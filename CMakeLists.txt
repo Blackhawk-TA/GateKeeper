@@ -8,7 +8,7 @@ project(game)
 set(PROJECT_SOURCE game.cpp game.hpp)
 
 # ... and any other files you want in the release here
-set(PROJECT_DISTRIBS LICENSE README.md)
+set(PROJECT_DISTRIBS LICENSE.md README.md)
 
 # Build configuration; approach this with caution!
 if(MSVC)
