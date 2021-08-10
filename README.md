@@ -1,33 +1,24 @@
-# 32Blit Boilerplate
+# 32Blit RPG game
 
+[![license](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Blackhawk-TA/TowerDefense/blob/master/LICENSE.md)
 ![Build](https://github.com/32blit/32blit-boilerplate/workflows/Build/badge.svg)
+[![github](https://img.shields.io/github/release/Blackhawk-TA/TowerDefense.svg?color=brightgreen)](https://github.com/Blackhawk-TA/TowerDefense/releases)
 
-This is a basic template for starting 32blit projects. It shows the basic
-code layout and asset pipeline, hopefully giving folk a starting point for
-any new projects.
+A yet unnamed RPG game for the 32blit retro console.
 
-It's based on the original `template` project from the 
-[32Blit Beta](https://github.com/pimoroni/32blit-beta), with added asset
-handling, and some tidying up to fit in with how I do things.
-
-## Usage
-
-[Use this template](https://github.com/32blit/32blit-boilerplate/generate) to
-generate your own project.
-
-* Edit the CMakeList.txt file to set the name of your project
-* Edit the metadata.yml file to set the information for your project
-* Edit the LICENSE file to set your name on the license
-* Write lots of super cool code!
-
-You should then be able to follow the usual build instructions.
-
-For local builds this is:
+## Build
+Linux:
 ```
 mkdir build
 cd build
-cmake -D32BLIT_DIR=/path/to/32blit-sdk/ ..
+cmake ..
+make
 ```
 
-Platform/Editor specific insctuctions [can be found in the main 32blit repo](https://github.com/pimoroni/32blit-beta#more-docs)
-(For Visual Studio, you should follow the "Option 2" instructions, as the boilerplate does not contain a solution file)
+32Blit:
+```
+mkdir build.stm32
+cd build.stm32
+cmake .. -DCMAKE_TOOLCHAIN_FILE="../32blit-sdk/32blit.toolchain"
+make 32blit-rpg
+```
