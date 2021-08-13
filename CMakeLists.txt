@@ -5,8 +5,11 @@ cmake_minimum_required(VERSION 3.9)
 project(32blit-rpg)
 
 # Add your sources here (adding headers is optional, but helps some CMake generators)
-set(PROJECT_SOURCE game.cpp game.hpp)
-
+set(PROJECT_SOURCE
+    src/game.cpp src/game.hpp
+    src/utils/map.cpp src/utils/map.hpp
+    src/utils/utils.cpp src/utils/utils.hpp
+)
 # ... and any other files you want in the release here
 set(PROJECT_DISTRIBS LICENSE.md README.md)
 
