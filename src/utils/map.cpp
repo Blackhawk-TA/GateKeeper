@@ -3,6 +3,7 @@
 //
 
 #include <cstring>
+#include <iostream>
 #include "assets.hpp"
 #include "map.hpp"
 
@@ -34,8 +35,11 @@ namespace map {
 					auto src = y * tmx->width + x;
 					auto dst = y * LEVEL_WIDTH + x;
 					layer_data[i][dst] = tmx->data[src + i * LEVEL_SIZE];
+					std::cout << (int)layer_data[i][dst] << ", ";
 				}
+				std::cout << std::endl;
 			}
+			std::cout << "---" << std::endl;
 		}
 	}
 

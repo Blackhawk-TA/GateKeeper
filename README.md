@@ -22,3 +22,6 @@ cd build.stm32
 cmake .. -DCMAKE_TOOLCHAIN_FILE="../32blit-sdk/32blit.toolchain"
 make 32blit-rpg
 ```
+
+## Sprites
+All sprites were created by [Jamie Brownhill](https://www.jamiebrownhill.com/).
