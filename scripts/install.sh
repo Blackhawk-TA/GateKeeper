@@ -7,3 +7,4 @@ mkdir build.stm32
 cd build.stm32
 cmake .. -DCMAKE_TOOLCHAIN_FILE="../32blit-sdk/32blit.toolchain"
 make 32blit-rpg
+sudo 32blit install 32blit-rpg.blit

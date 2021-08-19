@@ -13,7 +13,7 @@ namespace map {
 	};
 
 	void create();
-	void draw(std::function<Mat3(uint8_t)> *level_line_interrupt_callback);
+	void draw();
 	void set_flags(TileFlags flag, const std::vector<uint8_t> &tiles);
 	uint8_t get_flag(Point p);
 }

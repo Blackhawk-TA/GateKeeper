@@ -15,7 +15,7 @@ namespace map {
 
 	std::array<std::vector<uint8_t>, flag_count> flags;
 	uint8_t *layer_data[layer_count];
-	TileMap *layers[layer_count];
+//	TileMap *layers[layer_count];
 
 	void create() {
 		TMX *tmx = (TMX *) asset_map;
@@ -25,7 +25,7 @@ namespace map {
 
 		for (auto i = 0u; i < tmx->layers; i++) {
 			layer_data[i] = (uint8_t *) malloc(LEVEL_SIZE);
-			layers[i] = new TileMap((uint8_t *) layer_data[i], nullptr, Size(LEVEL_WIDTH, LEVEL_HEIGHT), screen.sprites);
+//			layers[i] = new TileMap((uint8_t *) layer_data[i], nullptr, Size(LEVEL_WIDTH, LEVEL_HEIGHT), screen.sprites);
 
 			// Load the level data from the map memory
 			memset(layer_data[i], 0, LEVEL_SIZE);
@@ -43,12 +43,23 @@ namespace map {
 		}
 	}
 
-	void draw(std::function<Mat3(uint8_t)> *level_line_interrupt_callback) {
-		for (auto & layer : layers) {
-			layer->draw(&screen, Rect(0, 0, screen.bounds.w, screen.bounds.h), *level_line_interrupt_callback);
+	void draw() {
+		int tile;
+		for (auto & layer : layer_data) {
+			for (int x = 0u; x < LEVEL_WIDTH; x++) {
+				for (int y = 0u; y < LEVEL_HEIGHT; y++) {
+					tile = layer[y * LEVEL_WIDTH + x];
+					screen.blit_sprite(Rect((tile % 8) * TILE_SIZE, (tile / 8) * TILE_SIZE, TILE_SIZE, TILE_SIZE), Point(x * TILE_SIZE, y * TILE_SIZE), SpriteTransform::NONE);
+				}
+			}
 		}
+
+//		for (auto & layer : layers) {
+//			layer->draw(&screen, Rect(0, 0, screen.bounds.w, screen.bounds.h), *level_line_interrupt_callback);
+//		}
 	}
 
+	/*
 	///////////////////////////////////////////////////////////////////////////
 	//
 	// Gets the flag of the given sprite on its highest layer, ignoring all underlying flags
@@ -84,4 +95,5 @@ namespace map {
 	void set_flags(TileFlags flag, const std::vector<uint8_t> &tiles) {
 		flags[flag] = tiles;
 	}
+	 */
 }
