@@ -6,10 +6,6 @@
 using namespace blit;
 
 uint32_t ms_start, ms_end;
-//Mat3 camera;
-//std::function<Mat3(uint8_t)> level_line_interrupt_callback = [](uint8_t y) -> Mat3 {
-//	return camera;
-//};
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -31,12 +27,12 @@ void init() {
 // This function is called to perform rendering of the game. time is the
 // amount if milliseconds elapsed since the start of your game
 //
+Vec2 position = Vec2(0, 0); //TODO implement properly with player class
 void render(uint32_t time) {
 	ms_start = now();
 
 	screen.clear();
-
-	map::draw(Point(0, 0));
+	map::draw(position);
 
 	ms_end = now();
 	ui_overlay::draw_fps(ms_start, ms_end);
@@ -50,5 +46,19 @@ void render(uint32_t time) {
 // amount if milliseconds elapsed since the start of your game
 //
 void update(uint32_t time) {
-//	camera = Mat3::identity();
+	static uint32_t last_buttons = 0;
+	static uint32_t changed = 0;
+	changed = buttons ^ last_buttons;
+
+	if (buttons & changed & Button::DPAD_UP) {
+		position.y -= 0.25;
+	} else if (buttons & changed & Button::DPAD_DOWN) {
+		position.y += 0.25;
+	} else if (buttons & changed & Button::DPAD_LEFT) {
+		position.x -= 0.25;
+	} else if (buttons & changed & Button::DPAD_RIGHT) {
+		position.x += 0.25;
+	}
+
+	last_buttons = buttons;
 }

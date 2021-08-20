@@ -45,7 +45,7 @@ namespace map {
 	}
 
 	//TODO implement flag handling: Maybe create grid where the entire map's sprites are entered in (like layer_data) and check by position with layer_data
-	void draw(Point offset) {
+	void draw(Vec2 offset) {
 		int tile, x, y;
 
 		for (auto & layer : layer_data) {
@@ -59,7 +59,7 @@ namespace map {
 						if (tile != tmx->empty_tile) { //Do not draw empty tiles
 							screen.blit_sprite(
 								Rect((tile % SPRITE_SHEET_SIZE.x) * TILE_SIZE, (tile / SPRITE_SHEET_SIZE.y) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-								Point((x - offset.x) * TILE_SIZE, (y - offset.y) * TILE_SIZE),
+								world_to_screen(x - offset.x, y - offset.y),
 								SpriteTransform::NONE
 							);
 						}

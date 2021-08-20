@@ -13,7 +13,7 @@ namespace map {
 	};
 
 	void create();
-	void draw(Point offset);
+	void draw(Vec2 offset);
 	void set_flags(TileFlags flag, const std::vector<uint8_t> &tiles);
 	uint8_t get_flag(Point p);
 }
