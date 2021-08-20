@@ -16,9 +16,10 @@ namespace map {
 	std::array<std::vector<uint8_t>, flag_count> flags;
 	uint8_t *layer_data[layer_count];
 //	TileMap *layers[layer_count];
+	TMX *tmx;
 
 	void create() {
-		TMX *tmx = (TMX *) asset_map;
+		tmx = (TMX *) asset_map;
 
 		if (tmx->width > LEVEL_WIDTH) return;
 		if (tmx->height > LEVEL_HEIGHT) return;
@@ -30,9 +31,9 @@ namespace map {
 			// Load the level data from the map memory
 			memset(layer_data[i], 0, LEVEL_SIZE);
 
-			for (auto x = 0u; x < tmx->width; x++) {
+			for (auto x = 0u; x < tmx->width; x++) { //TODO maybe unnecessary
 				for (auto y = 0u; y < tmx->height; y++) {
-					auto src = y * tmx->width + x;
+					auto src = y * tmx->width + x; //TODO those lines are equal
 					auto dst = y * LEVEL_WIDTH + x;
 					layer_data[i][dst] = tmx->data[src + i * LEVEL_SIZE];
 					std::cout << (int)layer_data[i][dst] << ", ";
@@ -43,13 +44,26 @@ namespace map {
 		}
 	}
 
-	void draw() {
-		int tile;
+	//TODO implement flag handling: Maybe create grid where the entire map's sprites are entered in (like layer_data) and check by position with layer_data
+	void draw(Point offset) {
+		int tile, x, y;
+
 		for (auto & layer : layer_data) {
-			for (int x = 0u; x < LEVEL_WIDTH; x++) {
-				for (int y = 0u; y < LEVEL_HEIGHT; y++) {
-					tile = layer[y * LEVEL_WIDTH + x];
-					screen.blit_sprite(Rect((tile % 8) * TILE_SIZE, (tile / 8) * TILE_SIZE, TILE_SIZE, TILE_SIZE), Point(x * TILE_SIZE, y * TILE_SIZE), SpriteTransform::NONE);
+			for (x = 0; x < tmx->height ; x++) {
+				for (y = 0; y < tmx->width; y++) {
+					//Checks if tile is visible in screen
+					if (SCREEN_TILES.x + offset.x - x >= 0 && x <= SCREEN_TILES.x + offset.x
+					&& SCREEN_TILES.y + offset.y - y >= 0 && y <= SCREEN_TILES.y + offset.y)
+					{
+						tile = layer[y * tmx->width + x];
+						if (tile != tmx->empty_tile) { //Do not draw empty tiles
+							screen.blit_sprite(
+								Rect((tile % SPRITE_SHEET_SIZE.x) * TILE_SIZE, (tile / SPRITE_SHEET_SIZE.y) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+								Point((x - offset.x) * TILE_SIZE, (y - offset.y) * TILE_SIZE),
+								SpriteTransform::NONE
+							);
+						}
+					}
 				}
 			}
 		}

@@ -36,7 +36,7 @@ void render(uint32_t time) {
 
 	screen.clear();
 
-	map::draw();
+	map::draw(Point(0, 0));
 
 	ms_end = now();
 	ui_overlay::draw_fps(ms_start, ms_end);
