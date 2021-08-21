@@ -22,6 +22,12 @@ Point world_to_screen(const float &x, const float &y) {
 	return Point(std::ceil(x * TILE_SIZE), std::ceil(y * TILE_SIZE));
 }
 
+//Get amount of tiles on a spritesheet's x and y-axis
 Point get_sprite_sheet_size() {
 	return Point(screen.sprites->bounds.w / TILE_SIZE, screen.sprites->bounds.h / TILE_SIZE);
+}
+
+//Get amount of tiles that can be displayed on the screen's x and y-axis
+Point get_screen_tiles() {
+	return Point(screen.bounds.w / TILE_SIZE, screen.bounds.h / TILE_SIZE);
 }

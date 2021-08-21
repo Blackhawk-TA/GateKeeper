@@ -17,7 +17,7 @@ namespace map {
 	void create() {
 		tmx = (TMX *) asset_map;
 		uint16_t x, y, tile_index;
-		screen_tiles = Point(screen.bounds.w / TILE_SIZE, screen.bounds.h / TILE_SIZE);
+		screen_tiles = get_screen_tiles();
 		sprite_sheet_size = get_sprite_sheet_size();
 
 		if (tmx->width > LEVEL_WIDTH) return;

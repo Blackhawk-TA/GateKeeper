@@ -28,5 +28,5 @@ private:
 	Point sprite_sheet_size;
 	bool is_moving = false;
 
-	void move(Point player_movement);
+	void move(Point movement);
 };
