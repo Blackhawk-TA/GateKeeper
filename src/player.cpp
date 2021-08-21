@@ -8,6 +8,7 @@
 constexpr uint8_t camera_scale = 100;
 constexpr float camera_scale_float = 100.0f;
 
+//Camera is scaled by the factor of 100 to prevent rounding issues
 Player::Player() {
 	Player::start_position = Point(10, 7);
 	Player::position = start_position;

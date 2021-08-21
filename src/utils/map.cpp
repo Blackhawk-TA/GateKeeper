@@ -33,15 +33,15 @@ namespace map {
 
 	void draw(Point &camera_position) {
 		uint16_t tile, x, y;
+		Point camera_position_world = screen_to_world(camera_position);
 
 		for (auto & layer : layer_data) {
 			for (x = 0; x < tmx->height ; x++) {
 				for (y = 0; y < tmx->width; y++) {
-					//Checks if tile is visible in screen
-					//TODO does still render tiles to the left and top, can be seen when going to the bottom right
-//					if (SCREEN_TILES.x + camera_position.x - x >= 0 && x <= SCREEN_TILES.x + camera_position.x
-//					&& SCREEN_TILES.y + camera_position.y - y >= 0 && y <= SCREEN_TILES.y + camera_position.y)
-//					{
+					//Checks if tile is visible on screen
+					if (SCREEN_TILES.x + camera_position_world.x - x >= 0 && camera_position_world.x <= x
+					&& SCREEN_TILES.y + camera_position_world.y - y >= 0 && camera_position_world.y <= y)
+					{
 						tile = layer[y * tmx->width + x];
 						if (tile != tmx->empty_tile) { //Do not draw empty tiles
 							screen.blit_sprite(
@@ -50,7 +50,7 @@ namespace map {
 								SpriteTransform::NONE
 							);
 						}
-//					}
+					}
 				}
 			}
 		}

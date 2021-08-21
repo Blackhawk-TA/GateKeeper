@@ -15,5 +15,7 @@ constexpr Point SCREEN_TILES = Point(20, 15); //Point(screen.bounds.w / TILE_SIZ
 constexpr Point SPRITE_SHEET_SIZE = Point(8, 8);
 
 Vec2 screen_to_world(const Vec2 &p);
+Point screen_to_world(const Point &p);
+
 Point world_to_screen(const Point &p);
 Point world_to_screen(const float &x, const float &y);
