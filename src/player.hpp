@@ -25,6 +25,7 @@ private:
 	Point position;
 	Point camera;
 	Point camera_offset;
+	Point sprite_sheet_size;
 	bool is_moving = false;
 
 	void move(Point player_movement);

@@ -14,6 +14,7 @@ Player::Player() {
 	Player::position = start_position;
 	Player::camera = Point(0, 0);
 	Player::camera_offset = Point(0, 0);
+	Player::sprite_sheet_size = get_sprite_sheet_size();
 }
 
 void Player::move_up() {
@@ -42,12 +43,11 @@ void Player::move(Point player_movement) {
 
 void Player::draw() {
 	screen.blit_sprite(
-		Rect((tile_id % SPRITE_SHEET_SIZE.x) * TILE_SIZE, (tile_id / SPRITE_SHEET_SIZE.y ) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+		Rect((tile_id % sprite_sheet_size.x) * TILE_SIZE, (tile_id / sprite_sheet_size.y ) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 		world_to_screen(position),
 		SpriteTransform::NONE
 	);
 }
-
 
 Point Player::update_camera() {
 	if (!is_moving) {

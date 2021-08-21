@@ -8,15 +8,17 @@
 using namespace blit;
 
 namespace map {
-	constexpr uint8_t layer_count = 3;
-
 	std::array<std::vector<uint8_t>, TileFlags::COUNTER> flags;
-	std::array<std::array<uint32_t, LEVEL_SIZE>, layer_count> layer_data;
+	std::array<std::array<uint16_t, LEVEL_SIZE>, LAYER_COUNT> layer_data;
 	TMX *tmx;
+	Point screen_tiles;
+	Point sprite_sheet_size;
 
 	void create() {
 		tmx = (TMX *) asset_map;
 		uint16_t x, y, tile_index;
+		screen_tiles = Point(screen.bounds.w / TILE_SIZE, screen.bounds.h / TILE_SIZE);
+		sprite_sheet_size = get_sprite_sheet_size();
 
 		if (tmx->width > LEVEL_WIDTH) return;
 		if (tmx->height > LEVEL_HEIGHT) return;
@@ -39,13 +41,13 @@ namespace map {
 			for (x = 0; x < tmx->height ; x++) {
 				for (y = 0; y < tmx->width; y++) {
 					//Checks if tile is visible on screen
-					if (SCREEN_TILES.x + camera_position_world.x - x >= 0 && camera_position_world.x <= x
-					&& SCREEN_TILES.y + camera_position_world.y - y >= 0 && camera_position_world.y <= y)
+					if (screen_tiles.x + camera_position_world.x - x >= 0 && camera_position_world.x <= x
+					&& screen_tiles.y + camera_position_world.y - y >= 0 && camera_position_world.y <= y)
 					{
 						tile = layer[y * tmx->width + x];
 						if (tile != tmx->empty_tile) { //Do not draw empty tiles
 							screen.blit_sprite(
-								Rect((tile % SPRITE_SHEET_SIZE.x) * TILE_SIZE, (tile / SPRITE_SHEET_SIZE.y) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+								Rect((tile % sprite_sheet_size.x) * TILE_SIZE, (tile / sprite_sheet_size.y) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 								world_to_screen(x, y) - camera_position,
 								SpriteTransform::NONE
 							);
@@ -62,7 +64,7 @@ namespace map {
 	// Always selects the tile on the highest layer if several tiles overlap.
 	//
 	uint16_t tile_at(Point &p) {
-		uint8_t i = layer_count;
+		uint8_t i = LAYER_COUNT;
 		uint16_t tile = 0;
 
 		while (i >= 0 && tile == 0) {
@@ -78,7 +80,7 @@ namespace map {
 	// Gets the flag of the given sprite on its highest layer, ignoring all underlying flags
 	//
 	uint8_t get_flag(Point p) {
-		uint8_t i = layer_count;
+		uint8_t i = LAYER_COUNT;
 		uint8_t j, k;
 		uint8_t flag_enum_id = 0;
 		uint16_t tile_id;

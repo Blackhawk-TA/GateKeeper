@@ -21,3 +21,7 @@ Point world_to_screen(const Point &p) {
 Point world_to_screen(const float &x, const float &y) {
 	return Point(std::ceil(x * TILE_SIZE), std::ceil(y * TILE_SIZE));
 }
+
+Point get_sprite_sheet_size() {
+	return Point(screen.sprites->bounds.w / TILE_SIZE, screen.sprites->bounds.h / TILE_SIZE);
+}
