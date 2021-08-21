@@ -11,7 +11,7 @@ namespace map {
 	constexpr uint8_t layer_count = 3;
 
 	std::array<std::vector<uint8_t>, TileFlags::COUNTER> flags;
-	std::array<std::array<uint16_t, LEVEL_SIZE>, layer_count> layer_data;
+	std::array<std::array<uint32_t, LEVEL_SIZE>, layer_count> layer_data;
 	TMX *tmx;
 
 	void create() {
@@ -31,25 +31,26 @@ namespace map {
 		}
 	}
 
-	void draw(Vec2 &offset) {
+	void draw(Point &camera_position) {
 		uint16_t tile, x, y;
 
 		for (auto & layer : layer_data) {
 			for (x = 0; x < tmx->height ; x++) {
 				for (y = 0; y < tmx->width; y++) {
 					//Checks if tile is visible in screen
-					if (SCREEN_TILES.x + offset.x - x >= 0 && x <= SCREEN_TILES.x + offset.x
-					&& SCREEN_TILES.y + offset.y - y >= 0 && y <= SCREEN_TILES.y + offset.y)
-					{
+					//TODO does still render tiles to the left and top, can be seen when going to the bottom right
+//					if (SCREEN_TILES.x + camera_position.x - x >= 0 && x <= SCREEN_TILES.x + camera_position.x
+//					&& SCREEN_TILES.y + camera_position.y - y >= 0 && y <= SCREEN_TILES.y + camera_position.y)
+//					{
 						tile = layer[y * tmx->width + x];
 						if (tile != tmx->empty_tile) { //Do not draw empty tiles
 							screen.blit_sprite(
 								Rect((tile % SPRITE_SHEET_SIZE.x) * TILE_SIZE, (tile / SPRITE_SHEET_SIZE.y) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-								world_to_screen(x - offset.x, y - offset.y),
+								world_to_screen(x, y) - camera_position,
 								SpriteTransform::NONE
 							);
 						}
-					}
+//					}
 				}
 			}
 		}

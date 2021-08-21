@@ -2,10 +2,13 @@
 #include "assets.hpp"
 #include "utils/map.hpp"
 #include "utils/ui_overlay.hpp"
+#include "player.hpp"
 
 using namespace blit;
 
 uint32_t ms_start, ms_end;
+Player *player;
+Point camera_position;
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -19,6 +22,8 @@ void init() {
 
 	map::create();
 	map::set_flags(map::TileFlags::SOLID, {25, 26, 32, 33, 34, 40, 41, 42, 48});
+
+	player = new Player();
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -28,12 +33,12 @@ void init() {
 // This function is called to perform rendering of the game. time is the
 // amount if milliseconds elapsed since the start of your game
 //
-Vec2 position = Vec2(0, 0); //TODO implement properly with player class
 void render(uint32_t time) {
 	ms_start = now();
-
 	screen.clear();
-	map::draw(position);
+
+	map::draw(camera_position);
+	player->draw();
 
 	ms_end = now();
 	ui_overlay::draw_fps(ms_start, ms_end);
@@ -47,19 +52,23 @@ void render(uint32_t time) {
 // amount if milliseconds elapsed since the start of your game
 //
 void update(uint32_t time) {
+	//Handler button inputs
 	static uint32_t last_buttons = 0;
 	static uint32_t changed = 0;
 	changed = buttons ^ last_buttons;
 
 	if (buttons & changed & Button::DPAD_UP) {
-		position.y -= 0.25;
+		player->move_up();
 	} else if (buttons & changed & Button::DPAD_DOWN) {
-		position.y += 0.25;
+		player->move_down();
 	} else if (buttons & changed & Button::DPAD_LEFT) {
-		position.x -= 0.25;
+		player->move_left();
 	} else if (buttons & changed & Button::DPAD_RIGHT) {
-		position.x += 0.25;
+		player->move_right();
 	}
 
 	last_buttons = buttons;
+
+	//Handle camera update
+	camera_position = player->update_camera();
 }
