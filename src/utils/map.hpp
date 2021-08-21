@@ -9,11 +9,13 @@ using namespace blit;
 
 namespace map {
 	enum TileFlags {
-		SOLID = 1
+		SOLID = 1,
+		COUNTER = 2
 	};
 
 	void create();
-	void draw(Vec2 offset);
+	void draw(Vec2 &offset);
+	uint16_t tile_at(Point &p);
 	void set_flags(TileFlags flag, const std::vector<uint8_t> &tiles);
 	uint8_t get_flag(Point p);
 }

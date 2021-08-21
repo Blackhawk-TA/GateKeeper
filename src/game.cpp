@@ -18,6 +18,7 @@ void init() {
 	screen.sprites = Surface::load(asset_spritesheet);
 
 	map::create();
+	map::set_flags(map::TileFlags::SOLID, {25, 26, 32, 33, 34, 40, 41, 42, 48});
 }
 
 ///////////////////////////////////////////////////////////////////////////

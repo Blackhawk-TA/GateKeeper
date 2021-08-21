@@ -2,8 +2,6 @@
 // Created by daniel on 28.02.21.
 //
 
-#include <cstring>
-#include <iostream>
 #include "assets.hpp"
 #include "map.hpp"
 
@@ -11,42 +9,30 @@ using namespace blit;
 
 namespace map {
 	constexpr uint8_t layer_count = 3;
-	constexpr uint8_t flag_count = 1;
 
-	std::array<std::vector<uint8_t>, flag_count> flags;
-	uint8_t *layer_data[layer_count];
-//	TileMap *layers[layer_count];
+	std::array<std::vector<uint8_t>, TileFlags::COUNTER> flags;
+	std::array<std::array<uint16_t, LEVEL_SIZE>, layer_count> layer_data;
 	TMX *tmx;
 
 	void create() {
 		tmx = (TMX *) asset_map;
+		uint16_t x, y, tile_index;
 
 		if (tmx->width > LEVEL_WIDTH) return;
 		if (tmx->height > LEVEL_HEIGHT) return;
 
 		for (auto i = 0u; i < tmx->layers; i++) {
-			layer_data[i] = (uint8_t *) malloc(LEVEL_SIZE);
-//			layers[i] = new TileMap((uint8_t *) layer_data[i], nullptr, Size(LEVEL_WIDTH, LEVEL_HEIGHT), screen.sprites);
-
-			// Load the level data from the map memory
-			memset(layer_data[i], 0, LEVEL_SIZE);
-
-			for (auto x = 0u; x < tmx->width; x++) { //TODO maybe unnecessary
-				for (auto y = 0u; y < tmx->height; y++) {
-					auto src = y * tmx->width + x; //TODO those lines are equal
-					auto dst = y * LEVEL_WIDTH + x;
-					layer_data[i][dst] = tmx->data[src + i * LEVEL_SIZE];
-					std::cout << (int)layer_data[i][dst] << ", ";
+			for (x = 0u; x < tmx->width; x++) {
+				for (y = 0u; y < tmx->height; y++) {
+					tile_index = y * tmx->width + x;
+					layer_data[i][tile_index] = tmx->data[tile_index + i * LEVEL_SIZE];
 				}
-				std::cout << std::endl;
 			}
-			std::cout << "---" << std::endl;
 		}
 	}
 
-	//TODO implement flag handling: Maybe create grid where the entire map's sprites are entered in (like layer_data) and check by position with layer_data
-	void draw(Vec2 offset) {
-		int tile, x, y;
+	void draw(Vec2 &offset) {
+		uint16_t tile, x, y;
 
 		for (auto & layer : layer_data) {
 			for (x = 0; x < tmx->height ; x++) {
@@ -67,13 +53,25 @@ namespace map {
 				}
 			}
 		}
-
-//		for (auto & layer : layers) {
-//			layer->draw(&screen, Rect(0, 0, screen.bounds.w, screen.bounds.h), *level_line_interrupt_callback);
-//		}
 	}
 
-	/*
+	///////////////////////////////////////////////////////////////////////////
+	//
+	// Gets the id of a tile at a specific Point on the map.
+	// Always selects the tile on the highest layer if several tiles overlap.
+	//
+	uint16_t tile_at(Point &p) {
+		uint8_t i = layer_count;
+		uint16_t tile = 0;
+
+		while (i >= 0 && tile == 0) {
+			tile = layer_data[i][p.y * tmx->width + p.x];
+			i--;
+		}
+
+		return tile;
+	}
+
 	///////////////////////////////////////////////////////////////////////////
 	//
 	// Gets the flag of the given sprite on its highest layer, ignoring all underlying flags
@@ -81,14 +79,14 @@ namespace map {
 	uint8_t get_flag(Point p) {
 		uint8_t i = layer_count;
 		uint8_t j, k;
-		uint8_t tile_id;
 		uint8_t flag_enum_id = 0;
+		uint16_t tile_id;
 		bool flag_found = false;
 
 		while (!flag_found && i > 0) {
 			i--;
 			j = 0;
-			tile_id = layers[i]->tile_at(p);
+			tile_id = tile_at(p);
 
 			while (!flag_found && j < flags.size() - 1) {
 				j++;
@@ -109,5 +107,4 @@ namespace map {
 	void set_flags(TileFlags flag, const std::vector<uint8_t> &tiles) {
 		flags[flag] = tiles;
 	}
-	 */
 }
