@@ -33,7 +33,7 @@ namespace map {
 		}
 	}
 
-	void draw(Point &camera_position) {
+	void draw(Point camera_position) {
 		uint16_t tile, x, y;
 		Point camera_position_world = screen_to_world(camera_position);
 

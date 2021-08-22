@@ -8,6 +8,7 @@ project(32blit-rpg)
 set(PROJECT_SOURCE
     src/game.cpp src/game.hpp
     src/player.cpp src/player.hpp
+    src/utils/camera.cpp src/utils/camera.hpp
     src/utils/map.cpp src/utils/map.hpp
     src/utils/utils.cpp src/utils/utils.hpp
     src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp

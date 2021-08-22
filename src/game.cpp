@@ -1,5 +1,6 @@
 #include "game.hpp"
 #include "assets.hpp"
+#include "utils/camera.hpp"
 #include "utils/map.hpp"
 #include "utils/ui_overlay.hpp"
 #include "player.hpp"
@@ -7,8 +8,8 @@
 using namespace blit;
 
 uint32_t ms_start, ms_end;
+Camera *camera;
 Player *player;
-Point camera_position;
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -23,7 +24,8 @@ void init() {
 	map::create();
 	map::set_flags(map::TileFlags::SOLID, {25, 26, 32, 33, 34, 40, 41, 42, 48});
 
-	player = new Player();
+	camera = new Camera();
+	player = new Player(camera);
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -37,7 +39,7 @@ void render(uint32_t time) {
 	ms_start = now();
 	screen.clear();
 
-	map::draw(camera_position);
+	map::draw(camera->get_screen_position());
 	player->draw();
 
 	ms_end = now();
@@ -69,6 +71,6 @@ void update(uint32_t time) {
 
 	last_buttons = buttons;
 
-	//Handle camera update
-	camera_position = player->update_camera();
+	//Handle camera_position update
+	camera->update_position();
 }

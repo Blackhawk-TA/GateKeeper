@@ -3,18 +3,14 @@
 //
 
 #include "player.hpp"
-#include "utils/map.hpp"
-
-constexpr uint8_t camera_scale = 100;
-constexpr float camera_scale_float = 100.0f;
+#include "utils/camera.hpp"
 
 //Camera is scaled by the factor of 100 to prevent rounding issues
-Player::Player() {
+Player::Player(Camera *camera) {
 	Player::start_position = get_screen_tiles() / 2;
 	Player::position = start_position;
-	Player::camera = Point(0, 0);
-	Player::camera_offset = Point(0, 0);
 	Player::sprite_sheet_size = get_sprite_sheet_size();
+	Player::camera = camera;
 }
 
 void Player::move_up() {
@@ -34,10 +30,9 @@ void Player::move_right() {
 }
 
 void Player::move(Point movement) {
-//	Point next_position = camera + movement;
-	if (!is_moving /*&& map::get_flag(next_position) == map::TileFlags::SOLID*/) {
-		camera_offset = movement * camera_scale;
-		is_moving = true;
+//	Point next_position = camera->get_world_position() + movement;
+	if (!camera->is_moving() /*&& map::get_flag(next_position) == map::TileFlags::SOLID*/) {
+		camera->move(movement);
 	}
 }
 
@@ -47,28 +42,4 @@ void Player::draw() {
 		world_to_screen(position),
 		SpriteTransform::NONE
 	);
-}
-
-Point Player::update_camera() {
-	if (camera_offset.x != 0) {
-		if (camera.x < camera.x + camera_offset.x) {
-			camera.x += velocity;
-			camera_offset.x -= velocity;
-		} else if (camera.x > camera.x + camera_offset.x) {
-			camera.x -= velocity;
-			camera_offset.x += velocity;
-		}
-	} else if (camera_offset.y != 0) {
-		if (camera.y < camera.y + camera_offset.y) {
-			camera.y += velocity;
-			camera_offset.y -= velocity;
-		} else if (camera.y > camera.y + camera_offset.y) {
-			camera.y -= velocity;
-			camera_offset.y += velocity;
-		}
-	} else {
-		is_moving = false;
-	}
-
-	return world_to_screen((float)camera.x / camera_scale_float, (float)camera.y / camera_scale_float);
 }
