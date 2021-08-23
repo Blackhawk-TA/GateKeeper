@@ -18,7 +18,7 @@ public:
 	void move_right();
 
 private:
-	const uint16_t tile_id = 5;
+	const uint16_t tile_id = 60;
 
 	Camera *camera;
 	Point start_position;

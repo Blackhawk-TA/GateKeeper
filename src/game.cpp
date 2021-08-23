@@ -22,7 +22,7 @@ void init() {
 	screen.sprites = Surface::load(asset_spritesheet);
 
 	map::create();
-	map::set_flags(map::TileFlags::SOLID, {25, 26, 32, 33, 34, 40, 41, 42, 48});
+	map::set_flags(map::TileFlags::SOLID, {69, 70, 133, 134, 197, 198, 199, 261, 262, 263, 325, 326, 327, 705, 769});
 
 	camera = new Camera();
 	player = new Player(camera);

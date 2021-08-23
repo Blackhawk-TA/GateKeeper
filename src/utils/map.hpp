@@ -16,6 +16,6 @@ namespace map {
 	void create();
 	void draw(Point camera_position);
 	uint16_t tile_at(Point &p);
-	void set_flags(TileFlags flag, const std::vector<uint8_t> &tiles);
+	void set_flags(TileFlags flag, const std::vector<uint16_t> &tiles);
 	uint8_t get_flag(Point p);
 }

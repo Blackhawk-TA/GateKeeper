@@ -8,14 +8,27 @@
 using namespace blit;
 
 namespace map {
-	std::array<std::vector<uint8_t>, TileFlags::COUNTER> flags;
+	#pragma pack(push,1)
+	struct TMX_16 {
+		char head[4];
+		uint16_t header_length;
+		uint16_t flags;
+		uint16_t empty_tile;
+		uint16_t width;
+		uint16_t height;
+		uint16_t layers;
+		uint16_t data[];
+	};
+	#pragma pack(pop)
+
+	std::array<std::vector<uint16_t>, TileFlags::COUNTER> flags;
 	std::array<std::array<uint16_t, LEVEL_SIZE>, LAYER_COUNT> layer_data;
-	TMX *tmx;
+	TMX_16 *tmx;
 	Point screen_tiles;
 	Point sprite_sheet_size;
 
 	void create() {
-		tmx = (TMX *) asset_map;
+		tmx = (TMX_16 *) asset_map;
 		uint16_t x, y, tile_index;
 		screen_tiles = get_screen_tiles();
 		sprite_sheet_size = get_sprite_sheet_size();
@@ -107,7 +120,7 @@ namespace map {
 		return flag_enum_id;
 	}
 
-	void set_flags(TileFlags flag, const std::vector<uint8_t> &tiles) {
+	void set_flags(TileFlags flag, const std::vector<uint16_t> &tiles) {
 		flags[flag] = tiles;
 	}
 }

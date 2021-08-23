@@ -9,9 +9,9 @@ using namespace blit;
 
 //Sprite and map constants
 constexpr uint8_t TILE_SIZE = 16;
-constexpr uint8_t LAYER_COUNT = 3;
-constexpr uint16_t LEVEL_WIDTH = 128;
-constexpr uint16_t LEVEL_HEIGHT = 128;
+constexpr uint8_t LAYER_COUNT = 2;
+constexpr uint16_t LEVEL_WIDTH = 256;
+constexpr uint16_t LEVEL_HEIGHT = 256;
 constexpr uint32_t LEVEL_SIZE = LEVEL_WIDTH * LEVEL_HEIGHT;
 
 Vec2 screen_to_world(const Vec2 &p);
