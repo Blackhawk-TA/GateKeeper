@@ -28,7 +28,7 @@ void Camera::move(Point &offset) {
 	moving = true;
 }
 
-Point Camera::update_position() {
+void Camera::update_position() {
 	if (camera_offset.x != 0) {
 		if (camera_position.x < camera_position.x + camera_offset.x) {
 			camera_position.x += velocity;
@@ -48,6 +48,4 @@ Point Camera::update_position() {
 	} else {
 		moving = false;
 	}
-
-	return world_to_screen((float) camera_position.x / camera_scale_float, (float) camera_position.y / camera_scale_float);
 }

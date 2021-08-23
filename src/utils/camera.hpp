@@ -14,7 +14,7 @@ public:
 	Point get_world_position() const;
 	Point get_screen_position() const;
 	void move(Point &offset);
-	Point update_position();
+	void update_position();
 
 private:
 	const uint8_t camera_scale = 100;
