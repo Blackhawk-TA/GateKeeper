@@ -7,9 +7,20 @@ assets.cpp:
 
   assets/characters.png:
     name: characters
-  assets/spritesheet.png:
-    name: spritesheet
-  assets/map.tmx:
-    name: map
+  assets/dungeon.png:
+    name: dungeon
+  assets/exterior.png:
+    name: exterior
+  assets/interior.png:
+    name: interior
+  assets/winter.png:
+    name: winter
+
+  assets/exterior.tmx:
+    name: exterior_map
+    empty_tile: 0
+    output_struct: true
+  assets/winter.tmx:
+    name: winter_map
     empty_tile: 0
     output_struct: true

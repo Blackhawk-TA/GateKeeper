@@ -18,7 +18,7 @@ public:
 	void move_right();
 
 private:
-	const uint16_t tile_id = 60;
+	const uint16_t tile_id = 0;
 
 	Camera *camera;
 	Surface *characters;

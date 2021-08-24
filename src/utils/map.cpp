@@ -2,39 +2,71 @@
 // Created by daniel on 28.02.21.
 //
 
+#include <cstring>
+#include <stdexcept>
+#include <iostream>
 #include "assets.hpp"
 #include "map.hpp"
 
 using namespace blit;
 
 namespace map {
-	#pragma pack(push,1)
-	struct TMX_16 {
-		char head[4];
-		uint16_t header_length;
-		uint16_t flags;
-		uint16_t empty_tile;
-		uint16_t width;
-		uint16_t height;
-		uint16_t layers;
-		uint16_t data[];
-	};
-	#pragma pack(pop)
-
 	std::array<std::vector<uint16_t>, TileFlags::COUNTER> flags;
 	std::array<std::array<uint16_t, LEVEL_SIZE>, LAYER_COUNT> layer_data;
-	TMX_16 *tmx;
+//	std::unique_ptr<TMX_16> tmx;
+	TMX_16* tmx = new TMX_16;
 	Point screen_tiles;
 	Point sprite_sheet_size;
 
-	void create() {
-		tmx = (TMX_16 *) asset_map;
+	void load(MapTypes map_type) {
+		//TODO delete tmx, sprites and layer_data, flags
+		delete screen.sprites;
+//		tmx.reset();
+		if (tmx != nullptr) {
+//			free(tmx);
+//			delete &tmx;
+		}
+
+
+		//TODO dont delete flag array, rather store it in class for each map type
+		for (auto &flag : flags) {
+			std::destroy(flag.begin(), flag.end());
+		}
+
+		switch (map_type) {
+			case MapTypes::DUNGEON:
+				tmx = nullptr;
+				break;
+			case MapTypes::EXTERIOR:
+				screen.sprites = Surface::load(asset_exterior);
+//				tmx = (TMX_16 *) malloc(asset_exterior_map_length);
+//				if (tmx == nullptr) return;
+//				memset(tmx, 0, asset_exterior_map_length);
+				tmx = (TMX_16 *) asset_exterior_map;
+
+//				tmx = std::unique_ptr<TMX_16>((TMX_16*) asset_exterior_map);
+				break;
+			case MapTypes::INTERIOR:
+				tmx = nullptr;
+				break;
+			case MapTypes::WINTER:
+				screen.sprites = Surface::load(asset_winter);
+				tmx = (TMX_16 *) malloc(asset_winter_map_length);
+//				if (tmx == nullptr) return;
+				memset(tmx, 0, asset_winter_map_length);
+				tmx = (TMX_16 *) asset_winter_map;
+
+//				tmx = std::unique_ptr<TMX_16>((TMX_16*) asset_winter_map);
+				break;
+		}
+
+		if (tmx == nullptr) return;
+		if (tmx->width > LEVEL_WIDTH) return;
+		if (tmx->height > LEVEL_HEIGHT) return;
+
 		uint16_t x, y, tile_index;
 		screen_tiles = get_screen_tiles();
 		sprite_sheet_size = get_sprite_sheet_size();
-
-		if (tmx->width > LEVEL_WIDTH) return;
-		if (tmx->height > LEVEL_HEIGHT) return;
 
 		for (auto i = 0u; i < tmx->layers; i++) {
 			for (x = 0u; x < tmx->width; x++) {
@@ -49,6 +81,8 @@ namespace map {
 	void draw(Point camera_position) {
 		uint16_t tile, x, y;
 		Point camera_position_world = screen_to_world(camera_position);
+
+		if (tmx == nullptr) return; //Prevent rendering while switching map
 
 		for (auto & layer : layer_data) {
 			for (x = 0; x < tmx->height ; x++) {

@@ -19,9 +19,10 @@ Player *player;
 //
 void init() {
 	set_screen_mode(ScreenMode::hires);
-	screen.sprites = Surface::load(asset_spritesheet);
 
-	map::create();
+	map::load(map::MapTypes::EXTERIOR);
+
+	//TODO set flags depending on map type, maybe map class is required
 	map::set_flags(map::TileFlags::SOLID, {69, 70, 133, 134, 197, 198, 199, 261, 262, 263, 325, 326, 327, 705, 769});
 
 	camera = new Camera();
@@ -61,8 +62,10 @@ void update(uint32_t time) {
 
 	if (buttons & changed & Button::DPAD_UP) {
 		player->move_up();
+		map::load(map::MapTypes::EXTERIOR);
 	} else if (buttons & changed & Button::DPAD_DOWN) {
 		player->move_down();
+		map::load(map::MapTypes::WINTER);
 	} else if (buttons & changed & Button::DPAD_LEFT) {
 		player->move_left();
 	} else if (buttons & changed & Button::DPAD_RIGHT) {

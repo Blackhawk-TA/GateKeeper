@@ -9,7 +9,7 @@ using namespace blit;
 
 //Sprite and map constants
 constexpr uint8_t TILE_SIZE = 16;
-constexpr uint8_t LAYER_COUNT = 2;
+constexpr uint8_t LAYER_COUNT = 1;
 constexpr uint8_t LEVEL_WIDTH = 128;
 constexpr uint8_t LEVEL_HEIGHT = 128;
 constexpr uint16_t LEVEL_SIZE = LEVEL_WIDTH * LEVEL_HEIGHT;
