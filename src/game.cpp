@@ -55,7 +55,7 @@ void render(uint32_t time) {
 //
 void update(uint32_t time) {
 	//Handler button inputs
-	static uint32_t last_buttons = 0;
+	static uint32_t last_buttons = 0; //TODO check
 	static uint32_t changed = 0;
 	changed = buttons ^ last_buttons;
 

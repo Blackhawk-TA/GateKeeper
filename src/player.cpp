@@ -2,6 +2,7 @@
 // Created by daniel on 21.08.21.
 //
 
+#include <assets.hpp>
 #include "player.hpp"
 #include "utils/camera.hpp"
 #include "utils/map.hpp"
@@ -12,6 +13,7 @@ Player::Player(Camera *camera) {
 	Player::position = start_position;
 	Player::sprite_sheet_size = get_sprite_sheet_size();
 	Player::camera = camera;
+	Player::characters = Surface::load(asset_characters);
 }
 
 void Player::move_up() {
@@ -38,7 +40,8 @@ void Player::move(Point movement) {
 }
 
 void Player::draw() {
-	screen.blit_sprite(
+	screen.blit(
+		characters,
 		Rect((tile_id % sprite_sheet_size.x) * TILE_SIZE, (tile_id / sprite_sheet_size.y ) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 		world_to_screen(position),
 		SpriteTransform::NONE

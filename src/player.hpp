@@ -21,6 +21,7 @@ private:
 	const uint16_t tile_id = 60;
 
 	Camera *camera;
+	Surface *characters;
 	Point start_position;
 	Point position;
 	Point sprite_sheet_size;
