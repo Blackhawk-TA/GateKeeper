@@ -13,20 +13,15 @@ using namespace blit;
 namespace map {
 	std::array<std::vector<uint16_t>, TileFlags::COUNTER> flags;
 	std::array<std::array<uint16_t, LEVEL_SIZE>, LAYER_COUNT> layer_data;
-//	std::unique_ptr<TMX_16> tmx;
-	TMX_16* tmx = new TMX_16;
+	TMX_16* tmx;
 	Point screen_tiles;
 	Point sprite_sheet_size;
 
 	void load(MapTypes map_type) {
-		//TODO delete tmx, sprites and layer_data, flags
-		delete screen.sprites;
-//		tmx.reset();
+		// Remove old TileMap from memory to load a new one
 		if (tmx != nullptr) {
-//			free(tmx);
-//			delete &tmx;
+			free(tmx);
 		}
-
 
 		//TODO dont delete flag array, rather store it in class for each map type
 		for (auto &flag : flags) {
@@ -38,25 +33,21 @@ namespace map {
 				tmx = nullptr;
 				break;
 			case MapTypes::EXTERIOR:
-				screen.sprites = Surface::load(asset_exterior);
-//				tmx = (TMX_16 *) malloc(asset_exterior_map_length);
-//				if (tmx == nullptr) return;
-//				memset(tmx, 0, asset_exterior_map_length);
-				tmx = (TMX_16 *) asset_exterior_map;
+				screen.sprites = Surface::load_read_only(asset_exterior);
 
-//				tmx = std::unique_ptr<TMX_16>((TMX_16*) asset_exterior_map);
+				// Allocate memory for TileMap and copy it into memory
+				tmx = (TMX_16 *) malloc(asset_exterior_map_length);
+				memcpy(tmx, asset_exterior_map, asset_exterior_map_length);
 				break;
 			case MapTypes::INTERIOR:
 				tmx = nullptr;
 				break;
 			case MapTypes::WINTER:
-				screen.sprites = Surface::load(asset_winter);
-				tmx = (TMX_16 *) malloc(asset_winter_map_length);
-//				if (tmx == nullptr) return;
-				memset(tmx, 0, asset_winter_map_length);
-				tmx = (TMX_16 *) asset_winter_map;
+				screen.sprites = Surface::load_read_only(asset_winter);
 
-//				tmx = std::unique_ptr<TMX_16>((TMX_16*) asset_winter_map);
+				// Allocate memory for TileMap and copy it into memory
+				tmx = (TMX_16 *) malloc(asset_winter_map_length);
+				memcpy(tmx, asset_winter_map, asset_winter_map_length);
 				break;
 		}
 
@@ -66,7 +57,7 @@ namespace map {
 
 		uint16_t x, y, tile_index;
 		screen_tiles = get_screen_tiles();
-		sprite_sheet_size = get_sprite_sheet_size();
+		sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
 
 		for (auto i = 0u; i < tmx->layers; i++) {
 			for (x = 0u; x < tmx->width; x++) {
@@ -82,7 +73,7 @@ namespace map {
 		uint16_t tile, x, y;
 		Point camera_position_world = screen_to_world(camera_position);
 
-		if (tmx == nullptr) return; //Prevent rendering while switching map
+		if (tmx == nullptr) return; //Prevent rendering when TileMap is not loaded
 
 		for (auto & layer : layer_data) {
 			for (x = 0; x < tmx->height ; x++) {

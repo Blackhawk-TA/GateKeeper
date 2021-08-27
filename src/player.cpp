@@ -11,9 +11,9 @@
 Player::Player(Camera *camera) {
 	Player::start_position = get_screen_tiles() / 2;
 	Player::position = start_position;
-	Player::sprite_sheet_size = get_sprite_sheet_size();
 	Player::camera = camera;
 	Player::characters = Surface::load(asset_characters);
+	Player::sprite_sheet_size = get_sprite_sheet_size(Player::characters->bounds);
 }
 
 void Player::move_up() {
