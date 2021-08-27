@@ -7,9 +7,10 @@ project(32blit-rpg)
 # Add your sources here (adding headers is optional, but helps some CMake generators)
 set(PROJECT_SOURCE
     src/game.cpp src/game.hpp
+    src/map/map_segment.cpp src/map/map_segment.hpp
     src/player.cpp src/player.hpp
-    src/utils/camera.cpp src/utils/camera.hpp
-    src/utils/map.cpp src/utils/map.hpp
+    src/camera.cpp src/camera.hpp
+    src/map/map_handler.cpp src/map/map_handler.hpp
     src/utils/utils.cpp src/utils/utils.hpp
     src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp
 )

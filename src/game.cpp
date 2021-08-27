@@ -1,7 +1,7 @@
 #include "game.hpp"
 #include "assets.hpp"
-#include "utils/camera.hpp"
-#include "utils/map.hpp"
+#include "camera.hpp"
+#include "map/map_handler.hpp"
 #include "utils/ui_overlay.hpp"
 #include "player.hpp"
 

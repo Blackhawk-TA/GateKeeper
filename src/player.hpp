@@ -4,7 +4,7 @@
 
 #pragma once
 #include "utils/utils.hpp"
-#include "utils/camera.hpp"
+#include "camera.hpp"
 
 using namespace blit;
 

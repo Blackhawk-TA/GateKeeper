@@ -6,7 +6,7 @@
 #include <stdexcept>
 #include <iostream>
 #include "assets.hpp"
-#include "map.hpp"
+#include "map_handler.hpp"
 
 using namespace blit;
 
