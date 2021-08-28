@@ -1,8 +1,7 @@
 #include "game.hpp"
 #include "assets.hpp"
 #include "camera.hpp"
-#include "map/map_flags.hpp"
-#include "map/map.hpp"
+#include "map.hpp"
 #include "utils/ui_overlay.hpp"
 #include "player.hpp"
 
@@ -22,8 +21,8 @@ void init() {
 	set_screen_mode(ScreenMode::hires);
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
-	map::generate_flags();
 	map::load_section(map::MapSections::EXTERIOR);
+	map::set_flags(map::TileFlags::SOLID, {});
 
 	camera = new Camera();
 	player = new Player(camera);

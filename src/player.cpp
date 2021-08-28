@@ -5,7 +5,7 @@
 #include <assets.hpp>
 #include "player.hpp"
 #include "camera.hpp"
-#include "map/map.hpp"
+#include "map.hpp"
 
 //Camera is scaled by the factor of 100 to prevent rounding issues
 Player::Player(Camera *camera) {

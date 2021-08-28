@@ -9,8 +9,7 @@ set(PROJECT_SOURCE
     src/camera.cpp src/camera.hpp
     src/game.cpp src/game.hpp
     src/player.cpp src/player.hpp
-    src/map/map.cpp src/map/map.hpp
-    src/map/map_flags.cpp src/map/map_flags.hpp
+    src/map.cpp src/map.hpp
     src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp
     src/utils/utils.cpp src/utils/utils.hpp
 )
