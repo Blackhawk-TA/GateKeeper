@@ -19,6 +19,7 @@ Player *player;
 //
 void init() {
 	set_screen_mode(ScreenMode::hires);
+	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
 	map::load(map::MapTypes::EXTERIOR);
 

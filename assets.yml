@@ -7,17 +7,8 @@ assets.cpp:
 
   assets/characters.png:
     name: characters
-  assets/dungeon.png:
-    name: dungeon
-    packed: false
-  assets/exterior.png:
-    name: exterior
-    packed: false
-  assets/interior.png:
-    name: interior
-    packed: false
-  assets/winter.png:
-    name: winter
+  assets/spritesheet.png:
+    name: spritesheet
     packed: false
 
   assets/exterior.tmx:

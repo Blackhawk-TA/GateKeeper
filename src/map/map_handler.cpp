@@ -33,8 +33,6 @@ namespace map {
 				tmx = nullptr;
 				break;
 			case MapTypes::EXTERIOR:
-				screen.sprites = Surface::load_read_only(asset_exterior);
-
 				// Allocate memory for TileMap and copy it into memory
 				tmx = (TMX_16 *) malloc(asset_exterior_map_length);
 				memcpy(tmx, asset_exterior_map, asset_exterior_map_length);
@@ -43,8 +41,6 @@ namespace map {
 				tmx = nullptr;
 				break;
 			case MapTypes::WINTER:
-				screen.sprites = Surface::load_read_only(asset_winter);
-
 				// Allocate memory for TileMap and copy it into memory
 				tmx = (TMX_16 *) malloc(asset_winter_map_length);
 				memcpy(tmx, asset_winter_map, asset_winter_map_length);
