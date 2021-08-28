@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "map_handler.hpp"
+#include "map.hpp"
 #include "../utils/utils.hpp"
 
 using namespace blit;

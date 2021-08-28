@@ -14,6 +14,14 @@ namespace map {
 	const uint8_t INTERIOR_LAYER_COUNT = 0;
 	const uint8_t WINTER_LAYER_COUNT = 2;
 
+//	struct map_struct {
+//		uint8_t layer_count;
+//		uint16_t width;
+//		uint16_t height;
+//		uint32_t size;
+//		MapFlags map_flags;
+//	};
+
 	enum TileFlags {
 		SOLID = 1,
 		COUNTER = 2

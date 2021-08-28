@@ -2,7 +2,7 @@
 #include "assets.hpp"
 #include "camera.hpp"
 #include "map/map_flags.hpp"
-#include "map/map_handler.hpp"
+#include "map/map.hpp"
 #include "utils/ui_overlay.hpp"
 #include "player.hpp"
 

@@ -5,7 +5,7 @@
 #include <cstring>
 #include <stdexcept>
 #include "assets.hpp"
-#include "map_handler.hpp"
+#include "map.hpp"
 
 using namespace blit;
 
