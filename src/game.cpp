@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include "assets.hpp"
 #include "camera.hpp"
+#include "map/map_flags.hpp"
 #include "map/map_handler.hpp"
 #include "utils/ui_overlay.hpp"
 #include "player.hpp"
@@ -21,10 +22,8 @@ void init() {
 	set_screen_mode(ScreenMode::hires);
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
-	map::load(map::MapTypes::EXTERIOR);
-
-	//TODO set flags depending on map type, maybe map class is required
-	map::set_flags(map::TileFlags::SOLID, {69, 70, 133, 134, 197, 198, 199, 261, 262, 263, 325, 326, 327, 705, 769});
+	map::generate_flags();
+	map::load_section(map::MapSections::EXTERIOR);
 
 	camera = new Camera();
 	player = new Player(camera);
@@ -63,10 +62,10 @@ void update(uint32_t time) {
 
 	if (buttons & changed & Button::DPAD_UP) {
 		player->move_up();
-		map::load(map::MapTypes::EXTERIOR);
+		map::load_section(map::MapSections::EXTERIOR);
 	} else if (buttons & changed & Button::DPAD_DOWN) {
 		player->move_down();
-		map::load(map::MapTypes::WINTER);
+		map::load_section(map::MapSections::WINTER);
 	} else if (buttons & changed & Button::DPAD_LEFT) {
 		player->move_left();
 	} else if (buttons & changed & Button::DPAD_RIGHT) {

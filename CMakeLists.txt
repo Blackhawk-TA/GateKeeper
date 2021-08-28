@@ -10,7 +10,7 @@ set(PROJECT_SOURCE
     src/player.cpp src/player.hpp
     src/camera.cpp src/camera.hpp
     src/map/map_handler.cpp src/map/map_handler.hpp
-    src/map/map_segment.cpp src/map/map_segment.hpp
+    src/map/map_flags.cpp src/map/map_flags.hpp
     src/utils/utils.cpp src/utils/utils.hpp
     src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp
 )

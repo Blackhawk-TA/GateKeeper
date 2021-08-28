@@ -4,7 +4,6 @@
 
 #include <cstring>
 #include <stdexcept>
-#include <iostream>
 #include "assets.hpp"
 #include "map_handler.hpp"
 
@@ -12,40 +11,77 @@ using namespace blit;
 
 namespace map {
 	std::array<std::vector<uint16_t>, TileFlags::COUNTER> flags;
-	std::array<std::array<uint16_t, LEVEL_SIZE>, LAYER_COUNT> layer_data;
+	std::vector<std::array<uint16_t, LEVEL_SIZE>> layer_data;
 	TMX_16* tmx;
 	Point screen_tiles;
 	Point sprite_sheet_size;
+	MapFlags *current_map_flags;
+	uint8_t current_layer_count;
+	std::map<MapSections, MapFlags> map_flags_registry;
 
-	void load(MapTypes map_type) {
-		// Remove old TileMap from memory to load a new one
+	/**
+	 * Generates and sets the flags for each map section
+	 */
+	void generate_flags() {
+		MapFlags dungeon_flags = MapFlags(DUNGEON_LAYER_COUNT);
+		MapFlags exterior_flags = MapFlags(EXTERIOR_LAYER_COUNT);
+		MapFlags interior_flags = MapFlags(INTERIOR_LAYER_COUNT);
+		MapFlags winter_flags = MapFlags(WINTER_LAYER_COUNT);
+
+		dungeon_flags.set_flags(dungeon_flags.TileFlags::SOLID, {});
+		exterior_flags.set_flags(exterior_flags.TileFlags::SOLID, {});
+		interior_flags.set_flags(interior_flags.TileFlags::SOLID, {});
+		winter_flags.set_flags(winter_flags.TileFlags::SOLID, {});
+
+		map_flags_registry.insert(std::make_pair(DUNGEON, dungeon_flags));
+		map_flags_registry.insert(std::make_pair(EXTERIOR, exterior_flags));
+		map_flags_registry.insert(std::make_pair(INTERIOR, interior_flags));
+		map_flags_registry.insert(std::make_pair(WINTER, winter_flags));
+	}
+
+	/**
+	 * Loads new map section into memory and deletes the old one
+	 *
+	 * @param map_section The enum describing the map section
+	 */
+	void load_section(MapSections map_section) {
+		// Remove old TileMap from memory to load_section a new one
 		if (tmx != nullptr) {
 			free(tmx);
 		}
 
-		//TODO dont delete flag array, rather store it in class for each map type
-		for (auto &flag : flags) {
-			std::destroy(flag.begin(), flag.end());
-		}
+		// Remove old TileMap from layer_data
+		layer_data.clear();
 
-		switch (map_type) {
-			case MapTypes::DUNGEON:
+		switch (map_section) {
+			case MapSections::DUNGEON:
 				tmx = nullptr;
+
+				current_layer_count = DUNGEON_LAYER_COUNT;
 				break;
-			case MapTypes::EXTERIOR:
+			case MapSections::EXTERIOR:
 				// Allocate memory for TileMap and copy it into memory
 				tmx = (TMX_16 *) malloc(asset_exterior_map_length);
 				memcpy(tmx, asset_exterior_map, asset_exterior_map_length);
+
+				current_layer_count = EXTERIOR_LAYER_COUNT;
 				break;
-			case MapTypes::INTERIOR:
+			case MapSections::INTERIOR:
 				tmx = nullptr;
+				current_layer_count = INTERIOR_LAYER_COUNT;
 				break;
-			case MapTypes::WINTER:
+			case MapSections::WINTER:
 				// Allocate memory for TileMap and copy it into memory
 				tmx = (TMX_16 *) malloc(asset_winter_map_length);
 				memcpy(tmx, asset_winter_map, asset_winter_map_length);
+
+				current_layer_count = WINTER_LAYER_COUNT;
 				break;
 		}
+
+		// Get current map flags for tile_at method
+		auto current_map_flags_itr = map_flags_registry.find(map_section);
+		current_map_flags = &current_map_flags_itr->second;
 
 		if (tmx == nullptr) return;
 		if (tmx->width > LEVEL_WIDTH) return;
@@ -56,15 +92,22 @@ namespace map {
 		sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
 
 		for (auto i = 0u; i < tmx->layers; i++) {
+			layer_data.push_back({}); // Create new empty layer to fill it later on
+
 			for (x = 0u; x < tmx->width; x++) {
 				for (y = 0u; y < tmx->height; y++) {
 					tile_index = y * tmx->width + x;
-					layer_data[i][tile_index] = tmx->data[tile_index + i * LEVEL_SIZE];
+					layer_data.at(i)[tile_index] = tmx->data[tile_index + i * LEVEL_SIZE];
 				}
 			}
 		}
 	}
 
+	/**
+	 * Draws the tile map to the screen if a TileMap is loaded in the memory
+	 *
+	 * @param camera_position The position of the camera on the TileMap
+	 */
 	void draw(Point camera_position) {
 		uint16_t tile, x, y;
 		Point camera_position_world = screen_to_world(camera_position);
@@ -92,13 +135,25 @@ namespace map {
 		}
 	}
 
-	///////////////////////////////////////////////////////////////////////////
-	//
-	// Gets the id of a tile at a specific Point on the map.
-	// Always selects the tile on the highest layer if several tiles overlap.
-	//
+	/**
+	 * Calls the get_flag method of the map which is currently rendered
+	 *
+	 * @param p The point at which the flag is located
+	 * @return The TileFlags enum id of the found flag
+	 */
+	uint8_t get_flag(Point p) {
+		return current_map_flags->get_flag(p);
+	}
+
+	/**
+	 * Gets the id of a tile at a specific Point on the map.
+	 * Always selects the tile on the highest layer if several tiles overlap.
+	 *
+	 * @param p The point at which the tile is located
+	 * @return The id of the tile mapped to the sprite sheet
+	 */
 	uint16_t tile_at(Point &p) {
-		uint8_t i = LAYER_COUNT;
+		uint8_t i = current_layer_count;
 		uint16_t tile = 0;
 
 		while (i >= 0 && tile == 0) {
@@ -107,41 +162,5 @@ namespace map {
 		}
 
 		return tile;
-	}
-
-	///////////////////////////////////////////////////////////////////////////
-	//
-	// Gets the flag of the given sprite on its highest layer, ignoring all underlying flags
-	//
-	uint8_t get_flag(Point p) {
-		uint8_t i = LAYER_COUNT;
-		uint8_t j, k;
-		uint8_t flag_enum_id = 0;
-		uint16_t tile_id;
-		bool flag_found = false;
-
-		while (!flag_found && i > 0) {
-			i--;
-			j = 0;
-			tile_id = tile_at(p);
-
-			while (!flag_found && j < flags.size() - 1) {
-				j++;
-				k = 0;
-				while (!flag_found && k < flags[j].size()) {
-					if (tile_id == flags[j].at(k)) {
-						flag_enum_id = j;
-						flag_found = true;
-					}
-					k++;
-				}
-			}
-		}
-
-		return flag_enum_id;
-	}
-
-	void set_flags(TileFlags flag, const std::vector<uint16_t> &tiles) {
-		flags[flag] = tiles;
 	}
 }

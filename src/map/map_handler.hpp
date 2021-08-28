@@ -4,16 +4,22 @@
 
 #pragma once
 #include "../utils/utils.hpp"
+#include "map_flags.hpp"
 
 using namespace blit;
 
 namespace map {
+	const uint8_t DUNGEON_LAYER_COUNT = 0;
+	const uint8_t EXTERIOR_LAYER_COUNT = 2;
+	const uint8_t INTERIOR_LAYER_COUNT = 0;
+	const uint8_t WINTER_LAYER_COUNT = 2;
+
 	enum TileFlags {
 		SOLID = 1,
 		COUNTER = 2
 	};
 
-	enum MapTypes {
+	enum MapSections {
 		DUNGEON = 1,
 		EXTERIOR = 2,
 		INTERIOR = 3,
@@ -33,9 +39,10 @@ namespace map {
 	};
 	#pragma pack(pop)
 
-	void load(MapTypes map_type);
+	void generate_flags();
+	void load_section(MapSections map_section);
 	void draw(Point camera_position);
-	uint16_t tile_at(Point &p);
 	void set_flags(TileFlags flag, const std::vector<uint16_t> &tiles);
 	uint8_t get_flag(Point p);
+	uint16_t tile_at(Point &p);
 }
