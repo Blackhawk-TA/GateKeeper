@@ -7,6 +7,9 @@
 
 using namespace blit;
 
+uint32_t last_buttons = 0;
+uint32_t changed = 0;
+
 uint32_t ms_start, ms_end;
 Camera *camera;
 Player *player;
@@ -54,20 +57,18 @@ void render(uint32_t time) {
 // amount if milliseconds elapsed since the start of your game
 //
 void update(uint32_t time) {
-	//Handler button inputs
-	static uint32_t last_buttons = 0; //TODO check
-	static uint32_t changed = 0;
+	//Handle button inputs
 	changed = buttons ^ last_buttons;
 
-	if (buttons & changed & Button::DPAD_UP) {
+	if (buttons & Button::DPAD_UP) {
 		player->move_up();
 //		map::load_section(map::MapSections::EXTERIOR);
-	} else if (buttons & changed & Button::DPAD_DOWN) {
+	} else if (buttons & Button::DPAD_DOWN) {
 		player->move_down();
 //		map::load_section(map::MapSections::WINTER);
-	} else if (buttons & changed & Button::DPAD_LEFT) {
+	} else if (buttons & Button::DPAD_LEFT) {
 		player->move_left();
-	} else if (buttons & changed & Button::DPAD_RIGHT) {
+	} else if (buttons & Button::DPAD_RIGHT) {
 		player->move_right();
 	}
 
