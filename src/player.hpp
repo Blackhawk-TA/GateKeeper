@@ -10,7 +10,7 @@ using namespace blit;
 
 class Player {
 public:
-	explicit Player(Camera *camera);
+	explicit Player(Camera *game_camera);
 	void draw();
 	void move_up();
 	void move_down();
@@ -18,21 +18,30 @@ public:
 	void move_right();
 
 private:
+	enum MovementDirection {
+		UP = 1,
+		DOWN = 2,
+		LEFT = 3,
+		RIGHT = 4
+	};
+
 	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 	static uint16_t sprite_index;
 	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
+	static bool is_moving;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> move_down_sprites{};
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> move_left_sprites{};
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> move_right_sprites{};
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> move_up_sprites{};
+	MovementDirection current_direction;
 
-	Camera *camera;
+	static Camera *camera;
 	Surface *characters;
 	Point start_position;
 	Point position;
 	Point sprite_sheet_size;
 	Timer animation_timer;
 
-	void move(Point movement);
 	static void animate(Timer &timer);
+	void move(Point movement, MovementDirection direction);
 };

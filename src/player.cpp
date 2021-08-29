@@ -3,18 +3,21 @@
 //
 
 #include <assets.hpp>
+#include <iostream>
 #include "player.hpp"
 #include "camera.hpp"
 #include "map.hpp"
 
+bool Player::is_moving = false;
+Camera *Player::camera;
 uint16_t Player::sprite_index = 0;
 std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 
 //Camera is scaled by the factor of 100 to prevent rounding issues
-Player::Player(Camera *camera) {
+Player::Player(Camera *game_camera) {
 	Player::start_position = get_screen_tiles() / 2;
 	Player::position = start_position;
-	Player::camera = camera;
+	Player::camera = game_camera;
 	Player::characters = Surface::load(asset_characters);
 	Player::sprite_sheet_size = get_sprite_sheet_size(Player::characters->bounds);
 
@@ -23,6 +26,7 @@ Player::Player(Camera *camera) {
 	Player::move_left_sprites = {16, 17, 18, 19};
 	Player::move_right_sprites = {32, 33, 34, 35};
 	Player::move_up_sprites = {48, 49, 50, 51};
+	Player::current_direction = MovementDirection::DOWN;
 	Player::animation_sprites = move_down_sprites;
 	Player::sprite_index = animation_sprites[0];
 
@@ -31,35 +35,59 @@ Player::Player(Camera *camera) {
 }
 
 void Player::animate(Timer &timer) {
-	sprite_index = animation_sprites[(sprite_index + 1) % 4];
+	if (camera->is_moving()) {
+		sprite_index = animation_sprites[(sprite_index + 1) % 4];
+	} else {
+		sprite_index = animation_sprites[0]; //TODO is triggered on continued walking
+	}
 }
 
 void Player::move_up() {
-	animation_sprites = move_up_sprites;
-	move(Point(0, -1));
+	move(Point(0, -1), MovementDirection::UP);
 }
 
 void Player::move_down() {
-	animation_sprites = move_down_sprites;
-	move(Point(0, 1));
+	move(Point(0, 1), MovementDirection::DOWN);
 }
 
 void Player::move_left() {
-	animation_sprites = move_left_sprites;
-	move(Point(-1, 0));
+	move(Point(-1, 0), MovementDirection::LEFT);
 }
 
 void Player::move_right() {
-	animation_sprites = move_right_sprites;
-	move(Point(1, 0));
+	move(Point(1, 0), MovementDirection::RIGHT);
 }
 
-void Player::move(Point movement) {
-	sprite_index = animation_sprites[(sprite_index) % 4]; //Set sprite manually to avoid timer delay on player turn
+void Player::move(Point movement, MovementDirection direction) {
+	is_moving = camera->is_moving();
 
-	Point next_position = camera->get_world_position() + position + movement;
-	if (!camera->is_moving() && map::get_flag(next_position) != map::TileFlags::SOLID) {
-		camera->move(movement);
+	if (is_moving) {
+		return;
+	}
+
+	if (current_direction != direction) {
+		switch (direction) {
+			case MovementDirection::UP:
+				animation_sprites = move_up_sprites;
+				break;
+			case MovementDirection::DOWN:
+				animation_sprites = move_down_sprites;
+				break;
+			case MovementDirection::LEFT:
+				animation_sprites = move_left_sprites;
+				break;
+			case MovementDirection::RIGHT:
+				animation_sprites = move_right_sprites;
+				break;
+		}
+		current_direction = direction;
+		sprite_index = animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
+	} else {
+		//Prevent turn and move at the same time //TODO not working
+		Point next_position = camera->get_world_position() + position + movement;
+		if (map::get_flag(next_position) != map::TileFlags::SOLID) {
+			camera->move(movement);
+		}
 	}
 }
 
