@@ -120,8 +120,8 @@ namespace map {
 		uint16_t tile = 0;
 
 		while (i >= 0 && tile == 0) {
-			tile = layer_data[i][p.y * tmx->width + p.x];
 			i--;
+			tile = layer_data[i][p.y * tmx->width + p.x];
 		}
 
 		return tile;
@@ -146,15 +146,15 @@ namespace map {
 			tile_id = map::tile_at(p);
 
 			while (!flag_found && j < flags.size() - 1) {
-				j++;
 				k = 0;
 				while (!flag_found && k < flags[j].size()) {
 					if (tile_id == flags[j].at(k)) {
-						flag_enum_id = j;
+						flag_enum_id = j + 1; //Add 1 because flag index starts at 1
 						flag_found = true;
 					}
 					k++;
 				}
+				j++;
 			}
 		}
 
@@ -162,6 +162,6 @@ namespace map {
 	}
 
 	void set_flags(TileFlags flag, const std::vector<uint16_t> &tiles) {
-		flags[flag] = tiles;
+		flags[flag - 1] = tiles;
 	}
 }

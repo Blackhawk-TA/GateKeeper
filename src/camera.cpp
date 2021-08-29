@@ -16,7 +16,7 @@ bool Camera::is_moving() const {
 }
 
 Point Camera::get_world_position() const {
-	return camera_position;
+	return camera_position / camera_scale;
 }
 
 Point Camera::get_screen_position() const {

@@ -44,6 +44,8 @@ void render(uint32_t time) {
 
 	ms_end = now();
 	ui_overlay::draw_fps(ms_start, ms_end);
+	map::set_flags(map::TileFlags::SOLID, {769});
+	map::get_flag(Point(22, 22));
 }
 
 ///////////////////////////////////////////////////////////////////////////
