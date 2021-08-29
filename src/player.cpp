@@ -33,8 +33,8 @@ void Player::move_right() {
 }
 
 void Player::move(Point movement) {
-//	Point next_position = camera->get_world_position() + movement; //TODO fix
-	if (!camera->is_moving() /*&& map::get_flag(next_position) == map::TileFlags::SOLID*/) {
+	Point next_position = camera->get_world_position() + position + movement;
+	if (!camera->is_moving() && map::get_flag(next_position) != map::TileFlags::SOLID) {
 		camera->move(movement);
 	}
 }
