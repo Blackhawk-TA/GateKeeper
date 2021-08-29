@@ -18,13 +18,21 @@ public:
 	void move_right();
 
 private:
-	const uint16_t tile_id = 0;
+	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
+	static uint16_t sprite_index;
+	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> move_down_sprites{};
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> move_left_sprites{};
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> move_right_sprites{};
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> move_up_sprites{};
 
 	Camera *camera;
 	Surface *characters;
 	Point start_position;
 	Point position;
 	Point sprite_sheet_size;
+	Timer animation_timer;
 
 	void move(Point movement);
+	static void animate(Timer &timer);
 };
