@@ -33,16 +33,19 @@ Player::Player(Camera *game_camera) {
 
 	animation_timer = new Timer();
 	animation_timer->init(animate, 175, -1);
-	animation_timer->start();
 }
 
 void Player::animate(Timer &timer) {
-	if (camera->is_moving()) {
+	if (is_moving) {
 		sprite_index = animation_sprites[(sprite_index + 1) % 4];
 	} else {
-		sprite_index = animation_sprites[0]; //TODO is triggered on continued walking
+		sprite_index = animation_sprites[0];
 		animation_timer->stop();
 	}
+}
+
+void Player::stop_movement() {
+	is_moving = false;
 }
 
 void Player::move_up() {
@@ -62,15 +65,15 @@ void Player::move_right() {
 }
 
 void Player::move(Point movement, MovementDirection direction) {
-	is_moving = camera->is_moving();
+	is_moving = true;
 
 	//Do not trigger a movement while another one is in progress
-	if (is_moving) {
+	if (camera->is_moving()) {
 		return;
 	}
 
 	//Start animation timer if not already running
-	if (animation_timer->is_stopped()) {
+	if (!animation_timer->is_running()) {
 		animation_timer->start();
 	}
 

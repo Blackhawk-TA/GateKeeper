@@ -1,3 +1,4 @@
+#include <iostream>
 #include "game.hpp"
 #include "assets.hpp"
 #include "camera.hpp"
@@ -9,6 +10,7 @@ using namespace blit;
 
 uint32_t last_buttons = 0;
 uint32_t changed = 0;
+bool holding_button = false;
 
 uint32_t ms_start, ms_end;
 Camera *camera;
@@ -59,6 +61,17 @@ void render(uint32_t time) {
 void update(uint32_t time) {
 	//Handle button inputs
 	changed = buttons ^ last_buttons;
+
+	//Check if the player is holding a button
+	if (buttons != last_buttons) {
+		holding_button = !holding_button;
+		std::cout << "Pressed: " << holding_button << std::endl;
+	}
+
+	if (changed && !holding_button && (last_buttons & Button::DPAD_UP || last_buttons & Button::DPAD_DOWN
+	|| last_buttons & Button::DPAD_LEFT || last_buttons & Button::DPAD_RIGHT)){
+		player->stop_movement();
+	}
 
 	if (buttons & Button::DPAD_UP) {
 		player->move_up();

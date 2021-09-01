@@ -16,6 +16,7 @@ public:
 	void move_down();
 	void move_left();
 	void move_right();
+	static void stop_movement();
 
 private:
 	enum MovementDirection {
