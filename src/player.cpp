@@ -10,6 +10,7 @@
 
 bool Player::is_moving = false;
 Camera *Player::camera;
+Timer *Player::animation_timer;
 uint16_t Player::sprite_index = 0;
 std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 
@@ -30,8 +31,9 @@ Player::Player(Camera *game_camera) {
 	Player::animation_sprites = move_down_sprites;
 	Player::sprite_index = animation_sprites[0];
 
-	animation_timer.init(animate, 175, -1);
-	animation_timer.start();
+	animation_timer = new Timer();
+	animation_timer->init(animate, 175, -1);
+	animation_timer->start();
 }
 
 void Player::animate(Timer &timer) {
@@ -39,6 +41,7 @@ void Player::animate(Timer &timer) {
 		sprite_index = animation_sprites[(sprite_index + 1) % 4];
 	} else {
 		sprite_index = animation_sprites[0]; //TODO is triggered on continued walking
+		animation_timer->stop();
 	}
 }
 
@@ -61,8 +64,14 @@ void Player::move_right() {
 void Player::move(Point movement, MovementDirection direction) {
 	is_moving = camera->is_moving();
 
+	//Do not trigger a movement while another one is in progress
 	if (is_moving) {
 		return;
+	}
+
+	//Start animation timer if not already running
+	if (animation_timer->is_stopped()) {
+		animation_timer->start();
 	}
 
 	if (current_direction != direction) {

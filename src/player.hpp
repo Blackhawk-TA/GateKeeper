@@ -36,11 +36,11 @@ private:
 	MovementDirection current_direction;
 
 	static Camera *camera;
+	static Timer *animation_timer;
 	Surface *characters;
 	Point start_position;
 	Point position;
 	Point sprite_sheet_size;
-	Timer animation_timer;
 
 	static void animate(Timer &timer);
 	void move(Point movement, MovementDirection direction);
