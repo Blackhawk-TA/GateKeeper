@@ -3,7 +3,6 @@
 //
 
 #include <assets.hpp>
-#include <iostream>
 #include "player.hpp"
 #include "camera.hpp"
 #include "map.hpp"
@@ -36,7 +35,7 @@ Player::Player(Camera *game_camera) {
 }
 
 void Player::animate(Timer &timer) {
-	if (is_moving) {
+	if (is_moving || camera->is_moving()) {
 		sprite_index = animation_sprites[(sprite_index + 1) % 4];
 	} else {
 		sprite_index = animation_sprites[0];
@@ -94,12 +93,13 @@ void Player::move(Point movement, MovementDirection direction) {
 		}
 		current_direction = direction;
 		sprite_index = animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
+	}
+
+	Point next_position = camera->get_world_position() + position + movement;
+	if (map::get_flag(next_position) != map::TileFlags::SOLID) {
+		camera->move(movement);
 	} else {
-		//Prevent turn and move at the same time //TODO not working
-		Point next_position = camera->get_world_position() + position + movement;
-		if (map::get_flag(next_position) != map::TileFlags::SOLID) {
-			camera->move(movement);
-		}
+		is_moving = false;
 	}
 }
 

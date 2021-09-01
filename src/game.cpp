@@ -1,4 +1,3 @@
-#include <iostream>
 #include "game.hpp"
 #include "assets.hpp"
 #include "camera.hpp"
@@ -27,7 +26,7 @@ void init() {
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
 	map::load_section(map::MapSections::EXTERIOR);
-	map::set_flags(map::TileFlags::SOLID, {});
+	map::set_flags(map::TileFlags::SOLID, {768});
 
 	camera = new Camera();
 	player = new Player(camera);
@@ -65,12 +64,11 @@ void update(uint32_t time) {
 	//Check if the player is holding a button
 	if (buttons != last_buttons) {
 		holding_button = !holding_button;
-		std::cout << "Pressed: " << holding_button << std::endl;
 	}
 
 	if (changed && !holding_button && (last_buttons & Button::DPAD_UP || last_buttons & Button::DPAD_DOWN
 	|| last_buttons & Button::DPAD_LEFT || last_buttons & Button::DPAD_RIGHT)){
-		player->stop_movement();
+		Player::stop_movement();
 	}
 
 	if (buttons & Button::DPAD_UP) {
