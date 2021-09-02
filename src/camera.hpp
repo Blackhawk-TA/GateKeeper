@@ -13,6 +13,7 @@ public:
 	bool is_moving() const;
 	Point get_world_position() const;
 	Point get_screen_position() const;
+	void set_position(Point &position);
 	void move(Point &offset);
 	void update_position();
 

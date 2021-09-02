@@ -23,6 +23,10 @@ Point Camera::get_screen_position() const {
 	return world_to_screen((float) camera_position.x / camera_scale_float, (float) camera_position.y / camera_scale_float);
 }
 
+void Camera::set_position(Point &position) {
+	camera_position = position * camera_scale;
+}
+
 void Camera::move(Point &offset) {
 	camera_offset = offset * camera_scale;
 	moving = true;

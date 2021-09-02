@@ -44,7 +44,9 @@ namespace map {
 				current_layer_count = EXTERIOR_LAYER_COUNT;
 				break;
 			case MapSections::INTERIOR:
-				tmx = nullptr;
+				tmx = (TMX_16 *) malloc(asset_interior_map_length);
+				memcpy(tmx, asset_interior_map, asset_interior_map_length);
+
 				current_layer_count = INTERIOR_LAYER_COUNT;
 				break;
 			case MapSections::WINTER:
@@ -161,7 +163,7 @@ namespace map {
 		return flag_enum_id;
 	}
 
-	void set_flags(TileFlags flag, const std::vector<uint16_t> &tiles) {
+	void set_flag(TileFlags flag, const std::vector<uint16_t> &tiles) {
 		flags[flag - 1] = tiles;
 	}
 }

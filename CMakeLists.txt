@@ -8,6 +8,7 @@ project(32blit-rpg)
 set(PROJECT_SOURCE
     src/camera.cpp src/camera.hpp
     src/game.cpp src/game.hpp
+    src/interior_connector.cpp src/interior_connector.hpp
     src/player.cpp src/player.hpp
     src/map.cpp src/map.hpp
     src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp

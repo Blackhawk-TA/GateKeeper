@@ -15,6 +15,10 @@ assets.cpp:
     name: exterior_map
     empty_tile: 0
     output_struct: true
+  assets/interior.tmx:
+    name: interior_map
+    empty_tile: 0
+    output_struct: true
   assets/winter.tmx:
     name: winter_map
     empty_tile: 0

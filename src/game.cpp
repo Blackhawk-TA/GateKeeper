@@ -26,7 +26,8 @@ void init() {
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
 	map::load_section(map::MapSections::EXTERIOR);
-	map::set_flags(map::TileFlags::SOLID, {768});
+	map::set_flag(map::TileFlags::SOLID, {768});
+	map::set_flag(map::TileFlags::DOOR, {773, 1336});
 
 	camera = new Camera();
 	player = new Player(camera);
@@ -73,10 +74,8 @@ void update(uint32_t time) {
 
 	if (buttons & Button::DPAD_UP) {
 		player->move_up();
-//		map::load_section(map::MapSections::EXTERIOR);
 	} else if (buttons & Button::DPAD_DOWN) {
 		player->move_down();
-//		map::load_section(map::MapSections::WINTER);
 	} else if (buttons & Button::DPAD_LEFT) {
 		player->move_left();
 	} else if (buttons & Button::DPAD_RIGHT) {

@@ -6,6 +6,7 @@
 #include "player.hpp"
 #include "camera.hpp"
 #include "map.hpp"
+#include "interior_connector.hpp"
 
 bool Player::is_moving = false;
 Camera *Player::camera;
@@ -39,7 +40,7 @@ void Player::animate(Timer &timer) {
 		sprite_index = animation_sprites[(sprite_index + 1) % 4];
 	} else {
 		sprite_index = animation_sprites[0];
-		animation_timer->stop();
+		animation_timer->stop(); //TODO when walking to the door timer does not stop
 	}
 }
 
@@ -97,6 +98,11 @@ void Player::move(Point movement, MovementDirection direction) {
 
 	Point next_position = camera->get_world_position() + position + movement;
 	if (map::get_flag(next_position) != map::TileFlags::SOLID) {
+		if (map::get_flag(next_position) == map::TileFlags::DOOR) {
+			//TODO get building id dynamically
+			Point teleport_position = interior_connector::teleport(0, next_position);
+			camera->set_position(teleport_position);
+		}
 		camera->move(movement);
 	} else {
 		is_moving = false;

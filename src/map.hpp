@@ -10,12 +10,13 @@ using namespace blit;
 namespace map {
 	const uint8_t DUNGEON_LAYER_COUNT = 0;
 	const uint8_t EXTERIOR_LAYER_COUNT = 2;
-	const uint8_t INTERIOR_LAYER_COUNT = 0;
+	const uint8_t INTERIOR_LAYER_COUNT = 3;
 	const uint8_t WINTER_LAYER_COUNT = 2;
 
 	enum TileFlags {
 		SOLID = 1,
-		COUNTER = 2
+		DOOR = 2,
+		COUNTER = 3
 	};
 
 	enum MapSections {
@@ -42,5 +43,5 @@ namespace map {
 	void draw(Point camera_position);
 	uint16_t tile_at(Point &p);
 	uint8_t get_flag(Point p);
-	void set_flags(TileFlags flag, const std::vector<uint16_t> &tiles);
+	void set_flag(TileFlags flag, const std::vector<uint16_t> &tiles);
 }
