@@ -8,7 +8,7 @@
 using namespace blit;
 
 /**
- * Connects the building with their interior by linking the coordinates on the specific tile maps.
+ * Connects the buildings with their interior by linking the coordinates on the specific tile maps.
  */
 namespace building {
 	struct Door {

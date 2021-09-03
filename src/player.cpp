@@ -23,10 +23,6 @@ Player::Player(Camera *game_camera) {
 	Player::sprite_sheet_size = get_sprite_sheet_size(Player::characters->bounds);
 
 	//Set player animation tiles
-	Player::move_down_sprites = {0, 1, 2, 3};
-	Player::move_left_sprites = {16, 17, 18, 19};
-	Player::move_right_sprites = {32, 33, 34, 35};
-	Player::move_up_sprites = {48, 49, 50, 51};
 	Player::current_direction = MovementDirection::DOWN;
 	Player::animation_sprites = move_down_sprites;
 	Player::sprite_index = animation_sprites[0];
@@ -37,7 +33,7 @@ Player::Player(Camera *game_camera) {
 
 void Player::animate(Timer &timer) {
 	if (is_moving || camera->is_moving()) {
-		sprite_index = animation_sprites[(sprite_index + 1) % 4];
+		sprite_index = animation_sprites[(sprite_index + 1) % ANIMATION_SPRITE_COUNT];
 	} else {
 		sprite_index = animation_sprites[0];
 		animation_timer->stop(); //TODO when walking to the Door timer does not stop
@@ -103,7 +99,6 @@ void Player::draw() {
 
 /**
  * Teleports the player to the interior/exterior of the building and swaps the tile maps
- *
  * @param building_id The id of the building
  * @param next_position The position where the player will walk within the next move
  */
