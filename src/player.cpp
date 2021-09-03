@@ -24,7 +24,7 @@ Player::Player(Camera *game_camera) {
 
 	//Set player animation tiles
 	Player::current_direction = MovementDirection::DOWN;
-	Player::animation_sprites = move_down_sprites;
+	Player::animation_sprites = movement_sprites.at(Player::current_direction);
 	Player::sprite_index = animation_sprites[0];
 
 	animation_timer = new Timer();
@@ -45,7 +45,7 @@ void Player::stop_movement() {
 }
 
 void Player::move(MovementDirection direction) {
-	Point movement = movement_map.at(direction);
+	Point movement = movements.at(direction);
 	is_moving = true;
 
 	//Do not trigger a movement while another one is in progress
@@ -59,20 +59,7 @@ void Player::move(MovementDirection direction) {
 	}
 
 	if (current_direction != direction) {
-		switch (direction) {
-			case UP:
-				animation_sprites = move_up_sprites;
-				break;
-			case DOWN:
-				animation_sprites = move_down_sprites;
-				break;
-			case LEFT:
-				animation_sprites = move_left_sprites;
-				break;
-			case RIGHT:
-				animation_sprites = move_right_sprites;
-				break;
-		}
+		animation_sprites = movement_sprites.at(direction);
 		current_direction = direction;
 		sprite_index = animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
 	}
