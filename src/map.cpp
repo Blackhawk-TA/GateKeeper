@@ -121,7 +121,7 @@ namespace map {
 		uint8_t i = current_layer_count;
 		uint16_t tile = 0;
 
-		while (i >= 0 && tile == 0) {
+		while (i > 0 && tile == 0) {
 			i--;
 			tile = layer_data[i][p.y * tmx->width + p.x];
 		}

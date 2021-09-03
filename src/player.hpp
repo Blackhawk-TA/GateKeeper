@@ -10,20 +10,24 @@ using namespace blit;
 
 class Player {
 public:
-	explicit Player(Camera *game_camera);
-	void draw();
-	void move_up();
-	void move_down();
-	void move_left();
-	void move_right();
-	static void stop_movement();
-
-private:
 	enum MovementDirection {
 		UP = 1,
 		DOWN = 2,
 		LEFT = 3,
 		RIGHT = 4
+	};
+
+	explicit Player(Camera *game_camera);
+	void draw();
+	void move(MovementDirection direction);
+	static void stop_movement();
+
+private:
+	std::map<MovementDirection, Point> movement_map {
+			{UP, Point(0, -1)},
+			{DOWN, Point(0, 1)},
+			{LEFT, Point(-1, 0)},
+			{RIGHT, Point(1, 0)},
 	};
 
 	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
@@ -44,5 +48,4 @@ private:
 	Point sprite_sheet_size;
 
 	static void animate(Timer &timer);
-	void move(Point movement, MovementDirection direction);
 };

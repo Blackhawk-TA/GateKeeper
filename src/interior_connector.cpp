@@ -9,13 +9,13 @@
 using namespace blit;
 
 namespace interior_connector {
-	struct building_doors {
+	struct Door {
 		Point exterior;
 		Point interior;
 	};
 
-	constexpr building_doors connections[] = {
-			building_doors{Point(19, 15), Point(15, 13)}
+	constexpr Door connections[] = {
+			Door{Point(19, 15), Point(15, 13)}
 	};
 
 	Point teleport(uint8_t building_id, Point position) {

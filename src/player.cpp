@@ -40,7 +40,7 @@ void Player::animate(Timer &timer) {
 		sprite_index = animation_sprites[(sprite_index + 1) % 4];
 	} else {
 		sprite_index = animation_sprites[0];
-		animation_timer->stop(); //TODO when walking to the door timer does not stop
+		animation_timer->stop(); //TODO when walking to the Door timer does not stop
 	}
 }
 
@@ -48,23 +48,8 @@ void Player::stop_movement() {
 	is_moving = false;
 }
 
-void Player::move_up() {
-	move(Point(0, -1), MovementDirection::UP);
-}
-
-void Player::move_down() {
-	move(Point(0, 1), MovementDirection::DOWN);
-}
-
-void Player::move_left() {
-	move(Point(-1, 0), MovementDirection::LEFT);
-}
-
-void Player::move_right() {
-	move(Point(1, 0), MovementDirection::RIGHT);
-}
-
-void Player::move(Point movement, MovementDirection direction) {
+void Player::move(MovementDirection direction) {
+	Point movement = movement_map.at(direction);
 	is_moving = true;
 
 	//Do not trigger a movement while another one is in progress
@@ -79,16 +64,16 @@ void Player::move(Point movement, MovementDirection direction) {
 
 	if (current_direction != direction) {
 		switch (direction) {
-			case MovementDirection::UP:
+			case UP:
 				animation_sprites = move_up_sprites;
 				break;
-			case MovementDirection::DOWN:
+			case DOWN:
 				animation_sprites = move_down_sprites;
 				break;
-			case MovementDirection::LEFT:
+			case LEFT:
 				animation_sprites = move_left_sprites;
 				break;
-			case MovementDirection::RIGHT:
+			case RIGHT:
 				animation_sprites = move_right_sprites;
 				break;
 		}

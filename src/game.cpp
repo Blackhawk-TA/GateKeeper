@@ -73,13 +73,13 @@ void update(uint32_t time) {
 	}
 
 	if (buttons & Button::DPAD_UP) {
-		player->move_up();
+		player->move(player->UP);
 	} else if (buttons & Button::DPAD_DOWN) {
-		player->move_down();
+		player->move(player->DOWN);
 	} else if (buttons & Button::DPAD_LEFT) {
-		player->move_left();
+		player->move(player->LEFT);
 	} else if (buttons & Button::DPAD_RIGHT) {
-		player->move_right();
+		player->move(player->RIGHT);
 	}
 
 	last_buttons = buttons;
