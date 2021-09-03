@@ -10,6 +10,13 @@ using namespace blit;
 /**
  * Connects the building with their interior by linking the coordinates on the specific tile maps.
  */
-namespace interior_connector {
-	Point teleport(uint8_t building_id, Point position);
+namespace building {
+	struct Door {
+		Point exterior;
+		Point interior;
+	};
+
+	constexpr Door connections[] = {
+			Door{Point(19, 15), Point(15, 13)}
+	};
 }

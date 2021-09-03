@@ -6,7 +6,7 @@
 #include "player.hpp"
 #include "camera.hpp"
 #include "map.hpp"
-#include "interior_connector.hpp"
+#include "building.hpp"
 
 bool Player::is_moving = false;
 Camera *Player::camera;
@@ -84,9 +84,7 @@ void Player::move(MovementDirection direction) {
 	Point next_position = camera->get_world_position() + position + movement;
 	if (map::get_flag(next_position) != map::TileFlags::SOLID) {
 		if (map::get_flag(next_position) == map::TileFlags::DOOR) {
-			//TODO get building id dynamically
-			Point teleport_position = interior_connector::teleport(0, next_position);
-			camera->set_position(teleport_position);
+			teleport(0, next_position); //TODO get building id dynamically
 		}
 		camera->move(movement);
 	} else {
@@ -101,4 +99,24 @@ void Player::draw() {
 		world_to_screen(position),
 		SpriteTransform::NONE
 	);
+}
+
+/**
+ * Teleports the player to the interior/exterior of the building and swaps the tile maps
+ *
+ * @param building_id The id of the building
+ * @param next_position The position where the player will walk within the next move
+ */
+void Player::teleport(uint8_t building_id, Point next_position) {
+	Point destination;
+
+	if (next_position == building::connections[building_id].exterior) {
+		map::load_section(map::MapSections::INTERIOR);
+		destination = building::connections[building_id].interior - get_screen_tiles() / 2;
+	} else if (next_position == building::connections[building_id].interior) {
+		map::load_section(map::MapSections::EXTERIOR);
+		destination = building::connections[building_id].exterior - get_screen_tiles() / 2;
+	}
+
+	camera->set_position(destination);
 }

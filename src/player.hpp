@@ -48,4 +48,5 @@ private:
 	Point sprite_sheet_size;
 
 	static void animate(Timer &timer);
+	static void teleport(uint8_t building_id, Point next_position);
 };
