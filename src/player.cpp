@@ -36,7 +36,7 @@ void Player::animate(Timer &timer) {
 		sprite_index = animation_sprites[(sprite_index + 1) % ANIMATION_SPRITE_COUNT];
 	} else {
 		sprite_index = animation_sprites[0];
-		animation_timer->stop(); //TODO when walking to the Door timer does not stop
+		animation_timer->stop();
 	}
 }
 

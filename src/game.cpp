@@ -63,9 +63,7 @@ void update(uint32_t time) {
 	changed = buttons ^ last_buttons;
 
 	//Check if the player is holding a button
-	if (buttons != last_buttons) {
-		holding_button = !holding_button;
-	}
+	holding_button = buttons == last_buttons;
 
 	if (changed && !holding_button && (last_buttons & Button::DPAD_UP || last_buttons & Button::DPAD_DOWN
 	|| last_buttons & Button::DPAD_LEFT || last_buttons & Button::DPAD_RIGHT)){
