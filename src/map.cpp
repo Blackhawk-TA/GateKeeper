@@ -66,7 +66,7 @@ namespace map {
 		screen_tiles = get_screen_tiles();
 		sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
 
-		for (auto i = 0u; i < tmx->layers; i++) {
+		for (auto i = 0u; i < current_layer_count; i++) {
 			layer_data.push_back({}); // Create new empty layer to fill it later on
 
 			for (x = 0u; x < tmx->width; x++) {
