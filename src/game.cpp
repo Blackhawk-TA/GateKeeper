@@ -1,11 +1,11 @@
 #include "game.hpp"
 #include "assets.hpp"
-#include "camera.hpp"
-#include "map.hpp"
+#include "engine/camera.hpp"
+#include "engine/map.hpp"
 #include "utils/ui_overlay.hpp"
 #include "player.hpp"
-#include "utils/transition.hpp"
-#include "flags.hpp"
+#include "engine/transition.hpp"
+#include "engine/flags.hpp"
 
 using namespace blit;
 

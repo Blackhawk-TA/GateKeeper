@@ -4,11 +4,11 @@
 
 #include <assets.hpp>
 #include "player.hpp"
-#include "camera.hpp"
-#include "map.hpp"
+#include "engine/camera.hpp"
+#include "engine/map.hpp"
 #include "building.hpp"
-#include "utils/transition.hpp"
-#include "flags.hpp"
+#include "engine/transition.hpp"
+#include "engine/flags.hpp"
 
 bool Player::is_moving = false;
 Camera *Player::camera;

@@ -6,13 +6,13 @@ project(32blit-rpg)
 
 # Add your sources here (adding headers is optional, but helps some CMake generators)
 set(PROJECT_SOURCE
-    src/camera.cpp src/camera.hpp
-    src/flags.cpp src/flags.hpp
+        src/engine/camera.cpp src/engine/camera.hpp
+        src/engine/flags.cpp src/engine/flags.hpp
     src/game.cpp src/game.hpp
     src/building.cpp src/building.hpp
     src/player.cpp src/player.hpp
-    src/map.cpp src/map.hpp
-    src/utils/transition.cpp src/utils/transition.hpp
+        src/engine/map.cpp src/engine/map.hpp
+        src/engine/transition.cpp src/engine/transition.hpp
     src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp
     src/utils/utils.cpp src/utils/utils.hpp
 )
