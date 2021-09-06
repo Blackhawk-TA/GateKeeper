@@ -11,6 +11,7 @@ set(PROJECT_SOURCE
     src/building.hpp
     src/player.cpp src/player.hpp
     src/map.cpp src/map.hpp
+    src/utils/transition.cpp src/utils/transition.hpp
     src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp
     src/utils/utils.cpp src/utils/utils.hpp
 )

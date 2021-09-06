@@ -7,6 +7,7 @@
 #include "camera.hpp"
 #include "map.hpp"
 #include "building.hpp"
+#include "utils/transition.hpp"
 
 bool Player::is_moving = false;
 Camera *Player::camera;
@@ -32,7 +33,7 @@ Player::Player(Camera *game_camera) {
 }
 
 void Player::animate(Timer &timer) {
-	if (is_moving || camera->is_moving()) {
+	if ((is_moving || camera->is_moving()) && !transition::in_progress()) {
 		sprite_index = animation_sprites[(sprite_index + 1) % ANIMATION_SPRITE_COUNT];
 	} else {
 		sprite_index = animation_sprites[0];
@@ -45,6 +46,11 @@ void Player::stop_movement() {
 }
 
 void Player::move(MovementDirection direction) {
+	//Do not move when a transition is in progress
+	if (transition::in_progress()) {
+		return;
+	}
+
 	Point movement = movements.at(direction);
 	is_moving = true;
 
@@ -58,16 +64,18 @@ void Player::move(MovementDirection direction) {
 		animation_timer->start();
 	}
 
+	//Set player sprite direction
 	if (current_direction != direction) {
 		animation_sprites = movement_sprites.at(direction);
 		current_direction = direction;
 		sprite_index = animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
 	}
 
+	//Move player
 	Point next_position = camera->get_world_position() + position + movement;
 	if (map::get_flag(next_position) != map::TileFlags::SOLID) {
 		if (map::get_flag(next_position) == map::TileFlags::DOOR) {
-			teleport(0, next_position); //TODO get building id dynamically
+			transition::start(std::bind(teleport, 0, next_position));
 		}
 		camera->move(movement);
 	} else {
@@ -97,7 +105,8 @@ void Player::teleport(uint8_t building_id, Point next_position) {
 		destination = building::connections[building_id].interior - get_screen_tiles() / 2;
 	} else if (next_position == building::connections[building_id].interior) {
 		map::load_section(map::MapSections::EXTERIOR);
-		destination = building::connections[building_id].exterior - get_screen_tiles() / 2;
+		Point door_offset = Point(0, 1); //Teleport player in front of the door instead of directly on it
+		destination = building::connections[building_id].exterior - get_screen_tiles() / 2 + door_offset;
 	}
 
 	camera->set_position(destination);

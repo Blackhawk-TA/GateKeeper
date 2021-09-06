@@ -4,6 +4,7 @@
 #include "map.hpp"
 #include "utils/ui_overlay.hpp"
 #include "player.hpp"
+#include "utils/transition.hpp"
 
 using namespace blit;
 
@@ -46,6 +47,10 @@ void render(uint32_t time) {
 
 	map::draw(camera->get_screen_position());
 	player->draw();
+
+	if (transition::in_progress()) {
+		transition::draw();
+	}
 
 	ms_end = now();
 	ui_overlay::draw_fps(ms_start, ms_end);
