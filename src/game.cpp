@@ -5,6 +5,7 @@
 #include "utils/ui_overlay.hpp"
 #include "player.hpp"
 #include "utils/transition.hpp"
+#include "flags.hpp"
 
 using namespace blit;
 
@@ -27,8 +28,8 @@ void init() {
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
 	map::load_section(map::MapSections::EXTERIOR);
-	map::set_flag(map::TileFlags::SOLID, {768});
-	map::set_flag(map::TileFlags::DOOR, {773, 965, 1251, 1252, 1253, 1254});
+	flags::set_flag(flags::TileFlags::SOLID, {768});
+	flags::set_flag(flags::TileFlags::DOOR, {773, 965, 1251, 1252, 1253, 1254});
 
 	camera = new Camera();
 	player = new Player(camera);

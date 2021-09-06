@@ -7,6 +7,7 @@ project(32blit-rpg)
 # Add your sources here (adding headers is optional, but helps some CMake generators)
 set(PROJECT_SOURCE
     src/camera.cpp src/camera.hpp
+    src/flags.cpp src/flags.hpp
     src/game.cpp src/game.hpp
     src/building.cpp src/building.hpp
     src/player.cpp src/player.hpp

@@ -8,7 +8,6 @@
 
 using namespace blit;
 
-std::array<std::vector<uint16_t>, map::TileFlags::COUNTER> flags;
 std::vector<std::array<uint16_t, LEVEL_SIZE>> layer_data;
 map::TMX_16 *tmx;
 Point screen_tiles;
@@ -83,10 +82,6 @@ void map::load_section(MapSections map_section) {
 	}
 }
 
-map::MapSections map::get_section() {
-	return current_section;
-}
-
 /**
  * Draws the tile map to the screen if a TileMap is loaded in the memory
  * @param camera_position The position of the camera on the TileMap
@@ -99,6 +94,7 @@ void map::draw(Point camera_position) {
 
 	//TODO optimize by removing loops: Maybe use layer_data instead of loop for x & y or recursion or calc x and y from layer data
 	//TODO in best case this becomes a single for loop
+	//TODO optimizations here require flag handler rework
 	for (auto &layer: layer_data) {
 		for (x = 0; x < tmx->height; x++) {
 			for (y = 0; y < tmx->width; y++) {
@@ -139,39 +135,10 @@ uint16_t map::tile_at(Point &p) {
 	return tile;
 }
 
-/**
- * Gets the flag of the given sprite on its highest layer, ignoring all underlying flags
- * @param p The point at which the flag is located
- * @return The TileFlags enum id of the found flag
- */
-uint8_t map::get_flag(Point p) {
-	uint8_t i = current_layer_count;
-	uint8_t j, k;
-	uint8_t flag_enum_id = 0;
-	uint16_t tile_id;
-	bool flag_found = false;
-
-	while (!flag_found && i > 0) {
-		i--;
-		j = 0;
-		tile_id = map::tile_at(p);
-
-		while (!flag_found && j < flags.size() - 1) {
-			k = 0;
-			while (!flag_found && k < flags[j].size()) {
-				if (tile_id == flags[j].at(k)) {
-					flag_enum_id = j + 1; //Add 1 because flag index starts at 1
-					flag_found = true;
-				}
-				k++;
-			}
-			j++;
-		}
-	}
-
-	return flag_enum_id;
+map::MapSections map::get_section() {
+	return current_section;
 }
 
-void map::set_flag(TileFlags flag, const std::vector<uint16_t> &tiles) {
-	flags[flag - 1] = tiles;
+uint8_t map::get_layer_count() {
+	return current_layer_count;
 }

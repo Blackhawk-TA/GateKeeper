@@ -13,12 +13,6 @@ namespace map {
 	const uint8_t INTERIOR_LAYER_COUNT = 3;
 	const uint8_t WINTER_LAYER_COUNT = 2;
 
-	enum TileFlags {
-		SOLID = 1,
-		DOOR = 2,
-		COUNTER = 3
-	};
-
 	enum MapSections {
 		DUNGEON = 1,
 		EXTERIOR = 2,
@@ -40,9 +34,8 @@ namespace map {
 	#pragma pack(pop)
 
 	void load_section(MapSections map_section);
-	MapSections get_section();
 	void draw(Point camera_position);
 	uint16_t tile_at(Point &p);
-	uint8_t get_flag(Point p);
-	void set_flag(TileFlags flag, const std::vector<uint16_t> &tiles);
+	MapSections get_section();
+	uint8_t get_layer_count();
 }
