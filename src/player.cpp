@@ -71,11 +71,22 @@ void Player::move(MovementDirection direction) {
 		sprite_index = animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
 	}
 
-	//Move player
+	//Move player according to tile flag of next position
 	Point next_position = camera->get_world_position() + position + movement;
 	if (map::get_flag(next_position) != map::TileFlags::SOLID) {
 		if (map::get_flag(next_position) == map::TileFlags::DOOR) {
-			transition::start(std::bind(teleport, 0, next_position));
+			uint8_t building_id = building::get_id(next_position, map::get_section());
+
+			//No building found, stop movement
+			if (building_id == 255) {
+				is_moving = false;
+				return;
+			}
+
+			//Teleport to position on different tile map
+			transition::start([building_id, next_position] {
+				return teleport(building_id, next_position);
+			});
 		}
 		camera->move(movement);
 	} else {

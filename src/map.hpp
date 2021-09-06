@@ -40,6 +40,7 @@ namespace map {
 	#pragma pack(pop)
 
 	void load_section(MapSections map_section);
+	MapSections get_section();
 	void draw(Point camera_position);
 	uint16_t tile_at(Point &p);
 	uint8_t get_flag(Point p);

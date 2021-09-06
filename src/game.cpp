@@ -28,7 +28,7 @@ void init() {
 
 	map::load_section(map::MapSections::EXTERIOR);
 	map::set_flag(map::TileFlags::SOLID, {768});
-	map::set_flag(map::TileFlags::DOOR, {773, 1253, 1254});
+	map::set_flag(map::TileFlags::DOOR, {773, 965, 1251, 1252, 1253, 1254});
 
 	camera = new Camera();
 	player = new Player(camera);

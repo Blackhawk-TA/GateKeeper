@@ -14,10 +14,10 @@ map::TMX_16 *tmx;
 Point screen_tiles;
 Point sprite_sheet_size;
 uint8_t current_layer_count;
+map::MapSections current_section;
 
 /**
  * Loads new map section into memory and deletes the old one
- *
  * @param map_section The enum describing the map section
  */
 void map::load_section(MapSections map_section) {
@@ -65,11 +65,15 @@ void map::load_section(MapSections map_section) {
 	uint16_t x, y, tile_index;
 	screen_tiles = get_screen_tiles();
 	sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
+	current_section = map_section;
 
 	//TODO optimize by removing loops, currently useless because layer_data is not needed
+	// maybe save all data for all layers in a one dimensional array
 	for (auto i = 0u; i < current_layer_count; i++) {
 		layer_data.push_back({}); // Create new empty layer to fill it later on
 
+		//TODO can use directly loop till x < width * height
+		// can be made obsolete when using tmx->data directly in draw
 		for (x = 0u; x < tmx->width; x++) {
 			for (y = 0u; y < tmx->height; y++) {
 				tile_index = y * tmx->width + x;
@@ -79,9 +83,12 @@ void map::load_section(MapSections map_section) {
 	}
 }
 
+map::MapSections map::get_section() {
+	return current_section;
+}
+
 /**
  * Draws the tile map to the screen if a TileMap is loaded in the memory
- *
  * @param camera_position The position of the camera on the TileMap
  */
 void map::draw(Point camera_position) {
@@ -90,13 +97,15 @@ void map::draw(Point camera_position) {
 
 	if (tmx == nullptr) return; //Prevent rendering when TileMap is not loaded
 
-	//TODO optimize by removing loops: Maybe use layer_data instead of loop for x & y or recursion
+	//TODO optimize by removing loops: Maybe use layer_data instead of loop for x & y or recursion or calc x and y from layer data
+	//TODO in best case this becomes a single for loop
 	for (auto &layer: layer_data) {
 		for (x = 0; x < tmx->height; x++) {
 			for (y = 0; y < tmx->width; y++) {
 				//Checks if tile is visible on screen
-				if (screen_tiles.x + camera_position_world.x - x >= 0 && camera_position_world.x <= x
-				    && screen_tiles.y + camera_position_world.y - y >= 0 && camera_position_world.y <= y) {
+				if (screen_tiles.x + camera_position_world.x - x >= 0 && camera_position_world.x <= x &&
+					screen_tiles.y + camera_position_world.y - y >= 0 && camera_position_world.y <= y)
+				{
 					tile = layer[y * tmx->width + x];
 					if (tile != tmx->empty_tile) { //Do not draw empty tiles
 						screen.blit_sprite(
@@ -115,7 +124,6 @@ void map::draw(Point camera_position) {
 /**
  * Gets the id of a tile at a specific Point on the map.
  * Always selects the tile on the highest layer if several tiles overlap.
- *
  * @param p The point at which the tile is located
  * @return The id of the tile mapped to the sprite sheet
  */
@@ -133,7 +141,6 @@ uint16_t map::tile_at(Point &p) {
 
 /**
  * Gets the flag of the given sprite on its highest layer, ignoring all underlying flags
- *
  * @param p The point at which the flag is located
  * @return The TileFlags enum id of the found flag
  */

@@ -8,7 +8,7 @@ project(32blit-rpg)
 set(PROJECT_SOURCE
     src/camera.cpp src/camera.hpp
     src/game.cpp src/game.hpp
-    src/building.hpp
+    src/building.cpp src/building.hpp
     src/player.cpp src/player.hpp
     src/map.cpp src/map.hpp
     src/utils/transition.cpp src/utils/transition.hpp
