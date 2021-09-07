@@ -9,10 +9,6 @@
 
 using namespace blit;
 
-uint32_t last_buttons = 0;
-uint32_t changed = 0;
-bool holding_button = false;
-
 uint32_t ms_start, ms_end;
 Camera *camera;
 Player *player;
@@ -65,6 +61,10 @@ void render(uint32_t time) {
 // amount if milliseconds elapsed since the start of your game
 //
 void update(uint32_t time) {
+	static uint32_t last_buttons = 0;
+	static uint32_t changed = 0;
+	static bool holding_button = false;
+
 	//Handle button inputs
 	changed = buttons ^ last_buttons;
 

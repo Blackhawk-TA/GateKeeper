@@ -9,6 +9,7 @@ using namespace blit;
 
 //Sprite and map constants. All TileMaps require to have the same size.
 constexpr uint8_t TILE_SIZE = 16;
+//TODO calculate in map class and create getter
 constexpr uint8_t LEVEL_WIDTH = 128;
 constexpr uint8_t LEVEL_HEIGHT = 128;
 constexpr uint16_t LEVEL_SIZE = LEVEL_WIDTH * LEVEL_HEIGHT;

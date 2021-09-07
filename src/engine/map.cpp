@@ -31,35 +31,28 @@ void map::load_section(MapSections map_section) {
 	switch (map_section) {
 		case MapSections::DUNGEON:
 			tmx = nullptr;
-
-			current_layer_count = DUNGEON_LAYER_COUNT;
 			break;
 		case MapSections::EXTERIOR:
 			// Allocate memory for TileMap and copy it into memory
 			tmx = (TMX_16 *) malloc(asset_exterior_map_length);
 			//TODO handle error case if no mem available
 			memcpy(tmx, asset_exterior_map, asset_exterior_map_length);
-
-			current_layer_count = EXTERIOR_LAYER_COUNT;
 			break;
 		case MapSections::INTERIOR:
 			tmx = (TMX_16 *) malloc(asset_interior_map_length);
 			memcpy(tmx, asset_interior_map, asset_interior_map_length);
-
-			current_layer_count = INTERIOR_LAYER_COUNT;
 			break;
 		case MapSections::WINTER:
 			// Allocate memory for TileMap and copy it into memory
 			tmx = (TMX_16 *) malloc(asset_winter_map_length);
 			memcpy(tmx, asset_winter_map, asset_winter_map_length);
-
-			current_layer_count = WINTER_LAYER_COUNT;
 			break;
 	}
 
 	if (tmx == nullptr) return;
 	if (tmx->width > LEVEL_WIDTH) return;
 	if (tmx->height > LEVEL_HEIGHT) return;
+	current_layer_count = tmx->layers;
 
 	uint16_t x, y, tile_index;
 	screen_tiles = get_screen_tiles();
@@ -68,7 +61,7 @@ void map::load_section(MapSections map_section) {
 
 	//TODO optimize by removing loops, currently useless because layer_data is not needed
 	// maybe save all data for all layers in a one dimensional array
-	for (auto i = 0u; i < current_layer_count; i++) {
+	for (auto i = 0u; i < tmx->layers; i++) {
 		layer_data.push_back({}); // Create new empty layer to fill it later on
 
 		//TODO can use directly loop till x < width * height

@@ -8,11 +8,6 @@
 using namespace blit;
 
 namespace map {
-	const uint8_t DUNGEON_LAYER_COUNT = 0;
-	const uint8_t EXTERIOR_LAYER_COUNT = 3;
-	const uint8_t INTERIOR_LAYER_COUNT = 3;
-	const uint8_t WINTER_LAYER_COUNT = 2;
-
 	enum MapSections {
 		DUNGEON = 1,
 		EXTERIOR = 2,
