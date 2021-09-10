@@ -3,6 +3,8 @@
 //
 
 #pragma once
+
+#include <list>
 #include "../utils/utils.hpp"
 
 using namespace blit;
@@ -13,6 +15,18 @@ namespace map {
 		EXTERIOR = 2,
 		INTERIOR = 3,
 		WINTER = 4
+	};
+
+	//TODO maybe z position is needed, most likely not
+	//Stores information of a tile and how often it appears in repetition
+	struct Tile {
+		uint8_t x;
+		uint8_t y;
+		uint16_t id;
+		uint16_t range_start; //TODO maybe not needed
+		uint16_t range;
+		uint16_t sprite_rect_x;
+		uint16_t sprite_rect_y;
 	};
 
 	#pragma pack(push,1)

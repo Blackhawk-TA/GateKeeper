@@ -3,6 +3,7 @@
 //
 
 #include <cstring>
+#include <iostream>
 #include "assets.hpp"
 #include "map.hpp"
 
@@ -14,6 +15,7 @@ Point screen_tiles;
 Point sprite_sheet_size;
 uint8_t current_layer_count;
 map::MapSections current_section;
+std::vector<map::Tile> tile_data;
 
 /**
  * Loads new map section into memory and deletes the old one
@@ -28,12 +30,12 @@ void map::load_section(MapSections map_section) {
 	// Remove old TileMap from layer_data
 	layer_data.clear();
 
+	// Allocate memory for TileMap and copy it into memory
 	switch (map_section) {
 		case MapSections::DUNGEON:
 			tmx = nullptr;
 			break;
 		case MapSections::EXTERIOR:
-			// Allocate memory for TileMap and copy it into memory
 			tmx = (TMX_16 *) malloc(asset_exterior_map_length);
 			//TODO handle error case if no mem available
 			memcpy(tmx, asset_exterior_map, asset_exterior_map_length);
@@ -43,33 +45,74 @@ void map::load_section(MapSections map_section) {
 			memcpy(tmx, asset_interior_map, asset_interior_map_length);
 			break;
 		case MapSections::WINTER:
-			// Allocate memory for TileMap and copy it into memory
 			tmx = (TMX_16 *) malloc(asset_winter_map_length);
 			memcpy(tmx, asset_winter_map, asset_winter_map_length);
 			break;
 	}
 
 	if (tmx == nullptr) return;
-	if (tmx->width > LEVEL_WIDTH) return;
-	if (tmx->height > LEVEL_HEIGHT) return;
-	current_layer_count = tmx->layers;
 
-	uint16_t x, y, tile_index;
 	screen_tiles = get_screen_tiles();
 	sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
 	current_section = map_section;
+	current_layer_count = tmx->layers;
+//	level_size = tmx->width * tmx->height;
 
-	//TODO optimize by removing loops, currently useless because layer_data is not needed
-	// maybe save all data for all layers in a one dimensional array
-	for (auto i = 0u; i < tmx->layers; i++) {
-		layer_data.push_back({}); // Create new empty layer to fill it later on
+	//TODO move to own function and class with Tile and SpriteData structs
+	bool first_tile = true;
+	bool last_tile = false;
+	uint16_t tile_id;
+	uint16_t previous_tile_id = 0; //Set to 0, so it can never be equal to tile_id on first run. Prevents first tile being count as 2
+	uint16_t range_start = 0;
+	uint16_t range = 0;
+	uint16_t x, y, z;
 
-		//TODO can use directly loop till x < width * height
-		// can be made obsolete when using tmx->data directly in draw
+	//TODO get rid of triple for loop
+	for (z = 0u; z < tmx->layers; z++) {
 		for (x = 0u; x < tmx->width; x++) {
 			for (y = 0u; y < tmx->height; y++) {
-				tile_index = y * tmx->width + x;
-				layer_data.at(i)[tile_index] = tmx->data[tile_index + i * LEVEL_SIZE];
+				//Extract current tile id from tmx data
+				tile_id = tmx->data[y * tmx->width + x + z * LEVEL_SIZE];
+
+				//Check if it is the last tile, if so skip all other steps and save previous valid tile
+				if ((tmx->layers - 1) * (tmx->width - 1) * (tmx->height - 1) == x * y * z) {
+					last_tile = true;
+				}
+
+				//Do not save empty tiles
+				if (tile_id == tmx->empty_tile && !last_tile) {
+					continue;
+				}
+
+				//Instead of saving each tile count repetitions
+				if (tile_id == previous_tile_id && !last_tile) {
+					range++;
+					continue;
+				}
+
+				//For first tile, set previous tile to current one
+				if (first_tile) {
+					previous_tile_id = tile_id;
+					first_tile = false;
+					continue;
+				}
+
+				//TODO previous tile gets x and y pos if next tile...
+				//Save last tile in row of equals and its position. Requires calculation position of previous tiles
+				tile_data.push_back(Tile{ //TODO last tile missing or first tile missing if using tile_id
+					static_cast<uint8_t>(x),
+					static_cast<uint8_t>(y),
+					previous_tile_id,
+					range_start,
+					range,
+					static_cast<uint16_t>((tile_id % sprite_sheet_size.x) * TILE_SIZE),
+					static_cast<uint16_t>((tile_id / sprite_sheet_size.y) * TILE_SIZE),
+				});
+
+				//Reset range information for next tile with different id
+				range = 0;
+				range_start = tile_data.size();
+				previous_tile_id = tile_id;
 			}
 		}
 	}
@@ -80,7 +123,7 @@ void map::load_section(MapSections map_section) {
  * @param camera_position The position of the camera on the TileMap
  */
 void map::draw(Point camera_position) {
-	uint16_t tile, x, y;
+//	uint16_t tile, x, y;
 	Point camera_position_world = screen_to_world(camera_position);
 
 	if (tmx == nullptr) return; //Prevent rendering when TileMap is not loaded
@@ -88,6 +131,7 @@ void map::draw(Point camera_position) {
 	//TODO optimize by removing loops: Maybe use layer_data instead of loop for x & y or recursion or calc x and y from layer data
 	//TODO in best case this becomes a single for loop
 	//TODO optimizations here require flag handler rework
+	/*
 	for (auto &layer: layer_data) {
 		for (x = 0; x < tmx->height; x++) {
 			for (y = 0; y < tmx->width; y++) {
@@ -105,6 +149,28 @@ void map::draw(Point camera_position) {
 						);
 					}
 				}
+			}
+		}
+	}*/
+
+	uint16_t i, tile_x, tile_y;
+	for (Tile &tile : tile_data) {
+		tile_x = tile.x;
+		tile_y = tile.y;
+
+		for (i = 0u; i < tile.range; i++) {
+			tile_x = (tile_x - 1) % (tmx->width - 1);
+			tile_y = ((tile_y - 1) * 100) / (tmx->height - 1);
+
+			//Checks if tile is visible on screen
+			if (screen_tiles.x + camera_position_world.x - tile_x >= 0 && camera_position_world.x <= tile_x &&
+				screen_tiles.y + camera_position_world.y - tile_x >= 0 && camera_position_world.y <= tile_y)
+			{
+				screen.blit_sprite(
+					Rect(tile.sprite_rect_x, tile.sprite_rect_y, TILE_SIZE, TILE_SIZE),
+					Point(tile_x * TILE_SIZE, tile_y * TILE_SIZE) - camera_position,
+					SpriteTransform::NONE
+				);
 			}
 		}
 	}
