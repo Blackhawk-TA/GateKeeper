@@ -63,9 +63,10 @@ void map::load_section(MapSections map_section) {
 	bool last_tile = false;
 	uint16_t tile_id;
 	uint16_t previous_tile_id = 0; //Set to 0, so it can never be equal to tile_id on first run. Prevents first tile being count as 2
-	uint16_t range_start = 0;
 	uint16_t range = 0;
 	uint16_t x, y, z;
+	uint8_t next_tile_x;
+	uint8_t next_tile_y;
 
 	//TODO get rid of triple for loop
 	for (z = 0u; z < tmx->layers; z++) {
@@ -97,21 +98,24 @@ void map::load_section(MapSections map_section) {
 					continue;
 				}
 
+				if (!last_tile) {
+					next_tile_x = x;
+					next_tile_y = y;
+				}
+
 				//TODO previous tile gets x and y pos if next tile...
 				//Save last tile in row of equals and its position. Requires calculation position of previous tiles
 				tile_data.push_back(Tile{ //TODO last tile missing or first tile missing if using tile_id
-					static_cast<uint8_t>(x),
-					static_cast<uint8_t>(y),
+					next_tile_x,
+					next_tile_y,
 					previous_tile_id,
-					range_start,
 					range,
-					static_cast<uint16_t>((tile_id % sprite_sheet_size.x) * TILE_SIZE),
-					static_cast<uint16_t>((tile_id / sprite_sheet_size.y) * TILE_SIZE),
+					static_cast<uint16_t>((previous_tile_id % sprite_sheet_size.x) * TILE_SIZE),
+					static_cast<uint16_t>((previous_tile_id / sprite_sheet_size.y) * TILE_SIZE),
 				});
 
 				//Reset range information for next tile with different id
 				range = 0;
-				range_start = tile_data.size();
 				previous_tile_id = tile_id;
 			}
 		}
@@ -160,7 +164,7 @@ void map::draw(Point camera_position) {
 
 		for (i = 0u; i < tile.range; i++) {
 			tile_x = (tile_x - 1) % (tmx->width - 1);
-			tile_y = ((tile_y - 1) * 100) / (tmx->height - 1);
+			tile_y = ((tile_y - 1)) / (tmx->height - 1);
 
 			//Checks if tile is visible on screen
 			if (screen_tiles.x + camera_position_world.x - tile_x >= 0 && camera_position_world.x <= tile_x &&
