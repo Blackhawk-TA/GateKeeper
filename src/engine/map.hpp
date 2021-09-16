@@ -41,6 +41,7 @@ namespace map {
 	};
 	#pragma pack(pop)
 
+	void precalculate_tile_data();
 	void load_section(MapSections map_section);
 	void draw(Point camera_position);
 	uint16_t tile_at(Point &p);

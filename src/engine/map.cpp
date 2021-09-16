@@ -16,50 +16,13 @@ map::MapSections current_section;
 std::vector<map::Tile> tile_data;
 
 /**
- * Loads new map section into memory and deletes the old one
- * @param map_section The enum describing the map section
+ * Parses the tile map data into optimized tile struct vector
  */
-void map::load_section(MapSections map_section) {
-	//Remove old TileMap from memory to load_section a new one
-	if (tmx != nullptr) {
-		free(tmx);
-	}
-
-	//Remove old TileMap
-	tile_data.clear();
-
-	//Allocate memory for TileMap and copy it into memory
-	//TODO move to load_tmx function
-	switch (map_section) {
-		case MapSections::DUNGEON:
-			tmx = nullptr;
-			break;
-		case MapSections::GRASSLAND:
-			tmx = (TMX_16 *) malloc(asset_grassland_map_length);
-			//TODO handle error case if no mem available
-			memcpy(tmx, asset_grassland_map, asset_grassland_map_length);
-			break;
-		case MapSections::INTERIOR:
-			tmx = (TMX_16 *) malloc(asset_interior_map_length);
-			memcpy(tmx, asset_interior_map, asset_interior_map_length);
-			break;
-		case MapSections::WINTER:
-			tmx = (TMX_16 *) malloc(asset_winter_map_length);
-			memcpy(tmx, asset_winter_map, asset_winter_map_length);
-			break;
-	}
-
-	if (tmx == nullptr) return;
-
-	uint16_t level_size = tmx->width * tmx->height;
+void map::precalculate_tile_data() {
 	Point sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
-
-	screen_tiles = get_screen_tiles();
-	current_section = map_section;
-	current_layer_count = tmx->layers;
-
 	bool first_tile = true;
 	bool last_tile;
+	uint16_t level_size = tmx->width * tmx->height;
 	uint16_t tile_id;
 	uint16_t previous_tile_id = 0; //Set to 0, so it can never be equal to tile_id on first run. Prevents first tile being count as 2
 	uint16_t range = 0;
@@ -68,7 +31,6 @@ void map::load_section(MapSections map_section) {
 	uint8_t previous_tile_y = 0;
 
 	//TODO get rid of triple for loop, maybe by multiplicating them all
-	//TODO move to own function called precalculate tile_data
 	for (z = 0u; z < tmx->layers; z++) {
 		for (x = 0u; x < tmx->width; x++) {
 			for (y = 0u; y < tmx->height; y++) {
@@ -100,12 +62,12 @@ void map::load_section(MapSections map_section) {
 
 				//Save first tile in row of equals and its position.
 				tile_data.push_back(Tile{
-					previous_tile_x,
-					previous_tile_y,
-					previous_tile_id,
-					range,
-					static_cast<uint16_t>((previous_tile_id % sprite_sheet_size.x) * TILE_SIZE),
-					static_cast<uint16_t>((previous_tile_id / sprite_sheet_size.y) * TILE_SIZE),
+						previous_tile_x,
+						previous_tile_y,
+						previous_tile_id,
+						range,
+						static_cast<uint16_t>((previous_tile_id % sprite_sheet_size.x) * TILE_SIZE),
+						static_cast<uint16_t>((previous_tile_id / sprite_sheet_size.y) * TILE_SIZE),
 				});
 
 				//Reset range information for next tile with a different id
@@ -116,6 +78,48 @@ void map::load_section(MapSections map_section) {
 			}
 		}
 	}
+}
+
+/**
+ * Loads new map section into memory and deletes the old one
+ * @param map_section The enum describing the map section
+ */
+void map::load_section(MapSections map_section) {
+	//Remove old TileMap from memory to load_section a new one
+	if (tmx != nullptr) {
+		free(tmx);
+	}
+
+	//Remove old TileMap
+	tile_data.clear();
+
+	//Allocate memory for TileMap and copy it into memory
+	switch (map_section) {
+		case MapSections::DUNGEON:
+			tmx = nullptr;
+			break;
+		case MapSections::GRASSLAND:
+			tmx = (TMX_16 *) malloc(asset_grassland_map_length);
+			//TODO handle error case if no mem available
+			memcpy(tmx, asset_grassland_map, asset_grassland_map_length);
+			break;
+		case MapSections::INTERIOR:
+			tmx = (TMX_16 *) malloc(asset_interior_map_length);
+			memcpy(tmx, asset_interior_map, asset_interior_map_length);
+			break;
+		case MapSections::WINTER:
+			tmx = (TMX_16 *) malloc(asset_winter_map_length);
+			memcpy(tmx, asset_winter_map, asset_winter_map_length);
+			break;
+	}
+
+	if (tmx == nullptr) return;
+
+	screen_tiles = get_screen_tiles();
+	current_section = map_section;
+	current_layer_count = tmx->layers;
+
+	precalculate_tile_data();
 }
 
 /**
