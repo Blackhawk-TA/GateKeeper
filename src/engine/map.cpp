@@ -35,7 +35,12 @@ void map::precalculate_tile_data() {
 				//Extract current tile id from tmx data
 				tile_id = tmx->data[x + y * tmx->width + z * level_size];
 
-				last_tile = (tmx->layers - 1) * (tmx->width - 1) * (tmx->height - 1) == x * y * z;
+				//Support single layer maps
+				if (tmx->layers == 1) {
+					last_tile = (tmx->width - 1) * (tmx->height - 1) == x * y;
+				} else {
+					last_tile = (tmx->layers - 1) * (tmx->width - 1) * (tmx->height - 1) == x * y * z;
+				}
 
 				//Check if this is not the last tile. If it is the last, skip all steps and save previous
 				if (!last_tile) {
@@ -56,6 +61,8 @@ void map::precalculate_tile_data() {
 						range++;
 						continue;
 					}
+				} else if (tile_id == previous_tile_id) { //Increment range for last tile
+					range++;
 				}
 
 				//Save first tile in row of equals and its position.
