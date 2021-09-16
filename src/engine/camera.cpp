@@ -4,6 +4,7 @@
 
 #include "camera.hpp"
 
+//TODO class not required, use namespace with namespace variables
 Camera::Camera() {
 	moving = false;
 	velocity = 5;

@@ -9,7 +9,7 @@
 
 using namespace blit;
 
-std::vector<std::array<uint16_t, LEVEL_SIZE>> layer_data;
+std::vector<std::array<uint16_t, LEVEL_SIZE>> layer_data; //TODO remove
 map::TMX_16 *tmx;
 Point screen_tiles;
 Point sprite_sheet_size;
@@ -35,10 +35,10 @@ void map::load_section(MapSections map_section) {
 		case MapSections::DUNGEON:
 			tmx = nullptr;
 			break;
-		case MapSections::EXTERIOR:
-			tmx = (TMX_16 *) malloc(asset_exterior_map_length);
+		case MapSections::GRASSLAND:
+			tmx = (TMX_16 *) malloc(asset_grassland_map_length);
 			//TODO handle error case if no mem available
-			memcpy(tmx, asset_exterior_map, asset_exterior_map_length);
+			memcpy(tmx, asset_grassland_map, asset_grassland_map_length);
 			break;
 		case MapSections::INTERIOR:
 			tmx = (TMX_16 *) malloc(asset_interior_map_length);
@@ -73,8 +73,7 @@ void map::load_section(MapSections map_section) {
 		for (x = 0u; x < tmx->width; x++) {
 			for (y = 0u; y < tmx->height; y++) {
 				//Extract current tile id from tmx data
-				//TODO umbauen so dass es nicht von oben nach unten sondern von rechts nach links liest.
-				tile_id = tmx->data[y * tmx->width + x + z * LEVEL_SIZE];
+				tile_id = tmx->data[x + y * tmx->width + z * LEVEL_SIZE];
 
 				last_tile = (tmx->layers - 1) * (tmx->width - 1) * (tmx->height - 1) == x * y * z;
 
@@ -154,32 +153,27 @@ void map::draw(Point camera_position) {
 		}
 	}*/
 
-	uint16_t i, tile_x, tile_y;
-	for (Tile &tile : tile_data) {
-		if (tile.range > 0) {
-			for (i = 0u; i < tile.range; i++) {
-				tile_x = (tile.x + i) % tmx->width; //TODO should render from top to button before doing left to right
-				tile_y = (tile.y + i) / tmx->width;
+	uint16_t i, r, tile_x, tile_y;
+	for (i = 0u; i < tile_data.size(); i++)  {
+		tile_x = tile_data[i].x;
 
-				//Checks if tile is visible on screen
-				if (screen_tiles.x + camera_position_world.x - tile_x >= 0 && camera_position_world.x <= tile_x &&
-				    screen_tiles.y + camera_position_world.y - tile_y >= 0 && camera_position_world.y <= tile_y) {
-					screen.blit_sprite(
-							Rect(tile.sprite_rect_x, tile.sprite_rect_y, TILE_SIZE, TILE_SIZE),
-							Point(tile_x * TILE_SIZE, tile_y * TILE_SIZE) - camera_position,
-							SpriteTransform::NONE
-					);
-				}
-			}
-		} else {
+		for (r = 0u; r <= tile_data[i].range; r++) {
+			tile_y = (tile_data[i].y + r) & tmx->height - 1; //Equal to modulo operator but faster, only works with powers of 2
+
 			//Checks if tile is visible on screen
-			if (screen_tiles.x + camera_position_world.x - tile_x >= 0 && camera_position_world.x <= tile_x &&
-			    screen_tiles.y + camera_position_world.y - tile_x >= 0 && camera_position_world.y <= tile_y) {
+			if (camera_position_world.x <= tile_x && camera_position_world.y <= tile_y &&
+			screen_tiles.x + camera_position_world.x - tile_x >= 0 && screen_tiles.y + camera_position_world.y - tile_y >= 0)
+			{
 				screen.blit_sprite(
-						Rect(tile.sprite_rect_x, tile.sprite_rect_y, TILE_SIZE, TILE_SIZE),
-						Point(tile.x * TILE_SIZE, tile.y * TILE_SIZE) - camera_position,
+						Rect(tile_data[i].sprite_rect_x, tile_data[i].sprite_rect_y, TILE_SIZE, TILE_SIZE),
+						Point(tile_x * TILE_SIZE, tile_y * TILE_SIZE) - camera_position,
 						SpriteTransform::NONE
 				);
+			}
+
+			//Increment tile_x for next loop if tile_y hits upper limit
+			if (tile_y == tmx->height - 1) {
+				tile_x++;
 			}
 		}
 	}
@@ -191,7 +185,7 @@ void map::draw(Point camera_position) {
  * @param p The point at which the tile is located
  * @return The id of the tile mapped to the sprite sheet
  */
-uint16_t map::tile_at(Point &p) {
+uint16_t map::tile_at(Point &p) { //TODO fix
 	uint8_t i = current_layer_count;
 	uint16_t tile = 0;
 

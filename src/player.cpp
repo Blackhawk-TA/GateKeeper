@@ -116,7 +116,7 @@ void Player::teleport(uint8_t building_id, Point next_position) {
 		map::load_section(map::MapSections::INTERIOR);
 		destination = building::connections[building_id].interior - get_screen_tiles() / 2;
 	} else if (next_position == building::connections[building_id].interior) {
-		map::load_section(map::MapSections::EXTERIOR);
+		map::load_section(map::MapSections::GRASSLAND);
 		Point door_offset = Point(0, 1); //Teleport player in front of the door instead of directly on it
 		destination = building::connections[building_id].exterior - get_screen_tiles() / 2 + door_offset;
 	}

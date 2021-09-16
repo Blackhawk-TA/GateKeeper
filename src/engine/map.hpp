@@ -12,7 +12,7 @@ using namespace blit;
 namespace map {
 	enum MapSections {
 		DUNGEON = 1,
-		EXTERIOR = 2,
+		GRASSLAND = 2,
 		INTERIOR = 3,
 		WINTER = 4
 	};

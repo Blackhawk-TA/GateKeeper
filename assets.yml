@@ -11,8 +11,8 @@ assets.cpp:
     name: spritesheet
     packed: false
 
-  assets/exterior.tmx:
-    name: exterior_map
+  assets/grassland.tmx:
+    name: grassland_map
     empty_tile: 0
     output_struct: true
   assets/interior.tmx:
