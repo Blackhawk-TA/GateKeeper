@@ -14,6 +14,6 @@ namespace flags {
 		COUNTER = 3
 	};
 
-	uint8_t get_flag(Point p);
+	uint8_t get_flag(uint16_t tile_id);
 	void set_flag(TileFlags flag, const std::vector<uint16_t> &tiles);
 }

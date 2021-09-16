@@ -74,8 +74,8 @@ void Player::move(MovementDirection direction) {
 
 	//Move player according to tile flag of next position
 	Point next_position = camera->get_world_position() + position + movement;
-	if (flags::get_flag(next_position) != flags::TileFlags::SOLID) {
-		if (flags::get_flag(next_position) == flags::TileFlags::DOOR) {
+	if (map::get_flag(next_position) != flags::TileFlags::SOLID) {
+		if (map::get_flag(next_position) == flags::TileFlags::DOOR) {
 			uint8_t building_id = building::get_id(next_position, map::get_section());
 
 			//No building found, stop movement

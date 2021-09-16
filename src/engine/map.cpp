@@ -6,12 +6,12 @@
 #include <iostream>
 #include "assets.hpp"
 #include "map.hpp"
+#include "flags.hpp"
 
 using namespace blit;
 
 map::TMX_16 *tmx;
 Point screen_tiles;
-uint8_t current_layer_count;
 map::MapSections current_section;
 std::vector<map::Tile> tile_data;
 
@@ -22,11 +22,10 @@ void map::precalculate_tile_data() {
 	Point sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
 	bool first_tile = true;
 	bool last_tile;
+	uint16_t tile_id, x, y, z;
 	uint16_t level_size = tmx->width * tmx->height;
-	uint16_t tile_id;
 	uint16_t previous_tile_id = 0; //Set to 0, so it can never be equal to tile_id on first run. Prevents first tile being count as 2
 	uint16_t range = 0;
-	uint16_t x, y, z;
 	uint8_t previous_tile_x = 0;
 	uint8_t previous_tile_y = 0;
 
@@ -64,6 +63,7 @@ void map::precalculate_tile_data() {
 				tile_data.push_back(Tile{
 						previous_tile_x,
 						previous_tile_y,
+						flags::get_flag(previous_tile_id),
 						previous_tile_id,
 						range,
 						static_cast<uint16_t>((previous_tile_id % sprite_sheet_size.x) * TILE_SIZE),
@@ -100,7 +100,6 @@ void map::load_section(MapSections map_section) {
 			break;
 		case MapSections::GRASSLAND:
 			tmx = (TMX_16 *) malloc(asset_grassland_map_length);
-			//TODO handle error case if no mem available
 			memcpy(tmx, asset_grassland_map, asset_grassland_map_length);
 			break;
 		case MapSections::INTERIOR:
@@ -117,7 +116,6 @@ void map::load_section(MapSections map_section) {
 
 	screen_tiles = get_screen_tiles();
 	current_section = map_section;
-	current_layer_count = tmx->layers;
 
 	precalculate_tile_data();
 }
@@ -163,29 +161,25 @@ void map::draw(Point camera_position) {
  * @param p The point at which the tile is located
  * @return The id of the tile mapped to the sprite sheet
  */
-uint16_t map::tile_at(Point &p) { //TODO could directly return tile flag if it was a part of the tile struct
+uint8_t map::get_flag(Point &p) {
 	uint8_t i = tile_data.size();
-	uint16_t tile = 0;
+	uint16_t flag_enum_id = 0;
 	uint8_t tile_max_x;
 	uint8_t tile_max_y;
 
-	while (i > 0 && tile == 0) {
+	while (i > 0 && flag_enum_id == 0) {
 		i--;
 		tile_max_x = tile_data[i].x + (tile_data[i].x + tile_data[i].range) / tmx->width;
 		tile_max_y = (tile_data[i].y + tile_data[i].range) & (tmx->height -1);
 
 		if (p.x >= tile_data[i].x && p.y >= tile_data[i].y && p.x <= tile_max_x && p.y <= tile_max_y) {
-			tile = tile_data[i].id;
+			flag_enum_id = tile_data[i].flag;
 		}
 	}
 
-	return tile;
+	return flag_enum_id;
 }
 
 map::MapSections map::get_section() {
 	return current_section;
-}
-
-uint8_t map::get_layer_count() {
-	return current_layer_count;
 }

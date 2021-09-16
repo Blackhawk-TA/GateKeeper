@@ -23,9 +23,9 @@ void init() {
 	set_screen_mode(ScreenMode::hires);
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
-	map::load_section(map::MapSections::GRASSLAND);
 	flags::set_flag(flags::TileFlags::SOLID, {768});
 	flags::set_flag(flags::TileFlags::DOOR, {773, 965, 1251, 1252, 1253, 1254});
+	map::load_section(map::MapSections::GRASSLAND);
 
 	camera = new Camera();
 	player = new Player(camera);
