@@ -18,9 +18,10 @@ namespace map {
 	};
 
 	//Stores information of a tile and how often it appears in repetition
-	struct Tile {
+	struct Tile { //TODO include flag info directly here
 		uint8_t x;
 		uint8_t y;
+//		uint8_t flag;
 		uint16_t id;
 		uint16_t range;
 		uint16_t sprite_rect_x;

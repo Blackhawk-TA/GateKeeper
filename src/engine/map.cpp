@@ -9,10 +9,8 @@
 
 using namespace blit;
 
-std::vector<std::array<uint16_t, LEVEL_SIZE>> layer_data; //TODO remove
 map::TMX_16 *tmx;
 Point screen_tiles;
-Point sprite_sheet_size;
 uint8_t current_layer_count;
 map::MapSections current_section;
 std::vector<map::Tile> tile_data;
@@ -31,6 +29,7 @@ void map::load_section(MapSections map_section) {
 	tile_data.clear();
 
 	//Allocate memory for TileMap and copy it into memory
+	//TODO move to load_tmx function
 	switch (map_section) {
 		case MapSections::DUNGEON:
 			tmx = nullptr;
@@ -52,13 +51,13 @@ void map::load_section(MapSections map_section) {
 
 	if (tmx == nullptr) return;
 
+	uint16_t level_size = tmx->width * tmx->height;
+	Point sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
+
 	screen_tiles = get_screen_tiles();
-	sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
 	current_section = map_section;
 	current_layer_count = tmx->layers;
-//	level_size = tmx->width * tmx->height;
 
-	//TODO move to own function and class with Tile and SpriteData structs
 	bool first_tile = true;
 	bool last_tile;
 	uint16_t tile_id;
@@ -69,11 +68,12 @@ void map::load_section(MapSections map_section) {
 	uint8_t previous_tile_y = 0;
 
 	//TODO get rid of triple for loop, maybe by multiplicating them all
+	//TODO move to own function called precalculate tile_data
 	for (z = 0u; z < tmx->layers; z++) {
 		for (x = 0u; x < tmx->width; x++) {
 			for (y = 0u; y < tmx->height; y++) {
 				//Extract current tile id from tmx data
-				tile_id = tmx->data[x + y * tmx->width + z * LEVEL_SIZE];
+				tile_id = tmx->data[x + y * tmx->width + z * level_size];
 
 				last_tile = (tmx->layers - 1) * (tmx->width - 1) * (tmx->height - 1) == x * y * z;
 
@@ -123,42 +123,16 @@ void map::load_section(MapSections map_section) {
  * @param camera_position The position of the camera on the TileMap
  */
 void map::draw(Point camera_position) {
-//	uint16_t tile, x, y;
 	Point camera_position_world = screen_to_world(camera_position);
 
 	if (tmx == nullptr) return; //Prevent rendering when TileMap is not loaded
-
-	//TODO optimize by removing loops: Maybe use layer_data instead of loop for x & y or recursion or calc x and y from layer data
-	//TODO in best case this becomes a single for loop
-	//TODO optimizations here require flag handler rework
-	/*
-	for (auto &layer: layer_data) {
-		for (x = 0; x < tmx->height; x++) {
-			for (y = 0; y < tmx->width; y++) {
-				//Checks if tile is visible on screen
-				if (screen_tiles.x + camera_position_world.x - x >= 0 && camera_position_world.x <= x &&
-					screen_tiles.y + camera_position_world.y - y >= 0 && camera_position_world.y <= y)
-				{
-					tile = layer[y * tmx->width + x];
-					if (tile != tmx->empty_tile) { //Do not draw empty tiles
-						screen.blit_sprite(
-								Rect((tile % sprite_sheet_size.x) * TILE_SIZE, (tile / sprite_sheet_size.y) * TILE_SIZE,
-								     TILE_SIZE, TILE_SIZE),
-								world_to_screen(x, y) - camera_position,
-								SpriteTransform::NONE
-						);
-					}
-				}
-			}
-		}
-	}*/
 
 	uint16_t i, r, tile_x, tile_y;
 	for (i = 0u; i < tile_data.size(); i++)  {
 		tile_x = tile_data[i].x;
 
 		for (r = 0u; r <= tile_data[i].range; r++) {
-			tile_y = (tile_data[i].y + r) & tmx->height - 1; //Equal to modulo operator but faster, only works with powers of 2
+			tile_y = (tile_data[i].y + r) & (tmx->height - 1); //Equal to modulo operator but faster, only works with powers of 2
 
 			//Checks if tile is visible on screen
 			if (camera_position_world.x <= tile_x && camera_position_world.y <= tile_y &&
@@ -185,13 +159,20 @@ void map::draw(Point camera_position) {
  * @param p The point at which the tile is located
  * @return The id of the tile mapped to the sprite sheet
  */
-uint16_t map::tile_at(Point &p) { //TODO fix
-	uint8_t i = current_layer_count;
+uint16_t map::tile_at(Point &p) { //TODO could directly return tile flag if it was a part of the tile struct
+	uint8_t i = tile_data.size();
 	uint16_t tile = 0;
+	uint8_t tile_max_x;
+	uint8_t tile_max_y;
 
 	while (i > 0 && tile == 0) {
 		i--;
-		tile = layer_data[i][p.y * tmx->width + p.x];
+		tile_max_x = tile_data[i].x + (tile_data[i].x + tile_data[i].range) / tmx->width;
+		tile_max_y = (tile_data[i].y + tile_data[i].range) & (tmx->height -1);
+
+		if (p.x >= tile_data[i].x && p.y >= tile_data[i].y && p.x <= tile_max_x && p.y <= tile_max_y) {
+			tile = tile_data[i].id;
+		}
 	}
 
 	return tile;

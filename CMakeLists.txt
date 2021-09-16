@@ -10,7 +10,6 @@ set(PROJECT_SOURCE
         src/engine/camera.cpp src/engine/camera.hpp
         src/engine/flags.cpp src/engine/flags.hpp
         src/engine/map.cpp src/engine/map.hpp
-        src/engine/tile.cpp src/engine/tile.hpp
         src/engine/transition.cpp src/engine/transition.hpp
         src/game.cpp src/game.hpp
         src/player.cpp src/player.hpp
