@@ -9,7 +9,7 @@ using namespace blit;
 
 namespace flags {
 	enum TileFlags {
-		SOLID = 1,
+		WALKABLE = 1,
 		DOOR = 2,
 		COUNTER = 3
 	};

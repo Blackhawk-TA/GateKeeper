@@ -3,7 +3,6 @@
 //
 
 #include <cstring>
-#include <iostream>
 #include "assets.hpp"
 #include "map.hpp"
 #include "flags.hpp"
@@ -166,14 +165,16 @@ uint8_t map::get_flag(Point &p) {
 	uint16_t flag_enum_id = 0;
 	uint8_t tile_max_x;
 	uint8_t tile_max_y;
+	bool found = false;
 
-	while (i > 0 && flag_enum_id == 0) {
+	while (i > 0 && !found) {
 		i--;
 		tile_max_x = tile_data[i].x + (tile_data[i].x + tile_data[i].range) / tmx->width;
 		tile_max_y = (tile_data[i].y + tile_data[i].range) & (tmx->height -1);
 
 		if (p.x >= tile_data[i].x && p.y >= tile_data[i].y && p.x <= tile_max_x && p.y <= tile_max_y) {
 			flag_enum_id = tile_data[i].flag;
+			found = true;
 		}
 	}
 

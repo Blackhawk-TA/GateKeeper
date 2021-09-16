@@ -74,9 +74,14 @@ void Player::move(MovementDirection direction) {
 
 	//Move player according to tile flag of next position
 	Point next_position = camera->get_world_position() + position + movement;
-	if (map::get_flag(next_position) != flags::TileFlags::SOLID) {
-		if (map::get_flag(next_position) == flags::TileFlags::DOOR) {
-			uint8_t building_id = building::get_id(next_position, map::get_section());
+	uint8_t building_id;
+
+	switch(map::get_flag(next_position)) {
+		case flags::TileFlags::WALKABLE:
+			camera->move(movement);
+			break;
+		case flags::TileFlags::DOOR:
+			building_id = building::get_id(next_position, map::get_section());
 
 			//No building found, stop movement
 			if (building_id == 255) {
@@ -88,10 +93,10 @@ void Player::move(MovementDirection direction) {
 			transition::start([building_id, next_position] {
 				return teleport(building_id, next_position);
 			});
-		}
-		camera->move(movement);
-	} else {
-		is_moving = false;
+			camera->move(movement);
+			break;
+		default:
+			is_moving = false;
 	}
 }
 

@@ -23,7 +23,7 @@ void init() {
 	set_screen_mode(ScreenMode::hires);
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
-	flags::set_flag(flags::TileFlags::SOLID, {768});
+	flags::set_flag(flags::TileFlags::WALKABLE, {705, 769, 1632, 1633, 1634});
 	flags::set_flag(flags::TileFlags::DOOR, {773, 965, 1251, 1252, 1253, 1254});
 	map::load_section(map::MapSections::GRASSLAND);
 
