@@ -102,7 +102,7 @@ void Player::move(MovementDirection direction) {
 void Player::draw() {
 	screen.blit(
 		characters,
-		Rect((sprite_index % sprite_sheet_size.x) * TILE_SIZE, (sprite_index / sprite_sheet_size.y ) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+		Rect((sprite_index % sprite_sheet_size.x) * TILE_SIZE, (sprite_index / sprite_sheet_size.y) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 		world_to_screen(position),
 		SpriteTransform::NONE
 	);

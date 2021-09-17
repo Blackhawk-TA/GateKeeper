@@ -11,6 +11,7 @@ set(PROJECT_SOURCE
         src/engine/flags.cpp src/engine/flags.hpp
         src/engine/map.cpp src/engine/map.hpp
         src/engine/transition.cpp src/engine/transition.hpp
+        src/game_objects/stargate.cpp src/game_objects/stargate.hpp
         src/game.cpp src/game.hpp
         src/player.cpp src/player.hpp
         src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp

@@ -45,7 +45,6 @@ private:
 	static Timer *animation_timer;
 
 	Surface *characters;
-	Point start_position;
 	Point position;
 	Point sprite_sheet_size;
 	MovementDirection current_direction;
