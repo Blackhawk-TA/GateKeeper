@@ -4,11 +4,10 @@
 
 #include "camera.hpp"
 
-//TODO class not required, use namespace with namespace variables
-Camera::Camera() {
+Camera::Camera(Point start_position) {
 	moving = false;
 	velocity = 5;
-	camera_position = Point(0, 0);
+	camera_position = start_position * camera_scale;
 	camera_offset = Point(0, 0);
 }
 

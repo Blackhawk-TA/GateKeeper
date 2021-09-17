@@ -18,8 +18,7 @@ std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 
 //Camera is scaled by the factor of 100 to prevent rounding issues
 Player::Player(Camera *game_camera) {
-	Player::start_position = get_screen_tiles() / 2;
-	Player::position = start_position;
+	Player::position = get_screen_tiles() / 2;
 	Player::camera = game_camera;
 	Player::characters = Surface::load(asset_characters);
 	Player::sprite_sheet_size = get_sprite_sheet_size(Player::characters->bounds);

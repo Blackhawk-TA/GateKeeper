@@ -9,7 +9,7 @@ using namespace blit;
 
 class Camera {
 public:
-	explicit Camera();
+	explicit Camera(Point start_position);
 	bool is_moving() const;
 	Point get_world_position() const;
 	Point get_screen_position() const;

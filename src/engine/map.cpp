@@ -168,7 +168,7 @@ void map::draw(Point camera_position) {
  * @return The id of the tile mapped to the sprite sheet
  */
 uint8_t map::get_flag(Point &p) {
-	uint8_t i = tile_data.size();
+	uint16_t i = tile_data.size();
 	uint16_t flag_enum_id = 0;
 	uint8_t tile_max_x;
 	uint8_t tile_max_y;
