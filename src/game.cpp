@@ -6,12 +6,13 @@
 #include "player.hpp"
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
+#include "game_objects/stargate.hpp"
 
 using namespace blit;
 
 uint32_t ms_start, ms_end;
-Camera *camera;
 Player *player;
+Stargate *stargate; //TODO add gate handler or building like namespace which stores gate positions
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -28,8 +29,9 @@ void init() {
 	map::load_section(map::MapSections::GRASSLAND);
 
 	Point start_position = Point(22,12) - get_screen_tiles() / 2;
-	camera = new Camera(start_position);
-	player = new Player(camera);
+	camera::init(start_position);
+	player = new Player();
+	stargate = new Stargate(Point(21, 9), true);
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -43,7 +45,8 @@ void render(uint32_t time) {
 	ms_start = now();
 	screen.clear();
 
-	map::draw(camera->get_screen_position());
+	map::draw();
+	stargate->draw();
 	player->draw();
 
 	if (transition::in_progress()) {
@@ -90,5 +93,5 @@ void update(uint32_t time) {
 	last_buttons = buttons;
 
 	//Handle camera_position update
-	camera->update_position();
+	camera::update_position();
 }

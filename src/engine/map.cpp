@@ -6,6 +6,7 @@
 #include "assets.hpp"
 #include "map.hpp"
 #include "flags.hpp"
+#include "camera.hpp"
 
 using namespace blit;
 
@@ -130,7 +131,8 @@ void map::load_section(MapSections map_section) {
  * Draws the tile map to the screen if a TileMap is loaded in the memory
  * @param camera_position The position of the camera on the TileMap
  */
-void map::draw(Point camera_position) {
+void map::draw() {
+	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
 
 	if (tmx == nullptr) return; //Prevent rendering when TileMap is not loaded

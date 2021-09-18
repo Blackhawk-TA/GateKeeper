@@ -17,7 +17,7 @@ public:
 		RIGHT = 4
 	};
 
-	explicit Player(Camera *game_camera);
+	explicit Player();
 	void draw();
 	void move(MovementDirection direction);
 	static void stop_movement();
@@ -41,7 +41,6 @@ private:
 	static uint16_t sprite_index;
 	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
 	static bool is_moving;
-	static Camera *camera;
 	static Timer *animation_timer;
 
 	Surface *characters;

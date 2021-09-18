@@ -4,35 +4,43 @@
 
 #include "camera.hpp"
 
-Camera::Camera(Point start_position) {
+const uint8_t camera_scale = 100;
+const float camera_scale_float = 100.0f;
+
+bool moving;
+uint8_t velocity;
+Point camera_position;
+Point camera_offset;
+
+void camera::init(Point start_position) {
 	moving = false;
 	velocity = 5;
 	camera_position = start_position * camera_scale;
 	camera_offset = Point(0, 0);
 }
 
-bool Camera::is_moving() const {
+bool camera::is_moving() {
 	return moving;
 }
 
-Point Camera::get_world_position() const {
+Point camera::get_world_position() {
 	return camera_position / camera_scale;
 }
 
-Point Camera::get_screen_position() const {
+Point camera::get_screen_position() {
 	return world_to_screen((float) camera_position.x / camera_scale_float, (float) camera_position.y / camera_scale_float);
 }
 
-void Camera::set_position(Point &position) {
+void camera::set_position(Point &position) {
 	camera_position = position * camera_scale;
 }
 
-void Camera::move(Point &offset) {
+void camera::move(Point &offset) {
 	camera_offset = offset * camera_scale;
 	moving = true;
 }
 
-void Camera::update_position() {
+void camera::update_position() {
 	if (camera_offset.x != 0) {
 		if (camera_position.x < camera_position.x + camera_offset.x) {
 			camera_position.x += velocity;

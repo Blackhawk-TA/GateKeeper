@@ -16,12 +16,15 @@ private:
 	RenderStates state;
 	Point position;
 	Point sprite_sheet_size;
+	Point screen_tiles;
 	uint16_t tile_id;
-	const uint8_t tile_size = 48; //Gate sprite consists of 3x3 16 bit sprites
+	const Point gate_size = Point(3, 3); //Gate sprite consists of 3x3 16 bit sprites
 	const uint16_t animation_id = 939;
+	const Point animation_size = Point(3, 2);
+	uint16_t get_tile_id(RenderStates current_state);
 
 public:
 	explicit Stargate(Point position, bool broken);
 	void draw();
-	uint16_t get_tile_id(RenderStates new_state);
+	void set_state(RenderStates new_state);
 };

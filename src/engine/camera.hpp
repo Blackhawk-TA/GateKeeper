@@ -7,22 +7,12 @@
 
 using namespace blit;
 
-class Camera {
-public:
-	explicit Camera(Point start_position);
-	bool is_moving() const;
-	Point get_world_position() const;
-	Point get_screen_position() const;
+namespace camera {
+	void init(Point start_position);
+	bool is_moving();
+	Point get_world_position();
+	Point get_screen_position();
 	void set_position(Point &position);
 	void move(Point &offset);
 	void update_position();
-
-private:
-	const uint8_t camera_scale = 100;
-	const float camera_scale_float = 100.0f;
-
-	bool moving;
-	uint8_t velocity;
-	Point camera_position;
-	Point camera_offset;
-};
+}

@@ -43,7 +43,7 @@ namespace map {
 
 	void precalculate_tile_data();
 	void load_section(MapSections map_section);
-	void draw(Point camera_position);
+	void draw();
 	uint8_t get_flag(Point &p);
 	MapSections get_section();
 }

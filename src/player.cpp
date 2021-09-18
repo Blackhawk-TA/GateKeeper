@@ -11,15 +11,13 @@
 #include "engine/flags.hpp"
 
 bool Player::is_moving = false;
-Camera *Player::camera;
 Timer *Player::animation_timer;
 uint16_t Player::sprite_index = 0;
 std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 
 //Camera is scaled by the factor of 100 to prevent rounding issues
-Player::Player(Camera *game_camera) {
+Player::Player() {
 	Player::position = get_screen_tiles() / 2;
-	Player::camera = game_camera;
 	Player::characters = Surface::load(asset_characters);
 	Player::sprite_sheet_size = get_sprite_sheet_size(Player::characters->bounds);
 
@@ -33,7 +31,7 @@ Player::Player(Camera *game_camera) {
 }
 
 void Player::animate(Timer &timer) {
-	if ((is_moving || camera->is_moving()) && !transition::in_progress()) {
+	if ((is_moving || camera::is_moving()) && !transition::in_progress()) {
 		sprite_index = animation_sprites[(sprite_index + 1) % ANIMATION_SPRITE_COUNT];
 	} else {
 		sprite_index = animation_sprites[0];
@@ -55,7 +53,7 @@ void Player::move(MovementDirection direction) {
 	is_moving = true;
 
 	//Do not trigger a movement while another one is in progress
-	if (camera->is_moving()) {
+	if (camera::is_moving()) {
 		return;
 	}
 
@@ -72,12 +70,12 @@ void Player::move(MovementDirection direction) {
 	}
 
 	//Move player according to tile flag of next position
-	Point next_position = camera->get_world_position() + position + movement;
+	Point next_position = camera::get_world_position() + position + movement;
 	uint8_t building_id;
 
 	switch(map::get_flag(next_position)) {
 		case flags::TileFlags::WALKABLE:
-			camera->move(movement);
+			camera::move(movement);
 			break;
 		case flags::TileFlags::DOOR:
 			building_id = building::get_id(next_position, map::get_section());
@@ -92,7 +90,7 @@ void Player::move(MovementDirection direction) {
 			transition::start([building_id, next_position] {
 				return teleport(building_id, next_position);
 			});
-			camera->move(movement);
+			camera::move(movement);
 			break;
 		default:
 			is_moving = false;
@@ -125,5 +123,5 @@ void Player::teleport(uint8_t building_id, Point next_position) {
 		destination = building::connections[building_id].exterior - get_screen_tiles() / 2 + door_offset;
 	}
 
-	camera->set_position(destination);
+	camera::set_position(destination);
 }
