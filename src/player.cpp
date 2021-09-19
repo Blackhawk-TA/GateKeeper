@@ -10,6 +10,7 @@
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"
+#include "game_objects/stargate.hpp"
 
 bool Player::is_moving = false;
 Timer *Player::animation_timer;
@@ -76,13 +77,12 @@ void Player::move(MovementDirection direction) {
 	}
 
 	//Check if teleport destination is available
-	Point teleport_destination = stargate_handler::get_teleport_destination(next_position);
-	if (teleport_destination != Point(0, 0)) {
+	Stargate *destination_gate;
+	destination_gate = stargate_handler::get_destination_gate(next_position);
+	if (destination_gate != nullptr) {
 		//Trigger teleportation
-		transition::start([teleport_destination, this] {
-			camera::set_position(teleport_destination);
-			set_direction(MovementDirection::DOWN);
-			stargate_handler::update_states(teleport_destination);
+		transition::start([destination_gate, this] {
+			gate_teleport(destination_gate);
 		});
 		is_moving = false;
 		return;
@@ -150,4 +150,20 @@ void Player::building_teleport(uint8_t building_id, Point next_position) {
 	}
 
 	camera::set_position(destination);
+}
+
+/**
+ * Teleports a player to the given gate and sets the movement direction to facing downwards
+ * @param destination_gate The gate to which the player is teleported
+ */
+void Player::gate_teleport(Stargate* destination_gate) {
+	Point teleport_destination = destination_gate->get_entry_point();
+	map::MapSections destination_map_section = destination_gate->get_map_section();
+	if (map::get_section() != destination_map_section) {
+		map::load_section(destination_map_section);
+	}
+
+	camera::set_position(teleport_destination);
+	set_direction(MovementDirection::DOWN);
+	stargate_handler::update_states(teleport_destination);
 }

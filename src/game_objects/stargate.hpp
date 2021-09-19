@@ -5,7 +5,6 @@
 #pragma once
 #include "../utils/utils.hpp"
 #include "../engine/map.hpp"
-#include "../handlers/stargate_handler.hpp"
 
 class Stargate {
 private:
@@ -31,7 +30,7 @@ private:
 	RenderStates state;
 	map::MapSections map_section;
 	Point position;
-	stargate_handler::Stargates destination;
+	StargateAddresses destination;
 	Point sprite_sheet_size;
 	Point screen_tiles;
 	uint32_t activation_start_time;
@@ -40,7 +39,7 @@ private:
 	void set_state(RenderStates new_state);
 
 public:
-	explicit Stargate(map::MapSections map_section, stargate_handler::Stargates position, Point destination, bool broken);
+	explicit Stargate(map::MapSections map_section, StargateAddresses destination, Point position, bool broken);
 	bool check_collision(Point next_position) const;
 	void update_state(Point next_position);
 	bool check_enter(Point next_position);
@@ -48,6 +47,6 @@ public:
 	void update_animation();
 	void repair();
 	Point get_entry_point();
-	stargate_handler::Stargates get_destination();
+	StargateAddresses get_destination();
 	map::MapSections get_map_section();
 };

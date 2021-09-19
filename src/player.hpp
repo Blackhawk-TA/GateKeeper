@@ -5,6 +5,7 @@
 #pragma once
 #include "utils/utils.hpp"
 #include "engine/camera.hpp"
+#include "game_objects/stargate.hpp"
 
 using namespace blit;
 
@@ -50,5 +51,6 @@ private:
 
 	static void animate(Timer &timer);
 	static void building_teleport(uint8_t building_id, Point next_position);
+	void gate_teleport(Stargate* destination_gate);
 	void set_direction(MovementDirection direction);
 };

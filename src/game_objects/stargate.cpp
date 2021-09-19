@@ -5,7 +5,7 @@
 #include "stargate.hpp"
 #include "../engine/camera.hpp"
 
-Stargate::Stargate(map::MapSections map_section, stargate_handler::Stargates destination, Point position, bool broken) {
+Stargate::Stargate(map::MapSections map_section, StargateAddresses destination, Point position, bool broken) {
 	Stargate::map_section = map_section;
 	Stargate::position = position;
 	Stargate::destination = destination;
@@ -167,7 +167,7 @@ Point Stargate::get_entry_point() {
  * Gets the destination gate to which this gate is linked
  * @return The destination gate
  */
-stargate_handler::Stargates Stargate::get_destination() {
+StargateAddresses Stargate::get_destination() {
 	return destination;
 }
 

@@ -10,6 +10,11 @@ using namespace blit;
 //Sprite and map constants. All TileMaps require to have the same size.
 constexpr uint8_t TILE_SIZE = 16;
 
+enum StargateAddresses {
+	GRASSLAND = 1,
+	WINTER = 2
+};
+
 Vec2 screen_to_world(const Vec2 &p);
 Point screen_to_world(const Point &p);
 

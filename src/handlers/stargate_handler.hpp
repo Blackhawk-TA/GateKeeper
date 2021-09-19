@@ -4,17 +4,13 @@
 
 #pragma once
 #include "../utils/utils.hpp"
+#include "../game_objects/stargate.hpp"
 
 namespace stargate_handler {
 	void init();
 	bool check_collisions(Point next_position);
 	void update_states(Point next_position);
-	Point get_teleport_destination(Point next_position);
+	Stargate *get_destination_gate(Point next_position);
 	void draw_stargates();
 	void update_animations();
-
-	enum Stargates {
-		GRASSLAND = 1,
-		WINTER = 2
-	};
 }
