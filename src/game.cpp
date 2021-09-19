@@ -1,4 +1,3 @@
-#include <iostream>
 #include "game.hpp"
 #include "assets.hpp"
 #include "engine/camera.hpp"
@@ -28,7 +27,7 @@ void init() {
 	flags::set_flag(flags::TileFlags::DOOR, {141, 517, 773, 965, 1573});
 	map::load_section(map::MapSections::GRASSLAND);
 
-	Point start_position = Point(22,12) - get_screen_tiles() / 2;
+	Point start_position = Point(22, 12);
 	camera::init(start_position);
 	stargate_handler::init();
 	player = new Player();

@@ -49,5 +49,6 @@ private:
 	MovementDirection current_direction;
 
 	static void animate(Timer &timer);
-	static void teleport(uint8_t building_id, Point next_position);
+	static void building_teleport(uint8_t building_id, Point next_position);
+	void set_direction(MovementDirection direction);
 };

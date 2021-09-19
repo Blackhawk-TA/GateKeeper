@@ -4,6 +4,8 @@
 
 #pragma once
 #include "../utils/utils.hpp"
+#include "../engine/map.hpp"
+#include "../handlers/stargate_handler.hpp"
 
 class Stargate {
 private:
@@ -27,8 +29,9 @@ private:
 	const Point RELATIVE_ENTRY_POINT = Point(1, 1); //Position in center of the portal where teleportation triggers
 
 	RenderStates state;
+	map::MapSections map_section;
 	Point position;
-	Point destination;
+	stargate_handler::Stargates destination;
 	Point sprite_sheet_size;
 	Point screen_tiles;
 	uint32_t activation_start_time;
@@ -37,12 +40,13 @@ private:
 	void set_state(RenderStates new_state);
 
 public:
-	explicit Stargate(Point position, Point destination, bool broken);
+	explicit Stargate(map::MapSections map_section, stargate_handler::Stargates position, Point destination, bool broken);
 	bool check_collision(Point next_position) const;
-	void check_activation(Point next_position);
+	void update_state(Point next_position);
 	bool check_enter(Point next_position);
-	Point get_destination();
 	void draw();
 	void update_animation();
 	void repair();
+	Point get_entry_point();
+	stargate_handler::Stargates get_destination();
 };

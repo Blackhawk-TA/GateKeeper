@@ -5,8 +5,8 @@
 #include "stargate.hpp"
 #include "../engine/camera.hpp"
 
-//TODO add collision
-Stargate::Stargate(Point position, Point destination, bool broken) {
+Stargate::Stargate(map::MapSections map_section, stargate_handler::Stargates destination, Point position, bool broken) {
+	Stargate::map_section = map_section;
 	Stargate::position = position;
 	Stargate::destination = destination;
 	sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
@@ -21,14 +21,22 @@ Stargate::Stargate(Point position, Point destination, bool broken) {
 	}
 }
 
-//TODO handle all checks within handler/class and only call one function within player movement function
 bool Stargate::check_collision(Point next_position) const {
+	if (map::get_section() != map_section) {
+		return false;
+	}
+
 	return next_position != position + RELATIVE_PRE_ENTRY_POINT &&
+		next_position != position + RELATIVE_ENTRY_POINT &&
 		position.x <= next_position.x && position.y <= next_position.y &&
 		position.x > next_position.x - GATE_SIZE.x && position.y > next_position.y - GATE_SIZE.y;
 }
 
-void Stargate::check_activation(Point next_position) {
+void Stargate::update_state(Point next_position) {
+	if (map::get_section() != map_section) {
+		return;
+	}
+
 	if (state == INACTIVE && (next_position == position + RELATIVE_ACTIVATION_POINT || next_position == position + RELATIVE_PRE_ENTRY_POINT)) {
 		set_state(ACTIVATING);
 	} else if (state == ACTIVE && next_position != position + RELATIVE_ACTIVATION_POINT && next_position != position + RELATIVE_PRE_ENTRY_POINT) {
@@ -37,14 +45,21 @@ void Stargate::check_activation(Point next_position) {
 }
 
 bool Stargate::check_enter(Point next_position) {
+	if (map::get_section() != map_section) {
+		return false;
+	}
+
 	return state == ACTIVE && next_position == position + RELATIVE_ENTRY_POINT;
 }
 
-Point Stargate::get_destination() {
-	return destination;
-}
-
+/**
+ * Checks if gate is activating/deactivating and shows sets the gate to active/inactive once the animation is complete
+ */
 void Stargate::update_animation() {
+	if (map::get_section() != map_section) {
+		return;
+	}
+
 	if (state == ACTIVATING || state == DEACTIVATING) {
 		if (activation_start_time == 0) {
 			activation_start_time = blit::now();
@@ -56,6 +71,10 @@ void Stargate::update_animation() {
 }
 
 void Stargate::draw() {
+	if (map::get_section() != map_section) {
+		return;
+	}
+
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
 
@@ -113,4 +132,20 @@ void Stargate::repair() {
 	if (state == BROKEN) { //TODO auto activate if player is in front of portal
 		set_state(INACTIVE);
 	}
+}
+
+/**
+ * Get the position at which the player leaves/enters a portal
+ * @return The entry point position
+ */
+Point Stargate::get_entry_point() {
+	return position + RELATIVE_PRE_ENTRY_POINT;
+}
+
+/**
+ * Gets the destination gate to which this gate is linked
+ * @return The destination gate
+ */
+stargate_handler::Stargates Stargate::get_destination() {
+	return destination;
 }

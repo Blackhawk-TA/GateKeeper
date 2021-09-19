@@ -64,11 +64,7 @@ void Player::move(MovementDirection direction) {
 	}
 
 	//Set player sprite direction
-	if (current_direction != direction) {
-		animation_sprites = movement_sprites.at(direction);
-		current_direction = direction;
-		sprite_index = animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
-	}
+	set_direction(direction);
 
 	//Move player according to tile flag of next position
 	Point next_position = camera::get_world_position() + position + movement;
@@ -79,9 +75,21 @@ void Player::move(MovementDirection direction) {
 		return;
 	}
 
-	//TODO maybe move all gate checks to handler and only call one function here which calls all gate checkers
-	//TODO also checks if gate is not broken. If broken no transport checks have to be done
-	stargate_handler::check_activations(next_position);
+	//Check if teleport destination is available
+	Point teleport_destination = stargate_handler::get_teleport_destination(next_position);
+	if (teleport_destination != Point(0, 0)) {
+		//Trigger teleportation
+		transition::start([teleport_destination, this] {
+			camera::set_position(teleport_destination);
+			set_direction(MovementDirection::DOWN);
+			stargate_handler::update_states(teleport_destination);
+		});
+		is_moving = false;
+		return;
+	}
+
+	//Update the stargate states when a player comes near them
+	stargate_handler::update_states(next_position);
 
 	switch(map::get_flag(next_position)) {
 		case flags::TileFlags::WALKABLE:
@@ -98,12 +106,20 @@ void Player::move(MovementDirection direction) {
 
 			//Teleport to position on different tile map
 			transition::start([building_id, next_position] {
-				return teleport(building_id, next_position);
+				building_teleport(building_id, next_position);
 			});
 			camera::move(movement);
 			break;
 		default:
 			is_moving = false;
+	}
+}
+
+void Player::set_direction(MovementDirection direction) {
+	if (current_direction != direction) {
+		animation_sprites = movement_sprites.at(direction);
+		current_direction = direction;
+		sprite_index = animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
 	}
 }
 
@@ -121,16 +137,16 @@ void Player::draw() {
  * @param building_id The id of the building
  * @param next_position The position where the player will walk within the next move
  */
-void Player::teleport(uint8_t building_id, Point next_position) {
+void Player::building_teleport(uint8_t building_id, Point next_position) {
 	Point destination;
 
 	if (next_position == building::connections[building_id].exterior) {
 		map::load_section(map::MapSections::INTERIOR);
-		destination = building::connections[building_id].interior - get_screen_tiles() / 2;
+		destination = building::connections[building_id].interior;
 	} else if (next_position == building::connections[building_id].interior) {
 		map::load_section(map::MapSections::GRASSLAND);
 		Point door_offset = Point(0, 1); //Teleport player in front of the door instead of directly on it
-		destination = building::connections[building_id].exterior - get_screen_tiles() / 2 + door_offset;
+		destination = building::connections[building_id].exterior + door_offset;
 	}
 
 	camera::set_position(destination);

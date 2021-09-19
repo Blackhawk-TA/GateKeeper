@@ -12,7 +12,7 @@ namespace camera {
 	bool is_moving();
 	Point get_world_position();
 	Point get_screen_position();
-	void set_position(Point &position);
+	void set_position(Point position);
 	void move(Point &offset);
 	void update_position();
 }
