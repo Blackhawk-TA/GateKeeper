@@ -13,6 +13,7 @@ set(PROJECT_SOURCE
         src/engine/transition.cpp src/engine/transition.hpp
         src/game_objects/stargate.cpp src/game_objects/stargate.hpp
         src/game.cpp src/game.hpp
+        src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/player.cpp src/player.hpp
         src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp
         src/utils/utils.cpp src/utils/utils.hpp

@@ -10,21 +10,39 @@ private:
 	enum RenderStates {
 		BROKEN = 1,
 		INACTIVE = 2,
-		ACTIVE = 3
+		ACTIVATING = 3,
+		ACTIVE = 4,
+		DEACTIVATING = 5
 	};
+
+	const Point GATE_SIZE = Point(3, 3); //Gate sprite consists of 3x3 16 bit sprites
+	const uint16_t tile_id_broken = 1763;
+	const uint16_t tile_id_inactive = 683;
+	const uint16_t tile_id_active = 872;
+	const uint16_t ANIMATION_ID = 939;
+	const uint8_t ANIMATION_DURATION = 125;
+	const Point ANIMATION_SIZE = Point(3, 2);
+	const Point RELATIVE_ACTIVATION_POINT = Point(1, 3); //Position at which the gate animation is triggered
+	const Point RELATIVE_PRE_ENTRY_POINT = Point(1, 2); //Position right in front of the gate
+	const Point RELATIVE_ENTRY_POINT = Point(1, 1); //Position in center of the portal where teleportation triggers
 
 	RenderStates state;
 	Point position;
+	Point destination;
 	Point sprite_sheet_size;
 	Point screen_tiles;
+	uint32_t activation_start_time;
 	uint16_t tile_id;
-	const Point gate_size = Point(3, 3); //Gate sprite consists of 3x3 16 bit sprites
-	const uint16_t animation_id = 939;
-	const Point animation_size = Point(3, 2);
-	uint16_t get_tile_id(RenderStates current_state);
+
+	void set_state(RenderStates new_state);
 
 public:
-	explicit Stargate(Point position, bool broken);
+	explicit Stargate(Point position, Point destination, bool broken);
+	bool check_collision(Point next_position) const;
+	void check_activation(Point next_position);
+	bool check_enter(Point next_position);
+	Point get_destination();
 	void draw();
-	void set_state(RenderStates new_state);
+	void update_animation();
+	void repair();
 };

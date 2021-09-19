@@ -9,6 +9,7 @@
 #include "building.hpp"
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
+#include "handlers/stargate_handler.hpp"
 
 bool Player::is_moving = false;
 Timer *Player::animation_timer;
@@ -72,6 +73,15 @@ void Player::move(MovementDirection direction) {
 	//Move player according to tile flag of next position
 	Point next_position = camera::get_world_position() + position + movement;
 	uint8_t building_id;
+
+	if (stargate_handler::check_collisions(next_position)) {
+		is_moving = false;
+		return;
+	}
+
+	//TODO maybe move all gate checks to handler and only call one function here which calls all gate checkers
+	//TODO also checks if gate is not broken. If broken no transport checks have to be done
+	stargate_handler::check_activations(next_position);
 
 	switch(map::get_flag(next_position)) {
 		case flags::TileFlags::WALKABLE:
