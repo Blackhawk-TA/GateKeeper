@@ -49,4 +49,5 @@ public:
 	void repair();
 	Point get_entry_point();
 	stargate_handler::Stargates get_destination();
+	map::MapSections get_map_section();
 };

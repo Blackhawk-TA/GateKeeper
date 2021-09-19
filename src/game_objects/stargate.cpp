@@ -14,13 +14,18 @@ Stargate::Stargate(map::MapSections map_section, stargate_handler::Stargates des
 	activation_start_time = 0;
 
 	//TODO load stored data if it was repaired
-	if (!broken) { //TODO remove negation
+	if (broken) {
 		set_state(BROKEN);
 	} else {
 		set_state(INACTIVE);
 	}
 }
 
+/**
+ * Check for player collisions with the gate
+ * @param next_position The next position of the player
+ * @return True, if a collision took place, else false
+ */
 bool Stargate::check_collision(Point next_position) const {
 	if (map::get_section() != map_section) {
 		return false;
@@ -32,6 +37,10 @@ bool Stargate::check_collision(Point next_position) const {
 		position.x > next_position.x - GATE_SIZE.x && position.y > next_position.y - GATE_SIZE.y;
 }
 
+/**
+ * If the gate is on the same map section, change the gate state depending on the next position of the player
+ * @param next_position The next position the player
+ */
 void Stargate::update_state(Point next_position) {
 	if (map::get_section() != map_section) {
 		return;
@@ -44,6 +53,11 @@ void Stargate::update_state(Point next_position) {
 	}
 }
 
+/**
+ * Checks if a player enters the gate, if the gate is on the same map section
+ * @param next_position The next position of the player
+ * @return True if the gate is active and the player enters it, else false
+ */
 bool Stargate::check_enter(Point next_position) {
 	if (map::get_section() != map_section) {
 		return false;
@@ -53,7 +67,7 @@ bool Stargate::check_enter(Point next_position) {
 }
 
 /**
- * Checks if gate is activating/deactivating and shows sets the gate to active/inactive once the animation is complete
+ * Checks if gate is de-/activating and sets the gate to in-/active once the animation is complete
  */
 void Stargate::update_animation() {
 	if (map::get_section() != map_section) {
@@ -70,6 +84,9 @@ void Stargate::update_animation() {
 	}
 }
 
+/**
+ * Draws the gate if it is on the active map section and draws the gate animation if the gate is de-/activating
+ */
 void Stargate::draw() {
 	if (map::get_section() != map_section) {
 		return;
@@ -110,6 +127,10 @@ void Stargate::draw() {
 	}
 }
 
+/**
+ * Sets the state and tile_id of the gate
+ * @param new_state The new state
+ */
 void Stargate::set_state(Stargate::RenderStates new_state) {
 	switch (new_state) {
 		case BROKEN:
@@ -148,4 +169,12 @@ Point Stargate::get_entry_point() {
  */
 stargate_handler::Stargates Stargate::get_destination() {
 	return destination;
+}
+
+/**
+ * Gets the map section on which the gate is located
+ * @return The map section of the gate
+ */
+map::MapSections Stargate::get_map_section() {
+	return map_section;
 }
