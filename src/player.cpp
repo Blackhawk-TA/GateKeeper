@@ -77,8 +77,7 @@ void Player::move(MovementDirection direction) {
 	}
 
 	//Check if teleport destination is available
-	Stargate *destination_gate;
-	destination_gate = stargate_handler::get_destination_gate(next_position);
+	Stargate *destination_gate = stargate_handler::get_destination_gate(next_position);
 	if (destination_gate != nullptr) {
 		//Trigger teleportation
 		transition::start([destination_gate, this] {

@@ -174,7 +174,7 @@ void map::draw() {
  */
 uint8_t map::get_flag(Point &p) {
 	uint16_t i = tile_data.size();
-	uint16_t flag_enum_id = 0;
+	uint8_t flag_enum_id = 0;
 	uint8_t tile_max_x;
 	uint8_t tile_max_y;
 	bool found = false;
@@ -184,7 +184,7 @@ uint8_t map::get_flag(Point &p) {
 		tile_max_x = tile_data[i].x + (tile_data[i].x + tile_data[i].range) / tmx->width;
 		tile_max_y = (tile_data[i].y + tile_data[i].range) & (tmx->height -1);
 
-		if (p.x >= tile_data[i].x && p.y >= tile_data[i].y && p.x <= tile_max_x && p.y <= tile_max_y) {
+		if (((p.x == tile_data[i].x && p.y >= tile_data[i].y) || p.x > tile_data[i].x) && ((p.x == tile_max_x && p.y <= tile_max_y) || p.x < tile_max_x)) {
 			flag_enum_id = tile_data[i].flag;
 			found = true;
 		}
