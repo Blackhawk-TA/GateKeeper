@@ -14,7 +14,7 @@ namespace map {
 		DUNGEON = 1,
 		GRASSLAND = 2,
 		INTERIOR = 3,
-		WINTER = 4
+		SNOWLAND = 4
 	};
 
 	//Stores information of a tile and how often it appears in repetition

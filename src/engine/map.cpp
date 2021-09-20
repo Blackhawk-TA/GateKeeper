@@ -113,9 +113,9 @@ void map::load_section(MapSections map_section) {
 			tmx = (TMX_16 *) malloc(asset_interior_map_length);
 			memcpy(tmx, asset_interior_map, asset_interior_map_length);
 			break;
-		case MapSections::WINTER:
-			tmx = (TMX_16 *) malloc(asset_winter_map_length);
-			memcpy(tmx, asset_winter_map, asset_winter_map_length);
+		case MapSections::SNOWLAND:
+			tmx = (TMX_16 *) malloc(asset_snowland_map_length);
+			memcpy(tmx, asset_snowland_map, asset_snowland_map_length);
 			break;
 	}
 
@@ -137,8 +137,8 @@ void map::draw() {
 
 	if (tmx == nullptr) return; //Prevent rendering when TileMap is not loaded
 
-	uint16_t i, r, tile_x, tile_y;
-	for (i = 0u; i < tile_data.size(); i++)  {
+	uint16_t r, tile_x, tile_y;
+	for (auto i = 0u; i < tile_data.size(); i++)  {
 		tile_x = tile_data[i].x;
 
 		for (r = 0u; r <= tile_data[i].range; r++) {

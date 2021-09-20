@@ -19,7 +19,7 @@ assets.cpp:
     name: interior_map
     empty_tile: 0
     output_struct: true
-  assets/winter.tmx:
-    name: winter_map
+  assets/snowland.tmx:
+    name: snowland_map
     empty_tile: 0
     output_struct: true
