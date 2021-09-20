@@ -46,7 +46,7 @@ private:
 
 	Surface *characters;
 	Point position;
-	Point sprite_sheet_size;
+	Size spritesheet_size;
 	MovementDirection current_direction;
 
 	static void animate(Timer &timer);

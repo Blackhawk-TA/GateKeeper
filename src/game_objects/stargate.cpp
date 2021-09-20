@@ -9,7 +9,7 @@ Stargate::Stargate(map::MapSections map_section, StargateAddresses destination, 
 	Stargate::map_section = map_section;
 	Stargate::position = position;
 	Stargate::destination = destination;
-	sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
+	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	activation_start_time = 0;
 
 	//TODO load stored data if it was repaired
@@ -98,8 +98,8 @@ void Stargate::draw() {
 		//Draw stargate
 		screen.blit_sprite(
 				Rect(
-						(tile_id & (sprite_sheet_size.x - 1)) * TILE_SIZE,
-						(tile_id / sprite_sheet_size.y) * TILE_SIZE,
+						(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
+						(tile_id / spritesheet_size.h) * TILE_SIZE,
 						GATE_SIZE.w * TILE_SIZE,
 						GATE_SIZE.h * TILE_SIZE
 				),
@@ -111,8 +111,8 @@ void Stargate::draw() {
 		if (state == ACTIVATING || state == DEACTIVATING) {
 			screen.blit_sprite(
 					Rect(
-							(ANIMATION_ID & (sprite_sheet_size.x - 1)) * TILE_SIZE,
-							(ANIMATION_ID / sprite_sheet_size.y) * TILE_SIZE,
+							(ANIMATION_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
+							(ANIMATION_ID / spritesheet_size.h) * TILE_SIZE,
 							ANIMATION_SIZE.w * TILE_SIZE,
 							ANIMATION_SIZE.h * TILE_SIZE
 					),

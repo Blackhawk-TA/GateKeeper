@@ -19,7 +19,7 @@ std::vector<map::Tile> tile_data;
  * Parses the tile map data into optimized tile struct vector
  */
 void map::precalculate_tile_data() {
-	Point sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
+	Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	bool first_tile = true;
 	bool last_tile;
 	uint16_t tile_id, x, y, z;
@@ -75,8 +75,8 @@ void map::precalculate_tile_data() {
 						flags::get_flag(previous_tile_id),
 						previous_tile_id,
 						range,
-						static_cast<uint16_t>((previous_tile_id % sprite_sheet_size.x) * TILE_SIZE),
-						static_cast<uint16_t>((previous_tile_id / sprite_sheet_size.y) * TILE_SIZE),
+						static_cast<uint16_t>((previous_tile_id % spritesheet_size.w) * TILE_SIZE),
+						static_cast<uint16_t>((previous_tile_id / spritesheet_size.h) * TILE_SIZE),
 				});
 
 				//Reset range information for next tile with a different id

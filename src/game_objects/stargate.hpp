@@ -32,7 +32,7 @@ private:
 	map::MapSections map_section;
 	Point position;
 	StargateAddresses destination;
-	Point sprite_sheet_size;
+	Size spritesheet_size;
 	uint32_t activation_start_time;
 	uint16_t tile_id;
 

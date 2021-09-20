@@ -51,10 +51,10 @@ Point world_to_screen(const float &x, const float &y) {
 /**
  * Get amount of tiles on a spritesheet's x and y-axis
  * @param bounds The bounds of the spritesheet
- * @return The amount of tiles a spritesheet can fit stored as Point
+ * @return The amount of tiles a spritesheet can fit stored as Size
  */
-Point get_sprite_sheet_size(Size bounds) {
-	return Point(bounds.w / TILE_SIZE, bounds.h / TILE_SIZE);
+Size get_spritesheet_size(Size bounds) {
+	return Size(bounds.w / TILE_SIZE, bounds.h / TILE_SIZE);
 }
 
 /**

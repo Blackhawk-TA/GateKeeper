@@ -23,5 +23,5 @@ Point screen_to_world(const Point &p);
 Point world_to_screen(const Point &p);
 Point world_to_screen(const float &x, const float &y);
 
-Point get_sprite_sheet_size(Size bounds);
+Size get_spritesheet_size(Size bounds);
 Point get_screen_tiles();

@@ -21,7 +21,7 @@ std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 Player::Player() {
 	Player::position = get_screen_tiles() / 2;
 	Player::characters = Surface::load(asset_characters);
-	Player::sprite_sheet_size = get_sprite_sheet_size(Player::characters->bounds);
+	Player::spritesheet_size = get_spritesheet_size(Player::characters->bounds);
 
 	//Set player animation tiles
 	Player::current_direction = MovementDirection::DOWN;
@@ -125,7 +125,7 @@ void Player::set_direction(MovementDirection direction) {
 void Player::draw() {
 	screen.blit(
 		characters,
-		Rect((sprite_index % sprite_sheet_size.x) * TILE_SIZE, (sprite_index / sprite_sheet_size.y) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+		Rect((sprite_index % spritesheet_size.w) * TILE_SIZE, (sprite_index / spritesheet_size.h) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 		world_to_screen(position),
 		SpriteTransform::NONE
 	);
