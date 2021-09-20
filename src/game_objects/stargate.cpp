@@ -10,7 +10,6 @@ Stargate::Stargate(map::MapSections map_section, StargateAddresses destination, 
 	Stargate::position = position;
 	Stargate::destination = destination;
 	sprite_sheet_size = get_sprite_sheet_size(screen.sprites->bounds);
-	screen_tiles = get_screen_tiles();
 	activation_start_time = 0;
 
 	//TODO load stored data if it was repaired
@@ -24,7 +23,7 @@ Stargate::Stargate(map::MapSections map_section, StargateAddresses destination, 
 /**
  * Check for player collisions with the gate
  * @param next_position The next position of the player
- * @return True, if a collision took place, else false
+ * @return True if a collision took place, else false
  */
 bool Stargate::check_collision(Point next_position) const {
 	if (map::get_section() != map_section) {
@@ -34,7 +33,7 @@ bool Stargate::check_collision(Point next_position) const {
 	return next_position != position + RELATIVE_PRE_ENTRY_POINT &&
 		next_position != position + RELATIVE_ENTRY_POINT &&
 		position.x <= next_position.x && position.y <= next_position.y &&
-		position.x > next_position.x - GATE_SIZE.x && position.y > next_position.y - GATE_SIZE.y;
+		position.x > next_position.x - GATE_SIZE.w && position.y > next_position.y - GATE_SIZE.h;
 }
 
 /**
@@ -95,16 +94,14 @@ void Stargate::draw() {
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
 
-	if (camera_position_world.x < position.x + GATE_SIZE.x && camera_position_world.y < position.y + GATE_SIZE.y &&
-	screen_tiles.x + camera_position_world.x - position.x > 0 && screen_tiles.y + camera_position_world.y - position.y > 0)
-	{
+	if (sprite_rect_in_screen(position, GATE_SIZE, camera_position_world)) {
 		//Draw stargate
 		screen.blit_sprite(
 				Rect(
 						(tile_id & (sprite_sheet_size.x - 1)) * TILE_SIZE,
 						(tile_id / sprite_sheet_size.y) * TILE_SIZE,
-						GATE_SIZE.x * TILE_SIZE,
-						GATE_SIZE.y * TILE_SIZE
+						GATE_SIZE.w * TILE_SIZE,
+						GATE_SIZE.h * TILE_SIZE
 				),
 				world_to_screen(position) - camera_position,
 				SpriteTransform::NONE
@@ -116,11 +113,10 @@ void Stargate::draw() {
 					Rect(
 							(ANIMATION_ID & (sprite_sheet_size.x - 1)) * TILE_SIZE,
 							(ANIMATION_ID / sprite_sheet_size.y) * TILE_SIZE,
-							ANIMATION_SIZE.x * TILE_SIZE,
-							ANIMATION_SIZE.y * TILE_SIZE
+							ANIMATION_SIZE.w * TILE_SIZE,
+							ANIMATION_SIZE.h * TILE_SIZE
 					),
-					world_to_screen(position + GATE_SIZE - ANIMATION_SIZE) -
-					camera_position, //Calculate animation offset because it's smaller than the gate
+					world_to_screen(position + ANIMATION_OFFSET) - camera_position, //Calculate animation offset because it's smaller than the gate
 					SpriteTransform::NONE
 			);
 		}
