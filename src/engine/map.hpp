@@ -46,4 +46,5 @@ namespace map {
 	void draw();
 	uint8_t get_flag(Point &p);
 	MapSections get_section();
+	bool point_in_rect(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, uint8_t max_y);
 }

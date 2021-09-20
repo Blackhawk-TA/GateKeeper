@@ -196,3 +196,19 @@ uint8_t map::get_flag(Point &p) {
 map::MapSections map::get_section() {
 	return current_section;
 }
+
+/**
+ * Checks if a point is within a rectangle of the map defined by a min and max point.
+ * It is expected that the map is drawn from top to bottom and then left to right.
+ * @param p The point which shall be checked
+ * @param min_x The position at which the rectangle begins on the x-axis
+ * @param min_y The position at which the rectangle begins on the y-axis
+ * @param max_x The position at which the rectangle ends on the x-axis
+ * @param max_y The position at which the rectangle ends on the y-axis
+ * @return True if the point p is within the rectangle, else false
+ */
+bool map::point_in_rect(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, uint8_t max_y) {
+	return (((p.x == min_x && p.y >= min_y) || p.x > min_x) &&
+	        ((p.x == max_x && p.y <= max_y) || p.x < max_x));
+}
+
