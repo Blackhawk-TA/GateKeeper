@@ -28,6 +28,7 @@ void map::precalculate_tile_data() {
 	uint16_t range = 0;
 	uint8_t previous_tile_x = 0;
 	uint8_t previous_tile_y = 0;
+	bool skipped_empty_tile = false;
 
 	//TODO get rid of triple for loop, maybe by multiplicating them all
 	for (z = 0u; z < tmx->layers; z++) {
@@ -47,6 +48,7 @@ void map::precalculate_tile_data() {
 				if (!last_tile) {
 					//Do not save empty tiles
 					if (tile_id == tmx->empty_tile) {
+						skipped_empty_tile = true;
 						continue;
 					}
 
@@ -57,12 +59,12 @@ void map::precalculate_tile_data() {
 						continue;
 					}
 
-					//Instead of saving each tile count repetitions
-					if (tile_id == previous_tile_id) {
+					//Instead of saving each tile count repetitions. Make sure there are no skipped tile in between
+					if (tile_id == previous_tile_id && !skipped_empty_tile) {
 						range++;
 						continue;
 					}
-				} else if (tile_id == previous_tile_id) { //Increment range for last tile
+				} else if (tile_id == previous_tile_id && !skipped_empty_tile) { //Increment range for last tile
 					range++;
 				}
 
@@ -82,6 +84,7 @@ void map::precalculate_tile_data() {
 				previous_tile_x = x;
 				previous_tile_y = y;
 				previous_tile_id = tile_id;
+				skipped_empty_tile = false;
 			}
 		}
 	}

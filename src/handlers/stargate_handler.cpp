@@ -9,7 +9,7 @@ std::map<StargateAddresses, Stargate *>::iterator it;
 
 void stargate_handler::init() {
 	stargates.insert(std::make_pair(GRASSLAND, new Stargate(map::GRASSLAND, WINTER, Point(21, 7), false)));
-	stargates.insert(std::make_pair(WINTER, new Stargate(map::SNOWLAND, GRASSLAND, Point(10, 10), false)));
+	stargates.insert(std::make_pair(WINTER, new Stargate(map::SNOWLAND, GRASSLAND, Point(12, 10), false)));
 	it = stargates.begin();
 }
 
