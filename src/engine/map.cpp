@@ -140,8 +140,8 @@ void map::draw() {
 
 	if (tmx == nullptr) return; //Prevent rendering when TileMap is not loaded
 
-	uint16_t r, tile_x, tile_y;
-	for (auto i = 0u; i < tile_data.size(); i++)  {
+	uint16_t i, r, tile_x, tile_y;
+	for (i = 0u; i < tile_data.size(); i++)  {
 		tile_x = tile_data[i].x;
 
 		for (r = 0u; r <= tile_data[i].range; r++) {
@@ -184,7 +184,7 @@ uint8_t map::get_flag(Point &p) {
 		tile_max_x = tile_data[i].x + (tile_data[i].x + tile_data[i].range) / tmx->width;
 		tile_max_y = (tile_data[i].y + tile_data[i].range) & (tmx->height -1);
 
-		if (((p.x == tile_data[i].x && p.y >= tile_data[i].y) || p.x > tile_data[i].x) && ((p.x == tile_max_x && p.y <= tile_max_y) || p.x < tile_max_x)) {
+		if (point_in_rect(p, tile_data[i].x, tile_data[i].y, tile_max_x, tile_max_y)) {
 			flag_enum_id = tile_data[i].flag;
 			found = true;
 		}

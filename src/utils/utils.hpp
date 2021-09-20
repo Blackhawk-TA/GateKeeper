@@ -15,6 +15,8 @@ enum StargateAddresses {
 	WINTER = 2
 };
 
+bool point_in_rect(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, uint8_t max_y);
+
 Vec2 screen_to_world(const Vec2 &p);
 Point screen_to_world(const Point &p);
 
