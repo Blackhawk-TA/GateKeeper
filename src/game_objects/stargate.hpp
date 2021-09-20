@@ -26,7 +26,7 @@ private:
 	const Point RELATIVE_ACTIVATION_POINT = Point(1, 3); //Position at which the gate animation is triggered
 	const Point RELATIVE_PRE_ENTRY_POINT = Point(1, 2); //Position right in front of the gate
 	const Point RELATIVE_ENTRY_POINT = Point(1, 1); //Position in center of the portal where teleportation triggers
-	const Point ANIMATION_OFFSET = Point(GATE_SIZE.w - ANIMATION_SIZE.w, GATE_SIZE.h - ANIMATION_SIZE.w);
+	const Point ANIMATION_OFFSET = Point(GATE_SIZE.w - ANIMATION_SIZE.w, GATE_SIZE.h - ANIMATION_SIZE.h);
 
 	RenderStates state;
 	map::MapSections map_section;
