@@ -2,7 +2,7 @@
 #include "assets.hpp"
 #include "engine/camera.hpp"
 #include "engine/map.hpp"
-#include "utils/ui_overlay.hpp"
+#include "ui/overlay.hpp"
 #include "player.hpp"
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
@@ -59,7 +59,7 @@ void render(uint32_t time) {
 	}
 
 	ms_end = now();
-	ui_overlay::draw_fps(ms_start, ms_end);
+	overlay::draw_fps(ms_start, ms_end);
 }
 
 ///////////////////////////////////////////////////////////////////////////

@@ -4,23 +4,25 @@
 
 #include <iostream>
 #include "sidemenu.hpp"
+#include "overlay.hpp"
 
 bool sidemenu::visible = false;
 
 const uint16_t cursor_sprite_id = 1742;
-const uint8_t list_count = 3;
+const uint8_t list_count = 4;
 std::array<std::string, list_count> list;
 Size spritesheet_size;
 Box *menu;
 Point cursor_position;
 
-//TODO cleanup and remove magic numbers
+//TODO cleanup and remove magic numbers, maybe add tooltips
 void sidemenu::init() {
 	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
-	menu = new Box(Rect(16, 0, 4, 5));
+	menu = new Box(Rect(16, 0, 4, 6));
 	cursor_position = Point(16, 1);
 	list = {
 		"ITEMS",
+		"SHOW FPS",
 		"SAVE",
 		"EXIT"
 	};
@@ -63,10 +65,13 @@ void sidemenu::press() {
 		case 1: //ITEMS
 			std::cout << "ITEMS" << std::endl;
 			break;
-		case 2: //SAVE
+		case 2: //SHOW FPS
+			overlay::show_fps = !overlay::show_fps;
+			break;
+		case 3: //SAVE
 			std::cout << "SAVE" << std::endl;
 			break;
-		case 3: //EXIT
+		case 4: //EXIT
 			visible = false;
 			break;
 	}

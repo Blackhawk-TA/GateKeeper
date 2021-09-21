@@ -2,11 +2,16 @@
 // Created by Daniel Peters on 12.04.21.
 //
 
-#include "ui_overlay.hpp"
+#include "overlay.hpp"
 
 using namespace blit;
 
-void ui_overlay::draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
+bool overlay::show_fps = true;
+
+void overlay::draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
+	//Abort if fps counter is hidden
+	if (!show_fps) return;
+
 	//Draw fps box
 	screen.alpha = 255;
 	screen.pen = Pen(255, 255, 255, 100);

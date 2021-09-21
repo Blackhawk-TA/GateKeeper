@@ -5,6 +5,7 @@
 #pragma once
 #include "32blit.hpp"
 
-namespace ui_overlay {
+namespace overlay {
 	void draw_fps(uint32_t &ms_start, uint32_t &ms_end);
+	extern bool show_fps;
 }

@@ -17,7 +17,7 @@ set(PROJECT_SOURCE
         src/player.cpp src/player.hpp
         src/ui/box.cpp src/ui/box.hpp
         src/ui/sidemenu.cpp src/ui/sidemenu.hpp
-        src/utils/ui_overlay.cpp src/utils/ui_overlay.hpp
+        src/ui/overlay.cpp src/ui/overlay.hpp
         src/utils/utils.cpp src/utils/utils.hpp
 )
 # ... and any other files you want in the release here
