@@ -7,6 +7,7 @@
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"
+#include "ui/sidemenu.hpp"
 
 using namespace blit;
 
@@ -30,6 +31,7 @@ void init() {
 	Point start_position = Point(22, 12);
 	camera::init(start_position);
 	stargate_handler::init();
+	sidemenu::init();
 	player = new Player();
 }
 
@@ -47,6 +49,10 @@ void render(uint32_t time) {
 	map::draw();
 	stargate_handler::draw_stargates();
 	player->draw();
+
+	if (sidemenu::visible) {
+		sidemenu::draw();
+	}
 
 	if (transition::in_progress()) {
 		transition::draw();
@@ -79,14 +85,28 @@ void update(uint32_t time) {
 		Player::stop_movement();
 	}
 
-	if (buttons & Button::DPAD_UP) {
-		player->move(player->UP);
-	} else if (buttons & Button::DPAD_DOWN) {
-		player->move(player->DOWN);
-	} else if (buttons & Button::DPAD_LEFT) {
-		player->move(player->LEFT);
-	} else if (buttons & Button::DPAD_RIGHT) {
-		player->move(player->RIGHT);
+	if (sidemenu::visible) {
+		if (buttons & changed & Button::DPAD_UP) {
+			sidemenu::cursor_up();
+		} else if (buttons & changed & Button::DPAD_DOWN) {
+			sidemenu::cursor_down();
+		} else if (buttons & changed & Button::A) {
+			sidemenu::press();
+		} else if (buttons & changed & Button::MENU) {
+			sidemenu::visible = false;
+		}
+	} else {
+		if (buttons & Button::DPAD_UP) {
+			player->move(player->UP);
+		} else if (buttons & Button::DPAD_DOWN) {
+			player->move(player->DOWN);
+		} else if (buttons & Button::DPAD_LEFT) {
+			player->move(player->LEFT);
+		} else if (buttons & Button::DPAD_RIGHT) {
+			player->move(player->RIGHT);
+		} else if (buttons & changed & Button::MENU) {
+			sidemenu::visible = true;
+		}
 	}
 
 	last_buttons = buttons;
