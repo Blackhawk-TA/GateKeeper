@@ -10,15 +10,17 @@
 
 using namespace blit;
 
-map::TMX_16 *tmx;
+map::TileMap tile_map;
 Point screen_tiles;
 map::MapSections current_section;
-std::vector<map::Tile> tile_data;
 
 /**
- * Parses the tile map data into optimized tile struct vector
+ * Parses the tmx struct into a tile map struct with render optimized tile_data
+ * @param tmx The TMX struct which contains the data directly extracted from the tilemap file
+ * @return The rendering and memory optimized TileMap struct
  */
-void map::precalculate_tile_data() {
+map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
+	std::vector<map::Tile> tile_data;
 	Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	bool first_tile = true;
 	bool last_tile;
@@ -88,6 +90,14 @@ void map::precalculate_tile_data() {
 			}
 		}
 	}
+
+	return map::TileMap{
+		tmx->empty_tile,
+		static_cast<uint8_t>(tmx->width),
+		static_cast<uint8_t>(tmx->height),
+		static_cast<uint8_t>(tmx->layers),
+		tile_data
+	};
 }
 
 /**
@@ -95,13 +105,7 @@ void map::precalculate_tile_data() {
  * @param map_section The enum describing the map section
  */
 void map::load_section(MapSections map_section) {
-	//Remove old TileMap from memory to load_section a new one
-	if (tmx != nullptr) {
-		free(tmx);
-	}
-
-	//Remove old TileMap
-	tile_data.clear();
+	map::TMX_16 *tmx;
 
 	//Allocate memory for TileMap and copy it into memory
 	switch (map_section) {
@@ -127,7 +131,10 @@ void map::load_section(MapSections map_section) {
 	screen_tiles = get_screen_tiles();
 	current_section = map_section;
 
-	precalculate_tile_data();
+	tile_map = precalculate_tile_data(tmx);
+
+	//Remove tmx struct from memory because it's only required for the pre-calculations
+	free(tmx);
 }
 
 /**
@@ -138,28 +145,26 @@ void map::draw() {
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
 
-	if (tmx == nullptr) return; //Prevent rendering when TileMap is not loaded
-
 	uint16_t i, r, tile_x, tile_y;
-	for (i = 0u; i < tile_data.size(); i++)  {
-		tile_x = tile_data[i].x;
+	for (i = 0u; i < tile_map.data.size(); i++)  {
+		tile_x = tile_map.data[i].x;
 
-		for (r = 0u; r <= tile_data[i].range; r++) {
-			tile_y = (tile_data[i].y + r) & (tmx->height - 1); //Equal to modulo operator but faster, only works with powers of 2
+		for (r = 0u; r <= tile_map.data[i].range; r++) {
+			tile_y = (tile_map.data[i].y + r) & (tile_map.height - 1); //Equal to modulo operator but faster, only works with powers of 2
 
 			//Checks if tile is visible on screen
 			if (camera_position_world.x <= tile_x && camera_position_world.y <= tile_y &&
 			screen_tiles.x + camera_position_world.x - tile_x >= 0 && screen_tiles.y + camera_position_world.y - tile_y >= 0)
 			{
 				screen.blit_sprite(
-						Rect(tile_data[i].sprite_rect_x, tile_data[i].sprite_rect_y, TILE_SIZE, TILE_SIZE),
+						Rect(tile_map.data[i].sprite_rect_x, tile_map.data[i].sprite_rect_y, TILE_SIZE, TILE_SIZE),
 						Point(tile_x * TILE_SIZE, tile_y * TILE_SIZE) - camera_position,
 						SpriteTransform::NONE
 				);
 			}
 
 			//Increment tile_x for next loop if tile_y hits upper limit
-			if (tile_y == tmx->height - 1) {
+			if (tile_y == tile_map.height - 1) {
 				tile_x++;
 			}
 		}
@@ -173,7 +178,7 @@ void map::draw() {
  * @return The id of the tile mapped to the sprite sheet
  */
 uint8_t map::get_flag(Point &p) {
-	uint16_t i = tile_data.size();
+	uint16_t i = tile_map.data.size();
 	uint8_t flag_enum_id = 0;
 	uint8_t tile_max_x;
 	uint8_t tile_max_y;
@@ -181,11 +186,11 @@ uint8_t map::get_flag(Point &p) {
 
 	while (i > 0 && !found) {
 		i--;
-		tile_max_x = tile_data[i].x + (tile_data[i].x + tile_data[i].range) / tmx->width;
-		tile_max_y = (tile_data[i].y + tile_data[i].range) & (tmx->height -1);
+		tile_max_x = tile_map.data[i].x + (tile_map.data[i].x + tile_map.data[i].range) / tile_map.width;
+		tile_max_y = (tile_map.data[i].y + tile_map.data[i].range) & (tile_map.height -1);
 
-		if (point_in_rect(p, tile_data[i].x, tile_data[i].y, tile_max_x, tile_max_y)) {
-			flag_enum_id = tile_data[i].flag;
+		if (point_in_rect(p, tile_map.data[i].x, tile_map.data[i].y, tile_max_x, tile_max_y)) {
+			flag_enum_id = tile_map.data[i].flag;
 			found = true;
 		}
 	}

@@ -41,7 +41,15 @@ namespace map {
 	};
 	#pragma pack(pop)
 
-	void precalculate_tile_data();
+	struct TileMap {
+		uint16_t emtpy_tile;
+		uint8_t width;
+		uint8_t height;
+		uint8_t layers;
+		std::vector<map::Tile> data;
+	};
+
+	TileMap precalculate_tile_data(TMX_16 *tmx);
 	void load_section(MapSections map_section);
 	void draw();
 	uint8_t get_flag(Point &p);
