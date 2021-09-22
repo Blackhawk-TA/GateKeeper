@@ -17,6 +17,7 @@ public:
 	};
 
 	explicit Listbox(Rect rect, std::vector<Item> &items);
+	~Listbox();
 	void draw();
 	void cursor_up();
 	void cursor_down();

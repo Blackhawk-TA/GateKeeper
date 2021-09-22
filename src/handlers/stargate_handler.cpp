@@ -4,12 +4,12 @@
 
 #include "stargate_handler.hpp"
 
-std::map<StargateAddresses, Stargate *> stargates;
-std::map<StargateAddresses, Stargate *>::iterator it;
+std::map<StargateAddresses, Stargate> stargates;
+std::map<StargateAddresses, Stargate>::iterator it;
 
 void stargate_handler::init() {
-	stargates.insert(std::make_pair(GRASSLAND, new Stargate(map::GRASSLAND, WINTER, Point(21, 7), false)));
-	stargates.insert(std::make_pair(WINTER, new Stargate(map::SNOWLAND, GRASSLAND, Point(12, 10), false)));
+	stargates.insert(std::make_pair(GRASSLAND, Stargate(map::GRASSLAND, WINTER, Point(21, 7), false)));
+	stargates.insert(std::make_pair(WINTER, Stargate(map::SNOWLAND, GRASSLAND, Point(12, 10), false)));
 	it = stargates.begin();
 }
 
@@ -17,7 +17,7 @@ bool stargate_handler::check_collisions(Point next_position) {
 	bool collision = false;
 
 	while (!collision && it != stargates.end()) {
-		collision = it->second->check_collision(next_position);
+		collision = it->second.check_collision(next_position);
 		it++;
 	}
 	it = stargates.begin(); //Reset iterator
@@ -26,8 +26,8 @@ bool stargate_handler::check_collisions(Point next_position) {
 }
 
 void stargate_handler::update_states(Point next_position) {
-	for (const auto& [key, stargate] : stargates) {
-		stargate->update_state(next_position);
+	for (auto& [key, stargate] : stargates) {
+		stargate.update_state(next_position);
 	}
 }
 
@@ -43,7 +43,7 @@ Stargate *stargate_handler::get_destination_gate(Point next_position) {
 
 	//Check if player entered a gate
 	while (!teleport && it != stargates.end()) {
-		teleport = it->second->check_enter(next_position);
+		teleport = it->second.check_enter(next_position);
 		if (!teleport) {
 			it++;
 		}
@@ -51,11 +51,11 @@ Stargate *stargate_handler::get_destination_gate(Point next_position) {
 
 	//Find destination gate
 	if (teleport) {
-		destination_address = it->second->get_destination();
+		destination_address = it->second.get_destination();
 
 		it = stargates.find(destination_address);
 		if (it != stargates.end()) {
-			destination_gate = it->second;
+			destination_gate = &it->second;
 		}
 	}
 
@@ -66,13 +66,13 @@ Stargate *stargate_handler::get_destination_gate(Point next_position) {
 }
 
 void stargate_handler::draw_stargates() {
-	for (const auto& [key, stargate] : stargates) {
-		stargate->draw();
+	for (auto& [key, stargate] : stargates) {
+		stargate.draw();
 	}
 }
 
 void stargate_handler::update_animations() {
-	for (const auto& [key, stargate] : stargates) {
-		stargate->update_animation();
+	for (auto& [key, stargate] : stargates) {
+		stargate.update_animation();
 	}
 }

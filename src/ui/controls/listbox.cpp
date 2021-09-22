@@ -13,6 +13,10 @@ Listbox::Listbox(Rect rect, std::vector<Item> &items) : Box(rect) {
 	update_tooltip();
 }
 
+Listbox::~Listbox() {
+	delete tooltip;
+}
+
 void Listbox::draw() {
 	tooltip->draw();
 	Box::draw();
@@ -78,11 +82,11 @@ void Listbox::cursor_down() {
 void Listbox::cursor_press() {
 	uint8_t item_index = cursor_position.y - rect.y - CURSOR_OFFSET;
 	if (!items.empty() && item_index < items.size()) {
-		items[item_index].callback();
 		std::string callback_tooltip = items[item_index].callback_tooltip;
 		if (!callback_tooltip.empty()) {
 			tooltip->set_text(callback_tooltip);
 		}
+		items[item_index].callback();
 	}
 }
 
