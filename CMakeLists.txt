@@ -15,10 +15,10 @@ set(PROJECT_SOURCE
         src/game.cpp src/game.hpp
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/player.cpp src/player.hpp
-        src/ui/box.cpp src/ui/box.hpp
-        src/ui/listbox.cpp src/ui/listbox.hpp
+        src/ui/controls/box.cpp src/ui/controls/box.hpp
+        src/ui/controls/listbox.cpp src/ui/controls/listbox.hpp
         src/ui/sidemenu.cpp src/ui/sidemenu.hpp
-        src/ui/textbox.cpp src/ui/textbox.hpp
+        src/ui/controls/textbox.cpp src/ui/controls/textbox.hpp
         src/ui/overlay.cpp src/ui/overlay.hpp
         src/utils/utils.cpp src/utils/utils.hpp
 )

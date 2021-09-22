@@ -5,7 +5,7 @@
 #include <iostream>
 #include "sidemenu.hpp"
 #include "overlay.hpp"
-#include "listbox.hpp"
+#include "controls/listbox.hpp"
 
 Listbox *menu;
 std::vector<Listbox::Item> items;

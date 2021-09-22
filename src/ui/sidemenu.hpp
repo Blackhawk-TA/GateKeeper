@@ -4,7 +4,7 @@
 
 #pragma once
 #include "../utils/utils.hpp"
-#include "box.hpp"
+#include "controls/box.hpp"
 
 namespace sidemenu {
 	void init();
