@@ -7,7 +7,7 @@
 #include "overlay.hpp"
 #include "controls/listbox.hpp"
 
-Listbox *menu;
+Listbox *menu = nullptr;
 std::vector<Listbox::Item> items;
 
 void sidemenu::init() {

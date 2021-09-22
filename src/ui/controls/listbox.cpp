@@ -7,8 +7,8 @@
 Listbox::Listbox(Rect rect, std::vector<Item> &items) : Box(rect) {
 	Listbox::rect = rect;
 	Listbox::items = items;
-	Listbox::spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
-	Listbox::cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
+	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
+	cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
 	tooltip = new Textbox("");
 	update_tooltip();
 }

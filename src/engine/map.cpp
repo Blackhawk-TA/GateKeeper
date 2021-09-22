@@ -105,7 +105,7 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
  * @param map_section The enum describing the map section
  */
 void map::load_section(MapSections map_section) {
-	map::TMX_16 *tmx;
+	map::TMX_16 *tmx = nullptr;
 
 	//Allocate memory for TileMap and copy it into memory
 	switch (map_section) {
@@ -126,15 +126,15 @@ void map::load_section(MapSections map_section) {
 			break;
 	}
 
-	if (tmx == nullptr) return;
+	if (tmx != nullptr) {
+		screen_tiles = get_screen_tiles();
+		current_section = map_section;
 
-	screen_tiles = get_screen_tiles();
-	current_section = map_section;
+		tile_map = precalculate_tile_data(tmx);
 
-	tile_map = precalculate_tile_data(tmx);
-
-	//Remove tmx struct from memory because it's only required for the pre-calculations
-	free(tmx); //TODO fix "maybe uninitialized warning"
+		//Remove tmx struct from memory because it's only required for the pre-calculations
+		free(tmx);
+	}
 }
 
 /**
