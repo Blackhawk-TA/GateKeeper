@@ -72,13 +72,13 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 
 				//Save first tile in row of equals and its position.
 				tile_data.push_back(Tile{
-						previous_tile_x,
-						previous_tile_y,
-						flags::get_flag(previous_tile_id),
-						previous_tile_id,
-						range,
-						static_cast<uint16_t>((previous_tile_id % spritesheet_size.w) * TILE_SIZE),
-						static_cast<uint16_t>((previous_tile_id / spritesheet_size.h) * TILE_SIZE),
+					previous_tile_x,
+					previous_tile_y,
+					flags::get_flag(previous_tile_id),
+					previous_tile_id,
+					range,
+					static_cast<uint16_t>((previous_tile_id % spritesheet_size.w) * TILE_SIZE),
+					static_cast<uint16_t>((previous_tile_id / spritesheet_size.h) * TILE_SIZE),
 				});
 
 				//Reset range information for next tile with a different id
@@ -146,20 +146,21 @@ void map::draw() {
 	Point camera_position_world = screen_to_world(camera_position);
 
 	uint16_t i, r, tile_x, tile_y;
-	for (i = 0u; i < tile_map.data.size(); i++)  {
+	for (i = 0u; i < tile_map.data.size(); i++) {
 		tile_x = tile_map.data[i].x;
 
 		for (r = 0u; r <= tile_map.data[i].range; r++) {
-			tile_y = (tile_map.data[i].y + r) & (tile_map.height - 1); //Equal to modulo operator but faster, only works with powers of 2
+			tile_y = (tile_map.data[i].y + r) &
+			         (tile_map.height - 1); //Equal to modulo operator but faster, only works with powers of 2
 
 			//Checks if tile is visible on screen
 			if (camera_position_world.x <= tile_x && camera_position_world.y <= tile_y &&
-			screen_tiles.x + camera_position_world.x - tile_x >= 0 && screen_tiles.y + camera_position_world.y - tile_y >= 0)
-			{
+			    screen_tiles.x + camera_position_world.x - tile_x >= 0 &&
+			    screen_tiles.y + camera_position_world.y - tile_y >= 0) {
 				screen.blit_sprite(
-						Rect(tile_map.data[i].sprite_rect_x, tile_map.data[i].sprite_rect_y, TILE_SIZE, TILE_SIZE),
-						Point(tile_x * TILE_SIZE, tile_y * TILE_SIZE) - camera_position,
-						SpriteTransform::NONE
+					Rect(tile_map.data[i].sprite_rect_x, tile_map.data[i].sprite_rect_y, TILE_SIZE, TILE_SIZE),
+					Point(tile_x * TILE_SIZE, tile_y * TILE_SIZE) - camera_position,
+					SpriteTransform::NONE
 				);
 			}
 
@@ -187,7 +188,7 @@ uint8_t map::get_flag(Point &p) {
 	while (i > 0 && !found) {
 		i--;
 		tile_max_x = tile_map.data[i].x + (tile_map.data[i].x + tile_map.data[i].range) / tile_map.width;
-		tile_max_y = (tile_map.data[i].y + tile_map.data[i].range) & (tile_map.height -1);
+		tile_max_y = (tile_map.data[i].y + tile_map.data[i].range) & (tile_map.height - 1);
 
 		if (point_in_area(p, tile_map.data[i].x, tile_map.data[i].y, tile_max_x, tile_max_y)) {
 			flag_enum_id = tile_map.data[i].flag;

@@ -28,7 +28,8 @@ Point camera::get_world_position() {
 }
 
 Point camera::get_screen_position() {
-	return world_to_screen((float) camera_position.x / camera_scale_float, (float) camera_position.y / camera_scale_float);
+	return world_to_screen((float) camera_position.x / camera_scale_float,
+	                       (float) camera_position.y / camera_scale_float);
 }
 
 void camera::set_position(Point position) {

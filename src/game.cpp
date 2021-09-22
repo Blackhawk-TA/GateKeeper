@@ -24,7 +24,11 @@ void init() {
 	set_screen_mode(ScreenMode::hires);
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
-	flags::set_flag(flags::TileFlags::WALKABLE, {68, 69, 70, 71, 133, 134, 135, 197, 198, 199, 261, 262, 263, 325, 326, 327, 705, 769, 1037, 1038, 1101, 1102, 1165, 1166, 1167, 1229, 1230, 1231, 1293, 1294, 1295, 1632, 1633, 1634, 1635, 1636, 1637, 2305});
+	flags::set_flag(flags::TileFlags::WALKABLE, {
+		68, 69, 70, 71, 133, 134, 135, 197, 198, 199, 261, 262, 263, 325, 326, 327, 705, 769, 1037, 1038,
+		1101, 1102, 1165, 1166, 1167, 1229, 1230, 1231, 1293, 1294, 1295, 1632, 1633, 1634, 1635, 1636,
+		1637, 2305
+	});
 	flags::set_flag(flags::TileFlags::DOOR, {141, 517, 773, 965, 1573});
 	map::load_section(map::MapSections::GRASSLAND);
 
@@ -81,7 +85,7 @@ void update(uint32_t time) {
 	holding_button = buttons == last_buttons;
 
 	if (changed && !holding_button && (last_buttons & Button::DPAD_UP || last_buttons & Button::DPAD_DOWN
-	|| last_buttons & Button::DPAD_LEFT || last_buttons & Button::DPAD_RIGHT)){
+	                                   || last_buttons & Button::DPAD_LEFT || last_buttons & Button::DPAD_RIGHT)) {
 		Player::stop_movement();
 	}
 

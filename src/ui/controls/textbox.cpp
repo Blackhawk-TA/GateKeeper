@@ -23,7 +23,7 @@ std::string Textbox::format_text(std::string &unformatted_text) {
 		std::string formatted_text;
 		std::istringstream iss(unformatted_text);
 
-		for (std::string s; iss >>s;) {
+		for (std::string s; iss >> s;) {
 			if (char_counter + s.length() <= LINE_MAX_CHARS) {
 				char_counter += s.length() + 1; //Add 1 because of the added space down below
 				formatted_text.append(s);
@@ -72,7 +72,16 @@ int8_t Textbox::calculate_line_offset() const {
 void Textbox::draw() {
 	Box::draw();
 	screen.pen = Pen(0, 0, 0, 255);
-	screen.text(text, font, Rect(PADDING * TILE_SIZE, (rect.y + PADDING) * TILE_SIZE + line_offset, rect.w * TILE_SIZE, rect.h * TILE_SIZE));
+	screen.text(
+		text,
+		font,
+		Rect(
+			PADDING * TILE_SIZE,
+			(rect.y + PADDING) * TILE_SIZE + line_offset,
+			rect.w * TILE_SIZE,
+			rect.h * TILE_SIZE
+		)
+	);
 }
 
 void Textbox::set_text(std::string &new_text) {

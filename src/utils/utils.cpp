@@ -17,9 +17,9 @@ bool sprite_rect_in_screen(Point &position, const Size &size, Point &camera_posi
 	Point screen_tiles = get_screen_tiles();
 
 	return camera_position_world.x < position.x + size.w &&
-		camera_position_world.y < position.y + size.h &&
-		screen_tiles.x + camera_position_world.x - position.x > 0 &&
-		screen_tiles.y + camera_position_world.y - position.y > 0;
+	       camera_position_world.y < position.y + size.h &&
+	       screen_tiles.x + camera_position_world.x - position.x > 0 &&
+	       screen_tiles.y + camera_position_world.y - position.y > 0;
 }
 
 Point screen_to_world(const Point &p) {

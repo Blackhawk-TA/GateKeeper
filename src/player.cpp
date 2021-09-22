@@ -90,7 +90,7 @@ void Player::move(MovementDirection direction) {
 	//Update the stargate states when a player comes near them
 	stargate_handler::update_states(next_position);
 
-	switch(map::get_flag(next_position)) {
+	switch (map::get_flag(next_position)) {
 		case flags::TileFlags::WALKABLE:
 			camera::move(movement);
 			break;
@@ -125,7 +125,8 @@ void Player::set_direction(MovementDirection direction) {
 void Player::draw() {
 	screen.blit(
 		characters,
-		Rect((sprite_index % spritesheet_size.w) * TILE_SIZE, (sprite_index / spritesheet_size.h) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+		Rect((sprite_index % spritesheet_size.w) * TILE_SIZE, (sprite_index / spritesheet_size.h) * TILE_SIZE,
+		     TILE_SIZE, TILE_SIZE),
 		world_to_screen(position),
 		SpriteTransform::NONE
 	);
@@ -155,7 +156,7 @@ void Player::building_teleport(uint8_t building_id, Point next_position) {
  * Teleports a player to the given gate and sets the movement direction to facing downwards
  * @param destination_gate The gate to which the player is teleported
  */
-void Player::gate_teleport(Stargate* destination_gate) {
+void Player::gate_teleport(Stargate *destination_gate) {
 	Point teleport_destination = destination_gate->get_entry_point();
 	map::MapSections destination_map_section = destination_gate->get_map_section();
 	if (map::get_section() != destination_map_section) {

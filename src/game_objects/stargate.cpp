@@ -31,9 +31,9 @@ bool Stargate::check_collision(Point next_position) const {
 	}
 
 	return next_position != position + RELATIVE_PRE_ENTRY_POINT &&
-		next_position != position + RELATIVE_ENTRY_POINT &&
-		position.x <= next_position.x && position.y <= next_position.y &&
-		position.x > next_position.x - GATE_SIZE.w && position.y > next_position.y - GATE_SIZE.h;
+	       next_position != position + RELATIVE_ENTRY_POINT &&
+	       position.x <= next_position.x && position.y <= next_position.y &&
+	       position.x > next_position.x - GATE_SIZE.w && position.y > next_position.y - GATE_SIZE.h;
 }
 
 /**
@@ -97,27 +97,27 @@ void Stargate::draw() {
 	if (sprite_rect_in_screen(position, GATE_SIZE, camera_position_world)) {
 		//Draw stargate
 		screen.blit_sprite(
-				Rect(
-						(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
-						(tile_id / spritesheet_size.h) * TILE_SIZE,
-						GATE_SIZE.w * TILE_SIZE,
-						GATE_SIZE.h * TILE_SIZE
-				),
-				world_to_screen(position) - camera_position,
-				SpriteTransform::NONE
+			Rect(
+				(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
+				(tile_id / spritesheet_size.h) * TILE_SIZE,
+				GATE_SIZE.w * TILE_SIZE,
+				GATE_SIZE.h * TILE_SIZE
+			),
+			world_to_screen(position) - camera_position,
+			SpriteTransform::NONE
 		);
 
 		//Draw animation
 		if (state == ACTIVATING || state == DEACTIVATING) {
 			screen.blit_sprite(
-					Rect(
-							(ANIMATION_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
-							(ANIMATION_ID / spritesheet_size.h) * TILE_SIZE,
-							ANIMATION_SIZE.w * TILE_SIZE,
-							ANIMATION_SIZE.h * TILE_SIZE
-					),
-					world_to_screen(position + ANIMATION_OFFSET) - camera_position, //Calculate animation offset because it's smaller than the gate
-					SpriteTransform::NONE
+				Rect(
+					(ANIMATION_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
+					(ANIMATION_ID / spritesheet_size.h) * TILE_SIZE,
+					ANIMATION_SIZE.w * TILE_SIZE,
+					ANIMATION_SIZE.h * TILE_SIZE
+				),
+				world_to_screen(position + ANIMATION_OFFSET) - camera_position, //Calculate animation offset because it's smaller than the gate
+				SpriteTransform::NONE
 			);
 		}
 	}

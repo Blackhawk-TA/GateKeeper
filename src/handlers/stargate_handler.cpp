@@ -26,7 +26,7 @@ bool stargate_handler::check_collisions(Point next_position) {
 }
 
 void stargate_handler::update_states(Point next_position) {
-	for (auto& [key, stargate] : stargates) {
+	for (auto&[key, stargate]: stargates) {
 		stargate.update_state(next_position);
 	}
 }
@@ -66,13 +66,13 @@ Stargate *stargate_handler::get_destination_gate(Point next_position) {
 }
 
 void stargate_handler::draw_stargates() {
-	for (auto& [key, stargate] : stargates) {
+	for (auto &[key, stargate]: stargates) {
 		stargate.draw();
 	}
 }
 
 void stargate_handler::update_animations() {
-	for (auto& [key, stargate] : stargates) {
+	for (auto &[key, stargate]: stargates) {
 		stargate.update_animation();
 	}
 }

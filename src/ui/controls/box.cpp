@@ -37,14 +37,14 @@ void Box::draw() const {
 				}
 
 				screen.blit_sprite(
-						Rect(
-								(sprite_id & (spritesheet_size.w - 1)) * TILE_SIZE,
-								(sprite_id / spritesheet_size.h) * TILE_SIZE,
-								TILE_SIZE,
-								TILE_SIZE
-						),
-						Point((rect.x + x) * TILE_SIZE, (rect.y + y) * TILE_SIZE),
-						SpriteTransform::NONE
+					Rect(
+						(sprite_id & (spritesheet_size.w - 1)) * TILE_SIZE,
+						(sprite_id / spritesheet_size.h) * TILE_SIZE,
+						TILE_SIZE,
+						TILE_SIZE
+					),
+					Point((rect.x + x) * TILE_SIZE, (rect.y + y) * TILE_SIZE),
+					SpriteTransform::NONE
 				);
 			}
 		}

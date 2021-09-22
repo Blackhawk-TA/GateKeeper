@@ -25,40 +25,40 @@ void Listbox::draw() {
 	if (items.empty()) {
 		//Draw no items text
 		screen.text(
-				"No items",
-				font,
-				Rect(
-						(rect.x + PADDING) * TILE_SIZE,
-						static_cast<int>(rect.y + PADDING) * TILE_SIZE + font.char_h / 2,
-						rect.w * TILE_SIZE,
-						TILE_SIZE
-				)
+			"No items",
+			font,
+			Rect(
+				(rect.x + PADDING) * TILE_SIZE,
+				static_cast<int>(rect.y + PADDING) * TILE_SIZE + font.char_h / 2,
+				rect.w * TILE_SIZE,
+				TILE_SIZE
+			)
 		);
 	} else {
 		//Draw Item names
 		for (auto i = 0u; i < items.size(); i++) {
 			screen.text(
-					items[i].name,
-					font,
-					Rect(
-							(rect.x + PADDING) * TILE_SIZE,
-							static_cast<int>(rect.y + i + PADDING) * TILE_SIZE + font.char_h / 2,
-							rect.w * TILE_SIZE,
-							TILE_SIZE
-					)
+				items[i].name,
+				font,
+				Rect(
+					(rect.x + PADDING) * TILE_SIZE,
+					static_cast<int>(rect.y + i + PADDING) * TILE_SIZE + font.char_h / 2,
+					rect.w * TILE_SIZE,
+					TILE_SIZE
+				)
 			);
 		}
 
 		//Draw cursor
 		screen.blit_sprite(
 			Rect(
-						(CURSOR_SPRITE_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
-						(CURSOR_SPRITE_ID / spritesheet_size.h) * TILE_SIZE,
-						TILE_SIZE,
-						TILE_SIZE
-				),
-				world_to_screen(cursor_position),
-				SpriteTransform::NONE
+				(CURSOR_SPRITE_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
+				(CURSOR_SPRITE_ID / spritesheet_size.h) * TILE_SIZE,
+				TILE_SIZE,
+				TILE_SIZE
+			),
+			world_to_screen(cursor_position),
+			SpriteTransform::NONE
 		);
 	}
 }

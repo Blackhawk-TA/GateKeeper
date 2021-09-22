@@ -18,10 +18,10 @@ namespace building {
 	};
 
 	constexpr Door connections[] = {
-			Door{Point(15, 12), Point(15, 13)},
-			Door{Point(29, 12), Point(37, 13)},
-			Door{Point(18, 19), Point(59, 13)},
-			Door{Point(27, 19), Point(82, 13)}
+		Door{Point(15, 12), Point(15, 13)},
+		Door{Point(29, 12), Point(37, 13)},
+		Door{Point(18, 19), Point(59, 13)},
+		Door{Point(27, 19), Point(82, 13)}
 	};
 
 	uint8_t get_id(Point &p, map::MapSections map_section);

@@ -9,7 +9,7 @@
 
 class Listbox : private Box {
 public:
-	struct Item{
+	struct Item {
 		std::string name;
 		std::string tooltip;
 		std::string callback_tooltip;
