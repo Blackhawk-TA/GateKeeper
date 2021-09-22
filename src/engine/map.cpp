@@ -189,7 +189,7 @@ uint8_t map::get_flag(Point &p) {
 		tile_max_x = tile_map.data[i].x + (tile_map.data[i].x + tile_map.data[i].range) / tile_map.width;
 		tile_max_y = (tile_map.data[i].y + tile_map.data[i].range) & (tile_map.height -1);
 
-		if (point_in_rect(p, tile_map.data[i].x, tile_map.data[i].y, tile_max_x, tile_max_y)) {
+		if (point_in_area(p, tile_map.data[i].x, tile_map.data[i].y, tile_max_x, tile_max_y)) {
 			flag_enum_id = tile_map.data[i].flag;
 			found = true;
 		}
@@ -203,7 +203,7 @@ map::MapSections map::get_section() {
 }
 
 /**
- * Checks if a point is within a rectangle of the map defined by a min and max point.
+ * Checks if a point is within an area of the map defined by a min and max point.
  * It is expected that the map is drawn from top to bottom and then left to right.
  * @param p The point which shall be checked
  * @param min_x The position at which the rectangle begins on the x-axis
@@ -212,7 +212,7 @@ map::MapSections map::get_section() {
  * @param max_y The position at which the rectangle ends on the y-axis
  * @return True if the point p is within the rectangle, else false
  */
-bool map::point_in_rect(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, uint8_t max_y) {
+bool map::point_in_area(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, uint8_t max_y) {
 	return (((p.x == min_x && p.y >= min_y) || p.x > min_x) &&
 	        ((p.x == max_x && p.y <= max_y) || p.x < max_x));
 }
