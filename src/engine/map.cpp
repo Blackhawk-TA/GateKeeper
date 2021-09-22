@@ -134,7 +134,7 @@ void map::load_section(MapSections map_section) {
 	tile_map = precalculate_tile_data(tmx);
 
 	//Remove tmx struct from memory because it's only required for the pre-calculations
-	free(tmx);
+	free(tmx); //TODO fix "maybe uninitialized warning"
 }
 
 /**
