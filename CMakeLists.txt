@@ -16,6 +16,7 @@ set(PROJECT_SOURCE
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/player.cpp src/player.hpp
         src/ui/box.cpp src/ui/box.hpp
+        src/ui/listbox.cpp src/ui/listbox.hpp
         src/ui/sidemenu.cpp src/ui/sidemenu.hpp
         src/ui/textbox.cpp src/ui/textbox.hpp
         src/ui/overlay.cpp src/ui/overlay.hpp

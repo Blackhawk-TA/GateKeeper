@@ -5,10 +5,9 @@
 #include <sstream>
 #include "textbox.hpp"
 
-Textbox::Textbox(std::string &text) : Box(rect) {
+Textbox::Textbox(std::string text) : Box(rect) {
 	Textbox::line_counter = 1;
 	Textbox::text = format_text(text);
-	Textbox::line_offset = calculate_line_offset();
 }
 
 /**
@@ -17,6 +16,8 @@ Textbox::Textbox(std::string &text) : Box(rect) {
  * @return The formatted text with linebreaks
  */
 std::string Textbox::format_text(std::string &unformatted_text) {
+	std::string output_text;
+
 	if (unformatted_text.length() > LINE_MAX_CHARS) {
 		uint8_t char_counter = 0;
 		std::string formatted_text;
@@ -34,10 +35,13 @@ std::string Textbox::format_text(std::string &unformatted_text) {
 				line_counter++;
 			}
 		}
-		return formatted_text;
+		output_text = formatted_text;
 	} else {
-		return unformatted_text;
+		output_text = unformatted_text;
 	}
+
+	Textbox::line_offset = calculate_line_offset();
+	return output_text;
 }
 
 /**
@@ -69,4 +73,9 @@ void Textbox::draw() {
 	Box::draw();
 	screen.pen = Pen(0, 0, 0, 255);
 	screen.text(text, font, Rect(PADDING * TILE_SIZE, (rect.y + PADDING) * TILE_SIZE + line_offset, rect.w * TILE_SIZE, rect.h * TILE_SIZE));
+}
+
+void Textbox::set_text(std::string &new_text) {
+	line_counter = 1;
+	text = format_text(new_text);
 }

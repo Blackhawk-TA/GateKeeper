@@ -5,74 +5,74 @@
 #include <iostream>
 #include "sidemenu.hpp"
 #include "overlay.hpp"
+#include "listbox.hpp"
 
-bool sidemenu::visible = false;
+Listbox *menu;
+std::vector<Listbox::Item> items;
 
-const uint16_t cursor_sprite_id = 1742;
-const uint8_t list_count = 4;
-std::array<std::string, list_count> list;
-Size spritesheet_size;
-Box *menu;
-Point cursor_position;
-
-//TODO cleanup and remove magic numbers, maybe add tooltips
 void sidemenu::init() {
-	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
-	menu = new Box(Rect(16, 0, 4, 6));
-	cursor_position = Point(16, 1);
-	list = {
-		"ITEMS",
-		"SHOW FPS",
-		"SAVE",
-		"EXIT"
+	items = {
+			Listbox::Item{
+					"ITEMS",
+					"Press A to show items",
+					"Press B to go back",
+					[] {
+						std::cout << "ITEMS" << std::endl; //TODO implement
+					}
+			},
+			Listbox::Item{
+					"SHOW FPS",
+					"Press A to toggle the fps counter",
+					"",
+					[] {
+						overlay::show_fps = !overlay::show_fps;
+					}
+			},
+			Listbox::Item{
+					"SAVE",
+					"Press A to save the game",
+					"Successfully saved!",
+					[] {
+						std::cout << "SAVE" << std::endl; //TODO implement
+					}
+			},
+			Listbox::Item{
+					"EXIT",
+					"Press A to exit the menu",
+					"",
+					[] {
+						delete menu;
+						menu = nullptr;
+					}
+			}
 	};
+}
+
+void sidemenu::open() {
+	menu = new Listbox(Rect(16, 0, 4, 6), items);
+}
+
+void sidemenu::close() {
+	delete menu;
+	menu = nullptr;
+}
+
+bool sidemenu::is_open() {
+	return menu != nullptr;
 }
 
 void sidemenu::draw() {
 	menu->draw();
-	screen.pen = Pen(0, 0, 0, 255);
-
-	for (uint8_t i = 0; i < list_count; i++) {
-		screen.text(list[i], minimal_font, Rect(17 * TILE_SIZE, (i + 1) * TILE_SIZE + 5, TILE_SIZE * 3, TILE_SIZE));
-	}
-
-	screen.blit_sprite(
-			Rect(
-					(cursor_sprite_id & (spritesheet_size.w - 1)) * TILE_SIZE,
-					(cursor_sprite_id / spritesheet_size.h) * TILE_SIZE,
-					TILE_SIZE,
-					TILE_SIZE
-			),
-			world_to_screen(cursor_position),
-			SpriteTransform::NONE
-	);
 }
 
 void sidemenu::cursor_up() {
-	if (cursor_position.y > 1) {
-		cursor_position.y--;
-	}
+	menu->cursor_up();
 }
 
 void sidemenu::cursor_down() {
-	if (cursor_position.y < list_count) {
-		cursor_position.y++;
-	}
+	menu->cursor_down();
 }
 
-void sidemenu::press() {
-	switch (cursor_position.y) {
-		case 1: //ITEMS
-			std::cout << "ITEMS" << std::endl;
-			break;
-		case 2: //SHOW FPS
-			overlay::show_fps = !overlay::show_fps;
-			break;
-		case 3: //SAVE
-			std::cout << "SAVE" << std::endl;
-			break;
-		case 4: //EXIT
-			visible = false;
-			break;
-	}
+void sidemenu::cursor_press() {
+	menu->cursor_press();
 }

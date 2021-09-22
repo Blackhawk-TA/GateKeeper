@@ -8,9 +8,11 @@
 
 namespace sidemenu {
 	void init();
+	void open();
+	void close();
+	bool is_open();
 	void draw();
 	void cursor_up();
 	void cursor_down();
-	void press();
-	extern bool visible;
+	void cursor_press();
 }

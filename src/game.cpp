@@ -50,7 +50,7 @@ void render(uint32_t time) {
 	stargate_handler::draw_stargates();
 	player->draw();
 
-	if (sidemenu::visible) {
+	if (sidemenu::is_open()) {
 		sidemenu::draw();
 	}
 
@@ -85,15 +85,15 @@ void update(uint32_t time) {
 		Player::stop_movement();
 	}
 
-	if (sidemenu::visible) {
+	if (sidemenu::is_open()) {
 		if (buttons & changed & Button::DPAD_UP) {
 			sidemenu::cursor_up();
 		} else if (buttons & changed & Button::DPAD_DOWN) {
 			sidemenu::cursor_down();
 		} else if (buttons & changed & Button::A) {
-			sidemenu::press();
+			sidemenu::cursor_press();
 		} else if (buttons & changed & Button::MENU) {
-			sidemenu::visible = false;
+			sidemenu::close();
 		}
 	} else {
 		if (buttons & Button::DPAD_UP) {
@@ -105,7 +105,7 @@ void update(uint32_t time) {
 		} else if (buttons & Button::DPAD_RIGHT) {
 			player->move(player->RIGHT);
 		} else if (buttons & changed & Button::MENU) {
-			sidemenu::visible = true;
+			sidemenu::open();
 		}
 	}
 
