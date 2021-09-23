@@ -31,7 +31,8 @@ std::string Textbox::format_text(std::string &unformatted_text) {
 			} else {
 				formatted_text.append("\n");
 				formatted_text.append(s);
-				char_counter = s.length();
+				formatted_text.append(" ");
+				char_counter = s.length() + 1;
 				line_counter++;
 			}
 		}
