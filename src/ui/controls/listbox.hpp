@@ -29,8 +29,7 @@ public:
 	void draw();
 	void cursor_up();
 	void cursor_down();
-	uint8_t cursor_press();
-	void update_list(std::vector<Item> &new_items);
+	void cursor_press();
 
 private:
 	const uint16_t CURSOR_SPRITE_ID = 1742;
@@ -44,4 +43,5 @@ private:
 	Textbox *tooltip;
 
 	void update_tooltip();
+	void remove_item(uint8_t index);
 };

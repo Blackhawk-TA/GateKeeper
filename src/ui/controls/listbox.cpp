@@ -83,7 +83,7 @@ void Listbox::cursor_down() {
  * Handles a press on a listbox item
  * @return The index of the pressed listbox item
  */
-uint8_t Listbox::cursor_press() {
+void Listbox::cursor_press() {
 	uint8_t item_index = cursor_position.y - rect.y - CURSOR_OFFSET;
 
 	if (!items.empty() && item_index < items.size()) {
@@ -101,9 +101,12 @@ uint8_t Listbox::cursor_press() {
 			case SUPPRESS:
 				break;
 		}
-	}
 
-	return item_index;
+		//Delete items that can only be used once
+		if (tooltip_state == Tooltip::SUCCESS && items[item_index].single_use) {
+			remove_item(item_index);
+		}
+	}
 }
 
 void Listbox::update_tooltip() {
@@ -113,6 +116,18 @@ void Listbox::update_tooltip() {
 	}
 }
 
-void Listbox::update_list(std::vector<Item> &new_items) {
-	items = new_items;
+void Listbox::remove_item(uint8_t index) {
+	auto it = items.begin();
+	bool found = false;
+	uint8_t counter = 0;
+
+	while (!found && it != items.end()) {
+		if (counter == index) {
+			it = items.erase(it);
+			found = true;
+		} else {
+			it++;
+			counter++;
+		}
+	}
 }

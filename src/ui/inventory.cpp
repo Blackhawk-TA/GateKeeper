@@ -2,7 +2,6 @@
 // Created by daniel on 23.09.21.
 //
 
-#include <iostream>
 #include "inventory.hpp"
 #include "sidemenu.hpp"
 #include "../handlers/stargate_handler.hpp"
@@ -43,23 +42,6 @@ void inventory::add_item(Listbox::Item &item) {
 	items.push_back(item);
 }
 
-void inventory::remove_item(uint8_t index) {
-	auto it = items.begin();
-	bool found = false;
-	uint8_t counter = 0;
-
-	while (!found && it != items.end()) {
-		if (counter == index) {
-			it = items.erase(it);
-			control->update_list(items);
-			found = true;
-		} else {
-			it++;
-			counter++;
-		}
-	}
-}
-
 void inventory::open() {
 	control = new Listbox(Rect(15, 0, 5, 6), items);
 }
@@ -86,10 +68,5 @@ void inventory::cursor_down() {
 }
 
 void inventory::cursor_press() {
-	uint8_t item_index = control->cursor_press();
-
-	//Delete items that can only be used once
-	if (!items.empty() && items[item_index].single_use) {
-		remove_item(item_index);
-	}
+	control->cursor_press();
 }
