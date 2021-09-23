@@ -35,6 +35,7 @@ private:
 	Size spritesheet_size;
 	uint32_t activation_start_time;
 	uint16_t tile_id;
+	bool broken;
 
 	void set_state(RenderStates new_state);
 
@@ -45,7 +46,7 @@ public:
 	bool check_enter(Point next_position);
 	void draw();
 	void update_animation();
-	void repair();
+	bool repair();
 	Point get_entry_point();
 	StargateAddresses get_destination();
 	map::MapSections get_map_section();

@@ -3,12 +3,13 @@
 //
 
 #include "stargate_handler.hpp"
+#include "../engine/camera.hpp"
 
 std::map<StargateAddresses, Stargate> stargates;
 std::map<StargateAddresses, Stargate>::iterator it;
 
 void stargate_handler::init() {
-	stargates.insert(std::make_pair(GRASSLAND, Stargate(map::GRASSLAND, WINTER, Point(21, 7), false)));
+	stargates.insert(std::make_pair(GRASSLAND, Stargate(map::GRASSLAND, WINTER, Point(21, 7), true)));
 	stargates.insert(std::make_pair(WINTER, Stargate(map::SNOWLAND, GRASSLAND, Point(12, 10), false)));
 	it = stargates.begin();
 }
@@ -75,4 +76,22 @@ void stargate_handler::update_animations() {
 	for (auto &[key, stargate]: stargates) {
 		stargate.update_animation();
 	}
+}
+
+bool stargate_handler::player_repair_gate() {
+	bool repaired = false;
+	Point player_position;
+
+	while (!repaired && it != stargates.end()) {
+		player_position = camera::get_world_position() + get_screen_tiles() / 2;
+		if (it->second.get_entry_point() == player_position && it->second.repair()) {
+			repaired = true;
+		} else {
+			it++;
+		}
+	}
+
+	it = stargates.begin();
+
+	return repaired;
 }

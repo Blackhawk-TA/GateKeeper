@@ -12,7 +12,7 @@ namespace inventory {
 
 	void init();
 	void add_item(Listbox::Item &item);
-	bool remove_item();
+	void remove_item(uint8_t index);
 	void open();
 	void close();
 	bool is_open();

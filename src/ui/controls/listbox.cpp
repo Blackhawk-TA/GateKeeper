@@ -79,15 +79,31 @@ void Listbox::cursor_down() {
 	update_tooltip();
 }
 
-void Listbox::cursor_press() {
+/**
+ * Handles a press on a listbox item
+ * @return The index of the pressed listbox item
+ */
+uint8_t Listbox::cursor_press() {
 	uint8_t item_index = cursor_position.y - rect.y - CURSOR_OFFSET;
+
 	if (!items.empty() && item_index < items.size()) {
 		std::string callback_tooltip = items[item_index].callback_tooltip;
-		if (!callback_tooltip.empty()) {
-			tooltip->set_text(callback_tooltip);
+		std::string callback_fail_tooltip = items[item_index].callback_fail_tooltip;
+		Tooltip tooltip_state = items[item_index].callback();
+
+		switch (tooltip_state) {
+			case SUCCESS:
+				tooltip->set_text(callback_tooltip);
+				break;
+			case FAILURE:
+				tooltip->set_text(callback_fail_tooltip);
+				break;
+			case SUPPRESS:
+				break;
 		}
-		items[item_index].callback();
 	}
+
+	return item_index;
 }
 
 void Listbox::update_tooltip() {
@@ -95,4 +111,8 @@ void Listbox::update_tooltip() {
 	if (!items.empty() && item_index < items.size()) {
 		tooltip->set_text(items[item_index].tooltip);
 	}
+}
+
+void Listbox::update_list(std::vector<Item> &new_items) {
+	items = new_items;
 }

@@ -9,11 +9,19 @@
 
 class Listbox : private Box {
 public:
+	enum Tooltip {
+		SUCCESS = 1,
+		FAILURE = 2,
+		SUPPRESS = 3
+	};
+
 	struct Item {
 		std::string name;
 		std::string tooltip;
 		std::string callback_tooltip;
-		std::function<void()> callback;
+		std::string callback_fail_tooltip;
+		bool single_use;
+		std::function<Tooltip()> callback;
 	};
 
 	explicit Listbox(Rect rect, std::vector<Item> &items);
@@ -21,7 +29,8 @@ public:
 	void draw();
 	void cursor_up();
 	void cursor_down();
-	void cursor_press();
+	uint8_t cursor_press();
+	void update_list(std::vector<Item> &new_items);
 
 private:
 	const uint16_t CURSOR_SPRITE_ID = 1742;

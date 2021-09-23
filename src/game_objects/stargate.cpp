@@ -9,6 +9,7 @@ Stargate::Stargate(map::MapSections map_section, StargateAddresses destination, 
 	Stargate::map_section = map_section;
 	Stargate::position = position;
 	Stargate::destination = destination;
+	Stargate::broken = broken;
 	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	activation_start_time = 0;
 
@@ -145,10 +146,14 @@ void Stargate::set_state(Stargate::RenderStates new_state) {
 	state = new_state;
 }
 
-void Stargate::repair() {
-	if (state == BROKEN) { //TODO auto activate if player is in front of portal
-		set_state(INACTIVE);
+bool Stargate::repair() { //TODO save repaired state
+	if (broken) {
+		broken = false;
+		set_state(ACTIVATING);
+		return true;
 	}
+
+	return false;
 }
 
 /**

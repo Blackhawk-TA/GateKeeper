@@ -15,33 +15,45 @@ void sidemenu::init() {
 			"ITEMS",
 			"Press A to show items, press B to return to menu.",
 			"",
+			"",
+			false,
 			[] {
 				inventory::open();
 				sidemenu::close();
+				return Listbox::Tooltip::SUPPRESS;
 			}
 		},
 		Listbox::Item{
 			"SHOW FPS",
 			"Press A to toggle the fps counter.",
+			"Toggled fps counter.",
 			"",
+			false,
 			[] {
 				overlay::show_fps = !overlay::show_fps;
+				return Listbox::Tooltip::SUCCESS;
 			}
 		},
 		Listbox::Item{
 			"SAVE",
 			"Press A to save the game.",
 			"Successfully saved!",
+			"Could not save the game.",
+			false,
 			[] {
 				std::cout << "SAVE" << std::endl; //TODO implement
+				return Listbox::Tooltip::SUCCESS;
 			}
 		},
 		Listbox::Item{
 			"EXIT",
 			"Press A to exit the menu.",
 			"",
+			"",
+			false,
 			[] {
 				sidemenu::close();
+				return Listbox::Tooltip::SUPPRESS;
 			}
 		}
 	};
