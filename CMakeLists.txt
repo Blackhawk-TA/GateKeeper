@@ -17,6 +17,7 @@ set(PROJECT_SOURCE
         src/player.cpp src/player.hpp
         src/ui/controls/box.cpp src/ui/controls/box.hpp
         src/ui/controls/listbox.cpp src/ui/controls/listbox.hpp
+        src/ui/inventory.cpp src/ui/inventory.hpp
         src/ui/sidemenu.cpp src/ui/sidemenu.hpp
         src/ui/controls/textbox.cpp src/ui/controls/textbox.hpp
         src/ui/overlay.cpp src/ui/overlay.hpp

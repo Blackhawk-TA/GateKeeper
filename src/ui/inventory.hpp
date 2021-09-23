@@ -1,17 +1,18 @@
 //
-// Created by daniel on 21.09.21.
+// Created by daniel on 23.09.21.
 //
 
 #pragma once
-#include "../utils/utils.hpp"
-#include "controls/box.hpp"
+
 #include "controls/listbox.hpp"
 
-namespace sidemenu {
+namespace inventory {
 	inline Listbox *control;
 	inline std::vector<Listbox::Item> items;
 
 	void init();
+	void add_item(Listbox::Item &item);
+	bool remove_item();
 	void open();
 	void close();
 	bool is_open();
@@ -19,4 +20,4 @@ namespace sidemenu {
 	void cursor_up();
 	void cursor_down();
 	void cursor_press();
-}
+};

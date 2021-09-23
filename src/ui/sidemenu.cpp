@@ -6,23 +6,23 @@
 #include "sidemenu.hpp"
 #include "overlay.hpp"
 #include "controls/listbox.hpp"
-
-Listbox *menu = nullptr;
-std::vector<Listbox::Item> items;
+#include "inventory.hpp"
 
 void sidemenu::init() {
+	control = nullptr;
 	items = {
 		Listbox::Item{
 			"ITEMS",
-			"Press A to show items",
-			"Press B to go back",
+			"Press A to show items, press B to return to menu.",
+			"",
 			[] {
-				std::cout << "ITEMS" << std::endl; //TODO implement
+				inventory::open();
+				sidemenu::close();
 			}
 		},
 		Listbox::Item{
 			"SHOW FPS",
-			"Press A to toggle the fps counter",
+			"Press A to toggle the fps counter.",
 			"",
 			[] {
 				overlay::show_fps = !overlay::show_fps;
@@ -30,7 +30,7 @@ void sidemenu::init() {
 		},
 		Listbox::Item{
 			"SAVE",
-			"Press A to save the game",
+			"Press A to save the game.",
 			"Successfully saved!",
 			[] {
 				std::cout << "SAVE" << std::endl; //TODO implement
@@ -38,41 +38,40 @@ void sidemenu::init() {
 		},
 		Listbox::Item{
 			"EXIT",
-			"Press A to exit the menu",
+			"Press A to exit the menu.",
 			"",
 			[] {
-				delete menu;
-				menu = nullptr;
+				sidemenu::close();
 			}
 		}
 	};
 }
 
 void sidemenu::open() {
-	menu = new Listbox(Rect(16, 0, 4, 6), items);
+	control = new Listbox(Rect(16, 0, 4, 6), items);
 }
 
 void sidemenu::close() {
-	delete menu;
-	menu = nullptr;
+	delete control;
+	control = nullptr;
 }
 
 bool sidemenu::is_open() {
-	return menu != nullptr;
+	return control != nullptr;
 }
 
 void sidemenu::draw() {
-	menu->draw();
+	control->draw();
 }
 
 void sidemenu::cursor_up() {
-	menu->cursor_up();
+	control->cursor_up();
 }
 
 void sidemenu::cursor_down() {
-	menu->cursor_down();
+	control->cursor_down();
 }
 
 void sidemenu::cursor_press() {
-	menu->cursor_press();
+	control->cursor_press();
 }

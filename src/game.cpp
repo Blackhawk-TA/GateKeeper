@@ -8,6 +8,7 @@
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"
 #include "ui/sidemenu.hpp"
+#include "ui/inventory.hpp"
 
 using namespace blit;
 
@@ -36,6 +37,7 @@ void init() {
 	camera::init(start_position);
 	stargate_handler::init();
 	sidemenu::init();
+	inventory::init();
 	player = new Player();
 }
 
@@ -56,6 +58,10 @@ void render(uint32_t time) {
 
 	if (sidemenu::is_open()) {
 		sidemenu::draw();
+	}
+
+	if (inventory::is_open()) {
+		inventory::draw();
 	}
 
 	if (transition::in_progress()) {
@@ -98,6 +104,19 @@ void update(uint32_t time) {
 			sidemenu::cursor_press();
 		} else if (buttons & changed & Button::MENU) {
 			sidemenu::close();
+		}
+	} else if (inventory::is_open()) {
+		if (buttons & changed & Button::DPAD_UP) {
+			inventory::cursor_up();
+		} else if (buttons & changed & Button::DPAD_DOWN) {
+			inventory::cursor_down();
+		} else if (buttons & changed & Button::A) {
+			inventory::cursor_press();
+		} else if (buttons & changed & Button::B) {
+			sidemenu::open();
+			inventory::close();
+		} else if (buttons & changed & Button::MENU) {
+			inventory::close();
 		}
 	} else {
 		if (buttons & Button::DPAD_UP) {
