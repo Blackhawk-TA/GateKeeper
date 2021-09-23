@@ -102,7 +102,7 @@ void update(uint32_t time) {
 			sidemenu::cursor_down();
 		} else if (buttons & changed & Button::A) {
 			sidemenu::cursor_press();
-		} else if (buttons & changed & Button::MENU) {
+		} else if (buttons & changed & Button::MENU || buttons & changed & Button::B) {
 			sidemenu::close();
 		}
 	} else if (inventory::is_open()) {

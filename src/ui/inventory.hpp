@@ -20,4 +20,4 @@ namespace inventory {
 	void cursor_up();
 	void cursor_down();
 	void cursor_press();
-};
+}
