@@ -15,6 +15,7 @@ void inventory::init() {
 			"The gate part was used to repair the stargate.",
 			"Cannot repair stargate. It has to be broken and you have to stand directly in front of it.",
 			true,
+			1,
 			[] {
 				if (stargate_handler::player_repair_gate()) {
 					return Listbox::Tooltip::SUCCESS;
@@ -29,6 +30,7 @@ void inventory::init() {
 			"",
 			"",
 			false,
+			0,
 			[] {
 				inventory::close();
 				sidemenu::open();
@@ -38,12 +40,12 @@ void inventory::init() {
 	};
 }
 
-void inventory::add_item(Listbox::Item &item) {
-	items.push_back(item);
+bool inventory::add_item(Listbox::Item item) {
+	return control->add_item(item);
 }
 
 void inventory::open() {
-	control = new Listbox(Rect(15, 0, 5, 6), items);
+	control = new Listbox(Rect(14, 0, 6, 6), items);
 }
 
 void inventory::close() {

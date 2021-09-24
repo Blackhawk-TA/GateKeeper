@@ -26,23 +26,29 @@ void Listbox::draw() {
 		//Draw no items text
 		screen.text(
 			"No items",
-			font,
+			FONT,
 			Rect(
 				(rect.x + PADDING) * TILE_SIZE,
-				static_cast<int>(rect.y + PADDING) * TILE_SIZE + font.char_h / 2,
+				static_cast<int>(rect.y + PADDING) * TILE_SIZE + FONT.char_h / 2,
 				rect.w * TILE_SIZE,
 				TILE_SIZE
 			)
 		);
 	} else {
 		//Draw Item names
+		std::string item_text;
 		for (auto i = 0u; i < items.size(); i++) {
+			if (items[i].amount > 0) {
+				item_text = std::to_string(items[i].amount) + "x " + items[i].name;
+			} else {
+				item_text = items[i].name;
+			}
 			screen.text(
-				items[i].name,
-				font,
+				item_text,
+				FONT,
 				Rect(
 					(rect.x + PADDING) * TILE_SIZE,
-					static_cast<int>(rect.y + i + PADDING) * TILE_SIZE + font.char_h / 2,
+					static_cast<int>(rect.y + i + PADDING) * TILE_SIZE + FONT.char_h / 2,
 					rect.w * TILE_SIZE,
 					TILE_SIZE
 				)
@@ -130,4 +136,36 @@ void Listbox::remove_item(uint8_t index) {
 			counter++;
 		}
 	}
+}
+
+/**
+ * Adds either a new item to the list or increments the amount of an existing item if it doesn't exceed the maximum
+ * @param item The item that should be added
+ * @return True if the item could be added, else false
+ */
+bool Listbox::add_item(Listbox::Item &item) {
+	auto it = items.begin();
+	bool found = false;
+	bool success = false;
+
+	//Increment amount if item already exists and the amount is lower than the max. allowed
+	while (!found && it != items.end()) {
+		if (it->name == item.name) {
+			if (it->amount < MAX_ITEMS) {
+				it->amount++;
+				success = true;
+			}
+			found = true;
+		} else {
+			it++;
+		}
+	}
+
+	//Add item to the end of the list
+	if (!found) {
+		items.push_back(item);
+		success = true;
+	}
+
+	return success;
 }

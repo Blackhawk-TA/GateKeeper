@@ -11,7 +11,7 @@ namespace inventory {
 	inline std::vector<Listbox::Item> items;
 
 	void init();
-	void add_item(Listbox::Item &item);
+	bool add_item(Listbox::Item item);
 	void open();
 	void close();
 	bool is_open();

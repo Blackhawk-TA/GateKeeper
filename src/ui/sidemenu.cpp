@@ -17,6 +17,7 @@ void sidemenu::init() {
 			"",
 			"",
 			false,
+			0,
 			[] {
 				inventory::open();
 				sidemenu::close();
@@ -29,6 +30,7 @@ void sidemenu::init() {
 			"Toggled fps counter.",
 			"",
 			false,
+			0,
 			[] {
 				overlay::show_fps = !overlay::show_fps;
 				return Listbox::Tooltip::SUCCESS;
@@ -40,6 +42,7 @@ void sidemenu::init() {
 			"Successfully saved!",
 			"Could not save the game.",
 			false,
+			0,
 			[] {
 				std::cout << "SAVE" << std::endl; //TODO implement
 				return Listbox::Tooltip::SUCCESS;
@@ -51,6 +54,7 @@ void sidemenu::init() {
 			"",
 			"",
 			false,
+			0,
 			[] {
 				sidemenu::close();
 				return Listbox::Tooltip::SUPPRESS;
