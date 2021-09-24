@@ -14,7 +14,7 @@ Listbox::Listbox(Rect rect, std::vector<Item> &items) : Box(rect) {
 
 	//Sort items list alphabetically
 	std::sort(Listbox::items.begin(), Listbox::items.end(), [] (Listbox::Item &item1, Listbox::Item &item2){
-		return item1.amount > 0 && item2.amount > 0 && item1.name < item2.name;
+		return item1.amount > 0 && item1.name < item2.name;
 	});
 }
 
