@@ -14,6 +14,7 @@ set(PROJECT_SOURCE
         src/game_objects/stargate.cpp src/game_objects/stargate.hpp
         src/game.cpp src/game.hpp
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
+        src/items/gate_part.hpp
         src/player.cpp src/player.hpp
         src/ui/controls/box.cpp src/ui/controls/box.hpp
         src/ui/controls/listbox.cpp src/ui/controls/listbox.hpp
