@@ -9,6 +9,7 @@
 #include "handlers/stargate_handler.hpp"
 #include "ui/sidemenu.hpp"
 #include "ui/inventory.hpp"
+#include "items/items.hpp"
 
 using namespace blit;
 
@@ -117,6 +118,8 @@ void update(uint32_t time) {
 			inventory::close();
 		} else if (buttons & changed & Button::MENU) {
 			inventory::close();
+		} else if (buttons & changed & Button::X) {
+			inventory::add_item(inventory_item::create_gate_part());
 		}
 	} else {
 		if (buttons & Button::DPAD_UP) {

@@ -122,6 +122,10 @@ void Listbox::update_tooltip() {
 	}
 }
 
+/**
+ * Removes item from the list if the amount is more than one, else delete the entire item
+ * @param index The index at which the item should be removed
+ */
 void Listbox::remove_item(uint8_t index) {
 	auto it = items.begin();
 	bool found = false;
@@ -129,7 +133,11 @@ void Listbox::remove_item(uint8_t index) {
 
 	while (!found && it != items.end()) {
 		if (counter == index) {
-			it = items.erase(it);
+			if (it->amount > 1) {
+				it->amount--;
+			} else {
+				it = items.erase(it);
+			}
 			found = true;
 		} else {
 			it++;

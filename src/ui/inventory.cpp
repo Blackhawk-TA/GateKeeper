@@ -5,12 +5,12 @@
 #include "inventory.hpp"
 #include "sidemenu.hpp"
 #include "../handlers/stargate_handler.hpp"
-#include "../items/gate_part.hpp"
+#include "../items/items.hpp"
 
 void inventory::init() {
 	control = nullptr;
 	items = {
-		inventory_item::gate_part,
+		inventory_item::create_gate_part(),
 		Listbox::Item{
 			"EXIT",
 			"Press A to go back to the menu.",

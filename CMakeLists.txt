@@ -12,7 +12,8 @@ set(PROJECT_SOURCE
         src/engine/transition.cpp src/engine/transition.hpp
         src/game.cpp src/game.hpp
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
-        src/items/gate_part.hpp
+        src/items/items.hpp
+        src/items/gate_part.cpp
         src/map_objects/building.cpp src/map_objects/building.hpp
         src/map_objects/stargate.cpp src/map_objects/stargate.hpp
         src/player.cpp src/player.hpp
