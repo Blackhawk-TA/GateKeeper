@@ -11,6 +11,11 @@ Listbox::Listbox(Rect rect, std::vector<Item> &items) : Box(rect) {
 	cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
 	tooltip = new Textbox("");
 	update_tooltip();
+
+	//Sort items list alphabetically
+	std::sort(Listbox::items.begin(), Listbox::items.end(), [] (Listbox::Item &item1, Listbox::Item &item2){
+		return item1.amount > 0 && item2.amount > 0 && item1.name < item2.name;
+	});
 }
 
 Listbox::~Listbox() {
