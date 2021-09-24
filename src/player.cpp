@@ -6,11 +6,11 @@
 #include "player.hpp"
 #include "engine/camera.hpp"
 #include "engine/map.hpp"
-#include "game_objects/building.hpp"
+#include "map_objects/building.hpp"
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"
-#include "game_objects/stargate.hpp"
+#include "map_objects/stargate.hpp"
 
 bool Player::is_moving = false;
 Timer *Player::animation_timer;

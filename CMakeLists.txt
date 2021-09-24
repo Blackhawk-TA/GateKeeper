@@ -10,11 +10,11 @@ set(PROJECT_SOURCE
         src/engine/flags.cpp src/engine/flags.hpp
         src/engine/map.cpp src/engine/map.hpp
         src/engine/transition.cpp src/engine/transition.hpp
-        src/game_objects/building.cpp src/game_objects/building.hpp
-        src/game_objects/stargate.cpp src/game_objects/stargate.hpp
         src/game.cpp src/game.hpp
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/items/gate_part.hpp
+        src/map_objects/building.cpp src/map_objects/building.hpp
+        src/map_objects/stargate.cpp src/map_objects/stargate.hpp
         src/player.cpp src/player.hpp
         src/ui/controls/box.cpp src/ui/controls/box.hpp
         src/ui/controls/listbox.cpp src/ui/controls/listbox.hpp
