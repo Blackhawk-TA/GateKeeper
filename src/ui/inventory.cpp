@@ -36,6 +36,7 @@ void inventory::open() {
 }
 
 void inventory::close() {
+	items = control->get_items(); //Update item list on close
 	delete control;
 	control = nullptr;
 }

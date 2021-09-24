@@ -169,3 +169,7 @@ bool Listbox::add_item(Listbox::Item &item) {
 
 	return success;
 }
+
+std::vector<Listbox::Item> Listbox::get_items() {
+	return items;
+}
