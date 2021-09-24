@@ -6,7 +6,7 @@
 #include "player.hpp"
 #include "engine/camera.hpp"
 #include "engine/map.hpp"
-#include "building.hpp"
+#include "game_objects/building.hpp"
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"

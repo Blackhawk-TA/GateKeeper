@@ -3,8 +3,8 @@
 //
 
 #pragma once
-#include "utils/utils.hpp"
-#include "engine/map.hpp"
+#include "../utils/utils.hpp"
+#include "../engine/map.hpp"
 
 using namespace blit;
 

@@ -6,11 +6,11 @@ project(32blit-rpg)
 
 # Add your sources here (adding headers is optional, but helps some CMake generators)
 set(PROJECT_SOURCE
-        src/building.cpp src/building.hpp
         src/engine/camera.cpp src/engine/camera.hpp
         src/engine/flags.cpp src/engine/flags.hpp
         src/engine/map.cpp src/engine/map.hpp
         src/engine/transition.cpp src/engine/transition.hpp
+        src/game_objects/building.cpp src/game_objects/building.hpp
         src/game_objects/stargate.cpp src/game_objects/stargate.hpp
         src/game.cpp src/game.hpp
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
