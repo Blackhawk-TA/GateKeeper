@@ -3,7 +3,6 @@
 //
 
 #pragma once
-
 #include "controls/listbox.hpp"
 
 namespace inventory {
@@ -11,7 +10,9 @@ namespace inventory {
 	inline std::vector<Listbox::Item> items;
 
 	void init();
+	void load(std::vector<Listbox::Item> loaded_items);
 	bool add_item(Listbox::Item item);
+	std::vector<Listbox::Item> get_items();
 	void open();
 	void close();
 	bool is_open();

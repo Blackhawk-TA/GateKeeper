@@ -47,6 +47,8 @@ public:
 	void draw();
 	void update_animation();
 	bool repair();
+	void set_broken(bool value);
+	bool is_broken() const;
 	Point get_entry_point();
 	StargateAddresses get_destination();
 	map::MapSections get_map_section();

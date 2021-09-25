@@ -10,6 +10,7 @@ using namespace blit;
 namespace camera {
 	void init(Point start_position);
 	bool is_moving();
+	Point get_player_position();
 	Point get_world_position();
 	Point get_screen_position();
 	void set_position(Point position);

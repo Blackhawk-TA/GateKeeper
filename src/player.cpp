@@ -13,18 +13,19 @@
 #include "map_objects/stargate.hpp"
 
 bool Player::is_moving = false;
+Player::MovementDirection Player::current_direction;
 Timer *Player::animation_timer;
 uint16_t Player::sprite_index = 0;
 std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 
 //Camera is scaled by the factor of 100 to prevent rounding issues
-Player::Player() {
+Player::Player(MovementDirection direction) {
 	Player::position = get_screen_tiles() / 2;
 	Player::characters = Surface::load(asset_characters);
 	Player::spritesheet_size = get_spritesheet_size(Player::characters->bounds);
 
 	//Set player animation tiles
-	Player::current_direction = MovementDirection::DOWN;
+	Player::current_direction = direction;
 	Player::animation_sprites = movement_sprites.at(Player::current_direction);
 	Player::sprite_index = animation_sprites[0];
 
@@ -166,4 +167,8 @@ void Player::gate_teleport(Stargate *destination_gate) {
 	camera::set_position(teleport_destination);
 	set_direction(MovementDirection::DOWN);
 	stargate_handler::update_states(teleport_destination);
+}
+
+Player::MovementDirection Player::get_direction() {
+	return current_direction;
 }

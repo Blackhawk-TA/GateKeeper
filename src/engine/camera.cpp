@@ -23,6 +23,10 @@ bool camera::is_moving() {
 	return moving;
 }
 
+Point camera::get_player_position() {
+	return camera_position / camera_scale + get_screen_tiles() / 2;
+}
+
 Point camera::get_world_position() {
 	return camera_position / camera_scale;
 }

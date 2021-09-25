@@ -18,9 +18,10 @@ public:
 		RIGHT = 4
 	};
 
-	explicit Player();
+	explicit Player(MovementDirection direction);
 	void draw();
 	void move(MovementDirection direction);
+	static MovementDirection get_direction();
 	static void stop_movement();
 
 private:
@@ -43,11 +44,11 @@ private:
 	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
 	static bool is_moving;
 	static Timer *animation_timer;
+	static MovementDirection current_direction;
 
 	Surface *characters;
 	Point position;
 	Size spritesheet_size;
-	MovementDirection current_direction;
 
 	static void animate(Timer &timer);
 	static void building_teleport(uint8_t building_id, Point next_position);

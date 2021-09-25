@@ -3,6 +3,8 @@
 //
 
 #include "inventory.hpp"
+
+#include <utility>
 #include "sidemenu.hpp"
 #include "../handlers/stargate_handler.hpp"
 #include "../items/items.hpp"
@@ -10,25 +12,25 @@
 void inventory::init() {
 	control = nullptr;
 	items = {
-		inventory_item::create_gate_part(),
-		Listbox::Item{
-			"EXIT",
-			"Press A to go back to the menu.",
-			"",
-			"",
-			false,
-			0,
-			[] {
-				inventory::close();
-				sidemenu::open();
-				return Listbox::Tooltip::SUPPRESS;
-			}
-		}
+		inventory_item::create_item(inventory_item::GATE_PART),
+		inventory_item::create_item(inventory_item::EXIT),
 	};
+}
+
+/**
+ * Load a inventory that was stored in the save game
+ * @param loaded_items The stored items from the save game
+ */
+void inventory::load(std::vector<Listbox::Item> loaded_items) {
+	items = std::move(loaded_items);
 }
 
 bool inventory::add_item(Listbox::Item item) {
 	return control->add_item(item);
+}
+
+std::vector<Listbox::Item> inventory::get_items() {
+	return items;
 }
 
 void inventory::open() {

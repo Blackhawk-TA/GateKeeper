@@ -11,8 +11,9 @@ using namespace blit;
 constexpr uint8_t TILE_SIZE = 16;
 
 enum StargateAddresses {
-	GRASSLAND = 1,
-	WINTER = 2
+	GRASSLAND = 0,
+	WINTER = 1,
+	COUNTER = 2
 };
 
 bool sprite_rect_in_screen(Point &position, const Size &size, Point &camera_position_world);

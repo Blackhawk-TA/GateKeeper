@@ -2,15 +2,16 @@
 // Created by daniel on 21.09.21.
 //
 
-#include <iostream>
 #include "sidemenu.hpp"
 #include "overlay.hpp"
 #include "controls/listbox.hpp"
 #include "inventory.hpp"
+#include "../utils/savegame.hpp"
 
 void sidemenu::init() {
 	control = nullptr;
 	items = {
+		//TODO extract
 		Listbox::Item{
 			"ITEMS",
 			"Press A to show items, press B to return to menu.",
@@ -44,22 +45,11 @@ void sidemenu::init() {
 			false,
 			0,
 			[] {
-				std::cout << "SAVE" << std::endl; //TODO implement
+				savegame::save();
 				return Listbox::Tooltip::SUCCESS;
 			}
 		},
-		Listbox::Item{
-			"EXIT",
-			"Press A to exit the menu.",
-			"",
-			"",
-			false,
-			0,
-			[] {
-				sidemenu::close();
-				return Listbox::Tooltip::SUPPRESS;
-			}
-		}
+		inventory_item::create_item(inventory_item::EXIT)
 	};
 }
 

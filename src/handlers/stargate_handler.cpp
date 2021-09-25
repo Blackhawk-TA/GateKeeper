@@ -14,6 +14,15 @@ void stargate_handler::init() {
 	it = stargates.begin();
 }
 
+/**
+ * Sets the stargates map according to the loaded save game
+ * @param saved_stargates The stored stargates from the save game
+ */
+void stargate_handler::load(std::map<StargateAddresses, Stargate> saved_stargates) {
+	stargates = std::move(saved_stargates);
+	it = stargates.begin();
+}
+
 bool stargate_handler::check_collisions(Point next_position) {
 	bool collision = false;
 
@@ -80,11 +89,9 @@ void stargate_handler::update_animations() {
 
 bool stargate_handler::player_repair_gate() {
 	bool repaired = false;
-	Point player_position;
 
 	while (!repaired && it != stargates.end()) {
-		player_position = camera::get_world_position() + get_screen_tiles() / 2;
-		if (it->second.get_entry_point() == player_position && it->second.repair()) {
+		if (it->second.get_entry_point() == camera::get_player_position() && it->second.repair()) {
 			repaired = true;
 		} else {
 			it++;
@@ -94,4 +101,8 @@ bool stargate_handler::player_repair_gate() {
 	it = stargates.begin();
 
 	return repaired;
+}
+
+std::map<StargateAddresses, Stargate> stargate_handler::get_stargates() {
+	return stargates;
 }

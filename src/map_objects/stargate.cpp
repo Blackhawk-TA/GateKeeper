@@ -13,7 +13,6 @@ Stargate::Stargate(map::MapSections map_section, StargateAddresses destination, 
 	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	activation_start_time = 0;
 
-	//TODO load stored data if it was repaired
 	if (broken) {
 		set_state(BROKEN);
 	} else {
@@ -146,7 +145,7 @@ void Stargate::set_state(Stargate::RenderStates new_state) {
 	state = new_state;
 }
 
-bool Stargate::repair() { //TODO save repaired state
+bool Stargate::repair() {
 	if (broken) {
 		broken = false;
 		set_state(ACTIVATING);
@@ -154,6 +153,27 @@ bool Stargate::repair() { //TODO save repaired state
 	}
 
 	return false;
+}
+
+/**
+ * Sets stargate broken property and stargate state depending on player position.
+ * Used for loading save games.
+ * @param value The broken value
+ */
+void Stargate::set_broken(bool value) {
+	Point player_position = camera::get_player_position();
+	broken = value;
+	if (broken) {
+		set_state(BROKEN);
+	} else if (player_position == position + RELATIVE_ACTIVATION_POINT || player_position == position + RELATIVE_PRE_ENTRY_POINT) {
+		set_state(ACTIVE);
+	} else {
+		set_state(INACTIVE);
+	}
+}
+
+bool Stargate::is_broken() const {
+	return broken;
 }
 
 /**

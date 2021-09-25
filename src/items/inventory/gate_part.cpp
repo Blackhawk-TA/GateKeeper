@@ -2,7 +2,7 @@
 // Created by daniel on 24.09.21.
 //
 
-#include "items.hpp"
+#include "../items.hpp"
 
 Listbox::Item inventory_item::create_gate_part() {
 	return Listbox::Item{

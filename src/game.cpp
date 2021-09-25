@@ -10,6 +10,7 @@
 #include "ui/sidemenu.hpp"
 #include "ui/inventory.hpp"
 #include "items/items.hpp"
+#include "utils/savegame.hpp"
 
 using namespace blit;
 
@@ -34,12 +35,9 @@ void init() {
 	flags::set_flag(flags::TileFlags::DOOR, {141, 517, 773, 965, 1573});
 	map::load_section(map::MapSections::GRASSLAND);
 
-	Point start_position = Point(22, 12);
-	camera::init(start_position);
-	stargate_handler::init();
 	sidemenu::init();
-	inventory::init();
-	player = new Player();
+
+	player = savegame::load();
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -119,7 +117,7 @@ void update(uint32_t time) {
 		} else if (buttons & changed & Button::MENU) {
 			inventory::close();
 		} else if (buttons & changed & Button::X) {
-			inventory::add_item(inventory_item::create_gate_part());
+			inventory::add_item(inventory_item::create_item(inventory_item::GATE_PART));
 		}
 	} else {
 		if (buttons & Button::DPAD_UP) {
