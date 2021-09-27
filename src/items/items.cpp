@@ -11,6 +11,9 @@ Listbox::Item inventory_item::create_inventory_item(inventory_item::INVENTORY_IT
 		case INVENTORY_ITEM::GATE_PART:
 			item = create_gate_part();
 			break;
+		case INVENTORY_ITEM::EXIT_INVENTORY:
+			item = create_exit_entry();
+			break;
 		case INVENTORY_ITEM::INVENTORY_COUNTER: //Do nothing, this is the item counter
 			break;
 	}

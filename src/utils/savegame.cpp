@@ -32,15 +32,19 @@ std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, inventory
 
 	for (auto i = 0u; i < items.size(); i++) {
 		item_template = inventory_item::create_inventory_item(static_cast<inventory_item::INVENTORY_ITEM>(i));
-		decompressed_items.emplace_back(Listbox::Item{
-			item_template.name,
-			item_template.tooltip,
-			item_template.callback_tooltip,
-			item_template.callback_fail_tooltip,
-			item_template.single_use,
-			items[i].amount,
-			item_template.callback
-		});
+
+		//Include only items that have an amount > 0 or are a menu item
+		if (items[i].amount > 0 || (items[i].amount == 0 && !item_template.single_use)) {
+			decompressed_items.emplace_back(Listbox::Item{
+				item_template.name,
+				item_template.tooltip,
+				item_template.callback_tooltip,
+				item_template.callback_fail_tooltip,
+				item_template.single_use,
+				items[i].amount,
+				item_template.callback
+			});
+		}
 	}
 
 	return decompressed_items;

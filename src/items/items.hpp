@@ -12,6 +12,7 @@
 namespace inventory_item {
 	enum INVENTORY_ITEM {
 		GATE_PART = 0,
+		EXIT_INVENTORY = 1,
 		INVENTORY_COUNTER = 2
 	};
 

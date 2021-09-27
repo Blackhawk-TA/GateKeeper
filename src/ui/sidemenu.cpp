@@ -5,7 +5,6 @@
 #include "sidemenu.hpp"
 #include "overlay.hpp"
 #include "controls/listbox.hpp"
-#include "inventory.hpp"
 #include "../utils/savegame.hpp"
 
 void sidemenu::init() {
