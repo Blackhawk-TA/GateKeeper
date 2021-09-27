@@ -4,22 +4,31 @@
 
 #include "listbox.hpp"
 
-Listbox::Listbox(Rect rect, std::vector<Item> &items) : Box(rect) {
+Listbox::Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting) : Box(rect) {
 	Listbox::rect = rect;
 	Listbox::items = items;
+	Listbox::enable_sorting = enable_sorting;
 	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
 	tooltip = new Textbox("");
-	update_tooltip();
 
-	//Sort items list alphabetically
-	std::sort(Listbox::items.begin(), Listbox::items.end(), [] (Listbox::Item &item1, Listbox::Item &item2){
-		return item1.amount > 0 && item1.name < item2.name;
-	});
+	update_tooltip();
+	sort_list();
 }
 
 Listbox::~Listbox() {
 	delete tooltip;
+}
+
+/**
+ * Sorts the list alphabetically, if sorting is enabled
+ */
+void Listbox::sort_list() {
+	if (!enable_sorting) return;
+
+	std::sort(Listbox::items.begin(), Listbox::items.end(), [] (Listbox::Item &item1, Listbox::Item &item2){
+		return item1.amount > 0 && item1.name < item2.name;
+	});
 }
 
 void Listbox::draw() {
@@ -177,6 +186,7 @@ bool Listbox::add_item(Listbox::Item &item) {
 	//Add item to the end of the list
 	if (!found) {
 		items.push_back(item);
+		sort_list();
 		success = true;
 	}
 

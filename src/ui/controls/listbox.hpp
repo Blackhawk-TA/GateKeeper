@@ -24,7 +24,7 @@ public:
 		std::function<Tooltip()> callback;
 	};
 
-	explicit Listbox(Rect rect, std::vector<Item> &items);
+	explicit Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting = true);
 	~Listbox();
 	void draw();
 	void cursor_up();
@@ -41,10 +41,12 @@ private:
 	const uint8_t MAX_ITEMS = 99;
 	Rect rect;
 	std::vector<Item> items;
+	bool enable_sorting;
 	Size spritesheet_size;
 	Point cursor_position;
 	Textbox *tooltip;
 
+	void sort_list();
 	void update_tooltip();
 	void remove_item(uint8_t index);
 };
