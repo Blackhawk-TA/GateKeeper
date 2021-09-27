@@ -14,7 +14,10 @@ set(PROJECT_SOURCE
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
-        src/items/menu/exit.cpp
+        src/items/menu/exit_entry.cpp
+        src/items/menu/inventory.cpp
+        src/items/menu/save_entry.cpp
+        src/items/menu/show_fps_entry.cpp
         src/map_objects/building.cpp src/map_objects/building.hpp
         src/map_objects/stargate.cpp src/map_objects/stargate.hpp
         src/player.cpp src/player.hpp

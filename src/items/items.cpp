@@ -4,17 +4,37 @@
 
 #include "items.hpp"
 
-Listbox::Item inventory_item::create_item(inventory_item::ITEM_TYPES item_type) {
+Listbox::Item inventory_item::create_inventory_item(inventory_item::INVENTORY_ITEM item_type) {
 	Listbox::Item item;
 
 	switch (item_type) {
-		case ITEM_TYPES::GATE_PART:
+		case INVENTORY_ITEM::GATE_PART:
 			item = create_gate_part();
 			break;
-		case ITEM_TYPES::EXIT:
-			item = create_exit();
+		case INVENTORY_ITEM::INVENTORY_COUNTER: //Do nothing, this is the item counter
 			break;
-		case ITEM_TYPES::COUNTER: //Do nothing, this is the item counter
+	}
+
+	return item;
+}
+
+Listbox::Item inventory_item::create_menu_item(inventory_item::MENU_ITEM item_type) {
+	Listbox::Item item;
+
+	switch (item_type) {
+		case MENU_ITEM::INVENTORY:
+			item = create_inventory_entry();
+			break;
+		case MENU_ITEM::SHOW_FPS:
+			item = create_show_fps_entry();
+			break;
+		case MENU_ITEM::SAVE:
+			item = create_save_entry();
+			break;
+		case MENU_ITEM::EXIT:
+			item = create_exit_entry();
+			break;
+		case MENU_ITEM::MENU_COUNTER: //Do nothing, this is the item counter
 			break;
 	}
 

@@ -10,14 +10,25 @@
  * Contains the create function for all inventory items
  */
 namespace inventory_item {
-	//TODO split in menu and inventory items
-	enum ITEM_TYPES {
+	enum INVENTORY_ITEM {
 		GATE_PART = 0,
-		EXIT = 1,
-		COUNTER = 2
+		INVENTORY_COUNTER = 2
 	};
 
-	Listbox::Item create_item(ITEM_TYPES item_type);
+	enum MENU_ITEM {
+		INVENTORY = 0,
+		SHOW_FPS = 1,
+		SAVE = 2,
+		EXIT = 3,
+		MENU_COUNTER = 4
+	};
+
+	Listbox::Item create_inventory_item(INVENTORY_ITEM item_type);
+	Listbox::Item create_menu_item(MENU_ITEM item_type);
+
 	Listbox::Item create_gate_part();
-	Listbox::Item create_exit();
+	Listbox::Item create_inventory_entry();
+	Listbox::Item create_show_fps_entry();
+	Listbox::Item create_save_entry();
+	Listbox::Item create_exit_entry();
 }

@@ -5,15 +5,13 @@
 #include "inventory.hpp"
 
 #include <utility>
-#include "sidemenu.hpp"
-#include "../handlers/stargate_handler.hpp"
 #include "../items/items.hpp"
 
 void inventory::init() {
 	control = nullptr;
 	items = {
-		inventory_item::create_item(inventory_item::GATE_PART),
-		inventory_item::create_item(inventory_item::EXIT),
+		inventory_item::create_inventory_item(inventory_item::INVENTORY_ITEM::GATE_PART),
+		inventory_item::create_menu_item(inventory_item::MENU_ITEM::EXIT)
 	};
 }
 

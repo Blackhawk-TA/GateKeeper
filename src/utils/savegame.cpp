@@ -11,13 +11,13 @@
  * @return The compressed item array
  */
  //TODO not working when item amount is 0, maybe create own struct for menu items, it cant differ
-std::array<savegame::Item, inventory_item::ITEM_TYPES::COUNTER> compress_items(std::vector<Listbox::Item> &items) {
-	std::array<savegame::Item, inventory_item::ITEM_TYPES::COUNTER> compressed_items = {};
+std::array<savegame::Item, inventory_item::INVENTORY_ITEM::INVENTORY_COUNTER> compress_items(std::vector<Listbox::Item> &items) {
+	std::array<savegame::Item, inventory_item::INVENTORY_ITEM::INVENTORY_COUNTER> compressed_items = {};
 
 	for (auto i = 0u; i < items.size(); i++) {
 		if (items[i].amount > 0) {
 			compressed_items[i] = savegame::Item{
-				static_cast<inventory_item::ITEM_TYPES>(i),
+				static_cast<inventory_item::INVENTORY_ITEM>(i),
 				items[i].amount
 			};
 		}
@@ -26,12 +26,12 @@ std::array<savegame::Item, inventory_item::ITEM_TYPES::COUNTER> compress_items(s
 	return compressed_items;
 }
 
-std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, inventory_item::ITEM_TYPES::COUNTER> &items) {
+std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, inventory_item::INVENTORY_COUNTER> &items) {
 	std::vector<Listbox::Item> decompressed_items = {};
 	Listbox::Item item_template;
 
 	for (auto i = 0u; i < items.size(); i++) {
-		item_template = inventory_item::create_item(static_cast<inventory_item::ITEM_TYPES>(i));
+		item_template = inventory_item::create_inventory_item(static_cast<inventory_item::INVENTORY_ITEM>(i));
 		decompressed_items.emplace_back(Listbox::Item{
 			item_template.name,
 			item_template.tooltip,

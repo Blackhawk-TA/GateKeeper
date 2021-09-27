@@ -11,45 +11,10 @@
 void sidemenu::init() {
 	control = nullptr;
 	items = {
-		//TODO extract
-		Listbox::Item{
-			"ITEMS",
-			"Press A to show items, press B to return to menu.",
-			"",
-			"",
-			false,
-			0,
-			[] {
-				inventory::open();
-				sidemenu::close();
-				return Listbox::Tooltip::SUPPRESS;
-			}
-		},
-		Listbox::Item{
-			"SHOW FPS",
-			"Press A to toggle the fps counter.",
-			"Toggled fps counter.",
-			"",
-			false,
-			0,
-			[] {
-				overlay::show_fps = !overlay::show_fps;
-				return Listbox::Tooltip::SUCCESS;
-			}
-		},
-		Listbox::Item{
-			"SAVE",
-			"Press A to save the game.",
-			"Successfully saved!",
-			"Could not save the game.",
-			false,
-			0,
-			[] {
-				savegame::save();
-				return Listbox::Tooltip::SUCCESS;
-			}
-		},
-		inventory_item::create_item(inventory_item::EXIT)
+		inventory_item::create_menu_item(inventory_item::INVENTORY),
+		inventory_item::create_menu_item(inventory_item::SHOW_FPS),
+		inventory_item::create_menu_item(inventory_item::SAVE),
+		inventory_item::create_menu_item(inventory_item::EXIT)
 	};
 }
 
