@@ -4,6 +4,7 @@
 
 #include "savegame.hpp"
 #include "../ui/inventory.hpp"
+#include "../ui/overlay.hpp"
 
 /**
  * Parses the item vector into an array, because vector cannot be saved directly
@@ -96,6 +97,7 @@ void savegame::save() {
 
 	//Save and compress data which will be saved
 	auto game_data = GameData{
+		overlay::show_fps,
 		map::get_section(),
 		camera::get_player_position(),
 		Player::get_direction(),
@@ -114,6 +116,9 @@ Player *savegame::load() {
 
 	//Load data from save game
 	if (save_found) {
+		//Load fps setting
+		overlay::show_fps = save_data.show_fps;
+
 		//Load position and direction
 		map::load_section(save_data.map_section);
 		camera::init(save_data.camera_position);

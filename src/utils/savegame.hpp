@@ -15,6 +15,7 @@ namespace savegame {
 	};
 
 	struct GameData {
+		bool show_fps;
 		map::MapSections map_section;
 		Point camera_position;
 		Player::MovementDirection player_direction;
