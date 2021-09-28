@@ -27,7 +27,14 @@ void Listbox::sort_list() {
 	if (!enable_sorting) return;
 
 	std::sort(Listbox::items.begin(), Listbox::items.end(), [] (Listbox::Item &item1, Listbox::Item &item2){
-		return item1.amount > 0 && item1.name < item2.name;
+		//Move items with the amount 0 to the bottom of the list
+		if (item1.amount == 0) { //Move item down in list
+			return false;
+		} else if (item2.amount == 0) { //Keep position in list
+			return true;
+		} else {
+			return item1.name < item2.name; //Sort alphabetically
+		}
 	});
 }
 
