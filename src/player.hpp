@@ -34,10 +34,10 @@ private:
 
 	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites = {
-		{UP,    {48, 49, 50, 51}},
-		{DOWN,  {0,  1,  2,  3}},
-		{LEFT,  {16, 17, 18, 19}},
-		{RIGHT, {32, 33, 34, 35}}
+		{UP,    {118, 119, 120, 121}},
+		{DOWN,  {70,  71,  72,  73}},
+		{LEFT,  {102, 103, 104, 105}},
+		{RIGHT, {86, 87, 88, 89}}
 	};
 
 	static uint16_t sprite_index;

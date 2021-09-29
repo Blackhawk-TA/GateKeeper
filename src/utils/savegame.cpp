@@ -11,7 +11,6 @@
  * @param items The item vector to be compressed
  * @return The compressed item array
  */
- //TODO not working when item amount is 0, maybe create own struct for menu items, it cant differ
 std::array<savegame::Item, inventory_item::INVENTORY_ITEM::INVENTORY_COUNTER> compress_items(std::vector<Listbox::Item> &items) {
 	std::array<savegame::Item, inventory_item::INVENTORY_ITEM::INVENTORY_COUNTER> compressed_items = {};
 
