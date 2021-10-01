@@ -130,6 +130,8 @@ void update(uint32_t time) {
 			player->move(player->RIGHT);
 		} else if (buttons & changed & Button::MENU) {
 			sidemenu::open();
+		} else if (buttons & changed & Button::A) {
+			player->attack();
 		}
 	}
 

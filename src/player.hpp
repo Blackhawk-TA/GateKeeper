@@ -20,6 +20,7 @@ public:
 
 	explicit Player(MovementDirection direction);
 	void draw();
+	void attack();
 	void move(MovementDirection direction);
 	static MovementDirection get_direction();
 	static void stop_movement();
@@ -33,24 +34,33 @@ private:
 	};
 
 	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
-	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites = {
-		{UP,    {118, 119, 120, 121}},
-		{DOWN,  {70,  71,  72,  73}},
-		{LEFT,  {102, 103, 104, 105}},
-		{RIGHT, {86, 87, 88, 89}}
+	static const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
+
+	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> attack_sprites = {
+		{UP,    {108, 111, 114, 117}},
+		{DOWN,  {0,   3,   6,   9}},
+		{LEFT,  {72,  75,  78,  81}},
+		{RIGHT, {36,  39,  42,  45}},
 	};
 
-	static uint16_t sprite_index;
+	static uint16_t sprite_id;
+	static uint8_t sprite_index;
 	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
+	static bool is_attacking;
 	static bool is_moving;
 	static Timer *animation_timer;
+	static Timer *attack_timer;
 	static MovementDirection current_direction;
 
+	const uint8_t ATTACK_TILE_SIZE = 3;
 	Surface *characters;
+	Surface *player_attack;
 	Point position;
 	Size spritesheet_size;
+	Size attack_spritesheet_size;
 
 	static void animate(Timer &timer);
+	static void animate_attack(Timer &timer);
 	static void building_teleport(uint8_t building_id, Point next_position);
 	void gate_teleport(Stargate *destination_gate);
 	void set_direction(MovementDirection direction);
