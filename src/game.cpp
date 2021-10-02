@@ -132,6 +132,8 @@ void update(uint32_t time) {
 			sidemenu::open();
 		} else if (buttons & changed & Button::A) {
 			player->attack();
+		} else if (buttons & changed & Button::B) {
+			player->evade();
 		}
 	}
 

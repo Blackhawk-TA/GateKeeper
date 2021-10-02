@@ -21,6 +21,7 @@ bool sprite_rect_in_screen(Point &position, const Size &size, Point &camera_posi
 Point screen_to_world(const Point &p);
 
 Point world_to_screen(const Point &p);
+Point world_to_screen(const Vec2 &p);
 Point world_to_screen(const float &x, const float &y);
 
 Size get_spritesheet_size(Size bounds);

@@ -30,6 +30,10 @@ Point world_to_screen(const Point &p) {
 	return Point(p.x * TILE_SIZE, p.y * TILE_SIZE);
 }
 
+Point world_to_screen(const Vec2 &p) {
+	return Point(std::ceil(p.x * TILE_SIZE), std::ceil(p.y * TILE_SIZE));
+}
+
 Point world_to_screen(const float &x, const float &y) {
 	return Point(std::ceil(x * TILE_SIZE), std::ceil(y * TILE_SIZE));
 }

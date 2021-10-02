@@ -21,6 +21,7 @@ public:
 	explicit Player(MovementDirection direction);
 	void draw();
 	void attack();
+	void evade();
 	void move(MovementDirection direction);
 	static MovementDirection get_direction();
 	static void stop_movement();
@@ -47,10 +48,13 @@ private:
 	static uint8_t sprite_index;
 	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
 	static bool is_attacking;
+	static bool is_evading;
 	static bool is_moving;
 	static Timer *animation_timer;
-	static Timer *attack_timer;
+	static Timer *action_timer;
 	static MovementDirection current_direction;
+	static Vec2 evasion_position_modifier;
+	static float evasion_modifier;
 
 	const uint8_t ATTACK_TILE_SIZE = 3;
 	Surface *characters;
@@ -60,8 +64,9 @@ private:
 	Size attack_spritesheet_size;
 
 	static void animate(Timer &timer);
-	static void animate_attack(Timer &timer);
+	static void animate_action(Timer &timer);
 	static void building_teleport(uint8_t building_id, Point next_position);
 	void gate_teleport(Stargate *destination_gate);
 	void set_direction(MovementDirection direction);
+	static bool in_action();
 };

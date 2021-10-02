@@ -12,11 +12,19 @@
 
 bool Player::is_moving = false;
 bool Player::is_attacking = false;
+bool Player::is_evading = false;
+
 Player::MovementDirection Player::current_direction;
+
+Vec2 Player::evasion_position_modifier;
+float Player::evasion_modifier = 0;
+
 Timer *Player::animation_timer;
-Timer *Player::attack_timer;
+Timer *Player::action_timer;
+
 uint16_t Player::sprite_id = 0;
 uint8_t Player::sprite_index = 0;
+
 std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 const std::map<Player::MovementDirection, std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
 	{UP,    {118, 119, 120, 121}},
@@ -39,8 +47,12 @@ Player::Player(MovementDirection direction) {
 
 	animation_timer = new Timer();
 	animation_timer->init(animate, 175, -1);
-	attack_timer = new Timer();
-	attack_timer->init(animate_attack, 75, ANIMATION_SPRITE_COUNT + 1);
+	action_timer = new Timer();
+	action_timer->init(animate_action, 75, ANIMATION_SPRITE_COUNT + 1);
+}
+
+bool Player::in_action() {
+	return is_moving || is_evading || is_attacking || transition::in_progress();
 }
 
 void Player::animate(Timer &timer) {
@@ -53,28 +65,66 @@ void Player::animate(Timer &timer) {
 	}
 }
 
-void Player::animate_attack(Timer &timer) {
+void Player::animate_action(Timer &timer) {
 	if (timer.loop_count <= ANIMATION_SPRITE_COUNT) {
-		sprite_id = animation_sprites[sprite_index % ANIMATION_SPRITE_COUNT];
-		sprite_index++;
+		if (is_attacking) {
+			sprite_id = animation_sprites[sprite_index % ANIMATION_SPRITE_COUNT];
+			sprite_index++;
+		} else if (is_evading) {
+			if (timer.loop_count <= ANIMATION_SPRITE_COUNT / 2) {
+				evasion_modifier -= 0.25f;
+			} else {
+				evasion_modifier += 0.25f;
+			}
+
+			switch (current_direction) {
+				case UP:
+					evasion_position_modifier = Vec2(0, -evasion_modifier);
+					break;
+				case DOWN:
+					evasion_position_modifier = Vec2(0, evasion_modifier);
+					break;
+				case LEFT:
+					evasion_position_modifier = Vec2(-evasion_modifier, 0);
+					break;
+				case RIGHT:
+					evasion_position_modifier = Vec2(evasion_modifier, 0);
+					break;
+			}
+
+			sprite_index--;
+			sprite_id = animation_sprites[sprite_index % ANIMATION_SPRITE_COUNT];
+		}
 	} else {
 		animation_sprites = movement_sprites.at(current_direction);
 		sprite_id = animation_sprites[0];
 		sprite_index = 0;
 		is_attacking = false;
+		is_evading = false;
 		timer.stop();
 	}
 }
 
 void Player::attack() {
-	if (!is_attacking && !is_moving) {
+	if (!Player::in_action()) {
 		animation_sprites = attack_sprites.at(current_direction);
 		sprite_id = animation_sprites[0];
 		sprite_index = 0;
 		is_attacking = true;
-		if (!attack_timer->is_running()) {
-			attack_timer->start();
+		if (!action_timer->is_running()) {
+			action_timer->start();
 		}
+	}
+}
+
+//TODO check here if player bumps backwards into wall
+void Player::evade() {
+	if (!Player::in_action()) {
+		action_timer->start();
+		evasion_modifier = 0;
+		evasion_position_modifier = Vec2(0, 0);
+		sprite_index = ANIMATION_SPRITE_COUNT;
+		is_evading = true;
 	}
 }
 
@@ -92,7 +142,7 @@ void Player::move(MovementDirection direction) {
 	is_moving = true;
 
 	//Do not trigger a movement while another one is in progress
-	if (camera::is_moving() || is_attacking) {
+	if (camera::is_moving() || is_attacking || is_evading) {
 		return;
 	}
 
@@ -171,7 +221,7 @@ void Player::draw() {
 		screen.blit(
 			characters,
 			Rect((sprite_id % spritesheet_size.w) * TILE_SIZE, (sprite_id / spritesheet_size.h) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-			world_to_screen(position),
+			world_to_screen(position) + world_to_screen(evasion_position_modifier),
 			SpriteTransform::NONE
 		);
 	}
@@ -187,7 +237,7 @@ void Player::building_teleport(uint8_t building_id, Point next_position) {
 
 	if (next_position == building::connections[building_id].exterior) {
 		map::load_section(map::MapSections::INTERIOR);
-		destination = building::connections[building_id].interior;
+		destination = building::connections[building_id].interior - Point(0, 1);
 	} else if (next_position == building::connections[building_id].interior) {
 		map::load_section(map::MapSections::GRASSLAND);
 		Point door_offset = Point(0, 1); //Teleport player in front of the door instead of directly on it
