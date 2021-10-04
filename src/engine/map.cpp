@@ -110,7 +110,8 @@ void map::load_section(MapSections map_section) {
 	//Allocate memory for TileMap and copy it into memory
 	switch (map_section) {
 		case MapSections::DUNGEON:
-			tmx = nullptr;
+			tmx = (TMX_16 *) malloc(asset_dungeon_map_length);
+			memcpy(tmx, asset_dungeon_map, asset_dungeon_map_length);
 			break;
 		case MapSections::GRASSLAND:
 			tmx = (TMX_16 *) malloc(asset_grassland_map_length);

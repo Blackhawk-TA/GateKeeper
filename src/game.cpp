@@ -34,6 +34,7 @@ void init() {
 		1392, 1393, 1492, 1493, 1494, 1504, 1632, 1633, 1634, 1635, 1636, 1637, 2305
 	});
 	flags::set_flag(flags::TileFlags::DOOR, {141, 517, 773, 965, 1425, 1573});
+	flags::set_flag(flags::TileFlags::DEADLY, {});
 	map::load_section(map::MapSections::GRASSLAND);
 
 	sidemenu::init();

@@ -17,6 +17,10 @@ assets.cpp:
     name: grassland_map
     empty_tile: 0
     output_struct: true
+  assets/dungeon.tmx:
+    name: dungeon_map
+    empty_tile: 0
+    output_struct: true
   assets/interior.tmx:
     name: interior_map
     empty_tile: 0

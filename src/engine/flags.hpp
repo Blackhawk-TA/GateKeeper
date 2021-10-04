@@ -11,7 +11,8 @@ namespace flags {
 	enum TileFlags {
 		WALKABLE = 1,
 		DOOR = 2,
-		COUNTER = 3
+		DEADLY = 3,
+		COUNTER = 4
 	};
 
 	uint8_t get_flag(uint16_t tile_id);
