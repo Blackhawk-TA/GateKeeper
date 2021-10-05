@@ -33,7 +33,7 @@ void init() {
 		1222, 1223, 1229, 1230, 1231, 1263, 1264, 1265, 1285, 1286, 1287, 1293, 1294, 1295, 1327, 1328, 1329, 1391,
 		1392, 1393, 1492, 1493, 1494, 1504, 1632, 1633, 1634, 1635, 1636, 1637, 2305
 	});
-	flags::set_flag(flags::TileFlags::DOOR, {141, 517, 773, 965, 1425, 1573});
+	flags::set_flag(flags::TileFlags::ENTRY, {141, 294, 515, 517, 773, 965, 1425, 1573});
 	flags::set_flag(flags::TileFlags::DEADLY, {});
 	map::load_section(map::MapSections::GRASSLAND);
 

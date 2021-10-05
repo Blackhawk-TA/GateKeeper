@@ -5,7 +5,7 @@
 #include <assets.hpp>
 #include <iostream>
 #include "player.hpp"
-#include "map_objects/building.hpp"
+#include "utils/entry_registry.hpp"
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"
@@ -156,7 +156,7 @@ void Player::move(MovementDirection direction) {
 
 	//Move player according to tile flag of next position
 	Point next_position = camera::get_world_position() + position + movement;
-	uint8_t building_id;
+	uint8_t entry_id;
 
 	if (stargate_handler::check_collisions(next_position)) {
 		is_moving = false;
@@ -181,18 +181,18 @@ void Player::move(MovementDirection direction) {
 		case flags::TileFlags::WALKABLE:
 			camera::move(movement);
 			break;
-		case flags::TileFlags::DOOR:
-			building_id = building::get_id(next_position, map::get_section());
+		case flags::TileFlags::ENTRY:
+			entry_id = entry_registry::get_id(next_position, map::get_section());
 
 			//No building found, stop movement
-			if (building_id == 255) {
+			if (entry_id == 255) {
 				is_moving = false;
 				return;
 			}
 
 			//Teleport to position on different tile map
-			transition::start([building_id, next_position] {
-				building_teleport(building_id, next_position);
+			transition::start([entry_id, next_position] {
+				entry_teleport(entry_id, next_position);
 			});
 			camera::move(movement);
 			break;
@@ -232,16 +232,16 @@ void Player::draw() {
  * @param building_id The id of the building
  * @param next_position The position where the player will walk within the next move
  */
-void Player::building_teleport(uint8_t building_id, Point next_position) {
+void Player::entry_teleport(uint8_t building_id, Point next_position) {
 	Point destination;
+	entry_registry::Entry entry = entry_registry::connections[building_id];
 
-	if (next_position == building::connections[building_id].exterior) {
-		map::load_section(map::MapSections::INTERIOR);
-		destination = building::connections[building_id].interior - Point(0, 1);
-	} else if (next_position == building::connections[building_id].interior) {
-		map::load_section(map::MapSections::GRASSLAND);
-		Point door_offset = Point(0, 1); //Teleport player in front of the door instead of directly on it
-		destination = building::connections[building_id].exterior + door_offset;
+	if (next_position == entry.exterior) {
+		map::load_section(entry.interior_map);
+		destination = entry.interior - entry.interior_offset;
+	} else if (next_position == entry.interior) {
+		map::load_section(entry.exterior_map);
+		destination = entry.exterior + Point(0, 1); //On exit teleport player in front of the door instead of directly on it
 	}
 
 	camera::set_position(destination);

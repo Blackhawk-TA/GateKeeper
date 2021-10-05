@@ -10,7 +10,7 @@ using namespace blit;
 namespace flags {
 	enum TileFlags {
 		WALKABLE = 1,
-		DOOR = 2,
+		ENTRY = 2,
 		DEADLY = 3,
 		COUNTER = 4
 	};

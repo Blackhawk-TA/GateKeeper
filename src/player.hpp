@@ -65,7 +65,7 @@ private:
 
 	static void animate(Timer &timer);
 	static void animate_action(Timer &timer);
-	static void building_teleport(uint8_t building_id, Point next_position);
+	static void entry_teleport(uint8_t building_id, Point next_position);
 	void gate_teleport(Stargate *destination_gate);
 	void set_direction(MovementDirection direction);
 	static bool in_action();

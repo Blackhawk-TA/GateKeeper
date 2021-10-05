@@ -18,7 +18,6 @@ set(PROJECT_SOURCE
         src/items/menu/inventory.cpp
         src/items/menu/save_entry.cpp
         src/items/menu/show_fps_entry.cpp
-        src/map_objects/building.cpp src/map_objects/building.hpp
         src/map_objects/stargate.cpp src/map_objects/stargate.hpp
         src/player.cpp src/player.hpp
         src/ui/controls/box.cpp src/ui/controls/box.hpp
@@ -27,6 +26,7 @@ set(PROJECT_SOURCE
         src/ui/sidemenu.cpp src/ui/sidemenu.hpp
         src/ui/controls/textbox.cpp src/ui/controls/textbox.hpp
         src/ui/overlay.cpp src/ui/overlay.hpp
+        src/utils/entry_registry.cpp src/utils/entry_registry.hpp
         src/utils/savegame.cpp src/utils/savegame.hpp
         src/utils/utils.cpp src/utils/utils.hpp
 )
