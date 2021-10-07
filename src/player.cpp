@@ -3,7 +3,6 @@
 //
 
 #include <assets.hpp>
-#include <iostream>
 #include "player.hpp"
 #include "handlers/entry_handler.hpp"
 #include "engine/transition.hpp"
@@ -13,18 +12,13 @@
 bool Player::is_moving = false;
 bool Player::is_attacking = false;
 bool Player::is_evading = false;
-
 Player::MovementDirection Player::current_direction;
-
 Vec2 Player::evasion_position_modifier;
 float Player::evasion_modifier = 0;
-
 Timer *Player::animation_timer;
 Timer *Player::action_timer;
-
 uint16_t Player::sprite_id = 0;
 uint8_t Player::sprite_index = 0;
-
 std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 const std::map<Player::MovementDirection, std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
 	{UP,    {118, 119, 120, 121}},
@@ -57,8 +51,8 @@ bool Player::in_action() {
 
 void Player::animate(Timer &timer) {
 	if ((is_moving || camera::is_moving()) && !transition::in_progress()) {
-		sprite_index++; //Skips standing sprite because it is already displayed
-		sprite_id = animation_sprites[sprite_index % ANIMATION_SPRITE_COUNT];
+		//Sprite index increment skips standing sprite because it is already displayed
+		sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
 	} else {
 		sprite_id = animation_sprites[0];
 		animation_timer->stop();
@@ -146,9 +140,10 @@ void Player::move(MovementDirection direction) {
 		return;
 	}
 
-	//Start animation timer if not already running
+	//Start animation timer if not already running and update sprite animation to prevent delay
 	if (!animation_timer->is_running()) {
 		animation_timer->start();
+		sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
 	}
 
 	//Set player sprite direction
@@ -182,6 +177,7 @@ void Player::move(MovementDirection direction) {
 			camera::move(movement);
 			break;
 		case flags::TileFlags::ENTRY:
+			//TODO entire code can be moved to entry_handler
 			entry_id = entry_handler::get_id(next_position, map::get_section());
 
 			//No entry found, stop movement
@@ -205,7 +201,7 @@ void Player::set_direction(MovementDirection direction) {
 	if (current_direction != direction) {
 		animation_sprites = movement_sprites.at(direction);
 		current_direction = direction;
-		sprite_id = animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
+		sprite_id = animation_sprites[1]; //Set sprite manually to avoid timer delay on player turn
 	}
 }
 
