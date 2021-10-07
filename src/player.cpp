@@ -5,7 +5,7 @@
 #include <assets.hpp>
 #include <iostream>
 #include "player.hpp"
-#include "utils/entry_registry.hpp"
+#include "handlers/entry_handler.hpp"
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"
@@ -182,9 +182,9 @@ void Player::move(MovementDirection direction) {
 			camera::move(movement);
 			break;
 		case flags::TileFlags::ENTRY:
-			entry_id = entry_registry::get_id(next_position, map::get_section());
+			entry_id = entry_handler::get_id(next_position, map::get_section());
 
-			//No building found, stop movement
+			//No entry found, stop movement
 			if (entry_id == 255) {
 				is_moving = false;
 				return;
@@ -192,7 +192,7 @@ void Player::move(MovementDirection direction) {
 
 			//Teleport to position on different tile map
 			transition::start([entry_id, next_position] {
-				entry_teleport(entry_id, next_position);
+				entry_handler::teleport(entry_id, next_position);
 			});
 			camera::move(movement);
 			break;
@@ -225,26 +225,6 @@ void Player::draw() {
 			SpriteTransform::NONE
 		);
 	}
-}
-
-/**
- * Teleports the player to the interior/exterior of the building and swaps the tile maps
- * @param building_id The id of the building
- * @param next_position The position where the player will walk within the next move
- */
-void Player::entry_teleport(uint8_t building_id, Point next_position) {
-	Point destination;
-	entry_registry::Entry entry = entry_registry::connections[building_id];
-
-	if (next_position == entry.exterior) {
-		map::load_section(entry.interior_map);
-		destination = entry.interior - entry.interior_offset;
-	} else if (next_position == entry.interior) {
-		map::load_section(entry.exterior_map);
-		destination = entry.exterior + Point(0, 1); //On exit teleport player in front of the door instead of directly on it
-	}
-
-	camera::set_position(destination);
 }
 
 /**

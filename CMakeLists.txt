@@ -11,6 +11,7 @@ set(PROJECT_SOURCE
         src/engine/map.cpp src/engine/map.hpp
         src/engine/transition.cpp src/engine/transition.hpp
         src/game.cpp src/game.hpp
+        src/handlers/entry_handler.cpp src/handlers/entry_handler.hpp
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
@@ -26,7 +27,6 @@ set(PROJECT_SOURCE
         src/ui/sidemenu.cpp src/ui/sidemenu.hpp
         src/ui/controls/textbox.cpp src/ui/controls/textbox.hpp
         src/ui/overlay.cpp src/ui/overlay.hpp
-        src/utils/entry_registry.cpp src/utils/entry_registry.hpp
         src/utils/savegame.cpp src/utils/savegame.hpp
         src/utils/utils.cpp src/utils/utils.hpp
 )

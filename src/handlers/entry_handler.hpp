@@ -3,15 +3,15 @@
 //
 
 #pragma once
-#include "utils.hpp"
+#include "../utils/utils.hpp"
 #include "../engine/map.hpp"
 
 using namespace blit;
 
 /**
- * Connects the buildings with their interior by linking the coordinates on the specific tile maps.
+ * Connects the entries with their interior by linking the coordinates on the specific tile maps.
  */
-namespace entry_registry {
+namespace entry_handler {
 	struct Entry {
 		Point exterior;
 		Point interior;
@@ -30,4 +30,5 @@ namespace entry_registry {
 	};
 
 	uint8_t get_id(Point &p, map::MapSections current_map);
+	void teleport(uint8_t entry_id, Point next_position);
 }
