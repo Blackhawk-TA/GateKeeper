@@ -47,6 +47,11 @@ void entry_handler::teleport(uint8_t entry_id, Point next_position) {
 	camera::set_position(destination);
 }
 
+/**
+ * Triggers the entering process of for example a door or dungeon
+ * @param next_position The position where the player will walk within the next move
+ * @return False if entry id was not found, else true
+ */
 bool entry_handler::enter(Point &next_position) {
 	uint8_t entry_id = entry_handler::get_id(next_position, map::get_section());
 
