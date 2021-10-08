@@ -3,8 +3,7 @@
 //
 #include "entry_handler.hpp"
 #include "../engine/camera.hpp"
-
-//TODO make teleport entry_id parameter obsolete by combining the functions.
+#include "../engine/transition.hpp"
 
 /**
  * Gets the id of an entry by the position of its interior or exterior entry depending on
@@ -46,4 +45,20 @@ void entry_handler::teleport(uint8_t entry_id, Point next_position) {
 	}
 
 	camera::set_position(destination);
+}
+
+bool entry_handler::enter(Point &next_position) {
+	uint8_t entry_id = entry_handler::get_id(next_position, map::get_section());
+
+	//No entry found, stop movement
+	if (entry_id == 255) {
+		return false;
+	}
+
+	//Teleport to position on different tile map
+	transition::start([entry_id, next_position] {
+		entry_handler::teleport(entry_id, next_position);
+	});
+
+	return true;
 }

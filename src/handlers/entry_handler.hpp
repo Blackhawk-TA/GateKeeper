@@ -31,4 +31,5 @@ namespace entry_handler {
 
 	uint8_t get_id(Point &p, map::MapSections current_map);
 	void teleport(uint8_t entry_id, Point next_position);
+	bool enter(Point &next_position);
 }

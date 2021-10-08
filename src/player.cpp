@@ -151,8 +151,6 @@ void Player::move(MovementDirection direction) {
 
 	//Move player according to tile flag of next position
 	Point next_position = camera::get_world_position() + position + movement;
-	uint8_t entry_id;
-
 	if (stargate_handler::check_collisions(next_position)) {
 		is_moving = false;
 		return;
@@ -172,25 +170,17 @@ void Player::move(MovementDirection direction) {
 	//Update the stargate states when a player comes near them
 	stargate_handler::update_states(next_position);
 
+	//Move player according to tile flag of next position
 	switch (map::get_flag(next_position)) {
 		case flags::TileFlags::WALKABLE:
 			camera::move(movement);
 			break;
 		case flags::TileFlags::ENTRY:
-			//TODO entire code can be moved to entry_handler
-			entry_id = entry_handler::get_id(next_position, map::get_section());
-
-			//No entry found, stop movement
-			if (entry_id == 255) {
+			if (entry_handler::enter(next_position)) {
+				camera::move(movement);
+			} else {
 				is_moving = false;
-				return;
 			}
-
-			//Teleport to position on different tile map
-			transition::start([entry_id, next_position] {
-				entry_handler::teleport(entry_id, next_position);
-			});
-			camera::move(movement);
 			break;
 		default:
 			is_moving = false;
