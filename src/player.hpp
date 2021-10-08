@@ -66,6 +66,6 @@ private:
 	static void animate(Timer &timer);
 	static void animate_action(Timer &timer);
 	void gate_teleport(Stargate *destination_gate);
-	void set_direction(MovementDirection direction);
+	static void change_direction(MovementDirection direction, bool animate = true);
 	static bool in_action();
 };

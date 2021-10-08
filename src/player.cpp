@@ -146,10 +146,7 @@ void Player::move(MovementDirection direction) {
 		sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
 	}
 
-	//Set player sprite direction
-	set_direction(direction);
-
-	//Move player according to tile flag of next position
+	Player::change_direction(direction);
 	Point next_position = camera::get_world_position() + position + movement;
 	if (stargate_handler::check_collisions(next_position)) {
 		is_moving = false;
@@ -187,11 +184,11 @@ void Player::move(MovementDirection direction) {
 	}
 }
 
-void Player::set_direction(MovementDirection direction) {
+void Player::change_direction(MovementDirection direction, bool animate) {
 	if (current_direction != direction) {
 		animation_sprites = movement_sprites.at(direction);
 		current_direction = direction;
-		sprite_id = animation_sprites[1]; //Set sprite manually to avoid timer delay on player turn
+		sprite_id = animate ? animation_sprites[1] : animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
 	}
 }
 
@@ -225,7 +222,7 @@ void Player::gate_teleport(Stargate *destination_gate) {
 	}
 
 	camera::set_position(teleport_destination);
-	set_direction(MovementDirection::DOWN);
+	change_direction(MovementDirection::DOWN, false);
 	stargate_handler::update_states(teleport_destination);
 }
 
