@@ -151,8 +151,7 @@ void map::draw() {
 		tile_x = tile_map.data[i].x;
 
 		for (r = 0u; r <= tile_map.data[i].range; r++) {
-			tile_y = (tile_map.data[i].y + r) &
-			         (tile_map.height - 1); //Equal to modulo operator but faster, only works with powers of 2
+			tile_y = (tile_map.data[i].y + r) & (tile_map.height - 1); //Equal to modulo operator but faster, only works with powers of 2
 
 			//Checks if tile is visible on screen
 			if (camera_position_world.x <= tile_x && camera_position_world.y <= tile_y &&

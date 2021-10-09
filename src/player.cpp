@@ -33,6 +33,7 @@ Player::Player(MovementDirection direction) {
 	Player::player_attack = Surface::load(asset_player_attack);
 	Player::spritesheet_size = get_spritesheet_size(Player::characters->bounds);
 	Player::attack_spritesheet_size = get_spritesheet_size(Player::player_attack->bounds);
+	Player::elevation_offset = 0;
 
 	//Set player animation tiles
 	Player::current_direction = direction;
@@ -171,6 +172,19 @@ void Player::move(MovementDirection direction) {
 	switch (map::get_flag(next_position)) {
 		case flags::TileFlags::WALKABLE:
 			camera::move(movement);
+			elevation_offset = 0;
+			break;
+		case flags::TileFlags::ELEVATE_1PX:
+			camera::move(movement);
+			elevation_offset = 1;
+			break;
+		case flags::TileFlags::ELEVATE_2PX:
+			camera::move(movement);
+			elevation_offset = 2;
+			break;
+		case flags::TileFlags::ELEVATE_3PX:
+			camera::move(movement);
+			elevation_offset = 3;
 			break;
 		case flags::TileFlags::ENTRY:
 			if (entry_handler::enter(next_position)) {
@@ -178,6 +192,7 @@ void Player::move(MovementDirection direction) {
 			} else {
 				is_moving = false;
 			}
+			elevation_offset = 0;
 			break;
 		default:
 			is_moving = false;
@@ -197,14 +212,14 @@ void Player::draw() {
 		screen.blit(
 			player_attack,
 			Rect((sprite_id % attack_spritesheet_size.w) * TILE_SIZE, (sprite_id / attack_spritesheet_size.h) * TILE_SIZE, TILE_SIZE * ATTACK_TILE_SIZE, TILE_SIZE * ATTACK_TILE_SIZE),
-			world_to_screen(position - Point(1,1)),
+			world_to_screen(position - Point(1,1)) - Point(0, elevation_offset),
 			SpriteTransform::NONE
 		);
 	} else {
 		screen.blit(
 			characters,
 			Rect((sprite_id % spritesheet_size.w) * TILE_SIZE, (sprite_id / spritesheet_size.h) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-			world_to_screen(position) + world_to_screen(evasion_position_modifier),
+			world_to_screen(position) + world_to_screen(evasion_position_modifier) - Point(0, elevation_offset),
 			SpriteTransform::NONE
 		);
 	}

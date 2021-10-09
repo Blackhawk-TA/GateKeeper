@@ -28,13 +28,16 @@ void init() {
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 
 	flags::set_flag(flags::TileFlags::WALKABLE, {
-		33, 68, 69, 70, 71, 133, 134, 135, 186, 197, 198, 199, 261, 262, 263, 325, 326, 327, 640, 641, 705, 712, 713,
+		33, 68, 69, 70, 71, 133, 134, 135, 197, 198, 199, 261, 262, 263, 325, 326, 327, 640, 641, 705, 712, 713,
 		769, 776, 840, 841, 968, 1029, 1030, 1037, 1038, 1093, 1094, 1101, 1102, 1157, 1158, 1159, 1165, 1166, 1167,
 		1221, 1222, 1223, 1229, 1230, 1231, 1263, 1264, 1265, 1285, 1286, 1287, 1293, 1294, 1295, 1327, 1328, 1329,
-		1391, 1392, 1393, 1492, 1493, 1494, 1504, 1632, 1633, 1634, 1635, 1636, 1637, 2305
+		1391, 1392, 1393, 1504, 1632, 1633, 1634, 1635, 1636, 1637, 2305
 	});
+	flags::set_flag(flags::TileFlags::ELEVATE_1PX, {1492, 1494});
+	flags::set_flag(flags::TileFlags::ELEVATE_2PX, {1493});
+	flags::set_flag(flags::TileFlags::ELEVATE_3PX, {186});
 	flags::set_flag(flags::TileFlags::ENTRY, {141, 294, 515, 517, 773, 965, 1425, 1573});
-	flags::set_flag(flags::TileFlags::DEADLY, {});
+	flags::set_flag(flags::TileFlags::DEADLY, {57, 248, 248});
 	map::load_section(map::MapSections::GRASSLAND);
 
 	sidemenu::init();

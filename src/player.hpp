@@ -62,6 +62,7 @@ private:
 	Point position;
 	Size spritesheet_size;
 	Size attack_spritesheet_size;
+	uint8_t elevation_offset;
 
 	static void animate(Timer &timer);
 	static void animate_action(Timer &timer);
