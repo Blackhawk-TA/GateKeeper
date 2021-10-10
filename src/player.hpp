@@ -24,7 +24,6 @@ public:
 	void evade();
 	void move(MovementDirection direction);
 	static MovementDirection get_direction();
-	static void stop_movement();
 
 private:
 	const std::map<MovementDirection, Point> movements{
@@ -49,7 +48,6 @@ private:
 	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
 	static bool is_attacking;
 	static bool is_evading;
-	static bool is_moving;
 	static Timer *animation_timer;
 	static Timer *action_timer;
 	static MovementDirection current_direction;
@@ -66,7 +64,8 @@ private:
 
 	static void animate(Timer &timer);
 	static void animate_action(Timer &timer);
-	void gate_teleport(Stargate *destination_gate);
+	static void gate_teleport(Stargate *destination_gate);
 	static void change_direction(MovementDirection direction, bool animate = true);
 	static bool in_action();
+	static void stop_animation();
 };

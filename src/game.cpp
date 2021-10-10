@@ -86,18 +86,9 @@ void render(uint32_t time) {
 void update(uint32_t time) {
 	static uint32_t last_buttons = 0;
 	static uint32_t changed = 0;
-	static bool holding_button = false;
 
 	//Handle button inputs
 	changed = buttons ^ last_buttons;
-
-	//Check if the player is holding a button
-	holding_button = buttons == last_buttons;
-
-	if (changed && !holding_button && (last_buttons & Button::DPAD_UP || last_buttons & Button::DPAD_DOWN
-	                                   || last_buttons & Button::DPAD_LEFT || last_buttons & Button::DPAD_RIGHT)) {
-		Player::stop_movement();
-	}
 
 	if (sidemenu::is_open()) {
 		if (buttons & changed & Button::DPAD_UP) {

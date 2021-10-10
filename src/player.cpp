@@ -9,7 +9,6 @@
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"
 
-bool Player::is_moving = false;
 bool Player::is_attacking = false;
 bool Player::is_evading = false;
 Player::MovementDirection Player::current_direction;
@@ -47,11 +46,11 @@ Player::Player(MovementDirection direction) {
 }
 
 bool Player::in_action() {
-	return is_moving || is_evading || is_attacking || transition::in_progress();
+	return camera::is_moving() || is_evading || is_attacking || transition::in_progress();
 }
 
 void Player::animate(Timer &timer) {
-	if ((is_moving || camera::is_moving()) && !transition::in_progress()) {
+	if (camera::is_moving() && !transition::in_progress()) {
 		//Sprite index increment skips standing sprite because it is already displayed
 		sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
 	} else {
@@ -63,8 +62,7 @@ void Player::animate(Timer &timer) {
 void Player::animate_action(Timer &timer) {
 	if (timer.loop_count <= ANIMATION_SPRITE_COUNT) {
 		if (is_attacking) {
-			sprite_id = animation_sprites[sprite_index % ANIMATION_SPRITE_COUNT];
-			sprite_index++;
+			sprite_id = animation_sprites[sprite_index++ % ANIMATION_SPRITE_COUNT];
 		} else if (is_evading) {
 			if (timer.loop_count <= ANIMATION_SPRITE_COUNT / 2) {
 				evasion_modifier -= 0.25f;
@@ -86,9 +84,7 @@ void Player::animate_action(Timer &timer) {
 					evasion_position_modifier = Vec2(evasion_modifier, 0);
 					break;
 			}
-
-			sprite_index--;
-			sprite_id = animation_sprites[sprite_index % ANIMATION_SPRITE_COUNT];
+			sprite_id = animation_sprites[--sprite_index % ANIMATION_SPRITE_COUNT];
 		}
 	} else {
 		animation_sprites = movement_sprites.at(current_direction);
@@ -123,34 +119,15 @@ void Player::evade() {
 	}
 }
 
-void Player::stop_movement() {
-	is_moving = false;
-}
-
 void Player::move(MovementDirection direction) {
-	//Do not move when a transition is in progress
-	if (transition::in_progress()) {
-		return;
-	}
+	if (Player::in_action()) return; //Do not move player if already in action
 
+	change_direction(direction); //Change player viewing direction
 	Point movement = movements.at(direction);
-	is_moving = true;
-
-	//Do not trigger a movement while another one is in progress
-	if (camera::is_moving() || is_attacking || is_evading) {
-		return;
-	}
-
-	//Start animation timer if not already running and update sprite animation to prevent delay
-	if (!animation_timer->is_running()) {
-		animation_timer->start();
-		sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
-	}
-
-	Player::change_direction(direction);
 	Point next_position = camera::get_world_position() + position + movement;
+
 	if (stargate_handler::check_collisions(next_position)) {
-		is_moving = false;
+		stop_animation();
 		return;
 	}
 
@@ -158,15 +135,20 @@ void Player::move(MovementDirection direction) {
 	Stargate *destination_gate = stargate_handler::get_destination_gate(next_position);
 	if (destination_gate != nullptr) {
 		//Trigger teleportation
-		transition::start([destination_gate, this] {
+		transition::start([destination_gate] {
 			gate_teleport(destination_gate);
 		});
-		is_moving = false;
 		return;
 	}
 
 	//Update the stargate states when a player comes near them
 	stargate_handler::update_states(next_position);
+
+	//Start animation timer and directly update sprite animation to prevent delay
+	if (!animation_timer->is_running()) {
+		animation_timer->start();
+		sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
+	}
 
 	//Move player according to tile flag of next position
 	switch (map::get_flag(next_position)) {
@@ -189,13 +171,11 @@ void Player::move(MovementDirection direction) {
 		case flags::TileFlags::ENTRY:
 			if (entry_handler::enter(next_position)) {
 				camera::move(movement);
-			} else {
-				is_moving = false;
 			}
 			elevation_offset = 0;
 			break;
 		default:
-			is_moving = false;
+			stop_animation();
 	}
 }
 
@@ -243,4 +223,9 @@ void Player::gate_teleport(Stargate *destination_gate) {
 
 Player::MovementDirection Player::get_direction() {
 	return current_direction;
+}
+
+void Player::stop_animation() {
+	animation_timer->stop();
+	sprite_id = animation_sprites[0];
 }
