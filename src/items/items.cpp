@@ -14,8 +14,6 @@ Listbox::Item inventory_item::create_inventory_item(inventory_item::INVENTORY_IT
 		case INVENTORY_ITEM::EXIT_INVENTORY:
 			item = create_exit_entry();
 			break;
-		case INVENTORY_ITEM::INVENTORY_COUNTER: //Do nothing, this is the item counter
-			break;
 	}
 
 	return item;
@@ -36,8 +34,6 @@ Listbox::Item inventory_item::create_menu_item(inventory_item::MENU_ITEM item_ty
 			break;
 		case MENU_ITEM::EXIT:
 			item = create_exit_entry();
-			break;
-		case MENU_ITEM::MENU_COUNTER: //Do nothing, this is the item counter
 			break;
 	}
 

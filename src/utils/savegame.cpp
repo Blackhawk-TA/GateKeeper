@@ -11,16 +11,16 @@
  * @param items The item vector to be compressed
  * @return The compressed item array
  */
-std::array<savegame::Item, inventory_item::INVENTORY_ITEM::INVENTORY_COUNTER> compress_items(std::vector<Listbox::Item> &items) {
-	std::array<savegame::Item, inventory_item::INVENTORY_ITEM::INVENTORY_COUNTER> compressed_items = {};
+std::array<savegame::Item, inventory_item::INVENTORY_COUNTER> compress_items(std::vector<Listbox::Item> &items) {
+	std::array<savegame::Item, inventory_item::INVENTORY_COUNTER> compressed_items = {};
+	uint8_t amount;
 
-	for (auto i = 0u; i < items.size(); i++) {
-		if (items[i].amount > 0) {
-			compressed_items[i] = savegame::Item{
-				static_cast<inventory_item::INVENTORY_ITEM>(i),
-				items[i].amount
-			};
-		}
+	for (auto i = 0u; i < inventory_item::INVENTORY_COUNTER; i++) {
+		amount = i < items.size() ? items [i].amount : 0;
+		compressed_items[i] = savegame::Item{
+			static_cast<inventory_item::INVENTORY_ITEM>(i + 1),
+			amount
+		};
 	}
 
 	return compressed_items;
@@ -31,7 +31,7 @@ std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, inventory
 	Listbox::Item item_template;
 
 	for (auto i = 0u; i < items.size(); i++) {
-		item_template = inventory_item::create_inventory_item(static_cast<inventory_item::INVENTORY_ITEM>(i));
+		item_template = inventory_item::create_inventory_item(static_cast<inventory_item::INVENTORY_ITEM>(i + 1));
 
 		//Include only items that have an amount > 0 or are a menu item
 		if (items[i].amount > 0 || (items[i].amount == 0 && !item_template.single_use)) {

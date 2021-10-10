@@ -19,7 +19,7 @@ namespace savegame {
 		map::MapSections map_section;
 		Point camera_position;
 		Player::MovementDirection player_direction;
-		std::array<Item, inventory_item::INVENTORY_ITEM::INVENTORY_COUNTER> items;
+		std::array<Item, inventory_item::INVENTORY_COUNTER> items;
 		std::array<bool, StargateAddresses::COUNTER> gate_states;
 	};
 
