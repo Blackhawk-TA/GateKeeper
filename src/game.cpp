@@ -37,7 +37,7 @@ void init() {
 	flags::set_flag(flags::TileFlags::ELEVATE_2PX, {1493});
 	flags::set_flag(flags::TileFlags::ELEVATE_3PX, {186});
 	flags::set_flag(flags::TileFlags::ENTRY, {141, 294, 515, 517, 773, 965, 1425, 1573});
-	flags::set_flag(flags::TileFlags::DEADLY, {57, 248, 248});
+	flags::set_flag(flags::TileFlags::DEADLY, {57, 248, 249});
 	map::load_section(map::MapSections::GRASSLAND);
 
 	sidemenu::init();
