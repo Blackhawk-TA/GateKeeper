@@ -9,8 +9,8 @@
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"
 
-bool Player::is_attacking = false;
-bool Player::is_evading = false;
+bool Player::attacking = false;
+bool Player::evading = false;
 Player::MovementDirection Player::current_direction;
 Vec2 Player::evasion_position_modifier;
 float Player::evasion_modifier = 0;
@@ -27,17 +27,17 @@ const std::map<Player::MovementDirection, std::array<uint16_t, Player::ANIMATION
 };
 
 Player::Player(MovementDirection direction) {
-	Player::position = get_screen_tiles() / 2;
-	Player::characters = Surface::load(asset_characters);
-	Player::player_attack = Surface::load(asset_player_attack);
-	Player::spritesheet_size = get_spritesheet_size(Player::characters->bounds);
-	Player::attack_spritesheet_size = get_spritesheet_size(Player::player_attack->bounds);
-	Player::elevation_offset = 0;
+	health = 100;
+	dead = false;
+	position = get_screen_tiles() / 2;
+	spritesheet_size = get_spritesheet_size(player_sprites->bounds);
+	attack_spritesheet_size = get_spritesheet_size(player_attack_sprites->bounds);
+	elevation_offset = 0;
 
 	//Set player animation tiles
-	Player::current_direction = direction;
-	Player::animation_sprites = movement_sprites.at(Player::current_direction);
-	Player::sprite_id = animation_sprites[0];
+	current_direction = direction;
+	animation_sprites = movement_sprites.at(current_direction);
+	sprite_id = animation_sprites[0];
 
 	animation_timer = new Timer();
 	animation_timer->init(animate, 175, -1);
@@ -45,8 +45,15 @@ Player::Player(MovementDirection direction) {
 	action_timer->init(animate_action, 75, ANIMATION_SPRITE_COUNT + 1);
 }
 
-bool Player::in_action() {
-	return camera::is_moving() || is_evading || is_attacking || transition::in_progress();
+Player::~Player() {
+	animation_timer->stop();
+	action_timer->stop();
+	delete animation_timer;
+	delete action_timer;
+}
+
+bool Player::in_action() const {
+	return camera::is_moving() || evading || attacking || dead || transition::in_progress();
 }
 
 void Player::animate(Timer &timer) {
@@ -61,9 +68,9 @@ void Player::animate(Timer &timer) {
 
 void Player::animate_action(Timer &timer) {
 	if (timer.loop_count <= ANIMATION_SPRITE_COUNT) {
-		if (is_attacking) {
+		if (attacking) {
 			sprite_id = animation_sprites[sprite_index++ % ANIMATION_SPRITE_COUNT];
-		} else if (is_evading) {
+		} else if (evading) {
 			if (timer.loop_count <= ANIMATION_SPRITE_COUNT / 2) {
 				evasion_modifier -= 0.25f;
 			} else {
@@ -90,18 +97,18 @@ void Player::animate_action(Timer &timer) {
 		animation_sprites = movement_sprites.at(current_direction);
 		sprite_id = animation_sprites[0];
 		sprite_index = 0;
-		is_attacking = false;
-		is_evading = false;
+		attacking = false;
+		evading = false;
 		timer.stop();
 	}
 }
 
 void Player::attack() {
-	if (!Player::in_action()) {
+	if (!in_action()) {
 		animation_sprites = attack_sprites.at(current_direction);
 		sprite_id = animation_sprites[0];
 		sprite_index = 0;
-		is_attacking = true;
+		attacking = true;
 		if (!action_timer->is_running()) {
 			action_timer->start();
 		}
@@ -110,12 +117,20 @@ void Player::attack() {
 
 //TODO check here if player bumps backwards into wall
 void Player::evade() {
-	if (!Player::in_action()) {
+	if (!in_action()) {
 		action_timer->start();
 		evasion_modifier = 0;
 		evasion_position_modifier = Vec2(0, 0);
 		sprite_index = ANIMATION_SPRITE_COUNT;
-		is_evading = true;
+		evading = true;
+	}
+}
+
+void Player::take_damage(uint8_t damage_amount) {
+	if (health - damage_amount > 0) {
+		health -= damage_amount;
+	} else {
+		dead = true;
 	}
 }
 
@@ -174,6 +189,10 @@ void Player::move(MovementDirection direction) {
 			}
 			elevation_offset = 0;
 			break;
+		case flags::TileFlags::DEADLY:
+			camera::move(movement);
+			take_damage(health);
+			break;
 		default:
 			stop_animation();
 	}
@@ -188,16 +207,16 @@ void Player::change_direction(MovementDirection direction, bool animate) {
 }
 
 void Player::draw() {
-	if (is_attacking) {
+	if (attacking) {
 		screen.blit(
-			player_attack,
+			player_attack_sprites,
 			Rect((sprite_id % attack_spritesheet_size.w) * TILE_SIZE, (sprite_id / attack_spritesheet_size.h) * TILE_SIZE, TILE_SIZE * ATTACK_TILE_SIZE, TILE_SIZE * ATTACK_TILE_SIZE),
 			world_to_screen(position - Point(1,1)) - Point(0, elevation_offset),
 			SpriteTransform::NONE
 		);
 	} else {
 		screen.blit(
-			characters,
+			player_sprites,
 			Rect((sprite_id % spritesheet_size.w) * TILE_SIZE, (sprite_id / spritesheet_size.h) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 			world_to_screen(position) + world_to_screen(evasion_position_modifier) - Point(0, elevation_offset),
 			SpriteTransform::NONE
@@ -228,4 +247,8 @@ Player::MovementDirection Player::get_direction() {
 void Player::stop_animation() {
 	animation_timer->stop();
 	sprite_id = animation_sprites[0];
+}
+
+bool Player::is_dead() const {
+	return dead;
 }

@@ -16,6 +16,9 @@ enum StargateAddresses {
 	COUNTER = 2
 };
 
+inline Surface *player_sprites;
+inline Surface *player_attack_sprites;
+
 bool sprite_rect_in_screen(Point &position, const Size &size, Point &camera_position_world);
 
 Point screen_to_world(const Point &p);
@@ -26,3 +29,5 @@ Point world_to_screen(const float &x, const float &y);
 
 Size get_spritesheet_size(Size bounds);
 Point get_screen_tiles();
+
+void load_persistent_spritesheets();

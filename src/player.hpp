@@ -19,9 +19,12 @@ public:
 	};
 
 	explicit Player(MovementDirection direction);
+	~Player();
 	void draw();
 	void attack();
 	void evade();
+	void take_damage(uint8_t damage_amount);
+	bool is_dead() const;
 	void move(MovementDirection direction);
 	static MovementDirection get_direction();
 
@@ -46,8 +49,8 @@ private:
 	static uint16_t sprite_id;
 	static uint8_t sprite_index;
 	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
-	static bool is_attacking;
-	static bool is_evading;
+	static bool attacking;
+	static bool evading;
 	static Timer *animation_timer;
 	static Timer *action_timer;
 	static MovementDirection current_direction;
@@ -55,8 +58,8 @@ private:
 	static float evasion_modifier;
 
 	const uint8_t ATTACK_TILE_SIZE = 3;
-	Surface *characters;
-	Surface *player_attack;
+	bool dead;
+	uint8_t health;
 	Point position;
 	Size spritesheet_size;
 	Size attack_spritesheet_size;
@@ -66,6 +69,6 @@ private:
 	static void animate_action(Timer &timer);
 	static void gate_teleport(Stargate *destination_gate);
 	static void change_direction(MovementDirection direction, bool animate = true);
-	static bool in_action();
+	bool in_action() const;
 	static void stop_animation();
 };

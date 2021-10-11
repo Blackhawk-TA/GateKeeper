@@ -15,7 +15,7 @@
 using namespace blit;
 
 uint32_t ms_start, ms_end;
-Player *player;
+Player *player = nullptr;
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -25,7 +25,7 @@ Player *player;
 //
 void init() {
 	set_screen_mode(ScreenMode::hires);
-	screen.sprites = Surface::load_read_only(asset_spritesheet);
+	load_persistent_spritesheets();
 
 	flags::set_flag(flags::TileFlags::WALKABLE, {
 		33, 68, 69, 70, 71, 133, 134, 135, 197, 198, 199, 261, 262, 263, 325, 326, 327, 640, 641, 705, 712, 713,

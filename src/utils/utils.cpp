@@ -2,6 +2,7 @@
 // Created by daniel on 27.02.21.
 //
 
+#include <assets.hpp>
 #include "utils.hpp"
 
 using namespace blit;
@@ -49,8 +50,18 @@ Size get_spritesheet_size(Size bounds) {
 
 /**
  * Get amount of tiles that can be displayed on the screen's x and y-axis
- * @return The amoutn of tiles that can be displayed at the screen stored as Point
+ * @return The amount of tiles that can be displayed at the screen stored as Point
  */
 Point get_screen_tiles() {
 	return Point(screen.bounds.w / TILE_SIZE, screen.bounds.h / TILE_SIZE);
+}
+
+/**
+ * Loads all spritesheets that are persistently needed during the game's runtime
+ */
+void load_persistent_spritesheets() {
+	screen.sprites = Surface::load_read_only(asset_spritesheet);
+
+	player_sprites = Surface::load_read_only(asset_characters);
+	player_attack_sprites = Surface::load_read_only(asset_player_attack);
 }

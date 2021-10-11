@@ -7,8 +7,10 @@ assets.cpp:
 
   assets/characters.png:
     name: characters
+    packed: false
   assets/player_attack.png:
     name: player_attack
+    packed: false
   assets/spritesheet.png:
     name: spritesheet
     packed: false
