@@ -75,7 +75,6 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 					previous_tile_x,
 					previous_tile_y,
 					flags::get_flag(previous_tile_id),
-					previous_tile_id,
 					range,
 					static_cast<uint16_t>((previous_tile_id % spritesheet_size.w) * TILE_SIZE),
 					static_cast<uint16_t>((previous_tile_id / spritesheet_size.h) * TILE_SIZE),
