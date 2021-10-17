@@ -4,6 +4,8 @@
 
 #include "transition.hpp"
 
+using namespace blit;
+
 bool fading_in = true;
 Timer *transition_timer;
 uint8_t default_timer_duration = 8;

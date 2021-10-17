@@ -5,8 +5,6 @@
 #pragma once
 #include "../utils/utils.hpp"
 
-using namespace blit;
-
 namespace transition {
 	bool in_progress();
 	void draw();
