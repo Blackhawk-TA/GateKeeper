@@ -47,10 +47,6 @@ void GameScene::render(uint32_t time) {
 		inventory::draw();
 	}
 
-	if (transition::in_progress()) {
-		transition::draw();
-	}
-
 	ms_end = now();
 	overlay::draw_fps(ms_start, ms_end);
 }

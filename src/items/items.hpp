@@ -25,6 +25,7 @@ namespace listbox_item {
 
 	Listbox::Item create_inventory_item(INVENTORY_ITEM item_type);
 	Listbox::Item create_sidemenu_item(MENU_ITEM item_type, uint8_t save_id = 0);
+	Listbox::Item create_menu_item(uint8_t save_id);
 
 	Listbox::Item create_gate_part();
 	Listbox::Item create_inventory_entry();

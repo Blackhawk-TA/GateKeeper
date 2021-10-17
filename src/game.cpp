@@ -23,20 +23,22 @@ void init() {
 	menu_scene = new MenuScene();
 }
 
+//TODO either implement own gameover screen or fix invalid read.
+// without transition, there are invalid reads and writes. Transitions somehow fix it
 void load_menu_scene() {
-//	transition::start([] {
-		menu_scene = new MenuScene();
+	transition::start([] {
 		delete game_scene;
 		game_scene = nullptr;
-//	});
+		menu_scene = new MenuScene();
+	});
 }
 
 void load_game_scene(uint8_t save_id) {
-//	transition::start([] {
-		game_scene = new GameScene(save_id);
+	transition::start([save_id] {
 		delete menu_scene;
 		menu_scene = nullptr;
-//	});
+		game_scene = new GameScene(save_id);
+	});
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -53,6 +55,10 @@ void render(uint32_t time) {
 		menu_scene->render(time);
 	} else if (game_scene != nullptr) {
 		game_scene->render(time);
+	}
+
+	if (transition::in_progress()) {
+		transition::draw();
 	}
 }
 
