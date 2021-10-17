@@ -47,6 +47,8 @@ void load_game_scene(uint8_t save_id) {
 // amount if milliseconds elapsed since the start of your game
 //
 void render(uint32_t time) {
+	screen.clear();
+
 	if (menu_scene != nullptr) {
 		menu_scene->render(time);
 	} else if (game_scene != nullptr) {

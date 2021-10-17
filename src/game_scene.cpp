@@ -34,7 +34,6 @@ GameScene::~GameScene() {
 
 void GameScene::render(uint32_t time) {
 	ms_start = now();
-	screen.clear();
 
 	map::draw();
 	stargate_handler::draw_stargates();
@@ -60,7 +59,7 @@ void GameScene::update(uint32_t time) {
 	//Handle player death
 	if (player->is_dead() && !transition::in_progress()) {
 		//TODO implement death animation/return to menu
-		transition::start(load_menu_scene);
+		load_menu_scene();
 		//TODO instead of transition implement own death screen?
 //		delete player;
 //		player = savegame::load();
