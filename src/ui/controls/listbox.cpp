@@ -10,7 +10,7 @@ Listbox::Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting) : Box
 	Listbox::enable_sorting = enable_sorting;
 	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
-	tooltip = new Textbox("");
+	tooltip = new Textbox();
 
 	update_tooltip();
 	sort_list();
