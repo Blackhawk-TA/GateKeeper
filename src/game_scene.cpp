@@ -5,7 +5,7 @@
 #include "game_scene.hpp"
 #include "game.hpp"
 
-GameScene::GameScene() {
+GameScene::GameScene(uint8_t save_id) {
 	last_buttons = 0;
 	changed = 0;
 	ms_start = 0;
@@ -24,9 +24,8 @@ GameScene::GameScene() {
 	flags::set_flag(flags::TileFlags::DEADLY, {57, 248, 249});
 	map::load_section(map::MapSections::GRASSLAND);
 
-	sidemenu::init();
-
-	player = savegame::load();
+	sidemenu::init(save_id);
+	player = savegame::load(save_id);
 }
 
 GameScene::~GameScene() {

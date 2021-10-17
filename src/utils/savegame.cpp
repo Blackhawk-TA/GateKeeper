@@ -89,7 +89,7 @@ Player *savegame::create() {
 	return new Player(Player::MovementDirection::DOWN);
 }
 
-void savegame::save() {
+void savegame::save(uint8_t save_id) {
 	//Fetch item and stargate data
 	std::vector<Listbox::Item> items = inventory::get_items();
 	std::map<StargateAddresses, Stargate> stargates = stargate_handler::get_stargates();
@@ -104,14 +104,14 @@ void savegame::save() {
 		compress_gates(stargates)
 	};
 
-	write_save(game_data);
+	write_save(game_data, save_id);
 }
 
-Player *savegame::load() {
+Player *savegame::load(uint8_t save_id) {
 	Player *player;
 	GameData save_data;
 
-	bool save_found = read_save(save_data);
+	bool save_found = read_save(save_data, save_id);
 
 	//Load data from save game
 	if (save_found) {

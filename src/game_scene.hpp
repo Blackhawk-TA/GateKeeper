@@ -19,7 +19,7 @@
 
 class GameScene {
 public:
-	explicit GameScene();
+	explicit GameScene(uint8_t save_id);
 	~GameScene();
 	void render(uint32_t time);
 	void update(uint32_t time);
