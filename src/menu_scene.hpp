@@ -14,9 +14,9 @@ public:
 	void update(uint32_t time);
 
 private:
+	std::vector<Listbox::Item> saves;
 	uint32_t last_buttons;
 	uint32_t changed;
-	uint8_t save_id;
 	Listbox *listbox;
 	Textbox *textbox;
 };

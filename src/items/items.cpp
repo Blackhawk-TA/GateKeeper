@@ -3,6 +3,7 @@
 //
 
 #include "items.hpp"
+#include "../game.hpp"
 
 Listbox::Item listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM item_type) {
 	Listbox::Item item;
@@ -38,5 +39,22 @@ Listbox::Item listbox_item::create_sidemenu_item(listbox_item::MENU_ITEM item_ty
 	}
 
 	return item;
+}
+
+Listbox::Item listbox_item::create_menu_item(uint8_t save_id) {
+	std::string save_id_str = std::to_string(save_id);
+
+	return Listbox::Item{
+		"Save " + save_id_str,
+		"Load saved game " + save_id_str,
+		"Loading save...",
+		"",
+		false,
+		0,
+		[save_id] {
+			load_game_scene(save_id);
+			return Listbox::Tooltip::SUCCESS;
+		}
+	};
 }
 
