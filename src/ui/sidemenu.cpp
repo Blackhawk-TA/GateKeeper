@@ -7,13 +7,13 @@
 #include "controls/listbox.hpp"
 #include "../utils/savegame.hpp"
 
-void sidemenu::init() {
+void sidemenu::init(uint8_t save_id) {
 	control = nullptr;
 	items = {
-		inventory_item::create_menu_item(inventory_item::INVENTORY),
-		inventory_item::create_menu_item(inventory_item::SHOW_FPS),
-		inventory_item::create_menu_item(inventory_item::SAVE),
-		inventory_item::create_menu_item(inventory_item::EXIT)
+		inventory_item::create_sidemenu_item(inventory_item::INVENTORY),
+		inventory_item::create_sidemenu_item(inventory_item::SHOW_FPS),
+		inventory_item::create_sidemenu_item(inventory_item::SAVE, save_id),
+		inventory_item::create_sidemenu_item(inventory_item::EXIT)
 	};
 }
 

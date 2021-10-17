@@ -19,7 +19,7 @@ Listbox::Item inventory_item::create_inventory_item(inventory_item::INVENTORY_IT
 	return item;
 }
 
-Listbox::Item inventory_item::create_menu_item(inventory_item::MENU_ITEM item_type) {
+Listbox::Item inventory_item::create_sidemenu_item(inventory_item::MENU_ITEM item_type, uint8_t save_id) {
 	Listbox::Item item;
 
 	switch (item_type) {
@@ -30,7 +30,7 @@ Listbox::Item inventory_item::create_menu_item(inventory_item::MENU_ITEM item_ty
 			item = create_show_fps_entry();
 			break;
 		case MENU_ITEM::SAVE:
-			item = create_save_entry();
+			item = create_save_entry(save_id);
 			break;
 		case MENU_ITEM::EXIT:
 			item = create_exit_entry();

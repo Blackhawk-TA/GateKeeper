@@ -31,9 +31,9 @@ void load_menu_scene() {
 //	});
 }
 
-void load_game_scene() {
+void load_game_scene(uint8_t save_id) {
 //	transition::start([] {
-		game_scene = new GameScene();
+		game_scene = new GameScene(save_id);
 		delete menu_scene;
 		menu_scene = nullptr;
 //	});

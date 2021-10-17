@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../utils/savegame.hpp"
 
-Listbox::Item inventory_item::create_save_entry() {
+Listbox::Item inventory_item::create_save_entry(uint8_t save_id) {
 	return Listbox::Item{
 		"SAVE",
 		"Press A to save the game.",
@@ -13,8 +13,8 @@ Listbox::Item inventory_item::create_save_entry() {
 		"Could not save the game.",
 		false,
 		0,
-		[] {
-			savegame::save();
+		[save_id] {
+			savegame::save(save_id);
 			return Listbox::Tooltip::SUCCESS;
 		}
 	};

@@ -24,6 +24,6 @@ namespace savegame {
 	};
 
 	Player *create();
-	void save();
-	Player *load();
+	void save(uint8_t save_id);
+	Player *load(uint8_t save_id);
 }

@@ -10,7 +10,7 @@ namespace sidemenu {
 	inline Listbox *control;
 	inline std::vector<Listbox::Item> items;
 
-	void init();
+	void init(uint8_t save_id);
 	void open();
 	void close();
 	bool is_open();
