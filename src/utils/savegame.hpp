@@ -25,5 +25,5 @@ namespace savegame {
 
 	Player *create();
 	void save();
-	Player *initial_load();
+	Player *load();
 }

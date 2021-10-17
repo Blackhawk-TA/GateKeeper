@@ -43,7 +43,7 @@ void init() {
 	sidemenu::init();
 	transition::init();
 
-	player = savegame::initial_load();
+	player = savegame::load();
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -85,10 +85,23 @@ void render(uint32_t time) {
 // amount if milliseconds elapsed since the start of your game
 //
 void update(uint32_t time) {
+	//Handle player death
+	if (player->is_dead() && !transition::in_progress()) {
+		//TODO implement death animation/return to menu
+		delete player;
+		player = savegame::load();
+	}
+
+	//Handle camera_position update
+	camera::update_position();
+
+	//Handle stargate animations
+	stargate_handler::update_animations();
+
+	//Handle button inputs
 	static uint32_t last_buttons = 0;
 	static uint32_t changed = 0;
 
-	//Handle button inputs
 	changed = buttons ^ last_buttons;
 
 	if (sidemenu::is_open()) {
@@ -135,10 +148,4 @@ void update(uint32_t time) {
 	}
 
 	last_buttons = buttons;
-
-	//Handle camera_position update
-	camera::update_position();
-
-	//Handle stargate animations
-	stargate_handler::update_animations();
 }

@@ -37,15 +37,8 @@ Player::Player(MovementDirection direction) {
 	animation_sprites = movement_sprites.at(current_direction);
 	sprite_id = animation_sprites[0];
 
-	animation_timer = new Timer();
-	animation_timer->init(animate, 175, -1);
-	action_timer = new Timer();
-	action_timer->init(animate_action, 75, ANIMATION_SPRITE_COUNT + 1);
-}
-
-Player::~Player() {
-	delete animation_timer;
-	delete action_timer;
+	animation_timer.init(animate, 175, -1);
+	action_timer.init(animate_action, 75, ANIMATION_SPRITE_COUNT + 1);
 }
 
 bool Player::in_action() const {
@@ -105,13 +98,13 @@ void Player::attack() {
 		sprite_id = animation_sprites[0];
 		sprite_index = 0;
 		attacking = true;
-		action_timer->start();
+		action_timer.start();
 	}
 }
 
 void Player::evade() {
 	if (!in_action()) {
-		action_timer->start();
+		action_timer.start();
 		evasion_modifier = 0;
 		evasion_position_modifier = Vec2(0, 0);
 		sprite_index = ANIMATION_SPRITE_COUNT;
@@ -153,8 +146,8 @@ void Player::move(MovementDirection direction) {
 	stargate_handler::update_states(next_position);
 
 	//Start animation timer and directly update sprite animation to prevent delay
-	if (!animation_timer->is_running()) {
-		animation_timer->start();
+	if (!animation_timer.is_running()) {
+		animation_timer.start();
 		sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
 	}
 
@@ -238,7 +231,7 @@ Player::MovementDirection Player::get_direction() {
 }
 
 void Player::stop_animation() {
-	animation_timer->stop();
+	animation_timer.stop();
 	sprite_id = animation_sprites[0];
 }
 

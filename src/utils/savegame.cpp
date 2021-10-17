@@ -107,7 +107,7 @@ void savegame::save() {
 	write_save(game_data);
 }
 
-Player *savegame::initial_load() {
+Player *savegame::load() {
 	Player *player;
 	GameData save_data;
 
