@@ -10,7 +10,7 @@
 
 namespace savegame {
 	struct Item {
-		inventory_item::INVENTORY_ITEM type;
+		listbox_item::INVENTORY_ITEM type;
 		uint8_t amount;
 	};
 
@@ -19,7 +19,7 @@ namespace savegame {
 		map::MapSections map_section;
 		Point camera_position;
 		Player::MovementDirection player_direction;
-		std::array<Item, inventory_item::INVENTORY_COUNTER> items;
+		std::array<Item, listbox_item::INVENTORY_COUNTER> items;
 		std::array<bool, StargateAddresses::COUNTER> gate_states;
 	};
 

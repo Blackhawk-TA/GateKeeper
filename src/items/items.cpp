@@ -4,7 +4,7 @@
 
 #include "items.hpp"
 
-Listbox::Item inventory_item::create_inventory_item(inventory_item::INVENTORY_ITEM item_type) {
+Listbox::Item listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM item_type) {
 	Listbox::Item item;
 
 	switch (item_type) {
@@ -19,7 +19,7 @@ Listbox::Item inventory_item::create_inventory_item(inventory_item::INVENTORY_IT
 	return item;
 }
 
-Listbox::Item inventory_item::create_sidemenu_item(inventory_item::MENU_ITEM item_type, uint8_t save_id) {
+Listbox::Item listbox_item::create_sidemenu_item(listbox_item::MENU_ITEM item_type, uint8_t save_id) {
 	Listbox::Item item;
 
 	switch (item_type) {

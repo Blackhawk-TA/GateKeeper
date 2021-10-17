@@ -6,7 +6,7 @@
 	 #include "../../ui/sidemenu.hpp"
 	 #include "../items.hpp"
 
-Listbox::Item inventory_item::create_inventory_entry() {
+Listbox::Item listbox_item::create_inventory_entry() {
 	return Listbox::Item{
 		"ITEMS",
 		"Press A to show items, press B to return to menu.",

@@ -98,7 +98,7 @@ void GameScene::update(uint32_t time) {
 		} else if (buttons & changed & Button::MENU) {
 			inventory::close();
 		} else if (buttons & changed & Button::X) {
-			inventory::add_item(inventory_item::create_inventory_item(inventory_item::GATE_PART));
+			inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 		}
 	} else {
 		if (buttons & Button::DPAD_UP) {

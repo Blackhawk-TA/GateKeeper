@@ -6,7 +6,7 @@
 #include "../../ui/sidemenu.hpp"
 #include "../items.hpp"
 
-Listbox::Item inventory_item::create_exit_entry() {
+Listbox::Item listbox_item::create_exit_entry() {
 	return Listbox::Item{
 		"EXIT",
 		"Press A to go back.",
