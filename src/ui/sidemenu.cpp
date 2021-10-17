@@ -10,10 +10,10 @@
 void sidemenu::init(uint8_t save_id) {
 	control = nullptr;
 	items = {
-		inventory_item::create_sidemenu_item(inventory_item::INVENTORY),
-		inventory_item::create_sidemenu_item(inventory_item::SHOW_FPS),
-		inventory_item::create_sidemenu_item(inventory_item::SAVE, save_id),
-		inventory_item::create_sidemenu_item(inventory_item::EXIT)
+		listbox_item::create_sidemenu_item(listbox_item::INVENTORY),
+		listbox_item::create_sidemenu_item(listbox_item::SHOW_FPS),
+		listbox_item::create_sidemenu_item(listbox_item::SAVE, save_id),
+		listbox_item::create_sidemenu_item(listbox_item::EXIT)
 	};
 }
 

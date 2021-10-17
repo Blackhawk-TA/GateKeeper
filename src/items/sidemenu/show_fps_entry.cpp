@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../ui/overlay.hpp"
 
-Listbox::Item inventory_item::create_show_fps_entry() {
+Listbox::Item listbox_item::create_show_fps_entry() {
 	return Listbox::Item{
 		"SHOW FPS",
 		"Press A to toggle the fps counter.",

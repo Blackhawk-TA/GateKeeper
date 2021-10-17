@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../utils/savegame.hpp"
 
-Listbox::Item inventory_item::create_save_entry(uint8_t save_id) {
+Listbox::Item listbox_item::create_save_entry(uint8_t save_id) {
 	return Listbox::Item{
 		"SAVE",
 		"Press A to save the game.",

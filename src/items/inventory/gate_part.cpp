@@ -4,7 +4,7 @@
 
 #include "../items.hpp"
 
-Listbox::Item inventory_item::create_gate_part() {
+Listbox::Item listbox_item::create_gate_part() {
 	return Listbox::Item{
 		"GATE PART",
 		"Can be used to repair a broken stargate.",
