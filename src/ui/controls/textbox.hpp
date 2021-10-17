@@ -19,7 +19,7 @@ private:
 	int8_t calculate_line_offset() const;
 
 public:
-	explicit Textbox(std::string text);
+	explicit Textbox(std::string text = "");
 	void draw();
 	void set_text(std::string &new_text);
 };
