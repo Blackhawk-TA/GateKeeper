@@ -19,6 +19,7 @@ public:
 	};
 
 	explicit Player(MovementDirection direction);
+	~Player();
 	void draw();
 	void attack();
 	void evade();
@@ -56,8 +57,8 @@ private:
 
 	const uint8_t ATTACK_TILE_SIZE = 3;
 	bool dead;
-	Timer animation_timer;
-	Timer action_timer;
+	Timer *animation_timer;
+	Timer *action_timer;
 	uint8_t health;
 	Point position;
 	Size spritesheet_size;

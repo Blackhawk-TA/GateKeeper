@@ -5,7 +5,7 @@
 #include "transition.hpp"
 
 bool fading_in = true;
-Timer transition_timer;
+Timer *transition_timer;
 uint8_t default_timer_duration = 8;
 uint8_t transition_alpha = 0;
 std::function<void()> transition_callback;
@@ -37,7 +37,7 @@ void fade(Timer &timer) {
 }
 
 bool transition::in_progress() {
-	return transition_timer.is_running();
+	return transition_timer->is_running();
 }
 
 void transition::draw() {
@@ -46,10 +46,11 @@ void transition::draw() {
 }
 
 void transition::init() {
-	transition_timer.init(fade, default_timer_duration, -1);
+	transition_timer = new Timer();
+	transition_timer->init(fade, default_timer_duration, -1);
 }
 
 void transition::start(std::function<void()> callback) {
 	transition_callback = std::move(callback);
-	transition_timer.start();
+	transition_timer->start();
 }
