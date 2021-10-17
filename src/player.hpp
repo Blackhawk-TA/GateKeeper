@@ -19,7 +19,6 @@ public:
 	};
 
 	explicit Player(MovementDirection direction);
-	~Player();
 	void draw();
 	void attack();
 	void evade();
@@ -51,14 +50,14 @@ private:
 	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
 	static bool attacking;
 	static bool evading;
-	static Timer *animation_timer;
-	static Timer *action_timer;
 	static MovementDirection current_direction;
 	static Vec2 evasion_position_modifier;
 	static float evasion_modifier;
 
 	const uint8_t ATTACK_TILE_SIZE = 3;
 	bool dead;
+	Timer animation_timer;
+	Timer action_timer;
 	uint8_t health;
 	Point position;
 	Size spritesheet_size;
@@ -70,5 +69,5 @@ private:
 	static void gate_teleport(Stargate *destination_gate);
 	static void change_direction(MovementDirection direction, bool animate = true);
 	bool in_action() const;
-	static void stop_animation();
+	void stop_animation();
 };

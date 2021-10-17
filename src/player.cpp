@@ -14,8 +14,6 @@ bool Player::evading = false;
 Player::MovementDirection Player::current_direction;
 Vec2 Player::evasion_position_modifier;
 float Player::evasion_modifier = 0;
-Timer *Player::animation_timer;
-Timer *Player::action_timer;
 uint16_t Player::sprite_id = 0;
 uint8_t Player::sprite_index = 0;
 std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
@@ -39,17 +37,8 @@ Player::Player(MovementDirection direction) {
 	animation_sprites = movement_sprites.at(current_direction);
 	sprite_id = animation_sprites[0];
 
-	animation_timer = new Timer();
-	animation_timer->init(animate, 175, -1);
-	action_timer = new Timer();
-	action_timer->init(animate_action, 75, ANIMATION_SPRITE_COUNT + 1);
-}
-
-Player::~Player() {
-	animation_timer->stop();
-	action_timer->stop();
-	delete animation_timer;
-	delete action_timer;
+	animation_timer.init(animate, 175, -1);
+	action_timer.init(animate_action, 75, ANIMATION_SPRITE_COUNT + 1);
 }
 
 bool Player::in_action() const {
@@ -62,7 +51,7 @@ void Player::animate(Timer &timer) {
 		sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
 	} else {
 		sprite_id = animation_sprites[0];
-		animation_timer->stop();
+		timer.stop();
 	}
 }
 
@@ -109,16 +98,13 @@ void Player::attack() {
 		sprite_id = animation_sprites[0];
 		sprite_index = 0;
 		attacking = true;
-		if (!action_timer->is_running()) {
-			action_timer->start();
-		}
+		action_timer.start();
 	}
 }
 
-//TODO check here if player bumps backwards into wall
 void Player::evade() {
 	if (!in_action()) {
-		action_timer->start();
+		action_timer.start();
 		evasion_modifier = 0;
 		evasion_position_modifier = Vec2(0, 0);
 		sprite_index = ANIMATION_SPRITE_COUNT;
@@ -160,8 +146,8 @@ void Player::move(MovementDirection direction) {
 	stargate_handler::update_states(next_position);
 
 	//Start animation timer and directly update sprite animation to prevent delay
-	if (!animation_timer->is_running()) {
-		animation_timer->start();
+	if (!animation_timer.is_running()) {
+		animation_timer.start();
 		sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
 	}
 
@@ -245,7 +231,7 @@ Player::MovementDirection Player::get_direction() {
 }
 
 void Player::stop_animation() {
-	animation_timer->stop();
+	animation_timer.stop();
 	sprite_id = animation_sprites[0];
 }
 

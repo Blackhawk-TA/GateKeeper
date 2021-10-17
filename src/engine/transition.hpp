@@ -10,5 +10,6 @@ using namespace blit;
 namespace transition {
 	bool in_progress();
 	void draw();
+	void init();
 	void start(std::function<void()> callback);
 }

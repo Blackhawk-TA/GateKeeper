@@ -41,8 +41,9 @@ void init() {
 	map::load_section(map::MapSections::GRASSLAND);
 
 	sidemenu::init();
+	transition::init();
 
-	player = savegame::load();
+	player = savegame::initial_load();
 }
 
 ///////////////////////////////////////////////////////////////////////////
