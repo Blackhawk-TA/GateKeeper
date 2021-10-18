@@ -19,14 +19,16 @@ set(PROJECT_SOURCE
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
         src/items/sidemenu/exit_entry.cpp
-        src/items/sidemenu/inventory.cpp
+        src/items/sidemenu/inventory_entry.cpp
         src/items/sidemenu/save_entry.cpp
         src/items/sidemenu/show_fps_entry.cpp
+        src/items/menu/load_entry.cpp
+        src/items/menu/new_save_entry.cpp
         src/map_objects/stargate.cpp src/map_objects/stargate.hpp
         src/player.cpp src/player.hpp
         src/ui/controls/box.cpp src/ui/controls/box.hpp
         src/ui/controls/listbox.cpp src/ui/controls/listbox.hpp
-        src/ui/inventory.cpp src/ui/inventory.hpp
+        src/ui/inventory.cpp src/ui/inventory_entry.hpp
         src/ui/sidemenu.cpp src/ui/sidemenu.hpp
         src/ui/controls/textbox.cpp src/ui/controls/textbox.hpp
         src/ui/overlay.cpp src/ui/overlay.hpp

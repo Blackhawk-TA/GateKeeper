@@ -2,9 +2,9 @@
 // Created by daniel on 26.09.21.
 //
 
-#include "../../ui/inventory.hpp"
-	 #include "../../ui/sidemenu.hpp"
-	 #include "../items.hpp"
+#include "../../ui/inventory_entry.hpp"
+#include "../../ui/sidemenu.hpp"
+#include "../items.hpp"
 
 Listbox::Item listbox_item::create_inventory_entry() {
 	return Listbox::Item{

@@ -9,18 +9,34 @@
 MenuScene::MenuScene() {
 	last_buttons = 0;
 	changed = 0;
-	saves = { //TODO save which saves are already in use
-		listbox_item::create_menu_item(0)
-	};
-	listbox = new Listbox(Rect(0, 0, 4, 6), saves);
+	saves_count = 0,
+	show_fps = false;
+
+	saves = {};
+	load_menu_data();
+	create_list_entries();
+
+	listbox = new Listbox(Rect(0, 0, 5, 6), saves);
 	textbox = new Textbox();
 }
 
 MenuScene::~MenuScene() {
+	save_menu_data();
 	delete textbox;
 	delete listbox;
 	textbox = nullptr;
 	listbox = nullptr;
+}
+
+//TODO add settings and fix saves
+void MenuScene::create_list_entries() {
+	for (uint8_t i = 0u; i < saves_count; i++) {
+		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::LOAD_SAVE, i + 1));
+	}
+
+	if (saves_count < MAX_SAVES) {
+		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, saves_count++));
+	}
 }
 
 void MenuScene::render(uint32_t time) {
@@ -41,5 +57,24 @@ void MenuScene::update(uint32_t time) {
 		listbox->cursor_down();
 	} else if (buttons & changed & Button::A) {
 		listbox->cursor_press();
+	}
+}
+
+void MenuScene::save_menu_data() {
+	MenuData menu_data = {
+		saves_count,
+		show_fps
+	};
+
+	write_save(menu_data, 0);
+}
+
+void MenuScene::load_menu_data() {
+	MenuData menu_data{};
+	bool save_found = read_save(menu_data, 0);
+
+	if (save_found) {
+		saves_count = menu_data.save_count;
+		show_fps = menu_data.show_fps;
 	}
 }

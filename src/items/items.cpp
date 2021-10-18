@@ -20,20 +20,20 @@ Listbox::Item listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM i
 	return item;
 }
 
-Listbox::Item listbox_item::create_sidemenu_item(listbox_item::MENU_ITEM item_type, uint8_t save_id) {
+Listbox::Item listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_ITEM item_type, uint8_t save_id) {
 	Listbox::Item item;
 
 	switch (item_type) {
-		case MENU_ITEM::INVENTORY:
+		case SIDEMENU_ITEM::INVENTORY:
 			item = create_inventory_entry();
 			break;
-		case MENU_ITEM::SHOW_FPS:
+		case SIDEMENU_ITEM::SHOW_FPS:
 			item = create_show_fps_entry();
 			break;
-		case MENU_ITEM::SAVE:
+		case SIDEMENU_ITEM::SAVE:
 			item = create_save_entry(save_id);
 			break;
-		case MENU_ITEM::EXIT:
+		case SIDEMENU_ITEM::EXIT:
 			item = create_exit_entry();
 			break;
 	}
@@ -41,20 +41,22 @@ Listbox::Item listbox_item::create_sidemenu_item(listbox_item::MENU_ITEM item_ty
 	return item;
 }
 
-Listbox::Item listbox_item::create_menu_item(uint8_t save_id) {
+Listbox::Item listbox_item::create_menu_item(listbox_item::MENU_ITEM item_type, uint8_t save_id) {
 	std::string save_id_str = std::to_string(save_id);
 
-	return Listbox::Item{
-		"Save " + save_id_str,
-		"Load saved game " + save_id_str,
-		"Loading save...",
-		"",
-		false,
-		0,
-		[save_id] {
-			load_game_scene(save_id);
-			return Listbox::Tooltip::SUCCESS;
-		}
-	};
+	Listbox::Item item;
+
+	switch (item_type) {
+		case MENU_ITEM::LOAD_SAVE:
+			item = create_load_entry(save_id);
+			break;
+		case MENU_ITEM::NEW_SAVE:
+			item = create_new_save_entry(save_id);
+			break;
+		case MENU_ITEM::SETTINGS:
+			break;
+	}
+
+	return item;
 }
 
