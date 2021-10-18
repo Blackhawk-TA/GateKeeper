@@ -3,8 +3,8 @@
 //
 
 #include "menu_scene.hpp"
-#include "game.hpp"
-#include "items/items.hpp"
+#include "../game.hpp"
+#include "../items/items.hpp"
 
 MenuScene::MenuScene() {
 	last_buttons = 0;

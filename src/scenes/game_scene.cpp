@@ -3,7 +3,7 @@
 //
 
 #include "game_scene.hpp"
-#include "game.hpp"
+#include "../game.hpp"
 
 GameScene::GameScene(uint8_t save_id) {
 	last_buttons = 0;

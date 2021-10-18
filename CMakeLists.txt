@@ -11,8 +11,9 @@ set(PROJECT_SOURCE
         src/engine/map.cpp src/engine/map.hpp
         src/engine/transition.cpp src/engine/transition.hpp
         src/game.cpp src/game.hpp
-        src/game_scene.cpp src/game_scene.hpp
-        src/menu_scene.cpp src/menu_scene.hpp
+        src/scenes/scene_interface.hpp
+        src/scenes/game_scene.cpp src/scenes/game_scene.hpp
+        src/scenes/menu_scene.cpp src/scenes/menu_scene.hpp
         src/handlers/entry_handler.cpp src/handlers/entry_handler.hpp
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/items/items.cpp src/items/items.hpp
