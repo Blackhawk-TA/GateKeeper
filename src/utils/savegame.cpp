@@ -3,7 +3,7 @@
 //
 
 #include "savegame.hpp"
-#include "../ui/inventory.hpp"
+#include "../ui/inventory_entry.hpp"
 #include "../ui/overlay.hpp"
 
 /**
