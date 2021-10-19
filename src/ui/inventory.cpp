@@ -2,7 +2,7 @@
 // Created by daniel on 23.09.21.
 //
 
-#include "inventory_entry.hpp"
+#include "inventory.hpp"
 #include <utility>
 #include "../items/items.hpp"
 

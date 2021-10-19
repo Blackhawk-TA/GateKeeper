@@ -13,7 +13,7 @@
 #include "../engine/flags.hpp"
 #include "../handlers/stargate_handler.hpp"
 #include "../ui/sidemenu.hpp"
-#include "../ui/inventory_entry.hpp"
+#include "../ui/inventory.hpp"
 #include "../items/items.hpp"
 #include "../utils/savegame.hpp"
 #include "scene_interface.hpp"

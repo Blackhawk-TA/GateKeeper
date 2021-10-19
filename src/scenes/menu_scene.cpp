@@ -12,30 +12,25 @@ MenuScene::MenuScene() {
 	saves_count = 0,
 	show_fps = false;
 
-	saves = {};
 	load_menu_data();
 	create_list_entries();
 
-	listbox = new Listbox(Rect(0, 0, 5, 6), saves);
-	textbox = new Textbox();
+	listbox = new Listbox(Rect(0, 0, 5, 6), saves, false);
 }
 
 MenuScene::~MenuScene() {
 	save_menu_data();
-	delete textbox;
 	delete listbox;
-	textbox = nullptr;
 	listbox = nullptr;
 }
 
-//TODO add settings and fix saves
 void MenuScene::create_list_entries() {
 	for (uint8_t i = 0u; i < saves_count; i++) {
 		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::LOAD_SAVE, i + 1));
 	}
 
 	if (saves_count < MAX_SAVES) {
-		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, saves_count++));
+		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, saves_count + 1));
 	}
 }
 
@@ -43,7 +38,6 @@ void MenuScene::render(uint32_t time) {
 	screen.pen = Pen(0, 0, 0, 255);
 	screen.rectangle(Rect(0, 0, 320, 240));
 
-	textbox->draw();
 	listbox->draw();
 }
 
@@ -58,6 +52,8 @@ void MenuScene::update(uint32_t time) {
 	} else if (buttons & changed & Button::A) {
 		listbox->cursor_press();
 	}
+
+	last_buttons = buttons;
 }
 
 void MenuScene::save_menu_data() {
@@ -66,12 +62,12 @@ void MenuScene::save_menu_data() {
 		show_fps
 	};
 
-	write_save(menu_data, 0);
+	write_save(menu_data, MENU_DATA_SLOT);
 }
 
 void MenuScene::load_menu_data() {
 	MenuData menu_data{};
-	bool save_found = read_save(menu_data, 0);
+	bool save_found = read_save(menu_data, MENU_DATA_SLOT);
 
 	if (save_found) {
 		saves_count = menu_data.save_count;

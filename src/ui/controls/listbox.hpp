@@ -30,8 +30,8 @@ public:
 	void cursor_up();
 	void cursor_down();
 	void cursor_press();
-	bool add_item(Listbox::Item &item);
-	std::vector<Listbox::Item> get_items();
+	bool add_item(Item &item);
+	std::vector<Item> get_items();
 
 private:
 	const uint16_t CURSOR_SPRITE_ID = 1742;

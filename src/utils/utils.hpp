@@ -9,6 +9,7 @@ using namespace blit;
 
 //Sprite and map constants. All TileMaps require to have the same size.
 constexpr uint8_t TILE_SIZE = 16;
+const uint8_t MENU_DATA_SLOT = 0;
 
 enum StargateAddresses {
 	GRASSLAND = 0,
