@@ -3,8 +3,9 @@
 //
 
 #include "savegame.hpp"
-#include "../ui/inventory_entry.hpp"
+#include "../ui/inventory.hpp"
 #include "../ui/overlay.hpp"
+#include "../scenes/menu_scene.hpp"
 
 /**
  * Parses the item vector into an array, because vector cannot be saved directly
@@ -90,6 +91,14 @@ Player *savegame::create() {
 }
 
 void savegame::save(uint8_t save_id) {
+	//Check if current save is a new save game and therefore update save_count
+	MenuScene::MenuData menu_data{};
+	bool data_loaded = read_save(menu_data, MENU_DATA_SLOT);
+	if (data_loaded && menu_data.save_count < save_id) { //Menu data exists always
+		menu_data.save_count = save_id;
+		write_save(menu_data, MENU_DATA_SLOT);
+	}
+
 	//Fetch item and stargate data
 	std::vector<Listbox::Item> items = inventory::get_items();
 	std::map<StargateAddresses, Stargate> stargates = stargate_handler::get_stargates();

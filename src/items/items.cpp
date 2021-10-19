@@ -59,4 +59,3 @@ Listbox::Item listbox_item::create_menu_item(listbox_item::MENU_ITEM item_type, 
 
 	return item;
 }
-
