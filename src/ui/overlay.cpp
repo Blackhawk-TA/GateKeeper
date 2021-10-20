@@ -15,7 +15,7 @@ void overlay::draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
 	screen.alpha = 255;
 	screen.pen = Pen(255, 255, 255, 100);
 	screen.rectangle(Rect(1, screen.bounds.h - 10, 20, 9));
-	screen.pen = Pen(255, 255, 255, 200);
+	screen.pen = Pen(0, 0, 0, 200);
 
 	//Calculate frames per second (fps)
 	float time_difference_in_sec = static_cast<float>(ms_end - ms_start) / 1000;

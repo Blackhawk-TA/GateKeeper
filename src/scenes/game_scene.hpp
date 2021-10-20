@@ -29,7 +29,5 @@ private:
 	uint8_t save_id;
 	uint32_t last_buttons;
 	uint32_t changed;
-	uint32_t ms_start;
-	uint32_t ms_end;
 	Player *player;
 };

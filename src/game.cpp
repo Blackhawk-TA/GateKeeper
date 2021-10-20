@@ -7,6 +7,8 @@
 
 using namespace blit;
 
+uint32_t ms_start = 0;
+uint32_t ms_end = 0;
 IScene *scene = nullptr;
 Scene previous_scene;
 Scene current_scene;
@@ -63,12 +65,17 @@ void load_scene(Scene scene_type, uint8_t save_id) {
 // amount if milliseconds elapsed since the start of your game
 //
 void render(uint32_t time) {
+	ms_start = now();
+
 	screen.clear();
 	scene->render(time);
 
 	if (transition::in_progress()) {
 		transition::draw();
 	}
+
+	ms_end = now();
+	overlay::draw_fps(ms_start, ms_end);
 }
 
 ///////////////////////////////////////////////////////////////////////////
