@@ -15,7 +15,6 @@ public:
 	void update(uint32_t time) override;
 
 private:
-	uint8_t saves_count;
 	std::vector<Listbox::Item> saves;
 	uint32_t last_buttons;
 	uint32_t changed;

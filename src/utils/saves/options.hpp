@@ -10,8 +10,9 @@ namespace options {
 	const uint8_t OPTIONS_DATA_SLOT = 0;
 	const uint8_t MAX_SAVES = 3;
 
+	//Global settings variables
 	extern bool show_fps;
-	extern uint8_t saves_count;
+	extern uint8_t save_count;
 
 	struct OptionsData {
 		uint8_t save_count;
@@ -19,5 +20,5 @@ namespace options {
 	};
 
 	void save();
-	OptionsData load();
+	void load();
 }

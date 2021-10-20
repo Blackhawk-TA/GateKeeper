@@ -6,29 +6,24 @@
 #include "../../ui/overlay.hpp"
 
 bool options::show_fps = false;
-uint8_t options::saves_count = 0;
+uint8_t options::save_count = 0;
 
 void options::save() {
 	OptionsData data = {
-		saves_count,
+		save_count,
 		show_fps
 	};
 
 	write_save(data, OPTIONS_DATA_SLOT);
 }
 
-options::OptionsData options::load() {
+void options::load() {
 	OptionsData data{};
 
 	bool save_found = read_save(data, OPTIONS_DATA_SLOT);
 
-	//If not exists, set default values
-	if (!save_found) {
-		data = {
-			0,
-			false
-		};
+	if (save_found) {
+		save_count = data.save_count;
+		show_fps = data.show_fps;
 	}
-
-	return data;
 }

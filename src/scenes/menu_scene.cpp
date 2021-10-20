@@ -11,9 +11,6 @@ MenuScene::MenuScene() {
 	last_buttons = 0;
 	changed = 0;
 
-	options::OptionsData options_data = options::load();
-	saves_count = options_data.save_count;
-
 	create_list_entries();
 
 	listbox = new Listbox(Rect(0, 0, 5, 6), saves, false);
@@ -25,12 +22,12 @@ MenuScene::~MenuScene() {
 }
 
 void MenuScene::create_list_entries() {
-	for (uint8_t i = 0u; i < saves_count; i++) {
+	for (uint8_t i = 0u; i < options::save_count; i++) {
 		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::LOAD_SAVE, i + 1));
 	}
 
-	if (saves_count < options::MAX_SAVES) {
-		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, saves_count + 1));
+	if (options::save_count < options::MAX_SAVES) {
+		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, options::save_count + 1));
 	}
 
 	saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::MENU_OPTIONS));
