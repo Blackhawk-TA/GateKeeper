@@ -1,0 +1,23 @@
+//
+// Created by D069765 on 20.10.2021.
+//
+
+#pragma once
+
+#include "../utils.hpp"
+
+namespace options {
+	const uint8_t OPTIONS_DATA_SLOT = 0;
+	const uint8_t MAX_SAVES = 3;
+
+	extern bool show_fps;
+	extern uint8_t saves_count;
+
+	struct OptionsData {
+		uint8_t save_count;
+		bool show_fps;
+	};
+
+	void save();
+	OptionsData load();
+}

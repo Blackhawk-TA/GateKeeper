@@ -4,15 +4,14 @@
 
 #include "sidemenu.hpp"
 #include "overlay.hpp"
-#include "controls/listbox.hpp"
-#include "../utils/savegame.hpp"
+#include "../utils/saves/savegame.hpp"
 
 void sidemenu::init(uint8_t save_id) {
 	control = nullptr;
 	items = {
 		listbox_item::create_sidemenu_item(listbox_item::INVENTORY),
-		listbox_item::create_sidemenu_item(listbox_item::SAVE, save_id),
 		listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_OPTIONS, save_id),
+		listbox_item::create_sidemenu_item(listbox_item::SAVE, save_id),
 		listbox_item::create_sidemenu_item(listbox_item::EXIT)
 	};
 }

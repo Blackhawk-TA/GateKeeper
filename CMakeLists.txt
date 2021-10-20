@@ -35,7 +35,8 @@ set(PROJECT_SOURCE
         src/ui/sidemenu.cpp src/ui/sidemenu.hpp
         src/ui/controls/textbox.cpp src/ui/controls/textbox.hpp
         src/ui/overlay.cpp src/ui/overlay.hpp
-        src/utils/savegame.cpp src/utils/savegame.hpp
+        src/utils/saves/savegame.cpp src/utils/saves/savegame.hpp
+        src/utils/saves/options.cpp src/utils/saves/options.hpp
         src/utils/utils.cpp src/utils/utils.hpp
 )
 # ... and any other files you want in the release here

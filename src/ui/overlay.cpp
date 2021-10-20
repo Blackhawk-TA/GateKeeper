@@ -3,14 +3,13 @@
 //
 
 #include "overlay.hpp"
+#include "../utils/saves/options.hpp"
 
 using namespace blit;
 
-bool overlay::show_fps = true;
-
 void overlay::draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
 	//Abort if fps counter is hidden
-	if (!show_fps) return;
+	if (!options::show_fps) return;
 
 	//Draw fps box
 	screen.alpha = 255;
