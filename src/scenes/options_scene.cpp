@@ -4,8 +4,10 @@
 
 #include "options_scene.hpp"
 #include "../items/items.hpp"
+#include "../game.hpp"
 
 OptionsScene::OptionsScene(uint8_t save_id) {
+	OptionsScene::save_id = save_id;
 	last_buttons = 0;
 	changed = 0;
 	option_items = {
@@ -38,6 +40,8 @@ void OptionsScene::inputs() {
 		listbox->cursor_down();
 	} else if (buttons & changed & Button::A) {
 		listbox->cursor_press();
+	} else if (buttons & changed & Button::B) {
+		load_previous_scene(save_id);
 	}
 
 	last_buttons = buttons;
