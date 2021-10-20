@@ -5,18 +5,8 @@
 #pragma once
 #include "../utils/utils.hpp"
 #include "assets.hpp"
-#include "../engine/camera.hpp"
-#include "../engine/map.hpp"
-#include "../ui/overlay.hpp"
-#include "../player.hpp"
-#include "../engine/transition.hpp"
-#include "../engine/flags.hpp"
-#include "../handlers/stargate_handler.hpp"
-#include "../ui/sidemenu.hpp"
-#include "../ui/inventory.hpp"
-#include "../items/items.hpp"
-#include "../utils/saves/savegame.hpp"
 #include "scene_interface.hpp"
+#include "../player.hpp"
 
 class GameScene : public IScene {
 public:

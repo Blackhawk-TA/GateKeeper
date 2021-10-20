@@ -5,7 +5,6 @@
 #include "savegame.hpp"
 #include "../../ui/inventory.hpp"
 #include "../../ui/overlay.hpp"
-#include "../../scenes/menu_scene.hpp"
 #include "options.hpp"
 
 /**

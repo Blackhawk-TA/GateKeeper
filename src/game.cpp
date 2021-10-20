@@ -4,6 +4,8 @@
 #include "scenes/menu_scene.hpp"
 #include "scenes/options_scene.hpp"
 #include "utils/saves/options.hpp"
+#include "engine/transition.hpp"
+#include "ui/overlay.hpp"
 
 using namespace blit;
 

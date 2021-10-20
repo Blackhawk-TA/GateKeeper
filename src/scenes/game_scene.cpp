@@ -4,6 +4,13 @@
 
 #include "game_scene.hpp"
 #include "../game.hpp"
+#include "../engine/transition.hpp"
+#include "../engine/flags.hpp"
+#include "../handlers/stargate_handler.hpp"
+#include "../ui/sidemenu.hpp"
+#include "../ui/inventory.hpp"
+#include "../items/items.hpp"
+#include "../utils/saves/savegame.hpp"
 
 GameScene::GameScene(uint8_t save_id) {
 	GameScene::save_id = save_id;

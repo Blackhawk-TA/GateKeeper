@@ -4,7 +4,6 @@
 
 #include "../items.hpp"
 #include "../../game.hpp"
-#include "../../ui/sidemenu.hpp"
 
 Listbox::Item listbox_item::create_options_entry(uint8_t save_id) {
 	return Listbox::Item{
