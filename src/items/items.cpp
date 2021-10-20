@@ -27,9 +27,6 @@ Listbox::Item listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_ITEM ite
 		case SIDEMENU_ITEM::INVENTORY:
 			item = create_inventory_entry();
 			break;
-		case SIDEMENU_ITEM::SHOW_FPS:
-			item = create_show_fps_entry();
-			break;
 		case SIDEMENU_ITEM::SAVE:
 			item = create_save_entry(save_id);
 			break;
@@ -54,6 +51,22 @@ Listbox::Item listbox_item::create_menu_item(listbox_item::MENU_ITEM item_type, 
 			item = create_new_save_entry(save_id);
 			break;
 		case MENU_ITEM::SETTINGS:
+			item = create_settings_entry();
+			break;
+	}
+
+	return item;
+}
+
+Listbox::Item listbox_item::create_settings_item(listbox_item::SETTINGS_ITEM item_type) {
+	Listbox::Item item;
+
+	switch (item_type) {
+		case SETTINGS_ITEM::SHOW_FPS:
+			item = create_show_fps_entry();
+			break;
+		case SETTINGS_ITEM::EXIT_SETTINGS:
+			item = create_settings_exit_entry();
 			break;
 	}
 

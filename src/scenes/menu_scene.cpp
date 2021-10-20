@@ -32,6 +32,8 @@ void MenuScene::create_list_entries() {
 	if (saves_count < MAX_SAVES) {
 		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, saves_count + 1));
 	}
+
+	saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::SETTINGS));
 }
 
 void MenuScene::render(uint32_t time) {

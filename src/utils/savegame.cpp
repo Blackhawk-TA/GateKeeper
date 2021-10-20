@@ -94,7 +94,7 @@ void savegame::save(uint8_t save_id) {
 	//Check if current save is a new save game and therefore update save_count
 	MenuScene::MenuData menu_data{};
 	bool data_loaded = read_save(menu_data, MENU_DATA_SLOT);
-	if (data_loaded && menu_data.save_count < save_id) { //Menu data exists always
+	if (data_loaded && menu_data.save_count < save_id) { //Menu data always exists
 		menu_data.save_count = save_id;
 		write_save(menu_data, MENU_DATA_SLOT);
 	}

@@ -18,9 +18,8 @@ namespace listbox_item {
 
 	enum SIDEMENU_ITEM {
 		INVENTORY = 1,
-		SHOW_FPS = 2,
-		SAVE = 3,
-		EXIT = 4
+		SAVE = 2,
+		EXIT = 3
 	};
 
 	enum MENU_ITEM {
@@ -29,17 +28,26 @@ namespace listbox_item {
 		SETTINGS = 3
 	};
 
+	enum SETTINGS_ITEM {
+		SHOW_FPS = 1,
+		EXIT_SETTINGS = 2
+	};
+
 	Listbox::Item create_inventory_item(INVENTORY_ITEM item_type);
 	Listbox::Item create_sidemenu_item(SIDEMENU_ITEM item_type, uint8_t save_id = 0);
-	Listbox::Item create_menu_item(MENU_ITEM item_type, uint8_t save_id);
+	Listbox::Item create_menu_item(MENU_ITEM item_type, uint8_t save_id = 0);
+	Listbox::Item create_settings_item(SETTINGS_ITEM item_type);
 
 	Listbox::Item create_gate_part();
 
 	Listbox::Item create_inventory_entry();
-	Listbox::Item create_show_fps_entry();
 	Listbox::Item create_save_entry(uint8_t save_id);
 	Listbox::Item create_exit_entry();
 
 	Listbox::Item create_load_entry(uint8_t save_id);
 	Listbox::Item create_new_save_entry(uint8_t save_id);
+	Listbox::Item create_settings_entry();
+
+	Listbox::Item create_show_fps_entry();
+	Listbox::Item create_settings_exit_entry();
 }
