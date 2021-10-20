@@ -9,8 +9,6 @@ GameScene::GameScene(uint8_t save_id) {
 	GameScene::save_id = save_id;
 	last_buttons = 0;
 	changed = 0;
-	ms_start = 0;
-	ms_end = 0;
 
 	flags::set_flag(flags::TileFlags::WALKABLE, {
 		33, 68, 69, 70, 71, 133, 134, 135, 197, 198, 199, 261, 262, 263, 325, 326, 327, 640, 641, 705, 712, 713,
@@ -38,8 +36,6 @@ GameScene::~GameScene() {
 }
 
 void GameScene::render(uint32_t time) {
-	ms_start = now();
-
 	map::draw();
 	stargate_handler::draw_stargates();
 	player->draw();
@@ -51,9 +47,6 @@ void GameScene::render(uint32_t time) {
 	if (inventory::is_open()) {
 		inventory::draw();
 	}
-
-	ms_end = now();
-	overlay::draw_fps(ms_start, ms_end);
 }
 
 void GameScene::update(uint32_t time) {
