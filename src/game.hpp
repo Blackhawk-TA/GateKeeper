@@ -1,4 +1,9 @@
 #include "32blit.hpp"
 
-void load_menu_scene();
-void load_game_scene(uint8_t save_id);
+enum Scene {
+	MENU = 1,
+	GAME = 2,
+	SETTINGS = 3
+};
+
+void load_scene(Scene scene_type, uint8_t save_id = 0);

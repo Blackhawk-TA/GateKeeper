@@ -11,7 +11,6 @@ void sidemenu::init(uint8_t save_id) {
 	control = nullptr;
 	items = {
 		listbox_item::create_sidemenu_item(listbox_item::INVENTORY),
-		listbox_item::create_sidemenu_item(listbox_item::SHOW_FPS),
 		listbox_item::create_sidemenu_item(listbox_item::SAVE, save_id),
 		listbox_item::create_sidemenu_item(listbox_item::EXIT)
 	};

@@ -54,11 +54,7 @@ void GameScene::render(uint32_t time) {
 void GameScene::update(uint32_t time) {
 	//Handle player death
 	if (player->is_dead() && !transition::in_progress()) {
-		//TODO implement death animation/return to menu
-		load_menu_scene();
-		//TODO instead of transition implement own death screen?
-//		delete player;
-//		player = savegame::load();
+		load_scene(Scene::MENU);
 	}
 
 	//Handle camera_position update

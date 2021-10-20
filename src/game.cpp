@@ -2,6 +2,7 @@
 #include "assets.hpp"
 #include "scenes/game_scene.hpp"
 #include "scenes/menu_scene.hpp"
+#include "scenes/settings_scene.hpp"
 
 using namespace blit;
 
@@ -23,17 +24,21 @@ void init() {
 
 //TODO either implement own gameover screen or fix invalid read.
 // without transition, there are invalid reads and writes. Transitions somehow fix it
-void load_menu_scene() {
-	transition::start([] {
+void load_scene(Scene scene_type, uint8_t save_id) {
+	transition::start([scene_type, save_id] { //TODO move transition wrapping somewhere else
 		delete scene;
-		scene = new MenuScene();
-	});
-}
 
-void load_game_scene(uint8_t save_id) {
-	transition::start([save_id] {
-		delete scene;
-		scene = new GameScene(save_id);
+		switch (scene_type) {
+			case Scene::MENU:
+				scene = new MenuScene();
+				break;
+			case Scene::GAME:
+				scene = new GameScene(save_id);
+				break;
+			case Scene::SETTINGS:
+				scene = new SettingsScene();
+				break;
+		}
 	});
 }
 
