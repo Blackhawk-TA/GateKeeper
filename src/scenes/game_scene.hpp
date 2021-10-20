@@ -26,6 +26,7 @@ public:
 	void update(uint32_t time) override;
 
 private:
+	uint8_t save_id;
 	uint32_t last_buttons;
 	uint32_t changed;
 	uint32_t ms_start;

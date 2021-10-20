@@ -7,6 +7,8 @@
 using namespace blit;
 
 IScene *scene = nullptr;
+Scene previous_scene;
+Scene current_scene;
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -20,11 +22,19 @@ void init() {
 	transition::init();
 
 	scene = new MenuScene();
+	current_scene = Scene::MENU;
+}
+
+void load_previous_scene(uint8_t save_id) {
+	load_scene(previous_scene, save_id);
 }
 
 //TODO either implement own gameover screen or fix invalid read.
 // without transition, there are invalid reads and writes. Transitions somehow fix it
 void load_scene(Scene scene_type, uint8_t save_id) {
+	previous_scene = current_scene;
+	current_scene = scene_type;
+
 	transition::start([scene_type, save_id] { //TODO move transition wrapping somewhere else
 		delete scene;
 
@@ -36,7 +46,7 @@ void load_scene(Scene scene_type, uint8_t save_id) {
 				scene = new GameScene(save_id);
 				break;
 			case Scene::OPTIONS:
-				scene = new OptionsScene();
+				scene = new OptionsScene(save_id);
 				break;
 		}
 	});

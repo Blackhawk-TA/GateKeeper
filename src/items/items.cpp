@@ -30,6 +30,9 @@ Listbox::Item listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_ITEM ite
 		case SIDEMENU_ITEM::SAVE:
 			item = create_save_entry(save_id);
 			break;
+		case SIDEMENU_ITEM::SIDEMENU_OPTIONS:
+			item = create_options_entry(save_id);
+			break;
 		case SIDEMENU_ITEM::EXIT:
 			item = create_exit_entry();
 			break;
@@ -58,7 +61,7 @@ Listbox::Item listbox_item::create_menu_item(listbox_item::MENU_ITEM item_type, 
 	return item;
 }
 
-Listbox::Item listbox_item::create_options_item(listbox_item::OPTIONS_ITEM item_type) {
+Listbox::Item listbox_item::create_options_item(listbox_item::OPTIONS_ITEM item_type, uint8_t save_id) {
 	Listbox::Item item;
 
 	switch (item_type) {
@@ -66,7 +69,7 @@ Listbox::Item listbox_item::create_options_item(listbox_item::OPTIONS_ITEM item_
 			item = create_show_fps_entry();
 			break;
 		case OPTIONS_ITEM::EXIT_OPTIONS:
-			item = create_options_exit_entry();
+			item = create_options_exit_entry(save_id);
 			break;
 	}
 

@@ -6,6 +6,7 @@
 #include "../game.hpp"
 
 GameScene::GameScene(uint8_t save_id) {
+	GameScene::save_id = save_id;
 	last_buttons = 0;
 	changed = 0;
 	ms_start = 0;
@@ -29,6 +30,7 @@ GameScene::GameScene(uint8_t save_id) {
 }
 
 GameScene::~GameScene() {
+	savegame::save(save_id); //Auto save
 	delete player;
 }
 
