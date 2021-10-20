@@ -12,7 +12,7 @@ OptionsScene::OptionsScene(uint8_t save_id) {
 		listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::SHOW_FPS),
 		listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::EXIT_OPTIONS, save_id)
 	};
-	listbox = new Listbox(Rect(0, 0 , 5, 6), option_items, false);
+	listbox = new Listbox(Rect(15, 0 , 5, 6), option_items, false);
 }
 
 OptionsScene::~OptionsScene() {
