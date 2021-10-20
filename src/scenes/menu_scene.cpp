@@ -13,7 +13,7 @@ MenuScene::MenuScene() {
 
 	create_list_entries();
 
-	listbox = new Listbox(Rect(0, 0, 5, 6), saves, false);
+	listbox = new Listbox(Rect(15, 0, 5, 6), saves, false);
 }
 
 MenuScene::~MenuScene() {
