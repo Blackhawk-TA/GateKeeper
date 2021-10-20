@@ -7,15 +7,15 @@
 #include "scene_interface.hpp"
 #include "../ui/controls/listbox.hpp"
 
-class SettingsScene : public IScene {
+class OptionsScene : public IScene {
 public:
-	explicit SettingsScene();
-	~SettingsScene();
+	explicit OptionsScene();
+	~OptionsScene() override;
 	void render(uint32_t time) override;
 	void update(uint32_t time) override;
 
 private:
-	std::vector<Listbox::Item> settings_items;
+	std::vector<Listbox::Item> option_items;
 	uint32_t last_buttons;
 	uint32_t changed;
 	Listbox *listbox;

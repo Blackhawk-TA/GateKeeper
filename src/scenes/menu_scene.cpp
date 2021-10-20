@@ -33,7 +33,7 @@ void MenuScene::create_list_entries() {
 		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, saves_count + 1));
 	}
 
-	saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::SETTINGS));
+	saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::MENU_OPTIONS));
 }
 
 void MenuScene::render(uint32_t time) {

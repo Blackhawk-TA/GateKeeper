@@ -2,31 +2,31 @@
 // Created by D069765 on 20.10.2021.
 //
 
-#include "settings_scene.hpp"
+#include "options_scene.hpp"
 #include "../items/items.hpp"
 
-SettingsScene::SettingsScene() {
+OptionsScene::OptionsScene() {
 	last_buttons = 0;
 	changed = 0;
-	settings_items = {
-		listbox_item::create_settings_item(listbox_item::SETTINGS_ITEM::SHOW_FPS),
-		listbox_item::create_settings_item(listbox_item::SETTINGS_ITEM::EXIT_SETTINGS)
+	option_items = {
+		listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::SHOW_FPS),
+		listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::EXIT_OPTIONS)
 	};
-	listbox = new Listbox(Rect(0, 0 , 5, 6), settings_items, false);
+	listbox = new Listbox(Rect(0, 0 , 5, 6), option_items, false);
 }
 
-SettingsScene::~SettingsScene() {
+OptionsScene::~OptionsScene() {
 	delete listbox;
 }
 
-void SettingsScene::render(uint32_t time) {
+void OptionsScene::render(uint32_t time) {
 	screen.pen = Pen(0, 0, 0, 255);
 	screen.rectangle(Rect(0, 0, 320, 240));
 
 	listbox->draw();
 }
 
-void SettingsScene::update(uint32_t time) {
+void OptionsScene::update(uint32_t time) {
 	//Handle button inputs
 	changed = buttons ^ last_buttons;
 

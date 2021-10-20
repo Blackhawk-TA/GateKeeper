@@ -2,7 +2,7 @@
 #include "assets.hpp"
 #include "scenes/game_scene.hpp"
 #include "scenes/menu_scene.hpp"
-#include "scenes/settings_scene.hpp"
+#include "scenes/options_scene.hpp"
 
 using namespace blit;
 
@@ -35,8 +35,8 @@ void load_scene(Scene scene_type, uint8_t save_id) {
 			case Scene::GAME:
 				scene = new GameScene(save_id);
 				break;
-			case Scene::SETTINGS:
-				scene = new SettingsScene();
+			case Scene::OPTIONS:
+				scene = new OptionsScene();
 				break;
 		}
 	});

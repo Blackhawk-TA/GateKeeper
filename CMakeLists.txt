@@ -14,7 +14,7 @@ set(PROJECT_SOURCE
         src/scenes/scene_interface.hpp
         src/scenes/game_scene.cpp src/scenes/game_scene.hpp
         src/scenes/menu_scene.cpp src/scenes/menu_scene.hpp
-        src/scenes/settings_scene.cpp src/scenes/settings_scene.hpp
+        src/scenes/options_scene.cpp src/scenes/options_scene.hpp
         src/handlers/entry_handler.cpp src/handlers/entry_handler.hpp
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/items/items.cpp src/items/items.hpp
@@ -22,8 +22,8 @@ set(PROJECT_SOURCE
         src/items/sidemenu/exit_sidemenu_entry.cpp
         src/items/sidemenu/inventory_entry.cpp
         src/items/sidemenu/save_entry.cpp
-        src/items/settings/show_fps_entry.cpp
-        src/items/settings/exit_settings_entry.cpp
+        src/items/options/show_fps_entry.cpp
+        src/items/options/exit_options_entry.cpp
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
         src/items/menu/settings_entry.cpp
