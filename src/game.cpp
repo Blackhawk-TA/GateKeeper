@@ -3,6 +3,7 @@
 #include "scenes/game_scene.hpp"
 #include "scenes/menu_scene.hpp"
 #include "scenes/options_scene.hpp"
+#include "utils/saves/options.hpp"
 
 using namespace blit;
 
@@ -19,6 +20,8 @@ Scene current_scene;
 void init() {
 	set_screen_mode(ScreenMode::hires);
 	load_persistent_spritesheets();
+
+	options::load();
 	transition::init();
 
 	scene = new MenuScene();

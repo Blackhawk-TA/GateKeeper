@@ -6,8 +6,6 @@
 #include "../../game.hpp"
 #include "../../utils/saves/options.hpp"
 
-//TODO save options in struct, this is not done currently
-// move options saving from MenuScene to own namespace in utils
 Listbox::Item listbox_item::create_options_exit_entry(uint8_t save_id) {
 	return Listbox::Item{
 		"EXIT",

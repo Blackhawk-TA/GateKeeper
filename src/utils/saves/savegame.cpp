@@ -93,11 +93,9 @@ Player *savegame::create() {
 
 void savegame::save(uint8_t save_id) {
 	//Check if current save is a new save game and therefore update save_count
-	options::OptionsData options_data{};
-	bool data_loaded = read_save(options_data, options::OPTIONS_DATA_SLOT);
-	if (data_loaded && options_data.save_count < save_id) { //TODO not anymore -> Options data always exists
-		options_data.save_count = save_id;
-		write_save(options_data, options::OPTIONS_DATA_SLOT);
+	if (options::save_count < save_id) {
+		options::save_count = save_id;
+		options::save();
 	}
 
 	//Fetch item and stargate data
