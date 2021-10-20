@@ -9,7 +9,7 @@
 
 class OptionsScene : public IScene {
 public:
-	explicit OptionsScene();
+	explicit OptionsScene(uint8_t save_id = 0);
 	~OptionsScene() override;
 	void render(uint32_t time) override;
 	void update(uint32_t time) override;

@@ -5,12 +5,12 @@
 #include "options_scene.hpp"
 #include "../items/items.hpp"
 
-OptionsScene::OptionsScene() {
+OptionsScene::OptionsScene(uint8_t save_id) {
 	last_buttons = 0;
 	changed = 0;
 	option_items = {
 		listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::SHOW_FPS),
-		listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::EXIT_OPTIONS)
+		listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::EXIT_OPTIONS, save_id)
 	};
 	listbox = new Listbox(Rect(0, 0 , 5, 6), option_items, false);
 }

@@ -34,10 +34,14 @@ namespace listbox_item {
 		EXIT_OPTIONS = 2
 	};
 
+	//Item generators
 	Listbox::Item create_inventory_item(INVENTORY_ITEM item_type);
 	Listbox::Item create_sidemenu_item(SIDEMENU_ITEM item_type, uint8_t save_id = 0);
 	Listbox::Item create_menu_item(MENU_ITEM item_type, uint8_t save_id = 0);
-	Listbox::Item create_options_item(OPTIONS_ITEM item_type);
+	Listbox::Item create_options_item(OPTIONS_ITEM item_type, uint8_t save_id = 0);
+
+	//Generic items
+	Listbox::Item create_options_entry(uint8_t save_id = 0);
 
 	//Inventory items
 	Listbox::Item create_gate_part();
@@ -50,9 +54,8 @@ namespace listbox_item {
 	//Menu items
 	Listbox::Item create_load_entry(uint8_t save_id);
 	Listbox::Item create_new_save_entry(uint8_t save_id);
-	Listbox::Item create_options_entry();
 
 	//Options items
 	Listbox::Item create_show_fps_entry();
-	Listbox::Item create_options_exit_entry();
+	Listbox::Item create_options_exit_entry(uint8_t save_id = 0);
 }
