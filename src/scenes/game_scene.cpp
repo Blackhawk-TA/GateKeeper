@@ -11,6 +11,7 @@
 #include "../ui/inventory.hpp"
 #include "../items/items.hpp"
 #include "../utils/saves/savegame.hpp"
+#include "../ui/overlay.hpp"
 
 GameScene::GameScene(uint8_t save_id) {
 	GameScene::save_id = save_id;
@@ -50,6 +51,7 @@ void GameScene::render(uint32_t time) {
 	map::draw();
 	stargate_handler::draw_stargates();
 	player->draw();
+	overlay::draw_statusbar(player->get_health());
 
 	if (sidemenu::is_open()) {
 		sidemenu::draw();

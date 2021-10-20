@@ -238,3 +238,7 @@ void Player::stop_animation() {
 bool Player::is_dead() const {
 	return dead;
 }
+
+uint8_t Player::get_health() const {
+	return health;
+}

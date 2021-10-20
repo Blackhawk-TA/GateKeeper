@@ -7,6 +7,15 @@
 
 using namespace blit;
 
+void overlay::draw_statusbar(uint8_t health) {
+	screen.pen = Pen(255, 255, 255, 200);
+	screen.rectangle(Rect(0, screen.bounds.h - 10, screen.bounds.w, 10));
+
+	screen.pen = Pen(0, 0, 0, 255);
+	std::string health_string = "Health: " + std::to_string(health);
+	screen.text(health_string, minimal_font, Rect(screen.bounds.w - 10, screen.bounds.h - 10, 10, 10), false, TextAlign::right);
+}
+
 void overlay::draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
 	//Abort if fps counter is hidden
 	if (!options::show_fps) return;
@@ -14,7 +23,7 @@ void overlay::draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
 	//Draw fps box
 	screen.alpha = 255;
 	screen.pen = Pen(255, 255, 255, 100);
-	screen.rectangle(Rect(1, screen.bounds.h - 10, 20, 9));
+	screen.rectangle(Rect(0, screen.bounds.h - 10, 20, 10));
 	screen.pen = Pen(0, 0, 0, 200);
 
 	//Calculate frames per second (fps)
@@ -30,8 +39,8 @@ void overlay::draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
 	}
 
 	//Draw fps counter
-	std::string fms = std::to_string(fps);
-	screen.text(fms, minimal_font, Rect(3, screen.bounds.h - 9, 10, 16));
+	std::string fps_string = std::to_string(fps);
+	screen.text(fps_string, minimal_font, Rect(1, screen.bounds.h - 10, 10, 10));
 
 	//Draw frame time boxes
 	int block_size = 4;

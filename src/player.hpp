@@ -24,6 +24,7 @@ public:
 	void evade();
 	void take_damage(uint8_t damage_amount);
 	bool is_dead() const;
+	uint8_t get_health() const;
 	void move(MovementDirection direction);
 	static MovementDirection get_direction();
 

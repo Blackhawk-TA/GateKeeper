@@ -6,5 +6,6 @@
 #include "32blit.hpp"
 
 namespace overlay {
+	void draw_statusbar(uint8_t health);
 	void draw_fps(uint32_t &ms_start, uint32_t &ms_end);
 }
