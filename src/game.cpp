@@ -40,7 +40,7 @@ void load_scene(Scene scene_type, uint8_t save_id) {
 	previous_scene = current_scene;
 	current_scene = scene_type;
 
-	transition::start([scene_type, save_id] { //TODO move transition wrapping somewhere else
+	transition::start([scene_type, save_id] {
 		delete scene;
 
 		switch (scene_type) {
@@ -62,7 +62,7 @@ void load_scene(Scene scene_type, uint8_t save_id) {
 // render(time)
 //
 // This function is called to perform rendering of the game. time is the
-// amount if milliseconds elapsed since the start of your game
+// amount of milliseconds elapsed since the start of your game
 //
 void render(uint32_t time) {
 	ms_start = now();
@@ -83,8 +83,13 @@ void render(uint32_t time) {
 // update(time)
 //
 // This is called to update your game state. time is the
-// amount if milliseconds elapsed since the start of your game
+// amount of milliseconds elapsed since the start of your game
 //
 void update(uint32_t time) {
 	scene->update(time);
+
+	//Only update inputs when not in transition
+	if (!transition::in_progress()) {
+		scene->inputs();
+	}
 }

@@ -24,6 +24,7 @@ public:
 	~GameScene() override;
 	void render(uint32_t time) override;
 	void update(uint32_t time) override;
+	void inputs() override;
 
 private:
 	uint8_t save_id;

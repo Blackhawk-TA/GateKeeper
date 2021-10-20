@@ -41,7 +41,9 @@ void MenuScene::render(uint32_t time) {
 }
 
 void MenuScene::update(uint32_t time) {
-	//Handle button inputs
+}
+
+void MenuScene::inputs() {
 	changed = buttons ^ last_buttons;
 
 	if (buttons & changed & Button::DPAD_UP) {

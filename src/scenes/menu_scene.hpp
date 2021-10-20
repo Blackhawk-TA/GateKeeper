@@ -13,6 +13,7 @@ public:
 	~MenuScene() override;
 	void render(uint32_t time) override;
 	void update(uint32_t time) override;
+	void inputs() override;
 
 private:
 	std::vector<Listbox::Item> saves;
