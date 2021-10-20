@@ -26,7 +26,7 @@ set(PROJECT_SOURCE
         src/items/options/exit_options_entry.cpp
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
-        src/items/generic/settings_entry.cpp
+        src/items/generic/options_entry.cpp
         src/map_objects/stargate.cpp src/map_objects/stargate.hpp
         src/player.cpp src/player.hpp
         src/ui/controls/box.cpp src/ui/controls/box.hpp

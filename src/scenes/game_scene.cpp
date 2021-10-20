@@ -28,6 +28,10 @@ GameScene::GameScene(uint8_t save_id) {
 }
 
 GameScene::~GameScene() {
+	if (sidemenu::is_open()) {
+		sidemenu::close();
+	}
+
 	//Auto save
 	if (!player->is_dead()) {
 		savegame::save(save_id);
