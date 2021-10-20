@@ -15,7 +15,7 @@
 #include "../ui/sidemenu.hpp"
 #include "../ui/inventory.hpp"
 #include "../items/items.hpp"
-#include "../utils/savegame.hpp"
+#include "../utils/saves/savegame.hpp"
 #include "scene_interface.hpp"
 
 class GameScene : public IScene {

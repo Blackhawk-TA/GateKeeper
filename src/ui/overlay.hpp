@@ -7,5 +7,4 @@
 
 namespace overlay {
 	void draw_fps(uint32_t &ms_start, uint32_t &ms_end);
-	extern bool show_fps;
 }

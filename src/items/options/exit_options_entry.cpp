@@ -4,6 +4,7 @@
 
 #include "../items.hpp"
 #include "../../game.hpp"
+#include "../../utils/saves/options.hpp"
 
 //TODO save options in struct, this is not done currently
 // move options saving from MenuScene to own namespace in utils
@@ -16,6 +17,7 @@ Listbox::Item listbox_item::create_options_exit_entry(uint8_t save_id) {
 		false,
 		0,
 		[save_id] {
+			options::save();
 			load_previous_scene(save_id);
 			return Listbox::Tooltip::SUPPRESS;
 		}

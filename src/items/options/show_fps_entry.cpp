@@ -3,7 +3,7 @@
 //
 
 #include "../items.hpp"
-#include "../../ui/overlay.hpp"
+#include "../../utils/saves/options.hpp"
 
 Listbox::Item listbox_item::create_show_fps_entry() {
 	return Listbox::Item{
@@ -14,7 +14,7 @@ Listbox::Item listbox_item::create_show_fps_entry() {
 		false,
 		0,
 		[] {
-			overlay::show_fps = !overlay::show_fps;
+			options::show_fps = !options::show_fps;
 			return Listbox::Tooltip::SUCCESS;
 		}
 	};

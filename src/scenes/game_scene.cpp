@@ -30,7 +30,10 @@ GameScene::GameScene(uint8_t save_id) {
 }
 
 GameScene::~GameScene() {
-	savegame::save(save_id); //Auto save
+	//Auto save
+	if (!player->is_dead()) {
+		savegame::save(save_id);
+	}
 	delete player;
 }
 

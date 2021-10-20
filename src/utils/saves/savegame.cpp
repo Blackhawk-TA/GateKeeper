@@ -3,9 +3,10 @@
 //
 
 #include "savegame.hpp"
-#include "../ui/inventory.hpp"
-#include "../ui/overlay.hpp"
-#include "../scenes/menu_scene.hpp"
+#include "../../ui/inventory.hpp"
+#include "../../ui/overlay.hpp"
+#include "../../scenes/menu_scene.hpp"
+#include "options.hpp"
 
 /**
  * Parses the item vector into an array, because vector cannot be saved directly
@@ -92,11 +93,11 @@ Player *savegame::create() {
 
 void savegame::save(uint8_t save_id) {
 	//Check if current save is a new save game and therefore update save_count
-	MenuScene::MenuData menu_data{};
-	bool data_loaded = read_save(menu_data, MENU_DATA_SLOT);
-	if (data_loaded && menu_data.save_count < save_id) { //Menu data always exists
-		menu_data.save_count = save_id;
-		write_save(menu_data, MENU_DATA_SLOT);
+	options::OptionsData options_data{};
+	bool data_loaded = read_save(options_data, options::OPTIONS_DATA_SLOT);
+	if (data_loaded && options_data.save_count < save_id) { //TODO not anymore -> Options data always exists
+		options_data.save_count = save_id;
+		write_save(options_data, options::OPTIONS_DATA_SLOT);
 	}
 
 	//Fetch item and stargate data
@@ -105,7 +106,6 @@ void savegame::save(uint8_t save_id) {
 
 	//Save and compress data which will be saved
 	auto game_data = GameData{
-		overlay::show_fps,
 		map::get_section(),
 		camera::get_player_position(),
 		Player::get_direction(),
@@ -124,9 +124,6 @@ Player *savegame::load(uint8_t save_id) {
 
 	//Load data from save game
 	if (save_found) {
-		//Load fps setting
-		overlay::show_fps = save_data.show_fps;
-
 		//Load position and direction
 		map::load_section(save_data.map_section);
 		camera::init(save_data.camera_position);
