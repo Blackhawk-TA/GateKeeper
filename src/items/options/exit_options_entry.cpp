@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../game.hpp"
 
-Listbox::Item listbox_item::create_settings_exit_entry() {
+Listbox::Item listbox_item::create_options_exit_entry() {
 	return Listbox::Item{
 		"EXIT",
 		"Press A to go to the menu.",

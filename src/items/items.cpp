@@ -50,23 +50,23 @@ Listbox::Item listbox_item::create_menu_item(listbox_item::MENU_ITEM item_type, 
 		case MENU_ITEM::NEW_SAVE:
 			item = create_new_save_entry(save_id);
 			break;
-		case MENU_ITEM::SETTINGS:
-			item = create_settings_entry();
+		case MENU_ITEM::MENU_OPTIONS:
+			item = create_options_entry();
 			break;
 	}
 
 	return item;
 }
 
-Listbox::Item listbox_item::create_settings_item(listbox_item::SETTINGS_ITEM item_type) {
+Listbox::Item listbox_item::create_options_item(listbox_item::OPTIONS_ITEM item_type) {
 	Listbox::Item item;
 
 	switch (item_type) {
-		case SETTINGS_ITEM::SHOW_FPS:
+		case OPTIONS_ITEM::SHOW_FPS:
 			item = create_show_fps_entry();
 			break;
-		case SETTINGS_ITEM::EXIT_SETTINGS:
-			item = create_settings_exit_entry();
+		case OPTIONS_ITEM::EXIT_OPTIONS:
+			item = create_options_exit_entry();
 			break;
 	}
 
