@@ -3,7 +3,6 @@
 //
 
 #pragma once
-#include <iostream>
 #include "../utils/utils.hpp"
 
 class IScene {
