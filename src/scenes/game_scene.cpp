@@ -60,8 +60,9 @@ void GameScene::update(uint32_t time) {
 
 	//Handle stargate animations
 	stargate_handler::update_animations();
+}
 
-	//Handle button inputs
+void GameScene::inputs() {
 	changed = buttons ^ last_buttons;
 
 	if (sidemenu::is_open()) {

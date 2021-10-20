@@ -27,7 +27,9 @@ void OptionsScene::render(uint32_t time) {
 }
 
 void OptionsScene::update(uint32_t time) {
-	//Handle button inputs
+}
+
+void OptionsScene::inputs() {
 	changed = buttons ^ last_buttons;
 
 	if (buttons & changed & Button::DPAD_UP) {
