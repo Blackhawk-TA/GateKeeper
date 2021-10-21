@@ -10,7 +10,7 @@ void inventory::init() {
 	control = nullptr;
 	items = {
 		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::GATE_PART),
-		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::EXIT_INVENTORY)
+		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
 	};
 }
 

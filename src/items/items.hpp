@@ -13,14 +13,14 @@ namespace listbox_item {
 	const uint8_t INVENTORY_COUNTER = 2; //Amount of individual items in inventory
 	enum INVENTORY_ITEM {
 		GATE_PART = 1,
-		EXIT_INVENTORY = 2
+		INVENTORY_BACK = 2
 	};
 
 	enum SIDEMENU_ITEM {
 		INVENTORY = 1,
 		SAVE = 2,
 		SIDEMENU_OPTIONS = 3,
-		EXIT = 4
+		SIDEMENU_BACK = 4
 	};
 
 	enum MENU_ITEM {
@@ -31,7 +31,7 @@ namespace listbox_item {
 
 	enum OPTIONS_ITEM {
 		SHOW_FPS = 1,
-		EXIT_OPTIONS = 2
+		OPTIONS_BACK = 2
 	};
 
 	//Item generators

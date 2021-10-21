@@ -19,11 +19,11 @@ set(PROJECT_SOURCE
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
-        src/items/sidemenu/exit_sidemenu_entry.cpp
+        src/items/sidemenu/sidemenu_back_entry.cpp
         src/items/sidemenu/inventory_entry.cpp
         src/items/sidemenu/save_entry.cpp
         src/items/options/show_fps_entry.cpp
-        src/items/options/exit_options_entry.cpp
+        src/items/options/options_back_entry.cpp
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
         src/items/generic/options_entry.cpp

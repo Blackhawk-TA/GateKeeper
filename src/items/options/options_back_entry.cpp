@@ -8,7 +8,7 @@
 
 Listbox::Item listbox_item::create_options_exit_entry(uint8_t save_id) {
 	return Listbox::Item{
-		"EXIT",
+		"BACK",
 		"Press A to go to close options.",
 		"",
 		"",

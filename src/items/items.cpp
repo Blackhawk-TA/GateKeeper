@@ -12,7 +12,7 @@ Listbox::Item listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM i
 		case INVENTORY_ITEM::GATE_PART:
 			item = create_gate_part();
 			break;
-		case INVENTORY_ITEM::EXIT_INVENTORY:
+		case INVENTORY_ITEM::INVENTORY_BACK:
 			item = create_exit_entry();
 			break;
 	}
@@ -33,7 +33,7 @@ Listbox::Item listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_ITEM ite
 		case SIDEMENU_ITEM::SIDEMENU_OPTIONS:
 			item = create_options_entry(save_id);
 			break;
-		case SIDEMENU_ITEM::EXIT:
+		case SIDEMENU_ITEM::SIDEMENU_BACK:
 			item = create_exit_entry();
 			break;
 	}
@@ -68,7 +68,7 @@ Listbox::Item listbox_item::create_options_item(listbox_item::OPTIONS_ITEM item_
 		case OPTIONS_ITEM::SHOW_FPS:
 			item = create_show_fps_entry();
 			break;
-		case OPTIONS_ITEM::EXIT_OPTIONS:
+		case OPTIONS_ITEM::OPTIONS_BACK:
 			item = create_options_exit_entry(save_id);
 			break;
 	}

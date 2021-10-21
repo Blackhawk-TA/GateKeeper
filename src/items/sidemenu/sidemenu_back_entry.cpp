@@ -8,7 +8,7 @@
 
 Listbox::Item listbox_item::create_exit_entry() {
 	return Listbox::Item{
-		"EXIT",
+		"BACK",
 		"Press A to go back.",
 		"",
 		"",
