@@ -36,6 +36,9 @@ Listbox::Item listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_ITEM ite
 		case SIDEMENU_ITEM::SIDEMENU_BACK:
 			item = create_exit_entry();
 			break;
+		case SIDEMENU_ITEM::QUIT:
+			item = create_quit_entry();
+			break;
 	}
 
 	return item;

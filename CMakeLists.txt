@@ -22,6 +22,7 @@ set(PROJECT_SOURCE
         src/items/sidemenu/sidemenu_back_entry.cpp
         src/items/sidemenu/inventory_entry.cpp
         src/items/sidemenu/save_entry.cpp
+        src/items/sidemenu/quit_entry.cpp
         src/items/options/show_fps_entry.cpp
         src/items/options/options_back_entry.cpp
         src/items/menu/load_entry.cpp

@@ -20,7 +20,8 @@ namespace listbox_item {
 		INVENTORY = 1,
 		SAVE = 2,
 		SIDEMENU_OPTIONS = 3,
-		SIDEMENU_BACK = 4
+		SIDEMENU_BACK = 4,
+		QUIT = 5
 	};
 
 	enum MENU_ITEM {
@@ -50,6 +51,7 @@ namespace listbox_item {
 	Listbox::Item create_inventory_entry();
 	Listbox::Item create_save_entry(uint8_t save_id);
 	Listbox::Item create_exit_entry();
+	Listbox::Item create_quit_entry();
 
 	//Menu items
 	Listbox::Item create_load_entry(uint8_t save_id);

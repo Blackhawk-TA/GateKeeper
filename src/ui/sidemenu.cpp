@@ -12,12 +12,13 @@ void sidemenu::init(uint8_t save_id) {
 		listbox_item::create_sidemenu_item(listbox_item::INVENTORY),
 		listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_OPTIONS, save_id),
 		listbox_item::create_sidemenu_item(listbox_item::SAVE, save_id),
-		listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_BACK)
+		listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_BACK),
+		listbox_item::create_sidemenu_item(listbox_item::QUIT)
 	};
 }
 
 void sidemenu::open() {
-	control = new Listbox(Rect(16, 0, 4, 6), items);
+	control = new Listbox(Rect(16, 0, 4, 7), items);
 }
 
 void sidemenu::close() {

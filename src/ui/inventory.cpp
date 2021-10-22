@@ -31,7 +31,7 @@ std::vector<Listbox::Item> inventory::get_items() {
 }
 
 void inventory::open() {
-	control = new Listbox(Rect(14, 0, 6, 6), items);
+	control = new Listbox(Rect(14, 0, 6, 7), items);
 }
 
 void inventory::close() {
