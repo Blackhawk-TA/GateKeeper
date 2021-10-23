@@ -4,6 +4,7 @@
 #include "entry_handler.hpp"
 #include "../engine/camera.hpp"
 #include "../engine/transition.hpp"
+#include "../player.hpp"
 
 /**
  * Gets the id of an entry by the position of its interior or exterior entry depending on
@@ -39,9 +40,11 @@ void entry_handler::teleport(uint8_t entry_id, Point next_position) {
 	if (next_position == entry.exterior) {
 		map::load_section(entry.interior_map);
 		destination = entry.interior - entry.interior_offset;
+		Player::change_direction(Player::MovementDirection::UP, false);
 	} else if (next_position == entry.interior) {
 		map::load_section(entry.exterior_map);
 		destination = entry.exterior + Point(0, 1); //On exit teleport player in front of the door instead of directly on it
+		Player::change_direction(Player::MovementDirection::DOWN, false);
 	}
 
 	camera::set_position(destination);
