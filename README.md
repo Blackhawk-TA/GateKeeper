@@ -4,7 +4,7 @@
 ![Build](https://github.com/Blackhawk-TA/32blit-rpg/workflows/Build/badge.svg)
 [![github](https://img.shields.io/github/release/Blackhawk-TA/32blit-rpg.svg?color=brightgreen)](https://github.com/Blackhawk-TA/TowerDefense/releases)
 
-An RPG game called GateKeeper made for the 32blit and PicoSystem retro consoles.
+An RPG game called GateKeeper made for the 32blit and PicoSystem retro consoles. \
 It also runs on Linux, MacOS and Windows.
 
 ## Build
