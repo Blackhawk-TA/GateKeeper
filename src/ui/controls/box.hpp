@@ -11,6 +11,8 @@ public:
 	void draw() const;
 	void set_visibility(bool value);
 
+	static Rect set_bounds(Rect &r);
+
 private:
 	const uint16_t sprite_id_top_left = 1679;
 	const uint16_t sprite_id_top_center = 1680;

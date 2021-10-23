@@ -5,9 +5,40 @@
 #include "box.hpp"
 
 Box::Box(Rect rect) {
-	Box::rect = rect;
+	Box::rect = set_bounds(rect);
 	Box::visible = true;
 	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
+}
+
+/**
+ * Checks if the rectangle is fully visible on the screen and adjusts its size if necessary.
+ * @param r The rectangle of the box
+ * @return The rectangle which fits the screen.
+ */
+Rect Box::set_bounds(Rect &r) {
+	Point screen_tiles = get_screen_tiles();
+
+	//Check width
+	if (r.w > screen_tiles.x) {
+		r.w = screen_tiles.x;
+	}
+
+	//Check height
+	if (r.h > screen_tiles.y) {
+		r.h = screen_tiles.y;
+	}
+
+	//Check x position + width
+	if (r.x + r.w > screen_tiles.x) {
+		r.x = screen_tiles.x - r.w;
+	}
+
+	//Check y position + height
+	if (r.y + r.h > screen_tiles.y) {
+		r.y = screen_tiles.y - r.h;
+	}
+
+	return {r.x, r.y, r.w, r.h};
 }
 
 void Box::draw() const {

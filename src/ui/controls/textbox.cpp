@@ -7,6 +7,8 @@
 
 Textbox::Textbox(std::string text) : Box(rect) {
 	Textbox::line_counter = 1;
+	Point screen_tiles = get_screen_tiles();
+	Textbox::line_max_chars = screen_tiles.x * CHARS_PER_TILE;
 	Textbox::text = format_text(text);
 }
 
@@ -18,13 +20,13 @@ Textbox::Textbox(std::string text) : Box(rect) {
 std::string Textbox::format_text(std::string &unformatted_text) {
 	std::string output_text;
 
-	if (unformatted_text.length() > LINE_MAX_CHARS) {
+	if (unformatted_text.length() > line_max_chars) {
 		uint8_t char_counter = 0;
 		std::string formatted_text;
 		std::istringstream iss(unformatted_text);
 
 		for (std::string s; iss >> s;) {
-			if (char_counter + s.length() <= LINE_MAX_CHARS) {
+			if (char_counter + s.length() <= line_max_chars) {
 				char_counter += s.length() + 1; //Add 1 because of the added space down below
 				formatted_text.append(s);
 				formatted_text.append(" ");

@@ -5,7 +5,7 @@
 #include "listbox.hpp"
 
 Listbox::Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting) : Box(rect) {
-	Listbox::rect = rect;
+	Listbox::rect = Box::set_bounds(rect);
 	Listbox::items = items;
 	Listbox::enable_sorting = enable_sorting;
 	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);

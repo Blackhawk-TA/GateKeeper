@@ -13,6 +13,7 @@ using namespace blit;
 map::TileMap tile_map;
 Point screen_tiles;
 map::MapSections current_section;
+Pen background;
 
 /**
  * Parses the tmx struct into a tile map struct with render optimized tile_data
@@ -111,18 +112,22 @@ void map::load_section(MapSections map_section) {
 		case MapSections::DUNGEON:
 			tmx = (TMX_16 *) malloc(asset_dungeon_map_length);
 			memcpy(tmx, asset_dungeon_map, asset_dungeon_map_length);
+			background = Pen(48, 44, 46);
 			break;
 		case MapSections::GRASSLAND:
 			tmx = (TMX_16 *) malloc(asset_grassland_map_length);
 			memcpy(tmx, asset_grassland_map, asset_grassland_map_length);
+			background = Pen(40, 204, 223);
 			break;
 		case MapSections::INTERIOR:
 			tmx = (TMX_16 *) malloc(asset_interior_map_length);
 			memcpy(tmx, asset_interior_map, asset_interior_map_length);
+			background = Pen(48, 44, 46);
 			break;
 		case MapSections::SNOWLAND:
 			tmx = (TMX_16 *) malloc(asset_snowland_map_length);
 			memcpy(tmx, asset_snowland_map, asset_snowland_map_length);
+			background = Pen(223, 246, 245);
 			break;
 	}
 
@@ -142,6 +147,9 @@ void map::load_section(MapSections map_section) {
  * @param camera_position The position of the camera on the TileMap
  */
 void map::draw() {
+	screen.pen = background;
+	screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
+
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
 

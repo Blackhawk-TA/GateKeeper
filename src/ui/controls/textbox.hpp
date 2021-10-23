@@ -9,8 +9,9 @@ class Textbox : private Box {
 private:
 	static constexpr Rect rect = Rect(0, 12, 20, 3);
 	const uint8_t PADDING = 1; //Distance between Box border and text in tiles
-	const uint8_t LINE_MAX_CHARS = 57; //Maximum amount of chars per line
+	const float CHARS_PER_TILE = 2.8;
 	const Font font = minimal_font;
+	uint8_t line_max_chars;
 	int8_t line_offset;
 	uint8_t line_counter;
 	std::string text;

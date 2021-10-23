@@ -85,7 +85,7 @@ void GameScene::inputs() {
 			sidemenu::cursor_down();
 		} else if (buttons & changed & Button::A) {
 			sidemenu::cursor_press();
-		} else if (buttons & changed & Button::MENU || buttons & changed & Button::B) {
+		} else if (buttons & changed & Button::MENU || buttons & changed & Button::B || buttons & changed & Button::Y) {
 			sidemenu::close();
 		}
 	} else if (inventory::is_open()) {
@@ -98,7 +98,7 @@ void GameScene::inputs() {
 		} else if (buttons & changed & Button::B) {
 			sidemenu::open();
 			inventory::close();
-		} else if (buttons & changed & Button::MENU) {
+		} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
 			inventory::close();
 		} else if (buttons & changed & Button::X) {
 			inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
@@ -112,7 +112,7 @@ void GameScene::inputs() {
 			player->move(player->LEFT);
 		} else if (buttons & Button::DPAD_RIGHT) {
 			player->move(player->RIGHT);
-		} else if (buttons & changed & Button::MENU) {
+		} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
 			sidemenu::open();
 		} else if (buttons & changed & Button::A) {
 			player->attack();

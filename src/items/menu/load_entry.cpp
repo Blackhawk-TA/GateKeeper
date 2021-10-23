@@ -10,7 +10,7 @@ Listbox::Item listbox_item::create_load_entry(uint8_t save_id) {
 
 	return Listbox::Item{
 		"SAVE " + save_id_str,
-		"Press A to load save. Press B to delete save.",
+		"Press A to load save.",
 		"Loading save...",
 		"",
 		false,
