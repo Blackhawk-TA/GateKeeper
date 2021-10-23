@@ -30,6 +30,6 @@ uint8_t flags::get_flag(uint16_t tile_id) {
 	return flag_enum_id;
 }
 
-void flags::set_flag(TileFlags flag, const std::vector<uint16_t> &tiles) {
+void flags::set_flags(TileFlags flag, const std::vector<uint16_t> &tiles) {
 	flag_register[flag - 1] = tiles;
 }

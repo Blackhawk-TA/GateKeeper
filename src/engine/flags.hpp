@@ -19,5 +19,5 @@ namespace flags {
 	};
 
 	uint8_t get_flag(uint16_t tile_id);
-	void set_flag(TileFlags flag, const std::vector<uint16_t> &tiles);
+	void set_flags(TileFlags flag, const std::vector<uint16_t> &tiles);
 }
