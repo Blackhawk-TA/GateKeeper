@@ -91,7 +91,7 @@ bool stargate_handler::player_repair_gate() {
 	bool repaired = false;
 
 	while (!repaired && it != stargates.end()) {
-		if (it->second.get_entry_point() == camera::get_player_position() && it->second.repair()) {
+		if (it->second.get_entry_point() == camera::get_player_position() && it->second.interact()) {
 			repaired = true;
 		} else {
 			it++;

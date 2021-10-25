@@ -5,7 +5,7 @@
 #pragma once
 #include "utils/utils.hpp"
 #include "engine/camera.hpp"
-#include "map_objects/stargate.hpp"
+#include "game_objects/stargate.hpp"
 
 using namespace blit;
 

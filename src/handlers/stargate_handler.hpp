@@ -4,7 +4,7 @@
 
 #pragma once
 #include "../utils/utils.hpp"
-#include "../map_objects/stargate.hpp"
+#include "../game_objects/stargate.hpp"
 
 namespace stargate_handler {
 	void init();

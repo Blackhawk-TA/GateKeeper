@@ -5,17 +5,18 @@
 #pragma once
 #include "../utils/utils.hpp"
 #include "../engine/map.hpp"
+#include "game_object_interface.hpp"
 
-class Stargate {
+enum RenderStates {
+	BROKEN = 1,
+	INACTIVE = 2,
+	ACTIVATING = 3,
+	ACTIVE = 4,
+	DEACTIVATING = 5
+};
+
+class Stargate : public IGameObject<RenderStates> {
 private:
-	enum RenderStates {
-		BROKEN = 1,
-		INACTIVE = 2,
-		ACTIVATING = 3,
-		ACTIVE = 4,
-		DEACTIVATING = 5
-	};
-
 	const Size GATE_SIZE = Size(3, 3); //Gate sprite consists of 3x3 16 bit sprites
 	const uint16_t tile_id_broken = 1763;
 	const uint16_t tile_id_inactive = 683;
@@ -37,16 +38,17 @@ private:
 	uint16_t tile_id;
 	bool broken;
 
-	void set_state(RenderStates new_state);
+	void set_state(RenderStates new_state) override;
 
 public:
 	explicit Stargate(map::MapSections map_section, StargateAddresses destination, Point position, bool broken);
-	bool check_collision(Point next_position) const;
+	bool check_collision(Point next_position) override;
+	void draw() override;
+	bool interact() override;
+
 	void update_state(Point next_position);
 	bool check_enter(Point next_position);
-	void draw();
 	void update_animation();
-	bool repair();
 	void set_broken(bool value);
 	bool is_broken() const;
 	Point get_entry_point();

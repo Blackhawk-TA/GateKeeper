@@ -14,9 +14,9 @@ Stargate::Stargate(map::MapSections map_section, StargateAddresses destination, 
 	activation_start_time = 0;
 
 	if (broken) {
-		set_state(BROKEN);
+		Stargate::set_state(BROKEN);
 	} else {
-		set_state(INACTIVE);
+		Stargate::set_state(INACTIVE);
 	}
 }
 
@@ -25,7 +25,7 @@ Stargate::Stargate(map::MapSections map_section, StargateAddresses destination, 
  * @param next_position The next position of the player
  * @return True if a collision took place, else false
  */
-bool Stargate::check_collision(Point next_position) const {
+bool Stargate::check_collision(Point next_position) {
 	if (map::get_section() != map_section) {
 		return false;
 	}
@@ -127,7 +127,7 @@ void Stargate::draw() {
  * Sets the state and tile_id of the gate
  * @param new_state The new state
  */
-void Stargate::set_state(Stargate::RenderStates new_state) {
+void Stargate::set_state(RenderStates new_state) {
 	switch (new_state) {
 		case BROKEN:
 			tile_id = tile_id_broken;
@@ -145,7 +145,7 @@ void Stargate::set_state(Stargate::RenderStates new_state) {
 	state = new_state;
 }
 
-bool Stargate::repair() {
+bool Stargate::interact() {
 	if (broken) {
 		broken = false;
 		set_state(ACTIVATING);

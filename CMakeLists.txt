@@ -28,7 +28,8 @@ set(PROJECT_SOURCE
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
         src/items/generic/options_entry.cpp
-        src/map_objects/stargate.cpp src/map_objects/stargate.hpp
+        src/game_objects/stargate.cpp src/game_objects/stargate.hpp
+        src/game_objects/game_object_interface.hpp
         src/player.cpp src/player.hpp
         src/ui/controls/box.cpp src/ui/controls/box.hpp
         src/ui/controls/listbox.cpp src/ui/controls/listbox.hpp
