@@ -27,9 +27,15 @@ public:
 	 */
 	virtual bool interact() = 0;
 
+	/**
+	 * Updates the state of the object when a player moves closer to it
+	 * @param next_position The next position of the player
+	 */
+	virtual void update_state(Point next_position) = 0;
+
 protected:
 	/**
-	 * Changes the render state of a game object
+	 * Sets the state and tile_id of the object
 	 * @param new_state The new render state
 	 */
 	virtual void set_state(RenderState new_state) = 0;
