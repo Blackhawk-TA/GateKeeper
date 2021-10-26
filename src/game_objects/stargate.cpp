@@ -127,8 +127,10 @@ void Stargate::draw() {
  * Sets the state and tile_id of the gate
  * @param new_state The new state
  */
-void Stargate::set_state(RenderStates new_state) {
-	switch (new_state) {
+void Stargate::set_state(uint8_t new_state) {
+	auto new_state_enum = static_cast<RenderStates>(new_state);
+
+	switch (new_state_enum) {
 		case BROKEN:
 			tile_id = tile_id_broken;
 			break;
@@ -142,7 +144,7 @@ void Stargate::set_state(RenderStates new_state) {
 			break;
 	}
 
-	state = new_state;
+	state = new_state_enum;
 }
 
 bool Stargate::interact() {

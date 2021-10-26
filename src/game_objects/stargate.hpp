@@ -15,7 +15,7 @@ enum RenderStates {
 	DEACTIVATING = 5
 };
 
-class Stargate : public IGameObject<RenderStates> {
+class Stargate : public IGameObject { //TODO maybe remove inheritance or use decorator
 private:
 	const Size GATE_SIZE = Size(3, 3); //Gate sprite consists of 3x3 16 bit sprites
 	const uint16_t tile_id_broken = 1763;
@@ -38,15 +38,15 @@ private:
 	uint16_t tile_id;
 	bool broken;
 
-	void set_state(RenderStates new_state) override;
+	void set_state(uint8_t new_state) override;
 
 public:
 	explicit Stargate(map::MapSections map_section, StargateAddresses destination, Point position, bool broken);
 	bool check_collision(Point next_position) override;
 	void draw() override;
 	bool interact() override;
+	void update_state(Point next_position) override;
 
-	void update_state(Point next_position);
 	bool check_enter(Point next_position);
 	void update_animation();
 	void set_broken(bool value);

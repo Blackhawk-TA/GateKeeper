@@ -5,8 +5,6 @@
 #pragma once
 #include "../utils/utils.hpp"
 
-template<typename RenderState>
-
 class IGameObject {
 public:
 	/**
@@ -38,5 +36,5 @@ protected:
 	 * Sets the state and tile_id of the object
 	 * @param new_state The new render state
 	 */
-	virtual void set_state(RenderState new_state) = 0;
+	virtual void set_state(uint8_t new_state) = 0;
 };

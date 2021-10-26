@@ -16,6 +16,7 @@ set(PROJECT_SOURCE
         src/scenes/menu_scene.cpp src/scenes/menu_scene.hpp
         src/scenes/options_scene.cpp src/scenes/options_scene.hpp
         src/handlers/entry_handler.cpp src/handlers/entry_handler.hpp
+        src/handlers/game_objects.cpp src/handlers/game_objects.hpp
         src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
