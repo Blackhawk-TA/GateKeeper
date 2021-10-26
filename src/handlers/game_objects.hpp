@@ -4,6 +4,7 @@
 
 #pragma once
 #include "../game_objects/game_object_interface.hpp"
+#include "../engine/map.hpp"
 
 //TODO think about integrating stargate into a gameobject, might not make sense since a gate is special due to the objects being linked
 namespace game_objects {
@@ -11,6 +12,14 @@ namespace game_objects {
 	 * Creates the objects using their factory function
 	 */
 	void init();
+
+	/**
+	 * Create all game objects of a subclass by their position
+	 * @param positions The positions at which the game objects are on the map
+	 * @param map_section The map section on which the game object is placed on
+	 * @return
+	 */
+	std::vector<IGameObject> generate_game_objects(std::vector<Point> &positions, map::MapSections map_section);
 
 	/**
 	 * Load object states from savegame

@@ -7,6 +7,8 @@
 
 class IGameObject {
 public:
+	virtual ~IGameObject() = default;
+
 	/**
 	 * Check if the game object collides with the player's next position
 	 * @param next_position The next position of the player

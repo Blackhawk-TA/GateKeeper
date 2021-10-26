@@ -10,6 +10,10 @@ void game_objects::init() {
 
 }
 
+std::vector<IGameObject> game_objects::generate_game_objects(std::vector<Point> &positions, map::MapSections map_section) {
+	return {};
+}
+
 void game_objects::load() {
 
 }
