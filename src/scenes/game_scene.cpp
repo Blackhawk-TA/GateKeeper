@@ -12,6 +12,7 @@
 #include "../items/items.hpp"
 #include "../utils/saves/savegame.hpp"
 #include "../ui/overlay.hpp"
+#include "../handlers/game_objects.hpp"
 
 GameScene::GameScene(uint8_t save_id) {
 	GameScene::save_id = save_id;
@@ -32,6 +33,7 @@ GameScene::GameScene(uint8_t save_id) {
 	map::load_section(map::MapSections::GRASSLAND);
 
 	sidemenu::init(save_id);
+	game_objects::init();
 	player = savegame::load(save_id);
 }
 
@@ -50,6 +52,7 @@ GameScene::~GameScene() {
 void GameScene::render(uint32_t time) {
 	map::draw();
 	stargate_handler::draw_stargates();
+	game_objects::draw();
 	player->draw();
 	overlay::draw_statusbar(player->get_health());
 

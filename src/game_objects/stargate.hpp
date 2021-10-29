@@ -7,16 +7,16 @@
 #include "../engine/map.hpp"
 #include "game_object_interface.hpp"
 
-enum RenderStates {
-	BROKEN = 1,
-	INACTIVE = 2,
-	ACTIVATING = 3,
-	ACTIVE = 4,
-	DEACTIVATING = 5
-};
-
 class Stargate : public IGameObject { //TODO maybe remove inheritance or use decorator
 private:
+	enum RenderStates {
+		BROKEN = 1,
+		INACTIVE = 2,
+		ACTIVATING = 3,
+		ACTIVE = 4,
+		DEACTIVATING = 5
+	};
+
 	const Size GATE_SIZE = Size(3, 3); //Gate sprite consists of 3x3 16 bit sprites
 	const uint16_t tile_id_broken = 1763;
 	const uint16_t tile_id_inactive = 683;
