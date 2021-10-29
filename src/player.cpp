@@ -8,6 +8,7 @@
 #include "engine/transition.hpp"
 #include "engine/flags.hpp"
 #include "handlers/stargate_handler.hpp"
+#include "handlers/game_objects.hpp"
 
 bool Player::attacking = false;
 bool Player::evading = false;
@@ -127,7 +128,7 @@ void Player::move(MovementDirection direction) {
 	Point movement = movements.at(direction);
 	Point next_position = camera::get_world_position() + position + movement;
 
-	if (stargate_handler::check_collisions(next_position)) {
+	if (stargate_handler::check_collisions(next_position) || game_objects::check_collisions(next_position)) {
 		stop_animation();
 		return;
 	}
@@ -144,6 +145,7 @@ void Player::move(MovementDirection direction) {
 
 	//Update the stargate states when a player comes near them
 	stargate_handler::update_states(next_position);
+	game_objects::update_states(next_position);
 
 	//Start animation timer and directly update sprite animation to prevent delay
 	if (!animation_timer.is_running()) {

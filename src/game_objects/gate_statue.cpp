@@ -23,10 +23,11 @@ bool GateStatue::check_collision(Point next_position) {
 		return false;
 	}
 
-	return false;
+	return position.x <= next_position.x && position.y <= next_position.y &&
+	       position.x > next_position.x - STATUE_SIZE.w && position.y > next_position.y - STATUE_SIZE.h;
 }
 
-void GateStatue::draw() { //TODO try implementing it in parent
+void GateStatue::draw() {
 	if (map::get_section() != map_section) {
 		return;
 	}
@@ -64,6 +65,13 @@ bool GateStatue::interact() {
 void GateStatue::update_state(Point next_position) {
 	if (map::get_section() != map_section) {
 		return;
+	}
+
+	//Show as active when player stands directly in front of the statue
+	if (state == INACTIVE && next_position == position + Point(0, STATUE_SIZE.h)) {
+		set_state(ACTIVE);
+	} else if (state == ACTIVE) {
+		set_state(INACTIVE);
 	}
 }
 
