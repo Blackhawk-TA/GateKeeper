@@ -23,6 +23,11 @@ void inventory::load(std::vector<Listbox::Item> loaded_items) {
 	control->set_items(loaded_items);
 }
 
+void inventory::cleanup() {
+	open = false;
+	delete control;
+}
+
 bool inventory::add_item(Listbox::Item item) {
 	return control->add_item(item);
 }

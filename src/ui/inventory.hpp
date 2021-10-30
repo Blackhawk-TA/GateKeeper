@@ -10,6 +10,7 @@ namespace inventory {
 
 	void init();
 	void load(std::vector<Listbox::Item> loaded_items);
+	void cleanup();
 	bool add_item(Listbox::Item item);
 	std::vector<Listbox::Item> get_items();
 	void draw();

@@ -23,6 +23,10 @@ void stargate_handler::load(std::map<StargateAddresses, Stargate> saved_stargate
 	it = stargates.begin();
 }
 
+void stargate_handler::cleanup() {
+	stargates.clear();
+}
+
 bool stargate_handler::check_collisions(Point next_position) {
 	bool collision = false;
 

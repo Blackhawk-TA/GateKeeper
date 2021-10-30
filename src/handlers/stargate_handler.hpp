@@ -9,6 +9,7 @@
 namespace stargate_handler {
 	void init();
 	void load(std::map<StargateAddresses, Stargate> saved_stargates);
+	void cleanup();
 	bool check_collisions(Point next_position);
 	void update_states(Point next_position);
 	Stargate *get_destination_gate(Point next_position);

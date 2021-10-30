@@ -49,8 +49,10 @@ GameScene::~GameScene() {
 	}
 	delete player;
 
-	//Delete game objects after saving
+	//Delete game objects and inventory after saving
 	game_objects::cleanup();
+	stargate_handler::cleanup();
+	inventory::cleanup();
 }
 
 void GameScene::render(uint32_t time) {
