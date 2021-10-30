@@ -14,6 +14,11 @@ namespace game_objects {
 	void init();
 
 	/**
+	 * Deletes all objects from memory
+	 */
+	void cleanup();
+
+	/**
 	 * Create all game objects of a subclass by their position
 	 * @param positions The positions at which the game objects are on the map
 	 * @param map_section The map section on which the game object is placed on
@@ -38,8 +43,8 @@ namespace game_objects {
 
 	/**
 	 * Check if a game object collides with the player's next position
-	 * @param next_position
-	 * @return
+	 * @param next_position The next position of the player
+	 * @return True if a collision happened, else false
 	 */
 	bool check_collisions(Point next_position);
 

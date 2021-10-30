@@ -203,3 +203,7 @@ bool Listbox::add_item(Listbox::Item &item) {
 std::vector<Listbox::Item> Listbox::get_items() {
 	return items;
 }
+
+void Listbox::set_items(std::vector<Item> &new_items) {
+	items = new_items;
+}

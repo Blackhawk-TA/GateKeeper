@@ -31,6 +31,7 @@ public:
 	void cursor_down();
 	void cursor_press();
 	bool add_item(Item &item);
+	void set_items(std::vector<Item> &new_items);
 	std::vector<Item> get_items();
 
 private:

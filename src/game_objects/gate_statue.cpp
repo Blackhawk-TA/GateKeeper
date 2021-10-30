@@ -4,6 +4,8 @@
 
 #include "gate_statue.hpp"
 #include "../engine/camera.hpp"
+#include "../ui/inventory.hpp"
+#include "../items/items.hpp"
 
 GateStatue::GateStatue(map::MapSections map_section, Point position, bool depleted) {
 	GateStatue::position = position;
@@ -14,7 +16,7 @@ GateStatue::GateStatue(map::MapSections map_section, Point position, bool deplet
 	if (depleted) {
 		GateStatue::set_state(DEPLETED);
 	} else {
-		GateStatue::set_state(INACTIVE);
+		GateStatue::set_state(INACTIVE); //TODO set active when player stands infront of it, see stargate code
 	}
 }
 
@@ -54,8 +56,10 @@ bool GateStatue::interact() {
 		return false;
 	}
 
-	if (!depleted) {
+	if (camera::get_player_position() == position + Point(0, STATUE_SIZE.h) && !depleted) {
 		depleted = true;
+		set_state(DEPLETED);
+		inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 		return true;
 	}
 

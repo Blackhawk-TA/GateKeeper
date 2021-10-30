@@ -91,6 +91,7 @@ bool stargate_handler::player_repair_gate() {
 	bool repaired = false;
 
 	while (!repaired && it != stargates.end()) {
+		//TODO move to gate_statue.cpp which checks if a player stands infront of an object.
 		if (it->second.get_entry_point() == camera::get_player_position() && it->second.interact()) {
 			repaired = true;
 		} else {

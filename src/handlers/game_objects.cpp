@@ -11,6 +11,13 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), false));
 }
 
+void game_objects::cleanup() {
+	for (auto &game_object : game_object_collection) {
+		delete game_object;
+	}
+	game_object_collection.clear();
+}
+
 std::vector<IGameObject> game_objects::generate_game_objects(std::vector<Point> &positions, map::MapSections map_section) {
 	return {};
 }

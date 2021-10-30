@@ -33,6 +33,7 @@ GameScene::GameScene(uint8_t save_id) {
 	map::load_section(map::MapSections::GRASSLAND);
 
 	sidemenu::init(save_id);
+	inventory::init();
 	game_objects::init();
 	player = savegame::load(save_id);
 }
@@ -47,6 +48,9 @@ GameScene::~GameScene() {
 		savegame::save(save_id);
 	}
 	delete player;
+
+	//Delete game objects after saving
+	game_objects::cleanup();
 }
 
 void GameScene::render(uint32_t time) {
@@ -60,7 +64,7 @@ void GameScene::render(uint32_t time) {
 		sidemenu::draw();
 	}
 
-	if (inventory::is_open()) {
+	if (inventory::open) {
 		inventory::draw();
 	}
 }
@@ -91,7 +95,7 @@ void GameScene::inputs() {
 		} else if (buttons & changed & Button::MENU || buttons & changed & Button::B || buttons & changed & Button::Y) {
 			sidemenu::close();
 		}
-	} else if (inventory::is_open()) {
+	} else if (inventory::open) {
 		if (buttons & changed & Button::DPAD_UP) {
 			inventory::cursor_up();
 		} else if (buttons & changed & Button::DPAD_DOWN) {
@@ -100,9 +104,9 @@ void GameScene::inputs() {
 			inventory::cursor_press();
 		} else if (buttons & changed & Button::B) {
 			sidemenu::open();
-			inventory::close();
+			inventory::open = false;
 		} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
-			inventory::close();
+			inventory::open = false;
 		} else if (buttons & changed & Button::X) {
 			inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 		}
@@ -118,7 +122,9 @@ void GameScene::inputs() {
 		} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
 			sidemenu::open();
 		} else if (buttons & changed & Button::A) {
-			player->attack();
+			if (!game_objects::interact()) {
+				player->attack();
+			}
 		} else if (buttons & changed & Button::B) {
 			player->evade();
 		}

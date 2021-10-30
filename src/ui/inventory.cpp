@@ -3,15 +3,16 @@
 //
 
 #include "inventory.hpp"
-#include <utility>
 #include "../items/items.hpp"
 
+Listbox *control;
+
 void inventory::init() {
-	control = nullptr;
-	items = {
-		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::GATE_PART),
+	open = false;
+	std::vector<Listbox::Item> items = {
 		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
 	};
+	control = new Listbox(Rect(14, 0, 6, 7), items);
 }
 
 /**
@@ -19,7 +20,7 @@ void inventory::init() {
  * @param loaded_items The stored items from the save game
  */
 void inventory::load(std::vector<Listbox::Item> loaded_items) {
-	items = std::move(loaded_items);
+	control->set_items(loaded_items);
 }
 
 bool inventory::add_item(Listbox::Item item) {
@@ -27,21 +28,7 @@ bool inventory::add_item(Listbox::Item item) {
 }
 
 std::vector<Listbox::Item> inventory::get_items() {
-	return items;
-}
-
-void inventory::open() {
-	control = new Listbox(Rect(14, 0, 6, 7), items);
-}
-
-void inventory::close() {
-	items = control->get_items(); //Update item list on close
-	delete control;
-	control = nullptr;
-}
-
-bool inventory::is_open() {
-	return control != nullptr;
+	return control->get_items();
 }
 
 void inventory::draw() {

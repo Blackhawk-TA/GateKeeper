@@ -85,7 +85,6 @@ Player *savegame::create() {
 
 	camera::init(start_position);
 	stargate_handler::init();
-	inventory::init();
 
 	return new Player(Player::MovementDirection::DOWN);
 }
