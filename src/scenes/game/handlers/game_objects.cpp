@@ -54,6 +54,26 @@ void game_objects::draw() {
 	}
 }
 
+bool game_objects::is_textbox_open() {
+	bool is_open = false;
+	uint16_t i = 0;
+
+	while (!is_open && i < game_object_collection.size()) {
+		is_open = game_object_collection.at(i)->is_textbox_open();
+		i++;
+	}
+
+	return is_open;
+}
+
+void game_objects::close_textboxes() {
+	for (auto &game_object : game_object_collection) {
+		if (game_object->is_textbox_open()) {
+			game_object->close_textbox();
+		}
+	}
+}
+
 bool game_objects::check_collisions(Point next_position) {
 	bool collision = false;
 	uint16_t i = 0;

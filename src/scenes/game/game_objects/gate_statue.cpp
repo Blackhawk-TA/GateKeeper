@@ -20,6 +20,7 @@ bool GateStatue::interact() {
 	if (camera::get_player_position() == position + Point(0, size.h) && usable) {
 		set_usable(false);
 		inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
+		textbox = new Textbox("You picked up a Gate Part!");
 		return true;
 	}
 

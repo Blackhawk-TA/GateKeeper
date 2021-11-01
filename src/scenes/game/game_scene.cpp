@@ -111,6 +111,10 @@ void GameScene::inputs() {
 		} else if (buttons & changed & Button::X) {
 			inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 		}
+	} else if (game_objects::is_textbox_open()) {
+		if (buttons & changed & Button::A) {
+			game_objects::close_textboxes();
+		}
 	} else {
 		if (buttons & Button::DPAD_UP) {
 			player->move(player->UP);

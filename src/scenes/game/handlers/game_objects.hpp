@@ -40,6 +40,17 @@ namespace game_objects {
 	void draw();
 
 	/**
+	 * Checks if a game object has an open textbox
+	 * @return True, if there is a textbox open, else false
+	 */
+	bool is_textbox_open();
+
+	/**
+	 * Closes all textboxes opened by game objects
+	 */
+	void close_textboxes();
+
+	/**
 	 * Check if a game object collides with the player's next position
 	 * @param next_position The next position of the player
 	 * @return True if a collision happened, else false

@@ -9,6 +9,7 @@ GameObject::GameObject(map::MapSections map_section, Point position, bool usable
 	GameObject::map_section = map_section;
 	GameObject::usable = usable;
 	GameObject::spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
+	GameObject::textbox = nullptr;
 
 	//Generate object signature
 	signature = Signature{
@@ -37,6 +38,20 @@ void GameObject::draw() {
 			SpriteTransform::NONE
 		);
 	}
+
+	//Draw textbox notification
+	if (textbox != nullptr) {
+		textbox->draw();
+	}
+}
+
+bool GameObject::is_textbox_open() {
+	return textbox != nullptr;
+}
+
+void GameObject::close_textbox() {
+	delete textbox;
+	textbox = nullptr;
 }
 
 bool GameObject::check_collision(Point next_position) {

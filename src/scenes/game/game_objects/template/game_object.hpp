@@ -5,6 +5,7 @@
 #pragma once
 #include "../../../../utils/utils.hpp"
 #include "../../../../engine/map.hpp"
+#include "../../../../engine/ui/textbox.hpp"
 
 class GameObject {
 public:
@@ -58,6 +59,17 @@ public:
 	void draw();
 
 	/**
+	 * Checks if a textbox created by this game object is open
+	 * @return True, if a textbox is open, else false
+	 */
+	bool is_textbox_open();
+
+	/**
+	 * Closes the textbox of the game object
+	 */
+	void close_textbox();
+
+	/**
 	 * Called when the player interacts with a game object
 	 * @return True, if interaction successful, else false
 	 */
@@ -77,7 +89,7 @@ protected:
 	Size spritesheet_size;
 	uint16_t tile_id;
 	Size size;
-	Size sprite_sheet_size;
+	Textbox* textbox;
 
 	/**
 	 * Sets the state and tile_id of the object
