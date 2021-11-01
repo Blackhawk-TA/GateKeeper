@@ -96,7 +96,9 @@ void savegame::save(uint8_t save_id) {
 		options::save();
 	}
 
+
 	//Fetch item and stargate data
+	//TODO handle item compression and decompression in inventory namespace in get_items and load
 	std::vector<Listbox::Item> items = inventory::get_items();
 	std::map<StargateAddresses, Stargate> stargates = stargate_handler::get_stargates();
 
@@ -105,6 +107,7 @@ void savegame::save(uint8_t save_id) {
 		map::get_section(),
 		camera::get_player_position(),
 		Player::get_direction(),
+		game_objects::get_saves(),
 		compress_items(items),
 		compress_gates(stargates)
 	};
@@ -133,6 +136,9 @@ Player *savegame::load(uint8_t save_id) {
 
 		//Load broken state of stargates
 		stargate_handler::load(decompress_gates(save_data.gate_states));
+
+		//Load game object states
+		game_objects::load_saves(save_data.game_objects);
 	} else {
 		//If loading save was not successful, create new save
 		player = create();

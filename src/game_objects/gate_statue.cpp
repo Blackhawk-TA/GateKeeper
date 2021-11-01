@@ -7,17 +7,35 @@
 #include "../ui/inventory.hpp"
 #include "../items/items.hpp"
 
-GateStatue::GateStatue(map::MapSections map_section, Point position, bool depleted) {
+GateStatue::GateStatue(map::MapSections map_section, Point position, bool usable) {
 	GateStatue::position = position;
 	GateStatue::map_section = map_section;
-	GateStatue::depleted = depleted;
+	GateStatue::usable = usable;
 	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 
-	if (depleted) {
-		GateStatue::set_state(DEPLETED);
-	} else {
-		GateStatue::set_state(INACTIVE); //TODO set active when player stands infront of it, see stargate code
-	}
+	GateStatue::set_usable(usable);
+
+	//TODO move to parent constructor
+	//Generate object signature
+	signature = Signature{
+		map_section,
+		position
+	};
+}
+
+GateStatue::Signature GateStatue::get_signature() {
+	return signature;
+}
+
+GateStatue::Save GateStatue::get_save() {
+	return Save{
+		signature,
+		usable
+	};
+}
+
+void GateStatue::load_save(bool value) {
+	set_usable(value);
 }
 
 bool GateStatue::check_collision(Point next_position) {
@@ -56,9 +74,8 @@ bool GateStatue::interact() {
 		return false;
 	}
 
-	if (camera::get_player_position() == position + Point(0, STATUE_SIZE.h) && !depleted) {
-		depleted = true;
-		set_state(DEPLETED);
+	if (camera::get_player_position() == position + Point(0, STATUE_SIZE.h) && usable) {
+		set_usable(false);
 		inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 		return true;
 	}
@@ -95,4 +112,16 @@ void GateStatue::set_state(uint8_t new_state) {
 	}
 
 	state = new_state_enum;
+}
+
+void GateStatue::set_usable(bool value) {
+	usable = value;
+
+	if (value) {
+		set_state(INACTIVE);
+	} else {
+		set_state(DEPLETED);
+	}
+
+	update_state(camera::get_player_position());
 }

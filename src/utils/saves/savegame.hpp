@@ -7,6 +7,7 @@
 #include "../../ui/controls/listbox.hpp"
 #include "../../player.hpp"
 #include "../../items/items.hpp"
+#include "../../handlers/game_objects.hpp"
 
 namespace savegame {
 	struct Item {
@@ -18,6 +19,7 @@ namespace savegame {
 		map::MapSections map_section;
 		Point camera_position;
 		Player::MovementDirection player_direction;
+		std::array<IGameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects;
 		std::array<Item, listbox_item::INVENTORY_COUNTER> items;
 		std::array<bool, StargateAddresses::COUNTER> gate_states;
 	};

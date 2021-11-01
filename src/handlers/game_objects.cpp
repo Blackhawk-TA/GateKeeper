@@ -4,11 +4,16 @@
 
 #include "game_objects.hpp"
 #include "../game_objects/gate_statue.hpp"
+#include <stdexcept>
+#include <cassert>
 
 std::vector<IGameObject*> game_object_collection;
 
 void game_objects::init() {
-	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), false));
+	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
+
+	//Check if GAME_OBJECT_COUNT is set correctly
+	assert(GAME_OBJECT_COUNT == game_object_collection.size());
 }
 
 void game_objects::cleanup() {
@@ -18,16 +23,29 @@ void game_objects::cleanup() {
 	game_object_collection.clear();
 }
 
-std::vector<IGameObject> game_objects::generate_game_objects(std::vector<Point> &positions, map::MapSections map_section) {
-	return {};
+std::array<IGameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get_saves() {
+	std::array<IGameObject::Save, GAME_OBJECT_COUNT> saves;
+
+	for (uint16_t i = 0; i < GAME_OBJECT_COUNT; i++) {
+		saves[i] = game_object_collection.at(i)->get_save();
+	}
+
+	return saves;
 }
 
-void game_objects::load() {
+void game_objects::load_saves(std::array<IGameObject::Save, GAME_OBJECT_COUNT> &saved_objects) {
+	IGameObject::Signature signature;
 
-}
+	for (auto & saved_object : saved_objects) {
+		for (auto &game_object : game_object_collection) {
+			signature = game_object->get_signature();
 
-void game_objects::save() {
-
+			if (signature.map_section == saved_object.signature.map_section
+			&& signature.position == saved_object.signature.position) {
+				game_object->load_save(saved_object.value);
+			}
+		}
+	}
 }
 
 void game_objects::draw() {

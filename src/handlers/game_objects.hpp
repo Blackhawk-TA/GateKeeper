@@ -9,6 +9,11 @@
 //TODO think about integrating stargate into a gameobject, might not make sense since a gate is special due to the objects being linked
 namespace game_objects {
 	/**
+	 * The amount of game objects on the map
+	 */
+	constexpr uint16_t GAME_OBJECT_COUNT = 1;
+
+	/**
 	 * Creates the objects using their factory function
 	 */
 	void init();
@@ -19,22 +24,15 @@ namespace game_objects {
 	void cleanup();
 
 	/**
-	 * Create all game objects of a subclass by their position
-	 * @param positions The positions at which the game objects are on the map
-	 * @param map_section The map section on which the game object is placed on
-	 * @return
+	 * Gets array with save structs of all game objects objects
 	 */
-	std::vector<IGameObject> generate_game_objects(std::vector<Point> &positions, map::MapSections map_section);
+	std::array<IGameObject::Save, GAME_OBJECT_COUNT> get_saves();
 
 	/**
-	 * Load object states from savegame
+	 * Loads saved objects into each game object
+	 * @param saved_objects The saved game objects pointer array
 	 */
-	void load();
-
-	/**
-	 * Save object states to savegame //TODO should return savable structure and is called by savegame utils
-	 */
-	void save();
+	void load_saves(std::array<IGameObject::Save, GAME_OBJECT_COUNT> &saved_objects);
 
 	/**
 	 * Draws all game objects

@@ -4,20 +4,55 @@
 
 #pragma once
 #include "../utils/utils.hpp"
+#include "../engine/map.hpp"
 
 class IGameObject {
 public:
+	/**
+	 * A struct consisting of the map_section and position of a game object to create a unique signature.
+	 */
+	struct Signature {
+		map::MapSections map_section;
+		Point position;
+	};
+
+	/**
+	 * A struct of the savable value of a game object including the signature.
+	 */
+	struct Save {
+		Signature signature;
+		bool value{};
+	};
+
 	virtual ~IGameObject() = default;
 
 	/**
-	 * Check if the game object collides with the player's next position
+	 * Gets the signature of an object to clearly identify it.
+	 * @return The signature struct of the game object consisting of the map_section and position
+	 */
+	virtual Signature get_signature() = 0;
+
+	/**
+	 * Gets the savable struct of a game object to store a bool value and identify the corresponding object on load_save.
+	 * @return The savable struct of an object
+	 */
+	virtual Save get_save() = 0;
+
+	/**
+	 * Loads the saved state of the game object
+	 * @param value The value that is loaded in the game object
+	 */
+	virtual void load_save(bool value) = 0;
+
+	/**
+	 * Checks if the game object collides with the player's next position
 	 * @param next_position The next position of the player
 	 * @return True, if a collision takes place, else false
 	 */
 	virtual bool check_collision(Point next_position) = 0;
 
 	/**
-	 * Draw the game object
+	 * Draws the game object
 	 */
 	virtual void draw() = 0;
 
@@ -39,4 +74,10 @@ protected:
 	 * @param new_state The new render state
 	 */
 	virtual void set_state(uint8_t new_state) = 0;
+
+	/**
+	 * Sets the usable variable of a game object and updates the state
+	 * @param value The value showing if the game object is usable by a player
+	 */
+	virtual void set_usable(bool value) = 0;
 };

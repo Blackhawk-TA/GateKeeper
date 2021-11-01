@@ -7,7 +7,7 @@
 #include "../engine/map.hpp"
 #include "game_object_interface.hpp"
 
-class Stargate : public IGameObject { //TODO maybe remove inheritance or use decorator
+class Stargate { //TODO maybe remove inheritance or use decorator
 private:
 	enum RenderStates {
 		BROKEN = 1,
@@ -38,14 +38,14 @@ private:
 	uint16_t tile_id;
 	bool broken;
 
-	void set_state(uint8_t new_state) override;
+	void set_state(uint8_t new_state);
 
 public:
 	explicit Stargate(map::MapSections map_section, StargateAddresses destination, Point position, bool broken);
-	bool check_collision(Point next_position) override;
-	void draw() override;
-	bool interact() override;
-	void update_state(Point next_position) override;
+	bool check_collision(Point next_position);
+	void draw();
+	bool interact();
+	void update_state(Point next_position);
 
 	bool check_enter(Point next_position);
 	void update_animation();
