@@ -1,11 +1,11 @@
 #include "game.hpp"
 #include "assets.hpp"
-#include "scenes/game_scene.hpp"
-#include "scenes/menu_scene.hpp"
-#include "scenes/options_scene.hpp"
+#include "scenes/game/game_scene.hpp"
+#include "scenes/menu/menu_scene.hpp"
+#include "scenes/options/options_scene.hpp"
 #include "utils/saves/options.hpp"
-#include "engine/transition.hpp"
-#include "ui/overlay.hpp"
+#include "engine/effects/transition.hpp"
+#include "scenes/game/ui/overlay.hpp"
 
 using namespace blit;
 
@@ -77,7 +77,7 @@ void render(uint32_t time) {
 	}
 
 	ms_end = now();
-	overlay::draw_fps(ms_start, ms_end);
+	draw_fps(ms_start, ms_end);
 }
 
 ///////////////////////////////////////////////////////////////////////////

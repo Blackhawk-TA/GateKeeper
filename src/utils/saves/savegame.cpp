@@ -3,9 +3,8 @@
 //
 
 #include "savegame.hpp"
-#include "../../ui/inventory.hpp"
-#include "../../ui/overlay.hpp"
 #include "options.hpp"
+#include "../../scenes/game/ui/inventory.hpp"
 
 /**
  * Parses the item vector into an array, because vector cannot be saved directly

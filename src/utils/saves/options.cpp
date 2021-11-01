@@ -3,7 +3,6 @@
 //
 
 #include "options.hpp"
-#include "../../ui/overlay.hpp"
 
 bool options::show_fps = false;
 uint8_t options::save_count = 0;

@@ -9,15 +9,15 @@ set(PROJECT_SOURCE
         src/engine/camera.cpp src/engine/camera.hpp
         src/engine/flags.cpp src/engine/flags.hpp
         src/engine/map.cpp src/engine/map.hpp
-        src/engine/transition.cpp src/engine/transition.hpp
+        src/engine/effects/transition.cpp src/engine/effects/transition.hpp
         src/game.cpp src/game.hpp
         src/scenes/scene_interface.hpp
-        src/scenes/game_scene.cpp src/scenes/game_scene.hpp
-        src/scenes/menu_scene.cpp src/scenes/menu_scene.hpp
-        src/scenes/options_scene.cpp src/scenes/options_scene.hpp
-        src/handlers/entry_handler.cpp src/handlers/entry_handler.hpp
-        src/handlers/game_objects.cpp src/handlers/game_objects.hpp
-        src/handlers/stargate_handler.cpp src/handlers/stargate_handler.hpp
+        src/scenes/game/game_scene.cpp src/scenes/game/game_scene.hpp
+        src/scenes/menu/menu_scene.cpp src/scenes/menu/menu_scene.hpp
+        src/scenes/options/options_scene.cpp src/scenes/options/options_scene.hpp
+        src/scenes/game/handlers/entry_handler.cpp src/scenes/game/handlers/entry_handler.hpp
+        src/scenes/game/handlers/game_objects.cpp src/scenes/game/handlers/game_objects.hpp
+        src/scenes/game/handlers/stargate_handler.cpp src/scenes/game/handlers/stargate_handler.hpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
         src/items/sidemenu/sidemenu_back_entry.cpp
@@ -29,16 +29,16 @@ set(PROJECT_SOURCE
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
         src/items/generic/options_entry.cpp
-        src/game_objects/stargate.cpp src/game_objects/stargate.hpp
-        src/game_objects/gate_statue.cpp src/game_objects/gate_statue.hpp
-        src/game_objects/template/game_object.cpp src/game_objects/template/game_object.hpp
-        src/player.cpp src/player.hpp
-        src/ui/controls/box.cpp src/ui/controls/box.hpp
-        src/ui/controls/listbox.cpp src/ui/controls/listbox.hpp
-        src/ui/inventory.cpp src/ui/inventory.hpp
-        src/ui/sidemenu.cpp src/ui/sidemenu.hpp
-        src/ui/controls/textbox.cpp src/ui/controls/textbox.hpp
-        src/ui/overlay.cpp src/ui/overlay.hpp
+        src/scenes/game/game_objects/stargate.cpp src/scenes/game/game_objects/stargate.hpp
+        src/scenes/game/game_objects/gate_statue.cpp src/scenes/game/game_objects/gate_statue.hpp
+        src/scenes/game/game_objects/template/game_object.cpp src/scenes/game/game_objects/template/game_object.hpp
+        src/scenes/game/characters/player.cpp src/scenes/game/characters/player.hpp
+        src/engine/ui/box.cpp src/engine/ui/box.hpp
+        src/engine/ui/listbox.cpp src/engine/ui/listbox.hpp
+        src/scenes/game/ui/inventory.cpp src/scenes/game/ui/inventory.hpp
+        src/scenes/game/ui/sidemenu.cpp src/scenes/game/ui/sidemenu.hpp
+        src/engine/ui/textbox.cpp src/engine/ui/textbox.hpp
+        src/scenes/game/ui/overlay.cpp src/scenes/game/ui/overlay.hpp
         src/utils/saves/savegame.cpp src/utils/saves/savegame.hpp
         src/utils/saves/options.cpp src/utils/saves/options.hpp
         src/utils/utils.cpp src/utils/utils.hpp

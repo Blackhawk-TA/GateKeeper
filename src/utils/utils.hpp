@@ -30,3 +30,4 @@ Size get_spritesheet_size(Size bounds);
 Point get_screen_tiles();
 
 void load_persistent_spritesheets();
+void draw_fps(uint32_t &ms_start, uint32_t &ms_end);

@@ -4,10 +4,9 @@
 
 #pragma once
 #include "../utils.hpp"
-#include "../../ui/controls/listbox.hpp"
-#include "../../player.hpp"
+#include "../../scenes/game/characters/player.hpp"
 #include "../../items/items.hpp"
-#include "../../handlers/game_objects.hpp"
+#include "../../scenes/game/handlers/game_objects.hpp"
 
 namespace savegame {
 	struct Item {

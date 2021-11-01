@@ -2,9 +2,9 @@
 // Created by daniel on 26.09.21.
 //
 
-#include "../../ui/inventory.hpp"
-#include "../../ui/sidemenu.hpp"
 #include "../items.hpp"
+#include "../../scenes/game/ui/inventory.hpp"
+#include "../../scenes/game/ui/sidemenu.hpp"
 
 Listbox::Item listbox_item::create_exit_entry() {
 	return Listbox::Item{

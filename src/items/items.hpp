@@ -3,8 +3,8 @@
 //
 
 #pragma once
-#include "../ui/controls/listbox.hpp"
-#include "../handlers/stargate_handler.hpp"
+#include "../scenes/game/handlers/stargate_handler.hpp"
+#include "../engine/ui/listbox.hpp"
 
 /**
  * Contains the create function for all inventory items
