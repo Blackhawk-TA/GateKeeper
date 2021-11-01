@@ -66,6 +66,14 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 					if (tile_id == previous_tile_id && !skipped_empty_tile) {
 						range++;
 						continue;
+					} else if (previous_tile_x == 0 && previous_tile_y == 0 && range == 0) { //Set first tile position
+						if (x > 0 && y == 0) {
+							previous_tile_x = x - 1;
+							previous_tile_y = y;
+						} else if (y > 0) {
+							previous_tile_x = x;
+							previous_tile_y = y - 1;
+						}
 					}
 				} else if (tile_id == previous_tile_id && !skipped_empty_tile) { //Increment range for last tile
 					range++;
@@ -117,7 +125,7 @@ void map::load_section(MapSections map_section) {
 		case MapSections::GRASSLAND:
 			tmx = (TMX_16 *) malloc(asset_grassland_map_length);
 			memcpy(tmx, asset_grassland_map, asset_grassland_map_length);
-			background = Pen(40, 204, 223);
+			background = Pen(113, 170, 52);
 			break;
 		case MapSections::INTERIOR:
 			tmx = (TMX_16 *) malloc(asset_interior_map_length);
@@ -194,13 +202,18 @@ uint8_t map::get_flag(Point &p) {
 
 	while (i > 0 && !found) {
 		i--;
-		tile_max_x = tile_map.data[i].x + (tile_map.data[i].x + tile_map.data[i].range) / tile_map.width;
+		tile_max_x = tile_map.data[i].x + (tile_map.data[i].y + tile_map.data[i].range) / tile_map.width;
 		tile_max_y = (tile_map.data[i].y + tile_map.data[i].range) & (tile_map.height - 1);
 
 		if (point_in_area(p, tile_map.data[i].x, tile_map.data[i].y, tile_max_x, tile_max_y)) {
 			flag_enum_id = tile_map.data[i].flag;
 			found = true;
 		}
+	}
+
+	//If tile is not found it is an empty tile and therefore should be walkable
+	if (!found) {
+		flag_enum_id = flags::WALKABLE;
 	}
 
 	return flag_enum_id;

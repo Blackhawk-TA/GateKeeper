@@ -82,6 +82,7 @@ std::map<StargateAddresses, Stargate> decompress_gates(std::array<bool, Stargate
 Player *savegame::create() {
 	Point start_position = Point(22, 12);
 
+	map::load_section(map::MapSections::GRASSLAND);
 	camera::init(start_position);
 	stargate_handler::init();
 
@@ -94,7 +95,6 @@ void savegame::save(uint8_t save_id) {
 		options::save_count = save_id;
 		options::save();
 	}
-
 
 	//Fetch item and stargate data
 	//TODO handle item compression and decompression in inventory namespace in get_items and load

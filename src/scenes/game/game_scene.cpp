@@ -29,7 +29,6 @@ GameScene::GameScene(uint8_t save_id) {
 	flags::set_flags(flags::TileFlags::ELEVATE_3PX, {186});
 	flags::set_flags(flags::TileFlags::ENTRY, {141, 294, 515, 517, 773, 965, 1425, 1573});
 	flags::set_flags(flags::TileFlags::DEADLY, {56, 57, 58, 248, 249, 250});
-	map::load_section(map::MapSections::GRASSLAND);
 
 	sidemenu::init(save_id);
 	inventory::init();
