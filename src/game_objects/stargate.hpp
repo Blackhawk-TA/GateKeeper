@@ -5,7 +5,7 @@
 #pragma once
 #include "../utils/utils.hpp"
 #include "../engine/map.hpp"
-#include "game_object_interface.hpp"
+#include "template/game_object.hpp"
 
 class Stargate { //TODO maybe remove inheritance or use decorator
 private:

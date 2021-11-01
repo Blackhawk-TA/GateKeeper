@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "../game_objects/game_object_interface.hpp"
+#include "../game_objects/template/game_object.hpp"
 #include "../engine/map.hpp"
 
 //TODO think about integrating stargate into a gameobject, might not make sense since a gate is special due to the objects being linked
@@ -26,13 +26,13 @@ namespace game_objects {
 	/**
 	 * Gets array with save structs of all game objects objects
 	 */
-	std::array<IGameObject::Save, GAME_OBJECT_COUNT> get_saves();
+	std::array<GameObject::Save, GAME_OBJECT_COUNT> get_saves();
 
 	/**
 	 * Loads saved objects into each game object
 	 * @param saved_objects The saved game objects pointer array
 	 */
-	void load_saves(std::array<IGameObject::Save, GAME_OBJECT_COUNT> &saved_objects);
+	void load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &saved_objects);
 
 	/**
 	 * Draws all game objects

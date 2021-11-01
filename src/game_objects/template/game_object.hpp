@@ -3,10 +3,10 @@
 //
 
 #pragma once
-#include "../utils/utils.hpp"
-#include "../engine/map.hpp"
+#include "../../utils/utils.hpp"
+#include "../../engine/map.hpp"
 
-class IGameObject {
+class GameObject {
 public:
 	/**
 	 * A struct consisting of the map_section and position of a game object to create a unique signature.
@@ -24,37 +24,38 @@ public:
 		bool value{};
 	};
 
-	virtual ~IGameObject() = default;
+	explicit GameObject(map::MapSections map_section, Point position, bool usable);
+	virtual ~GameObject() = default;
 
 	/**
 	 * Gets the signature of an object to clearly identify it.
 	 * @return The signature struct of the game object consisting of the map_section and position
 	 */
-	virtual Signature get_signature() = 0;
+	Signature get_signature();
 
 	/**
 	 * Gets the savable struct of a game object to store a bool value and identify the corresponding object on load_save.
 	 * @return The savable struct of an object
 	 */
-	virtual Save get_save() = 0;
+	Save get_save();
 
 	/**
 	 * Loads the saved state of the game object
 	 * @param value The value that is loaded in the game object
 	 */
-	virtual void load_save(bool value) = 0;
+	void load_save(bool value);
 
 	/**
 	 * Checks if the game object collides with the player's next position
 	 * @param next_position The next position of the player
 	 * @return True, if a collision takes place, else false
 	 */
-	virtual bool check_collision(Point next_position) = 0;
+	bool check_collision(Point next_position);
 
 	/**
 	 * Draws the game object
 	 */
-	virtual void draw() = 0;
+	void draw();
 
 	/**
 	 * Called when the player interacts with a game object
@@ -69,6 +70,15 @@ public:
 	virtual void update_state(Point next_position) = 0;
 
 protected:
+	Point position;
+	map::MapSections map_section;
+	bool usable;
+	Signature signature;
+	Size spritesheet_size;
+	uint16_t tile_id;
+	Size size;
+	Size sprite_sheet_size;
+
 	/**
 	 * Sets the state and tile_id of the object
 	 * @param new_state The new render state

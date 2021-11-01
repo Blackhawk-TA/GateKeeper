@@ -143,10 +143,6 @@ void Player::move(MovementDirection direction) {
 		return;
 	}
 
-	//Update the stargate states when a player comes near them
-	stargate_handler::update_states(next_position);
-	game_objects::update_states(next_position);
-
 	//Start animation timer and directly update sprite animation to prevent delay
 	if (!animation_timer.is_running()) {
 		animation_timer.start();
@@ -183,7 +179,12 @@ void Player::move(MovementDirection direction) {
 			break;
 		default:
 			stop_animation();
+			return; //Prevent game object state update
 	}
+
+	//Update the stargate states when a player comes near them
+	stargate_handler::update_states(next_position);
+	game_objects::update_states(next_position);
 }
 
 void Player::change_direction(MovementDirection direction, bool animate) {

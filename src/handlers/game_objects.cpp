@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <cassert>
 
-std::vector<IGameObject*> game_object_collection;
+std::vector<GameObject*> game_object_collection;
 
 void game_objects::init() {
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
@@ -23,8 +23,8 @@ void game_objects::cleanup() {
 	game_object_collection.clear();
 }
 
-std::array<IGameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get_saves() {
-	std::array<IGameObject::Save, GAME_OBJECT_COUNT> saves;
+std::array<GameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get_saves() {
+	std::array<GameObject::Save, GAME_OBJECT_COUNT> saves;
 
 	for (uint16_t i = 0; i < GAME_OBJECT_COUNT; i++) {
 		saves[i] = game_object_collection.at(i)->get_save();
@@ -33,8 +33,8 @@ std::array<IGameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get
 	return saves;
 }
 
-void game_objects::load_saves(std::array<IGameObject::Save, GAME_OBJECT_COUNT> &saved_objects) {
-	IGameObject::Signature signature;
+void game_objects::load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &saved_objects) {
+	GameObject::Signature signature;
 
 	for (auto & saved_object : saved_objects) {
 		for (auto &game_object : game_object_collection) {

@@ -31,7 +31,7 @@ set(PROJECT_SOURCE
         src/items/generic/options_entry.cpp
         src/game_objects/stargate.cpp src/game_objects/stargate.hpp
         src/game_objects/gate_statue.cpp src/game_objects/gate_statue.hpp
-        src/game_objects/game_object_interface.hpp
+        src/game_objects/template/game_object.cpp src/game_objects/template/game_object.hpp
         src/player.cpp src/player.hpp
         src/ui/controls/box.cpp src/ui/controls/box.hpp
         src/ui/controls/listbox.cpp src/ui/controls/listbox.hpp
