@@ -44,19 +44,19 @@ public:
 	 * Loads the saved state of the game object
 	 * @param value The value that is loaded in the game object
 	 */
-	void load_save(bool value);
+	virtual void load_save(bool value);
 
 	/**
 	 * Checks if the game object collides with the player's next position
 	 * @param next_position The next position of the player
 	 * @return True, if a collision takes place, else false
 	 */
-	bool check_collision(Point next_position);
+	virtual bool check_collision(Point next_position);
 
 	/**
 	 * Draws the game object
 	 */
-	void draw();
+	virtual void draw();
 
 	/**
 	 * Checks if a textbox created by this game object is open

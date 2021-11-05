@@ -4,44 +4,17 @@
 
 #include "stargate_handler.hpp"
 #include "../../../engine/camera.hpp"
+#include "game_objects.hpp"
 
-std::map<StargateAddresses, Stargate> stargates;
-std::map<StargateAddresses, Stargate>::iterator it;
+std::vector<Stargate*> stargates;
 
 void stargate_handler::init() {
-	stargates.insert(std::make_pair(GRASSLAND, Stargate(map::GRASSLAND, WINTER, Point(21, 7), true)));
-	stargates.insert(std::make_pair(WINTER, Stargate(map::SNOWLAND, GRASSLAND, Point(12, 10), false)));
-	it = stargates.begin();
-}
+	std::vector<GameObject*> game_object_collection = game_objects::get_collection();
 
-/**
- * Sets the stargates map according to the loaded save game
- * @param saved_stargates The stored stargates from the save game
- */
-void stargate_handler::load(std::map<StargateAddresses, Stargate> saved_stargates) {
-	stargates = std::move(saved_stargates);
-	it = stargates.begin();
-}
-
-void stargate_handler::cleanup() {
-	stargates.clear();
-}
-
-bool stargate_handler::check_collisions(Point next_position) {
-	bool collision = false;
-
-	while (!collision && it != stargates.end()) {
-		collision = it->second.check_collision(next_position);
-		it++;
-	}
-	it = stargates.begin(); //Reset iterator
-
-	return collision;
-}
-
-void stargate_handler::update_states(Point next_position) {
-	for (auto&[key, stargate]: stargates) {
-		stargate.update_state(next_position);
+	for (auto &game_object : game_object_collection) {
+		if (dynamic_cast<Stargate*>(game_object)) {
+			stargates.push_back(dynamic_cast<Stargate*>(game_object));
+		}
 	}
 }
 
@@ -54,60 +27,34 @@ Stargate *stargate_handler::get_destination_gate(Point next_position) {
 	bool teleport = false;
 	StargateAddresses destination_address;
 	Stargate *destination_gate = nullptr;
+	uint16_t i = 0;
 
 	//Check if player entered a gate
-	while (!teleport && it != stargates.end()) {
-		teleport = it->second.check_enter(next_position);
+	while (!teleport && i < stargates.size()) {
+		teleport = stargates[i]->check_enter(next_position);
 		if (!teleport) {
-			it++;
+			i++;
 		}
 	}
 
 	//Find destination gate
 	if (teleport) {
-		destination_address = it->second.get_destination();
+		destination_address = stargates[i]->get_destination();
 
-		it = stargates.find(destination_address);
-		if (it != stargates.end()) {
-			destination_gate = &it->second;
+		i = 0;
+		while (destination_gate == nullptr && i < stargates.size()) {
+			if (stargates[i]->get_address() == destination_address) {
+				destination_gate = stargates[i];
+			}
+			i++;
 		}
 	}
-
-	//Reset iterator
-	it = stargates.begin();
 
 	return destination_gate;
 }
 
-void stargate_handler::draw_stargates() {
-	for (auto &[key, stargate]: stargates) {
-		stargate.draw();
-	}
-}
-
 void stargate_handler::update_animations() {
-	for (auto &[key, stargate]: stargates) {
-		stargate.update_animation();
+	for (auto &stargate : stargates) {
+		stargate->update_animation();
 	}
-}
-
-bool stargate_handler::player_repair_gate() {
-	bool repaired = false;
-
-	while (!repaired && it != stargates.end()) {
-		//TODO move to gate_statue.cpp which checks if a player stands infront of an object.
-		if (it->second.get_entry_point() == camera::get_player_position() && it->second.interact()) {
-			repaired = true;
-		} else {
-			it++;
-		}
-	}
-
-	it = stargates.begin();
-
-	return repaired;
-}
-
-std::map<StargateAddresses, Stargate> stargate_handler::get_stargates() {
-	return stargates;
 }

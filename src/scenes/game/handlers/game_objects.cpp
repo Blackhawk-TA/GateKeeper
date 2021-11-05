@@ -4,16 +4,30 @@
 
 #include "game_objects.hpp"
 #include "../game_objects/gate_statue.hpp"
+#include "../game_objects/stargate.hpp"
+#include "stargate_handler.hpp"
 #include <stdexcept>
 #include <cassert>
 
 std::vector<GameObject*> game_object_collection;
 
 void game_objects::init() {
+	//Gate statues
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
+
+	//Stargates
+	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, GRASSLAND, WINTER, Point(21, 7), true));
+	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, WINTER, GRASSLAND, Point(12, 10), true));
 
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());
+
+	//Init additional handlers for subclasses with additional functionality
+	stargate_handler::init();
+}
+
+std::vector<GameObject*> &game_objects::get_collection() {
+	return game_object_collection;
 }
 
 void game_objects::cleanup() {

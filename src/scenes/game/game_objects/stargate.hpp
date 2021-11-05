@@ -7,7 +7,7 @@
 #include "../../../engine/map.hpp"
 #include "template/game_object.hpp"
 
-class Stargate { //TODO maybe remove inheritance or use decorator
+class Stargate : public GameObject { //TODO maybe remove inheritance or use decorator
 private:
 	enum RenderStates {
 		BROKEN = 1,
@@ -30,28 +30,24 @@ private:
 	const Point ANIMATION_OFFSET = Point(GATE_SIZE.w - ANIMATION_SIZE.w, GATE_SIZE.h - ANIMATION_SIZE.h);
 
 	RenderStates state;
-	map::MapSections map_section;
-	Point position;
+	StargateAddresses address;
 	StargateAddresses destination;
-	Size spritesheet_size;
 	uint32_t activation_start_time;
-	uint16_t tile_id;
-	bool broken;
 
-	void set_state(uint8_t new_state);
+	void set_state(uint8_t new_state) override;
+	void set_usable(bool value) override;
 
 public:
-	explicit Stargate(map::MapSections map_section, StargateAddresses destination, Point position, bool broken);
-	bool check_collision(Point next_position);
-	void draw();
-	bool interact();
-	void update_state(Point next_position);
+	explicit Stargate(map::MapSections map_section, StargateAddresses address, StargateAddresses destination, Point position, bool usable);
+	bool check_collision(Point next_position) override;
+	void draw() override;
+	bool interact() override;
+	void update_state(Point next_position) override;
 
 	bool check_enter(Point next_position);
 	void update_animation();
-	void set_broken(bool value);
-	bool is_broken() const;
 	Point get_entry_point();
 	StargateAddresses get_destination();
+	StargateAddresses get_address();
 	map::MapSections get_map_section();
 };
