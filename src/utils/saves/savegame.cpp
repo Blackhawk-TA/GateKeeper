@@ -50,35 +50,6 @@ std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, listbox_i
 	return decompressed_items;
 }
 
-/**
- * Parses the stargates map into an array containing only the broken boolean. The compressed index mirrors the gate address
- * @param stargates The stargate map to be compressed
- * @return The compressed stargate array
- */
-std::array<bool, StargateAddresses::COUNTER> compress_gates(std::map<StargateAddresses, Stargate> &stargates) {
-	std::array<bool, StargateAddresses::COUNTER> compressed_gates = {};
-
-	for (auto &stargate: stargates) {
-		compressed_gates[stargate.first] = stargate.second.is_broken();
-	}
-
-	return compressed_gates;
-}
-
-std::map<StargateAddresses, Stargate> decompress_gates(std::array<bool, StargateAddresses::COUNTER> &stargates) {
-	std::map<StargateAddresses, Stargate> decompressed_gates = stargate_handler::get_stargates();
-
-	for (auto &decompressed_gate: decompressed_gates) {
-		for (auto i = 0u; i < stargates.size(); i++) {
-			if (decompressed_gate.first == i) {
-				decompressed_gate.second.set_broken(stargates[i]);
-			}
-		}
-	}
-
-	return decompressed_gates;
-}
-
 Player *savegame::create() {
 	Point start_position = Point(22, 12);
 
@@ -99,7 +70,6 @@ void savegame::save(uint8_t save_id) {
 	//Fetch item and stargate data
 	//TODO handle item compression and decompression in inventory namespace in get_items and load
 	std::vector<Listbox::Item> items = inventory::get_items();
-	std::map<StargateAddresses, Stargate> stargates = stargate_handler::get_stargates();
 
 	//Save and compress data which will be saved
 	auto game_data = GameData{
@@ -107,8 +77,7 @@ void savegame::save(uint8_t save_id) {
 		camera::get_player_position(),
 		Player::get_direction(),
 		game_objects::get_saves(),
-		compress_items(items),
-		compress_gates(stargates)
+		compress_items(items)
 	};
 
 	write_save(game_data, save_id);
@@ -134,7 +103,6 @@ Player *savegame::load(uint8_t save_id) {
 		stargate_handler::init();
 
 		//Load broken state of stargates
-		stargate_handler::load(decompress_gates(save_data.gate_states));
 
 		//Load game object states
 		game_objects::load_saves(save_data.game_objects);

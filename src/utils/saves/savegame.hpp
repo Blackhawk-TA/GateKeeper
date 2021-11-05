@@ -20,7 +20,6 @@ namespace savegame {
 		Player::MovementDirection player_direction;
 		std::array<GameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects;
 		std::array<Item, listbox_item::INVENTORY_COUNTER> items;
-		std::array<bool, StargateAddresses::COUNTER> gate_states;
 	};
 
 	Player *create();

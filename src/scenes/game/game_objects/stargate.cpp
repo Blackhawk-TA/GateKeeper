@@ -5,18 +5,15 @@
 #include "stargate.hpp"
 #include "../../../engine/camera.hpp"
 
-Stargate::Stargate(map::MapSections map_section, StargateAddresses destination, Point position, bool broken) {
-	Stargate::map_section = map_section;
-	Stargate::position = position;
+Stargate::Stargate(map::MapSections map_section, StargateAddresses address, StargateAddresses destination, Point position, bool usable) : GameObject(map_section, position, usable) {
+	Stargate::address = address;
 	Stargate::destination = destination;
-	Stargate::broken = broken;
-	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	activation_start_time = 0;
 
-	if (broken) {
-		Stargate::set_state(BROKEN);
-	} else {
+	if (usable) {
 		Stargate::set_state(INACTIVE);
+	} else {
+		Stargate::set_state(BROKEN);
 	}
 }
 
@@ -148,8 +145,12 @@ void Stargate::set_state(uint8_t new_state) {
 }
 
 bool Stargate::interact() {
-	if (broken) {
-		broken = false;
+	if (map::get_section() != map_section) {
+		return false;
+	}
+
+	if (get_entry_point() == camera::get_player_position() && !usable) {
+		usable = false;
 		set_state(ACTIVATING);
 		return true;
 	}
@@ -157,25 +158,16 @@ bool Stargate::interact() {
 	return false;
 }
 
-/**
- * Sets stargate broken property and stargate state depending on player position.
- * Used for loading save games.
- * @param value The broken value
- */
-void Stargate::set_broken(bool value) {
+void Stargate::set_usable(bool value) {
 	Point player_position = camera::get_player_position();
-	broken = value;
-	if (broken) {
+	usable = value;
+	if (!usable) {
 		set_state(BROKEN);
 	} else if (player_position == position + RELATIVE_ACTIVATION_POINT || player_position == position + RELATIVE_PRE_ENTRY_POINT) {
 		set_state(ACTIVE);
 	} else {
 		set_state(INACTIVE);
 	}
-}
-
-bool Stargate::is_broken() const {
-	return broken;
 }
 
 /**
@@ -192,6 +184,14 @@ Point Stargate::get_entry_point() {
  */
 StargateAddresses Stargate::get_destination() {
 	return destination;
+}
+
+/**
+ * Gets the address of the stargate
+ * @return The address of the stargate
+ */
+StargateAddresses Stargate::get_address() {
+	return address;
 }
 
 /**

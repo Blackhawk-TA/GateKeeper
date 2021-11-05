@@ -11,12 +11,14 @@ namespace game_objects {
 	/**
 	 * The amount of game objects on the map
 	 */
-	constexpr uint16_t GAME_OBJECT_COUNT = 1;
+	constexpr uint16_t GAME_OBJECT_COUNT = 3;
 
 	/**
 	 * Creates the objects using their factory function
 	 */
 	void init();
+
+	std::vector<GameObject*> &get_collection();
 
 	/**
 	 * Deletes all objects from memory

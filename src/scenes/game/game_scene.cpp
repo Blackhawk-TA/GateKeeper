@@ -49,13 +49,11 @@ GameScene::~GameScene() {
 
 	//Delete game objects and inventory after saving
 	game_objects::cleanup();
-	stargate_handler::cleanup();
 	inventory::cleanup();
 }
 
 void GameScene::render(uint32_t time) {
 	map::draw();
-	stargate_handler::draw_stargates();
 	game_objects::draw();
 	player->draw();
 	overlay::draw_statusbar(player->get_health());

@@ -128,7 +128,7 @@ void Player::move(MovementDirection direction) {
 	Point movement = movements.at(direction);
 	Point next_position = camera::get_world_position() + position + movement;
 
-	if (stargate_handler::check_collisions(next_position) || game_objects::check_collisions(next_position)) {
+	if (game_objects::check_collisions(next_position)) {
 		stop_animation();
 		return;
 	}
@@ -183,7 +183,6 @@ void Player::move(MovementDirection direction) {
 	}
 
 	//Update the stargate states when a player comes near them
-	stargate_handler::update_states(next_position);
 	game_objects::update_states(next_position);
 }
 
@@ -226,7 +225,7 @@ void Player::gate_teleport(Stargate *destination_gate) {
 
 	camera::set_position(teleport_destination);
 	change_direction(MovementDirection::DOWN, false);
-	stargate_handler::update_states(teleport_destination);
+	game_objects::update_states(teleport_destination);
 }
 
 Player::MovementDirection Player::get_direction() {
