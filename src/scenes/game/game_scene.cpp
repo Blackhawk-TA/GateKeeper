@@ -64,7 +64,7 @@ void GameScene::render(uint32_t time) {
 		sidemenu::draw();
 	}
 
-	if (inventory::open) {
+	if (inventory::is_open()) {
 		inventory::draw();
 	}
 }
@@ -95,7 +95,7 @@ void GameScene::inputs() {
 		} else if (buttons & changed & Button::MENU || buttons & changed & Button::B || buttons & changed & Button::Y) {
 			sidemenu::close();
 		}
-	} else if (inventory::open) {
+	} else if (inventory::is_open()) {
 		if (buttons & changed & Button::DPAD_UP) {
 			inventory::cursor_up();
 		} else if (buttons & changed & Button::DPAD_DOWN) {
@@ -104,9 +104,9 @@ void GameScene::inputs() {
 			inventory::cursor_press();
 		} else if (buttons & changed & Button::B) {
 			sidemenu::open();
-			inventory::open = false;
+			inventory::close();
 		} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
-			inventory::open = false;
+			inventory::close();
 		} else if (buttons & changed & Button::X) {
 			inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 		}

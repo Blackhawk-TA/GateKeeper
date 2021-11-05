@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_inventory_entry() {
 		false,
 		0,
 		[] {
-			inventory::open = true;
+			inventory::open();
 			sidemenu::close();
 			return Listbox::Tooltip::SUPPRESS;
 		}

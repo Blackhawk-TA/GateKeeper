@@ -6,9 +6,9 @@
 #include "../../../items/items.hpp"
 
 Listbox *control;
+bool open_state = false;
 
 void inventory::init() {
-	open = false;
 	std::vector<Listbox::Item> items = {
 		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
 	};
@@ -24,8 +24,21 @@ void inventory::load(std::vector<Listbox::Item> loaded_items) {
 }
 
 void inventory::cleanup() {
-	open = false;
+	open_state = false;
 	delete control;
+}
+
+void inventory::open() {
+	open_state = true;
+}
+
+void inventory::close() {
+	open_state = false;
+	control->cursor_reset();
+}
+
+bool inventory::is_open() {
+	return open_state;
 }
 
 bool inventory::add_item(Listbox::Item item) {

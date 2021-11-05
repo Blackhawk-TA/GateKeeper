@@ -90,6 +90,10 @@ void Listbox::draw() {
 	}
 }
 
+void Listbox::cursor_reset() {
+	cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
+}
+
 void Listbox::cursor_up() {
 	if (cursor_position.y - rect.y > 1) {
 		cursor_position.y--;

@@ -15,8 +15,8 @@ Listbox::Item listbox_item::create_exit_entry() {
 		false,
 		0,
 		[] {
-			if (inventory::open) {
-				inventory::open = false;
+			if (inventory::is_open()) {
+				inventory::close();
 				sidemenu::open();
 			} else if (sidemenu::is_open()) {
 				sidemenu::close();
