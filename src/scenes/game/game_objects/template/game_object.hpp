@@ -30,7 +30,8 @@ public:
 	 */
 	enum ObjectType {
 		GateStatueType = 1,
-		StargateType = 2
+		StargateType = 2,
+		SignType = 3
 	};
 
 	explicit GameObject(map::MapSections map_section, Point position, bool usable);

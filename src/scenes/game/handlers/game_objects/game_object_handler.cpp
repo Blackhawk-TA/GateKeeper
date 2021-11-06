@@ -6,6 +6,7 @@
 #include "../../game_objects/gate_statue.hpp"
 #include "../../game_objects/stargate.hpp"
 #include "extensions/stargate_handler.hpp"
+#include "../../game_objects/sign.hpp"
 #include <stdexcept>
 #include <cassert>
 
@@ -18,6 +19,10 @@ void game_objects::init() {
 	//Stargates
 	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND, WINTER, false));
 	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(12, 10), WINTER, GRASSLAND, true));
+
+	//Sign
+	game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(25, 12), Sign::WOOD, "The Stargate is a portal to other worlds! It was closed to keep the village safe."));
+	game_object_collection.emplace_back(new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to keep the gate closed and protect the world from unknown dangers."));
 
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());
