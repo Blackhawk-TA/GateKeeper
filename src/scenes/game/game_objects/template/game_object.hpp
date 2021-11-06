@@ -25,6 +25,14 @@ public:
 		bool value{};
 	};
 
+	/**
+	 * Game Object types. Required since PicoSystem does not support Run Time Type Information
+	 */
+	enum ObjectType {
+		GateStatueType = 1,
+		StargateType = 2
+	};
+
 	explicit GameObject(map::MapSections map_section, Point position, bool usable);
 	virtual ~GameObject() = default;
 
@@ -80,6 +88,12 @@ public:
 	 * @param next_position The next position of the player
 	 */
 	virtual void update_state(Point next_position) = 0;
+
+	/**
+	 * Gets the type of the game object
+	 * @return The game object type
+	 */
+	virtual ObjectType get_type() = 0;
 
 protected:
 	Point position;

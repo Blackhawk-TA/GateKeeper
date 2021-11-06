@@ -30,9 +30,6 @@ GameScene::GameScene(uint8_t save_id) {
 	flags::set_flags(flags::TileFlags::ENTRY, {141, 294, 515, 517, 773, 965, 1425, 1573});
 	flags::set_flags(flags::TileFlags::DEADLY, {56, 57, 58, 248, 249, 250});
 
-	sidemenu::init(save_id);
-	inventory::init();
-	game_objects::init();
 	player = savegame::load(save_id);
 }
 

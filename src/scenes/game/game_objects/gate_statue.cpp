@@ -69,3 +69,7 @@ void GateStatue::set_usable(bool value) {
 
 	update_state(camera::get_player_position());
 }
+
+GameObject::ObjectType GateStatue::get_type() {
+	return GateStatueType;
+}
