@@ -5,8 +5,9 @@
 #include "../items.hpp"
 #include "../../utils/saves/options.hpp"
 
-Listbox::Item listbox_item::create_show_fps_entry() {
+Listbox::Item listbox_item::create_show_fps_entry(uint8_t type_id) {
 	return Listbox::Item{
+		type_id,
 		"SHOW FPS",
 		"Press A to toggle the fps counter.",
 		"Toggled fps counter.",

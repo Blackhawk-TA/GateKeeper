@@ -10,13 +10,13 @@ Listbox::Item listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM i
 
 	switch (item_type) {
 		case INVENTORY_ITEM::GATE_PART:
-			item = create_gate_part();
+			item = create_gate_part(INVENTORY_ITEM::GATE_PART);
 			break;
 		case INVENTORY_ITEM::APPLE:
-			item = create_apple();
+			item = create_apple(INVENTORY_ITEM::APPLE);
 			break;
 		case INVENTORY_ITEM::INVENTORY_BACK:
-			item = create_exit_entry();
+			item = create_back_entry(INVENTORY_ITEM::INVENTORY_BACK);
 			break;
 	}
 
@@ -28,19 +28,19 @@ Listbox::Item listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_ITEM ite
 
 	switch (item_type) {
 		case SIDEMENU_ITEM::INVENTORY:
-			item = create_inventory_entry();
+			item = create_inventory_entry(SIDEMENU_ITEM::INVENTORY);
 			break;
 		case SIDEMENU_ITEM::SAVE:
-			item = create_save_entry(save_id);
+			item = create_save_entry(SIDEMENU_ITEM::SAVE, save_id);
 			break;
 		case SIDEMENU_ITEM::SIDEMENU_OPTIONS:
-			item = create_options_entry(save_id);
+			item = create_options_entry(SIDEMENU_ITEM::SIDEMENU_BACK, save_id);
 			break;
 		case SIDEMENU_ITEM::SIDEMENU_BACK:
-			item = create_exit_entry();
+			item = create_back_entry(SIDEMENU_ITEM::SIDEMENU_BACK);
 			break;
 		case SIDEMENU_ITEM::QUIT:
-			item = create_quit_entry();
+			item = create_quit_entry(SIDEMENU_ITEM::QUIT);
 			break;
 	}
 
@@ -54,13 +54,13 @@ Listbox::Item listbox_item::create_menu_item(listbox_item::MENU_ITEM item_type, 
 
 	switch (item_type) {
 		case MENU_ITEM::LOAD_SAVE:
-			item = create_load_entry(save_id);
+			item = create_load_entry(MENU_ITEM::LOAD_SAVE, save_id);
 			break;
 		case MENU_ITEM::NEW_SAVE:
-			item = create_new_save_entry(save_id);
+			item = create_new_save_entry(MENU_ITEM::NEW_SAVE, save_id);
 			break;
 		case MENU_ITEM::MENU_OPTIONS:
-			item = create_options_entry();
+			item = create_options_entry(MENU_ITEM::MENU_OPTIONS);
 			break;
 	}
 
@@ -72,10 +72,10 @@ Listbox::Item listbox_item::create_options_item(listbox_item::OPTIONS_ITEM item_
 
 	switch (item_type) {
 		case OPTIONS_ITEM::SHOW_FPS:
-			item = create_show_fps_entry();
+			item = create_show_fps_entry(OPTIONS_ITEM::SHOW_FPS);
 			break;
 		case OPTIONS_ITEM::OPTIONS_BACK:
-			item = create_options_exit_entry(save_id);
+			item = create_options_exit_entry(OPTIONS_ITEM::OPTIONS_BACK, save_id);
 			break;
 	}
 

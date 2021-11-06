@@ -42,23 +42,23 @@ namespace listbox_item {
 	Listbox::Item create_options_item(OPTIONS_ITEM item_type, uint8_t save_id = 0);
 
 	//Generic items
-	Listbox::Item create_options_entry(uint8_t save_id = 0);
+	Listbox::Item create_options_entry(uint8_t type_id, uint8_t save_id = 0);
 
 	//Inventory items
-	Listbox::Item create_gate_part();
-	Listbox::Item create_apple();
+	Listbox::Item create_gate_part(uint8_t type_id);
+	Listbox::Item create_apple(uint8_t type_id);
 
 	//Sidemenu items
-	Listbox::Item create_inventory_entry();
-	Listbox::Item create_save_entry(uint8_t save_id);
-	Listbox::Item create_exit_entry();
-	Listbox::Item create_quit_entry();
+	Listbox::Item create_inventory_entry(uint8_t type_id);
+	Listbox::Item create_save_entry(uint8_t type_id, uint8_t save_id);
+	Listbox::Item create_back_entry(uint8_t type_id);
+	Listbox::Item create_quit_entry(uint8_t type_id);
 
 	//Menu items
-	Listbox::Item create_load_entry(uint8_t save_id);
-	Listbox::Item create_new_save_entry(uint8_t save_id);
+	Listbox::Item create_load_entry(uint8_t type_id, uint8_t save_id);
+	Listbox::Item create_new_save_entry(uint8_t type_id, uint8_t save_id);
 
 	//Options items
-	Listbox::Item create_show_fps_entry();
-	Listbox::Item create_options_exit_entry(uint8_t save_id = 0);
+	Listbox::Item create_show_fps_entry(uint8_t type_id);
+	Listbox::Item create_options_exit_entry(uint8_t type_id, uint8_t save_id = 0);
 }

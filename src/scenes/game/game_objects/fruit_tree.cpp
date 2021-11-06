@@ -58,6 +58,10 @@ void FruitTree::draw() {
 }
 
 void FruitTree::update(uint32_t time) {
+	if (map::get_section() != map_section) {
+		return;
+	}
+
 	if (!usable && grown_time < game_time::get_time()) {
 		usable = true;
 	}

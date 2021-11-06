@@ -10,7 +10,7 @@
 
 namespace savegame {
 	struct Item {
-		listbox_item::INVENTORY_ITEM type;
+		uint8_t type;
 		uint8_t amount;
 	};
 

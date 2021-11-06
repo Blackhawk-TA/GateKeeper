@@ -15,6 +15,7 @@ public:
 	};
 
 	struct Item {
+		uint8_t type;
 		std::string name;
 		std::string tooltip;
 		std::string callback_tooltip;

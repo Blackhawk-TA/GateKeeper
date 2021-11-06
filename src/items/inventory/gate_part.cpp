@@ -5,8 +5,9 @@
 #include "../items.hpp"
 #include "../../scenes/game/handlers/game_objects/extensions/stargate_handler.hpp"
 
-Listbox::Item listbox_item::create_gate_part() {
+Listbox::Item listbox_item::create_gate_part(uint8_t type_id) {
 	return Listbox::Item{
+		type_id,
 		"GATE PART",
 		"Can be used to repair a broken stargate.",
 		"The gate part was used to repair the stargate.",

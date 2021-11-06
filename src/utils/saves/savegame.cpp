@@ -18,9 +18,9 @@ std::array<savegame::Item, listbox_item::INVENTORY_COUNTER> compress_items(std::
 	uint8_t amount;
 
 	for (auto i = 0u; i < listbox_item::INVENTORY_COUNTER; i++) {
-		amount = i < items.size() ? items [i].amount : 0;
+		amount = i < items.size() ? items[i].amount : 0;
 		compressed_items[i] = savegame::Item{
-			static_cast<listbox_item::INVENTORY_ITEM>(i + 1),
+			items[i].type,
 			amount
 		};
 	}
@@ -32,18 +32,19 @@ std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, listbox_i
 	std::vector<Listbox::Item> decompressed_items = {};
 	Listbox::Item item_template;
 
-	for (auto i = 0u; i < items.size(); i++) {
-		item_template = listbox_item::create_inventory_item(static_cast<listbox_item::INVENTORY_ITEM>(i + 1));
+	for (auto &item : items) {
+		item_template = listbox_item::create_inventory_item(static_cast<listbox_item::INVENTORY_ITEM>(item.type));
 
 		//Include only items that have an amount > 0 or are a menu item
-		if (items[i].amount > 0 || (items[i].amount == 0 && !item_template.single_use)) {
+		if (item.amount > 0 || (item.amount == 0 && !item_template.single_use)) {
 			decompressed_items.emplace_back(Listbox::Item{
+				item.type,
 				item_template.name,
 				item_template.tooltip,
 				item_template.callback_tooltip,
 				item_template.callback_fail_tooltip,
 				item_template.single_use,
-				items[i].amount,
+				item.amount,
 				item_template.callback
 			});
 		}
