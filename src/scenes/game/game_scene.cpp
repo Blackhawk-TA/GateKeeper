@@ -6,12 +6,12 @@
 #include "../../game.hpp"
 #include "../../engine/effects/transition.hpp"
 #include "../../engine/flags.hpp"
-#include "../../scenes/game/handlers/stargate_handler.hpp"
 #include "../../items/items.hpp"
 #include "../../utils/saves/savegame.hpp"
 #include "ui/sidemenu.hpp"
 #include "ui/inventory.hpp"
 #include "ui/overlay.hpp"
+#include "handlers/game_objects/extensions/stargate_handler.hpp"
 
 GameScene::GameScene(uint8_t save_id) {
 	GameScene::save_id = save_id;

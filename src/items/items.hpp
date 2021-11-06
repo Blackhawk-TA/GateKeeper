@@ -3,7 +3,6 @@
 //
 
 #pragma once
-#include "../scenes/game/handlers/stargate_handler.hpp"
 #include "../engine/ui/listbox.hpp"
 
 /**

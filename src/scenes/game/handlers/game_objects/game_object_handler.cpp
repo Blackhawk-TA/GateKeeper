@@ -2,10 +2,10 @@
 // Created by D069765 on 26.10.2021.
 //
 
-#include "game_objects.hpp"
-#include "../game_objects/gate_statue.hpp"
-#include "../game_objects/stargate.hpp"
-#include "stargate_handler.hpp"
+#include "game_object_handler.hpp"
+#include "../../game_objects/gate_statue.hpp"
+#include "../../game_objects/stargate.hpp"
+#include "extensions/stargate_handler.hpp"
 #include <stdexcept>
 #include <cassert>
 
