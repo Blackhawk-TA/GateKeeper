@@ -51,7 +51,7 @@ std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, listbox_i
 	return decompressed_items;
 }
 
-Player *savegame::create(u_int8_t save_id) {
+Player *savegame::create(uint8_t save_id) {
 	Point start_position = Point(22, 12);
 
 	map::load_section(map::MapSections::GRASSLAND);
