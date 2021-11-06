@@ -5,7 +5,7 @@
 #include "stargate.hpp"
 #include "../../../engine/camera.hpp"
 
-Stargate::Stargate(map::MapSections map_section, StargateAddresses address, StargateAddresses destination, Point position, bool usable) : GameObject(map_section, position, usable) {
+Stargate::Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool usable) : GameObject(map_section, position, usable) {
 	Stargate::address = address;
 	Stargate::destination = destination;
 	activation_start_time = 0;
@@ -150,7 +150,7 @@ bool Stargate::interact() {
 	}
 
 	if (get_entry_point() == camera::get_player_position() && !usable) {
-		usable = false;
+		usable = true;
 		set_state(ACTIVATING);
 		return true;
 	}
@@ -200,4 +200,8 @@ StargateAddresses Stargate::get_address() {
  */
 map::MapSections Stargate::get_map_section() {
 	return map_section;
+}
+
+GameObject::ObjectType Stargate::get_type() {
+	return StargateType;
 }

@@ -5,6 +5,7 @@
 #include "savegame.hpp"
 #include "options.hpp"
 #include "../../scenes/game/ui/inventory.hpp"
+#include "../../scenes/game/ui/sidemenu.hpp"
 
 /**
  * Parses the item vector into an array, because vector cannot be saved directly
@@ -50,12 +51,14 @@ std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, listbox_i
 	return decompressed_items;
 }
 
-Player *savegame::create() {
+Player *savegame::create(u_int8_t save_id) {
 	Point start_position = Point(22, 12);
 
 	map::load_section(map::MapSections::GRASSLAND);
 	camera::init(start_position);
-	stargate_handler::init();
+	sidemenu::init(save_id);
+	inventory::init();
+	game_objects::init();
 
 	return new Player(Player::MovementDirection::DOWN);
 }
@@ -96,19 +99,19 @@ Player *savegame::load(uint8_t save_id) {
 		camera::init(save_data.camera_position);
 		player = new Player(save_data.player_direction);
 
+		//Init sidemenu
+		sidemenu::init(save_id);
+
 		//Load inventory
+		inventory::init();
 		inventory::load(decompress_items(save_data.items));
 
-		//Initialize stargates to set their broken state later
-		stargate_handler::init();
-
-		//Load broken state of stargates
-
 		//Load game object states
+		game_objects::init();
 		game_objects::load_saves(save_data.game_objects);
 	} else {
 		//If loading save was not successful, create new save
-		player = create();
+		player = create(save_id);
 	}
 
 	return player;

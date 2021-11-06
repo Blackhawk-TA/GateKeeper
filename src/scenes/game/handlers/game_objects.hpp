@@ -6,7 +6,6 @@
 #include "../game_objects/template/game_object.hpp"
 #include "../../../engine/map.hpp"
 
-//TODO think about integrating stargate into a gameobject, might not make sense since a gate is special due to the objects being linked
 namespace game_objects {
 	/**
 	 * The amount of game objects on the map
@@ -18,6 +17,10 @@ namespace game_objects {
 	 */
 	void init();
 
+	/**
+	 * Gets the game object collection
+	 * @return The game object collection
+	 */
 	std::vector<GameObject*> &get_collection();
 
 	/**

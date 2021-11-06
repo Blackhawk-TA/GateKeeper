@@ -16,8 +16,8 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
 
 	//Stargates
-	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, GRASSLAND, WINTER, Point(21, 7), true));
-	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, WINTER, GRASSLAND, Point(12, 10), true));
+	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND, WINTER, false));
+	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(12, 10), WINTER, GRASSLAND, true));
 
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());

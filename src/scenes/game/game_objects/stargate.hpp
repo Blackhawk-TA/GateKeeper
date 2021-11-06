@@ -7,7 +7,7 @@
 #include "../../../engine/map.hpp"
 #include "template/game_object.hpp"
 
-class Stargate : public GameObject { //TODO maybe remove inheritance or use decorator
+class Stargate : public GameObject {
 private:
 	enum RenderStates {
 		BROKEN = 1,
@@ -38,11 +38,12 @@ private:
 	void set_usable(bool value) override;
 
 public:
-	explicit Stargate(map::MapSections map_section, StargateAddresses address, StargateAddresses destination, Point position, bool usable);
+	explicit Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool usable);
 	bool check_collision(Point next_position) override;
 	void draw() override;
 	bool interact() override;
 	void update_state(Point next_position) override;
+	ObjectType get_type() override;
 
 	bool check_enter(Point next_position);
 	void update_animation();

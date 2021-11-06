@@ -29,4 +29,5 @@ public:
 	~GateStatue() override = default;
 	bool interact() override;
 	void update_state(Point next_position) override;
+	ObjectType get_type() override;
 };

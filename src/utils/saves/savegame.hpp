@@ -22,7 +22,7 @@ namespace savegame {
 		std::array<Item, listbox_item::INVENTORY_COUNTER> items;
 	};
 
-	Player *create();
+	Player *create(uint8_t save_id);
 	void save(uint8_t save_id);
 	Player *load(uint8_t save_id);
 }

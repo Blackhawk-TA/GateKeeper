@@ -3,7 +3,6 @@
 //
 
 #include "stargate_handler.hpp"
-#include "../../../engine/camera.hpp"
 #include "game_objects.hpp"
 
 std::vector<Stargate*> stargates;
@@ -11,9 +10,9 @@ std::vector<Stargate*> stargates;
 void stargate_handler::init() {
 	std::vector<GameObject*> game_object_collection = game_objects::get_collection();
 
-	for (auto &game_object : game_object_collection) {
-		if (dynamic_cast<Stargate*>(game_object)) {
-			stargates.push_back(dynamic_cast<Stargate*>(game_object));
+	for (GameObject* game_object : game_object_collection) {
+		if (game_object->get_type() == GameObject::StargateType) {
+			stargates.push_back((Stargate*)game_object);
 		}
 	}
 }
