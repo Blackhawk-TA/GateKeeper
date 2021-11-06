@@ -3,7 +3,7 @@
 //
 
 #include "stargate_handler.hpp"
-#include "game_objects.hpp"
+#include "../game_object_handler.hpp"
 
 std::vector<Stargate*> stargates;
 

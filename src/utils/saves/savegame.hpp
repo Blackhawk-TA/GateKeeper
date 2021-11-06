@@ -6,7 +6,7 @@
 #include "../utils.hpp"
 #include "../../scenes/game/characters/player.hpp"
 #include "../../items/items.hpp"
-#include "../../scenes/game/handlers/game_objects.hpp"
+#include "../../scenes/game/handlers/game_objects/game_object_handler.hpp"
 
 namespace savegame {
 	struct Item {

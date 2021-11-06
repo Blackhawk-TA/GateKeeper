@@ -3,8 +3,8 @@
 //
 
 #pragma once
-#include "../game_objects/template/game_object.hpp"
-#include "../../../engine/map.hpp"
+#include "../../game_objects/template/game_object.hpp"
+#include "../../../../engine/map.hpp"
 
 namespace game_objects {
 	/**

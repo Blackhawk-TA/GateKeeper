@@ -3,6 +3,7 @@
 //
 
 #include "../items.hpp"
+#include "../../scenes/game/handlers/game_objects/extensions/stargate_handler.hpp"
 
 Listbox::Item listbox_item::create_gate_part() {
 	return Listbox::Item{

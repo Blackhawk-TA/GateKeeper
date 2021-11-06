@@ -6,9 +6,9 @@
 #include "player.hpp"
 #include "../../../engine/effects/transition.hpp"
 #include "../../../engine/flags.hpp"
-#include "../handlers/stargate_handler.hpp"
-#include "../handlers/game_objects.hpp"
+#include "../handlers/game_objects/game_object_handler.hpp"
 #include "../handlers/entry_handler.hpp"
+#include "../handlers/game_objects/extensions/stargate_handler.hpp"
 
 bool Player::attacking = false;
 bool Player::evading = false;

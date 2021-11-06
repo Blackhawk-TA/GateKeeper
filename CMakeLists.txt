@@ -16,8 +16,8 @@ set(PROJECT_SOURCE
         src/scenes/menu/menu_scene.cpp src/scenes/menu/menu_scene.hpp
         src/scenes/options/options_scene.cpp src/scenes/options/options_scene.hpp
         src/scenes/game/handlers/entry_handler.cpp src/scenes/game/handlers/entry_handler.hpp
-        src/scenes/game/handlers/game_objects.cpp src/scenes/game/handlers/game_objects.hpp
-        src/scenes/game/handlers/stargate_handler.cpp src/scenes/game/handlers/stargate_handler.hpp
+        src/scenes/game/handlers/game_objects/game_object_handler.cpp src/scenes/game/handlers/game_objects/game_object_handler.hpp
+        src/scenes/game/handlers/game_objects/extensions/stargate_handler.cpp src/scenes/game/handlers/game_objects/extensions/stargate_handler.hpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
         src/items/sidemenu/sidemenu_back_entry.cpp
