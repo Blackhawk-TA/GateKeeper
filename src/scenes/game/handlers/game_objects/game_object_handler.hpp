@@ -10,7 +10,7 @@ namespace game_objects {
 	/**
 	 * The amount of game objects on the map
 	 */
-	constexpr uint16_t GAME_OBJECT_COUNT = 5;
+	constexpr uint16_t GAME_OBJECT_COUNT = 7;
 
 	/**
 	 * Creates the objects using their factory function
@@ -43,6 +43,11 @@ namespace game_objects {
 	 * Draws all game objects
 	 */
 	void draw();
+
+	/**
+	 * Updates all game objects
+	 */
+	void update(uint32_t time);
 
 	/**
 	 * Checks if a game object has an open textbox

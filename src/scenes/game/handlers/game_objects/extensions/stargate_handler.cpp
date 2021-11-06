@@ -53,15 +53,6 @@ Stargate *stargate_handler::get_destination_gate(Point next_position) {
 }
 
 /**
- * Update stargate activation/deactivation animations
- */
-void stargate_handler::update_animations() {
-	for (auto &stargate : stargates) {
-		stargate->update_animation();
-	}
-}
-
-/**
  * Repairs the gate triggered by the GatePart selection in the inventory
  * @return True, if a gate could be repaired, else false
  */

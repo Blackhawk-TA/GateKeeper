@@ -30,4 +30,5 @@ public:
 	bool interact() override;
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;
+	void update(uint32_t time) override;
 };

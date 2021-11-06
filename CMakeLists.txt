@@ -20,6 +20,7 @@ set(PROJECT_SOURCE
         src/scenes/game/handlers/game_objects/extensions/stargate_handler.cpp src/scenes/game/handlers/game_objects/extensions/stargate_handler.hpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
+        src/items/inventory/apple.cpp
         src/items/sidemenu/sidemenu_back_entry.cpp
         src/items/sidemenu/inventory_entry.cpp
         src/items/sidemenu/save_entry.cpp
@@ -29,6 +30,7 @@ set(PROJECT_SOURCE
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
         src/items/generic/options_entry.cpp
+        src/scenes/game/game_objects/fruit_tree.cpp src/scenes/game/game_objects/fruit_tree.hpp
         src/scenes/game/game_objects/sign.cpp src/scenes/game/game_objects/sign.hpp
         src/scenes/game/game_objects/stargate.cpp src/scenes/game/game_objects/stargate.hpp
         src/scenes/game/game_objects/gate_statue.cpp src/scenes/game/game_objects/gate_statue.hpp

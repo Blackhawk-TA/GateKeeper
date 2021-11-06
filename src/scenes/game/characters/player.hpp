@@ -18,14 +18,15 @@ public:
 		RIGHT = 4
 	};
 
-	explicit Player(MovementDirection direction);
+	explicit Player(MovementDirection direction, uint8_t health);
 	void draw();
 	void attack();
 	void evade();
-	void take_damage(uint8_t damage_amount);
-	bool is_dead() const;
-	uint8_t get_health() const;
 	void move(MovementDirection direction);
+	static bool is_dead();
+	static uint8_t get_health();
+	static void take_damage(uint8_t damage_amount);
+	static void heal(uint8_t heal_amount);
 	static MovementDirection get_direction();
 	static void change_direction(MovementDirection direction, bool animate = true);
 
@@ -55,12 +56,12 @@ private:
 	static MovementDirection current_direction;
 	static Vec2 evasion_position_modifier;
 	static float evasion_modifier;
+	static uint8_t health;
+	static bool dead;
 
 	const uint8_t ATTACK_TILE_SIZE = 3;
-	bool dead;
 	Timer animation_timer;
 	Timer action_timer;
-	uint8_t health;
 	Point position;
 	Size spritesheet_size;
 	Size attack_spritesheet_size;

@@ -62,7 +62,7 @@ Player *savegame::create(uint8_t save_id) {
 	game_objects::init();
 	game_time::init();
 
-	return new Player(Player::MovementDirection::DOWN);
+	return new Player(Player::MovementDirection::DOWN, 100);
 }
 
 void savegame::save(uint8_t save_id) {
@@ -81,6 +81,7 @@ void savegame::save(uint8_t save_id) {
 		map::get_section(),
 		camera::get_player_position(),
 		Player::get_direction(),
+		Player::get_health(),
 		game_objects::get_saves(),
 		compress_items(items),
 		game_time::get_time()
@@ -100,7 +101,7 @@ Player *savegame::load(uint8_t save_id) {
 		//Load position and direction
 		map::load_section(save_data.map_section);
 		camera::init(save_data.camera_position);
-		player = new Player(save_data.player_direction);
+		player = new Player(save_data.player_direction, save_data.player_health);
 
 		//Init sidemenu
 		sidemenu::init(save_id);

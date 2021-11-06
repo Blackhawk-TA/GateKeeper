@@ -41,13 +41,13 @@ public:
 	explicit Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool usable);
 	bool check_collision(Point next_position) override;
 	void draw() override;
+	void update(uint32_t time) override;
 	bool interact() override;
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;
 
 	bool repair();
 	bool check_enter(Point next_position);
-	void update_animation();
 	Point get_entry_point();
 	StargateAddresses get_destination();
 	StargateAddresses get_address();

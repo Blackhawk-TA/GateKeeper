@@ -7,6 +7,7 @@
 #include "../../game_objects/stargate.hpp"
 #include "extensions/stargate_handler.hpp"
 #include "../../game_objects/sign.hpp"
+#include "../../game_objects/fruit_tree.hpp"
 #include <stdexcept>
 #include <cassert>
 
@@ -20,9 +21,13 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND, WINTER, false));
 	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(12, 10), WINTER, GRASSLAND, true));
 
-	//Sign
+	//Signs
 	game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(25, 12), Sign::WOOD, "The Stargate is a portal to other worlds! It was closed to keep the village safe."));
 	game_object_collection.emplace_back(new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to keep the gate closed and protect the world from unknown dangers."));
+
+	//Fruit trees
+	game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(11, 16), true));
+	game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(21, 42), true));
 
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());
@@ -70,6 +75,12 @@ void game_objects::load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &s
 void game_objects::draw() {
 	for (auto &game_object : game_object_collection) {
 		game_object->draw();
+	}
+}
+
+void game_objects::update(uint32_t time) {
+	for (auto &game_object : game_object_collection) {
+		game_object->update(time);
 	}
 }
 

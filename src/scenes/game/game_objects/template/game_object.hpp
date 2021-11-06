@@ -31,7 +31,8 @@ public:
 	enum ObjectType {
 		GateStatueType = 1,
 		StargateType = 2,
-		SignType = 3
+		SignType = 3,
+		FruitTreeType = 4,
 	};
 
 	explicit GameObject(map::MapSections map_section, Point position, bool usable);
@@ -66,6 +67,11 @@ public:
 	 * Draws the game object
 	 */
 	virtual void draw();
+
+	/**
+	 * Called on the GameScenes update function
+	 */
+	virtual void update(uint32_t time) = 0;
 
 	/**
 	 * Checks if a textbox created by this game object is open

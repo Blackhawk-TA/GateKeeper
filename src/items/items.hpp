@@ -9,10 +9,11 @@
  * Contains the create function for all inventory items
  */
 namespace listbox_item {
-	const uint8_t INVENTORY_COUNTER = 2; //Amount of individual items in inventory
+	const uint8_t INVENTORY_COUNTER = 3; //Amount of individual items in inventory
 	enum INVENTORY_ITEM {
 		GATE_PART = 1,
-		INVENTORY_BACK = 2
+		APPLE = 2,
+		INVENTORY_BACK = 3
 	};
 
 	enum SIDEMENU_ITEM {
@@ -45,6 +46,7 @@ namespace listbox_item {
 
 	//Inventory items
 	Listbox::Item create_gate_part();
+	Listbox::Item create_apple();
 
 	//Sidemenu items
 	Listbox::Item create_inventory_entry();

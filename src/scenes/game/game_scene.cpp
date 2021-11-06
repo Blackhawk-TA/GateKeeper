@@ -11,7 +11,6 @@
 #include "ui/sidemenu.hpp"
 #include "ui/inventory.hpp"
 #include "ui/overlay.hpp"
-#include "handlers/game_objects/extensions/stargate_handler.hpp"
 #include "../../utils/game_time.hpp"
 
 GameScene::GameScene(uint8_t save_id) {
@@ -77,7 +76,7 @@ void GameScene::update(uint32_t time) {
 	camera::update_position();
 
 	//Handle stargate animations
-	stargate_handler::update_animations();
+	game_objects::update(time);
 }
 
 void GameScene::inputs() {

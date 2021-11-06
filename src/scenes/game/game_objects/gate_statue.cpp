@@ -17,7 +17,7 @@ bool GateStatue::interact() {
 		return false;
 	}
 
-	if (camera::get_player_position() == position + Point(0, size.h) && usable) {
+	if (usable && camera::get_player_position() == position + Point(0, size.h)) {
 		set_usable(false);
 		inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 		textbox = new Textbox("You picked up a Gate Part!");
@@ -73,3 +73,5 @@ void GateStatue::set_usable(bool value) {
 GameObject::ObjectType GateStatue::get_type() {
 	return GateStatueType;
 }
+
+void GateStatue::update(uint32_t time) {}

@@ -56,7 +56,7 @@ bool Stargate::check_enter(Point next_position) {
 /**
  * Checks if gate is de-/activating and sets the gate to in-/active once the animation is complete
  */
-void Stargate::update_animation() {
+void Stargate::update(uint32_t time) {
 	if (map::get_section() != map_section) {
 		return;
 	}

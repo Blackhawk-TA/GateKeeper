@@ -12,6 +12,9 @@ Listbox::Item listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM i
 		case INVENTORY_ITEM::GATE_PART:
 			item = create_gate_part();
 			break;
+		case INVENTORY_ITEM::APPLE:
+			item = create_apple();
+			break;
 		case INVENTORY_ITEM::INVENTORY_BACK:
 			item = create_exit_entry();
 			break;

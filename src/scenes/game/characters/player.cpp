@@ -17,6 +17,8 @@ Vec2 Player::evasion_position_modifier;
 float Player::evasion_modifier = 0;
 uint16_t Player::sprite_id = 0;
 uint8_t Player::sprite_index = 0;
+uint8_t Player::health = 100;
+bool Player::dead = false;
 std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 const std::map<Player::MovementDirection, std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
 	{UP,    {118, 119, 120, 121}},
@@ -25,8 +27,8 @@ const std::map<Player::MovementDirection, std::array<uint16_t, Player::ANIMATION
 	{RIGHT, {86,  87,  88,  89}}
 };
 
-Player::Player(MovementDirection direction) {
-	health = 100;
+Player::Player(MovementDirection direction, uint8_t health) {
+	Player::health = health;
 	dead = false;
 	position = get_screen_tiles() / 2;
 	spritesheet_size = get_spritesheet_size(player_sprites->bounds);
@@ -118,6 +120,14 @@ void Player::take_damage(uint8_t damage_amount) {
 		health -= damage_amount;
 	} else {
 		dead = true;
+	}
+}
+
+void Player::heal(uint8_t heal_amount) {
+	if (health + heal_amount > 100) {
+		health = 100;
+	} else {
+		health += heal_amount;
 	}
 }
 
@@ -237,10 +247,10 @@ void Player::stop_animation() {
 	sprite_id = animation_sprites[0];
 }
 
-bool Player::is_dead() const {
+bool Player::is_dead() {
 	return dead;
 }
 
-uint8_t Player::get_health() const {
+uint8_t Player::get_health() {
 	return health;
 }
