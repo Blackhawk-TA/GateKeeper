@@ -73,10 +73,14 @@ bool FruitTree::interact() {
 	}
 
 	if (usable && camera::get_player_position() == position + Point(size.w / 2, size.h)) {
-		set_usable(false);
-		grown_time = game_time::get_time() + GROW_TIME_MS;
-		inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::APPLE));
-		textbox = new Textbox("You put an apple in your inventory.");
+		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::APPLE));
+		if (has_inventory_space) {
+			set_usable(false);
+			grown_time = game_time::get_time() + GROW_TIME_MS;
+			textbox = new Textbox("You put an apple in your inventory.");
+		} else {
+			textbox = new Textbox("You cannot carry any more apples.");
+		}
 		return true;
 	}
 	return false;

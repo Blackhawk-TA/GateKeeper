@@ -18,9 +18,13 @@ bool GateStatue::interact() {
 	}
 
 	if (usable && camera::get_player_position() == position + Point(0, size.h)) {
-		set_usable(false);
-		inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
-		textbox = new Textbox("You picked up a Gate Part!");
+		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
+		if (has_inventory_space) {
+			set_usable(false);
+			textbox = new Textbox("You picked up a Gate Part!");
+		} else {
+			textbox = new Textbox("You cannot carry any more Gate Parts.");
+		}
 		return true;
 	}
 
