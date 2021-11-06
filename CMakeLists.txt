@@ -43,6 +43,7 @@ set(PROJECT_SOURCE
         src/utils/saves/savegame.cpp src/utils/saves/savegame.hpp
         src/utils/saves/options.cpp src/utils/saves/options.hpp
         src/utils/utils.cpp src/utils/utils.hpp
+        src/utils/game_time.cpp src/utils/game_time.hpp
 )
 # ... and any other files you want in the release here
 set(PROJECT_DISTRIBS LICENSE.md README.md)

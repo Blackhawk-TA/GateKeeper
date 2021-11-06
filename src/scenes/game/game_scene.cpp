@@ -12,6 +12,7 @@
 #include "ui/inventory.hpp"
 #include "ui/overlay.hpp"
 #include "handlers/game_objects/extensions/stargate_handler.hpp"
+#include "../../utils/game_time.hpp"
 
 GameScene::GameScene(uint8_t save_id) {
 	GameScene::save_id = save_id;
@@ -65,6 +66,8 @@ void GameScene::render(uint32_t time) {
 }
 
 void GameScene::update(uint32_t time) {
+	game_time::update(time);
+
 	//Handle player death
 	if (player->is_dead() && !transition::in_progress()) {
 		load_scene(Scene::MENU);

@@ -6,6 +6,7 @@
 #include "options.hpp"
 #include "../../scenes/game/ui/inventory.hpp"
 #include "../../scenes/game/ui/sidemenu.hpp"
+#include "../game_time.hpp"
 
 /**
  * Parses the item vector into an array, because vector cannot be saved directly
@@ -59,6 +60,7 @@ Player *savegame::create(uint8_t save_id) {
 	sidemenu::init(save_id);
 	inventory::init();
 	game_objects::init();
+	game_time::init();
 
 	return new Player(Player::MovementDirection::DOWN);
 }
@@ -80,7 +82,8 @@ void savegame::save(uint8_t save_id) {
 		camera::get_player_position(),
 		Player::get_direction(),
 		game_objects::get_saves(),
-		compress_items(items)
+		compress_items(items),
+		game_time::get_time()
 	};
 
 	write_save(game_data, save_id);
@@ -109,6 +112,10 @@ Player *savegame::load(uint8_t save_id) {
 		//Load game object states
 		game_objects::init();
 		game_objects::load_saves(save_data.game_objects);
+
+		//Load game time
+		game_time::init();
+		game_time::load(save_data.passed_time);
 	} else {
 		//If loading save was not successful, create new save
 		player = create(save_id);

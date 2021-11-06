@@ -20,6 +20,7 @@ namespace savegame {
 		Player::MovementDirection player_direction;
 		std::array<GameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects;
 		std::array<Item, listbox_item::INVENTORY_COUNTER> items;
+		uint32_t passed_time;
 	};
 
 	Player *create(uint8_t save_id);
