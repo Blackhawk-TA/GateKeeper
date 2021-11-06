@@ -26,7 +26,7 @@ Stargate *stargate_handler::get_destination_gate(Point next_position) {
 	bool teleport = false;
 	StargateAddresses destination_address;
 	Stargate *destination_gate = nullptr;
-	uint16_t i = 0;
+	uint8_t i = 0;
 
 	//Check if player entered a gate
 	while (!teleport && i < stargates.size()) {
@@ -52,8 +52,29 @@ Stargate *stargate_handler::get_destination_gate(Point next_position) {
 	return destination_gate;
 }
 
+/**
+ * Update stargate activation/deactivation animations
+ */
 void stargate_handler::update_animations() {
 	for (auto &stargate : stargates) {
 		stargate->update_animation();
 	}
+}
+
+/**
+ * Repairs the gate triggered by the GatePart selection in the inventory
+ * @return True, if a gate could be repaired, else false
+ */
+bool stargate_handler::player_repair_gate() {
+	bool repaired = false;
+	uint8_t i = 0;
+
+	while (!repaired && i < stargates.size()) {
+		if (stargates[i]->repair()) {
+			repaired = true;
+		}
+		i++;
+	}
+
+	return repaired;
 }

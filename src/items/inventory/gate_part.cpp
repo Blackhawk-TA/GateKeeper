@@ -3,7 +3,6 @@
 //
 
 #include "../items.hpp"
-#include "../../scenes/game/handlers/game_objects.hpp"
 
 Listbox::Item listbox_item::create_gate_part() {
 	return Listbox::Item{
@@ -14,7 +13,7 @@ Listbox::Item listbox_item::create_gate_part() {
 		true,
 		1,
 		[] {
-			if (game_objects::interact()) {
+			if (stargate_handler::player_repair_gate()) {
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;
