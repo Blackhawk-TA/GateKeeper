@@ -129,6 +129,14 @@ void Stargate::set_state(uint8_t new_state) {
 }
 
 bool Stargate::interact() {
+	return false;
+}
+
+/**
+ * Repairs a broken stargate
+ * @return True, if stargate could be repaired, else false
+ */
+bool Stargate::repair() {
 	if (map::get_section() != map_section) {
 		return false;
 	}

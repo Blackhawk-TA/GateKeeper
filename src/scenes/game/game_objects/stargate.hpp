@@ -45,6 +45,7 @@ public:
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;
 
+	bool repair();
 	bool check_enter(Point next_position);
 	void update_animation();
 	Point get_entry_point();
