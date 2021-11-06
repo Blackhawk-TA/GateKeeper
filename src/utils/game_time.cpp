@@ -2,6 +2,7 @@
 // Created by daniel on 06.11.21.
 //
 
+#include <sstream>
 #include <iomanip>
 #include "game_time.hpp"
 
