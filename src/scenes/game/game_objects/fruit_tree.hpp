@@ -16,7 +16,6 @@ private:
 	uint32_t grown_time;
 
 	void set_state(uint8_t new_state) override;
-	void set_usable(bool value) override;
 
 public:
 	explicit FruitTree(map::MapSections map_section, Point position, bool usable);

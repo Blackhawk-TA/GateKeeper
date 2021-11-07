@@ -12,7 +12,7 @@ FruitTree::FruitTree(map::MapSections map_section, Point position, bool usable) 
 	size = Size(3, 3);
 	tile_id = TILE_ID_TREE;
 	grown_time = game_time::get_time() + GROW_TIME_MS / 2;
-	FruitTree::set_usable(usable);
+	FruitTree::set_player_usable(usable);
 }
 
 void FruitTree::draw() {
@@ -37,7 +37,7 @@ void FruitTree::draw() {
 		);
 
 		//Draw fruits
-		if (usable) {
+		if (player_usable) {
 			screen.blit_sprite(
 				Rect(
 					(TILE_ID_FRUITS & (spritesheet_size.w - 1)) * TILE_SIZE,
@@ -62,8 +62,8 @@ void FruitTree::update(uint32_t time) {
 		return;
 	}
 
-	if (!usable && grown_time < game_time::get_time()) {
-		usable = true;
+	if (!player_usable && grown_time < game_time::get_time()) {
+		player_usable = true;
 	}
 }
 
@@ -72,10 +72,10 @@ bool FruitTree::interact() {
 		return false;
 	}
 
-	if (usable && camera::get_player_position() == position + Point(size.w / 2, size.h)) {
+	if (player_usable && camera::get_player_position() == position + Point(size.w / 2, size.h)) {
 		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::APPLE));
 		if (has_inventory_space) {
-			set_usable(false);
+			set_player_usable(false);
 			grown_time = game_time::get_time() + GROW_TIME_MS;
 			textbox = new Textbox("You put an apple in your inventory.");
 		} else {
@@ -84,11 +84,6 @@ bool FruitTree::interact() {
 		return true;
 	}
 	return false;
-}
-
-
-void FruitTree::set_usable(bool value) {
-	usable = value;
 }
 
 GameObject::ObjectType FruitTree::get_type() {

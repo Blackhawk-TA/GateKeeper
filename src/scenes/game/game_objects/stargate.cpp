@@ -141,8 +141,8 @@ bool Stargate::repair() {
 		return false;
 	}
 
-	if (get_entry_point() == camera::get_player_position() && !usable) {
-		usable = true;
+	if (get_entry_point() == camera::get_player_position() && !player_usable) {
+		player_usable = true;
 		set_state(ACTIVATING);
 		return true;
 	}
@@ -150,10 +150,10 @@ bool Stargate::repair() {
 	return false;
 }
 
-void Stargate::set_usable(bool value) {
+void Stargate::set_player_usable(bool usable) {
 	Point player_position = camera::get_player_position();
-	usable = value;
-	if (!usable) {
+	player_usable = usable;
+	if (!player_usable) {
 		set_state(BROKEN);
 	} else if (player_position == position + RELATIVE_ACTIVATION_POINT || player_position == position + RELATIVE_PRE_ENTRY_POINT) {
 		set_state(ACTIVE);

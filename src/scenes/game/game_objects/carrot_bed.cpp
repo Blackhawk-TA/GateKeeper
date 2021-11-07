@@ -11,7 +11,8 @@
 CarrotBed::CarrotBed(map::MapSections map_section, Point position, bool usable) : GameObject(map_section, position, usable) {
 	size = Size(1, 1);
 	grown_time = game_time::get_time() + (PLANT_TIME_MS + GROWING_TIME_MS + GROWN_TIME_MS) / 2;
-	CarrotBed::set_usable(usable);
+	set_state(PLANTED);
+	CarrotBed::set_player_usable(usable);
 }
 
 void CarrotBed::update(uint32_t time) {
@@ -19,9 +20,9 @@ void CarrotBed::update(uint32_t time) {
 		return;
 	}
 
-	if (!usable && state != HARVESTED) {
+	if (!player_usable && state != HARVESTED) {
 		if (state != GROWN && grown_time < game_time::get_time()) {
-			set_usable(true);
+			set_player_usable(true);
 		} else if (state != GROWING && grown_time - (GROWING_TIME_MS + PLANT_TIME_MS) < game_time::get_time()) {
 			set_state(GROWING);
 		} else if (state != PLANTED && grown_time - (GROWN_TIME_MS *GROWING_TIME_MS + PLANT_TIME_MS) < game_time::get_time()) { //TODO fix
@@ -35,10 +36,10 @@ bool CarrotBed::interact() {
 		return false;
 	}
 
-	if (usable && in_use_range()) {
+	if (player_usable && in_use_range()) {
 		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT));
 		if (has_inventory_space) {
-			set_usable(false);
+			set_player_usable(false);
 			textbox = new Textbox("You put a carrot in your inventory.");
 		} else {
 			textbox = new Textbox("You cannot carry any more carrots.");
@@ -74,10 +75,10 @@ void CarrotBed::set_state(uint8_t new_state) {
 	state = new_state_enum;
 }
 
-void CarrotBed::set_usable(bool value) {
-	usable = value;
+void CarrotBed::set_player_usable(bool usable) {
+	player_usable = usable;
 
-	if (usable) {
+	if (player_usable) {
 		set_state(GROWN);
 	} else if (state == GROWN) {
 		set_state(HARVESTED);

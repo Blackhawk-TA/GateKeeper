@@ -18,11 +18,20 @@ public:
 	};
 
 	/**
-	 * A struct of the savable value of a game object including the signature.
+	 * A struct consisting of the data which is stored for each game object
+	 */
+	struct Data {
+		bool player_usable{};
+		bool inventory_usable{};
+		uint32_t value{};
+	};
+
+	/**
+	 * A struct consisting of the save signature and data
 	 */
 	struct Save {
 		Signature signature;
-		bool value{};
+		Data data;
 	};
 
 	/**
@@ -46,7 +55,7 @@ public:
 	Signature get_signature();
 
 	/**
-	 * Gets the savable struct of a game object to store a bool value and identify the corresponding object on load_save.
+	 * Gets the savable struct of a game object to restore the game object data identify the corresponding object on load_save.
 	 * @return The savable struct of an object
 	 */
 	Save get_save();
@@ -55,7 +64,7 @@ public:
 	 * Loads the saved state of the game object
 	 * @param value The value that is loaded in the game object
 	 */
-	virtual void load_save(bool value);
+	virtual void load_save(Data data);
 
 	/**
 	 * Checks if the game object collides with the player's next position
@@ -106,7 +115,9 @@ public:
 protected:
 	Point position;
 	map::MapSections map_section;
-	bool usable;
+	bool player_usable; //Shows if a player can directly interact with it
+	bool inventory_usable; //Shows if a player can interact with it using the inventory
+	uint32_t value;
 	Signature signature;
 	Size spritesheet_size;
 	uint16_t tile_id;
@@ -120,8 +131,20 @@ protected:
 	virtual void set_state(uint8_t new_state) = 0;
 
 	/**
-	 * Sets the usable variable of a game object and updates the state
-	 * @param value The value showing if the game object is usable by a player
+	 * Sets the player_usable variable for direct player interaction of a game object
+	 * @param usable The value showing if the game object is usable by a player directly
 	 */
-	virtual void set_usable(bool value) = 0;
+	virtual void set_player_usable(bool usable);
+
+	/**
+	 * Sets the inventory_usable variable for player interaction using the inventory of a game object
+	 * @param usable The value showing if the game object is usable by a player using the inventory
+	 */
+	virtual void set_inventory_usable(bool usable);
+
+	/**
+	 * Set the additional integer value in which data can be saved for the game object (e.g. timer data for fruit grow)
+	 * @param new_value The new integer value to which it should be set
+	 */
+	virtual void set_value(uint32_t new_value);
 };

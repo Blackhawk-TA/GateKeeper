@@ -22,7 +22,7 @@ private:
 	RenderStates state;
 
 	void set_state(uint8_t new_state) override;
-	void set_usable(bool value) override;
+	void set_player_usable(bool usable) override;
 
 public:
 	explicit GateStatue(map::MapSections map_section, Point position, bool usable);

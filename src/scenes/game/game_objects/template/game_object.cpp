@@ -7,7 +7,7 @@
 GameObject::GameObject(map::MapSections map_section, Point position, bool usable) {
 	GameObject::position = position;
 	GameObject::map_section = map_section;
-	GameObject::usable = usable;
+	GameObject::player_usable = usable;
 	GameObject::spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	GameObject::textbox = nullptr;
 
@@ -70,10 +70,26 @@ GameObject::Signature GameObject::get_signature() {
 GameObject::Save GameObject::get_save() {
 	return Save{
 		signature,
-		usable
+		Data{
+			player_usable,
+			inventory_usable,
+			value
+		}
 	};
 }
 
-void GameObject::load_save(bool value) {
-	set_usable(value);
+void GameObject::load_save(Data data) {
+	set_player_usable(data.player_usable);
+}
+
+void GameObject::set_player_usable(bool usable) {
+	player_usable = usable;
+}
+
+void GameObject::set_inventory_usable(bool usable) {
+	inventory_usable = usable;
+}
+
+void GameObject::set_value(uint32_t new_value) {
+	value = new_value;
 }

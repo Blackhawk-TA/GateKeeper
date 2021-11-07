@@ -9,7 +9,7 @@
 
 GateStatue::GateStatue(map::MapSections map_section, Point position, bool usable) : GameObject(map_section, position, usable) {
 	size = Size(1, 3);
-	GateStatue::set_usable(usable);
+	GateStatue::set_player_usable(usable);
 }
 
 bool GateStatue::interact() {
@@ -17,10 +17,10 @@ bool GateStatue::interact() {
 		return false;
 	}
 
-	if (usable && camera::get_player_position() == position + Point(0, size.h)) {
+	if (player_usable && camera::get_player_position() == position + Point(0, size.h)) {
 		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 		if (has_inventory_space) {
-			set_usable(false);
+			set_player_usable(false);
 			textbox = new Textbox("You picked up a Gate Part!");
 		} else {
 			textbox = new Textbox("You cannot carry any more Gate Parts.");
@@ -62,10 +62,10 @@ void GateStatue::set_state(uint8_t new_state) {
 	state = new_state_enum;
 }
 
-void GateStatue::set_usable(bool value) {
-	usable = value;
+void GateStatue::set_player_usable(bool usable) {
+	player_usable = usable;
 
-	if (value) {
+	if (usable) {
 		set_state(INACTIVE);
 	} else {
 		set_state(DEPLETED);

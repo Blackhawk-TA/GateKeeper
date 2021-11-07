@@ -83,7 +83,7 @@ void game_objects::load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &s
 
 			if (signature.map_section == saved_object.signature.map_section
 			&& signature.position == saved_object.signature.position) {
-				game_object->load_save(saved_object.value);
+				game_object->load_save(saved_object.data);
 			}
 		}
 	}

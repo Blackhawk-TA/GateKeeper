@@ -15,7 +15,7 @@ bool Sign::interact() {
 		return false;
 	}
 
-	if (camera::get_player_position() == position + Point(0, size.h) && usable) {
+	if (player_usable && camera::get_player_position() == position + Point(0, size.h)) {
 		textbox = new Textbox(text);
 		return true;
 	}
@@ -42,5 +42,4 @@ GameObject::ObjectType Sign::get_type() {
 
 void Sign::set_state(uint8_t new_state) {}
 void Sign::update_state(Point next_position) {}
-void Sign::set_usable(bool value) {}
 void Sign::update(uint32_t time) {}

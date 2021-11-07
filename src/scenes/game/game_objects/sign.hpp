@@ -25,5 +25,4 @@ private:
 
 	void set_sprite(SpriteType sprite_type);
 	void set_state(uint8_t new_state) override;
-	void set_usable(bool value) override;
 };

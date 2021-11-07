@@ -35,7 +35,7 @@ private:
 	uint32_t activation_start_time;
 
 	void set_state(uint8_t new_state) override;
-	void set_usable(bool value) override;
+	void set_player_usable(bool usable) override;
 
 public:
 	explicit Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool usable);
