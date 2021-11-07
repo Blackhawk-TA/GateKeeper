@@ -33,9 +33,8 @@ public:
 	explicit CarrotBed(map::MapSections map_section, Point position, bool usable);
 	~CarrotBed() override = default;
 	void update(uint32_t time) override;
-	bool interact() override;
+	bool player_interact() override;
+	bool inventory_interact() override;
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;
-
-	bool plant();
 };

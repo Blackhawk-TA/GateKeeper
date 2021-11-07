@@ -3,7 +3,7 @@
 //
 
 #include "../items.hpp"
-#include "../../scenes/game/handlers/game_objects/extensions/carrot_bed_handler.hpp"
+#include "../../scenes/game/handlers/game_objects/game_object_handler.hpp"
 
 Listbox::Item listbox_item::create_carrot_seed(uint8_t type_id) {
 	return Listbox::Item{
@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_carrot_seed(uint8_t type_id) {
 		true,
 		1,
 		[] {
-			if (carrot_bed_handler::plant()) {
+			if (game_objects::inventory_interact()) {
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

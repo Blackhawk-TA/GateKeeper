@@ -22,7 +22,7 @@ public:
 	~FruitTree() override = default;
 	void draw() override;
 	void update(uint32_t time) override;
-	bool interact() override;
+	bool player_interact() override;
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;
 };

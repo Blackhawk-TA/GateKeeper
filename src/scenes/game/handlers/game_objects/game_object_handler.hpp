@@ -68,10 +68,16 @@ namespace game_objects {
 	bool check_collisions(Point next_position);
 
 	/**
-	 * Checks if there was an interaction with a game object and trigger interaction
+	 * Checks if there was a player interaction with a game object and triggers interaction
 	 * @return True, if interaction successful, else false
 	 */
-	bool interact();
+	bool player_interact();
+
+	/**
+	 * Checks if there was a player interaction with a game object using the inventory and triggers interaction
+	 * @return True, if interaction successful, else false
+	 */
+	bool inventory_interact();
 
 	/**
 	 * Updates the states of the objects when a player moves closer to it

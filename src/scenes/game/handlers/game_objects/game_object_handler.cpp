@@ -9,7 +9,6 @@
 #include "../../game_objects/sign.hpp"
 #include "../../game_objects/fruit_tree.hpp"
 #include "../../game_objects/carrot_bed.hpp"
-#include "extensions/carrot_bed_handler.hpp"
 #include <stdexcept>
 #include <cassert>
 
@@ -45,7 +44,6 @@ void game_objects::init() {
 
 	//Init additional handlers for subclasses with additional functionality
 	stargate_handler::init();
-	carrot_bed_handler::init();
 }
 
 std::vector<GameObject*> &game_objects::get_collection() {
@@ -61,7 +59,6 @@ void game_objects::cleanup() {
 
 	//Cleanup extension handlers
 	stargate_handler::cleanup();
-	carrot_bed_handler::cleanup();
 }
 
 std::array<GameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get_saves() {
@@ -133,12 +130,24 @@ bool game_objects::check_collisions(Point next_position) {
 	return collision;
 }
 
-bool game_objects::interact() {
+bool game_objects::player_interact() {
 	bool interacted = false;
 	uint16_t i = 0;
 
 	while (!interacted && i < game_object_collection.size()) {
-		interacted = game_object_collection.at(i)->interact();
+		interacted = game_object_collection.at(i)->player_interact();
+		i++;
+	}
+
+	return interacted;
+}
+
+bool game_objects::inventory_interact() {
+	bool interacted = false;
+	uint16_t i = 0;
+
+	while (!interacted && i < game_object_collection.size()) {
+		interacted = game_object_collection.at(i)->inventory_interact();
 		i++;
 	}
 

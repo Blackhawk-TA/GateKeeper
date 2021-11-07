@@ -9,5 +9,4 @@ namespace stargate_handler {
 	void init();
 	void cleanup();
 	Stargate *get_destination_gate(Point next_position);
-	bool player_repair_gate();
 }

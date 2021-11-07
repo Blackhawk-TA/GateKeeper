@@ -56,21 +56,3 @@ Stargate *stargate_handler::get_destination_gate(Point next_position) {
 
 	return destination_gate;
 }
-
-/**
- * Repairs the gate triggered by the GatePart selection in the inventory
- * @return True, if a gate could be repaired, else false
- */
-bool stargate_handler::player_repair_gate() {
-	bool repaired = false;
-	uint8_t i = 0;
-
-	while (!repaired && i < stargates.size()) {
-		if (stargates[i]->repair()) {
-			repaired = true;
-		}
-		i++;
-	}
-
-	return repaired;
-}

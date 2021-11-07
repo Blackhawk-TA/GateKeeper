@@ -123,7 +123,7 @@ void GameScene::inputs() {
 		} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
 			sidemenu::open();
 		} else if (buttons & changed & Button::A) {
-			if (!game_objects::interact()) {
+			if (!game_objects::player_interact()) {
 				player->attack();
 			}
 		} else if (buttons & changed & Button::B) {

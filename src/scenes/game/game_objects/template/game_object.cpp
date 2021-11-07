@@ -93,3 +93,7 @@ void GameObject::set_inventory_usable(bool usable) {
 void GameObject::set_value(uint32_t new_value) {
 	value = new_value;
 }
+
+bool GameObject::inventory_interact() {
+	return false;
+}

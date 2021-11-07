@@ -10,7 +10,7 @@ Sign::Sign(map::MapSections map_section, Point position, Sign::SpriteType sprite
 	set_sprite(sprite_type);
 }
 
-bool Sign::interact() {
+bool Sign::player_interact() {
 	if (map::get_section() != map_section) {
 		return false;
 	}

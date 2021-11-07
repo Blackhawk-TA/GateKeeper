@@ -27,7 +27,7 @@ private:
 public:
 	explicit GateStatue(map::MapSections map_section, Point position, bool usable);
 	~GateStatue() override = default;
-	bool interact() override;
+	bool player_interact() override;
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;
 	void update(uint32_t time) override;

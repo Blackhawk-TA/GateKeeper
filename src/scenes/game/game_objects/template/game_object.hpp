@@ -98,7 +98,13 @@ public:
 	 * Called when the player interacts with a game object
 	 * @return True, if interaction successful, else false
 	 */
-	virtual bool interact() = 0;
+	virtual bool player_interact() = 0;
+
+	/**
+	 * Called when the player interacts with a game object using the inventory
+	 * @return True, if interaction successful, else false
+	 */
+	virtual bool inventory_interact();
 
 	/**
 	 * Updates the state of the object when a player moves closer to it

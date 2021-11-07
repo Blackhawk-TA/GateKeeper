@@ -12,7 +12,7 @@ GateStatue::GateStatue(map::MapSections map_section, Point position, bool usable
 	GateStatue::set_player_usable(usable);
 }
 
-bool GateStatue::interact() {
+bool GateStatue::player_interact() {
 	if (map::get_section() != map_section) {
 		return false;
 	}

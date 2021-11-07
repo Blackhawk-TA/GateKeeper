@@ -11,7 +11,7 @@
 CarrotBed::CarrotBed(map::MapSections map_section, Point position, bool usable) : GameObject(map_section, position, usable) {
 	size = Size(1, 1);
 	grown_time = game_time::get_time() + (PLANT_TIME_MS + GROWING_TIME_MS + GROWN_TIME_MS) / 2;
-	set_state(PLANTED);
+	CarrotBed::set_state(PLANTED);
 	CarrotBed::set_player_usable(usable);
 }
 
@@ -25,13 +25,13 @@ void CarrotBed::update(uint32_t time) {
 			set_player_usable(true);
 		} else if (state != GROWING && grown_time - (GROWING_TIME_MS + PLANT_TIME_MS) < game_time::get_time()) {
 			set_state(GROWING);
-		} else if (state != PLANTED && grown_time - (GROWN_TIME_MS *GROWING_TIME_MS + PLANT_TIME_MS) < game_time::get_time()) { //TODO fix
+		} else if (state != PLANTED && grown_time - (GROWN_TIME_MS *GROWING_TIME_MS + PLANT_TIME_MS) < game_time::get_time()) {
 			set_state(PLANTED);
 		}
 	}
 }
 
-bool CarrotBed::interact() {
+bool CarrotBed::player_interact() {
 	if (map::get_section() != map_section) {
 		return false;
 	}
@@ -87,7 +87,7 @@ void CarrotBed::set_player_usable(bool usable) {
 	}
 }
 
-bool CarrotBed::plant() {
+bool CarrotBed::inventory_interact() {
 	if (map::get_section() != map_section) {
 		return false;
 	}

@@ -15,7 +15,7 @@ public:
 
 	explicit Sign(map::MapSections map_section, Point position, Sign::SpriteType sprite_type, std::string text);
 	~Sign() override = default;
-	bool interact() override;
+	bool player_interact() override;
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;
 	void update(uint32_t time) override;

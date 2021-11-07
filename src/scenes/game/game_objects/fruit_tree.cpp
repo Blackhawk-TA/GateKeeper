@@ -67,7 +67,7 @@ void FruitTree::update(uint32_t time) {
 	}
 }
 
-bool FruitTree::interact() {
+bool FruitTree::player_interact() {
 	if (map::get_section() != map_section) {
 		return false;
 	}

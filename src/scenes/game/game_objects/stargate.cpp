@@ -128,7 +128,7 @@ void Stargate::set_state(uint8_t new_state) {
 	state = new_state_enum;
 }
 
-bool Stargate::interact() {
+bool Stargate::player_interact() {
 	return false;
 }
 
@@ -136,7 +136,7 @@ bool Stargate::interact() {
  * Repairs a broken stargate
  * @return True, if stargate could be repaired, else false
  */
-bool Stargate::repair() {
+bool Stargate::inventory_interact() {
 	if (map::get_section() != map_section) {
 		return false;
 	}

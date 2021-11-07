@@ -42,11 +42,11 @@ public:
 	bool check_collision(Point next_position) override;
 	void draw() override;
 	void update(uint32_t time) override;
-	bool interact() override;
+	bool player_interact() override;
+	bool inventory_interact() override;
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;
 
-	bool repair();
 	bool check_enter(Point next_position);
 	Point get_entry_point();
 	StargateAddresses get_destination();
