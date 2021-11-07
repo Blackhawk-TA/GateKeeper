@@ -3,7 +3,6 @@
 //
 
 #pragma once
-#include "../../../../../utils/utils.hpp"
 #include "../../../game_objects/stargate.hpp"
 
 namespace stargate_handler {

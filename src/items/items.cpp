@@ -15,6 +15,12 @@ Listbox::Item listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM i
 		case INVENTORY_ITEM::APPLE:
 			item = create_apple(INVENTORY_ITEM::APPLE);
 			break;
+		case INVENTORY_ITEM::CARROT:
+			item = create_carrot(INVENTORY_ITEM::CARROT);
+			break;
+		case INVENTORY_ITEM::CARROT_SEED:
+			item = create_carrot_seed(INVENTORY_ITEM::CARROT_SEED);
+			break;
 		case INVENTORY_ITEM::INVENTORY_BACK:
 			item = create_back_entry(INVENTORY_ITEM::INVENTORY_BACK);
 			break;

@@ -8,6 +8,8 @@
 #include "extensions/stargate_handler.hpp"
 #include "../../game_objects/sign.hpp"
 #include "../../game_objects/fruit_tree.hpp"
+#include "../../game_objects/carrot_bed.hpp"
+#include "extensions/carrot_bed_handler.hpp"
 #include <stdexcept>
 #include <cassert>
 
@@ -30,11 +32,20 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(11, 16), true));
 	game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(21, 42), true));
 
+	//Carrot beds
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 42), false));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 42), false));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 42), false));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 43), false));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 43), false));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 43), false));
+
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());
 
 	//Init additional handlers for subclasses with additional functionality
 	stargate_handler::init();
+	carrot_bed_handler::init();
 }
 
 std::vector<GameObject*> &game_objects::get_collection() {
@@ -50,6 +61,7 @@ void game_objects::cleanup() {
 
 	//Cleanup extension handlers
 	stargate_handler::cleanup();
+	carrot_bed_handler::cleanup();
 }
 
 std::array<GameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get_saves() {

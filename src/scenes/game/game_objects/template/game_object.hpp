@@ -33,6 +33,7 @@ public:
 		StargateType = 2,
 		SignType = 3,
 		FruitTreeType = 4,
+		CarrotBedType = 5,
 	};
 
 	explicit GameObject(map::MapSections map_section, Point position, bool usable);

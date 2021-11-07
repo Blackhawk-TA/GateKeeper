@@ -10,6 +10,7 @@ bool open_state = false;
 
 void inventory::init() {
 	std::vector<Listbox::Item> items = {
+		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT_SEED),
 		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
 	};
 	control = new Listbox(Rect(14, 0, 6, 7), items);

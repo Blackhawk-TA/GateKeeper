@@ -3,7 +3,6 @@
 //
 
 #pragma once
-
 #include "template/game_object.hpp"
 
 class FruitTree : public GameObject {
