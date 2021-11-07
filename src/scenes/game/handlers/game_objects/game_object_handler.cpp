@@ -44,8 +44,12 @@ std::vector<GameObject*> &game_objects::get_collection() {
 void game_objects::cleanup() {
 	for (auto &game_object : game_object_collection) {
 		delete game_object;
+		game_object = nullptr;
 	}
 	game_object_collection.clear();
+
+	//Cleanup extension handlers
+	stargate_handler::cleanup();
 }
 
 std::array<GameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get_saves() {
