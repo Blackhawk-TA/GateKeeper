@@ -27,10 +27,11 @@ private:
 
 	void set_state(uint8_t new_state) override;
 	void set_player_usable(bool usable) override;
+	void set_inventory_usable(bool usable) override;
 	bool in_use_range();
 
 public:
-	explicit CarrotBed(map::MapSections map_section, Point position, bool usable);
+	explicit CarrotBed(map::MapSections map_section, Point position);
 	~CarrotBed() override = default;
 	void update(uint32_t time) override;
 	bool player_interact() override;

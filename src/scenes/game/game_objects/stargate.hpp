@@ -35,14 +35,13 @@ private:
 	uint32_t activation_start_time;
 
 	void set_state(uint8_t new_state) override;
-	void set_player_usable(bool usable) override;
+	void set_inventory_usable(bool usable) override;
 
 public:
-	explicit Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool usable);
+	explicit Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool inventory_usable);
 	bool check_collision(Point next_position) override;
 	void draw() override;
 	void update(uint32_t time) override;
-	bool player_interact() override;
 	bool inventory_interact() override;
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;

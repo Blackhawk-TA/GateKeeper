@@ -8,11 +8,13 @@
 #include "../../../items/items.hpp"
 #include "../ui/inventory.hpp"
 
-CarrotBed::CarrotBed(map::MapSections map_section, Point position, bool usable) : GameObject(map_section, position, usable) {
+//TODO use integer save value to save time, also use value for time in FruitTrees
+CarrotBed::CarrotBed(map::MapSections map_section, Point position) : GameObject(map_section, position, false, false) {
 	size = Size(1, 1);
 	grown_time = game_time::get_time() + (PLANT_TIME_MS + GROWING_TIME_MS + GROWN_TIME_MS) / 2;
 	CarrotBed::set_state(PLANTED);
-	CarrotBed::set_player_usable(usable);
+	CarrotBed::set_player_usable(player_usable);
+	CarrotBed::set_inventory_usable(inventory_usable);
 }
 
 void CarrotBed::update(uint32_t time) {
@@ -20,8 +22,9 @@ void CarrotBed::update(uint32_t time) {
 		return;
 	}
 
-	if (!player_usable && state != HARVESTED) {
-		if (state != GROWN && grown_time < game_time::get_time()) {
+	//TODO grow rate seems off
+	if (state != GROWN && state != HARVESTED) {
+		if (grown_time < game_time::get_time()) {
 			set_player_usable(true);
 		} else if (state != GROWING && grown_time - (GROWING_TIME_MS + PLANT_TIME_MS) < game_time::get_time()) {
 			set_state(GROWING);
@@ -40,10 +43,25 @@ bool CarrotBed::player_interact() {
 		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT));
 		if (has_inventory_space) {
 			set_player_usable(false);
+			set_inventory_usable(true);
 			textbox = new Textbox("You put a carrot in your inventory.");
 		} else {
 			textbox = new Textbox("You cannot carry any more carrots.");
 		}
+		return true;
+	} else {
+		return false;
+	}
+}
+
+bool CarrotBed::inventory_interact() {
+	if (map::get_section() != map_section) {
+		return false;
+	}
+
+	if (inventory_usable && in_use_range()) {
+		grown_time = game_time::get_time() + (PLANT_TIME_MS + GROWING_TIME_MS + GROWN_TIME_MS);
+		set_inventory_usable(false);
 		return true;
 	} else {
 		return false;
@@ -80,24 +98,18 @@ void CarrotBed::set_player_usable(bool usable) {
 
 	if (player_usable) {
 		set_state(GROWN);
-	} else if (state == GROWN) {
-		set_state(HARVESTED);
 	} else {
-		set_state(PLANTED); //TODO with "inventory usable" flag in GameObject check, also add this flag to saves
+		set_state(HARVESTED);
 	}
 }
 
-bool CarrotBed::inventory_interact() {
-	if (map::get_section() != map_section) {
-		return false;
-	}
+void CarrotBed::set_inventory_usable(bool usable) {
+	inventory_usable = usable;
 
-	if (state == HARVESTED &&  in_use_range()) {
-		grown_time = game_time::get_time() + (PLANT_TIME_MS + GROWING_TIME_MS + GROWN_TIME_MS);
-		set_state(PLANTED);
-		return true;
+	if (inventory_usable) {
+		set_state(HARVESTED);
 	} else {
-		return false;
+		set_state(PLANTED);
 	}
 }
 

@@ -45,7 +45,7 @@ public:
 		CarrotBedType = 5,
 	};
 
-	explicit GameObject(map::MapSections map_section, Point position, bool usable);
+	explicit GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable);
 	virtual ~GameObject() = default;
 
 	/**
@@ -98,7 +98,7 @@ public:
 	 * Called when the player interacts with a game object
 	 * @return True, if interaction successful, else false
 	 */
-	virtual bool player_interact() = 0;
+	virtual bool player_interact();
 
 	/**
 	 * Called when the player interacts with a game object using the inventory

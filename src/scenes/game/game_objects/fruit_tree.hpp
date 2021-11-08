@@ -18,7 +18,7 @@ private:
 	void set_state(uint8_t new_state) override;
 
 public:
-	explicit FruitTree(map::MapSections map_section, Point position, bool usable);
+	explicit FruitTree(map::MapSections map_section, Point position, bool player_usable);
 	~FruitTree() override = default;
 	void draw() override;
 	void update(uint32_t time) override;

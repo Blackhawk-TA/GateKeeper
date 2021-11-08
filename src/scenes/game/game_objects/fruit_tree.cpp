@@ -8,11 +8,12 @@
 #include "../../../items/items.hpp"
 #include "../ui/inventory.hpp"
 
-FruitTree::FruitTree(map::MapSections map_section, Point position, bool usable) : GameObject(map_section, position, usable) {
+//TODO save grown time in int32 value, maybe add new
+FruitTree::FruitTree(map::MapSections map_section, Point position, bool player_usable) : GameObject(map_section, position, player_usable, false) {
 	size = Size(3, 3);
 	tile_id = TILE_ID_TREE;
 	grown_time = game_time::get_time() + GROW_TIME_MS / 2;
-	FruitTree::set_player_usable(usable);
+	FruitTree::set_player_usable(player_usable);
 }
 
 void FruitTree::draw() {

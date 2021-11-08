@@ -19,8 +19,8 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
 
 	//Stargates
-	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND, WINTER, false));
-	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(12, 10), WINTER, GRASSLAND, true));
+	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND, WINTER, true));
+	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(12, 10), WINTER, GRASSLAND, false));
 
 	//Signs
 	game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(24, 44), Sign::WOOD, "Trees grow fruits which can be eaten. They regrow after harvesting."));
@@ -32,12 +32,12 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(21, 42), true));
 
 	//Carrot beds
-	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 42), false));
-	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 42), false));
-	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 42), false));
-	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 43), false));
-	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 43), false));
-	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 43), false));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 42)));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 42)));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 42)));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 43)));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 43)));
+	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 43)));
 
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());

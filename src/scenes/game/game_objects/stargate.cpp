@@ -5,16 +5,12 @@
 #include "stargate.hpp"
 #include "../../../engine/camera.hpp"
 
-Stargate::Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool usable) : GameObject(map_section, position, usable) {
+Stargate::Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool inventory_usable)
+	: GameObject(map_section, position, false, inventory_usable) {
 	Stargate::address = address;
 	Stargate::destination = destination;
 	activation_start_time = 0;
-
-	if (usable) {
-		Stargate::set_state(INACTIVE);
-	} else {
-		Stargate::set_state(BROKEN);
-	}
+	Stargate::set_inventory_usable(inventory_usable);
 }
 
 bool Stargate::check_collision(Point next_position) {
@@ -57,7 +53,7 @@ bool Stargate::check_enter(Point next_position) {
  * Checks if gate is de-/activating and sets the gate to in-/active once the animation is complete
  */
 void Stargate::update(uint32_t time) {
-	if (map::get_section() != map_section) {
+	if (map::get_section() != map_section) { //TODO move those checks to game_object_handler
 		return;
 	}
 
@@ -128,10 +124,6 @@ void Stargate::set_state(uint8_t new_state) {
 	state = new_state_enum;
 }
 
-bool Stargate::player_interact() {
-	return false;
-}
-
 /**
  * Repairs a broken stargate
  * @return True, if stargate could be repaired, else false
@@ -141,8 +133,8 @@ bool Stargate::inventory_interact() {
 		return false;
 	}
 
-	if (get_entry_point() == camera::get_player_position() && !player_usable) {
-		player_usable = true;
+	if (inventory_usable && get_entry_point() == camera::get_player_position()) {
+		inventory_usable = false;
 		set_state(ACTIVATING);
 		return true;
 	}
@@ -150,10 +142,10 @@ bool Stargate::inventory_interact() {
 	return false;
 }
 
-void Stargate::set_player_usable(bool usable) {
+void Stargate::set_inventory_usable(bool usable) {
 	Point player_position = camera::get_player_position();
-	player_usable = usable;
-	if (!player_usable) {
+	inventory_usable = usable;
+	if (inventory_usable) {
 		set_state(BROKEN);
 	} else if (player_position == position + RELATIVE_ACTIVATION_POINT || player_position == position + RELATIVE_PRE_ENTRY_POINT) {
 		set_state(ACTIVE);

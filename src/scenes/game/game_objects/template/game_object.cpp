@@ -4,10 +4,11 @@
 #include "game_object.hpp"
 #include "../../../../engine/camera.hpp"
 
-GameObject::GameObject(map::MapSections map_section, Point position, bool usable) {
+GameObject::GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable) {
 	GameObject::position = position;
 	GameObject::map_section = map_section;
-	GameObject::player_usable = usable;
+	GameObject::player_usable = player_usable;
+	GameObject::inventory_usable = inventory_usable;
 	GameObject::spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	GameObject::textbox = nullptr;
 
@@ -80,6 +81,8 @@ GameObject::Save GameObject::get_save() {
 
 void GameObject::load_save(Data data) {
 	set_player_usable(data.player_usable);
+	set_inventory_usable(data.inventory_usable);
+	set_value(data.value);
 }
 
 void GameObject::set_player_usable(bool usable) {
@@ -92,6 +95,10 @@ void GameObject::set_inventory_usable(bool usable) {
 
 void GameObject::set_value(uint32_t new_value) {
 	value = new_value;
+}
+
+bool GameObject::player_interact() {
+	return false;
 }
 
 bool GameObject::inventory_interact() {

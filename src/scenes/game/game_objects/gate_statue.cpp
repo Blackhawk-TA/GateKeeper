@@ -7,9 +7,9 @@
 #include "../../../items/items.hpp"
 #include "../ui/inventory.hpp"
 
-GateStatue::GateStatue(map::MapSections map_section, Point position, bool usable) : GameObject(map_section, position, usable) {
+GateStatue::GateStatue(map::MapSections map_section, Point position, bool player_usable) : GameObject(map_section, position, player_usable, false) {
 	size = Size(1, 3);
-	GateStatue::set_player_usable(usable);
+	GateStatue::set_player_usable(player_usable);
 }
 
 bool GateStatue::player_interact() {
