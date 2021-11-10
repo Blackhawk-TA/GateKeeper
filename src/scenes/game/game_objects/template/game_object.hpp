@@ -95,10 +95,10 @@ public:
 	void close_textbox();
 
 	/**
-	 * Checks if the object is on the currently active map section
-	 * @return
+	 * Checks if the object is currently rendered
+	 * @return True, if the object is currently being rendered, else false
 	 */
-	bool on_active_map_section();
+	bool is_rendered();
 
 	/**
 	 * Called when the player interacts with a game object

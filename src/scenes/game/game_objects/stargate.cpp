@@ -10,6 +10,7 @@ Stargate::Stargate(map::MapSections map_section, Point position, StargateAddress
 	Stargate::address = address;
 	Stargate::destination = destination;
 	activation_start_time = 0;
+	size = GATE_SIZE;
 	Stargate::set_inventory_usable(inventory_usable);
 }
 
@@ -55,34 +56,31 @@ void Stargate::update(uint32_t time) {
 
 void Stargate::draw() {
 	Point camera_position = camera::get_screen_position();
-	Point camera_position_world = screen_to_world(camera_position);
 
-	if (sprite_rect_in_screen(position, GATE_SIZE, camera_position_world)) {
-		//Draw stargate
+	//Draw stargate
+	screen.blit_sprite(
+		Rect(
+			(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
+			(tile_id / spritesheet_size.h) * TILE_SIZE,
+			GATE_SIZE.w * TILE_SIZE,
+			GATE_SIZE.h * TILE_SIZE
+		),
+		world_to_screen(position) - camera_position,
+		SpriteTransform::NONE
+	);
+
+	//Draw animation
+	if (state == ACTIVATING || state == DEACTIVATING) {
 		screen.blit_sprite(
 			Rect(
-				(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
-				(tile_id / spritesheet_size.h) * TILE_SIZE,
-				GATE_SIZE.w * TILE_SIZE,
-				GATE_SIZE.h * TILE_SIZE
+				(ANIMATION_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
+				(ANIMATION_ID / spritesheet_size.h) * TILE_SIZE,
+				ANIMATION_SIZE.w * TILE_SIZE,
+				ANIMATION_SIZE.h * TILE_SIZE
 			),
-			world_to_screen(position) - camera_position,
+			world_to_screen(position + ANIMATION_OFFSET) - camera_position, //Calculate animation offset because it's smaller than the gate
 			SpriteTransform::NONE
 		);
-
-		//Draw animation
-		if (state == ACTIVATING || state == DEACTIVATING) {
-			screen.blit_sprite(
-				Rect(
-					(ANIMATION_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
-					(ANIMATION_ID / spritesheet_size.h) * TILE_SIZE,
-					ANIMATION_SIZE.w * TILE_SIZE,
-					ANIMATION_SIZE.h * TILE_SIZE
-				),
-				world_to_screen(position + ANIMATION_OFFSET) - camera_position, //Calculate animation offset because it's smaller than the gate
-				SpriteTransform::NONE
-			);
-		}
 	}
 }
 

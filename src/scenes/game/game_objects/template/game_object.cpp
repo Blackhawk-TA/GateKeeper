@@ -20,21 +20,16 @@ GameObject::GameObject(map::MapSections map_section, Point position, bool player
 }
 
 void GameObject::draw() {
-	Point camera_position = camera::get_screen_position();
-	Point camera_position_world = screen_to_world(camera_position);
-
-	if (sprite_rect_in_screen(position, size, camera_position_world)) {
-		screen.blit_sprite(
-			Rect(
-				(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
-				(tile_id / spritesheet_size.h) * TILE_SIZE,
-				size.w * TILE_SIZE,
-				size.h * TILE_SIZE
-			),
-			world_to_screen(position) - camera_position,
-			SpriteTransform::NONE
-		);
-	}
+	screen.blit_sprite(
+		Rect(
+			(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
+			(tile_id / spritesheet_size.h) * TILE_SIZE,
+			size.w * TILE_SIZE,
+			size.h * TILE_SIZE
+		),
+		world_to_screen(position) - camera::get_screen_position(),
+		SpriteTransform::NONE
+	);
 
 	//Draw textbox notification
 	if (textbox != nullptr) {
@@ -97,6 +92,7 @@ bool GameObject::inventory_interact() {
 	return false;
 }
 
-bool GameObject::on_active_map_section() {
-	return map::get_section() == map_section;
+bool GameObject::is_rendered() {
+	return map::get_section() == map_section
+		&& sprite_rect_in_screen(position, size, camera::get_world_position());
 }

@@ -18,34 +18,31 @@ FruitTree::FruitTree(map::MapSections map_section, Point position, bool player_u
 
 void FruitTree::draw() {
 	Point camera_position = camera::get_screen_position();
-	Point camera_position_world = screen_to_world(camera_position);
 
-	if (sprite_rect_in_screen(position, size, camera_position_world)) {
-		//Draw tree
+	//Draw tree
+	screen.blit_sprite(
+		Rect(
+			(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
+			(tile_id / spritesheet_size.h) * TILE_SIZE,
+			size.w * TILE_SIZE,
+			size.h * TILE_SIZE
+		),
+		world_to_screen(position) - camera_position,
+		SpriteTransform::NONE
+	);
+
+	//Draw fruits
+	if (player_usable) {
 		screen.blit_sprite(
 			Rect(
-				(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
-				(tile_id / spritesheet_size.h) * TILE_SIZE,
-				size.w * TILE_SIZE,
-				size.h * TILE_SIZE
+				(TILE_ID_FRUITS & (spritesheet_size.w - 1)) * TILE_SIZE,
+				(TILE_ID_FRUITS / spritesheet_size.h) * TILE_SIZE,
+				FRUIT_SIZE.w * TILE_SIZE,
+				FRUIT_SIZE.h * TILE_SIZE
 			),
-			world_to_screen(position) - camera_position,
+			world_to_screen(position + FRUIT_OFFSET) - camera_position,
 			SpriteTransform::NONE
 		);
-
-		//Draw fruits
-		if (player_usable) {
-			screen.blit_sprite(
-				Rect(
-					(TILE_ID_FRUITS & (spritesheet_size.w - 1)) * TILE_SIZE,
-					(TILE_ID_FRUITS / spritesheet_size.h) * TILE_SIZE,
-					FRUIT_SIZE.w * TILE_SIZE,
-					FRUIT_SIZE.h * TILE_SIZE
-				),
-				world_to_screen(position + FRUIT_OFFSET) - camera_position,
-				SpriteTransform::NONE
-			);
-		}
 	}
 
 	//Draw textbox notification

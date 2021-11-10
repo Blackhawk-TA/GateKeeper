@@ -88,7 +88,7 @@ void game_objects::load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &s
 
 void game_objects::draw() {
 	for (auto &game_object : game_object_collection) {
-		if (game_object->on_active_map_section()) {
+		if (game_object->is_rendered()) {
 			game_object->draw();
 		}
 	}
@@ -96,7 +96,7 @@ void game_objects::draw() {
 
 void game_objects::update(uint32_t time) {
 	for (auto &game_object : game_object_collection) {
-		if (game_object->on_active_map_section()) {
+		if (game_object->is_rendered()) {
 			game_object->update(time);
 		}
 	}
@@ -127,7 +127,7 @@ bool game_objects::check_collisions(Point next_position) {
 	uint16_t i = 0;
 
 	while (!collision && i < game_object_collection.size()) {
-		if (game_object_collection.at(i)->on_active_map_section()) {
+		if (game_object_collection.at(i)->is_rendered()) {
 			collision = game_object_collection.at(i)->check_collision(next_position);
 		}
 		i++;
@@ -141,7 +141,7 @@ bool game_objects::player_interact() {
 	uint16_t i = 0;
 
 	while (!interacted && i < game_object_collection.size()) {
-		if (game_object_collection.at(i)->on_active_map_section()) {
+		if (game_object_collection.at(i)->is_rendered()) {
 			interacted = game_object_collection.at(i)->player_interact();
 		}
 		i++;
@@ -155,7 +155,7 @@ bool game_objects::inventory_interact() {
 	uint16_t i = 0;
 
 	while (!interacted && i < game_object_collection.size()) {
-		if (game_object_collection.at(i)->on_active_map_section()) {
+		if (game_object_collection.at(i)->is_rendered()) {
 			interacted = game_object_collection.at(i)->inventory_interact();
 		}
 		i++;
@@ -166,7 +166,7 @@ bool game_objects::inventory_interact() {
 
 void game_objects::update_states(Point next_position) {
 	for (auto &game_object : game_object_collection) {
-		if (game_object->on_active_map_section()) {
+		if (game_object->is_rendered()) {
 			game_object->update_state(next_position);
 		}
 	}

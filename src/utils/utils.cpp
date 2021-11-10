@@ -15,7 +15,7 @@ using namespace blit;
  * @param camera_position_world The current position of the camera in the world
  * @return True if at least one part of the sprite rectangle is currently shown at the screen
  */
-bool sprite_rect_in_screen(Point &position, const Size &size, Point &camera_position_world) {
+bool sprite_rect_in_screen(Point &position, const Size &size, Point camera_position_world) {
 	Point screen_tiles = get_screen_tiles();
 
 	return camera_position_world.x < position.x + size.w &&

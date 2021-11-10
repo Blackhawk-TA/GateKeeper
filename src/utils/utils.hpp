@@ -18,7 +18,7 @@ enum StargateAddresses {
 inline Surface *player_sprites;
 inline Surface *player_attack_sprites;
 
-bool sprite_rect_in_screen(Point &position, const Size &size, Point &camera_position_world);
+bool sprite_rect_in_screen(Point &position, const Size &size, Point camera_position_world);
 
 Point screen_to_world(const Point &p);
 
