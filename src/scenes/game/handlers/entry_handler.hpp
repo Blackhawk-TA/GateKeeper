@@ -24,8 +24,8 @@ namespace entry_handler {
 		Entry{Point(15, 12), Point(6, 9), Point(0, 1), map::GRASSLAND, map::INTERIOR},
 		Entry{Point(29, 12), Point(28, 9), Point(0, 1), map::GRASSLAND, map::INTERIOR},
 		Entry{Point(18, 19), Point(50, 9), Point(0, 1), map::GRASSLAND, map::INTERIOR},
-		Entry{Point(27, 19), Point(6, 25), Point(0, 1), map::GRASSLAND, map::INTERIOR},
-		Entry{Point(12, 44), Point(28, 25), Point(0, 1), map::GRASSLAND, map::INTERIOR},
+		Entry{Point(27, 19), Point(6, 26), Point(0, 1), map::GRASSLAND, map::INTERIOR},
+		Entry{Point(12, 44), Point(28, 26), Point(0, 1), map::GRASSLAND, map::INTERIOR},
 		Entry{Point(52, 50), Point(19, 56), Point(1, 0), map::GRASSLAND, map::DUNGEON}
 	};
 
