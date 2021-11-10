@@ -13,10 +13,6 @@ GateStatue::GateStatue(map::MapSections map_section, Point position, bool player
 }
 
 bool GateStatue::player_interact() {
-	if (map::get_section() != map_section) {
-		return false;
-	}
-
 	if (player_usable && camera::get_player_position() == position + Point(0, size.h)) {
 		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 		if (has_inventory_space) {
@@ -32,10 +28,6 @@ bool GateStatue::player_interact() {
 }
 
 void GateStatue::update_state(Point next_position) {
-	if (map::get_section() != map_section) {
-		return;
-	}
-
 	//Show as active when player stands directly in front of the statue
 	if (state == INACTIVE && next_position == position + Point(0, size.h)) {
 		set_state(ACTIVE);

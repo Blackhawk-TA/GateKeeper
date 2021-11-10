@@ -18,10 +18,6 @@ CarrotBed::CarrotBed(map::MapSections map_section, Point position) : GameObject(
 }
 
 void CarrotBed::update(uint32_t time) {
-	if (map::get_section() != map_section) {
-		return;
-	}
-
 	//TODO grow rate seems off
 	if (state != GROWN && state != HARVESTED) {
 		if (grown_time < game_time::get_time()) {
@@ -35,10 +31,6 @@ void CarrotBed::update(uint32_t time) {
 }
 
 bool CarrotBed::player_interact() {
-	if (map::get_section() != map_section) {
-		return false;
-	}
-
 	if (player_usable && in_use_range()) {
 		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT));
 		if (has_inventory_space) {
@@ -55,10 +47,6 @@ bool CarrotBed::player_interact() {
 }
 
 bool CarrotBed::inventory_interact() {
-	if (map::get_section() != map_section) {
-		return false;
-	}
-
 	if (inventory_usable && in_use_range()) {
 		grown_time = game_time::get_time() + (PLANT_TIME_MS + GROWING_TIME_MS + GROWN_TIME_MS);
 		set_inventory_usable(false);

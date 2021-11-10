@@ -20,10 +20,6 @@ GameObject::GameObject(map::MapSections map_section, Point position, bool player
 }
 
 void GameObject::draw() {
-	if (map::get_section() != map_section) {
-		return;
-	}
-
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
 
@@ -56,10 +52,6 @@ void GameObject::close_textbox() {
 }
 
 bool GameObject::check_collision(Point next_position) {
-	if (map::get_section() != map_section) {
-		return false;
-	}
-
 	return position.x <= next_position.x && position.y <= next_position.y &&
 	       position.x > next_position.x - size.w && position.y > next_position.y - size.h;
 }
@@ -103,4 +95,8 @@ bool GameObject::player_interact() {
 
 bool GameObject::inventory_interact() {
 	return false;
+}
+
+bool GameObject::on_active_map_section() {
+	return map::get_section() == map_section;
 }

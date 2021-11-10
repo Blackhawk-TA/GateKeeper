@@ -95,6 +95,12 @@ public:
 	void close_textbox();
 
 	/**
+	 * Checks if the object is on the currently active map section
+	 * @return
+	 */
+	bool on_active_map_section();
+
+	/**
 	 * Called when the player interacts with a game object
 	 * @return True, if interaction successful, else false
 	 */

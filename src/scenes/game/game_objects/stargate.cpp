@@ -14,10 +14,6 @@ Stargate::Stargate(map::MapSections map_section, Point position, StargateAddress
 }
 
 bool Stargate::check_collision(Point next_position) {
-	if (map::get_section() != map_section) {
-		return false;
-	}
-
 	return next_position != position + RELATIVE_PRE_ENTRY_POINT &&
 	       next_position != position + RELATIVE_ENTRY_POINT &&
 	       position.x <= next_position.x && position.y <= next_position.y &&
@@ -25,10 +21,6 @@ bool Stargate::check_collision(Point next_position) {
 }
 
 void Stargate::update_state(Point next_position) {
-	if (map::get_section() != map_section) {
-		return;
-	}
-
 	if (state == INACTIVE && (next_position == position + RELATIVE_ACTIVATION_POINT || next_position == position + RELATIVE_PRE_ENTRY_POINT)) {
 		set_state(ACTIVATING);
 	} else if (state == ACTIVE && next_position != position + RELATIVE_ACTIVATION_POINT && next_position != position + RELATIVE_PRE_ENTRY_POINT) {
@@ -42,21 +34,15 @@ void Stargate::update_state(Point next_position) {
  * @return True if the gate is active and the player enters it, else false
  */
 bool Stargate::check_enter(Point next_position) {
-	if (map::get_section() != map_section) {
-		return false;
-	}
-
-	return state == ACTIVE && next_position == position + RELATIVE_ENTRY_POINT;
+	return map::get_section() == map_section
+		&& state == ACTIVE
+		&& next_position == position + RELATIVE_ENTRY_POINT;
 }
 
 /**
  * Checks if gate is de-/activating and sets the gate to in-/active once the animation is complete
  */
 void Stargate::update(uint32_t time) {
-	if (map::get_section() != map_section) { //TODO move those checks to game_object_handler
-		return;
-	}
-
 	if (state == ACTIVATING || state == DEACTIVATING) {
 		if (activation_start_time == 0) {
 			activation_start_time = blit::now();
@@ -68,10 +54,6 @@ void Stargate::update(uint32_t time) {
 }
 
 void Stargate::draw() {
-	if (map::get_section() != map_section) {
-		return;
-	}
-
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
 
@@ -129,10 +111,6 @@ void Stargate::set_state(uint8_t new_state) {
  * @return True, if stargate could be repaired, else false
  */
 bool Stargate::inventory_interact() {
-	if (map::get_section() != map_section) {
-		return false;
-	}
-
 	if (inventory_usable && get_entry_point() == camera::get_player_position()) {
 		inventory_usable = false;
 		set_state(ACTIVATING);

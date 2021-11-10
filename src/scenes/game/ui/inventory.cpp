@@ -10,6 +10,7 @@ bool open_state = false;
 
 void inventory::init() {
 	std::vector<Listbox::Item> items = {
+		//TODO remove free items
 		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT_SEED),
 		listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
 	};

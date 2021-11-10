@@ -17,10 +17,6 @@ FruitTree::FruitTree(map::MapSections map_section, Point position, bool player_u
 }
 
 void FruitTree::draw() {
-	if (map::get_section() != map_section) {
-		return;
-	}
-
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
 
@@ -59,20 +55,12 @@ void FruitTree::draw() {
 }
 
 void FruitTree::update(uint32_t time) {
-	if (map::get_section() != map_section) {
-		return;
-	}
-
 	if (!player_usable && grown_time < game_time::get_time()) {
 		player_usable = true;
 	}
 }
 
 bool FruitTree::player_interact() {
-	if (map::get_section() != map_section) {
-		return false;
-	}
-
 	if (player_usable && camera::get_player_position() == position + Point(size.w / 2, size.h)) {
 		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::APPLE));
 		if (has_inventory_space) {

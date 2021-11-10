@@ -11,10 +11,6 @@ Sign::Sign(map::MapSections map_section, Point position, Sign::SpriteType sprite
 }
 
 bool Sign::player_interact() {
-	if (map::get_section() != map_section) {
-		return false;
-	}
-
 	if (player_usable && camera::get_player_position() == position + Point(0, size.h)) {
 		textbox = new Textbox(text);
 		return true;
