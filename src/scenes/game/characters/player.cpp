@@ -27,8 +27,8 @@ const std::map<Player::MovementDirection, std::array<uint16_t, Player::ANIMATION
 	{RIGHT, {86,  87,  88,  89}}
 };
 
-Player::Player(MovementDirection direction, uint8_t health) {
-	Player::health = health;
+Player::Player(MovementDirection direction, uint8_t player_health) {
+	Player::health = player_health;
 	dead = false;
 	position = get_screen_tiles() / 2;
 	spritesheet_size = get_spritesheet_size(player_sprites->bounds);

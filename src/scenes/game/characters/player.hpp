@@ -18,7 +18,7 @@ public:
 		RIGHT = 4
 	};
 
-	explicit Player(MovementDirection direction, uint8_t health);
+	explicit Player(MovementDirection direction, uint8_t player_health);
 	void draw();
 	void attack();
 	void evade();
