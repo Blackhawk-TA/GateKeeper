@@ -8,23 +8,21 @@
 #include "../../../items/items.hpp"
 #include "../ui/inventory.hpp"
 
-//TODO use integer save value to save time, also use value for time in FruitTrees
 CarrotBed::CarrotBed(map::MapSections map_section, Point position) : GameObject(map_section, position, false, false) {
 	size = Size(1, 1);
-	grown_time = game_time::get_time() + (PLANT_TIME_MS + GROWING_TIME_MS + GROWN_TIME_MS) / 2;
+	value = game_time::get_time() + GROW_STAGE_1_TIME + GROW_STAGE_2_TIME; //Value equals grow time
 	CarrotBed::set_state(PLANTED);
 	CarrotBed::set_player_usable(player_usable);
 	CarrotBed::set_inventory_usable(inventory_usable);
 }
 
 void CarrotBed::update(uint32_t time) {
-	//TODO grow rate seems off
 	if (state != GROWN && state != HARVESTED) {
-		if (grown_time < game_time::get_time()) {
+		if (value < game_time::get_time()) {
 			set_player_usable(true);
-		} else if (state != GROWING && grown_time - (GROWING_TIME_MS + PLANT_TIME_MS) < game_time::get_time()) {
+		} else if (state != GROWING && value - GROW_STAGE_1_TIME < game_time::get_time()) {
 			set_state(GROWING);
-		} else if (state != PLANTED && grown_time - (GROWN_TIME_MS *GROWING_TIME_MS + PLANT_TIME_MS) < game_time::get_time()) {
+		} else if (state != PLANTED && state != GROWING && value - GROW_STAGE_1_TIME - GROW_STAGE_2_TIME < game_time::get_time()) {
 			set_state(PLANTED);
 		}
 	}
@@ -48,7 +46,7 @@ bool CarrotBed::player_interact() {
 
 bool CarrotBed::inventory_interact() {
 	if (inventory_usable && in_use_range()) {
-		grown_time = game_time::get_time() + (PLANT_TIME_MS + GROWING_TIME_MS + GROWN_TIME_MS);
+		value = game_time::get_time() + GROW_STAGE_1_TIME + GROW_STAGE_2_TIME;
 		set_inventory_usable(false);
 		return true;
 	} else {

@@ -8,11 +8,10 @@
 #include "../../../items/items.hpp"
 #include "../ui/inventory.hpp"
 
-//TODO save grown time in int32 value, maybe add new
 FruitTree::FruitTree(map::MapSections map_section, Point position, bool player_usable) : GameObject(map_section, position, player_usable, false) {
 	size = Size(3, 3);
 	tile_id = TILE_ID_TREE;
-	grown_time = game_time::get_time() + GROW_TIME_MS / 2;
+	value = game_time::get_time() + GROW_TIME_MS; //Value equals grow time
 	FruitTree::set_player_usable(player_usable);
 }
 
@@ -52,7 +51,7 @@ void FruitTree::draw() {
 }
 
 void FruitTree::update(uint32_t time) {
-	if (!player_usable && grown_time < game_time::get_time()) {
+	if (!player_usable && value < game_time::get_time()) {
 		player_usable = true;
 	}
 }
@@ -62,7 +61,7 @@ bool FruitTree::player_interact() {
 		bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::APPLE));
 		if (has_inventory_space) {
 			set_player_usable(false);
-			grown_time = game_time::get_time() + GROW_TIME_MS;
+			value = game_time::get_time() + GROW_TIME_MS;
 			textbox = new Textbox("You put an apple in your inventory.");
 		} else {
 			textbox = new Textbox("You cannot carry any more apples.");

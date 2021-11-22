@@ -13,8 +13,6 @@ private:
 	const Point FRUIT_OFFSET = Point(0, 1);
 	const uint16_t GROW_TIME_MS = 60000;
 
-	uint32_t grown_time;
-
 	void set_state(uint8_t new_state) override;
 
 public:

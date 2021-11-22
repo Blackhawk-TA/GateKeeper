@@ -18,12 +18,10 @@ private:
 	const uint16_t TILE_ID_PLANTED = 1237;
 	const uint16_t TILE_ID_GROWING = 1238;
 	const uint16_t TILE_ID_GROWN = 1300;
-	const uint16_t PLANT_TIME_MS = 10000;
-	const uint16_t GROWING_TIME_MS = 20000;
-	const uint16_t GROWN_TIME_MS = 30000;
+	const uint16_t GROW_STAGE_1_TIME = 3000;
+	const uint16_t GROW_STAGE_2_TIME = 3000;
 
 	RenderStates state;
-	uint32_t grown_time;
 
 	void set_state(uint8_t new_state) override;
 	void set_player_usable(bool usable) override;
