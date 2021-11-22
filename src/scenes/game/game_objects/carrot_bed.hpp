@@ -18,8 +18,8 @@ private:
 	const uint16_t TILE_ID_PLANTED = 1237;
 	const uint16_t TILE_ID_GROWING = 1238;
 	const uint16_t TILE_ID_GROWN = 1300;
-	const uint16_t GROW_STAGE_1_TIME = 3000;
-	const uint16_t GROW_STAGE_2_TIME = 3000;
+	const uint16_t GROW_STAGE_1_TIME = 30000;
+	const uint16_t GROW_STAGE_2_TIME = 30000;
 
 	RenderStates state;
 
