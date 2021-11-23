@@ -32,6 +32,7 @@ set(PROJECT_SOURCE
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
         src/items/generic/options_entry.cpp
+        src/scenes/game/characters/template/character.cpp src/scenes/game/characters/template/character.hpp
         src/scenes/game/game_objects/carrot_bed.cpp src/scenes/game/game_objects/carrot_bed.hpp
         src/scenes/game/game_objects/fruit_tree.cpp src/scenes/game/game_objects/fruit_tree.hpp
         src/scenes/game/game_objects/sign.cpp src/scenes/game/game_objects/sign.hpp
