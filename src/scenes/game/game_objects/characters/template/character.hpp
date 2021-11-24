@@ -11,4 +11,5 @@
 class Character : public GameObject {
 public:
 	Character(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable);
+	void draw() override;
 };

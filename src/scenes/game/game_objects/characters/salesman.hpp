@@ -12,4 +12,10 @@ private:
 public:
 	explicit Salesman(map::MapSections map_section, Point position);
 	~Salesman() override = default;
+	void update(uint32_t time) override;
+	void update_state(Point next_position) override;
+	ObjectType get_type() override;
+
+private:
+	void set_state(uint8_t new_state) override;
 };

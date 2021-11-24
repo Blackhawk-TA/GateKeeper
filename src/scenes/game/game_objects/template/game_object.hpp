@@ -43,6 +43,7 @@ public:
 		SignType = 3,
 		FruitTreeType = 4,
 		CarrotBedType = 5,
+		SalesmanType = 6
 	};
 
 	explicit GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable);
