@@ -6,7 +6,7 @@
 #include "../../utils/utils.hpp"
 #include "assets.hpp"
 #include "../scene_interface.hpp"
-#include "characters/player.hpp"
+#include "player.hpp"
 
 class GameScene : public IScene {
 public:

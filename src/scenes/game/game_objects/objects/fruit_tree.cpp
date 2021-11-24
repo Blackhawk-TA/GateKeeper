@@ -3,10 +3,10 @@
 //
 
 #include "fruit_tree.hpp"
-#include "../../../engine/camera.hpp"
-#include "../../../utils/game_time.hpp"
-#include "../../../items/items.hpp"
-#include "../ui/inventory.hpp"
+#include "../../../../engine/camera.hpp"
+#include "../../../../utils/game_time.hpp"
+#include "../../../../items/items.hpp"
+#include "../../ui/inventory.hpp"
 
 FruitTree::FruitTree(map::MapSections map_section, Point position, bool player_usable) : GameObject(map_section, position, player_usable, false) {
 	size = Size(3, 3);

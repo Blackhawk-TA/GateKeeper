@@ -3,7 +3,7 @@
 //
 
 #include "stargate.hpp"
-#include "../../../engine/camera.hpp"
+#include "../../../../engine/camera.hpp"
 
 Stargate::Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool inventory_usable)
 	: GameObject(map_section, position, false, inventory_usable) {

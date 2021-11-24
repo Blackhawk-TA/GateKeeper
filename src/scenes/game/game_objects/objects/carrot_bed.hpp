@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "template/game_object.hpp"
+#include "../template/game_object.hpp"
 
 class CarrotBed : public GameObject {
 private:

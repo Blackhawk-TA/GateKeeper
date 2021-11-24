@@ -3,9 +3,9 @@
 //
 
 #include "gate_statue.hpp"
-#include "../../../engine/camera.hpp"
-#include "../../../items/items.hpp"
-#include "../ui/inventory.hpp"
+#include "../../../../engine/camera.hpp"
+#include "../../../../items/items.hpp"
+#include "../../ui/inventory.hpp"
 
 GateStatue::GateStatue(map::MapSections map_section, Point position, bool player_usable) : GameObject(map_section, position, player_usable, false) {
 	size = Size(1, 3);

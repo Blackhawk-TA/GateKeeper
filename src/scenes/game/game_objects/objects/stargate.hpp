@@ -3,9 +3,9 @@
 //
 
 #pragma once
-#include "../../../utils/utils.hpp"
-#include "../../../engine/map.hpp"
-#include "template/game_object.hpp"
+#include "../../../../utils/utils.hpp"
+#include "../../../../engine/map.hpp"
+#include "../template/game_object.hpp"
 
 class Stargate : public GameObject {
 private:

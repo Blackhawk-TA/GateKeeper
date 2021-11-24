@@ -3,9 +3,9 @@
 //
 
 #pragma once
-#include "../../../utils/utils.hpp"
-#include "../../../engine/camera.hpp"
-#include "../game_objects/stargate.hpp"
+#include "../../utils/utils.hpp"
+#include "../../engine/camera.hpp"
+#include "game_objects/objects/stargate.hpp"
 
 using namespace blit;
 

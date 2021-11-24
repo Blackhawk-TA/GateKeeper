@@ -3,12 +3,12 @@
 //
 
 #include "game_object_handler.hpp"
-#include "../../game_objects/gate_statue.hpp"
-#include "../../game_objects/stargate.hpp"
+#include "../../game_objects/objects/gate_statue.hpp"
+#include "../../game_objects/objects/stargate.hpp"
 #include "extensions/stargate_handler.hpp"
-#include "../../game_objects/sign.hpp"
-#include "../../game_objects/fruit_tree.hpp"
-#include "../../game_objects/carrot_bed.hpp"
+#include "../../game_objects/objects/sign.hpp"
+#include "../../game_objects/objects/fruit_tree.hpp"
+#include "../../game_objects/objects/carrot_bed.hpp"
 #include <stdexcept>
 #include <cassert>
 

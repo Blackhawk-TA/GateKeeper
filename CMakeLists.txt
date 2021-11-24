@@ -15,6 +15,7 @@ set(PROJECT_SOURCE
         src/scenes/game/game_scene.cpp src/scenes/game/game_scene.hpp
         src/scenes/menu/menu_scene.cpp src/scenes/menu/menu_scene.hpp
         src/scenes/options/options_scene.cpp src/scenes/options/options_scene.hpp
+        src/scenes/game/handlers/game_objects/extensions/character_handler.cpp src/scenes/game/handlers/game_objects/extensions/character_handler.hpp
         src/scenes/game/handlers/entry_handler.cpp src/scenes/game/handlers/entry_handler.hpp
         src/scenes/game/handlers/game_objects/game_object_handler.cpp src/scenes/game/handlers/game_objects/game_object_handler.hpp
         src/scenes/game/handlers/game_objects/extensions/stargate_handler.cpp src/scenes/game/handlers/game_objects/extensions/stargate_handler.hpp
@@ -32,14 +33,15 @@ set(PROJECT_SOURCE
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
         src/items/generic/options_entry.cpp
-        src/scenes/game/characters/template/character.cpp src/scenes/game/characters/template/character.hpp
-        src/scenes/game/game_objects/carrot_bed.cpp src/scenes/game/game_objects/carrot_bed.hpp
-        src/scenes/game/game_objects/fruit_tree.cpp src/scenes/game/game_objects/fruit_tree.hpp
-        src/scenes/game/game_objects/sign.cpp src/scenes/game/game_objects/sign.hpp
-        src/scenes/game/game_objects/stargate.cpp src/scenes/game/game_objects/stargate.hpp
-        src/scenes/game/game_objects/gate_statue.cpp src/scenes/game/game_objects/gate_statue.hpp
+        src/scenes/game/game_objects/characters/template/character.cpp src/scenes/game/game_objects/characters/template/character.hpp
+        src/scenes/game/game_objects/characters/salesman.cpp src/scenes/game/game_objects/characters/salesman.hpp
+        src/scenes/game/game_objects/objects/carrot_bed.cpp src/scenes/game/game_objects/objects/carrot_bed.hpp
+        src/scenes/game/game_objects/objects/fruit_tree.cpp src/scenes/game/game_objects/objects/fruit_tree.hpp
+        src/scenes/game/game_objects/objects/sign.cpp src/scenes/game/game_objects/objects/sign.hpp
+        src/scenes/game/game_objects/objects/stargate.cpp src/scenes/game/game_objects/objects/stargate.hpp
+        src/scenes/game/game_objects/objects/gate_statue.cpp src/scenes/game/game_objects/objects/gate_statue.hpp
         src/scenes/game/game_objects/template/game_object.cpp src/scenes/game/game_objects/template/game_object.hpp
-        src/scenes/game/characters/player.cpp src/scenes/game/characters/player.hpp
+        src/scenes/game/player.cpp src/scenes/game/player.hpp
         src/engine/ui/box.cpp src/engine/ui/box.hpp
         src/engine/ui/listbox.cpp src/engine/ui/listbox.hpp
         src/scenes/game/ui/inventory.cpp src/scenes/game/ui/inventory.hpp

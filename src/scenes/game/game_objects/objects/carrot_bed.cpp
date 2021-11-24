@@ -3,10 +3,10 @@
 //
 
 #include "carrot_bed.hpp"
-#include "../../../utils/game_time.hpp"
-#include "../../../engine/camera.hpp"
-#include "../../../items/items.hpp"
-#include "../ui/inventory.hpp"
+#include "../../../../utils/game_time.hpp"
+#include "../../../../engine/camera.hpp"
+#include "../../../../items/items.hpp"
+#include "../../ui/inventory.hpp"
 
 CarrotBed::CarrotBed(map::MapSections map_section, Point position) : GameObject(map_section, position, false, false) {
 	size = Size(1, 1);

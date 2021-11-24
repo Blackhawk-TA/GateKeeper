@@ -3,9 +3,9 @@
 //
 
 #pragma once
-#include "template/game_object.hpp"
-#include "../../../engine/map.hpp"
-#include "../../../engine/ui/textbox.hpp"
+#include "../template/game_object.hpp"
+#include "../../../../engine/map.hpp"
+#include "../../../../engine/ui/textbox.hpp"
 
 class GateStatue : public GameObject {
 private:

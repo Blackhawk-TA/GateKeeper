@@ -4,7 +4,7 @@
 
 #include "../items.hpp"
 #include "../../scenes/game/handlers/game_objects/extensions/stargate_handler.hpp"
-#include "../../scenes/game/characters/player.hpp"
+#include "../../scenes/game/player.hpp"
 
 Listbox::Item listbox_item::create_apple(uint8_t type_id) {
 	return Listbox::Item{

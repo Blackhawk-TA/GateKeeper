@@ -4,7 +4,7 @@
 #include "entry_handler.hpp"
 #include "../../../engine/camera.hpp"
 #include "../../../engine/effects/transition.hpp"
-#include "../characters/player.hpp"
+#include "../player.hpp"
 
 /**
  * Gets the id of an entry by the position of its interior or exterior entry depending on
