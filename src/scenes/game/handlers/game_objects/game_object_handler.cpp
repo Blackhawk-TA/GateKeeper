@@ -10,6 +10,7 @@
 #include "../../game_objects/objects/fruit_tree.hpp"
 #include "../../game_objects/objects/carrot_bed.hpp"
 #include "../../game_objects/characters/salesman.hpp"
+#include "../../game_objects/characters/villager.hpp"
 #include <stdexcept>
 #include <cassert>
 
@@ -42,6 +43,7 @@ void game_objects::init() {
 
 	//Salesman character
 	game_object_collection.emplace_back(new Salesman(map::INTERIOR, Point(31,20)));
+	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(27,13)));
 
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());

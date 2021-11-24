@@ -28,3 +28,11 @@ void Character::draw() {
 		textbox->draw();
 	}
 }
+
+bool Character::player_interact() {
+	return player_usable
+		&& (camera::get_player_position() == position + Point(0, size.h)
+		|| camera::get_player_position() == position - Point(0, size.h)
+		|| camera::get_player_position() == position + Point(size.w, 0)
+		|| camera::get_player_position() == position - Point(size.w, 0));
+}

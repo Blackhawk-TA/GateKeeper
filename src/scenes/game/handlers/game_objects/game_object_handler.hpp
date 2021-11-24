@@ -10,7 +10,7 @@ namespace game_objects {
 	/**
 	 * The amount of game objects on the map
 	 */
-	constexpr uint16_t GAME_OBJECT_COUNT = 15;
+	constexpr uint16_t GAME_OBJECT_COUNT = 16;
 
 	/**
 	 * Creates the objects using their factory function
