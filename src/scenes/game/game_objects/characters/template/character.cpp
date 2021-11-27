@@ -30,9 +30,31 @@ void Character::draw() {
 }
 
 bool Character::player_interact() {
-	return player_usable
-		&& (camera::get_player_position() == position + Point(0, size.h)
-		|| camera::get_player_position() == position - Point(0, size.h)
-		|| camera::get_player_position() == position + Point(size.w, 0)
-		|| camera::get_player_position() == position - Point(size.w, 0));
+	bool interacted = false;
+
+	if (player_usable) {
+		if (camera::get_player_position() == position + Point(0, size.h)) {
+			interacted = true;
+			change_direction(DOWN, false);
+		} else if (camera::get_player_position() == position - Point(0, size.h)) {
+			interacted = true;
+			change_direction(UP, false);
+		} else if (camera::get_player_position() == position + Point(size.w, 0)) {
+			interacted = true;
+			change_direction(RIGHT, false);
+		} else if (camera::get_player_position() == position - Point(size.w, 0)) {
+			interacted = true;
+			change_direction(LEFT, false);
+		}
+	}
+
+	return interacted;
+}
+
+void Character::change_direction(MovementDirection direction, bool animate) {
+	if (current_direction != direction) {
+		animation_sprites = movement_sprites.at(direction);
+		current_direction = direction;
+		tile_id = animate ? animation_sprites[1] : animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
+	}
 }

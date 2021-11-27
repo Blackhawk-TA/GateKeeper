@@ -7,6 +7,12 @@
 
 Salesman::Salesman(map::MapSections map_section, Point position) : Character(map_section, position, true, false) {
 	tile_id = TILE_ID;
+	movement_sprites = {
+		{UP, {48, 49, 50, 51}},
+		{DOWN, {0, 1, 2, 3}},
+		{LEFT, {16, 17, 18, 19}},
+		{RIGHT, {32, 33, 34, 35}}
+	};
 }
 
 GameObject::ObjectType Salesman::get_type() {
