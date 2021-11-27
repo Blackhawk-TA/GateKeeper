@@ -8,10 +8,10 @@
 Salesman::Salesman(map::MapSections map_section, Point position) : Character(map_section, position, true, false) {
 	tile_id = TILE_ID;
 	movement_sprites = {
-		{UP, {48, 49, 50, 51}},
-		{DOWN, {0, 1, 2, 3}},
-		{LEFT, {16, 17, 18, 19}},
-		{RIGHT, {32, 33, 34, 35}}
+		{UP, {122, 123, 124, 125}},
+		{DOWN, {74, 75, 76, 77}},
+		{LEFT, {106, 107, 108, 109}},
+		{RIGHT, {90, 91, 92, 93}}
 	};
 }
 
@@ -21,7 +21,7 @@ GameObject::ObjectType Salesman::get_type() {
 
 bool Salesman::player_interact() {
 	if (player_usable && camera::get_player_position() == position + Point(0, size.h + BAR_HEIGHT)) {
-		textbox = new Textbox("Test message");
+		textbox = new Textbox("Hello! Normally I would sell you carrot seeds but they are all gone.");
 		return true;
 	}
 
