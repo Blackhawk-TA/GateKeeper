@@ -7,7 +7,7 @@
 
 class Villager : public Character {
 private:
-	const uint8_t TILE_ID = 0;
+	uint32_t last_turn;
 
 	void set_state(uint8_t new_state) override;
 

@@ -41,9 +41,9 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 43)));
 	game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 43)));
 
-	//Salesman character
+	//Characters
 	game_object_collection.emplace_back(new Salesman(map::INTERIOR, Point(31,20)));
-	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(27,13)));
+	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24,15)));
 
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());

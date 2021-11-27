@@ -23,9 +23,9 @@ protected:
 	};
 
 	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
-	std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
+	static constexpr uint8_t DIRECTION_COUNT = 4;
 
-private:
+	std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
 	MovementDirection current_direction;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
 
