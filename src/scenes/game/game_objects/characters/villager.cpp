@@ -8,6 +8,7 @@
 Villager::Villager(map::MapSections map_section, Point position, uint16_t tile_id, MovementDirection direction, std::string message) : Character(map_section, position, true, false) {
 	Villager::message = std::move(message);
 	last_turn = blit::now();
+	animation_delay = ANIMATION_BASE_DELAY;
 	movement_sprites = {
 		{UP,{
 			static_cast<uint16_t>(tile_id + 48),
@@ -54,10 +55,12 @@ GameObject::ObjectType Villager::get_type() {
 }
 
 void Villager::update(uint32_t time) {
-	if (!is_textbox_open() && time > ANIMATION_DELAY && last_turn < time - ANIMATION_DELAY) {
+	if (!is_textbox_open() && time > animation_delay && last_turn < time - animation_delay) {
 		uint8_t next_direction = blit::random() % DIRECTION_COUNT + 1;
 		change_direction(static_cast<MovementDirection>(next_direction), false);
+
 		last_turn = time;
+		animation_delay = ANIMATION_BASE_DELAY + blit::random() % ANIMATION_VARIANCE;
 	}
 }
 
