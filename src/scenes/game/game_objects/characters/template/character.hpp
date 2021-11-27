@@ -10,11 +10,6 @@
 
 class Character : public GameObject {
 public:
-	Character(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable);
-	void draw() override;
-	bool player_interact() override;
-
-protected:
 	enum MovementDirection {
 		UP = 1,
 		DOWN = 2,
@@ -22,6 +17,11 @@ protected:
 		RIGHT = 4
 	};
 
+	Character(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable);
+	void draw() override;
+	bool player_interact() override;
+
+protected:
 	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 	static constexpr uint8_t DIRECTION_COUNT = 4;
 

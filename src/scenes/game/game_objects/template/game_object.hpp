@@ -94,7 +94,7 @@ public:
 	/**
 	 * Closes the textbox of the game object
 	 */
-	void close_textbox();
+	virtual void close_textbox();
 
 	/**
 	 * Checks if the object is currently rendered
