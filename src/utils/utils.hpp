@@ -13,7 +13,8 @@ enum StargateAddresses {
 	GRASSLAND = 0,
 	GRASSLAND_ENDGAME = 1,
 	WINTER = 2,
-	COUNTER = 3
+	DESERT = 3,
+	COUNTER = 4,
 };
 
 inline Surface *player_sprites;

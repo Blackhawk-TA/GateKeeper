@@ -137,6 +137,11 @@ void map::load_section(MapSections map_section) {
 			memcpy(tmx, asset_snowland_map, asset_snowland_map_length);
 			background = Pen(223, 246, 245);
 			break;
+		case MapSections::DESERT:
+			tmx = (TMX_16 *) malloc(asset_desert_map_length);
+			memcpy(tmx, asset_desert_map, asset_desert_map_length);
+			background = Pen(244, 204, 161);
+			break;
 	}
 
 	if (tmx != nullptr) {

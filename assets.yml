@@ -31,3 +31,7 @@ assets.cpp:
     name: snowland_map
     empty_tile: 0
     output_struct: true
+  assets/desert.tmx:
+    name: desert_map
+    empty_tile: 0
+    output_struct: true

@@ -21,14 +21,15 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
 
 	//Stargates
-	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, WINTER, true));
+	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true));
 	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false));
 	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(12, 10), WINTER, GRASSLAND, false));
+	game_object_collection.emplace_back(new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false));
 
 	//Signs
 	game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(24, 44), Sign::WOOD, "Trees grow fruits which can be eaten. They regrow after harvesting. Carrots can be planted and harvested."));
 	game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(25, 12), Sign::WOOD, "The Stargate is a portal to other worlds! It was closed to keep the village safe."));
-	game_object_collection.emplace_back(new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to keep the gate closed and protect the world from unknown dangers."));
+	game_object_collection.emplace_back(new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to keep the gate closed and protect the village."));
 
 	//Fruit trees
 	game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(11, 16), true));
