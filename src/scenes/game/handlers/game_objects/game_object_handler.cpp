@@ -21,7 +21,8 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
 
 	//Stargates
-	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND, WINTER, true));
+	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, WINTER, true));
+	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false));
 	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(12, 10), WINTER, GRASSLAND, false));
 
 	//Signs

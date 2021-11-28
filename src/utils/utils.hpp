@@ -11,8 +11,9 @@ constexpr uint8_t TILE_SIZE = 16;
 
 enum StargateAddresses {
 	GRASSLAND = 0,
-	WINTER = 1,
-	COUNTER = 2
+	GRASSLAND_ENDGAME = 1,
+	WINTER = 2,
+	COUNTER = 3
 };
 
 inline Surface *player_sprites;
