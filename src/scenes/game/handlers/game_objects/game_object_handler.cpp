@@ -16,6 +16,7 @@
 
 std::vector<GameObject*> game_object_collection;
 
+//TODO only have items in the game object collection when they are on the same map
 void game_objects::init() {
 	//Gate statues
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));

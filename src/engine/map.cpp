@@ -23,80 +23,31 @@ Pen background;
 map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 	std::vector<map::Tile> tile_data;
 	Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
-	bool first_tile = true;
-	bool last_tile;
-	uint16_t tile_id, x, y, z;
-	uint16_t level_size = tmx->width * tmx->height;
-	uint16_t previous_tile_id = 0; //Set to 0, so it can never be equal to tile_id on first run. Prevents first tile being count as 2
-	uint16_t range = 0;
-	uint8_t previous_tile_x = 0;
-	uint8_t previous_tile_y = 0;
-	bool skipped_empty_tile = false;
+	uint16_t tile_range, tile_id, i;
+	uint8_t tile_x = 0;
+	uint8_t tile_y = 0;
+	uint16_t data_length = tmx->data[0]; //First array entry is the array length
 
-	//TODO get rid of triple for loop, maybe by multiplicating them all
-	for (z = 0u; z < tmx->layers; z++) {
-		for (x = 0u; x < tmx->width; x++) {
-			for (y = 0u; y < tmx->height; y++) {
-				//Extract current tile id from tmx data
-				tile_id = tmx->data[x + y * tmx->width + z * level_size];
+	//Skip first layer because it only contains the array length
+	for (i = 1u; i < data_length; i += 2) {
+		//Extract current tile id from tmx data
+		tile_range = tmx->data[i];
+		tile_id = tmx->data[i + 1];
 
-				//Support single layer maps
-				if (tmx->layers == 1) {
-					last_tile = (tmx->width - 1) * (tmx->height - 1) == x * y;
-				} else {
-					last_tile = (tmx->layers - 1) * (tmx->width - 1) * (tmx->height - 1) == x * y * z;
-				}
-
-				//Check if this is not the last tile. If it is the last, skip all steps and save previous
-				if (!last_tile) {
-					//Do not save empty tiles
-					if (tile_id == tmx->empty_tile) {
-						skipped_empty_tile = true;
-						continue;
-					}
-
-					//For first tile, set previous tile to current one
-					if (first_tile) {
-						previous_tile_id = tile_id;
-						first_tile = false;
-						continue;
-					}
-
-					//Instead of saving each tile count repetitions. Make sure there are no skipped tile in between
-					if (tile_id == previous_tile_id && !skipped_empty_tile) {
-						range++;
-						continue;
-					} else if (previous_tile_x == 0 && previous_tile_y == 0 && range == 0) { //Set first tile position
-						if (x > 0 && y == 0) {
-							previous_tile_x = x - 1;
-							previous_tile_y = y;
-						} else if (y > 0) {
-							previous_tile_x = x;
-							previous_tile_y = y - 1;
-						}
-					}
-				} else if (tile_id == previous_tile_id && !skipped_empty_tile) { //Increment range for last tile
-					range++;
-				}
-
-				//Save first tile in row of equals and its position.
-				tile_data.push_back(Tile{
-					previous_tile_x,
-					previous_tile_y,
-					flags::get_flag(previous_tile_id),
-					range,
-					static_cast<uint16_t>((previous_tile_id % spritesheet_size.w) * TILE_SIZE),
-					static_cast<uint16_t>((previous_tile_id / spritesheet_size.h) * TILE_SIZE),
-				});
-
-				//Reset range information for next tile with a different id
-				range = 0;
-				previous_tile_x = x;
-				previous_tile_y = y;
-				previous_tile_id = tile_id;
-				skipped_empty_tile = false;
-			}
+		if (tile_id != tmx->empty_tile) {
+			//Save first tile in row of equals and its position.
+			tile_data.push_back(Tile{
+				tile_x,
+				tile_y,
+				flags::get_flag(tile_id),
+				tile_range,
+				static_cast<uint16_t>((tile_id % spritesheet_size.w) * TILE_SIZE),
+				static_cast<uint16_t>((tile_id / spritesheet_size.h) * TILE_SIZE),
+			});
 		}
+
+		tile_x = (((tile_y + tile_range + 1) / tmx->height) + tile_x) & (tmx->width - 1);
+		tile_y = (tile_y + tile_range + 1) & (tmx->height - 1);
 	}
 
 	return map::TileMap{
