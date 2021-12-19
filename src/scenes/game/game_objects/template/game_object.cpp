@@ -4,11 +4,12 @@
 #include "game_object.hpp"
 #include "../../../../engine/camera.hpp"
 
-GameObject::GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable) {
+GameObject::GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable, bool draw_under_player) {
 	GameObject::position = position;
 	GameObject::map_section = map_section;
 	GameObject::player_usable = player_usable;
 	GameObject::inventory_usable = inventory_usable;
+	GameObject::draw_under_player = draw_under_player;
 	GameObject::spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	GameObject::textbox = nullptr;
 
@@ -95,4 +96,8 @@ bool GameObject::inventory_interact() {
 bool GameObject::is_rendered() {
 	return map::get_section() == map_section
 		&& sprite_rect_in_screen(position, size, camera::get_world_position());
+}
+
+bool GameObject::is_drawn_under_player() const {
+	return draw_under_player;
 }

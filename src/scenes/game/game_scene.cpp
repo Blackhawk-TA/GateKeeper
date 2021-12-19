@@ -52,9 +52,12 @@ GameScene::~GameScene() {
 
 void GameScene::render(uint32_t time) {
 	map::draw();
-	game_objects::draw();
+
+	game_objects::drawUnderPlayer();
 	player->draw();
-	overlay::draw_statusbar(player->get_health());
+	game_objects::drawOverPlayer();
+
+	overlay::draw_statusbar(Player::get_health());
 
 	if (sidemenu::is_open()) {
 		sidemenu::draw();

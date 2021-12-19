@@ -119,9 +119,17 @@ void game_objects::load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &s
 	}
 }
 
-void game_objects::draw() {
+void game_objects::drawUnderPlayer() {
 	for (auto &game_object : game_object_collection) {
-		if (game_object->is_rendered()) {
+		if (game_object->is_drawn_under_player() && game_object->is_rendered()) {
+			game_object->draw();
+		}
+	}
+}
+
+void game_objects::drawOverPlayer() {
+	for (auto &game_object : game_object_collection) {
+		if (!game_object->is_drawn_under_player() && game_object->is_rendered()) {
 			game_object->draw();
 		}
 	}

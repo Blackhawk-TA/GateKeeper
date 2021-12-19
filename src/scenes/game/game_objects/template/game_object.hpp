@@ -49,7 +49,7 @@ public:
 		DungeonDoorType = 9,
 	};
 
-	explicit GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable);
+	explicit GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable, bool draw_under_player = true);
 	virtual ~GameObject() = default;
 
 	/**
@@ -128,11 +128,18 @@ public:
 	 */
 	virtual ObjectType get_type() = 0;
 
+	/**
+	 * Get if the game object should be drawn under or over the players' sprite
+	 * @return True if the game object should be drawn under the player's sprite
+	 */
+	bool is_drawn_under_player() const;
+
 protected:
 	Point position;
 	map::MapSections map_section;
 	bool player_usable; //Shows if a player can directly interact with it
 	bool inventory_usable; //Shows if a player can interact with it using the inventory
+	bool draw_under_player; //Shows if the game object should be drawn under the player sprite
 	uint32_t value;
 	Signature signature;
 	Size spritesheet_size;

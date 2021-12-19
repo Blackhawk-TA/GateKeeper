@@ -40,9 +40,14 @@ namespace game_objects {
 	void load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &saved_objects);
 
 	/**
-	 * Draws all game objects
+	 * Draws the game objects which should be rendered under the player
 	 */
-	void draw();
+	void drawUnderPlayer();
+
+	/**
+	 * Draws the game objects which should be rendered over the player
+	 */
+	void drawOverPlayer();
 
 	/**
 	 * Updates all game objects
