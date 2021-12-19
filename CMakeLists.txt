@@ -19,6 +19,7 @@ set(PROJECT_SOURCE
         src/scenes/game/handlers/entry_handler.cpp src/scenes/game/handlers/entry_handler.hpp
         src/scenes/game/handlers/game_objects/game_object_handler.cpp src/scenes/game/handlers/game_objects/game_object_handler.hpp
         src/scenes/game/handlers/game_objects/extensions/stargate_handler.cpp src/scenes/game/handlers/game_objects/extensions/stargate_handler.hpp
+        src/scenes/game/handlers/game_objects/extensions/dungeon_door_handler.cpp src/scenes/game/handlers/game_objects/extensions/dungeon_door_handler.hpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
         src/items/inventory/apple.cpp
@@ -37,6 +38,7 @@ set(PROJECT_SOURCE
         src/scenes/game/game_objects/characters/salesman.cpp src/scenes/game/game_objects/characters/salesman.hpp
         src/scenes/game/game_objects/characters/villager.cpp src/scenes/game/game_objects/characters/villager.hpp
         src/scenes/game/game_objects/objects/carrot_bed.cpp src/scenes/game/game_objects/objects/carrot_bed.hpp
+        src/scenes/game/game_objects/objects/dungeon_door.cpp src/scenes/game/game_objects/objects/dungeon_door.hpp
         src/scenes/game/game_objects/objects/fruit_tree.cpp src/scenes/game/game_objects/objects/fruit_tree.hpp
         src/scenes/game/game_objects/objects/lever.cpp src/scenes/game/game_objects/objects/lever.hpp
         src/scenes/game/game_objects/objects/sign.cpp src/scenes/game/game_objects/objects/sign.hpp

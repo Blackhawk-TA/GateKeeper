@@ -4,11 +4,13 @@
 
 #include "lever.hpp"
 #include "../../../../engine/camera.hpp"
+#include "../../handlers/game_objects/extensions/dungeon_door_handler.hpp"
 
-Lever::Lever(map::MapSections map_section, Point position, bool working) : GameObject(map_section, position, true, false) {
+Lever::Lever(map::MapSections map_section, Point position, Signature interaction_object, bool working) : GameObject(map_section, position, true, false) {
 	tile_id = TILE_ID_OFF;
 	size = Size(1, 1);
 	Lever::working = working;
+	Lever::interaction_object = interaction_object;
 	Lever::set_state(OFF);
 }
 
@@ -19,13 +21,18 @@ bool Lever::player_interact() {
 			return true;
 		}
 
+		std::string text;
 		if (working) {
-			textbox = new Textbox("Sounds like a door opened.");
-			//TODO open door
+			if (dungeon_door_handler::open_door(interaction_object)) {
+				text = "Sounds like a door opened.";
+			} else {
+				text = "Nothing happens, but it should have worked...";
+			}
 		} else {
-			textbox = new Textbox("Nothing happens.");
+			text = "Nothing happens.";
 		}
 
+		textbox = new Textbox(text);
 		set_state(ON);
 		return true;
 	}

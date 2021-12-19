@@ -12,6 +12,8 @@
 #include "../../game_objects/characters/salesman.hpp"
 #include "../../game_objects/characters/villager.hpp"
 #include "../../game_objects/objects/lever.hpp"
+#include "../../game_objects/objects/dungeon_door.hpp"
+#include "extensions/dungeon_door_handler.hpp"
 #include <stdexcept>
 #include <cassert>
 
@@ -51,17 +53,27 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, Character::RIGHT, "Hello I'm the elder of this village."));
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, Character::RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."));
 
-	//Dungeon Levers
+	//Settings for grassland dungeon
 	uint8_t enabled_lever = blit::random() % 3;
-	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(37, 36), enabled_lever == 0));
-	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(43, 36), enabled_lever == 1));
-	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(49, 36), enabled_lever == 2));
+	GameObject::Signature interaction_signature = { //The signature of the door that the levers open
+		map::DUNGEON,
+		Point(14, 36)
+	};
+
+	//Dungeon Door
+	game_object_collection.emplace_back(new DungeonDoor(interaction_signature.map_section, interaction_signature.position));
+
+	//Dungeon Levers
+	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(37, 36), interaction_signature, enabled_lever == 0));
+	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(43, 36), interaction_signature, enabled_lever == 1));
+	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(49, 36), interaction_signature, enabled_lever == 2));
 
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());
 
 	//Init additional handlers for subclasses with additional functionality
 	stargate_handler::init();
+	dungeon_door_handler::init();
 }
 
 std::vector<GameObject*> &game_objects::get_collection() {
@@ -77,6 +89,10 @@ void game_objects::cleanup() {
 
 	//Cleanup extension handlers
 	stargate_handler::cleanup();
+}
+
+bool game_objects::has_equal_signature(GameObject::Signature sig1, GameObject::Signature sig2) {
+	return sig1.map_section == sig2.map_section && sig1.position == sig2.position;
 }
 
 std::array<GameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get_saves() {
@@ -96,8 +112,7 @@ void game_objects::load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &s
 		for (auto &game_object : game_object_collection) {
 			signature = game_object->get_signature();
 
-			if (signature.map_section == saved_object.signature.map_section
-			&& signature.position == saved_object.signature.position) {
+			if (has_equal_signature(signature, saved_object.signature)) {
 				game_object->load_save(saved_object.data);
 			}
 		}

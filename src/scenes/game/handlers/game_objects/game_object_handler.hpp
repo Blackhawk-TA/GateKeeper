@@ -10,7 +10,7 @@ namespace game_objects {
 	/**
 	 * The amount of game objects on the map
 	 */
-	constexpr uint16_t GAME_OBJECT_COUNT = 23;
+	constexpr uint16_t GAME_OBJECT_COUNT = 24;
 
 	/**
 	 * Creates the objects using their factory function
@@ -84,4 +84,12 @@ namespace game_objects {
 	 * @param next_position The next position of the player
 	 */
 	void update_states(Point next_position);
+
+	/**
+	 * Compares the signatures of two game object and checks if they are equal
+	 * @param sig1 The signature of the first game object
+	 * @param sig2 The signature of the second game object
+	 * @return True if the signatures are equal, else false
+	 */
+	bool has_equal_signature(GameObject::Signature sig1, GameObject::Signature sig2);
 }
