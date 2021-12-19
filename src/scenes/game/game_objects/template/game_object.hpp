@@ -44,7 +44,8 @@ public:
 		FruitTreeType = 4,
 		CarrotBedType = 5,
 		SalesmanType = 6,
-		VillagerType = 7
+		VillagerType = 7,
+		LeverType = 8
 	};
 
 	explicit GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable);

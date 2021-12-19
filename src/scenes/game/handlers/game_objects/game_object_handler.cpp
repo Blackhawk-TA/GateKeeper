@@ -11,6 +11,7 @@
 #include "../../game_objects/objects/carrot_bed.hpp"
 #include "../../game_objects/characters/salesman.hpp"
 #include "../../game_objects/characters/villager.hpp"
+#include "../../game_objects/objects/lever.hpp"
 #include <stdexcept>
 #include <cassert>
 
@@ -49,6 +50,12 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24, 15), 0, Character::LEFT, "Hello there!"));
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, Character::RIGHT, "Hello I'm the elder of this village."));
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, Character::RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."));
+
+	//Dungeon Levers
+	uint8_t enabled_lever = blit::random() % 3;
+	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(37, 36), enabled_lever == 0));
+	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(43, 36), enabled_lever == 1));
+	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(49, 36), enabled_lever == 2));
 
 	//Check if GAME_OBJECT_COUNT is set correctly
 	assert(GAME_OBJECT_COUNT == game_object_collection.size());
