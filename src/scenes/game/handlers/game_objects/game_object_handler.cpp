@@ -191,13 +191,13 @@ bool game_objects::player_interact() {
 	return interacted;
 }
 
-bool game_objects::inventory_interact() {
+bool game_objects::inventory_interact(listbox_item::INVENTORY_ITEM item_type) {
 	bool interacted = false;
 	uint16_t i = 0;
 
 	while (!interacted && i < game_object_collection.size()) {
 		if (game_object_collection.at(i)->is_rendered()) {
-			interacted = game_object_collection.at(i)->inventory_interact();
+			interacted = game_object_collection.at(i)->inventory_interact(item_type);
 		}
 		i++;
 	}

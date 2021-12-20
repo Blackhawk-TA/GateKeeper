@@ -42,7 +42,7 @@ public:
 	bool check_collision(Point next_position) override;
 	void draw() override;
 	void update(uint32_t time) override;
-	bool inventory_interact() override;
+	bool inventory_interact(listbox_item::INVENTORY_ITEM item_type) override;
 	void update_state(Point next_position) override;
 	ObjectType get_type() override;
 

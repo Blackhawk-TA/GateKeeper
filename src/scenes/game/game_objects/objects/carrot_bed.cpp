@@ -44,8 +44,8 @@ bool CarrotBed::player_interact() {
 	}
 }
 
-bool CarrotBed::inventory_interact() {
-	if (inventory_usable && in_use_range()) {
+bool CarrotBed::inventory_interact(listbox_item::INVENTORY_ITEM item_type) {
+	if (inventory_usable && item_type == listbox_item::CARROT_SEED && in_use_range()) {
 		value = game_time::get_time() + GROW_STAGE_1_TIME + GROW_STAGE_2_TIME;
 		set_inventory_usable(false);
 		return true;

@@ -106,10 +106,11 @@ void Stargate::set_state(uint8_t new_state) {
 
 /**
  * Repairs a broken stargate
+ * @param item_type The listbox_item enum value of the item
  * @return True, if stargate could be repaired, else false
  */
-bool Stargate::inventory_interact() {
-	if (inventory_usable && get_entry_point() == camera::get_player_position()) {
+bool Stargate::inventory_interact(listbox_item::INVENTORY_ITEM item_type) {
+	if (inventory_usable && item_type == listbox_item::GATE_PART && get_entry_point() == camera::get_player_position()) {
 		inventory_usable = false;
 		set_state(ACTIVATING);
 		return true;

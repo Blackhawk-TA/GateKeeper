@@ -89,7 +89,7 @@ bool GameObject::player_interact() {
 	return false;
 }
 
-bool GameObject::inventory_interact() {
+bool GameObject::inventory_interact(listbox_item::INVENTORY_ITEM item_type) {
 	return false;
 }
 

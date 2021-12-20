@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_carrot_seed(uint8_t type_id) {
 		true,
 		1,
 		[] {
-			if (game_objects::inventory_interact()) {
+			if (game_objects::inventory_interact(listbox_item::CARROT_SEED)) {
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

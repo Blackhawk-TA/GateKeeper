@@ -6,6 +6,7 @@
 #include "../../../../utils/utils.hpp"
 #include "../../../../engine/map.hpp"
 #include "../../../../engine/ui/textbox.hpp"
+#include "../../../../items/items.hpp"
 
 class GameObject {
 public:
@@ -112,9 +113,10 @@ public:
 
 	/**
 	 * Called when the player interacts with a game object using the inventory
+	 * @param item_type The listbox_item enum value of the item
 	 * @return True, if interaction successful, else false
 	 */
-	virtual bool inventory_interact();
+	virtual bool inventory_interact(listbox_item::INVENTORY_ITEM item_type);
 
 	/**
 	 * Updates the state of the object when a player moves closer to it

@@ -5,6 +5,7 @@
 #pragma once
 #include "../../game_objects/template/game_object.hpp"
 #include "../../../../engine/map.hpp"
+#include "../../../../items/items.hpp"
 
 namespace game_objects {
 	/**
@@ -80,9 +81,10 @@ namespace game_objects {
 
 	/**
 	 * Checks if there was a player interaction with a game object using the inventory and triggers interaction
+	 * @param item_type The listbox_item enum value of the item
 	 * @return True, if interaction successful, else false
 	 */
-	bool inventory_interact();
+	bool inventory_interact(listbox_item::INVENTORY_ITEM item_type);
 
 	/**
 	 * Updates the states of the objects when a player moves closer to it
