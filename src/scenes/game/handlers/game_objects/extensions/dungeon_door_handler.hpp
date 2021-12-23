@@ -7,6 +7,7 @@
 
 namespace dungeon_door_handler {
 	void init();
+	void cleanup();
 
 	/**
 	 * Opens the door with the corresponding signature

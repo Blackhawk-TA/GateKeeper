@@ -18,10 +18,10 @@ public:
 	};
 
 	Character(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable);
+	virtual void animate();
 	void draw() override;
 	bool player_interact() override;
 	GameObject::ObjectType get_type() override;
-	void animate();
 
 protected:
 	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;

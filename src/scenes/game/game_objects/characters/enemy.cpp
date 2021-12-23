@@ -2,7 +2,6 @@
 // Created by daniel on 24.11.21.
 //
 
-#include <iostream>
 #include "enemy.hpp"
 #include "../../../../engine/camera.hpp"
 #include "../../player.hpp"
@@ -79,6 +78,9 @@ bool Enemy::player_in_sightline() {
 		|| (current_direction == DOWN && position.x == player_position.x && position.y < player_position.y)
 		|| (current_direction == LEFT && position.y == player_position.y && position.x > player_position.x)
 		|| (current_direction == RIGHT && position.y == player_position.y && position.x < player_position.x);
+}
+
+void Enemy::animate() {
 }
 
 void Enemy::set_state(uint8_t new_state) {}

@@ -17,6 +17,10 @@ void dungeon_door_handler::init() {
 	}
 }
 
+void dungeon_door_handler::cleanup() {
+	doors.clear();
+}
+
 bool dungeon_door_handler::open_door(GameObject::Signature signature) {
 	bool is_open = false;
 	uint16_t i = 0;

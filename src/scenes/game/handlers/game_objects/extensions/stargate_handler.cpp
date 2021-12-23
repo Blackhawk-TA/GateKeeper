@@ -18,7 +18,7 @@ void stargate_handler::init() {
 }
 
 void stargate_handler::cleanup() {
-	//Points don't have to be deleted here since this is done in game_objects cleanup
+	//Pointers don't have to be deleted here since this is done in game_objects cleanup
 	stargates.clear();
 }
 

@@ -6,5 +6,7 @@
 #include "../../../game_objects/characters/template/character.hpp"
 
 namespace character_handler {
-
+	void init();
+	void cleanup();
+	void animate(Timer &timer);
 }

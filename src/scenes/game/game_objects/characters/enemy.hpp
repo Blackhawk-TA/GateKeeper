@@ -26,4 +26,5 @@ public:
 	~Enemy() override = default;
 	void update(uint32_t time) override;
 	void update_state(Point next_position) override;
+	void animate() override;
 };

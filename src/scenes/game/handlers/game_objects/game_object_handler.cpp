@@ -15,6 +15,7 @@
 #include "../../game_objects/objects/dungeon_door.hpp"
 #include "extensions/dungeon_door_handler.hpp"
 #include "../../game_objects/characters/enemy.hpp"
+#include "extensions/character_handler.hpp"
 #include <stdexcept>
 #include <cassert>
 
@@ -78,6 +79,7 @@ void game_objects::init() {
 	//Init additional handlers for subclasses with additional functionality
 	stargate_handler::init();
 	dungeon_door_handler::init();
+	character_handler::init();
 }
 
 std::vector<GameObject*> &game_objects::get_collection() {
@@ -93,6 +95,8 @@ void game_objects::cleanup() {
 
 	//Cleanup extension handlers
 	stargate_handler::cleanup();
+	dungeon_door_handler::cleanup();
+	character_handler::cleanup();
 }
 
 bool game_objects::has_equal_signature(GameObject::Signature sig1, GameObject::Signature sig2) {
