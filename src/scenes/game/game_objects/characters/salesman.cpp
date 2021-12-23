@@ -15,10 +15,6 @@ Salesman::Salesman(map::MapSections map_section, Point position) : Character(map
 	};
 }
 
-GameObject::ObjectType Salesman::get_type() {
-	return SalesmanType;
-}
-
 bool Salesman::player_interact() {
 	if (player_usable && camera::get_player_position() == position + Point(0, size.h + BAR_HEIGHT)) {
 		textbox = new Textbox("Hello! Normally I would sell you carrot seeds but they are all gone.");

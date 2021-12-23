@@ -12,6 +12,7 @@
 
 bool Player::attacking = false;
 bool Player::evading = false;
+bool Player::cut_scene = false;
 Player::MovementDirection Player::current_direction;
 Vec2 Player::evasion_position_modifier;
 float Player::evasion_modifier = 0;
@@ -44,8 +45,8 @@ Player::Player(MovementDirection direction, uint8_t player_health) {
 	action_timer.init(animate_action, 75, ANIMATION_SPRITE_COUNT + 1);
 }
 
-bool Player::in_action() const {
-	return camera::is_moving() || evading || attacking || dead || transition::in_progress();
+bool Player::in_action() {
+	return camera::is_moving() || evading || attacking || dead || cut_scene || transition::in_progress();
 }
 
 void Player::animate(Timer &timer) {
@@ -253,4 +254,8 @@ bool Player::is_dead() {
 
 uint8_t Player::get_health() {
 	return health;
+}
+
+void Player::set_cut_scene(bool value) {
+	cut_scene = value;
 }

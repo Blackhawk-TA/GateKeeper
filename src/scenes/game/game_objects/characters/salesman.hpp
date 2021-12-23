@@ -17,6 +17,5 @@ public:
 	~Salesman() override = default;
 	void update(uint32_t time) override;
 	void update_state(Point next_position) override;
-	ObjectType get_type() override;
 	bool player_interact() override;
 };

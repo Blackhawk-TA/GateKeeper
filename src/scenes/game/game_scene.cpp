@@ -6,7 +6,6 @@
 #include "../../game.hpp"
 #include "../../engine/effects/transition.hpp"
 #include "../../engine/flags.hpp"
-#include "../../items/items.hpp"
 #include "../../utils/saves/savegame.hpp"
 #include "ui/sidemenu.hpp"
 #include "ui/inventory.hpp"
@@ -40,8 +39,8 @@ GameScene::~GameScene() {
 	}
 
 	//Auto save
-	if (!player->is_dead()) {
-		savegame::save(save_id);
+	if (!Player::is_dead()) {
+		savegame::save(save_id); //TODO do not save when going to combat scene
 	}
 	delete player;
 

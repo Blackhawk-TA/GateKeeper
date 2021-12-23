@@ -58,3 +58,9 @@ void Character::change_direction(MovementDirection direction, bool animate) {
 		tile_id = animate ? animation_sprites[1] : animation_sprites[0]; //Set sprite manually to avoid timer delay on player turn
 	}
 }
+
+GameObject::ObjectType Character::get_type() {
+	return GameObject::CharacterType;
+}
+
+void Character::animate() {}

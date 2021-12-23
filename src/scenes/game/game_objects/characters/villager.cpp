@@ -12,7 +12,7 @@ Villager::Villager(map::MapSections map_section, Point position, uint16_t tile_i
 	last_turn = blit::now();
 	animation_delay = ANIMATION_BASE_DELAY;
 	movement_sprites = {
-		{UP,{
+		{UP, {
 			static_cast<uint16_t>(tile_id + 48),
 			static_cast<uint16_t>(tile_id + 49),
 			static_cast<uint16_t>(tile_id + 50),
@@ -48,10 +48,6 @@ bool Villager::player_interact() {
 	}
 
 	return false;
-}
-
-GameObject::ObjectType Villager::get_type() {
-	return GameObject::VillagerType;
 }
 
 void Villager::update(uint32_t time) {

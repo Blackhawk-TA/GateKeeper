@@ -29,6 +29,7 @@ public:
 	static void heal(uint8_t heal_amount);
 	static MovementDirection get_direction();
 	static void change_direction(MovementDirection direction, bool animate = true);
+	static void set_cut_scene(bool value);
 
 private:
 	const std::map<MovementDirection, Point> movements{
@@ -53,6 +54,7 @@ private:
 	static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
 	static bool attacking;
 	static bool evading;
+	static bool cut_scene;
 	static MovementDirection current_direction;
 	static Vec2 evasion_position_modifier;
 	static float evasion_modifier;
@@ -70,6 +72,6 @@ private:
 	static void animate(Timer &timer);
 	static void animate_action(Timer &timer);
 	static void gate_teleport(Stargate *destination_gate);
-	bool in_action() const;
+	static bool in_action();
 	void stop_animation();
 };

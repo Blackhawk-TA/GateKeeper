@@ -14,6 +14,7 @@
 #include "../../game_objects/objects/lever.hpp"
 #include "../../game_objects/objects/dungeon_door.hpp"
 #include "extensions/dungeon_door_handler.hpp"
+#include "../../game_objects/characters/enemy.hpp"
 #include <stdexcept>
 #include <cassert>
 
@@ -52,6 +53,9 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24, 15), 0, Character::LEFT, "Hello there!"));
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, Character::RIGHT, "Hello I'm the elder of this village."));
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, Character::RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."));
+
+	//TODO remove, it's just for testing
+	game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 4, Character::DOWN, false));
 
 	//Settings for grassland dungeon
 	uint8_t enabled_lever = blit::random() % 3;

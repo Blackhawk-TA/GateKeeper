@@ -44,10 +44,9 @@ public:
 		SignType = 3,
 		FruitTreeType = 4,
 		CarrotBedType = 5,
-		SalesmanType = 6,
-		VillagerType = 7,
-		LeverType = 8,
-		DungeonDoorType = 9,
+		CharacterType = 6,
+		LeverType = 7,
+		DungeonDoorType = 8,
 	};
 
 	explicit GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable, bool draw_under_player = true);
