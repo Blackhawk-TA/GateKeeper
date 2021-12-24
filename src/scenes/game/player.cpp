@@ -30,16 +30,24 @@ const std::map<Player::MovementDirection, std::array<uint16_t, Player::ANIMATION
 
 Player::Player(MovementDirection direction, uint8_t player_health) {
 	Player::health = player_health;
-	dead = false;
 	position = get_screen_tiles() / 2;
 	spritesheet_size = get_spritesheet_size(player_sprites->bounds);
 	attack_spritesheet_size = get_spritesheet_size(player_attack_sprites->bounds);
 	elevation_offset = 0;
 
+	//Set static vars in case of re-initialisation
+	attacking = false;
+	evading = false;
+	cut_scene = false;
+	dead = false;
+	evasion_modifier = 0;
+	evasion_position_modifier = Vec2(0, 0);
+
 	//Set player animation tiles
 	current_direction = direction;
 	animation_sprites = movement_sprites.at(current_direction);
 	sprite_id = animation_sprites[0];
+	sprite_index = 0;
 
 	animation_timer.init(animate, 175, -1);
 	action_timer.init(animate_action, 75, ANIMATION_SPRITE_COUNT + 1);
@@ -256,8 +264,8 @@ uint8_t Player::get_health() {
 	return health;
 }
 
-void Player::set_cut_scene(bool value) {
-	cut_scene = value;
+void Player::start_cut_scene() {
+	cut_scene = true;
 }
 
 bool Player::in_cut_scene() {

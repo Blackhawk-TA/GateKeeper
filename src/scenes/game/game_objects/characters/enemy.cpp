@@ -3,16 +3,13 @@
 //
 
 #include "enemy.hpp"
-#include "../../../../engine/camera.hpp"
 #include "../../player.hpp"
 #include "../../../../game.hpp"
+#include "../../../../engine/effects/transition.hpp"
 
 Enemy::Enemy(map::MapSections map_section, Point position, uint16_t tile_id, MovementDirection direction, bool turn)
 	: Character(map_section, position, true, false) {
 	Enemy::tile_id = tile_id;
-	Enemy::turn = turn;
-	last_turn = blit::now();
-	animation_delay = ANIMATION_BASE_DELAY;
 	movement_sprites = {
 		{UP, {
 			static_cast<uint16_t>(tile_id + 48),
@@ -44,20 +41,13 @@ Enemy::Enemy(map::MapSections map_section, Point position, uint16_t tile_id, Mov
 }
 
 void Enemy::update(uint32_t time) {
-	//Handle random turning of enemy
-	if (turn && time > animation_delay && last_turn < time - animation_delay) {
-		uint8_t next_direction = blit::random() % DIRECTION_COUNT + 1;
-		change_direction(static_cast<MovementDirection>(next_direction), false);
-
-		last_turn = time;
-		animation_delay = ANIMATION_BASE_DELAY + blit::random() % ANIMATION_VARIANCE;
-	}
+	Character::update(time);
 
 	//Trigger enemy to attack player
-	if (!in_action && player_in_sightline()) {
+	if (!in_action && !transition::in_progress() && player_in_sightline()) {
 		in_action = true;
 		is_moving = true;
-		Player::set_cut_scene(true);
+		Player::start_cut_scene();
 	}
 
 	if (is_moving) {
@@ -65,39 +55,24 @@ void Enemy::update(uint32_t time) {
 	}
 }
 
-void Enemy::walk_to_player() {
-	Point player_position = camera::get_player_position();
-
-	if (current_direction == UP && position.y - 1 > player_position.y) {
-		screen_position.y -= 1;
-	} else if (current_direction == DOWN && position.y + 1 < player_position.y) {
-		screen_position.y += 1;
-	} else if (current_direction == LEFT && position.x - 1 > player_position.x) {
-		screen_position.x -= 1;
-	} else if (current_direction == RIGHT && position.x + 1 < player_position.x) {
-		screen_position.x += 1;
-	} else {
-		//Enemy is standing in front of player and starts combat
-		is_moving = false;
-		tile_id = animation_sprites[0];
-		load_scene(Scene::MENU); //TODO load combat scene
+void Enemy::trigger_cut_scene() {
+	switch(current_direction) {
+		case NO_DIRECTION:
+			break;
+		case UP:
+			Player::change_direction(Player::MovementDirection::DOWN, false);
+			break;
+		case DOWN:
+			Player::change_direction(Player::MovementDirection::UP, false);
+			break;
+		case LEFT:
+			Player::change_direction(Player::MovementDirection::RIGHT, false);
+			break;
+		case RIGHT:
+			Player::change_direction(Player::MovementDirection::LEFT, false);
+			break;
 	}
-
-	position = screen_to_world(screen_position);
-}
-
-bool Enemy::player_in_sightline() {
-	Point player_position = camera::get_player_position();
-	return (current_direction == UP && position.x == player_position.x && position.y > player_position.y)
-		|| (current_direction == DOWN && position.x == player_position.x && position.y < player_position.y)
-		|| (current_direction == LEFT && position.y == player_position.y && position.x > player_position.x)
-		|| (current_direction == RIGHT && position.y == player_position.y && position.x < player_position.x);
-}
-
-void Enemy::animate() {
-	if (is_moving) {
-		tile_id = animation_sprites[++tile_index % ANIMATION_SPRITE_COUNT];
-	}
+	load_scene(Scene::MENU);
 }
 
 void Enemy::set_state(uint8_t new_state) {}

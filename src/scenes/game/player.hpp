@@ -9,9 +9,10 @@
 
 using namespace blit;
 
+//TODO rewrite so it is similar to character
 class Player {
 public:
-	enum MovementDirection {
+	enum MovementDirection { //TODO player and character can use the same MovementDirection
 		UP = 1,
 		DOWN = 2,
 		LEFT = 3,
@@ -29,7 +30,7 @@ public:
 	static void heal(uint8_t heal_amount);
 	static MovementDirection get_direction();
 	static void change_direction(MovementDirection direction, bool animate = true);
-	static void set_cut_scene(bool value);
+	static void start_cut_scene();
 	static bool in_cut_scene();
 
 private:
