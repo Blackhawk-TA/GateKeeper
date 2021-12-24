@@ -7,6 +7,8 @@
 Character::Character(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable)
 	: GameObject(map_section, position, player_usable, inventory_usable) {
 	Character::size = Size(1, 1);
+	Character::position = position;
+	Character::screen_position = world_to_screen(position);
 	Character::spritesheet_size = get_spritesheet_size(player_sprites->bounds);
 }
 
@@ -19,7 +21,7 @@ void Character::draw() {
 			size.w * TILE_SIZE,
 			size.h * TILE_SIZE
 		),
-		world_to_screen(position) - camera::get_screen_position(),
+		screen_position - camera::get_screen_position(),
 		SpriteTransform::NONE
 	);
 

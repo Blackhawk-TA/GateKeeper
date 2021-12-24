@@ -27,6 +27,7 @@ protected:
 	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 	static constexpr uint8_t DIRECTION_COUNT = 4;
 
+	Point screen_position;
 	std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
 	MovementDirection current_direction;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;

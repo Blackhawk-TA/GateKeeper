@@ -30,6 +30,7 @@ public:
 	static MovementDirection get_direction();
 	static void change_direction(MovementDirection direction, bool animate = true);
 	static void set_cut_scene(bool value);
+	static bool in_cut_scene();
 
 private:
 	const std::map<MovementDirection, Point> movements{

@@ -259,3 +259,7 @@ uint8_t Player::get_health() {
 void Player::set_cut_scene(bool value) {
 	cut_scene = value;
 }
+
+bool Player::in_cut_scene() {
+	return cut_scene;
+}
