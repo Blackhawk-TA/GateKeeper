@@ -71,7 +71,7 @@ void GameScene::update(uint32_t time) {
 	game_time::update(time);
 
 	//Handle player death
-	if (player->is_dead() && !transition::in_progress()) {
+	if (Player::is_dead() && !transition::in_progress()) {
 		load_scene(Scene::MENU);
 	}
 

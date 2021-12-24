@@ -7,8 +7,6 @@
 
 class Villager : public Character {
 private:
-	static const uint16_t ANIMATION_BASE_DELAY = 2500;
-	static const uint16_t ANIMATION_VARIANCE = 2000;
 	uint32_t last_turn;
 	uint32_t animation_delay;
 	std::string message;

@@ -10,6 +10,9 @@ Character::Character(map::MapSections map_section, Point position, bool player_u
 	Character::position = position;
 	Character::screen_position = world_to_screen(position);
 	Character::spritesheet_size = get_spritesheet_size(player_sprites->bounds);
+	Character::tile_index = 0;
+	Character::in_action = false;
+	Character::is_moving = false;
 }
 
 void Character::draw() {

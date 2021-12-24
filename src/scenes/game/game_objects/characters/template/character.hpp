@@ -26,7 +26,12 @@ public:
 protected:
 	static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 	static constexpr uint8_t DIRECTION_COUNT = 4;
+	static constexpr uint16_t ANIMATION_BASE_DELAY = 2500;
+	static constexpr uint16_t ANIMATION_VARIANCE = 2000;
 
+	bool in_action;
+	bool is_moving;
+	uint8_t tile_index;
 	Point screen_position;
 	std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
 	MovementDirection current_direction;
