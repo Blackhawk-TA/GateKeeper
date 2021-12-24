@@ -6,7 +6,6 @@
 #include <utility>
 
 Villager::Villager(map::MapSections map_section, Point position, uint16_t tile_id, MovementDirection direction, std::string message) : Character(map_section, position, true, false) {
-	Character::current_direction = direction;
 	Villager::message = std::move(message);
 	Villager::tile_id = tile_id;
 	last_turn = blit::now();
@@ -37,6 +36,8 @@ Villager::Villager(map::MapSections map_section, Point position, uint16_t tile_i
 			static_cast<uint16_t>(tile_id + 35)
 		}},
 	};
+
+	change_direction(direction, false);
 }
 
 bool Villager::player_interact() {
