@@ -10,3 +10,6 @@ cmake-build-debug/
 assets/characters.png
 assets/player_attack.png
 assets/spritesheet.png
+
+# Secrets
+.env

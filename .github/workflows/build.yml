@@ -104,21 +104,21 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update && sudo apt install ${{matrix.apt-packages}}
-          pip3 install 32blit
+          pip3 install 32blit python-dotenv cryptography
 
       # MacOS dependencies
       - name: Install macOS deps
         if: runner.os == 'macOS'
         run: |
           brew install ${{matrix.brew-packages}}
-          python3 -m pip install 32blit
+          python3 -m pip install 32blit python-dotenv cryptography
 
       # Windows dependencies
       - name: Install Windows deps
         if: runner.os == 'Windows'
         shell: bash
         run: |
-          python -m pip install 32blit
+          python -m pip install 32blit python-dotenv cryptography
 
       # Emscripten SDK setup
       - name: Setup Emscripten cache
@@ -139,6 +139,16 @@ jobs:
       - name: Pre-build Emscripten ports
         if: matrix.name == 'Emscripten'
         run: embuilder.py build sdl2 sdl2-image-jpg sdl2-net
+
+      # Decrypts uploaded assets
+      - name: Decrypt Assets
+        env:
+          ASSET_KEY: ${{ secrets.ASSET_KEY }}
+        run: |
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/characters_encrypted.png -o main/assets/characters.png --key=ASSET_KEY
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/player_attack_encrypted.png -o main/assets/player_attack.png --key=ASSET_KEY
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/spritesheet_encrypted.png -o main/assets/spritesheet.png --key=ASSET_KEY
+
 
       # Set up the cmake build environment
       - name: Create Build Environment
