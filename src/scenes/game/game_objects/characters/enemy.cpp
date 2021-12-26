@@ -72,6 +72,8 @@ void Enemy::trigger_cut_scene() {
 			Player::change_direction(Player::MovementDirection::LEFT, false);
 			break;
 	}
+
+	//TODO might require temp save so returning after fight is not broken
 	load_scene(Scene::COMBAT, 0, map_section);
 }
 
