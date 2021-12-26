@@ -19,6 +19,7 @@ set(PROJECT_SOURCE
         src/scenes/combat/characters/template/character.cpp src/scenes/combat/characters/template/character.hpp
         src/scenes/combat/characters/enemy.cpp src/scenes/combat/characters/enemy.hpp
         src/scenes/combat/characters/player.cpp src/scenes/combat/characters/player.hpp
+        src/scenes/combat/ui/combat_menu.cpp src/scenes/combat/ui/combat_menu.hpp
         src/scenes/game/handlers/game_objects/extensions/character_handler.cpp src/scenes/game/handlers/game_objects/extensions/character_handler.hpp
         src/scenes/game/handlers/entry_handler.cpp src/scenes/game/handlers/entry_handler.hpp
         src/scenes/game/handlers/game_objects/game_object_handler.cpp src/scenes/game/handlers/game_objects/game_object_handler.hpp

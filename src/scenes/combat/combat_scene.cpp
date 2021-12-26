@@ -5,17 +5,21 @@
 #include <iostream>
 #include "combat_scene.hpp"
 #include "../../engine/camera.hpp"
+#include "ui/combat_menu.hpp"
 
 //TODO use TMP_SAVE_ID when returning to game_scene
 CombatScene::CombatScene(map::MapSections map_section) {
 	CombatScene::map_section = map_section;
 	load_combat_scene();
+
+	combat_menu::open();
 }
 
 CombatScene::~CombatScene() = default;
 
 void CombatScene::render(uint32_t time) {
 	map::draw();
+	combat_menu::draw();
 }
 
 void CombatScene::update(uint32_t time) {
