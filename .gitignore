@@ -5,3 +5,8 @@ build.*/
 # IDE
 .idea/
 cmake-build-debug/
+
+# Assets
+assets/characters.png
+assets/player_attack.png
+assets/spritesheet.png
