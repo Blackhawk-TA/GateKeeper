@@ -68,7 +68,7 @@ Player *savegame::create(uint8_t save_id) {
 
 void savegame::save(uint8_t save_id) {
 	//Check if current save is a new save game and therefore update save_count
-	if (options::save_count < save_id) {
+	if (save_id != TMP_SAVE_ID && options::save_count < save_id) {
 		options::save_count = save_id;
 		options::save();
 	}

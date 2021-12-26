@@ -14,7 +14,7 @@ void combat_menu::open() {
 	control = new Listbox(Rect(16, 0, 4, 7), items);
 }
 
-void combat_menu::close() {
+void combat_menu::close() { //TODO close menu when attack is selected
 	delete control;
 	control = nullptr;
 }
