@@ -39,8 +39,13 @@ GameScene::~GameScene() {
 	}
 
 	//Auto save
-	if (!Player::is_dead() && !Player::in_cut_scene()) {
-		savegame::save(save_id); //TODO do not save when going to combat scene
+	if (!Player::is_dead())  {
+		if (Player::in_cut_scene()) {
+			//When changing scene on cut scene create temporary save
+			savegame::save(TMP_SAVE_ID);
+		} else {
+			savegame::save(save_id);
+		}
 	}
 	delete player;
 

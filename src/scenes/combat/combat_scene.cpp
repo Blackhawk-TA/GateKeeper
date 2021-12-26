@@ -6,6 +6,7 @@
 #include "combat_scene.hpp"
 #include "../../engine/camera.hpp"
 
+//TODO use TMP_SAVE_ID when returning to game_scene
 CombatScene::CombatScene(map::MapSections map_section) {
 	CombatScene::map_section = map_section;
 	load_combat_scene();

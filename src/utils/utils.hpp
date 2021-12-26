@@ -8,6 +8,7 @@
 using namespace blit;
 
 constexpr uint8_t TILE_SIZE = 16;
+constexpr uint8_t TMP_SAVE_ID = 4;
 
 enum StargateAddresses {
 	GRASSLAND = 0,
