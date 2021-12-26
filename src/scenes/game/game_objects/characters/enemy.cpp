@@ -72,7 +72,7 @@ void Enemy::trigger_cut_scene() {
 			Player::change_direction(Player::MovementDirection::LEFT, false);
 			break;
 	}
-	load_scene(Scene::MENU);
+	load_scene(Scene::COMBAT, 0, map_section);
 }
 
 void Enemy::set_state(uint8_t new_state) {}

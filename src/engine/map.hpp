@@ -11,11 +11,13 @@ using namespace blit;
 
 namespace map {
 	enum MapSections {
+		NO_MAP = 0,
 		DUNGEON = 1,
 		GRASSLAND = 2,
 		INTERIOR = 3,
 		SNOWLAND = 4,
 		DESERT = 5,
+		DUNGEON_COMBAT = 6,
 	};
 
 	//Stores information of a tile and how often it appears in repetition

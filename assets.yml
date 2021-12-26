@@ -23,6 +23,10 @@ assets.cpp:
     name: dungeon_map
     empty_tile: 0
     output_struct: true
+  assets/dungeon_combat.tmx:
+    name: dungeon_combat_map
+    empty_tile: 0
+    output_struct: true
   assets/interior.tmx:
     name: interior_map
     empty_tile: 0

@@ -12,6 +12,7 @@ set(PROJECT_SOURCE
         src/engine/effects/transition.cpp src/engine/effects/transition.hpp
         src/game.cpp src/game.hpp
         src/scenes/scene_interface.hpp
+        src/scenes/combat/combat_scene.cpp src/scenes/combat/combat_scene.hpp
         src/scenes/game/game_scene.cpp src/scenes/game/game_scene.hpp
         src/scenes/menu/menu_scene.cpp src/scenes/menu/menu_scene.hpp
         src/scenes/options/options_scene.cpp src/scenes/options/options_scene.hpp

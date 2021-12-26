@@ -6,6 +6,7 @@
 #include "utils/saves/options.hpp"
 #include "engine/effects/transition.hpp"
 #include "scenes/game/ui/overlay.hpp"
+#include "scenes/combat/combat_scene.hpp"
 
 using namespace blit;
 
@@ -38,11 +39,11 @@ void load_previous_scene(uint8_t save_id) {
 
 //TODO either implement own gameover screen or fix invalid read.
 // without transition, there are invalid reads and writes. Transitions somehow fix it
-void load_scene(Scene scene_type, uint8_t save_id) {
+void load_scene(Scene scene_type, uint8_t save_id, map::MapSections map_section) {
 	previous_scene = current_scene;
 	current_scene = scene_type;
 
-	transition::start([scene_type, save_id] {
+	transition::start([scene_type, save_id, map_section] {
 		delete scene;
 
 		switch (scene_type) {
@@ -54,6 +55,9 @@ void load_scene(Scene scene_type, uint8_t save_id) {
 				break;
 			case Scene::OPTIONS:
 				scene = new OptionsScene(save_id);
+				break;
+			case Scene::COMBAT:
+				scene = new CombatScene(map_section);
 				break;
 		}
 	});

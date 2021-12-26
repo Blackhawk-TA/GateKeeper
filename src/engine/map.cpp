@@ -3,6 +3,7 @@
 //
 
 #include <cstring>
+#include <iostream>
 #include "assets.hpp"
 #include "map.hpp"
 #include "flags.hpp"
@@ -93,6 +94,14 @@ void map::load_section(MapSections map_section) {
 			memcpy(tmx, asset_desert_map, asset_desert_map_length);
 			background = Pen(244, 204, 161);
 			break;
+		case MapSections::DUNGEON_COMBAT:
+			tmx = (TMX_16 *) malloc(asset_dungeon_combat_map_length);
+			memcpy(tmx, asset_dungeon_combat_map, asset_dungeon_combat_map_length);
+			background = Pen(60, 89, 86);
+			break;
+		default:
+			std::cerr << "Invalid map section" << std::endl;
+			exit(1);
 	}
 
 	if (tmx != nullptr) {
