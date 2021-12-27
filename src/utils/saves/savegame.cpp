@@ -79,6 +79,7 @@ void savegame::save(uint8_t save_id) {
 
 	//Save and compress data which will be saved
 	//TODO destroys existing saves if a new entry is added like a game_object => every update destroys savegames
+	// Inconsistent array lengths cause this problem, if the length of an array changes, the old change gets overwritten
 	auto game_data = GameData{
 		map::get_section(),
 		camera::get_player_position(),
