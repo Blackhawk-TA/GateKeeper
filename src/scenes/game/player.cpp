@@ -22,10 +22,10 @@ uint8_t Player::health = 100;
 bool Player::dead = false;
 std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 const std::map<Player::MovementDirection, std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
-	{UP,    {118, 119, 120, 121}},
-	{DOWN,  {70,  71,  72,  73}},
-	{LEFT,  {102, 103, 104, 105}},
-	{RIGHT, {86,  87,  88,  89}}
+	{UP,    {112, 113, 114, 115}},
+	{DOWN,  {64,  65,  66,  67}},
+	{LEFT, {80,  81,  82,  83}},
+	{RIGHT,  {96, 97, 98, 99}}
 };
 
 Player::Player(MovementDirection direction, uint8_t player_health) {

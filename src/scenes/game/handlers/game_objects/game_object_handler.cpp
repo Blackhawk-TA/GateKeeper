@@ -23,6 +23,9 @@ std::vector<GameObject*> game_object_collection;
 
 //TODO only have items in the game object collection when they are on the same map
 // make sure only map data is in memory when loading new section
+// could be done by adding map_section parameter to init function and call it and cleanup every time a new section loads
+// maybe use atlas with data or several functions or own namespace or at least file
+// Problem: GAME_OBJECT_COUNT must be considered for save games
 void game_objects::init() {
 	//Gate statues
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
@@ -58,6 +61,11 @@ void game_objects::init() {
 
 	//TODO remove, it's just for testing
 	game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 4, Character::DOWN, false));
+	game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(36, 36), 72, Character::DOWN, false));
+	game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(42, 36), 72, Character::DOWN, false));
+	game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(48, 36), 72, Character::DOWN, false));
+	game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(11, 35), 72, Character::RIGHT, false));
+	game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(18, 35), 72, Character::LEFT, false));
 
 	//Settings for grassland dungeon
 	uint8_t enabled_lever = blit::random() % 3;

@@ -8,10 +8,10 @@
 Salesman::Salesman(map::MapSections map_section, Point position) : Character(map_section, position, true, false) {
 	tile_id = TILE_ID;
 	movement_sprites = {
-		{UP, {122, 123, 124, 125}},
-		{DOWN, {74, 75, 76, 77}},
-		{LEFT, {106, 107, 108, 109}},
-		{RIGHT, {90, 91, 92, 93}}
+		{UP, {116, 117, 118, 119}},
+		{DOWN, {68, 69, 70, 71}},
+		{LEFT, {84, 85, 86, 87}},
+		{RIGHT, {100, 101, 102, 103}}
 	};
 }
 
