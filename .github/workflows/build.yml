@@ -145,9 +145,9 @@ jobs:
         env:
           ASSET_KEY: ${{ secrets.ASSET_KEY }}
         run: |
-          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/characters_encrypted.png -o main/assets/characters.png --key=ASSET_KEY
-          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/player_attack_encrypted.png -o main/assets/player_attack.png --key=ASSET_KEY
-          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/spritesheet_encrypted.png -o main/assets/spritesheet.png --key=ASSET_KEY
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/characters_encrypted -o main/assets/characters.png --key=ASSET_KEY
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/player_attack_encrypted -o main/assets/player_attack.png --key=ASSET_KEY
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/spritesheet_encrypted -o main/assets/spritesheet.png --key=ASSET_KEY
 
       # Set up the cmake build environment
       - name: Create Build Environment
