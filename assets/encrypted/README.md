@@ -1,4 +1,4 @@
-#Encrypted Assets
+# Encrypted Assets
 
 The assets within this folder are encrypted to prevent a violation of the asset licensing.
 
