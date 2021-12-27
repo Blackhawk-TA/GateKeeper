@@ -149,7 +149,6 @@ jobs:
           python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/player_attack_encrypted.png -o main/assets/player_attack.png --key=ASSET_KEY
           python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/spritesheet_encrypted.png -o main/assets/spritesheet.png --key=ASSET_KEY
 
-
       # Set up the cmake build environment
       - name: Create Build Environment
         run: cmake -E make_directory ${{runner.workspace}}/main/build
