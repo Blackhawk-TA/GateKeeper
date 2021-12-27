@@ -64,7 +64,7 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
  * Loads new map section into memory and deletes the old one
  * @param map_section The enum describing the map section
  */
-void map::load_section(MapSections map_section) {
+void map::load_section(MapSections map_section) { //TODO make sure only map data is in memory when loading new section
 	map::TMX_16 *tmx = nullptr;
 
 	//Allocate memory for TileMap and copy it into memory

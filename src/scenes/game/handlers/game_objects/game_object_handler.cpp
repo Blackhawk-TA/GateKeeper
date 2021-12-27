@@ -22,6 +22,7 @@
 std::vector<GameObject*> game_object_collection;
 
 //TODO only have items in the game object collection when they are on the same map
+// make sure only map data is in memory when loading new section
 void game_objects::init() {
 	//Gate statues
 	game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
@@ -29,7 +30,7 @@ void game_objects::init() {
 	//Stargates
 	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true));
 	game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false));
-	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(12, 10), WINTER, GRASSLAND, false));
+	game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false));
 	game_object_collection.emplace_back(new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false));
 
 	//Signs
@@ -53,7 +54,7 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new Salesman(map::INTERIOR, Point(31, 20)));
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24, 15), 0, Character::LEFT, "Hello there!"));
 	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, Character::RIGHT, "Hello I'm the elder of this village."));
-	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, Character::RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."));
+//	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, Character::RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."));
 
 	//TODO remove, it's just for testing
 	game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 4, Character::DOWN, false));
