@@ -82,8 +82,8 @@ void game_objects::init() {
 	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(43, 36), interaction_signature, enabled_lever == 1));
 	game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(49, 36), interaction_signature, enabled_lever == 2));
 
-	//Check if GAME_OBJECT_COUNT is set correctly
-	assert(GAME_OBJECT_COUNT == game_object_collection.size());
+	//Check if there are more than 255 game objects
+	assert(game_object_collection.size() <= MAX_GAME_OBJECTS);
 
 	//Init additional handlers for subclasses with additional functionality
 	stargate_handler::init();
@@ -112,8 +112,12 @@ bool game_objects::has_equal_signature(GameObject::Signature sig1, GameObject::S
 	return sig1.map_section == sig2.map_section && sig1.position == sig2.position;
 }
 
-std::array<GameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get_saves() {
-	std::array<GameObject::Save, GAME_OBJECT_COUNT> saves;
+bool game_objects::is_empty_signature(GameObject::Signature signature) {
+	return signature.map_section == map::NO_MAP && signature.position == Point(0, 0);
+}
+
+std::array<GameObject::Save, MAX_GAME_OBJECTS> game_objects::get_saves() {
+	std::array<GameObject::Save, MAX_GAME_OBJECTS> saves;
 
 	for (uint16_t i = 0; i < GAME_OBJECT_COUNT; i++) {
 		saves[i] = game_object_collection.at(i)->get_save();
@@ -122,17 +126,28 @@ std::array<GameObject::Save, game_objects::GAME_OBJECT_COUNT> game_objects::get_
 	return saves;
 }
 
-void game_objects::load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &saved_objects) {
+void game_objects::load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects) {
 	GameObject::Signature signature;
+	GameObject::Save *saved_object; //TODO check memory cleanup
+	uint8_t i = 0;
+	bool array_end = false;
 
-	for (auto & saved_object : saved_objects) {
+	while (!array_end && i < MAX_GAME_OBJECTS) {
+		saved_object = &saved_objects[i];
+
+		if (is_empty_signature(saved_object->signature)) {
+			array_end = true;
+			continue;
+		}
+
 		for (auto &game_object : game_object_collection) {
 			signature = game_object->get_signature();
 
-			if (has_equal_signature(signature, saved_object.signature)) {
-				game_object->load_save(saved_object.data);
+			if (has_equal_signature(signature, saved_object->signature)) {
+				game_object->load_save(saved_object->data);
 			}
 		}
+		i++;
 	}
 }
 

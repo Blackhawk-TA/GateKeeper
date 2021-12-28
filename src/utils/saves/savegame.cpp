@@ -7,15 +7,19 @@
 #include "../../scenes/game/ui/inventory.hpp"
 #include "../../scenes/game/ui/sidemenu.hpp"
 #include "../game_time.hpp"
+#include <cassert>
 
 /**
  * Parses the item vector into an array, because vector cannot be saved directly
  * @param items The item vector to be compressed
  * @return The compressed item array
  */
-std::array<savegame::Item, listbox_item::INVENTORY_COUNTER> compress_items(std::vector<Listbox::Item> &items) {
-	std::array<savegame::Item, listbox_item::INVENTORY_COUNTER> compressed_items = {};
+std::array<savegame::Item, MAX_ITEMS> compress_items(std::vector<Listbox::Item> &items) {
+	std::array<savegame::Item, MAX_ITEMS> compressed_items = {};
 	uint8_t amount;
+
+	//TODO check earlier if possible
+	assert(items.size() <= MAX_ITEMS);
 
 	for (auto i = 0u; i < items.size(); i++) {
 		amount = i < items.size() ? items[i].amount : 0;
@@ -28,26 +32,38 @@ std::array<savegame::Item, listbox_item::INVENTORY_COUNTER> compress_items(std::
 	return compressed_items;
 }
 
-std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, listbox_item::INVENTORY_COUNTER> &items) {
+std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, MAX_ITEMS> &items) {
 	std::vector<Listbox::Item> decompressed_items = {};
 	Listbox::Item item_template;
 
-	for (auto &item : items) {
-		item_template = listbox_item::create_inventory_item(static_cast<listbox_item::INVENTORY_ITEM>(item.type));
+	uint8_t i = 0;
+	savegame::Item *item;
+	bool array_end = false;
+
+	while (!array_end && i < MAX_ITEMS) {
+		item = &items[i];
+
+		if (item->type == 0 && item->amount == 0) {
+			array_end = true;
+			continue;
+		}
+
+		item_template = listbox_item::create_inventory_item(static_cast<listbox_item::INVENTORY_ITEM>(item->type));
 
 		//Include only items that have an amount > 0 or are a menu item
-		if (item.type > 0 && (item.amount > 0 || (item.amount == 0 && !item_template.single_use))) {
+		if (item->type > 0 && (item->amount > 0 || (item->amount == 0 && !item_template.single_use))) {
 			decompressed_items.emplace_back(Listbox::Item{
-				item.type,
+				item->type,
 				item_template.name,
 				item_template.tooltip,
 				item_template.callback_tooltip,
 				item_template.callback_fail_tooltip,
 				item_template.single_use,
-				item.amount,
+				item->amount,
 				item_template.callback
 			});
 		}
+		i++;
 	}
 
 	return decompressed_items;

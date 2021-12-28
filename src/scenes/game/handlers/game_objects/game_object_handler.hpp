@@ -32,13 +32,13 @@ namespace game_objects {
 	/**
 	 * Gets array with save structs of all game objects objects
 	 */
-	std::array<GameObject::Save, GAME_OBJECT_COUNT> get_saves();
+	std::array<GameObject::Save, MAX_GAME_OBJECTS> get_saves();
 
 	/**
 	 * Loads saved objects into each game object
 	 * @param saved_objects The saved game objects pointer array
 	 */
-	void load_saves(std::array<GameObject::Save, GAME_OBJECT_COUNT> &saved_objects);
+	void load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects);
 
 	/**
 	 * Draws the game objects which should be rendered under the player
@@ -99,4 +99,6 @@ namespace game_objects {
 	 * @return True if the signatures are equal, else false
 	 */
 	bool has_equal_signature(GameObject::Signature sig1, GameObject::Signature sig2);
+
+	bool is_empty_signature(GameObject::Signature signature);
 }

@@ -9,7 +9,6 @@
  * Contains the create function for all inventory items
  */
 namespace listbox_item {
-	const uint8_t INVENTORY_COUNTER = 5; //Amount of individual items in inventory
 	enum INVENTORY_ITEM {
 		GATE_PART = 1,
 		APPLE = 2,
