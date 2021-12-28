@@ -129,8 +129,8 @@ void savegame::save(uint8_t save_id) {
 	std::vector<Listbox::Item> items = game::inventory::get_items();
 
 	//Save and compress data which will be saved
-	//TODO destroys existing saves if a new entry is added like a game_object => every update destroys savegames
 	auto game_data = GameData{
+		savegame::VERSION,
 		map::get_section(),
 		camera::get_player_position(),
 		game::Player::get_direction(),
@@ -151,6 +151,10 @@ game::Player *savegame::load(uint8_t save_id) {
 
 	//Load data from save game
 	if (save_found) {
+		if (save_data.version != savegame::VERSION) {
+			//TODO port save using structs for each save version
+		}
+
 		//Load position and direction
 		map::load_section(save_data.map_section);
 		camera::init(save_data.camera_position);

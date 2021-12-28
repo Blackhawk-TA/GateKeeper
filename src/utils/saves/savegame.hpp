@@ -9,13 +9,14 @@
 #include "../../scenes/game/handlers/game_objects/game_object_handler.hpp"
 
 namespace savegame {
+	const uint8_t VERSION = 0;
 	struct Item {
 		uint8_t type;
 		uint8_t amount;
 	};
 
 	struct GameData {
-//		uint8_t version; //TODO implement version flag for porting GameData later on with structs like GameDatav1, etc.
+		uint8_t version;
 		map::MapSections map_section;
 		Point camera_position;
 		game::Player::MovementDirection player_direction;
