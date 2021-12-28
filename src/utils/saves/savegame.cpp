@@ -114,7 +114,7 @@ game::Player *savegame::create(uint8_t save_id) {
 	game::game_objects::init(map::GRASSLAND);
 	game_time::init();
 
-	return new game::Player(game::Player::MovementDirection::DOWN, 100);
+	return new game::Player(game::Player::MovementDirection::DOWN, 100, save_id);
 }
 
 void savegame::save(uint8_t save_id) {
@@ -154,7 +154,7 @@ game::Player *savegame::load(uint8_t save_id) {
 		//Load position and direction
 		map::load_section(save_data.map_section);
 		camera::init(save_data.camera_position);
-		player = new game::Player(save_data.player_direction, save_data.player_health);
+		player = new game::Player(save_data.player_direction, save_data.player_health, save_id);
 
 		//Init sidemenu
 		game::sidemenu::init(save_id);

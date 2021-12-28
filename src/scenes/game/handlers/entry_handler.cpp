@@ -32,8 +32,9 @@ namespace game {
 	 * Teleports the player to the interior/exterior of the entry and swaps the tile maps
 	 * @param entry_id The id of the entry
 	 * @param next_position The position where the player will walk within the next move
+	 * @param save_id The id of the current save
 	 */
-	void entry_handler::teleport(uint8_t entry_id, Point next_position) {
+	void entry_handler::teleport(uint8_t entry_id, Point next_position, uint8_t save_id) {
 		map::MapSections destination_map;
 		Point destination_position;
 		Player::MovementDirection player_direction;
@@ -49,15 +50,16 @@ namespace game {
 			player_direction = Player::MovementDirection::DOWN;
 		}
 
-		utils::teleport_player(destination_map, destination_position, player_direction);
+		utils::teleport_player(destination_map, destination_position, player_direction, save_id);
 	}
 
 	/**
 	 * Triggers the entering process of for example a door or dungeon
 	 * @param next_position The position where the player will walk within the next move
+	 * @param save_id The id of the current save
 	 * @return False if entry id was not found, else true
 	 */
-	bool entry_handler::enter(Point &next_position) {
+	bool entry_handler::enter(Point &next_position, uint8_t save_id) {
 		uint8_t entry_id = entry_handler::get_id(next_position, map::get_section());
 
 		//No entry found, stop movement
@@ -66,8 +68,8 @@ namespace game {
 		}
 
 		//Teleport to position on different tile map
-		transition::start([entry_id, next_position] {
-			entry_handler::teleport(entry_id, next_position);
+		transition::start([entry_id, next_position, save_id] {
+			entry_handler::teleport(entry_id, next_position, save_id);
 		});
 
 		return true;

@@ -20,7 +20,7 @@ namespace game {
 			RIGHT = 4
 		};
 
-		explicit Player(MovementDirection direction, uint8_t player_health);
+		explicit Player(MovementDirection direction, uint8_t player_health, uint8_t save_id);
 		void draw();
 		void attack();
 		void evade();
@@ -71,10 +71,11 @@ namespace game {
 		Size spritesheet_size;
 		Size attack_spritesheet_size;
 		uint8_t elevation_offset;
+		uint8_t save_id;
 
 		static void animate(Timer &timer);
 		static void animate_action(Timer &timer);
-		static void gate_teleport(Stargate *destination_gate);
+		static void gate_teleport(Stargate *destination_gate, uint8_t current_save_id);
 		static bool in_action();
 		void stop_animation();
 	};

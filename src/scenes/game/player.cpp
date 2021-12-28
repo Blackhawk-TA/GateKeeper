@@ -30,8 +30,9 @@ namespace game {
 		{RIGHT, {96,  97,  98,  99}}
 	};
 
-	Player::Player(MovementDirection direction, uint8_t player_health) {
+	Player::Player(MovementDirection direction, uint8_t player_health, uint8_t save_id) {
 		Player::health = player_health;
+		Player::save_id = save_id;
 		position = get_screen_tiles() / 2;
 		spritesheet_size = get_spritesheet_size(player_sprites->bounds);
 		attack_spritesheet_size = get_spritesheet_size(player_attack_sprites->bounds);
@@ -158,8 +159,9 @@ namespace game {
 		Stargate *destination_gate = stargate_handler::get_destination_gate(next_position);
 		if (destination_gate != nullptr) {
 			//Trigger teleportation
-			transition::start([destination_gate] {
-				gate_teleport(destination_gate);
+			uint8_t current_save_id = save_id;
+			transition::start([destination_gate, current_save_id] {
+				gate_teleport(destination_gate, current_save_id);
 			});
 			return;
 		}
@@ -189,7 +191,7 @@ namespace game {
 				elevation_offset = 3;
 				break;
 			case flags::TileFlags::ENTRY:
-				if (entry_handler::enter(next_position)) {
+				if (entry_handler::enter(next_position, save_id)) {
 					camera::move(movement);
 				}
 				elevation_offset = 0;
@@ -236,12 +238,13 @@ namespace game {
 	/**
 	 * Teleports a player to the given gate and sets the movement direction to facing downwards
 	 * @param destination_gate The gate to which the player is teleported
+	 * @param current_save_id The id of the current save
 	 */
-	void Player::gate_teleport(Stargate *destination_gate) {
+	void Player::gate_teleport(Stargate *destination_gate, uint8_t current_save_id) {
 		Point teleport_destination = destination_gate->get_entry_point();
 		map::MapSections destination_map_section = destination_gate->get_map_section();
 		if (map::get_section() != destination_map_section) {
-			utils::teleport_player(destination_map_section, teleport_destination, MovementDirection::DOWN);
+			utils::teleport_player(destination_map_section, teleport_destination, MovementDirection::DOWN, current_save_id);
 		}
 
 		game_objects::update_states(teleport_destination);
