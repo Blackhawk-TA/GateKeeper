@@ -32,12 +32,6 @@ namespace game {
 			Point(14, 36)
 		};
 
-		//Stargates must exist in all sections
-		game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true));
-		game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false));
-		game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false));
-		game_object_collection.emplace_back(new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false));
-
 		//TODO requires save after map section change, and save inserting to the correct array indexes
 		switch (map_section) {
 			case map::DUNGEON:
@@ -54,6 +48,11 @@ namespace game {
 				game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(49, 36), interaction_signature, enabled_lever == 2));
 				break;
 			case map::GRASSLAND:
+				game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true));
+				game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false));
+				game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false));
+				game_object_collection.emplace_back(new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false));
+
 				game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(24, 44), Sign::WOOD, "Trees grow fruits which can be eaten. They regrow after harvesting. Carrots can be planted and harvested."));
 				game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(25, 12), Sign::WOOD, "The Stargate is a portal to other worlds! It was closed to keep the village safe."));
 				game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(11, 16), true));
@@ -66,14 +65,19 @@ namespace game {
 				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 43)));
 				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24, 15), 0, Character::LEFT, "Hello there!"));
 				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, Character::RIGHT, "Hello I'm the elder of this village."));
+//				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, Character::RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."));
 				game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 4, Character::DOWN, false));
 				break;
 			case map::INTERIOR:
 				game_object_collection.emplace_back(new Salesman(map::INTERIOR, Point(31, 20)));
 				break;
 			case map::SNOWLAND:
+				game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false));
+				game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false));
 				break;
 			case map::DESERT:
+				game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true));
+				game_object_collection.emplace_back(new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false));
 				break;
 			default:
 				std::cerr << "Invalid map section" << std::endl;
