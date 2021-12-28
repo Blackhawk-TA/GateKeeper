@@ -4,37 +4,39 @@
 
 #include "combat_menu.hpp"
 
-void combat_menu::init() {
-	control = nullptr;
-	items = {
-	};
-}
+namespace combat {
+	void menu::init() {
+		control = nullptr;
+		items = {
+		};
+	}
 
-void combat_menu::open() {
-	control = new Listbox(Rect(16, 0, 4, 7), items);
-}
+	void menu::open() {
+		control = new Listbox(Rect(16, 0, 4, 7), items);
+	}
 
-void combat_menu::close() { //TODO close menu when attack is selected
-	delete control;
-	control = nullptr;
-}
+	void menu::close() { //TODO close menu when attack is selected
+		delete control;
+		control = nullptr;
+	}
 
-bool combat_menu::is_open() {
-	return control != nullptr;
-}
+	bool menu::is_open() {
+		return control != nullptr;
+	}
 
-void combat_menu::draw() {
-	control->draw();
-}
+	void menu::draw() {
+		control->draw();
+	}
 
-void combat_menu::cursor_up() {
-	control->cursor_up();
-}
+	void menu::cursor_up() {
+		control->cursor_up();
+	}
 
-void combat_menu::cursor_down() {
-	control->cursor_down();
-}
+	void menu::cursor_down() {
+		control->cursor_down();
+	}
 
-void combat_menu::cursor_press() {
-	control->cursor_press();
+	void menu::cursor_press() {
+		control->cursor_press();
+	}
 }

@@ -5,7 +5,7 @@
 #pragma once
 #include "../../../utils/utils.hpp"
 
-namespace combat_stats {
+namespace combat::stats {
 	const uint8_t TEXT_DISTANCE = 10;
 	const uint8_t BAR_LENGTH = 107;
 	const std::string STATUS_BARS[3] = {"Health", "Stamina", "Enemy"};

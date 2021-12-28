@@ -17,7 +17,7 @@ namespace combat {
 		enemy = new Enemy();
 		player = new CombatPlayer();
 
-		combat_menu::open();
+		menu::open();
 	}
 
 	Scene::~Scene() {
@@ -29,8 +29,8 @@ namespace combat {
 		map::draw();
 		enemy->draw();
 		player->draw();
-		combat_menu::draw();
-		combat_stats::draw(90, 100, 10);
+		menu::draw();
+		stats::draw(90, 100, 10);
 	}
 
 	void Scene::update(uint32_t time) {
