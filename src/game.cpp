@@ -57,7 +57,7 @@ void load_scene(Scene scene_type, uint8_t save_id, map::MapSections map_section)
 				scene = new OptionsScene(save_id);
 				break;
 			case Scene::COMBAT:
-				scene = new CombatScene(map_section);
+				scene = new combat::Scene(map_section);
 				break;
 		}
 	});

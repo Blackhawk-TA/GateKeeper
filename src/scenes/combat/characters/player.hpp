@@ -5,6 +5,9 @@
 #pragma once
 #include "template/character.hpp"
 
-class Player : Character {
-
-};
+namespace combat {
+	class CombatPlayer : public Character {
+	public:
+		explicit CombatPlayer();
+	};
+}

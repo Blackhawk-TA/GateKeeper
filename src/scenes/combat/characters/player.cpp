@@ -3,3 +3,9 @@
 //
 
 #include "player.hpp"
+
+namespace combat {
+	CombatPlayer::CombatPlayer() : Character(Point(18, 11)) {
+
+	}
+}

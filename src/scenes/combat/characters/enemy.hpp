@@ -5,6 +5,9 @@
 #pragma once
 #include "template/character.hpp"
 
-class Enemy : Character {
-
-};
+namespace combat {
+	class Enemy : public Character {
+	public:
+		explicit Enemy();
+	};
+}

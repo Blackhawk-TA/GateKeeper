@@ -8,39 +8,49 @@
 #include "ui/combat_menu.hpp"
 #include "ui/combat_stats.hpp"
 
-//TODO use TMP_SAVE_ID when returning to game_scene
-CombatScene::CombatScene(map::MapSections map_section) {
-	CombatScene::map_section = map_section;
-	load_combat_scene();
+namespace combat {
+	//TODO use TMP_SAVE_ID when returning to game_scene
+	Scene::Scene(map::MapSections map_section) {
+		Scene::map_section = map_section;
+		load_combat_scene();
 
-	combat_menu::open();
-}
+		enemy = new Enemy();
+		player = new CombatPlayer();
 
-CombatScene::~CombatScene() = default;
-
-void CombatScene::render(uint32_t time) {
-	map::draw();
-	combat_menu::draw();
-	combat_stats::draw(90, 100, 10);
-}
-
-void CombatScene::update(uint32_t time) {
-
-}
-
-void CombatScene::inputs() {
-
-}
-
-void CombatScene::load_combat_scene() {
-	switch (map_section) {
-		case map::GRASSLAND: //TODO remove this line
-		case map::DUNGEON:
-			map::load_section(map::DUNGEON_COMBAT);
-			break;
-		default:
-			std::cerr << "No matching combat area for map section found" << std::endl;
-			exit(1);
+		combat_menu::open();
 	}
-	camera::set_position(Point(15, 12));
+
+	Scene::~Scene() {
+		delete enemy;
+		delete player;
+	};
+
+	void Scene::render(uint32_t time) {
+		map::draw();
+		enemy->draw();
+		player->draw();
+		combat_menu::draw();
+		combat_stats::draw(90, 100, 10);
+	}
+
+	void Scene::update(uint32_t time) {
+
+	}
+
+	void Scene::inputs() {
+
+	}
+
+	void Scene::load_combat_scene() {
+		switch (map_section) {
+			case map::GRASSLAND: //TODO remove this line
+			case map::DUNGEON:
+				map::load_section(map::DUNGEON_COMBAT);
+				break;
+			default:
+				std::cerr << "No matching combat area for map section found" << std::endl;
+				exit(1);
+		}
+		camera::set_position(Point(15, 12));
+	}
 }
