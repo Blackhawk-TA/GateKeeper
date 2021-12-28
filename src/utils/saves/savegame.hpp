@@ -28,4 +28,5 @@ namespace savegame {
 	game::Player *create(uint8_t save_id);
 	void save(uint8_t save_id);
 	game::Player *load(uint8_t save_id);
+	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> load_game_objects(uint8_t save_id);
 }

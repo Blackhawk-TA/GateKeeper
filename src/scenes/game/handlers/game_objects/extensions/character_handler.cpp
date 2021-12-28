@@ -24,8 +24,10 @@ namespace game {
 	}
 
 	void character_handler::cleanup() {
-		animation_timer->stop();
-		delete animation_timer;
+		if (animation_timer != nullptr) {
+			animation_timer->stop();
+			delete animation_timer;
+		}
 
 		characters.clear();
 	}

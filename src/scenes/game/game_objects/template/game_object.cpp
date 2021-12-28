@@ -13,6 +13,7 @@ namespace game {
 		GameObject::draw_under_player = draw_under_player;
 		GameObject::spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 		GameObject::textbox = nullptr;
+		GameObject::value = 0;
 
 		//Generate object signature
 		signature = Signature{

@@ -11,10 +11,12 @@
 #include "ui/inventory.hpp"
 #include "ui/overlay.hpp"
 #include "../../utils/game_time.hpp"
+#include "utils.hpp"
 
 namespace game {
 	Scene::Scene(uint8_t save_id) {
 		Scene::save_id = save_id;
+		utils::current_save_id = save_id;
 		last_buttons = 0;
 		changed = 0;
 

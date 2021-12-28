@@ -9,6 +9,7 @@
 #include "handlers/game_objects/game_object_handler.hpp"
 #include "handlers/entry_handler.hpp"
 #include "handlers/game_objects/extensions/stargate_handler.hpp"
+#include "utils.hpp"
 
 namespace game {
 	bool Player::attacking = false;
@@ -232,19 +233,17 @@ namespace game {
 		}
 	}
 
-/**
- * Teleports a player to the given gate and sets the movement direction to facing downwards
- * @param destination_gate The gate to which the player is teleported
- */
+	/**
+	 * Teleports a player to the given gate and sets the movement direction to facing downwards
+	 * @param destination_gate The gate to which the player is teleported
+	 */
 	void Player::gate_teleport(Stargate *destination_gate) {
 		Point teleport_destination = destination_gate->get_entry_point();
 		map::MapSections destination_map_section = destination_gate->get_map_section();
 		if (map::get_section() != destination_map_section) {
-			map::load_section(destination_map_section);
+			utils::teleport_player(destination_map_section, teleport_destination, MovementDirection::DOWN);
 		}
 
-		camera::set_position(teleport_destination);
-		change_direction(MovementDirection::DOWN, false);
 		game_objects::update_states(teleport_destination);
 	}
 

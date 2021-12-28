@@ -16,7 +16,7 @@ namespace game {
 		 */
 		struct Signature {
 			map::MapSections map_section;
-			Point position;
+			Point position; //TODO save memory by using x,y uint8_t
 		};
 
 		/**

@@ -18,72 +18,68 @@
 #include "extensions/character_handler.hpp"
 #include <stdexcept>
 #include <cassert>
+#include <iostream>
 
 namespace game {
 	std::vector<GameObject *> game_object_collection;
 
-//TODO only have items in the game object collection when they are on the same map
-// make sure only map data is in memory when loading new section
-// could be done by adding map_section parameter to init function and call it and cleanup every time a new section loads
-// maybe use atlas with data or several functions or own namespace or at least file
-// Problem: GAME_OBJECT_COUNT must be considered for save games
-	void game_objects::init() {
-		//Gate statues
-		game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
-
-		//Stargates
-		game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true));
-		game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false));
-		game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false));
-		game_object_collection.emplace_back(new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false));
-
-		//Signs
-		game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(24, 44), Sign::WOOD, "Trees grow fruits which can be eaten. They regrow after harvesting. Carrots can be planted and harvested."));
-		game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(25, 12), Sign::WOOD, "The Stargate is a portal to other worlds! It was closed to keep the village safe."));
-		game_object_collection.emplace_back(new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to keep the gate closed and protect the village."));
-
-		//Fruit trees
-		game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(11, 16), true));
-		game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(21, 42), true));
-
-		//Carrot beds
-		game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 42)));
-		game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 42)));
-		game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 42)));
-		game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 43)));
-		game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 43)));
-		game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 43)));
-
-		//Characters
-		game_object_collection.emplace_back(new Salesman(map::INTERIOR, Point(31, 20)));
-		game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24, 15), 0, Character::LEFT, "Hello there!"));
-		game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, Character::RIGHT, "Hello I'm the elder of this village."));
-//	game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, Character::RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."));
-
-		//TODO remove, it's just for testing
-		game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 4, Character::DOWN, false));
-		game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(36, 36), 72, Character::DOWN, false));
-		game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(42, 36), 72, Character::DOWN, false));
-		game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(48, 36), 72, Character::DOWN, false));
-		game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(11, 35), 72, Character::RIGHT, false));
-		game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(18, 35), 72, Character::LEFT, false));
-
-		//Settings for grassland dungeon
+	//TODO move game object creation data to external file, .txt or something similar
+	void game_objects::init(map::MapSections map_section) {
+		//Settings for dungeon
 		uint8_t enabled_lever = blit::random() % 3;
 		GameObject::Signature interaction_signature = { //The signature of the door that the levers open
 			map::DUNGEON,
 			Point(14, 36)
 		};
 
-		//Dungeon Door
-		game_object_collection.emplace_back(new DungeonDoor(interaction_signature.map_section, interaction_signature.position));
+		//Stargates must exist in all sections
+		game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true));
+		game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false));
+		game_object_collection.emplace_back(new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false));
+		game_object_collection.emplace_back(new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false));
 
-		//Dungeon Levers
-		game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(37, 36), interaction_signature, enabled_lever == 0));
-		game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(43, 36), interaction_signature, enabled_lever == 1));
-		game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(49, 36), interaction_signature, enabled_lever == 2));
+		//TODO requires save after map section change, and save inserting to the correct array indexes
+		switch (map_section) {
+			case map::DUNGEON:
+				game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
+				game_object_collection.emplace_back(new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to keep the gate closed and protect the village."));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(36, 36), 72, Character::DOWN, false));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(42, 36), 72, Character::DOWN, false));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(48, 36), 72, Character::DOWN, false));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(11, 35), 72, Character::RIGHT, false));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(18, 35), 72, Character::LEFT, false));
+				game_object_collection.emplace_back(new DungeonDoor(interaction_signature.map_section, interaction_signature.position));
+				game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(37, 36), interaction_signature, enabled_lever == 0));
+				game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(43, 36), interaction_signature, enabled_lever == 1));
+				game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(49, 36), interaction_signature, enabled_lever == 2));
+				break;
+			case map::GRASSLAND:
+				game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(24, 44), Sign::WOOD, "Trees grow fruits which can be eaten. They regrow after harvesting. Carrots can be planted and harvested."));
+				game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(25, 12), Sign::WOOD, "The Stargate is a portal to other worlds! It was closed to keep the village safe."));
+				game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(11, 16), true));
+				game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(21, 42), true));
+				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 42)));
+				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 42)));
+				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 42)));
+				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 43)));
+				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 43)));
+				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 43)));
+				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24, 15), 0, Character::LEFT, "Hello there!"));
+				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, Character::RIGHT, "Hello I'm the elder of this village."));
+				game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 4, Character::DOWN, false));
+				break;
+			case map::INTERIOR:
+				game_object_collection.emplace_back(new Salesman(map::INTERIOR, Point(31, 20)));
+				break;
+			case map::SNOWLAND:
+				break;
+			case map::DESERT:
+				break;
+			default:
+				std::cerr << "Invalid map section" << std::endl;
+				exit(1);
+		}
 
-		//Check if there are more than 255 game objects
 		assert(game_object_collection.size() <= MAX_GAME_OBJECTS);
 
 		//Init additional handlers for subclasses with additional functionality
@@ -114,13 +110,13 @@ namespace game {
 	}
 
 	bool game_objects::is_empty_signature(GameObject::Signature signature) {
-		return signature.map_section == map::NO_MAP && signature.position == Point(0, 0);
+		return signature.map_section == 0 && signature.position == Point(0, 0);
 	}
 
 	std::array<GameObject::Save, MAX_GAME_OBJECTS> game_objects::get_saves() {
-		std::array<GameObject::Save, MAX_GAME_OBJECTS> saves;
+		std::array<GameObject::Save, MAX_GAME_OBJECTS> saves = {};
 
-		for (uint16_t i = 0; i < GAME_OBJECT_COUNT; i++) {
+		for (uint8_t i = 0; i < game_object_collection.size(); i++) {
 			saves[i] = game_object_collection.at(i)->get_save();
 		}
 
@@ -129,7 +125,7 @@ namespace game {
 
 	void game_objects::load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects) {
 		GameObject::Signature signature;
-		GameObject::Save *saved_object; //TODO check memory cleanup
+		GameObject::Save *saved_object;
 		uint8_t i = 0;
 		bool array_end = false;
 

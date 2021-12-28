@@ -9,14 +9,9 @@
 
 namespace game::game_objects {
 	/**
-	 * The amount of game objects on the map
-	 */
-	constexpr uint16_t GAME_OBJECT_COUNT = 29;
-
-	/**
 	 * Creates the objects using their factory function
 	 */
-	void init();
+	void init(map::MapSections map_section);
 
 	/**
 	 * Gets the game object collection

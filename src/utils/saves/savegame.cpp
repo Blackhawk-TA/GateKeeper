@@ -69,14 +69,49 @@ std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, MAX_ITEMS
 	return decompressed_items;
 }
 
+/**
+ * Gets all game object saves by merging the old ones from different map sections with the ones im memory from the current map section.
+ * This is necessary because there are never all game objects in memory.
+ * @param save_id The id of the current save
+ * @return A full list of game object saves
+ */
+std::array<game::GameObject::Save, MAX_GAME_OBJECTS> get_game_object_saves(uint8_t save_id) {
+	//The game object data which is currently in memory from the current map section
+	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> current_game_objects = game::game_objects::get_saves();
+
+	//Load old save to fetch game object data that is not currently in memory
+	savegame::GameData old_save;
+	bool save_found = read_save(old_save, save_id);
+
+	if (save_found) {
+		for (auto &current_game_object : current_game_objects) {
+			if (game::game_objects::is_empty_signature(current_game_object.signature)) {
+				continue;
+			}
+
+			for (auto &old_game_object : old_save.game_objects) {
+				if (game::game_objects::has_equal_signature(old_game_object.signature, current_game_object.signature)) {
+					old_game_object = current_game_object;
+					break;
+				}
+			}
+		}
+	} else {
+		old_save.game_objects = current_game_objects;
+	}
+
+	//Return overwritten game objects
+	return old_save.game_objects;
+}
+
 game::Player *savegame::create(uint8_t save_id) {
 	Point start_position = Point(22, 12);
 
-	map::load_section(map::MapSections::GRASSLAND);
+	map::load_section(map::GRASSLAND);
 	camera::init(start_position);
 	game::sidemenu::init(save_id);
 	game::inventory::init();
-	game::game_objects::init();
+	game::game_objects::init(map::GRASSLAND);
 	game_time::init();
 
 	return new game::Player(game::Player::MovementDirection::DOWN, 100);
@@ -95,13 +130,12 @@ void savegame::save(uint8_t save_id) {
 
 	//Save and compress data which will be saved
 	//TODO destroys existing saves if a new entry is added like a game_object => every update destroys savegames
-	// Inconsistent array lengths cause this problem, if the length of an array changes, the old change gets overwritten
 	auto game_data = GameData{
 		map::get_section(),
 		camera::get_player_position(),
 		game::Player::get_direction(),
 		game::Player::get_health(),
-		game::game_objects::get_saves(),
+		get_game_object_saves(save_id),
 		compress_items(items),
 		game_time::get_time()
 	};
@@ -130,7 +164,7 @@ game::Player *savegame::load(uint8_t save_id) {
 		game::inventory::load(decompress_items(save_data.items));
 
 		//Load game object states
-		game::game_objects::init();
+		game::game_objects::init(save_data.map_section);
 		game::game_objects::load_saves(save_data.game_objects);
 
 		//Load game time
@@ -142,4 +176,16 @@ game::Player *savegame::load(uint8_t save_id) {
 	}
 
 	return player;
+}
+
+std::array<game::GameObject::Save, MAX_GAME_OBJECTS> savegame::load_game_objects(uint8_t save_id) {
+	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects;
+	savegame::GameData save_game;
+
+	bool save_found = read_save(save_game, save_id);
+	if (save_found) {
+		game_objects = save_game.game_objects;
+	}
+
+	return game_objects;
 }
