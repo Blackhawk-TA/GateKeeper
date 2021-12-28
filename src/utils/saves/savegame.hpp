@@ -18,14 +18,14 @@ namespace savegame {
 //		uint8_t version; //TODO implement version flag for porting GameData later on with structs like GameDatav1, etc.
 		map::MapSections map_section;
 		Point camera_position;
-		Player::MovementDirection player_direction;
+		game::Player::MovementDirection player_direction;
 		uint8_t player_health;
-		std::array<GameObject::Save, MAX_GAME_OBJECTS> game_objects;
+		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects;
 		std::array<Item, MAX_ITEMS> items;
 		uint32_t passed_time;
 	};
 
-	Player *create(uint8_t save_id);
+	game::Player *create(uint8_t save_id);
 	void save(uint8_t save_id);
-	Player *load(uint8_t save_id);
+	game::Player *load(uint8_t save_id);
 }

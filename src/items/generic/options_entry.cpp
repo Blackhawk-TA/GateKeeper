@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_options_entry(uint8_t type_id, uint8_t save_i
 		false,
 		0,
 		[save_id] {
-			load_scene(Scene::OPTIONS, save_id);
+			load_scene(SceneType::OPTIONS, save_id);
 			return Listbox::Tooltip::SUPPRESS;
 		}
 	};

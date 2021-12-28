@@ -16,8 +16,8 @@ Listbox::Item listbox_item::create_inventory_entry(uint8_t type_id) {
 		false,
 		0,
 		[] {
-			inventory::open();
-			sidemenu::close();
+			game::inventory::open();
+			game::sidemenu::close();
 			return Listbox::Tooltip::SUPPRESS;
 		}
 	};

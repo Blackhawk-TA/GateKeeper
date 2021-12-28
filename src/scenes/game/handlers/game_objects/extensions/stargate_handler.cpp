@@ -5,54 +5,56 @@
 #include "stargate_handler.hpp"
 #include "../game_object_handler.hpp"
 
-std::vector<Stargate*> stargates;
+namespace game {
+	std::vector<Stargate *> stargates;
 
-void stargate_handler::init() {
-	std::vector<GameObject*> game_object_collection = game_objects::get_collection();
+	void stargate_handler::init() {
+		std::vector<GameObject *> game_object_collection = game_objects::get_collection();
 
-	for (GameObject* game_object : game_object_collection) {
-		if (game_object->get_type() == GameObject::StargateType) {
-			stargates.push_back((Stargate*)game_object);
+		for (GameObject *game_object: game_object_collection) {
+			if (game_object->get_type() == GameObject::StargateType) {
+				stargates.push_back((Stargate *) game_object);
+			}
 		}
 	}
-}
 
-void stargate_handler::cleanup() {
-	//Pointers don't have to be deleted here since this is done in game_objects cleanup
-	stargates.clear();
-}
+	void stargate_handler::cleanup() {
+		//Pointers don't have to be deleted here since this is done in game_objects cleanup
+		stargates.clear();
+	}
 
 /**
  * Checks if the players next position triggers a teleportation and returns the destination gate, if existing
  * @param next_position The next position of the player
  * @return The position of the destination gate if there is one, else Point(0, 0) is returned
  */
-Stargate *stargate_handler::get_destination_gate(Point next_position) {
-	bool teleport = false;
-	StargateAddresses destination_address;
-	Stargate *destination_gate = nullptr;
-	uint8_t i = 0;
+	Stargate *stargate_handler::get_destination_gate(Point next_position) {
+		bool teleport = false;
+		StargateAddresses destination_address;
+		Stargate *destination_gate = nullptr;
+		uint8_t i = 0;
 
-	//Check if player entered a gate
-	while (!teleport && i < stargates.size()) {
-		teleport = stargates[i]->check_enter(next_position);
-		if (!teleport) {
-			i++;
-		}
-	}
-
-	//Find destination gate
-	if (teleport) {
-		destination_address = stargates[i]->get_destination();
-
-		i = 0;
-		while (destination_gate == nullptr && i < stargates.size()) {
-			if (stargates[i]->get_address() == destination_address) {
-				destination_gate = stargates[i];
+		//Check if player entered a gate
+		while (!teleport && i < stargates.size()) {
+			teleport = stargates[i]->check_enter(next_position);
+			if (!teleport) {
+				i++;
 			}
-			i++;
 		}
-	}
 
-	return destination_gate;
+		//Find destination gate
+		if (teleport) {
+			destination_address = stargates[i]->get_destination();
+
+			i = 0;
+			while (destination_gate == nullptr && i < stargates.size()) {
+				if (stargates[i]->get_address() == destination_address) {
+					destination_gate = stargates[i];
+				}
+				i++;
+			}
+		}
+
+		return destination_gate;
+	}
 }

@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_gate_part(uint8_t type_id) {
 		true,
 		1,
 		[] {
-			if (game_objects::inventory_interact(listbox_item::GATE_PART)) {
+			if (game::game_objects::inventory_interact(listbox_item::GATE_PART)) {
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

@@ -7,7 +7,7 @@
 #include "../../../../engine/map.hpp"
 #include "../../../../items/items.hpp"
 
-namespace game_objects {
+namespace game::game_objects {
 	/**
 	 * The amount of game objects on the map
 	 */

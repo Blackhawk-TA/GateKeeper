@@ -13,8 +13,8 @@ using namespace blit;
 uint32_t ms_start = 0;
 uint32_t ms_end = 0;
 IScene *scene = nullptr;
-Scene previous_scene;
-Scene current_scene;
+SceneType previous_scene;
+SceneType current_scene;
 
 ///////////////////////////////////////////////////////////////////////////
 //
@@ -29,8 +29,8 @@ void init() {
 	options::load();
 	transition::init();
 
-	scene = new MenuScene();
-	current_scene = Scene::MENU;
+	scene = new menu::Scene();
+	current_scene = SceneType::MENU;
 }
 
 void load_previous_scene(uint8_t save_id) {
@@ -39,7 +39,7 @@ void load_previous_scene(uint8_t save_id) {
 
 //TODO either implement own gameover screen or fix invalid read.
 // without transition, there are invalid reads and writes. Transitions somehow fix it
-void load_scene(Scene scene_type, uint8_t save_id, map::MapSections map_section) {
+void load_scene(SceneType scene_type, uint8_t save_id, map::MapSections map_section) {
 	previous_scene = current_scene;
 	current_scene = scene_type;
 
@@ -47,16 +47,16 @@ void load_scene(Scene scene_type, uint8_t save_id, map::MapSections map_section)
 		delete scene;
 
 		switch (scene_type) {
-			case Scene::MENU:
-				scene = new MenuScene();
+			case SceneType::MENU:
+				scene = new menu::Scene();
 				break;
-			case Scene::GAME:
-				scene = new GameScene(save_id);
+			case SceneType::GAME:
+				scene = new game::Scene(save_id);
 				break;
-			case Scene::OPTIONS:
-				scene = new OptionsScene(save_id);
+			case SceneType::OPTIONS:
+				scene = new options::Scene(save_id);
 				break;
-			case Scene::COMBAT:
+			case SceneType::COMBAT:
 				scene = new combat::Scene(map_section);
 				break;
 		}

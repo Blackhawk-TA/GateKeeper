@@ -6,7 +6,7 @@
 
 #include "../../../engine/ui/listbox.hpp"
 
-namespace sidemenu {
+namespace game::sidemenu {
 	inline Listbox *control;
 	inline std::vector<Listbox::Item> items;
 

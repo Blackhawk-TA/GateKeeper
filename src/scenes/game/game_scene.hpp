@@ -8,17 +8,19 @@
 #include "../scene_interface.hpp"
 #include "player.hpp"
 
-class GameScene : public IScene {
-public:
-	explicit GameScene(uint8_t save_id);
-	~GameScene() override;
-	void render(uint32_t time) override;
-	void update(uint32_t time) override;
-	void inputs() override;
+namespace game {
+	class Scene : public IScene {
+	public:
+		explicit Scene(uint8_t save_id);
+		~Scene() override;
+		void render(uint32_t time) override;
+		void update(uint32_t time) override;
+		void inputs() override;
 
-private:
-	uint8_t save_id;
-	uint32_t last_buttons;
-	uint32_t changed;
-	Player *player;
-};
+	private:
+		uint8_t save_id;
+		uint32_t last_buttons;
+		uint32_t changed;
+		Player *player;
+	};
+}

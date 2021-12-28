@@ -17,7 +17,7 @@ Listbox::Item listbox_item::create_load_entry(uint8_t type_id, uint8_t save_id) 
 		false,
 		0,
 		[save_id] {
-			load_scene(Scene::GAME, save_id);
+			load_scene(SceneType::GAME, save_id);
 			return Listbox::Tooltip::SUCCESS;
 		}
 	};

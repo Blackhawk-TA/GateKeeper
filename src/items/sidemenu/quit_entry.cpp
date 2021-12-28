@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_quit_entry(uint8_t type_id) {
 		false,
 		0,
 		[] {
-			load_scene(Scene::MENU);
+			load_scene(SceneType::MENU);
 			return Listbox::Tooltip::SUPPRESS;
 		}
 	};

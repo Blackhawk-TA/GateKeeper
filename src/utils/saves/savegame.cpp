@@ -69,17 +69,17 @@ std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, MAX_ITEMS
 	return decompressed_items;
 }
 
-Player *savegame::create(uint8_t save_id) {
+game::Player *savegame::create(uint8_t save_id) {
 	Point start_position = Point(22, 12);
 
 	map::load_section(map::MapSections::GRASSLAND);
 	camera::init(start_position);
-	sidemenu::init(save_id);
-	inventory::init();
-	game_objects::init();
+	game::sidemenu::init(save_id);
+	game::inventory::init();
+	game::game_objects::init();
 	game_time::init();
 
-	return new Player(Player::MovementDirection::DOWN, 100);
+	return new game::Player(game::Player::MovementDirection::DOWN, 100);
 }
 
 void savegame::save(uint8_t save_id) {
@@ -91,7 +91,7 @@ void savegame::save(uint8_t save_id) {
 
 	//Fetch item and stargate data
 	//TODO handle item compression and decompression in inventory namespace in get_items and load
-	std::vector<Listbox::Item> items = inventory::get_items();
+	std::vector<Listbox::Item> items = game::inventory::get_items();
 
 	//Save and compress data which will be saved
 	//TODO destroys existing saves if a new entry is added like a game_object => every update destroys savegames
@@ -99,9 +99,9 @@ void savegame::save(uint8_t save_id) {
 	auto game_data = GameData{
 		map::get_section(),
 		camera::get_player_position(),
-		Player::get_direction(),
-		Player::get_health(),
-		game_objects::get_saves(),
+		game::Player::get_direction(),
+		game::Player::get_health(),
+		game::game_objects::get_saves(),
 		compress_items(items),
 		game_time::get_time()
 	};
@@ -109,8 +109,8 @@ void savegame::save(uint8_t save_id) {
 	write_save(game_data, save_id);
 }
 
-Player *savegame::load(uint8_t save_id) {
-	Player *player;
+game::Player *savegame::load(uint8_t save_id) {
+	game::Player *player;
 	GameData save_data;
 
 	bool save_found = read_save(save_data, save_id);
@@ -120,18 +120,18 @@ Player *savegame::load(uint8_t save_id) {
 		//Load position and direction
 		map::load_section(save_data.map_section);
 		camera::init(save_data.camera_position);
-		player = new Player(save_data.player_direction, save_data.player_health);
+		player = new game::Player(save_data.player_direction, save_data.player_health);
 
 		//Init sidemenu
-		sidemenu::init(save_id);
+		game::sidemenu::init(save_id);
 
 		//Load inventory
-		inventory::init();
-		inventory::load(decompress_items(save_data.items));
+		game::inventory::init();
+		game::inventory::load(decompress_items(save_data.items));
 
 		//Load game object states
-		game_objects::init();
-		game_objects::load_saves(save_data.game_objects);
+		game::game_objects::init();
+		game::game_objects::load_saves(save_data.game_objects);
 
 		//Load game time
 		game_time::init();

@@ -6,7 +6,7 @@
 
 #include "../../../engine/ui/listbox.hpp"
 
-namespace inventory {
+namespace game::inventory {
 	void init();
 	void load(std::vector<Listbox::Item> loaded_items);
 	void cleanup();

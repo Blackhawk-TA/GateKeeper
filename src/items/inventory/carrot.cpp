@@ -16,8 +16,8 @@ Listbox::Item listbox_item::create_carrot(uint8_t type_id) {
 		true,
 		1,
 		[] {
-			if (Player::get_health() < 100) {
-				Player::heal(15);
+			if (game::Player::get_health() < 100) {
+				game::Player::heal(15);
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

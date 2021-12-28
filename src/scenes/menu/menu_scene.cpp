@@ -7,52 +7,54 @@
 #include "../../items/items.hpp"
 #include "../../utils/saves/options.hpp"
 
-MenuScene::MenuScene() {
-	last_buttons = 0;
-	changed = 0;
+namespace menu {
+	Scene::Scene() {
+		last_buttons = 0;
+		changed = 0;
 
-	create_list_entries();
+		create_list_entries();
 
-	listbox = new Listbox(Rect(15, 0, 5, 6), saves, false);
-}
-
-MenuScene::~MenuScene() {
-	delete listbox;
-	listbox = nullptr;
-}
-
-void MenuScene::create_list_entries() {
-	for (uint8_t i = 0u; i < options::save_count; i++) {
-		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::LOAD_SAVE, i + 1));
+		listbox = new Listbox(Rect(15, 0, 5, 6), saves, false);
 	}
 
-	if (options::save_count < options::MAX_SAVES) {
-		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, options::save_count + 1));
+	Scene::~Scene() {
+		delete listbox;
+		listbox = nullptr;
 	}
 
-	saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::MENU_OPTIONS));
-}
+	void Scene::create_list_entries() {
+		for (uint8_t i = 0u; i < options::save_count; i++) {
+			saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::LOAD_SAVE, i + 1));
+		}
 
-void MenuScene::render(uint32_t time) {
-	screen.pen = Pen(0, 0, 0, 255);
-	screen.rectangle(Rect(0, 0, 320, 240));
+		if (options::save_count < options::MAX_SAVES) {
+			saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, options::save_count + 1));
+		}
 
-	listbox->draw();
-}
-
-void MenuScene::update(uint32_t time) {
-}
-
-void MenuScene::inputs() {
-	changed = buttons ^ last_buttons;
-
-	if (buttons & changed & Button::DPAD_UP) {
-		listbox->cursor_up();
-	} else if (buttons & changed & Button::DPAD_DOWN) {
-		listbox->cursor_down();
-	} else if (buttons & changed & Button::A) {
-		listbox->cursor_press();
+		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::MENU_OPTIONS));
 	}
 
-	last_buttons = buttons;
+	void Scene::render(uint32_t time) {
+		screen.pen = Pen(0, 0, 0, 255);
+		screen.rectangle(Rect(0, 0, 320, 240));
+
+		listbox->draw();
+	}
+
+	void Scene::update(uint32_t time) {
+	}
+
+	void Scene::inputs() {
+		changed = buttons ^ last_buttons;
+
+		if (buttons & changed & Button::DPAD_UP) {
+			listbox->cursor_up();
+		} else if (buttons & changed & Button::DPAD_DOWN) {
+			listbox->cursor_down();
+		} else if (buttons & changed & Button::A) {
+			listbox->cursor_press();
+		}
+
+		last_buttons = buttons;
+	}
 }

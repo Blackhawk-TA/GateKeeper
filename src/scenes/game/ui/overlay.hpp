@@ -5,6 +5,6 @@
 #pragma once
 #include "32blit.hpp"
 
-namespace overlay {
+namespace game::overlay {
 	void draw_statusbar(uint8_t health);
 }

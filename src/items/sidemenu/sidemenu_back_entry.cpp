@@ -16,11 +16,11 @@ Listbox::Item listbox_item::create_back_entry(uint8_t type_id) {
 		false,
 		0,
 		[] {
-			if (inventory::is_open()) {
-				inventory::close();
-				sidemenu::open();
-			} else if (sidemenu::is_open()) {
-				sidemenu::close();
+			if (game::inventory::is_open()) {
+				game::inventory::close();
+				game::sidemenu::open();
+			} else if (game::sidemenu::is_open()) {
+				game::sidemenu::close();
 			}
 			return Listbox::Tooltip::SUPPRESS;
 		}

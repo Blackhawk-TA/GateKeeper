@@ -11,7 +11,7 @@ using namespace blit;
 /**
  * Connects the entries with their interior by linking the coordinates on the specific tile maps.
  */
-namespace entry_handler {
+namespace game::entry_handler {
 	struct Entry {
 		Point exterior;
 		Point interior;
