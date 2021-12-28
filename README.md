@@ -34,6 +34,7 @@ make
 
 ## Sprites
 All sprites were created by [Gif](https://gif-superretroworld.itch.io/), [Noiracide](https://noiracide.itch.io/) and [TheRoro](https://drpixelo.itch.io/).
-The packs can be found here: https://gif-superretroworld.itch.io/ \
+The packs can be found here: https://gif-superretroworld.itch.io.
+The non character enemies were made by [vryell](https://vryell.itch.io/tiny-enemies-vol1). \
 I modified all character sprites to fit the 16x16 tile bounds.
 The white tiles with borders used for in game menus were made by me.
