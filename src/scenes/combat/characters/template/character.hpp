@@ -9,9 +9,18 @@
 namespace combat {
 	class Character {
 	public:
-		explicit Character(CharacterData character_data, Point position);
+		explicit Character(CharacterData character_data, Point position, Point attack_position);
 		virtual ~Character() = default;
 		void draw();
+		void update();
+
+	protected:
+		enum MovementDirection {
+			LEFT = 1,
+			RIGHT = 2,
+		};
+
+		MovementDirection direction;
 
 	private:
 		const Size SIZE = Size(1, 1);
@@ -19,6 +28,9 @@ namespace combat {
 		uint16_t tile_id;
 		Point position;
 		Point screen_position;
+		Point attack_position; //The position at which the attack animation is done
 		Size spritesheet_size;
+
+		void walk_to_attack_position();
 	};
 }

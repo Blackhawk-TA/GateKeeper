@@ -34,7 +34,8 @@ namespace combat {
 	}
 
 	void Scene::update(uint32_t time) {
-
+		enemy->update();
+		player->update();
 	}
 
 	void Scene::inputs() {

@@ -6,8 +6,9 @@
 #include "../../../../engine/camera.hpp"
 
 namespace combat {
-	Character::Character(CharacterData character_data, Point position) {
+	Character::Character(CharacterData character_data, Point position, Point attack_position) {
 		Character::position = position;
+		Character::attack_position = attack_position;
 
 		movement_sprites = character_data.movement_sprites;
 		tile_id = movement_sprites.at(0);
@@ -27,5 +28,18 @@ namespace combat {
 			screen_position - camera::get_screen_position(),
 			SpriteTransform::NONE
 		);
+	}
+
+	void Character::update() {
+	}
+
+	void Character::walk_to_attack_position() {
+		if (direction == LEFT && position.x >= attack_position.x) {
+			screen_position.x -= 1;
+		} else if (direction == RIGHT && position.x <= attack_position.x) {
+			screen_position.x += 1;
+		}
+
+		position = screen_to_world(screen_position);
 	}
 }
