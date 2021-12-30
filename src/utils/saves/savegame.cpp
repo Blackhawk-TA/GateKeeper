@@ -76,7 +76,7 @@ std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, MAX_ITEMS
  * @return A full list of game object saves
  */
 //TODO causes crash when on pico sometimes when going to snowland, solution: maybe one game_object save slot per map section
-// also check item load handling with 256 items, definitely decrease max amount
+// it works for items, why not for game objects?
 std::array<game::GameObject::Save, MAX_GAME_OBJECTS> get_game_object_saves(uint8_t save_id) {
 	//The game object data which is currently in memory from the current map section
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> current_game_objects = game::game_objects::get_saves();

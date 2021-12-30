@@ -29,7 +29,8 @@ namespace game {
 		uint8_t enabled_lever = blit::random() % 3;
 		GameObject::Signature interaction_signature = { //The signature of the door that the levers open
 			map::DUNGEON,
-			Point(14, 36)
+			14,
+			36
 		};
 
 		//TODO requires save after map section change, and save inserting to the correct array indexes
@@ -42,7 +43,7 @@ namespace game {
 				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(48, 36), 72, Character::DOWN, false));
 				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(11, 35), 72, Character::RIGHT, false));
 				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(18, 35), 72, Character::LEFT, false));
-				game_object_collection.emplace_back(new DungeonDoor(interaction_signature.map_section, interaction_signature.position));
+				game_object_collection.emplace_back(new DungeonDoor( static_cast<map::MapSection>(interaction_signature.map_section), Point(interaction_signature.x, interaction_signature.y)));
 				game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(37, 36), interaction_signature, enabled_lever == 0));
 				game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(43, 36), interaction_signature, enabled_lever == 1));
 				game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(49, 36), interaction_signature, enabled_lever == 2));
@@ -110,11 +111,11 @@ namespace game {
 	}
 
 	bool game_objects::has_equal_signature(GameObject::Signature sig1, GameObject::Signature sig2) {
-		return sig1.map_section == sig2.map_section && sig1.position == sig2.position;
+		return sig1.map_section == sig2.map_section && sig1.x == sig2.x && sig1.y == sig2.y;
 	}
 
 	bool game_objects::is_empty_signature(GameObject::Signature signature) {
-		return signature.map_section == map::NO_MAP && signature.position == Point(0, 0);
+		return signature.map_section == map::NO_MAP && signature.x == 0 && signature.y == 0;
 	}
 
 	std::array<GameObject::Save, MAX_GAME_OBJECTS> game_objects::get_saves() {
@@ -128,7 +129,7 @@ namespace game {
 	}
 
 	void game_objects::load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects) {
-		GameObject::Signature signature;
+		GameObject::Signature signature{};
 		GameObject::Save *saved_object;
 		uint8_t i = 0;
 		bool array_end = false;

@@ -15,8 +15,9 @@ namespace game {
 		 * A struct consisting of the map_section and position of a game object to create a unique signature.
 		 */
 		struct Signature {
-			map::MapSection map_section; //TODO change to uint8_t
-			Point position; //TODO save memory by using x,y uint8_t
+			uint8_t map_section; //The map section on which the game object exists
+			uint8_t x; //The x position of the game object
+			uint8_t y; //The y position of the game object
 		};
 
 		/**

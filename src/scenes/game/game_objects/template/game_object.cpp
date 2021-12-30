@@ -17,8 +17,9 @@ namespace game {
 
 		//Generate object signature
 		signature = Signature{
-			map_section,
-			position
+			static_cast<uint8_t>(map_section),
+			static_cast<uint8_t>(position.x),
+			static_cast<uint8_t>(position.y),
 		};
 	}
 
