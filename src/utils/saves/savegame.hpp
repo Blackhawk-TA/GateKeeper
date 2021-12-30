@@ -7,6 +7,7 @@
 #include "../../scenes/game/player.hpp"
 #include "../../items/items.hpp"
 #include "../../scenes/game/handlers/game_objects/game_object_handler.hpp"
+#include "../movement_direction.hpp"
 
 namespace savegame {
 	const uint8_t VERSION = 0;
@@ -19,6 +20,7 @@ namespace savegame {
 		uint8_t version;
 		map::MapSection map_section;
 		Point camera_position;
+		Point previous_camera_position;
 		MovementDirection player_direction;
 		uint8_t player_health;
 		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects; //TODO this causes save warning
@@ -28,6 +30,6 @@ namespace savegame {
 
 	game::Player *create(uint8_t save_id);
 	void save(uint8_t save_id);
-	game::Player *load(uint8_t save_id);
+	game::Player *load(uint8_t save_id, bool previous_player_position = false);
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> load_game_objects(uint8_t save_id);
 }

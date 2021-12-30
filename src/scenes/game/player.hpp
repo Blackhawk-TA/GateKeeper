@@ -7,6 +7,7 @@
 #include "../../engine/camera.hpp"
 #include "game_objects/objects/stargate.hpp"
 #include "../../game.hpp"
+#include "../../utils/movement_direction.hpp"
 
 using namespace blit;
 
@@ -25,9 +26,8 @@ namespace game {
 		static void heal(uint8_t heal_amount);
 		static MovementDirection get_direction();
 		static void change_direction(MovementDirection direction, bool animate = true);
-		static void start_cut_scene();
+		static void set_cut_scene(bool value);
 		static bool in_cut_scene();
-		static bool has_sword();
 		static CharacterData get_character_data();
 
 	private:

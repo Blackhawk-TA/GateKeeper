@@ -135,6 +135,7 @@ void savegame::save(uint8_t save_id) {
 		savegame::VERSION,
 		map::get_section(),
 		camera::get_player_position(),
+		camera::get_previous_player_position(),
 		game::Player::get_direction(),
 		game::Player::get_health(),
 		get_game_object_saves(save_id),
@@ -145,7 +146,9 @@ void savegame::save(uint8_t save_id) {
 	write_save(game_data, save_id);
 }
 
-game::Player *savegame::load(uint8_t save_id) {
+//TODO will handle set position to hospital/home and reset health on death.
+// might need major rewriting
+game::Player *savegame::load(uint8_t save_id, bool previous_player_position) {
 	game::Player *player;
 	GameData save_data;
 
@@ -157,10 +160,19 @@ game::Player *savegame::load(uint8_t save_id) {
 			//TODO port save using structs for each save version
 		}
 
-		//Load position and direction
+		//Load the map section
 		map::load_section(save_data.map_section);
-		camera::init(save_data.camera_position);
-		player = new game::Player(save_data.player_direction, save_data.player_health, save_id);
+
+		//Load position and direction
+		MovementDirection direction = save_data.player_direction;
+		Point camera_position = save_data.camera_position;
+		//Set the player position one step back if the flag is set
+		if (previous_player_position) {
+			camera_position = save_data.previous_camera_position;
+			direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
+		}
+		camera::init(camera_position);
+		player = new game::Player(direction, save_data.player_health, save_id);
 
 		//Init sidemenu
 		game::sidemenu::init(save_id);

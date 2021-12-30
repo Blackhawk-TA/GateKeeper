@@ -3,6 +3,7 @@
 //
 #include "character.hpp"
 #include "../../../../../engine/camera.hpp"
+#include "../../../player.hpp"
 
 namespace game {
 	Character::Character(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool turn)
@@ -90,18 +91,33 @@ namespace game {
 		}
 	}
 
+	bool Character::walk_straight_line(Point &p) {
+		//Can only walk straight lines
+		if (position.x != p.x && position.y != p.y) {
+			return false;
+		}
+
+		if (current_direction == UP && position.y > p.y) {
+			screen_position.y -= 1;
+			return true;
+		} else if (current_direction == DOWN && position.y + 1 < p.y) {
+			screen_position.y += 1;
+			return true;
+		} else if (current_direction == LEFT && position.x > p.x) {
+			screen_position.x -= 1;
+			return true;
+		} else if (current_direction == RIGHT && position.x + 1 < p.x) {
+			screen_position.x += 1;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	void Character::walk_to_player() {
 		Point player_position = camera::get_player_position();
 
-		if (current_direction == UP && position.y > player_position.y) {
-			screen_position.y -= 1;
-		} else if (current_direction == DOWN && position.y + 1 < player_position.y) {
-			screen_position.y += 1;
-		} else if (current_direction == LEFT && position.x > player_position.x) {
-			screen_position.x -= 1;
-		} else if (current_direction == RIGHT && position.x + 1 < player_position.x) {
-			screen_position.x += 1;
-		} else {
+		if (!walk_straight_line(player_position)) {
 			//Enemy is standing in front of player and starts combat
 			is_moving = false;
 			tile_id = animation_sprites[0];
@@ -117,6 +133,25 @@ namespace game {
 			|| (current_direction == DOWN && position.x == player_position.x && position.y < player_position.y)
 			|| (current_direction == LEFT && position.y == player_position.y && position.x > player_position.x)
 			|| (current_direction == RIGHT && position.y == player_position.y && position.x < player_position.x);
+	}
+
+	void Character::player_face_character() {
+		switch (current_direction) {
+			case NO_DIRECTION:
+				break;
+			case UP:
+				Player::change_direction(MovementDirection::DOWN, false);
+				break;
+			case DOWN:
+				Player::change_direction(MovementDirection::UP, false);
+				break;
+			case LEFT:
+				Player::change_direction(MovementDirection::RIGHT, false);
+				break;
+			case RIGHT:
+				Player::change_direction(MovementDirection::LEFT, false);
+				break;
+		}
 	}
 
 	void Character::trigger_cut_scene() {}

@@ -48,7 +48,7 @@ namespace game {
 		if (!in_action && !Player::in_cut_scene() && !transition::in_progress() && player_in_sightline()) {
 			in_action = true;
 			is_moving = true;
-			Player::start_cut_scene();
+			Player::set_cut_scene(true);
 		}
 
 		if (is_moving) {
@@ -57,31 +57,22 @@ namespace game {
 	}
 
 	void Enemy::trigger_cut_scene() {
-		switch (current_direction) {
-			case NO_DIRECTION:
-				break;
-			case UP:
-				Player::change_direction(MovementDirection::DOWN, false);
-				break;
-			case DOWN:
-				Player::change_direction(MovementDirection::UP, false);
-				break;
-			case LEFT:
-				Player::change_direction(MovementDirection::RIGHT, false);
-				break;
-			case RIGHT:
-				Player::change_direction(MovementDirection::LEFT, false);
-				break;
-		}
+		Character::player_face_character();
+		textbox = new Textbox("I cannot let you pass.");
+	}
 
-		//TODO might require temp save so returning after fight is not broken
-		auto combat_data = CombatData{
+	void Enemy::close_textbox() {
+		GameObject::close_textbox();
+
+		CombatData combat_data = {
 			map_section,
 			Player::get_character_data(),
-			CharacterData {
+			CharacterData{
 				movement_sprites.at(RIGHT),
 				0,
-				0
+				0,
+				true,
+				true,
 			}
 		};
 		load_scene(SceneType::COMBAT, 0, combat_data);

@@ -3,87 +3,100 @@
 //
 
 #include "items.hpp"
-#include "../game.hpp"
 
-Listbox::Item listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM item_type) {
-	Listbox::Item item;
+namespace listbox_item {
+	Listbox::Item create_inventory_item(INVENTORY_ITEM item_type) {
+		Listbox::Item item;
 
-	switch (item_type) {
-		case INVENTORY_ITEM::GATE_PART:
-			item = create_gate_part(INVENTORY_ITEM::GATE_PART);
-			break;
-		case INVENTORY_ITEM::APPLE:
-			item = create_apple(INVENTORY_ITEM::APPLE);
-			break;
-		case INVENTORY_ITEM::CARROT:
-			item = create_carrot(INVENTORY_ITEM::CARROT);
-			break;
-		case INVENTORY_ITEM::CARROT_SEED:
-			item = create_carrot_seed(INVENTORY_ITEM::CARROT_SEED);
-			break;
-		case INVENTORY_ITEM::INVENTORY_BACK:
-			item = create_back_entry(INVENTORY_ITEM::INVENTORY_BACK);
-			break;
+		switch (item_type) {
+			case INVENTORY_ITEM::GATE_PART:
+				item = create_gate_part(INVENTORY_ITEM::GATE_PART);
+				break;
+			case INVENTORY_ITEM::APPLE:
+				item = create_apple(INVENTORY_ITEM::APPLE);
+				break;
+			case INVENTORY_ITEM::CARROT:
+				item = create_carrot(INVENTORY_ITEM::CARROT);
+				break;
+			case INVENTORY_ITEM::CARROT_SEED:
+				item = create_carrot_seed(INVENTORY_ITEM::CARROT_SEED);
+				break;
+			case INVENTORY_ITEM::INVENTORY_BACK:
+				item = create_back_entry(INVENTORY_ITEM::INVENTORY_BACK);
+				break;
+		}
+
+		return item;
 	}
 
-	return item;
-}
+	Listbox::Item create_sidemenu_item(SIDEMENU_ITEM item_type, uint8_t save_id) {
+		Listbox::Item item;
 
-Listbox::Item listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_ITEM item_type, uint8_t save_id) {
-	Listbox::Item item;
+		switch (item_type) {
+			case SIDEMENU_ITEM::INVENTORY:
+				item = create_inventory_entry(SIDEMENU_ITEM::INVENTORY);
+				break;
+			case SIDEMENU_ITEM::SAVE:
+				item = create_save_entry(SIDEMENU_ITEM::SAVE, save_id);
+				break;
+			case SIDEMENU_ITEM::SIDEMENU_OPTIONS:
+				item = create_options_entry(SIDEMENU_ITEM::SIDEMENU_BACK, save_id);
+				break;
+			case SIDEMENU_ITEM::SIDEMENU_BACK:
+				item = create_back_entry(SIDEMENU_ITEM::SIDEMENU_BACK);
+				break;
+			case SIDEMENU_ITEM::QUIT:
+				item = create_quit_entry(SIDEMENU_ITEM::QUIT);
+				break;
+		}
 
-	switch (item_type) {
-		case SIDEMENU_ITEM::INVENTORY:
-			item = create_inventory_entry(SIDEMENU_ITEM::INVENTORY);
-			break;
-		case SIDEMENU_ITEM::SAVE:
-			item = create_save_entry(SIDEMENU_ITEM::SAVE, save_id);
-			break;
-		case SIDEMENU_ITEM::SIDEMENU_OPTIONS:
-			item = create_options_entry(SIDEMENU_ITEM::SIDEMENU_BACK, save_id);
-			break;
-		case SIDEMENU_ITEM::SIDEMENU_BACK:
-			item = create_back_entry(SIDEMENU_ITEM::SIDEMENU_BACK);
-			break;
-		case SIDEMENU_ITEM::QUIT:
-			item = create_quit_entry(SIDEMENU_ITEM::QUIT);
-			break;
+		return item;
 	}
 
-	return item;
-}
+	Listbox::Item create_menu_item(MENU_ITEM item_type, uint8_t save_id) {
+		std::string save_id_str = std::to_string(save_id);
 
-Listbox::Item listbox_item::create_menu_item(listbox_item::MENU_ITEM item_type, uint8_t save_id) {
-	std::string save_id_str = std::to_string(save_id);
+		Listbox::Item item;
 
-	Listbox::Item item;
+		switch (item_type) {
+			case MENU_ITEM::LOAD_SAVE:
+				item = create_load_entry(MENU_ITEM::LOAD_SAVE, save_id);
+				break;
+			case MENU_ITEM::NEW_SAVE:
+				item = create_new_save_entry(MENU_ITEM::NEW_SAVE, save_id);
+				break;
+			case MENU_ITEM::MENU_OPTIONS:
+				item = create_options_entry(MENU_ITEM::MENU_OPTIONS);
+				break;
+		}
 
-	switch (item_type) {
-		case MENU_ITEM::LOAD_SAVE:
-			item = create_load_entry(MENU_ITEM::LOAD_SAVE, save_id);
-			break;
-		case MENU_ITEM::NEW_SAVE:
-			item = create_new_save_entry(MENU_ITEM::NEW_SAVE, save_id);
-			break;
-		case MENU_ITEM::MENU_OPTIONS:
-			item = create_options_entry(MENU_ITEM::MENU_OPTIONS);
-			break;
+		return item;
 	}
 
-	return item;
-}
+	Listbox::Item create_options_item(OPTIONS_ITEM item_type, uint8_t save_id) {
+		Listbox::Item item;
 
-Listbox::Item listbox_item::create_options_item(listbox_item::OPTIONS_ITEM item_type, uint8_t save_id) {
-	Listbox::Item item;
+		switch (item_type) {
+			case OPTIONS_ITEM::SHOW_FPS:
+				item = create_show_fps_entry(OPTIONS_ITEM::SHOW_FPS);
+				break;
+			case OPTIONS_ITEM::OPTIONS_BACK:
+				item = create_options_exit_entry(OPTIONS_ITEM::OPTIONS_BACK, save_id);
+				break;
+		}
 
-	switch (item_type) {
-		case OPTIONS_ITEM::SHOW_FPS:
-			item = create_show_fps_entry(OPTIONS_ITEM::SHOW_FPS);
-			break;
-		case OPTIONS_ITEM::OPTIONS_BACK:
-			item = create_options_exit_entry(OPTIONS_ITEM::OPTIONS_BACK, save_id);
-			break;
+		return item;
 	}
 
-	return item;
+	Listbox::Item create_combat_item(COMBAT_ITEM item_type, uint8_t save_id) {
+		Listbox::Item item;
+
+		switch (item_type) {
+			case COMBAT_ITEM::ESCAPE:
+				item = create_combat_escape(COMBAT_ITEM::ESCAPE, save_id);
+				break;
+		}
+
+		return item;
+	}
 }

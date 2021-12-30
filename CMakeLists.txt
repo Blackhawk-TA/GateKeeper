@@ -29,6 +29,7 @@ set(PROJECT_SOURCE
         src/scenes/game/handlers/game_objects/extensions/character_handler.cpp src/scenes/game/handlers/game_objects/extensions/character_handler.hpp
         src/scenes/game/handlers/game_objects/extensions/stargate_handler.cpp src/scenes/game/handlers/game_objects/extensions/stargate_handler.hpp
         src/scenes/game/handlers/game_objects/extensions/dungeon_door_handler.cpp src/scenes/game/handlers/game_objects/extensions/dungeon_door_handler.hpp
+        src/items/combat/escape.cpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
         src/items/inventory/apple.cpp
@@ -66,6 +67,7 @@ set(PROJECT_SOURCE
         src/utils/saves/options.cpp src/utils/saves/options.hpp
         src/utils/utils.cpp src/utils/utils.hpp
         src/utils/game_time.cpp src/utils/game_time.hpp
+        src/utils/movement_direction.cpp src/utils/movement_direction.hpp
         src/utils/types.hpp
 )
 # ... and any other files you want in the release here

@@ -8,6 +8,7 @@
 #include "../../../../../engine/ui/textbox.hpp"
 #include "../../template/game_object.hpp"
 #include "../../../../../utils/types.hpp"
+#include "../../../../../utils/movement_direction.hpp"
 
 namespace game {
 	class Character : public GameObject {
@@ -37,7 +38,9 @@ namespace game {
 
 		virtual void trigger_cut_scene();
 		bool player_in_sightline();
+		bool walk_straight_line(Point &p);
 		void walk_to_player();
 		void change_direction(MovementDirection direction, bool animate = true);
+		void player_face_character();
 	};
 }

@@ -11,7 +11,7 @@
 namespace game {
 	class Scene : public IScene {
 	public:
-		explicit Scene(uint8_t save_id);
+		explicit Scene(uint8_t save_id, bool previous_player_position);
 		~Scene() override;
 		void render(uint32_t time) override;
 		void update(uint32_t time) override;

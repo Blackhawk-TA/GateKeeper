@@ -10,4 +10,4 @@ enum SceneType {
 };
 
 void load_previous_scene(uint8_t save_id = 0);
-void load_scene(SceneType scene_type, uint8_t save_id = 0, CombatData combat_data = {});
+void load_scene(SceneType scene_type, uint8_t save_id = 0, CombatData combat_data = {}, bool previous_player_position = false);

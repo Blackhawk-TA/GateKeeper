@@ -5,6 +5,7 @@
 #pragma once
 #include "../../../../utils/utils.hpp"
 #include "../../../../game.hpp"
+#include "../../../../utils/movement_direction.hpp"
 
 namespace combat {
 	class Character {
@@ -26,6 +27,7 @@ namespace combat {
 		Point screen_position;
 		Point attack_position; //The position at which the attack animation is done
 		Size spritesheet_size;
+		bool moving;
 
 		void walk_to_attack_position();
 	};

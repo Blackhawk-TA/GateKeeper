@@ -3,11 +3,13 @@
 //
 
 #include "combat_menu.hpp"
+#include "../../../items/items.hpp"
 
 namespace combat {
-	void menu::init() {
+	void menu::init(uint8_t save_id) {
 		control = nullptr;
 		items = {
+			listbox_item::create_combat_item(listbox_item::COMBAT_ITEM::ESCAPE, save_id),
 		};
 	}
 

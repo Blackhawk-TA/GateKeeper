@@ -11,6 +11,7 @@ namespace game {
 		void set_state(uint8_t new_state) override;
 		bool player_interact() override;
 		void trigger_cut_scene() override;
+		void close_textbox() override;
 
 	public:
 		explicit Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, bool turn = true);

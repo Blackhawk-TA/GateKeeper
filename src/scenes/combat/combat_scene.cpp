@@ -16,6 +16,7 @@ namespace combat {
 		load_combat_scene();
 
 		character_handler::init(combat_data);
+		menu::init(TMP_SAVE_ID);
 		menu::open();
 	}
 
@@ -35,7 +36,17 @@ namespace combat {
 	}
 
 	void Scene::inputs() {
+		changed = buttons ^ last_buttons;
 
+		if (buttons & changed & Button::DPAD_UP) {
+			menu::cursor_up();
+		} else if (buttons & changed & Button::DPAD_DOWN) {
+			menu::cursor_down();
+		} else if (buttons & changed & Button::A) {
+			menu::cursor_press();
+		}
+
+		last_buttons = buttons;
 	}
 
 	void Scene::load_combat_scene() {

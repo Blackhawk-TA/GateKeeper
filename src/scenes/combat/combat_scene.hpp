@@ -19,6 +19,8 @@ namespace combat {
 
 	private:
 		map::MapSection map_section;
+		uint32_t last_buttons;
+		uint32_t changed;
 		Enemy *enemy;
 		Player *player;
 

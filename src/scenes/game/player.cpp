@@ -3,6 +3,7 @@
 //
 
 #include <assets.hpp>
+#include <iostream>
 #include "player.hpp"
 #include "../../engine/effects/transition.hpp"
 #include "../../engine/flags.hpp"
@@ -98,6 +99,9 @@ namespace game {
 					case RIGHT:
 						evasion_position_modifier = Vec2(evasion_modifier, 0);
 						break;
+					default:
+						std::cerr << "Invalid map section" << std::endl;
+						exit(1);
 				}
 				sprite_id = animation_sprites[--sprite_index % ANIMATION_SPRITE_COUNT];
 			}
@@ -271,8 +275,8 @@ namespace game {
 		return health;
 	}
 
-	void Player::start_cut_scene() {
-		cut_scene = true;
+	void Player::set_cut_scene(bool value) {
+		cut_scene = value;
 	}
 
 	bool Player::in_cut_scene() {
@@ -283,11 +287,9 @@ namespace game {
 		return CharacterData{
 			movement_sprites.at(LEFT),
 			health,
-			level
+			level,
+			sword,
+			false,
 		};
-	}
-
-	bool Player::has_sword() {
-		return sword;
 	}
 }

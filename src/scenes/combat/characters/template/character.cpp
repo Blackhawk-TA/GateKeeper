@@ -14,6 +14,7 @@ namespace combat {
 		tile_id = movement_sprites.at(0);
 		screen_position = world_to_screen(position);
 		spritesheet_size = get_spritesheet_size(player_sprites->bounds);
+		moving = false;
 	}
 
 	void Character::draw() {

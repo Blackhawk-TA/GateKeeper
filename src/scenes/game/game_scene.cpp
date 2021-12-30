@@ -3,7 +3,6 @@
 //
 
 #include "game_scene.hpp"
-#include "../../game.hpp"
 #include "../../engine/effects/transition.hpp"
 #include "../../engine/flags.hpp"
 #include "../../utils/saves/savegame.hpp"
@@ -14,7 +13,7 @@
 #include "utils/utils.hpp"
 
 namespace game {
-	Scene::Scene(uint8_t save_id) {
+	Scene::Scene(uint8_t save_id, bool previous_player_position) {
 		Scene::save_id = save_id;
 		last_buttons = 0;
 		changed = 0;
@@ -34,7 +33,7 @@ namespace game {
 		flags::set_flags(flags::TileFlags::ENTRY, {141, 294, 515, 517, 773, 965, 1425, 1573});
 		flags::set_flags(flags::TileFlags::DEADLY, {56, 57, 58, 248, 249, 250});
 
-		player = savegame::load(save_id);
+		player = savegame::load(save_id, previous_player_position);
 	}
 
 	Scene::~Scene() {

@@ -10,6 +10,7 @@ const float camera_scale_float = 100.0f;
 bool moving;
 uint8_t velocity;
 Point camera_position;
+Point previous_camera_position;
 Point camera_offset;
 
 void camera::init(Point start_position) {
@@ -27,6 +28,10 @@ Point camera::get_player_position() {
 	return camera_position / camera_scale + get_screen_tiles() / 2;
 }
 
+Point camera::get_previous_player_position() {
+	return previous_camera_position / camera_scale + get_screen_tiles() / 2;
+}
+
 Point camera::get_world_position() {
 	return camera_position / camera_scale;
 }
@@ -37,10 +42,12 @@ Point camera::get_screen_position() {
 }
 
 void camera::set_position(Point position) {
+	previous_camera_position = camera_position;
 	camera_position = (position - get_screen_tiles() / 2) * camera_scale;
 }
 
 void camera::move(Point &offset) {
+	previous_camera_position = camera_position;
 	camera_offset = offset * camera_scale;
 	moving = true;
 }
