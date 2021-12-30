@@ -5,7 +5,7 @@
 #include "player.hpp"
 
 namespace combat {
-	CombatPlayer::CombatPlayer() : Character(Point(18, 11)) {
+	CombatPlayer::CombatPlayer(CharacterData character_data) : Character(character_data, Point(18, 11)) {
 
 	}
 }

@@ -11,7 +11,7 @@
 namespace combat {
 	class Scene : public IScene {
 	public:
-		explicit Scene(map::MapSections map_section);
+		explicit Scene(CombatData combat_data);
 		~Scene() override;
 		void render(uint32_t time) override;
 		void update(uint32_t time) override;

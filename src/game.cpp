@@ -39,11 +39,11 @@ void load_previous_scene(uint8_t save_id) {
 
 //TODO either implement own gameover screen or fix invalid read.
 // without transition, there are invalid reads and writes. Transitions somehow fix it
-void load_scene(SceneType scene_type, uint8_t save_id, map::MapSections map_section) {
+void load_scene(SceneType scene_type, uint8_t save_id, CombatData combat_data) {
 	previous_scene = current_scene;
 	current_scene = scene_type;
 
-	transition::start([scene_type, save_id, map_section] {
+	transition::start([scene_type, save_id, combat_data] {
 		delete scene;
 
 		switch (scene_type) {
@@ -57,7 +57,7 @@ void load_scene(SceneType scene_type, uint8_t save_id, map::MapSections map_sect
 				scene = new options::Scene(save_id);
 				break;
 			case SceneType::COMBAT:
-				scene = new combat::Scene(map_section);
+				scene = new combat::Scene(combat_data);
 				break;
 		}
 	});

@@ -6,6 +6,7 @@
 #include "../../utils/utils.hpp"
 #include "../../engine/camera.hpp"
 #include "game_objects/objects/stargate.hpp"
+#include "../../game.hpp"
 
 using namespace blit;
 
@@ -33,6 +34,7 @@ namespace game {
 		static void change_direction(MovementDirection direction, bool animate = true);
 		static void start_cut_scene();
 		static bool in_cut_scene();
+		static CharacterData get_character_data();
 
 	private:
 		const std::map<MovementDirection, Point> movements{
@@ -42,7 +44,6 @@ namespace game {
 			{RIGHT, Point(1, 0)},
 		};
 
-		static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 		static const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
 
 		const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> attack_sprites = {
@@ -62,6 +63,7 @@ namespace game {
 		static Vec2 evasion_position_modifier;
 		static float evasion_modifier;
 		static uint8_t health;
+		static uint8_t level;
 		static bool dead;
 
 		const uint8_t ATTACK_TILE_SIZE = 3;

@@ -75,7 +75,16 @@ namespace game {
 		}
 
 		//TODO might require temp save so returning after fight is not broken
-		load_scene(SceneType::COMBAT, 0, map_section);
+		auto combat_data = CombatData{
+			map_section,
+			Player::get_character_data(),
+			CharacterData {
+				movement_sprites.at(RIGHT),
+				0,
+				0
+			}
+		};
+		load_scene(SceneType::COMBAT, 0, combat_data);
 	}
 
 	void Enemy::set_state(uint8_t new_state) {}

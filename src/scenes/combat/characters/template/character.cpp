@@ -6,12 +6,13 @@
 #include "../../../../engine/camera.hpp"
 
 namespace combat {
-	Character::Character(Point position) {
+	Character::Character(CharacterData character_data, Point position) {
 		Character::position = position;
 
-		tile_id = 0;
+		movement_sprites = character_data.movement_sprites;
+		tile_id = movement_sprites.at(0);
 		screen_position = world_to_screen(position);
-		spritesheet_size = get_spritesheet_size(screen.bounds);
+		spritesheet_size = get_spritesheet_size(player_sprites->bounds);
 	}
 
 	void Character::draw() {

@@ -5,7 +5,5 @@
 #include "enemy.hpp"
 
 namespace combat {
-	Enemy::Enemy() : Character(Point(11, 11)) {
-
-	}
+	Enemy::Enemy(CharacterData character_data) : Character(character_data, Point(11, 11)) {}
 }

@@ -8,6 +8,6 @@
 namespace combat {
 	class CombatPlayer : public Character {
 	public:
-		explicit CombatPlayer();
+		explicit CombatPlayer(CharacterData character_data);
 	};
 }

@@ -27,7 +27,6 @@ namespace game {
 		void animate();
 
 	protected:
-		static constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 		static constexpr uint8_t DIRECTION_COUNT = 4;
 		static constexpr uint16_t ANIMATION_BASE_DELAY = 2500;
 		static constexpr uint16_t ANIMATION_VARIANCE = 2000;

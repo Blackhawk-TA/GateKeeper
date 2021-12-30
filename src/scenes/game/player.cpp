@@ -21,9 +21,10 @@ namespace game {
 	uint16_t Player::sprite_id = 0;
 	uint8_t Player::sprite_index = 0;
 	uint8_t Player::health = 100;
+	uint8_t Player::level = 1;
 	bool Player::dead = false;
-	std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT> Player::animation_sprites;
-	const std::map<Player::MovementDirection, std::array<uint16_t, Player::ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> Player::animation_sprites;
+	const std::map<Player::MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
 		{UP,    {112, 113, 114, 115}},
 		{DOWN,  {64,  65,  66,  67}},
 		{LEFT,  {80,  81,  82,  83}},
@@ -44,6 +45,7 @@ namespace game {
 		cut_scene = false;
 		dead = false;
 		evasion_modifier = 0;
+		level = 1; //TODO load level from save
 		evasion_position_modifier = Vec2(0, 0);
 
 		//Set player animation tiles
@@ -273,5 +275,13 @@ namespace game {
 
 	bool Player::in_cut_scene() {
 		return cut_scene;
+	}
+
+	CharacterData Player::get_character_data() {
+		return CharacterData{
+			movement_sprites.at(LEFT),
+			health,
+			level
+		};
 	}
 }

@@ -4,10 +4,11 @@
 
 #pragma once
 #include "template/character.hpp"
+#include "../../../game.hpp"
 
 namespace combat {
 	class Enemy : public Character {
 	public:
-		explicit Enemy();
+		explicit Enemy(CharacterData character_data);
 	};
 }
