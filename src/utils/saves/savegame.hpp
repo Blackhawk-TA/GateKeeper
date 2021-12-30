@@ -17,7 +17,7 @@ namespace savegame {
 
 	struct GameData { //TODO when changed after release, create GameDataV1 struct to allow porting the saves
 		uint8_t version;
-		map::MapSections map_section;
+		map::MapSection map_section;
 		Point camera_position;
 		game::Player::MovementDirection player_direction;
 		uint8_t player_health;

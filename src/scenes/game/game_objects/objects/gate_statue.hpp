@@ -26,7 +26,7 @@ namespace game {
 		void set_player_usable(bool usable) override;
 
 	public:
-		explicit GateStatue(map::MapSections map_section, Point position, bool player_usable);
+		explicit GateStatue(map::MapSection map_section, Point position, bool player_usable);
 		~GateStatue() override = default;
 		bool player_interact() override;
 		void update_state(Point next_position) override;

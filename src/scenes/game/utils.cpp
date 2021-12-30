@@ -7,7 +7,7 @@
 #include "../../utils/saves/savegame.hpp"
 
 namespace game::utils {
-	void teleport_player(map::MapSections map_section, Point position, Player::MovementDirection direction, uint8_t save_id) {
+	void teleport_player(map::MapSection map_section, Point position, Player::MovementDirection direction, uint8_t save_id) {
 		//Load map and set position
 		load_section(map_section);
 		camera::set_position(position);

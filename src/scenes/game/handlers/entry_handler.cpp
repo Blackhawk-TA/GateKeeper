@@ -13,7 +13,7 @@ namespace game {
 	 * @param current_map The section type of the current tile map
 	 * @return The id of the entry. If value is 255, no entry was found
 	 */
-	uint8_t entry_handler::get_id(Point &p, map::MapSections current_map) {
+	uint8_t entry_handler::get_id(Point &p, map::MapSection current_map) {
 		uint8_t id = 255; //Value 255 represents 'no entry found'
 		uint8_t i = 0;
 
@@ -35,7 +35,7 @@ namespace game {
 	 * @param save_id The id of the current save
 	 */
 	void entry_handler::teleport(uint8_t entry_id, Point next_position, uint8_t save_id) {
-		map::MapSections destination_map;
+		map::MapSection destination_map;
 		Point destination_position;
 		Player::MovementDirection player_direction;
 		entry_handler::Entry entry = entry_handler::connections[entry_id];

@@ -8,7 +8,7 @@
 namespace game {
 	class DungeonDoor : public GameObject {
 	public:
-		explicit DungeonDoor(map::MapSections map_section, Point position);
+		explicit DungeonDoor(map::MapSection map_section, Point position);
 		~DungeonDoor() override = default;
 		bool player_interact() override;
 		void update_state(Point next_position) override;

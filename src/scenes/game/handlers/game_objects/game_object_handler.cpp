@@ -24,7 +24,7 @@ namespace game {
 	std::vector<GameObject *> game_object_collection;
 
 	//TODO move game object creation data to external file, .txt or something similar
-	void game_objects::init(map::MapSections map_section) {
+	void game_objects::init(map::MapSection map_section) {
 		//Settings for dungeon
 		uint8_t enabled_lever = blit::random() % 3;
 		GameObject::Signature interaction_signature = { //The signature of the door that the levers open
@@ -114,7 +114,7 @@ namespace game {
 	}
 
 	bool game_objects::is_empty_signature(GameObject::Signature signature) {
-		return signature.map_section == 0 && signature.position == Point(0, 0);
+		return signature.map_section == map::NO_MAP && signature.position == Point(0, 0);
 	}
 
 	std::array<GameObject::Save, MAX_GAME_OBJECTS> game_objects::get_saves() {

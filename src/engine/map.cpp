@@ -13,7 +13,7 @@ using namespace blit;
 
 map::TileMap tile_map;
 Point screen_tiles;
-map::MapSections current_section;
+map::MapSection current_section;
 Pen background;
 
 /**
@@ -64,37 +64,37 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
  * Loads new map section into memory and deletes the old one
  * @param map_section The enum describing the map section
  */
-void map::load_section(MapSections map_section) { //TODO make sure only map data is in memory when loading new section
+void map::load_section(MapSection map_section) { //TODO make sure only map data is in memory when loading new section
 	map::TMX_16 *tmx = nullptr;
 
 	//Allocate memory for TileMap and copy it into memory
 	switch (map_section) {
-		case MapSections::DUNGEON:
+		case MapSection::DUNGEON:
 			tmx = (TMX_16 *) malloc(asset_dungeon_map_length);
 			memcpy(tmx, asset_dungeon_map, asset_dungeon_map_length);
 			background = Pen(48, 44, 46);
 			break;
-		case MapSections::GRASSLAND:
+		case MapSection::GRASSLAND:
 			tmx = (TMX_16 *) malloc(asset_grassland_map_length);
 			memcpy(tmx, asset_grassland_map, asset_grassland_map_length);
 			background = Pen(113, 170, 52);
 			break;
-		case MapSections::INTERIOR:
+		case MapSection::INTERIOR:
 			tmx = (TMX_16 *) malloc(asset_interior_map_length);
 			memcpy(tmx, asset_interior_map, asset_interior_map_length);
 			background = Pen(48, 44, 46);
 			break;
-		case MapSections::SNOWLAND:
+		case MapSection::SNOWLAND:
 			tmx = (TMX_16 *) malloc(asset_snowland_map_length);
 			memcpy(tmx, asset_snowland_map, asset_snowland_map_length);
 			background = Pen(223, 246, 245);
 			break;
-		case MapSections::DESERT:
+		case MapSection::DESERT:
 			tmx = (TMX_16 *) malloc(asset_desert_map_length);
 			memcpy(tmx, asset_desert_map, asset_desert_map_length);
 			background = Pen(244, 204, 161);
 			break;
-		case MapSections::DUNGEON_COMBAT:
+		case MapSection::DUNGEON_COMBAT:
 			tmx = (TMX_16 *) malloc(asset_dungeon_combat_map_length);
 			memcpy(tmx, asset_dungeon_combat_map, asset_dungeon_combat_map_length);
 			background = Pen(60, 89, 86);
@@ -184,7 +184,7 @@ uint8_t map::get_flag(Point &p) {
 	return flag_enum_id;
 }
 
-map::MapSections map::get_section() {
+map::MapSection map::get_section() {
 	return current_section;
 }
 

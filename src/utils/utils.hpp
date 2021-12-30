@@ -13,14 +13,6 @@ constexpr uint8_t MAX_ITEMS = 255;
 constexpr uint8_t MAX_GAME_OBJECTS = 255;
 constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 
-enum StargateAddresses {
-	GRASSLAND = 0,
-	GRASSLAND_ENDGAME = 1,
-	WINTER = 2,
-	DESERT = 3,
-	COUNTER = 4,
-};
-
 inline Surface *player_sprites;
 inline Surface *player_attack_sprites;
 

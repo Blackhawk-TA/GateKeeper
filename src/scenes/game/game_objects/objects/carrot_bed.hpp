@@ -30,7 +30,7 @@ namespace game {
 		bool in_use_range();
 
 	public:
-		explicit CarrotBed(map::MapSections map_section, Point position);
+		explicit CarrotBed(map::MapSection map_section, Point position);
 		~CarrotBed() override = default;
 		void update(uint32_t time) override;
 		bool player_interact() override;

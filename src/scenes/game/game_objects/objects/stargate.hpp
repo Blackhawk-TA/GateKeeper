@@ -6,6 +6,7 @@
 #include "../../../../utils/utils.hpp"
 #include "../../../../engine/map.hpp"
 #include "../template/game_object.hpp"
+#include "../../../../utils/types.hpp"
 
 namespace game {
 	class Stargate : public GameObject {
@@ -31,15 +32,15 @@ namespace game {
 		const Point ANIMATION_OFFSET = Point(GATE_SIZE.w - ANIMATION_SIZE.w, GATE_SIZE.h - ANIMATION_SIZE.h);
 
 		RenderStates state;
-		StargateAddresses address;
-		StargateAddresses destination;
+		StargateAddress address;
+		StargateAddress destination;
 		uint32_t activation_start_time;
 
 		void set_state(uint8_t new_state) override;
 		void set_inventory_usable(bool usable) override;
 
 	public:
-		explicit Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool inventory_usable);
+		explicit Stargate(map::MapSection map_section, Point position, StargateAddress address, StargateAddress destination, bool inventory_usable);
 		bool check_collision(Point next_position) override;
 		void draw() override;
 		void update(uint32_t time) override;
@@ -49,8 +50,8 @@ namespace game {
 
 		bool check_enter(Point next_position);
 		Point get_entry_point();
-		StargateAddresses get_destination();
-		StargateAddresses get_address();
-		map::MapSections get_map_section();
+		StargateAddress get_destination();
+		StargateAddress get_address();
+		map::MapSection get_map_section();
 	};
 }

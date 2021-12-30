@@ -9,7 +9,7 @@
 #include "../../ui/inventory.hpp"
 
 namespace game {
-	FruitTree::FruitTree(map::MapSections map_section, Point position, bool player_usable)
+	FruitTree::FruitTree(map::MapSection map_section, Point position, bool player_usable)
 	: GameObject(map_section, position, player_usable, false) {
 		size = Size(3, 3);
 		tile_id = TILE_ID_TREE;

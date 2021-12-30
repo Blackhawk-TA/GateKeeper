@@ -7,7 +7,7 @@
 #include "../../ui/inventory.hpp"
 
 namespace game {
-	GateStatue::GateStatue(map::MapSections map_section, Point position, bool player_usable)
+	GateStatue::GateStatue(map::MapSection map_section, Point position, bool player_usable)
 	: GameObject(map_section, position, player_usable, false) {
 		size = Size(1, 3);
 		GateStatue::set_player_usable(player_usable);

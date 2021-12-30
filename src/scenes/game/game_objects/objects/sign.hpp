@@ -14,7 +14,7 @@ namespace game {
 			WOOD = 2,
 		};
 
-		explicit Sign(map::MapSections map_section, Point position, Sign::SpriteType sprite_type, std::string text);
+		explicit Sign(map::MapSection map_section, Point position, Sign::SpriteType sprite_type, std::string text);
 		~Sign() override = default;
 		bool player_interact() override;
 		void update_state(Point next_position) override;

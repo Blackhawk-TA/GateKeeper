@@ -7,7 +7,7 @@
 #include "../../handlers/game_objects/extensions/dungeon_door_handler.hpp"
 
 namespace game {
-	Lever::Lever(map::MapSections map_section, Point position, Signature interaction_object, bool working) : GameObject( map_section, position, true, false) {
+	Lever::Lever(map::MapSection map_section, Point position, Signature interaction_object, bool working) : GameObject(map_section, position, true, false) {
 		tile_id = TILE_ID_OFF;
 		size = Size(1, 1);
 		Lever::working = working;

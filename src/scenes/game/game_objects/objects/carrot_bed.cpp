@@ -9,7 +9,7 @@
 #include "../../ui/inventory.hpp"
 
 namespace game {
-	CarrotBed::CarrotBed(map::MapSections map_section, Point position) : GameObject(map_section, position, false, false) {
+	CarrotBed::CarrotBed(map::MapSection map_section, Point position) : GameObject(map_section, position, false, false) {
 		size = Size(1, 1);
 		value = game_time::get_time() + GROW_STAGE_1_TIME + GROW_STAGE_2_TIME; //Value equals grow time
 		CarrotBed::set_state(PLANTED);

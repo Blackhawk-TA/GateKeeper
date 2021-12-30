@@ -6,7 +6,7 @@
 #include "../../../../engine/camera.hpp"
 
 namespace game {
-	Sign::Sign(map::MapSections map_section, Point position, Sign::SpriteType sprite_type, std::string text)
+	Sign::Sign(map::MapSection map_section, Point position, Sign::SpriteType sprite_type, std::string text)
 		: GameObject(map_section, position, true, false) {
 		Sign::text = std::move(text);
 		set_sprite(sprite_type);

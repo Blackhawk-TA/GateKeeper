@@ -13,7 +13,7 @@ namespace game {
 		void trigger_cut_scene() override;
 
 	public:
-		explicit Enemy(map::MapSections map_section, Point position, uint16_t tile_id, MovementDirection direction, bool turn = true);
+		explicit Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, bool turn = true);
 		~Enemy() override = default;
 		void update(uint32_t time) override;
 		void update_state(Point next_position) override;

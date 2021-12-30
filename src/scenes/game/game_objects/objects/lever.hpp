@@ -8,7 +8,7 @@
 namespace game {
 	class Lever : public GameObject {
 	public:
-		explicit Lever(map::MapSections map_section, Point position, Signature interaction_object, bool working);
+		explicit Lever(map::MapSection map_section, Point position, Signature interaction_object, bool working);
 		~Lever() override = default;
 		bool player_interact() override;
 		void update_state(Point next_position) override;

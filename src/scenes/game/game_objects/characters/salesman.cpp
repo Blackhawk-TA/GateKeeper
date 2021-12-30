@@ -6,7 +6,7 @@
 #include "../../../../engine/camera.hpp"
 
 namespace game {
-	Salesman::Salesman(map::MapSections map_section, Point position) : Character(map_section, position, true, false) {
+	Salesman::Salesman(map::MapSection map_section, Point position) : Character(map_section, position, true, false) {
 		tile_id = TILE_ID;
 		movement_sprites = {
 			{UP,    {116, 117, 118, 119}},

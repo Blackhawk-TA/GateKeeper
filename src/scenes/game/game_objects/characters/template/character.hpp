@@ -19,7 +19,7 @@ namespace game {
 			RIGHT = 4
 		};
 
-		Character(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable, bool turn = false);
+		Character(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool turn = false);
 		void draw() override;
 		void update(uint32_t time) override;
 		bool player_interact() override;

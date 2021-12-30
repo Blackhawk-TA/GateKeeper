@@ -5,7 +5,7 @@
 #include "../../../../engine/camera.hpp"
 
 namespace game {
-	GameObject::GameObject(map::MapSections map_section, Point position, bool player_usable, bool inventory_usable, bool draw_under_player) {
+	GameObject::GameObject(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool draw_under_player) {
 		GameObject::position = position;
 		GameObject::map_section = map_section;
 		GameObject::player_usable = player_usable;

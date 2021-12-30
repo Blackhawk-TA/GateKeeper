@@ -6,7 +6,7 @@
 #include "../../../../engine/camera.hpp"
 
 namespace game {
-	Stargate::Stargate(map::MapSections map_section, Point position, StargateAddresses address, StargateAddresses destination, bool inventory_usable)
+	Stargate::Stargate(map::MapSection map_section, Point position, StargateAddress address, StargateAddress destination, bool inventory_usable)
 		: GameObject(map_section, position, false, inventory_usable) {
 		Stargate::address = address;
 		Stargate::destination = destination;
@@ -144,7 +144,7 @@ namespace game {
 	 * Gets the destination gate to which this gate is linked
 	 * @return The destination gate
 	 */
-	StargateAddresses Stargate::get_destination() {
+	StargateAddress Stargate::get_destination() {
 		return destination;
 	}
 
@@ -152,7 +152,7 @@ namespace game {
 	 * Gets the address of the stargate
 	 * @return The address of the stargate
 	 */
-	StargateAddresses Stargate::get_address() {
+	StargateAddress Stargate::get_address() {
 		return address;
 	}
 
@@ -160,7 +160,7 @@ namespace game {
 	 * Gets the map section on which the gate is located
 	 * @return The map section of the gate
 	 */
-	map::MapSections Stargate::get_map_section() {
+	map::MapSection Stargate::get_map_section() {
 		return map_section;
 	}
 

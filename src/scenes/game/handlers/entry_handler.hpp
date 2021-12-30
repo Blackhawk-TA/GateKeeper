@@ -16,8 +16,8 @@ namespace game::entry_handler {
 		Point exterior;
 		Point interior;
 		Point interior_offset;
-		map::MapSections exterior_map;
-		map::MapSections interior_map;
+		map::MapSection exterior_map;
+		map::MapSection interior_map;
 	};
 
 	constexpr Entry connections[] = {
@@ -29,7 +29,7 @@ namespace game::entry_handler {
 		Entry{Point(52, 50), Point(19, 56), Point(1, 0), map::GRASSLAND, map::DUNGEON}
 	};
 
-	uint8_t get_id(Point &p, map::MapSections current_map);
+	uint8_t get_id(Point &p, map::MapSection current_map);
 	void teleport(uint8_t entry_id, Point next_position, uint8_t save_id);
 	bool enter(Point &next_position, uint8_t save_id);
 }

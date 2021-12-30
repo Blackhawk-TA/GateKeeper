@@ -18,7 +18,7 @@ namespace combat {
 		void inputs() override;
 
 	private:
-		map::MapSections map_section;
+		map::MapSection map_section;
 		Enemy *enemy;
 		CombatPlayer *player;
 

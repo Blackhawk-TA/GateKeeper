@@ -30,7 +30,7 @@ namespace game {
  */
 	Stargate *stargate_handler::get_destination_gate(Point next_position) {
 		bool teleport = false;
-		StargateAddresses destination_address;
+		StargateAddress destination_address;
 		Stargate *destination_gate = nullptr;
 		uint8_t i = 0;
 

@@ -13,7 +13,7 @@ namespace game {
 		void set_state(uint8_t new_state) override;
 
 	public:
-		explicit Villager(map::MapSections map_section, Point position, uint16_t tile_id, MovementDirection direction, std::string message);
+		explicit Villager(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, std::string message);
 		~Villager() override = default;
 		void update_state(Point next_position) override;
 		bool player_interact() override;

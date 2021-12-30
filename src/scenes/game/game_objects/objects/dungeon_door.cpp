@@ -7,7 +7,7 @@
 #include "../../player.hpp"
 
 namespace game {
-	DungeonDoor::DungeonDoor(map::MapSections map_section, Point position) : GameObject(map_section, position, true, false, false) {
+	DungeonDoor::DungeonDoor(map::MapSection map_section, Point position) : GameObject(map_section, position, true, false, false) {
 		tile_id = TILE_ID_CLOSED;
 		size = Size(2, 2);
 		DungeonDoor::set_state(CLOSED);

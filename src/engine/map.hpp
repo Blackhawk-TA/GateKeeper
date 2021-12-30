@@ -10,7 +10,7 @@
 using namespace blit;
 
 namespace map {
-	enum MapSections {
+	enum MapSection {
 		NO_MAP = 0,
 		DUNGEON = 1,
 		GRASSLAND = 2,
@@ -52,9 +52,9 @@ namespace map {
 	};
 
 	TileMap precalculate_tile_data(TMX_16 *tmx);
-	void load_section(MapSections map_section);
+	void load_section(MapSection map_section);
 	void draw();
 	uint8_t get_flag(Point &p);
-	MapSections get_section();
+	MapSection get_section();
 	bool point_in_area(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, uint8_t max_y);
 }

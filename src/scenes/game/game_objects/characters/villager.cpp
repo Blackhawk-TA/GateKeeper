@@ -6,7 +6,7 @@
 #include <utility>
 
 namespace game {
-	Villager::Villager(map::MapSections map_section, Point position, uint16_t tile_id, MovementDirection direction, std::string message)
+	Villager::Villager(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, std::string message)
 		: Character(map_section, position, true, false, true) {
 		Villager::message = std::move(message);
 		Villager::tile_id = tile_id;

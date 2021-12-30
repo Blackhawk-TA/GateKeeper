@@ -244,7 +244,7 @@ namespace game {
 	 */
 	void Player::gate_teleport(Stargate *destination_gate, uint8_t current_save_id) {
 		Point teleport_destination = destination_gate->get_entry_point();
-		map::MapSections destination_map_section = destination_gate->get_map_section();
+		map::MapSection destination_map_section = destination_gate->get_map_section();
 		if (map::get_section() != destination_map_section) {
 			utils::teleport_player(destination_map_section, teleport_destination, MovementDirection::DOWN, current_save_id);
 		}
