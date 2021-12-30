@@ -15,7 +15,7 @@ namespace game {
 	bool Player::attacking = false;
 	bool Player::evading = false;
 	bool Player::cut_scene = false;
-	Player::MovementDirection Player::current_direction;
+	Player::MovementDirection Player::current_direction = DOWN;
 	Vec2 Player::evasion_position_modifier;
 	float Player::evasion_modifier = 0;
 	uint16_t Player::sprite_id = 0;

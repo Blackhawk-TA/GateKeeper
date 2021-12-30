@@ -21,7 +21,7 @@ namespace savegame {
 		Point camera_position;
 		game::Player::MovementDirection player_direction;
 		uint8_t player_health;
-		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects;
+		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects; //TODO this causes save warning
 		std::array<Item, MAX_ITEMS> items;
 		uint32_t passed_time;
 	};
