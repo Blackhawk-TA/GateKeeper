@@ -7,8 +7,8 @@
 #include "../../game.hpp"
 
 namespace options {
-	Scene::Scene(uint8_t save_id) {
-		Scene::save_id = save_id;
+	Scene::Scene(SceneOptions options) {
+		Scene::save_id = options.save_id;
 		last_buttons = 0;
 		changed = 0;
 		option_items = {

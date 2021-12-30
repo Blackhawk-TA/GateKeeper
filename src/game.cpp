@@ -34,16 +34,19 @@ void init() {
 }
 
 void load_previous_scene(uint8_t save_id) {
-	load_scene(previous_scene, save_id);
+	SceneOptions options = {
+		save_id,
+	};
+	load_scene(previous_scene, options);
 }
 
 //TODO either implement own gameover screen or fix invalid read.
 // without transition, there are invalid reads and writes. Transitions somehow fix it
-void load_scene(SceneType scene_type, uint8_t save_id, CombatData combat_data, bool previous_player_position) {
+void load_scene(SceneType scene_type, SceneOptions options) {
 	previous_scene = current_scene;
 	current_scene = scene_type;
 
-	transition::start([scene_type, save_id, combat_data, previous_player_position] {
+	transition::start([scene_type, options] {
 		delete scene;
 
 		switch (scene_type) {
@@ -51,13 +54,13 @@ void load_scene(SceneType scene_type, uint8_t save_id, CombatData combat_data, b
 				scene = new menu::Scene();
 				break;
 			case SceneType::GAME:
-				scene = new game::Scene(save_id, previous_player_position);
+				scene = new game::Scene(options);
 				break;
 			case SceneType::OPTIONS:
-				scene = new options::Scene(save_id);
+				scene = new options::Scene(options);
 				break;
 			case SceneType::COMBAT:
-				scene = new combat::Scene(combat_data);
+				scene = new combat::Scene(options);
 				break;
 		}
 	});

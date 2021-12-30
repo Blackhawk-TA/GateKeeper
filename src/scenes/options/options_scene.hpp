@@ -6,11 +6,12 @@
 #include "../../utils/utils.hpp"
 #include "../scene_interface.hpp"
 #include "../../engine/ui/listbox.hpp"
+#include "../../utils/types.hpp"
 
 namespace options {
 	class Scene : public IScene {
 	public:
-		explicit Scene(uint8_t save_id = 0);
+		explicit Scene(SceneOptions options);
 		~Scene() override;
 		void render(uint32_t time) override;
 		void update(uint32_t time) override;

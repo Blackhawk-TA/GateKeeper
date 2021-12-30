@@ -9,16 +9,22 @@
 
 struct CharacterData {
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
-	uint8_t health{};
-	uint8_t level{};
-	bool sword{};
-	bool magic_powers{}; //TODO implement
+	uint8_t health = 100;
+	uint8_t level = 1;
+	bool sword = false;
+	bool magic_powers = false; //TODO implement
 };
 
 struct CombatData {
 	map::MapSection map_section{};
 	CharacterData player;
 	CharacterData enemy;
+};
+
+struct SceneOptions {
+	uint8_t save_id = 0;
+	CombatData combat_data = {};
+	bool previous_player_position = false;
 };
 
 enum StargateAddress {

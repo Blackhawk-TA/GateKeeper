@@ -75,7 +75,11 @@ namespace game {
 				true,
 			}
 		};
-		load_scene(SceneType::COMBAT, 0, combat_data);
+		SceneOptions options = {
+			0,
+			combat_data
+		};
+		load_scene(SceneType::COMBAT, options);
 	}
 
 	void Enemy::set_state(uint8_t new_state) {}

@@ -17,7 +17,10 @@ Listbox::Item listbox_item::create_new_save_entry(uint8_t type_id, uint8_t save_
 		false,
 		0,
 		[save_id] {
-			load_scene(SceneType::GAME, save_id);
+			SceneOptions options = {
+				save_id,
+			};
+			load_scene(SceneType::GAME, options);
 			return Listbox::Tooltip::SUCCESS;
 		}
 	};

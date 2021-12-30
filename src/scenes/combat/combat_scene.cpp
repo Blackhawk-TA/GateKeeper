@@ -11,11 +11,11 @@
 
 namespace combat {
 	//TODO use TMP_SAVE_ID when returning to game_scene
-	Scene::Scene(CombatData combat_data) {
-		map_section = combat_data.map_section;
+	Scene::Scene(SceneOptions options) {
+		map_section = options.combat_data.map_section;
 		load_combat_scene();
 
-		character_handler::init(combat_data);
+		character_handler::init(options.combat_data);
 		menu::init(TMP_SAVE_ID);
 		menu::open();
 	}

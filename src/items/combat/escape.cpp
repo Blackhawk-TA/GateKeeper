@@ -16,7 +16,12 @@ Listbox::Item listbox_item::create_combat_escape(uint8_t type_id, uint8_t save_i
 		0,
 		[save_id] {
 			if (blit::random() % 4 == 0) {
-				load_scene(SceneType::GAME, save_id, {}, true);
+				SceneOptions options = {
+					save_id,
+					{},
+					true
+				};
+				load_scene(SceneType::GAME, options);
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;
