@@ -6,8 +6,8 @@
 #include "template/character.hpp"
 
 namespace combat {
-	class CombatPlayer : public Character {
+	class Player : public Character {
 	public:
-		explicit CombatPlayer(CharacterData character_data);
+		explicit Player(CharacterData character_data);
 	};
 }

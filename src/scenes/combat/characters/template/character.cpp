@@ -30,7 +30,7 @@ namespace combat {
 		);
 	}
 
-	void Character::update() {
+	void Character::update(uint32_t time) {
 	}
 
 	void Character::walk_to_attack_position() {
@@ -41,5 +41,9 @@ namespace combat {
 		}
 
 		position = screen_to_world(screen_position);
+	}
+
+	void Character::animate(Timer &timer) {
+
 	}
 }

@@ -12,7 +12,8 @@ namespace combat {
 		explicit Character(CharacterData character_data, Point position, Point attack_position);
 		virtual ~Character() = default;
 		void draw();
-		void update();
+		void update(uint32_t time);
+		void animate(Timer &timer);
 
 	protected:
 		MovementDirection direction;

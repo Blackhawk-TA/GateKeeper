@@ -20,7 +20,7 @@ namespace combat {
 	private:
 		map::MapSection map_section;
 		Enemy *enemy;
-		CombatPlayer *player;
+		Player *player;
 
 		void load_combat_scene();
 	};

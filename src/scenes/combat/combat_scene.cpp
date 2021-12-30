@@ -7,6 +7,7 @@
 #include "../../engine/camera.hpp"
 #include "ui/combat_menu.hpp"
 #include "ui/combat_stats.hpp"
+#include "handlers/character_handler.hpp"
 
 namespace combat {
 	//TODO use TMP_SAVE_ID when returning to game_scene
@@ -14,28 +15,23 @@ namespace combat {
 		map_section = combat_data.map_section;
 		load_combat_scene();
 
-		enemy = new Enemy(combat_data.enemy);
-		player = new CombatPlayer(combat_data.player);
-
+		character_handler::init(combat_data);
 		menu::open();
 	}
 
 	Scene::~Scene() {
-		delete enemy;
-		delete player;
+		character_handler::cleanup();
 	};
 
 	void Scene::render(uint32_t time) {
 		map::draw();
-		enemy->draw();
-		player->draw();
+		character_handler::draw();
 		menu::draw();
 		stats::draw(90, 100, 10);
 	}
 
 	void Scene::update(uint32_t time) {
-		enemy->update();
-		player->update();
+		character_handler::update(time);
 	}
 
 	void Scene::inputs() {

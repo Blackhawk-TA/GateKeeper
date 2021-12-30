@@ -5,7 +5,7 @@
 #include "player.hpp"
 
 namespace combat {
-	CombatPlayer::CombatPlayer(CharacterData character_data)
+	Player::Player(CharacterData character_data)
 	: Character(character_data, Point(18, 11), Point(12, 11)) {
 		direction = LEFT;
 	}
