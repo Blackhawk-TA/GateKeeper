@@ -34,6 +34,7 @@ namespace game {
 		static void change_direction(MovementDirection direction, bool animate = true);
 		static void start_cut_scene();
 		static bool in_cut_scene();
+		static bool has_sword();
 		static CharacterData get_character_data();
 
 	private:
@@ -65,6 +66,7 @@ namespace game {
 		static uint8_t health;
 		static uint8_t level;
 		static bool dead;
+		static bool sword;
 
 		const uint8_t ATTACK_TILE_SIZE = 3;
 		Timer animation_timer;

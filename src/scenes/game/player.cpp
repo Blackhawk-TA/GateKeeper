@@ -15,14 +15,15 @@ namespace game {
 	bool Player::attacking = false;
 	bool Player::evading = false;
 	bool Player::cut_scene = false;
+	bool Player::dead = false;
+	bool Player::sword = false;
+	float Player::evasion_modifier = 0;
 	Player::MovementDirection Player::current_direction = DOWN;
 	Vec2 Player::evasion_position_modifier;
-	float Player::evasion_modifier = 0;
 	uint16_t Player::sprite_id = 0;
 	uint8_t Player::sprite_index = 0;
 	uint8_t Player::health = 100;
 	uint8_t Player::level = 1;
-	bool Player::dead = false;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 	const std::map<Player::MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
 		{UP,    {112, 113, 114, 115}},
@@ -44,6 +45,7 @@ namespace game {
 		evading = false;
 		cut_scene = false;
 		dead = false;
+		sword = false;
 		evasion_modifier = 0;
 		level = 1; //TODO load level from save
 		evasion_position_modifier = Vec2(0, 0);
@@ -283,5 +285,9 @@ namespace game {
 			health,
 			level
 		};
+	}
+
+	bool Player::has_sword() {
+		return sword;
 	}
 }
