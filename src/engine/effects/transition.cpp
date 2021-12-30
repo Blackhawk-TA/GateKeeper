@@ -8,7 +8,7 @@ using namespace blit;
 
 bool fading_in = true;
 Timer *transition_timer;
-uint8_t default_timer_duration = 8;
+uint8_t default_timer_duration = 7;
 uint8_t transition_alpha = 0;
 std::function<void()> transition_callback;
 
@@ -20,7 +20,7 @@ void fade(Timer &timer) {
 			transition_alpha += transition_steps;
 		} else {
 			transition_alpha = 255;
-			timer.duration = 100;
+			timer.duration = 250;
 			fading_in = false;
 
 			transition_callback();
