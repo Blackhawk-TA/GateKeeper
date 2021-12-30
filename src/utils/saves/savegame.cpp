@@ -116,7 +116,7 @@ game::Player *savegame::create(uint8_t save_id) {
 	game::game_objects::init(map::GRASSLAND);
 	game_time::init();
 
-	return new game::Player(game::Player::MovementDirection::DOWN, 100, save_id);
+	return new game::Player(MovementDirection::DOWN, 100, save_id);
 }
 
 void savegame::save(uint8_t save_id) {

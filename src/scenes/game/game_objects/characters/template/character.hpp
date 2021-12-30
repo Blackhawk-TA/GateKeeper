@@ -7,18 +7,11 @@
 #include "../../../../../engine/map.hpp"
 #include "../../../../../engine/ui/textbox.hpp"
 #include "../../template/game_object.hpp"
+#include "../../../../../utils/types.hpp"
 
 namespace game {
 	class Character : public GameObject {
 	public:
-		enum MovementDirection {
-			NO_DIRECTION = 0,
-			UP = 1,
-			DOWN = 2,
-			LEFT = 3,
-			RIGHT = 4
-		};
-
 		Character(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool turn = false);
 		void draw() override;
 		void update(uint32_t time) override;

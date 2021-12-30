@@ -61,16 +61,16 @@ namespace game {
 			case NO_DIRECTION:
 				break;
 			case UP:
-				Player::change_direction(Player::MovementDirection::DOWN, false);
+				Player::change_direction(MovementDirection::DOWN, false);
 				break;
 			case DOWN:
-				Player::change_direction(Player::MovementDirection::UP, false);
+				Player::change_direction(MovementDirection::UP, false);
 				break;
 			case LEFT:
-				Player::change_direction(Player::MovementDirection::RIGHT, false);
+				Player::change_direction(MovementDirection::RIGHT, false);
 				break;
 			case RIGHT:
-				Player::change_direction(Player::MovementDirection::LEFT, false);
+				Player::change_direction(MovementDirection::LEFT, false);
 				break;
 		}
 

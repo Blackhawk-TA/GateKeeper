@@ -14,7 +14,7 @@ namespace game {
 	}
 
 	bool DungeonDoor::player_interact() {
-		if (GameObject::player_usable && state == CLOSED && Player::get_direction() == Player::MovementDirection::UP
+		if (GameObject::player_usable && state == CLOSED && Player::get_direction() == MovementDirection::UP
 		&& (camera::get_player_position() == position + Point(0, size.h) || camera::get_player_position() == position + Point(size.w - 1, size.h))) {
 			textbox = new Textbox("The door is closed.");
 			return true;

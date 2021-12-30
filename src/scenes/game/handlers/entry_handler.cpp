@@ -37,17 +37,17 @@ namespace game {
 	void entry_handler::teleport(uint8_t entry_id, Point next_position, uint8_t save_id) {
 		map::MapSection destination_map;
 		Point destination_position;
-		Player::MovementDirection player_direction;
+		MovementDirection player_direction;
 		entry_handler::Entry entry = entry_handler::connections[entry_id];
 
 		if (next_position == entry.exterior) {
 			destination_map = entry.interior_map;
 			destination_position = entry.interior - entry.interior_offset;
-			player_direction = Player::MovementDirection::UP;
+			player_direction = MovementDirection::UP;
 		} else {
 			destination_map = entry.exterior_map;
 			destination_position = entry.exterior + Point(0, 1); //On exit teleport player in front of the door instead of directly on it
-			player_direction = Player::MovementDirection::DOWN;
+			player_direction = MovementDirection::DOWN;
 		}
 
 		utils::teleport_player(destination_map, destination_position, player_direction, save_id);

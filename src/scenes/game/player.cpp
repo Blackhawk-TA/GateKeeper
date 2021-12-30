@@ -18,14 +18,14 @@ namespace game {
 	bool Player::dead = false;
 	bool Player::sword = false;
 	float Player::evasion_modifier = 0;
-	Player::MovementDirection Player::current_direction = DOWN;
+	MovementDirection Player::current_direction = DOWN;
 	Vec2 Player::evasion_position_modifier;
 	uint16_t Player::sprite_id = 0;
 	uint8_t Player::sprite_index = 0;
 	uint8_t Player::health = 100;
 	uint8_t Player::level = 1;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> Player::animation_sprites;
-	const std::map<Player::MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
+	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
 		{UP,    {112, 113, 114, 115}},
 		{DOWN,  {64,  65,  66,  67}},
 		{LEFT,  {80,  81,  82,  83}},
@@ -254,7 +254,7 @@ namespace game {
 		game_objects::update_states(teleport_destination);
 	}
 
-	Player::MovementDirection Player::get_direction() {
+	MovementDirection Player::get_direction() {
 		return current_direction;
 	}
 

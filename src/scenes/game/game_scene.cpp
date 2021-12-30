@@ -125,13 +125,13 @@ namespace game {
 			}
 		} else {
 			if (buttons & Button::DPAD_UP) {
-				player->move(player->UP);
+				player->move(UP);
 			} else if (buttons & Button::DPAD_DOWN) {
-				player->move(player->DOWN);
+				player->move(DOWN);
 			} else if (buttons & Button::DPAD_LEFT) {
-				player->move(player->LEFT);
+				player->move(LEFT);
 			} else if (buttons & Button::DPAD_RIGHT) {
-				player->move(player->RIGHT);
+				player->move(RIGHT);
 			} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
 				sidemenu::open();
 			} else if (buttons & changed & Button::A) {

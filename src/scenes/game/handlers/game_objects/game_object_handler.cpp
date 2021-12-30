@@ -38,11 +38,11 @@ namespace game {
 			case map::DUNGEON:
 				game_object_collection.emplace_back(new GateStatue(map::DUNGEON, Point(14, 22), true));
 				game_object_collection.emplace_back(new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to keep the gate closed and protect the village."));
-				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(36, 36), 72, Character::DOWN, false));
-				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(42, 36), 72, Character::DOWN, false));
-				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(48, 36), 72, Character::DOWN, false));
-				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(11, 35), 72, Character::RIGHT, false));
-				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(18, 35), 72, Character::LEFT, false));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(36, 36), 72, DOWN, false));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(42, 36), 72, DOWN, false));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(48, 36), 72, DOWN, false));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(11, 35), 72, RIGHT, false));
+				game_object_collection.emplace_back(new Enemy(map::DUNGEON, Point(18, 35), 72, LEFT, false));
 				game_object_collection.emplace_back(new DungeonDoor( static_cast<map::MapSection>(interaction_signature.map_section), Point(interaction_signature.x, interaction_signature.y)));
 				game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(37, 36), interaction_signature, enabled_lever == 0));
 				game_object_collection.emplace_back(new Lever(map::DUNGEON, Point(43, 36), interaction_signature, enabled_lever == 1));
@@ -64,10 +64,10 @@ namespace game {
 				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 43)));
 				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(17, 43)));
 				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(18, 43)));
-				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24, 15), 0, Character::LEFT, "Hello there!"));
-				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, Character::RIGHT, "Hello I'm the elder of this village."));
+				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24, 15), 0, LEFT, "Hello there!"));
+				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, RIGHT, "Hello I'm the elder of this village."));
 //				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, Character::RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."));
-				game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 4, Character::DOWN, false));
+				game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 4, DOWN, false));
 				break;
 			case map::INTERIOR:
 				game_object_collection.emplace_back(new Salesman(map::INTERIOR, Point(31, 20)));

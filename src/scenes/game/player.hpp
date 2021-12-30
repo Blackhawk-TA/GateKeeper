@@ -14,13 +14,6 @@ namespace game {
 //TODO rewrite so it is similar to character
 	class Player {
 	public:
-		enum MovementDirection { //TODO player and character can use the same MovementDirection
-			UP = 1,
-			DOWN = 2,
-			LEFT = 3,
-			RIGHT = 4
-		};
-
 		explicit Player(MovementDirection direction, uint8_t player_health, uint8_t save_id);
 		void draw();
 		void attack();

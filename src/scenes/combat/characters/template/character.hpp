@@ -15,11 +15,6 @@ namespace combat {
 		void update();
 
 	protected:
-		enum MovementDirection {
-			LEFT = 1,
-			RIGHT = 2,
-		};
-
 		MovementDirection direction;
 
 	private:
