@@ -11,7 +11,7 @@
 #include "ui/inventory.hpp"
 #include "ui/overlay.hpp"
 #include "../../utils/game_time.hpp"
-#include "utils.hpp"
+#include "utils/utils.hpp"
 
 namespace game {
 	Scene::Scene(uint8_t save_id) {

@@ -9,7 +9,7 @@
 #include "handlers/game_objects/game_object_handler.hpp"
 #include "handlers/entry_handler.hpp"
 #include "handlers/game_objects/extensions/stargate_handler.hpp"
-#include "utils.hpp"
+#include "utils/utils.hpp"
 
 namespace game {
 	bool Player::attacking = false;

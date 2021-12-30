@@ -3,8 +3,8 @@
 //
 
 #include "utils.hpp"
-#include "handlers/game_objects/game_object_handler.hpp"
-#include "../../utils/saves/savegame.hpp"
+#include "../handlers/game_objects/game_object_handler.hpp"
+#include "../../../utils/saves/savegame.hpp"
 
 namespace game::utils {
 	void teleport_player(map::MapSection map_section, Point position, Player::MovementDirection direction, uint8_t save_id) {

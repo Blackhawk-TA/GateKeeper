@@ -2,9 +2,9 @@
 // Created by daniel on 28.12.21.
 //
 
-#include "../../utils/utils.hpp"
-#include "../../engine/map.hpp"
-#include "player.hpp"
+#include "../../../utils/utils.hpp"
+#include "../../../engine/map.hpp"
+#include "../player.hpp"
 
 namespace game::utils {
 	/**

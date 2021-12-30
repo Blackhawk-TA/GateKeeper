@@ -4,7 +4,7 @@
 #include "entry_handler.hpp"
 #include "../../../engine/effects/transition.hpp"
 #include "../player.hpp"
-#include "../utils.hpp"
+#include "../utils/utils.hpp"
 
 namespace game {
 	/**
