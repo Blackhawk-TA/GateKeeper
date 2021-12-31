@@ -38,6 +38,7 @@ namespace listbox_item {
 
 	enum COMBAT_ITEM {
 		ESCAPE = 1,
+		ATTACK = 2,
 	};
 
 	//Item generators
@@ -72,4 +73,5 @@ namespace listbox_item {
 
 	//Combat items
 	Listbox::Item create_combat_escape(uint8_t type_id, uint8_t save_id);
+	Listbox::Item create_combat_attack(uint8_t type_id);
 }

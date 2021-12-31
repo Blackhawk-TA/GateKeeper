@@ -9,6 +9,7 @@ namespace combat {
 	void attack_menu::init(uint8_t save_id) {
 		control = nullptr;
 		items = {
+			listbox_item::create_combat_item(listbox_item::COMBAT_ITEM::ATTACK),
 			listbox_item::create_combat_item(listbox_item::COMBAT_ITEM::ESCAPE, save_id),
 		};
 	}

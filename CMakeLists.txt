@@ -30,6 +30,7 @@ set(PROJECT_SOURCE
         src/scenes/game/handlers/game_objects/extensions/stargate_handler.cpp src/scenes/game/handlers/game_objects/extensions/stargate_handler.hpp
         src/scenes/game/handlers/game_objects/extensions/dungeon_door_handler.cpp src/scenes/game/handlers/game_objects/extensions/dungeon_door_handler.hpp
         src/items/combat/escape.cpp
+        src/items/combat/attack.cpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
         src/items/inventory/apple.cpp

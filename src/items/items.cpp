@@ -95,6 +95,9 @@ namespace listbox_item {
 			case COMBAT_ITEM::ESCAPE:
 				item = create_combat_escape(COMBAT_ITEM::ESCAPE, save_id);
 				break;
+			case COMBAT_ITEM::ATTACK:
+				item = create_combat_attack(COMBAT_ITEM::ATTACK);
+				break;
 		}
 
 		return item;
