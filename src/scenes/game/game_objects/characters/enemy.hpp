@@ -12,6 +12,8 @@ namespace game {
 		bool player_interact() override;
 		void trigger_cut_scene() override;
 		void close_textbox() override;
+		void start_interaction();
+		void start_fight();
 
 		std::string message;
 

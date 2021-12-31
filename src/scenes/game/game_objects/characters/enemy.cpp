@@ -59,14 +59,31 @@ namespace game {
 
 	void Enemy::trigger_cut_scene() {
 		Character::player_face_character();
+		start_interaction();
+	}
+
+	bool Enemy::player_interact() {
+		if (Character::player_interact()) {
+			start_interaction();
+			return true;
+		}
+		return false;
+	}
+
+	void Enemy::start_interaction() {
 		if (!message.empty()) {
 			textbox = new Textbox(message);
+		} else {
+			start_fight();
 		}
 	}
 
 	void Enemy::close_textbox() {
 		GameObject::close_textbox();
+		start_fight();
+	}
 
+	void Enemy::start_fight() {
 		CombatData combat_data = {
 			map_section,
 			Player::get_character_data(),
@@ -86,10 +103,5 @@ namespace game {
 	}
 
 	void Enemy::set_state(uint8_t new_state) {}
-
 	void Enemy::update_state(Point next_position) {}
-
-	bool Enemy::player_interact() {
-		return false;
-	}
 }
