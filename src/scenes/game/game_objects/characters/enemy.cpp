@@ -65,6 +65,7 @@ namespace game {
 
 	bool Enemy::player_interact() {
 		if (Character::player_interact()) {
+			in_action = true;
 			start_interaction();
 			return true;
 		}
