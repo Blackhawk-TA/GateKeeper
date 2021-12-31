@@ -24,14 +24,14 @@ namespace combat {
 
 		// Player health
 		screen.pen = Pen(0, 255, 0, 255);
-		screen.rectangle(Rect(50, 4, health / Character::MAX_HEALTH * BAR_LENGTH, 2));
+		screen.rectangle(Rect(50, 4, int(float(health) / float(Character::MAX_HEALTH) * BAR_LENGTH), 2));
 
 		//Player stamina
 		screen.pen = Pen(0, 215, 180, 255);
-		screen.rectangle(Rect(50, 4 + TEXT_DISTANCE, stamina / Player::MAX_STAMINA * BAR_LENGTH, 2));
+		screen.rectangle(Rect(50, 4 + TEXT_DISTANCE, int(float(stamina) / float(Player::MAX_STAMINA) * BAR_LENGTH), 2));
 
 		//Enemy health
 		screen.pen = Pen(255, 0, 0, 255);
-		screen.rectangle(Rect(50, 4 + 2 * TEXT_DISTANCE, enemy_health / Character::MAX_HEALTH * BAR_LENGTH, 2));
+		screen.rectangle(Rect(50, 4 + 2 * TEXT_DISTANCE, int(float(enemy_health) / float(Character::MAX_HEALTH) * BAR_LENGTH), 2));
 	}
 }
