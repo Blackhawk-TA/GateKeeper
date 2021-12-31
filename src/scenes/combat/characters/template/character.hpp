@@ -17,6 +17,7 @@ namespace combat {
 		void animate(Timer &timer);
 		void set_attacking(bool value);
 		uint8_t get_health() const;
+		void take_damage(uint8_t amount);
 		static const uint8_t MAX_HEALTH = 100;
 
 	protected:
@@ -34,6 +35,7 @@ namespace combat {
 		Size spritesheet_size;
 		bool attacking;
 		bool moving;
+		bool dead; //TODO maybe not needed
 
 		void walk_to_attack_position();
 	};

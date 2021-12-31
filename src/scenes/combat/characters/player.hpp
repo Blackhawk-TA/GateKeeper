@@ -8,9 +8,11 @@
 namespace combat {
 	class Player : public Character {
 	public:
+		static const uint8_t MAX_STAMINA = 100;
+
 		explicit Player(CharacterData character_data);
 		uint8_t get_stamina() const;
-		static const uint8_t MAX_STAMINA = 100;
+		bool use_stamina(uint8_t amount);
 
 	private:
 		uint8_t stamina;

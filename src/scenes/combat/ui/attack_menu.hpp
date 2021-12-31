@@ -4,12 +4,14 @@
 
 #pragma once
 #include "../../../engine/ui/listbox.hpp"
+#include "../characters/enemy.hpp"
+#include "../characters/player.hpp"
 
 namespace combat::attack_menu {
 	inline Listbox *control;
 	inline std::vector<Listbox::Item> items;
 
-	void init(uint8_t save_id);
+	void init(uint8_t save_id, Player *player, Enemy *enemy);
 	void open();
 	void close();
 	bool is_open();

@@ -88,7 +88,7 @@ namespace listbox_item {
 		return item;
 	}
 
-	Listbox::Item create_combat_item(COMBAT_ITEM item_type, uint8_t save_id) {
+	Listbox::Item create_combat_item(COMBAT_ITEM item_type, uint8_t save_id, combat::Player *player, combat::Enemy *enemy) {
 		Listbox::Item item;
 
 		switch (item_type) {
@@ -96,7 +96,7 @@ namespace listbox_item {
 				item = create_combat_escape(COMBAT_ITEM::ESCAPE, save_id);
 				break;
 			case COMBAT_ITEM::ATTACK:
-				item = create_combat_attack(COMBAT_ITEM::ATTACK);
+				item = create_combat_attack(COMBAT_ITEM::ATTACK, player, enemy);
 				break;
 		}
 

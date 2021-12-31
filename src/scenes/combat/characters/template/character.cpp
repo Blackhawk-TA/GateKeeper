@@ -60,4 +60,13 @@ namespace combat {
 	uint8_t Character::get_health() const {
 		return health;
 	}
+
+	void Character::take_damage(uint8_t amount) {
+		if (health - amount > 0) {
+			health -= amount;
+		} else {
+			health = 0;
+			dead = true;
+		}
+	}
 }

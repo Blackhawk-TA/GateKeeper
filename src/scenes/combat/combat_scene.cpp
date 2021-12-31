@@ -21,13 +21,13 @@ namespace combat {
 		enemy = character_handler::get_enemy();
 		player = character_handler::get_player();
 
-		attack_menu::init(TMP_SAVE_ID);
+		attack_menu::init(TMP_SAVE_ID, player, enemy);
 		attack_menu::open();
 	}
 
 	Scene::~Scene() {
 		character_handler::cleanup();
-	};
+	}
 
 	void Scene::render(uint32_t time) {
 		map::draw();

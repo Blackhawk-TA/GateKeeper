@@ -14,4 +14,14 @@ namespace combat {
 	uint8_t Player::get_stamina() const {
 		return stamina;
 	}
+
+	bool Player::use_stamina(uint8_t amount) {
+		if (stamina - amount > 0) {
+			stamina -= amount;
+			return true;
+		} else {
+			stamina = 0;
+			return false;
+		}
+	}
 }

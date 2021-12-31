@@ -4,6 +4,8 @@
 
 #pragma once
 #include "../engine/ui/listbox.hpp"
+#include "../scenes/combat/characters/player.hpp"
+#include "../scenes/combat/characters/enemy.hpp"
 
 /**
  * Contains the create function for all inventory items
@@ -46,7 +48,7 @@ namespace listbox_item {
 	Listbox::Item create_sidemenu_item(SIDEMENU_ITEM item_type, uint8_t save_id = 0);
 	Listbox::Item create_menu_item(MENU_ITEM item_type, uint8_t save_id = 0);
 	Listbox::Item create_options_item(OPTIONS_ITEM item_type, uint8_t save_id = 0);
-	Listbox::Item create_combat_item(COMBAT_ITEM item_type, uint8_t save_id = 0);
+	Listbox::Item create_combat_item(COMBAT_ITEM item_type, uint8_t save_id = 0, combat::Player *player = nullptr, combat::Enemy *enemy = nullptr);
 
 	//Generic items
 	Listbox::Item create_options_entry(uint8_t type_id, uint8_t save_id = 0);
@@ -73,5 +75,5 @@ namespace listbox_item {
 
 	//Combat items
 	Listbox::Item create_combat_escape(uint8_t type_id, uint8_t save_id);
-	Listbox::Item create_combat_attack(uint8_t type_id);
+	Listbox::Item create_combat_attack(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
 }

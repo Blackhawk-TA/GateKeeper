@@ -3,7 +3,6 @@
 //
 
 #include "../items.hpp"
-#include "../../game.hpp"
 
 Listbox::Item listbox_item::create_combat_escape(uint8_t type_id, uint8_t save_id) {
 	return Listbox::Item{
@@ -15,7 +14,7 @@ Listbox::Item listbox_item::create_combat_escape(uint8_t type_id, uint8_t save_i
 		false,
 		0,
 		[save_id] {
-			if (blit::random() % 4 == 0) {
+			if (blit::random() % 3 == 0) {
 				SceneOptions options = {
 					save_id,
 					{},
