@@ -3,14 +3,15 @@
 //
 
 #include "enemy.hpp"
+#include <utility>
 #include "../../player.hpp"
-#include "../../../../game.hpp"
 #include "../../../../engine/effects/transition.hpp"
 
 namespace game {
-	Enemy::Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, bool turn)
-		: Character(map_section, position, true, false) {
+	Enemy::Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, bool turn, std::string message)
+		: Character(map_section, position, true, false, turn) {
 		Enemy::tile_id = tile_id;
+		Enemy::message = std::move(message);
 		movement_sprites = {
 			{UP, {
 				static_cast<uint16_t>(tile_id + 48),
@@ -58,7 +59,9 @@ namespace game {
 
 	void Enemy::trigger_cut_scene() {
 		Character::player_face_character();
-		textbox = new Textbox("I cannot let you pass.");
+		if (!message.empty()) {
+			textbox = new Textbox(message);
+		}
 	}
 
 	void Enemy::close_textbox() {

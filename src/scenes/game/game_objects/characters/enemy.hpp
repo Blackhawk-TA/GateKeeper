@@ -13,8 +13,10 @@ namespace game {
 		void trigger_cut_scene() override;
 		void close_textbox() override;
 
+		std::string message;
+
 	public:
-		explicit Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, bool turn = true);
+		explicit Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, bool turn = false, std::string message = "");
 		~Enemy() override = default;
 		void update(uint32_t time) override;
 		void update_state(Point next_position) override;
