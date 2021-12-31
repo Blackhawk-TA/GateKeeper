@@ -10,12 +10,17 @@
 #include "handlers/character_handler.hpp"
 
 namespace combat {
-	//TODO use TMP_SAVE_ID when returning to game_scene
+	Player *player;
+	Enemy *enemy;
+
 	Scene::Scene(SceneOptions options) {
 		map_section = options.combat_data.map_section;
 		load_combat_scene();
 
 		character_handler::init(options.combat_data);
+		enemy = character_handler::get_enemy();
+		player = character_handler::get_player();
+
 		menu::init(TMP_SAVE_ID);
 		menu::open();
 	}
@@ -28,7 +33,7 @@ namespace combat {
 		map::draw();
 		character_handler::draw();
 		menu::draw();
-		stats::draw(90, 100, 10);
+		stats::draw(player->get_health(), player->get_stamina(), enemy->get_health());
 	}
 
 	void Scene::update(uint32_t time) {

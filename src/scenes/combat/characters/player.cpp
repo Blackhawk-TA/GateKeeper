@@ -8,5 +8,10 @@ namespace combat {
 	Player::Player(CharacterData character_data)
 	: Character(character_data, Point(18, 11), Point(12, 11)) {
 		direction = LEFT;
+		stamina = MAX_STAMINA;
+	}
+
+	uint8_t Player::get_stamina() const {
+		return stamina;
 	}
 }

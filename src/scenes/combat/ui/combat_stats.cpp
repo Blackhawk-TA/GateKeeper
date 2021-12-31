@@ -3,6 +3,8 @@
 //
 
 #include "combat_stats.hpp"
+#include "../characters/template/character.hpp"
+#include "../characters/player.hpp"
 
 namespace combat {
 	void stats::draw(uint8_t health, uint8_t stamina, uint8_t enemy_health) {
@@ -22,14 +24,14 @@ namespace combat {
 
 		// Player health
 		screen.pen = Pen(0, 255, 0, 255);
-		screen.rectangle(Rect(50, 4, 100, 2)); //TODO calc from health
+		screen.rectangle(Rect(50, 4, health / Character::MAX_HEALTH * BAR_LENGTH, 2));
 
 		//Player stamina
 		screen.pen = Pen(0, 215, 180, 255);
-		screen.rectangle(Rect(50, 4 + TEXT_DISTANCE, 107, 2));
+		screen.rectangle(Rect(50, 4 + TEXT_DISTANCE, stamina / Player::MAX_STAMINA * BAR_LENGTH, 2));
 
 		//Enemy health
 		screen.pen = Pen(255, 0, 0, 255);
-		screen.rectangle(Rect(50, 4 + 2 * TEXT_DISTANCE, 15, 2));
+		screen.rectangle(Rect(50, 4 + 2 * TEXT_DISTANCE, enemy_health / Character::MAX_HEALTH * BAR_LENGTH, 2));
 	}
 }
