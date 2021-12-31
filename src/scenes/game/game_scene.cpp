@@ -33,7 +33,11 @@ namespace game {
 		flags::set_flags(flags::TileFlags::ENTRY, {141, 294, 515, 517, 773, 965, 1425, 1573});
 		flags::set_flags(flags::TileFlags::DEADLY, {56, 57, 58, 248, 249, 250});
 
-		player = savegame::load(save_id, options.previous_player_position);
+		if (options.tmp_save) {
+			player = savegame::load(TMP_SAVE_ID, options.previous_player_position);
+		} else {
+			player = savegame::load(save_id);
+		}
 	}
 
 	Scene::~Scene() {

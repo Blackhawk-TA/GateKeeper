@@ -11,7 +11,7 @@ namespace game::game_objects {
 	/**
 	 * Creates the objects using their factory function
 	 */
-	void init(map::MapSection map_section);
+	void init(map::MapSection map_section, uint8_t save_id);
 
 	/**
 	 * Gets the game object collection

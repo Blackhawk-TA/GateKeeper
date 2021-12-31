@@ -18,6 +18,7 @@ Listbox::Item listbox_item::create_combat_escape(uint8_t type_id, uint8_t save_i
 				SceneOptions options = {
 					save_id,
 					{},
+					true,
 					true
 				};
 				load_scene(SceneType::GAME, options);

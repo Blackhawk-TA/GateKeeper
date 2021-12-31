@@ -8,9 +8,10 @@
 #include "../../../../engine/effects/transition.hpp"
 
 namespace game {
-	Enemy::Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, bool turn, std::string message)
+	Enemy::Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, uint8_t save_id, bool turn, std::string message)
 		: Character(map_section, position, true, false, turn) {
 		Enemy::tile_id = tile_id;
+		Enemy::save_id = save_id;
 		Enemy::message = std::move(message);
 		movement_sprites = {
 			{UP, {
@@ -96,8 +97,8 @@ namespace game {
 			}
 		};
 		SceneOptions options = {
-			0,
-			combat_data
+			save_id,
+			combat_data,
 		};
 		load_scene(SceneType::COMBAT, options);
 	}

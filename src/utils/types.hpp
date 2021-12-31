@@ -25,6 +25,7 @@ struct SceneOptions {
 	uint8_t save_id = 0;
 	CombatData combat_data = {};
 	bool previous_player_position = false;
+	bool tmp_save = false;
 };
 
 enum StargateAddress {

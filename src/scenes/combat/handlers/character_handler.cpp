@@ -24,6 +24,9 @@ namespace combat::character_handler {
 	}
 
 	void cleanup() {
+		animation_timer->stop();
+		delete animation_timer;
+
 		for (auto &character : character_collection) {
 			delete character;
 			character = nullptr;

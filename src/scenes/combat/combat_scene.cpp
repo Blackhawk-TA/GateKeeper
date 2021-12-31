@@ -20,13 +20,18 @@ namespace combat {
 		character_handler::init(options.combat_data);
 		enemy = character_handler::get_enemy();
 		player = character_handler::get_player();
+		changed = 0;
+		last_buttons = 0;
 
-		attack_menu::init(TMP_SAVE_ID, player, enemy);
+		attack_menu::init(options.save_id, player, enemy);
 		attack_menu::open();
 	}
 
 	Scene::~Scene() {
 		character_handler::cleanup();
+		if (attack_menu::is_open()) {
+			attack_menu::close();
+		}
 	}
 
 	void Scene::render(uint32_t time) {

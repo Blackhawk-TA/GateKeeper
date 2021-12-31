@@ -20,7 +20,7 @@ namespace game::utils {
 		game_objects::cleanup();
 
 		//Create game objects for next map section
-		game_objects::init(map_section);
+		game_objects::init(map_section, save_id);
 
 		//Load save to apply saved game object values for new map section
 		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects = savegame::load_game_objects(save_id);

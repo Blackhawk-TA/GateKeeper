@@ -113,7 +113,7 @@ game::Player *savegame::create(uint8_t save_id) {
 	camera::init(start_position);
 	game::sidemenu::init(save_id);
 	game::inventory::init();
-	game::game_objects::init(map::GRASSLAND);
+	game::game_objects::init(map::GRASSLAND, save_id);
 	game_time::init();
 
 	return new game::Player(MovementDirection::DOWN, 100, save_id);
@@ -131,7 +131,7 @@ void savegame::save(uint8_t save_id) {
 	std::vector<Listbox::Item> items = game::inventory::get_items();
 
 	//Save and compress data which will be saved
-	auto game_data = GameData{
+	GameData game_data = {
 		savegame::VERSION,
 		map::get_section(),
 		camera::get_player_position(),
@@ -182,7 +182,7 @@ game::Player *savegame::load(uint8_t save_id, bool previous_player_position) {
 		game::inventory::load(decompress_items(save_data.items));
 
 		//Load game object states
-		game::game_objects::init(save_data.map_section);
+		game::game_objects::init(save_data.map_section, save_id);
 		game::game_objects::load_saves(save_data.game_objects);
 
 		//Load game time
