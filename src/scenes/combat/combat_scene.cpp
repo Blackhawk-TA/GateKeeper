@@ -5,8 +5,8 @@
 #include <iostream>
 #include "combat_scene.hpp"
 #include "../../engine/camera.hpp"
-#include "ui/combat_menu.hpp"
-#include "ui/combat_stats.hpp"
+#include "ui/attack_menu.hpp"
+#include "ui/stats.hpp"
 #include "handlers/character_handler.hpp"
 
 namespace combat {
@@ -21,8 +21,8 @@ namespace combat {
 		enemy = character_handler::get_enemy();
 		player = character_handler::get_player();
 
-		menu::init(TMP_SAVE_ID);
-		menu::open();
+		attack_menu::init(TMP_SAVE_ID);
+		attack_menu::open();
 	}
 
 	Scene::~Scene() {
@@ -32,7 +32,7 @@ namespace combat {
 	void Scene::render(uint32_t time) {
 		map::draw();
 		character_handler::draw();
-		menu::draw();
+		attack_menu::draw();
 		stats::draw(player->get_health(), player->get_stamina(), enemy->get_health());
 	}
 
@@ -44,11 +44,11 @@ namespace combat {
 		changed = buttons ^ last_buttons;
 
 		if (buttons & changed & Button::DPAD_UP) {
-			menu::cursor_up();
+			attack_menu::cursor_up();
 		} else if (buttons & changed & Button::DPAD_DOWN) {
-			menu::cursor_down();
+			attack_menu::cursor_down();
 		} else if (buttons & changed & Button::A) {
-			menu::cursor_press();
+			attack_menu::cursor_press();
 		}
 
 		last_buttons = buttons;

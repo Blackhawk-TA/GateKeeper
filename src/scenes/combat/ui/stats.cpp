@@ -2,7 +2,7 @@
 // Created by daniel on 26.12.21.
 //
 
-#include "combat_stats.hpp"
+#include "stats.hpp"
 #include "../characters/template/character.hpp"
 #include "../characters/player.hpp"
 

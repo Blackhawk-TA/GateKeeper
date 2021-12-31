@@ -5,7 +5,7 @@
 #pragma once
 #include "../../../engine/ui/listbox.hpp"
 
-namespace combat::menu {
+namespace combat::attack_menu {
 	inline Listbox *control;
 	inline std::vector<Listbox::Item> items;
 
