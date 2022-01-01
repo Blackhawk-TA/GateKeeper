@@ -10,33 +10,51 @@
 namespace combat {
 	class Character {
 	public:
+		static const uint8_t MAX_HEALTH = 100;
+
 		explicit Character(CharacterData character_data, Point position, Point attack_position);
 		virtual ~Character() = default;
 		void draw();
 		void update(uint32_t time);
 		void animate(Timer &timer);
-		void set_attacking(bool value);
 		uint8_t get_health() const;
 		void take_damage(uint8_t amount);
-		static const uint8_t MAX_HEALTH = 100;
+		virtual bool use_stamina(uint8_t amount);
+		void animate_attack(std::function<void()> callback);
+		bool is_attacking() const;
 
 	protected:
 		MovementDirection direction;
 		uint8_t health;
 
 	private:
+		enum AttackState {
+			IDLE = 0,
+			WALKING_TO_ENEMY = 1,
+			ATTACKING = 2,
+			WALKING_BACK = 3
+		};
+
+		const uint8_t ATTACK_TILE_SIZE = 3;
 		const Size SIZE = Size(1, 1);
-		std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
+		std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites{};
+		std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
+		std::array<uint16_t, ANIMATION_SPRITE_COUNT> attack_sprites{};
 		uint16_t tile_id;
 		uint8_t tile_index;
 		Point position;
 		Point screen_position;
+		Point start_position;
 		Point attack_position; //The position at which the attack animation is done
 		Size spritesheet_size;
-		bool attacking;
-		bool moving;
-		bool dead; //TODO maybe not needed
+		Size attack_spritesheet_size;
+		AttackState attack_state;
+		std::function<void()> damage_dealer;
 
-		void walk_to_attack_position();
+		void set_state(AttackState state);
+		void walk_to_enemy();
+		void execute_attack();
+		void walk_back();
+		void handle_death();
 	};
 }

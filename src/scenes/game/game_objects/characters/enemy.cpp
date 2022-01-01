@@ -91,6 +91,7 @@ namespace game {
 			Player::get_character_data(),
 			CharacterData{
 				movement_sprites.at(RIGHT),
+				{}, //TODO add sprites
 				0,
 				0,
 				true,

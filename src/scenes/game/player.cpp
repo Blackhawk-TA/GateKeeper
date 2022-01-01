@@ -32,6 +32,12 @@ namespace game {
 		{LEFT,  {80,  81,  82,  83}},
 		{RIGHT, {96,  97,  98,  99}}
 	};
+	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::attack_sprites = {
+		{UP,    {108, 111, 114, 117}},
+		{DOWN,  {0,   3,   6,   9}},
+		{LEFT,  {72,  75,  78,  81}},
+		{RIGHT, {36,  39,  42,  45}},
+	};
 
 	Player::Player(MovementDirection direction, uint8_t player_health, uint8_t save_id) {
 		Player::health = player_health;
@@ -286,6 +292,7 @@ namespace game {
 	CharacterData Player::get_character_data() {
 		return CharacterData{
 			movement_sprites.at(LEFT),
+			attack_sprites.at(LEFT),
 			health,
 			level,
 			sword,

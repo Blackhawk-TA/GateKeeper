@@ -23,6 +23,13 @@ namespace game {
 		};
 	}
 
+	GameObject::~GameObject() {
+		if (textbox != nullptr) {
+			delete textbox;
+			textbox = nullptr;
+		}
+	}
+
 	void GameObject::draw() {
 		screen.blit_sprite(
 			Rect(

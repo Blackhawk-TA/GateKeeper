@@ -44,8 +44,13 @@ namespace combat::character_handler {
 	}
 
 	void draw() {
-		for (auto &character : character_collection) {
-			character->draw();
+		//Draw the attacking character above the target so the animation is always shown
+		if (player->is_attacking()) {
+			enemy->draw();
+			player->draw();
+		} else {
+			player->draw();
+			enemy->draw();
 		}
 	}
 
@@ -58,6 +63,23 @@ namespace combat::character_handler {
 	void animate(Timer &timer) {
 		for (auto &character : character_collection) {
 			character->animate(timer);
+		}
+	}
+
+	//TODO make generic
+	bool attack_light(Character *attacker, Character *target) {
+		if (attacker->use_stamina(5)) {
+			if (blit::random() % 5 == 0) {
+				return false;
+			} else {
+				attacker->animate_attack([target] {
+					uint8_t bonus_damage = blit::random() % 10;
+					target->take_damage(10 + bonus_damage);
+				});
+				return true;
+			}
+		} else {
+			return false;
 		}
 	}
 }

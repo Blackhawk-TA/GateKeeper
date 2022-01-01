@@ -3,6 +3,7 @@
 //
 
 #include "../items.hpp"
+#include "../../scenes/combat/handlers/character_handler.hpp"
 
 Listbox::Item listbox_item::create_combat_attack(uint8_t type_id, combat::Player *player, combat::Enemy *enemy) {
 	return Listbox::Item{
@@ -14,16 +15,10 @@ Listbox::Item listbox_item::create_combat_attack(uint8_t type_id, combat::Player
 		false,
 		0,
 		[player, enemy] {
-			if (player->use_stamina(5)) {
-				if (blit::random() % 5 == 0) {
-					return Listbox::Tooltip::FAILURE;
-				} else {
-					uint8_t bonus_damage = blit::random() % 10;
-					enemy->take_damage(10 + bonus_damage);
-					return Listbox::Tooltip::SUCCESS;
-				}
+			if (combat::character_handler::attack_light(player, enemy)) {
+				return Listbox::Tooltip::SUCCESS;
 			} else {
-				return Listbox::Tooltip::FAILURE; //TODO warn because of no stamina
+				return Listbox::Tooltip::FAILURE;
 			}
 		}
 	};

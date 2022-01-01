@@ -52,7 +52,7 @@ namespace game {
 		};
 
 		explicit GameObject(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool draw_under_player = true);
-		virtual ~GameObject() = default;
+		virtual ~GameObject();
 
 		/**
 		 * Gets the signature of an object to clearly identify it.

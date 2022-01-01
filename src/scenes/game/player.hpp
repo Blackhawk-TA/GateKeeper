@@ -39,13 +39,7 @@ namespace game {
 		};
 
 		static const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
-
-		const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> attack_sprites = {
-			{UP,    {108, 111, 114, 117}},
-			{DOWN,  {0,   3,   6,   9}},
-			{LEFT,  {72,  75,  78,  81}},
-			{RIGHT, {36,  39,  42,  45}},
-		};
+		static const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> attack_sprites;
 
 		static uint16_t sprite_id;
 		static uint8_t sprite_index;
