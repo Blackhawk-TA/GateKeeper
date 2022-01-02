@@ -17,8 +17,6 @@ namespace game {
 	public:
 		explicit Player(MovementDirection direction, uint8_t player_health, uint8_t save_id);
 		void draw();
-		void attack();
-		void evade();
 		void move(MovementDirection direction);
 		static bool is_dead();
 		static uint8_t get_health();
@@ -39,33 +37,24 @@ namespace game {
 		};
 
 		static const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
-		static const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> attack_sprites;
 
 		static uint16_t sprite_id;
 		static uint8_t sprite_index;
 		static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
-		static bool attacking;
-		static bool evading;
 		static bool cut_scene;
 		static MovementDirection current_direction;
-		static Vec2 evasion_position_modifier;
-		static float evasion_modifier;
 		static uint8_t health;
 		static uint8_t level;
 		static bool dead;
 		static bool sword;
 
-		const uint8_t ATTACK_TILE_SIZE = 3;
 		Timer animation_timer;
-		Timer action_timer;
 		Point position;
 		Size spritesheet_size;
-		Size attack_spritesheet_size;
 		uint8_t elevation_offset;
 		uint8_t save_id;
 
 		static void animate(Timer &timer);
-		static void animate_action(Timer &timer);
 		static void gate_teleport(Stargate *destination_gate, uint8_t current_save_id);
 		static bool in_action();
 		void stop_animation();

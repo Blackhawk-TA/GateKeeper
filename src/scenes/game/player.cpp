@@ -13,18 +13,14 @@
 #include "utils/utils.hpp"
 
 namespace game {
-	bool Player::attacking = false;
-	bool Player::evading = false;
 	bool Player::cut_scene = false;
 	bool Player::dead = false;
 	bool Player::sword = false;
-	float Player::evasion_modifier = 0;
-	MovementDirection Player::current_direction = DOWN;
-	Vec2 Player::evasion_position_modifier;
 	uint16_t Player::sprite_id = 0;
 	uint8_t Player::sprite_index = 0;
 	uint8_t Player::health = 100;
 	uint8_t Player::level = 1;
+	MovementDirection Player::current_direction = DOWN;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
 		{UP,    {112, 113, 114, 115}},
@@ -32,30 +28,19 @@ namespace game {
 		{LEFT,  {80,  81,  82,  83}},
 		{RIGHT, {96,  97,  98,  99}}
 	};
-	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::attack_sprites = {
-		{UP,    {108, 111, 114, 117}},
-		{DOWN,  {0,   3,   6,   9}},
-		{LEFT,  {72,  75,  78,  81}},
-		{RIGHT, {36,  39,  42,  45}},
-	};
 
 	Player::Player(MovementDirection direction, uint8_t player_health, uint8_t save_id) {
 		Player::health = player_health;
 		Player::save_id = save_id;
 		position = get_screen_tiles() / 2;
 		spritesheet_size = get_spritesheet_size(player_sprites->bounds);
-		attack_spritesheet_size = get_spritesheet_size(player_attack_sprites->bounds);
 		elevation_offset = 0;
 
 		//Set static vars in case of re-initialisation
-		attacking = false;
-		evading = false;
 		cut_scene = false;
 		dead = false;
 		sword = false;
-		evasion_modifier = 0;
 		level = 1; //TODO load level from save
-		evasion_position_modifier = Vec2(0, 0);
 
 		//Set player animation tiles
 		current_direction = direction;
@@ -64,11 +49,10 @@ namespace game {
 		sprite_index = 0;
 
 		animation_timer.init(animate, 175, -1);
-		action_timer.init(animate_action, 75, ANIMATION_SPRITE_COUNT + 1);
 	}
 
 	bool Player::in_action() {
-		return camera::is_moving() || evading || attacking || dead || cut_scene || transition::in_progress();
+		return camera::is_moving() || dead || cut_scene || transition::in_progress();
 	}
 
 	void Player::animate(Timer &timer) {
@@ -78,66 +62,6 @@ namespace game {
 		} else {
 			sprite_id = animation_sprites[0];
 			timer.stop();
-		}
-	}
-
-	void Player::animate_action(Timer &timer) {
-		if (timer.loop_count <= ANIMATION_SPRITE_COUNT) {
-			if (attacking) {
-				sprite_id = animation_sprites[sprite_index++ % ANIMATION_SPRITE_COUNT];
-			} else if (evading) {
-				if (timer.loop_count <= ANIMATION_SPRITE_COUNT / 2) {
-					evasion_modifier -= 0.25f;
-				} else {
-					evasion_modifier += 0.25f;
-				}
-
-				switch (current_direction) {
-					case UP:
-						evasion_position_modifier = Vec2(0, -evasion_modifier);
-						break;
-					case DOWN:
-						evasion_position_modifier = Vec2(0, evasion_modifier);
-						break;
-					case LEFT:
-						evasion_position_modifier = Vec2(-evasion_modifier, 0);
-						break;
-					case RIGHT:
-						evasion_position_modifier = Vec2(evasion_modifier, 0);
-						break;
-					default:
-						std::cerr << "Invalid map section" << std::endl;
-						exit(1);
-				}
-				sprite_id = animation_sprites[--sprite_index % ANIMATION_SPRITE_COUNT];
-			}
-		} else {
-			animation_sprites = movement_sprites.at(current_direction);
-			sprite_id = animation_sprites[0];
-			sprite_index = 0;
-			attacking = false;
-			evading = false;
-			timer.stop();
-		}
-	}
-
-	void Player::attack() {
-		if (!in_action()) {
-			animation_sprites = attack_sprites.at(current_direction);
-			sprite_id = animation_sprites[0];
-			sprite_index = 0;
-			attacking = true;
-			action_timer.start();
-		}
-	}
-
-	void Player::evade() {
-		if (!in_action()) {
-			action_timer.start();
-			evasion_modifier = 0;
-			evasion_position_modifier = Vec2(0, 0);
-			sprite_index = ANIMATION_SPRITE_COUNT;
-			evading = true;
 		}
 	}
 
@@ -232,21 +156,12 @@ namespace game {
 	}
 
 	void Player::draw() {
-		if (attacking) {
-			screen.blit(
-				player_attack_sprites,
-				Rect((sprite_id % attack_spritesheet_size.w) * TILE_SIZE, (sprite_id / attack_spritesheet_size.h) * TILE_SIZE, TILE_SIZE * ATTACK_TILE_SIZE, TILE_SIZE * ATTACK_TILE_SIZE),
-				world_to_screen(position - Point(1, 1)) - Point(0, elevation_offset),
-				SpriteTransform::NONE
-			);
-		} else {
-			screen.blit(
-				player_sprites,
-				Rect((sprite_id % spritesheet_size.w) * TILE_SIZE, (sprite_id / spritesheet_size.h) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
-				world_to_screen(position) + world_to_screen(evasion_position_modifier) - Point(0, elevation_offset),
-				SpriteTransform::NONE
-			);
-		}
+		screen.blit(
+			player_sprites,
+			Rect((sprite_id % spritesheet_size.w) * TILE_SIZE, (sprite_id / spritesheet_size.h) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
+			world_to_screen(position) - Point(0, elevation_offset),
+			SpriteTransform::NONE
+		);
 	}
 
 	/**
@@ -292,7 +207,7 @@ namespace game {
 	CharacterData Player::get_character_data() {
 		return CharacterData{
 			movement_sprites.at(LEFT),
-			attack_sprites.at(LEFT),
+			{72, 75, 78, 81},
 			health,
 			level,
 			sword,
