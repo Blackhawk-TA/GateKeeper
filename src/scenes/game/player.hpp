@@ -36,6 +36,7 @@ namespace game {
 			{RIGHT, Point(1, 0)},
 		};
 
+		static const uint16_t INIT_SPRITE_ID = 64;
 		static const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
 
 		static uint16_t sprite_id;

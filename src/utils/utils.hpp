@@ -13,8 +13,8 @@ constexpr uint8_t MAX_ITEMS = 128;
 constexpr uint8_t MAX_GAME_OBJECTS = 255;
 constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 
-inline Surface *player_sprites;
-inline Surface *player_attack_sprites;
+inline Surface *characters_spritesheet;
+inline Surface *attack_spritesheet;
 
 bool sprite_rect_in_screen(Point &position, const Size &size, Point camera_position_world);
 

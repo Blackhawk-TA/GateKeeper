@@ -11,7 +11,7 @@ namespace game {
 		Character::size = Size(1, 1);
 		Character::position = position;
 		Character::screen_position = world_to_screen(position);
-		Character::spritesheet_size = get_spritesheet_size(player_sprites->bounds);
+		Character::spritesheet_size = get_spritesheet_size(characters_spritesheet->bounds);
 		Character::tile_index = 0;
 		Character::in_action = false;
 		Character::is_moving = false;
@@ -23,7 +23,7 @@ namespace game {
 
 	void Character::draw() {
 		screen.blit(
-			player_sprites,
+			characters_spritesheet,
 			Rect(
 				(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
 				(tile_id / spritesheet_size.h) * TILE_SIZE,

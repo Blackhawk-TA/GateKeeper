@@ -8,9 +8,8 @@ cmake-build-debug/
 
 # Assets
 assets/characters.png
-assets/player_attack.png
 assets/spritesheet.png
-assets/knight_attack.png
+assets/attack_animations.png
 
 # Secrets
 .env

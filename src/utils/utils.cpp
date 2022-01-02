@@ -62,9 +62,8 @@ Point get_screen_tiles() {
  */
 void load_persistent_spritesheets() {
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
-
-	player_sprites = Surface::load_read_only(asset_characters);
-	player_attack_sprites = Surface::load_read_only(asset_player_attack);
+	characters_spritesheet = Surface::load_read_only(asset_characters);
+	attack_spritesheet = Surface::load_read_only(asset_attack_animations);
 }
 
 void draw_fps(uint32_t &ms_start, uint32_t &ms_end) {

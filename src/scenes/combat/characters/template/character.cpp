@@ -21,20 +21,20 @@ namespace combat {
 		health = character_data.health;
 		tile_id = animation_sprites.at(0);
 		tile_index = 0;
-		spritesheet_size = get_spritesheet_size(player_sprites->bounds);
-		attack_spritesheet_size = get_spritesheet_size(player_attack_sprites->bounds);
+		spritesheet_size = get_spritesheet_size(characters_spritesheet->bounds);
+		attack_spritesheet_size = get_spritesheet_size(attack_spritesheet->bounds);
 		attack_state = IDLE;
 	}
 
 	void Character::draw() {
 		if (attack_state == ATTACKING) {
 			screen.blit(
-				player_attack_sprites,
+				attack_spritesheet,
 				Rect((tile_id % attack_spritesheet_size.w) * TILE_SIZE, (tile_id / attack_spritesheet_size.h) * TILE_SIZE, TILE_SIZE * ATTACK_TILE_SIZE, TILE_SIZE * ATTACK_TILE_SIZE),
 				screen_position - camera::get_screen_position() - Point(TILE_SIZE, TILE_SIZE));
 		} else {
 			screen.blit(
-				player_sprites,
+				characters_spritesheet,
 				Rect((tile_id & (spritesheet_size.w - 1)) * TILE_SIZE, (tile_id / spritesheet_size.h) * TILE_SIZE, SIZE.w * TILE_SIZE, SIZE.h * TILE_SIZE),
 				screen_position - camera::get_screen_position()
 			);

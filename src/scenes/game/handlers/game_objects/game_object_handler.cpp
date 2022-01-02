@@ -67,7 +67,7 @@ namespace game {
 				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(24, 15), 0, LEFT, "Hello there!"));
 				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(13, 14), 12, RIGHT, "Hello I'm the elder of this village."));
 //				game_object_collection.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, Character::RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."));
-				game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 4, DOWN, save_id, false, "LET'S FIGHT!"));
+				game_object_collection.emplace_back(new Enemy(map::GRASSLAND, Point(22, 14), 76, DOWN, save_id, false, "LET'S FIGHT!"));
 				break;
 			case map::INTERIOR:
 				game_object_collection.emplace_back(new Salesman(map::INTERIOR, Point(31, 20)));

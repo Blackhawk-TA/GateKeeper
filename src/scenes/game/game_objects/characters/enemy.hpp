@@ -16,6 +16,7 @@ namespace game {
 		void start_fight();
 
 		uint8_t save_id;
+		uint16_t init_tile_id;
 		std::string message;
 
 	public:

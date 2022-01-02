@@ -3,8 +3,6 @@
 //
 
 #include "character_handler.hpp"
-#include "../characters/enemy.hpp"
-#include "../characters/player.hpp"
 
 namespace combat::character_handler {
 	std::vector<Character *> character_collection;

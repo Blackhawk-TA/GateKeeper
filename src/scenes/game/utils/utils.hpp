@@ -12,4 +12,10 @@ namespace game::utils {
 	 * @param map_section The map section to load
 	 */
 	void teleport_player(map::MapSection map_section, Point position, MovementDirection direction, uint8_t save_id);
+
+	/**
+	 * Gets the attack sprites by the first tile id of a character
+	 * @param tile_id The first tile id of a character
+	 */
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(uint16_t tile_id);
 }

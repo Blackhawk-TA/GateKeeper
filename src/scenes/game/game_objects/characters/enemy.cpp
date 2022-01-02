@@ -6,6 +6,7 @@
 #include <utility>
 #include "../../player.hpp"
 #include "../../../../engine/effects/transition.hpp"
+#include "../../utils/utils.hpp"
 
 namespace game {
 	Enemy::Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, uint8_t save_id, bool turn, std::string message)
@@ -13,6 +14,7 @@ namespace game {
 		Enemy::tile_id = tile_id;
 		Enemy::save_id = save_id;
 		Enemy::message = std::move(message);
+		init_tile_id = tile_id;
 		movement_sprites = {
 			{UP, {
 				static_cast<uint16_t>(tile_id + 48),
@@ -92,7 +94,7 @@ namespace game {
 			Player::get_character_data(),
 			CharacterData{
 				movement_sprites.at(RIGHT),
-				{}, //TODO add sprites
+				utils::get_attack_sprites(init_tile_id),
 				0,
 				0,
 				true,

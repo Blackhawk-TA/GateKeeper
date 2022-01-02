@@ -33,7 +33,7 @@ namespace game {
 		Player::health = player_health;
 		Player::save_id = save_id;
 		position = get_screen_tiles() / 2;
-		spritesheet_size = get_spritesheet_size(player_sprites->bounds);
+		spritesheet_size = get_spritesheet_size(characters_spritesheet->bounds);
 		elevation_offset = 0;
 
 		//Set static vars in case of re-initialisation
@@ -157,7 +157,7 @@ namespace game {
 
 	void Player::draw() {
 		screen.blit(
-			player_sprites,
+			characters_spritesheet,
 			Rect((sprite_id % spritesheet_size.w) * TILE_SIZE, (sprite_id / spritesheet_size.h) * TILE_SIZE, TILE_SIZE, TILE_SIZE),
 			world_to_screen(position) - Point(0, elevation_offset),
 			SpriteTransform::NONE
@@ -207,7 +207,7 @@ namespace game {
 	CharacterData Player::get_character_data() {
 		return CharacterData{
 			movement_sprites.at(LEFT),
-			{72, 75, 78, 81},
+			utils::get_attack_sprites(INIT_SPRITE_ID),
 			health,
 			level,
 			sword,

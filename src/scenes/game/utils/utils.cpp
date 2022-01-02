@@ -26,4 +26,13 @@ namespace game::utils {
 		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects = savegame::load_game_objects(save_id);
 		game_objects::load_saves(game_objects);
 	}
+
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(uint16_t tile_id) {
+		std::map<uint16_t, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> sprite_map = {
+			{64, {0, 3, 6, 9}},
+			{76, {36, 39, 42, 45}}
+		};
+
+		return sprite_map[tile_id];
+	}
 }
