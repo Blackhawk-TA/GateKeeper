@@ -33,11 +33,7 @@ namespace game {
 		flags::set_flags(flags::TileFlags::ENTRY, {141, 294, 515, 517, 773, 965, 1425, 1573});
 		flags::set_flags(flags::TileFlags::DEADLY, {56, 57, 58, 248, 249, 250});
 
-		if (options.tmp_save) {
-			player = savegame::load(TMP_SAVE_ID, options.previous_player_position);
-		} else {
-			player = savegame::load(save_id);
-		}
+		player = savegame::load(save_id, options.tmp_save, options.previous_player_position);
 	}
 
 	Scene::~Scene() {
@@ -49,7 +45,7 @@ namespace game {
 		if (!Player::is_dead()) {
 			if (Player::in_cut_scene()) {
 				//When changing scene on cut scene create temporary save
-				savegame::save(TMP_SAVE_ID);
+				savegame::save(save_id, true);
 			} else {
 				savegame::save(save_id);
 			}

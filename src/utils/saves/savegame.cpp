@@ -119,9 +119,9 @@ game::Player *savegame::create(uint8_t save_id) {
 	return new game::Player(MovementDirection::DOWN, 100, save_id);
 }
 
-void savegame::save(uint8_t save_id) {
+void savegame::save(uint8_t save_id, bool tmp_save) {
 	//Check if current save is a new save game and therefore update save_count
-	if (save_id != TMP_SAVE_ID && options::save_count < save_id) {
+	if (!tmp_save && options::save_count < save_id) {
 		options::save_count = save_id;
 		options::save();
 	}
@@ -143,16 +143,21 @@ void savegame::save(uint8_t save_id) {
 		game_time::get_time()
 	};
 
-	write_save(game_data, save_id);
+	if (tmp_save) {
+		write_save(game_data, TMP_SAVE_ID);
+	} else {
+		write_save(game_data, save_id);
+	}
 }
 
 //TODO will handle set position to hospital/home and reset health on death.
 // might need major rewriting
-game::Player *savegame::load(uint8_t save_id, bool previous_player_position) {
+game::Player *savegame::load(uint8_t save_id, bool tmp_save, bool previous_player_position) {
 	game::Player *player;
 	GameData save_data;
+	uint8_t load_save_id = tmp_save ? TMP_SAVE_ID : save_id;
 
-	bool save_found = read_save(save_data, save_id);
+	bool save_found = read_save(save_data, load_save_id);
 
 	//Load data from save game
 	if (save_found) {

@@ -29,7 +29,7 @@ namespace savegame {
 	};
 
 	game::Player *create(uint8_t save_id);
-	void save(uint8_t save_id);
-	game::Player *load(uint8_t save_id, bool previous_player_position = false);
+	void save(uint8_t save_id, bool tmp_save = false);
+	game::Player *load(uint8_t save_id, bool tmp_save = false, bool previous_player_position = false);
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> load_game_objects(uint8_t save_id);
 }
