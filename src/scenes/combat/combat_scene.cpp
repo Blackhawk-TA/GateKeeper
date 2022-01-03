@@ -30,6 +30,10 @@ namespace combat {
 	Scene::~Scene() {
 		character_handler::cleanup();
 		attack_menu::close();
+
+		//Deleted by character_handler
+		player = nullptr;
+		enemy = nullptr;
 	}
 
 	void Scene::render(uint32_t time) {

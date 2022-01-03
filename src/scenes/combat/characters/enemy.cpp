@@ -14,6 +14,16 @@ namespace combat {
 		textbox = nullptr;
 	}
 
+	Enemy::~Enemy() {
+		if (textbox != nullptr) {
+			delete textbox;
+			textbox = nullptr;
+		}
+
+		//Is already deleted by character_handler
+		target = nullptr;
+	}
+
 	Character::CharacterType Enemy::get_type() {
 		return Character::Enemy;
 	}
