@@ -2,6 +2,7 @@
 // Created by daniel on 30.12.21.
 //
 
+#include <iostream>
 #include "character_handler.hpp"
 
 namespace combat::character_handler {
@@ -39,6 +40,14 @@ namespace combat::character_handler {
 
 	Enemy *get_enemy() {
 		return enemy;
+	}
+
+	void next_turn(Character *last_turn) {
+		if (last_turn->get_type() == Character::Player) {
+			enemy->attack();
+		} else if (last_turn->get_type() == Character::Enemy) {
+			player->attack();
+		}
 	}
 
 	void draw() {

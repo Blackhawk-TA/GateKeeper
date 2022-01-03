@@ -10,16 +10,23 @@
 namespace combat {
 	class Character {
 	public:
+		enum CharacterType {
+			Player = 1,
+			Enemy = 2,
+		};
 		static const uint8_t MAX_HEALTH = 100;
 
 		explicit Character(CharacterData character_data, Point position, Point attack_position);
 		virtual ~Character() = default;
+		virtual bool use_stamina(uint8_t amount);
+		virtual CharacterType get_type() = 0;
+		virtual void attack() = 0;
+		virtual void finish_attack() = 0;
 		void draw();
 		void update(uint32_t time);
 		void animate(Timer &timer);
 		uint8_t get_health() const;
 		void take_damage(uint8_t amount);
-		virtual bool use_stamina(uint8_t amount);
 		void animate_attack(std::function<void()> callback);
 		bool is_attacking() const;
 

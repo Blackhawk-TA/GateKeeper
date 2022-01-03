@@ -15,6 +15,7 @@ namespace combat::character_handler {
 	void animate(Timer &timer);
 	Enemy *get_enemy();
 	Player *get_player();
+	void next_turn(Character *last_turn);
 	bool attack_light(Character *attacker, Character *target);
 //	bool attack_heavy(Character *attacker, Character *target);
 //	bool attack_range(Character *attacker, Character *target);

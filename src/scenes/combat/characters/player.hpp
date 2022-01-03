@@ -13,6 +13,9 @@ namespace combat {
 		explicit Player(CharacterData character_data);
 		uint8_t get_stamina() const;
 		bool use_stamina(uint8_t amount) override;
+		void attack() override;
+		void finish_attack() override;
+		CharacterType get_type() override;
 
 	private:
 		uint8_t stamina;

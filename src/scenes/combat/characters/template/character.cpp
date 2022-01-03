@@ -7,6 +7,7 @@
 #include <utility>
 #include "../../../../engine/camera.hpp"
 #include "../../ui/attack_menu.hpp"
+#include "../../handlers/character_handler.hpp"
 
 namespace combat {
 	Character::Character(CharacterData character_data, Point position, Point attack_position) {
@@ -92,6 +93,7 @@ namespace combat {
 			screen_position.x -= 1;
 		} else {
 			set_state(IDLE);
+			finish_attack();
 		}
 
 		position = screen_to_world(screen_position);
