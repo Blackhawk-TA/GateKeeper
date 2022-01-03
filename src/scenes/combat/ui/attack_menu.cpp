@@ -42,7 +42,6 @@ namespace combat {
 	}
 
 	void attack_menu::cursor_press() {
-		control->cursor_press();
-		control->set_view_mode(true);
+		control->cursor_press(true);
 	}
 }

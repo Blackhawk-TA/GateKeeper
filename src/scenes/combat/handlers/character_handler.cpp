@@ -73,7 +73,17 @@ namespace combat::character_handler {
 		}
 	}
 
-	//TODO make generic
+	bool escape() {
+		//TODO save lost health;
+		if (blit::random() % 3 == 0) {
+			return true;
+		} else {
+			player->finish_round();
+			return false;
+		}
+	}
+
+		//TODO make generic
 	bool attack_light(Character *attacker, Character *target) {
 		if (attacker->use_stamina(5)) {
 			attacker->animate_attack([target] {

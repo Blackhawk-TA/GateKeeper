@@ -19,6 +19,7 @@ Listbox::Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting) : Box
 
 Listbox::~Listbox() {
 	delete tooltip;
+	tooltip = nullptr;
 }
 
 /**
@@ -37,10 +38,6 @@ void Listbox::sort_list() {
 			return item1.name < item2.name; //Sort alphabetically
 		}
 	});
-}
-
-void Listbox::set_view_mode(bool value) {
-	view_mode = value;
 }
 
 void Listbox::draw() {
@@ -126,7 +123,7 @@ void Listbox::cursor_down() {
  * Handles a press on a listbox item
  * @return The index of the pressed listbox item
  */
-void Listbox::cursor_press() {
+void Listbox::cursor_press(bool set_view_mode) {
 	if (view_mode) return;
 
 	uint8_t item_index = cursor_position.y - rect.y - CURSOR_OFFSET;
@@ -136,15 +133,17 @@ void Listbox::cursor_press() {
 		std::string callback_fail_tooltip = items[item_index].callback_fail_tooltip;
 		Tooltip tooltip_state = items[item_index].callback();
 
-		switch (tooltip_state) {
-			case SUCCESS:
-				tooltip->set_text(callback_tooltip);
-				break;
-			case FAILURE:
-				tooltip->set_text(callback_fail_tooltip);
-				break;
-			case SUPPRESS:
-				break;
+		if (tooltip != nullptr) {
+			switch (tooltip_state) {
+				case SUCCESS:
+					tooltip->set_text(callback_tooltip);
+					break;
+				case FAILURE:
+					tooltip->set_text(callback_fail_tooltip);
+					break;
+				case SUPPRESS:
+					break;
+			}
 		}
 
 		//Delete items that can only be used once
@@ -152,6 +151,8 @@ void Listbox::cursor_press() {
 			remove_item(item_index);
 		}
 	}
+
+	view_mode = set_view_mode;
 }
 
 void Listbox::update_tooltip() {
