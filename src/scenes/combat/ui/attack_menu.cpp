@@ -18,9 +18,11 @@ namespace combat {
 		control = new Listbox(Rect(16, 0, 4, 7), items);
 	}
 
-	void attack_menu::close() { //TODO close menu when attack is selected
-		delete control;
-		control = nullptr;
+	void attack_menu::close() {
+		if (control != nullptr) {
+			delete control;
+			control = nullptr;
+		}
 	}
 
 	bool attack_menu::is_open() {
@@ -41,5 +43,6 @@ namespace combat {
 
 	void attack_menu::cursor_press() {
 		control->cursor_press();
+		control->set_view_mode(true);
 	}
 }

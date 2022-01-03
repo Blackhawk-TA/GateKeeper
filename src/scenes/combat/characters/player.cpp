@@ -32,9 +32,7 @@ namespace combat {
 	}
 
 	void Player::start_round() {
-		if (!attack_menu::is_open()) {
-			attack_menu::open();
-		}
+		attack_menu::open();
 		//TODO hide selection listbox on attack but keep textbox visible, textbox also shows information about enemy attack
 		// selection box has to be immediately hidden on press attack, otherwise it could be pressed twice
 		// also make sure it can only be pressed once, regarding fast clicks
@@ -42,6 +40,7 @@ namespace combat {
 	}
 
 	void Player::finish_round() {
+		attack_menu::close();
 		character_handler::next_turn(this);
 	}
 }

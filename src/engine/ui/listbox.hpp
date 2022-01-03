@@ -28,6 +28,7 @@ public:
 	explicit Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting = true);
 	~Listbox();
 	void draw();
+	void set_view_mode(bool value);
 	void cursor_reset();
 	void cursor_up();
 	void cursor_down();
@@ -45,6 +46,7 @@ private:
 	Rect rect;
 	std::vector<Item> items;
 	bool enable_sorting;
+	bool view_mode;
 	Size spritesheet_size;
 	Point cursor_position;
 	Textbox *tooltip;

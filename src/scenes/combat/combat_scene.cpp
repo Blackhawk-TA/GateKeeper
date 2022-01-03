@@ -29,9 +29,7 @@ namespace combat {
 
 	Scene::~Scene() {
 		character_handler::cleanup();
-		if (attack_menu::is_open()) {
-			attack_menu::close();
-		}
+		attack_menu::close();
 	}
 
 	void Scene::render(uint32_t time) {
@@ -49,6 +47,8 @@ namespace combat {
 	}
 
 	void Scene::inputs() {
+		if (!attack_menu::is_open()) return;
+
 		changed = buttons ^ last_buttons;
 
 		if (buttons & changed & Button::DPAD_UP) {

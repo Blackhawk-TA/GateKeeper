@@ -8,6 +8,7 @@ Listbox::Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting) : Box
 	Listbox::rect = Box::set_bounds(rect);
 	Listbox::items = items;
 	Listbox::enable_sorting = enable_sorting;
+	view_mode = false;
 	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
 	tooltip = new Textbox();
@@ -38,8 +39,15 @@ void Listbox::sort_list() {
 	});
 }
 
+void Listbox::set_view_mode(bool value) {
+	view_mode = value;
+}
+
 void Listbox::draw() {
 	tooltip->draw();
+
+	if (view_mode) return;
+
 	Box::draw();
 	screen.pen = Pen(0, 0, 0, 255);
 
@@ -95,6 +103,8 @@ void Listbox::cursor_reset() {
 }
 
 void Listbox::cursor_up() {
+	if (view_mode) return;
+
 	if (cursor_position.y - rect.y > 1) {
 		cursor_position.y--;
 	}
@@ -103,6 +113,8 @@ void Listbox::cursor_up() {
 }
 
 void Listbox::cursor_down() {
+	if (view_mode) return;
+
 	if (cursor_position.y - rect.y < static_cast<uint8_t>(items.size())) {
 		cursor_position.y++;
 	}
@@ -115,6 +127,8 @@ void Listbox::cursor_down() {
  * @return The index of the pressed listbox item
  */
 void Listbox::cursor_press() {
+	if (view_mode) return;
+
 	uint8_t item_index = cursor_position.y - rect.y - CURSOR_OFFSET;
 
 	if (!items.empty() && item_index < items.size()) {
