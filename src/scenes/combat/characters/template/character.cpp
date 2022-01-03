@@ -6,11 +6,10 @@
 
 #include <utility>
 #include "../../../../engine/camera.hpp"
-#include "../../ui/attack_menu.hpp"
-#include "../../handlers/character_handler.hpp"
 
 namespace combat {
-	Character::Character(CharacterData character_data, Point position, Point attack_position) {
+	Character::Character(uint8_t save_id, CharacterData character_data, Point position, Point attack_position) {
+		Character::save_id = save_id;
 		Character::position = position;
 		Character::attack_position = attack_position;
 
@@ -122,12 +121,6 @@ namespace combat {
 			health = 0;
 			handle_death();
 		}
-	}
-
-	void Character::handle_death() {
-//		if (attack_menu::is_open()) {
-//			attack_menu::close();
-//		}
 	}
 
 	bool Character::use_stamina(uint8_t amount) {

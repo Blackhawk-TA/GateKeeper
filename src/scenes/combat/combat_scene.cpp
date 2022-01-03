@@ -17,7 +17,7 @@ namespace combat {
 		map_section = options.combat_data.map_section;
 		load_combat_scene();
 
-		character_handler::init(options.combat_data);
+		character_handler::init(options.save_id, options.combat_data);
 		enemy = character_handler::get_enemy();
 		player = character_handler::get_player();
 		changed = 0;

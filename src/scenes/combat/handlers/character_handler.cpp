@@ -11,9 +11,9 @@ namespace combat::character_handler {
 	Player *player;
 	Enemy *enemy;
 
-	void init(CombatData combat_data) {
-		player = new Player(combat_data.player);
-		enemy = new Enemy(combat_data.enemy);
+	void init(uint8_t save_id, CombatData combat_data) {
+		player = new Player(save_id, combat_data.player);
+		enemy = new Enemy(save_id, combat_data.enemy);
 		character_collection.push_back(player);
 		character_collection.push_back(enemy);
 

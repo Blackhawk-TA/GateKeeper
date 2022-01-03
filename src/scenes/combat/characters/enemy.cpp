@@ -6,8 +6,8 @@
 #include "../handlers/character_handler.hpp"
 
 namespace combat {
-	Enemy::Enemy(CharacterData character_data)
-	: Character(character_data, Point(11, 11), Point(17, 11)) {
+	Enemy::Enemy(uint8_t save_id, CharacterData character_data)
+	: Character(save_id, character_data, Point(11, 11), Point(17, 11)) {
 		direction = RIGHT;
 		health = MAX_HEALTH;
 	}
@@ -22,5 +22,16 @@ namespace combat {
 
 	void Enemy::finish_round() {
 		character_handler::next_turn(this);
+	}
+
+	void Enemy::handle_death() {
+		//TODO remove enemy from game objects
+		SceneOptions options = {
+			save_id,
+			{},
+			true,
+			true
+		};
+		load_scene(SceneType::GAME, options);
 	}
 }

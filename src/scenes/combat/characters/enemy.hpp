@@ -9,9 +9,12 @@
 namespace combat {
 	class Enemy : public Character {
 	public:
-		explicit Enemy(CharacterData character_data);
+		explicit Enemy(uint8_t save_id, CharacterData character_data);
 		void start_round() override;
 		void finish_round() override;
 		CharacterType get_type() override;
+
+	private:
+		void handle_death() override;
 	};
 }

@@ -16,7 +16,7 @@ namespace combat {
 		};
 		static const uint8_t MAX_HEALTH = 100;
 
-		explicit Character(CharacterData character_data, Point position, Point attack_position);
+		explicit Character(uint8_t save_id, CharacterData character_data, Point position, Point attack_position);
 		virtual ~Character() = default;
 		virtual bool use_stamina(uint8_t amount);
 		virtual CharacterType get_type() = 0;
@@ -33,6 +33,8 @@ namespace combat {
 	protected:
 		MovementDirection direction;
 		uint8_t health;
+		uint8_t save_id;
+		virtual void handle_death() = 0;
 
 	private:
 		enum AttackState {
@@ -62,6 +64,5 @@ namespace combat {
 		void walk_to_enemy();
 		void execute_attack();
 		void walk_back();
-		void handle_death();
 	};
 }

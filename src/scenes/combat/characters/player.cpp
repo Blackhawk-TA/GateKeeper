@@ -7,8 +7,8 @@
 #include "../handlers/character_handler.hpp"
 
 namespace combat {
-	Player::Player(CharacterData character_data)
-	: Character(character_data, Point(18, 11), Point(12, 11)) {
+	Player::Player(uint8_t save_id, CharacterData character_data)
+	: Character(save_id, character_data, Point(18, 11), Point(12, 11)) {
 		direction = LEFT;
 		stamina = MAX_STAMINA;
 	}
@@ -42,5 +42,16 @@ namespace combat {
 	void Player::finish_round() {
 		attack_menu::close();
 		character_handler::next_turn(this);
+	}
+
+	void Player::handle_death() {
+		//TODO teleport to hospital
+		SceneOptions options = {
+			save_id,
+			{},
+			true,
+			true
+		};
+		load_scene(SceneType::GAME, options);
 	}
 }
