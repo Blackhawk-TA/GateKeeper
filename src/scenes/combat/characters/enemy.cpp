@@ -44,13 +44,7 @@ namespace combat {
 
 	void Enemy::handle_death() {
 		//TODO remove enemy from game objects and set player health
-		SceneOptions options = {
-			save_id,
-			{},
-			true,
-			true
-		};
-		load_scene(SceneType::GAME, options);
+		character_handler::load_game_scene(save_id, true);
 	}
 
 	void Enemy::draw() {

@@ -42,12 +42,6 @@ namespace combat {
 
 	void Player::handle_death() {
 		//TODO teleport to hospital
-		SceneOptions options = {
-			save_id,
-			{},
-			true,
-			true
-		};
-		load_scene(SceneType::GAME, options);
+		character_handler::load_game_scene(save_id, false);
 	}
 }

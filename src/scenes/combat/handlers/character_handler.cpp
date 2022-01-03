@@ -96,4 +96,18 @@ namespace combat::character_handler {
 			return false;
 		}
 	}
+
+	void load_game_scene(uint8_t save_id, bool won) {
+		SceneOptions options = {
+			save_id,
+			{},
+			{
+				player->get_health(),
+				won
+			},
+			true,
+			true
+		};
+		load_scene(SceneType::GAME, options);
+	}
 }

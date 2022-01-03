@@ -152,10 +152,10 @@ void savegame::save(uint8_t save_id, bool tmp_save) {
 
 //TODO will handle set position to hospital/home and reset health on death.
 // might need major rewriting
-game::Player *savegame::load(uint8_t save_id, bool tmp_save, bool previous_player_position) {
+game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 	game::Player *player;
 	GameData save_data;
-	uint8_t load_save_id = tmp_save ? TMP_SAVE_ID : save_id;
+	uint8_t load_save_id = options.tmp_save ? TMP_SAVE_ID : save_id;
 
 	bool save_found = read_save(save_data, load_save_id);
 
@@ -172,12 +172,13 @@ game::Player *savegame::load(uint8_t save_id, bool tmp_save, bool previous_playe
 		MovementDirection direction = save_data.player_direction;
 		Point camera_position = save_data.camera_position;
 		//Set the player position one step back if the flag is set
-		if (previous_player_position) {
+		if (options.use_previous_player_position) {
 			camera_position = save_data.previous_camera_position;
 			direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
 		}
 		camera::init(camera_position);
-		player = new game::Player(direction, save_data.player_health, save_id);
+		uint8_t health = options.tmp_save ? options.game_data.health : save_data.player_health;
+		player = new game::Player(direction, health, save_id);
 
 		//Init sidemenu
 		game::sidemenu::init(save_id);
