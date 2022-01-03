@@ -6,10 +6,12 @@
 #include "../handlers/character_handler.hpp"
 
 namespace combat {
-	Enemy::Enemy(uint8_t save_id, CharacterData character_data)
+	Enemy::Enemy(uint8_t save_id, Character *target, CharacterData character_data)
 	: Character(save_id, character_data, Point(11, 11), Point(17, 11)) {
+		Enemy::target = target;
 		direction = RIGHT;
 		health = MAX_HEALTH;
+		textbox = nullptr;
 	}
 
 	Character::CharacterType Enemy::get_type() {
@@ -17,15 +19,31 @@ namespace combat {
 	}
 
 	void Enemy::start_round() {
-		//TODO implement enemy attack
+		uint8_t rand = blit::random() % 10;
+
+		if (rand < 4) { //40% chance for light attack
+			textbox = new Textbox("Enemy is executing a light sword attack!");
+			character_handler::attack_light(this, target);
+		} else if (rand < 6) { // 20% chance for heavy attack
+			textbox = new Textbox("Enemy is executing an heavy sword attack!");
+			character_handler::attack_light(this, target);
+		} else if (rand < 9) { // 30% chance for range attack
+			textbox = new Textbox("Enemy is executing a range attack!");
+			character_handler::attack_light(this, target);
+		} else { // 10% chance for magic attack
+			textbox = new Textbox("Enemy is executing a magic attack!");
+			character_handler::attack_light(this, target);
+		}
 	}
 
 	void Enemy::finish_round() {
+		delete textbox;
+		textbox = nullptr;
 		character_handler::next_turn(this);
 	}
 
 	void Enemy::handle_death() {
-		//TODO remove enemy from game objects
+		//TODO remove enemy from game objects and set player health
 		SceneOptions options = {
 			save_id,
 			{},
@@ -33,5 +51,13 @@ namespace combat {
 			true
 		};
 		load_scene(SceneType::GAME, options);
+	}
+
+	void Enemy::draw() {
+		Character::draw();
+
+		if (textbox != nullptr) {
+			textbox->draw();
+		}
 	}
 }

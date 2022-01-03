@@ -9,9 +9,9 @@ Listbox::Item listbox_item::create_combat_attack(uint8_t type_id, combat::Player
 	return Listbox::Item{
 		type_id,
 		"ATTACK",
-		"Simple attack using not much stamina.",
-		"You hit your enemy!",
-		"Attack failed.",
+		"Simple sword attack using not much stamina.",
+		"Attacking!",
+		"Not enough stamina for this attack",
 		false,
 		0,
 		[player, enemy] {

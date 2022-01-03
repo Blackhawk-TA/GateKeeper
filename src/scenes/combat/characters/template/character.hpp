@@ -22,7 +22,7 @@ namespace combat {
 		virtual CharacterType get_type() = 0;
 		virtual void start_round() = 0;
 		virtual void finish_round() = 0;
-		void draw();
+		virtual void draw();
 		void update(uint32_t time);
 		void animate(Timer &timer);
 		uint8_t get_health() const;

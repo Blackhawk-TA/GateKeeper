@@ -65,7 +65,7 @@ namespace combat {
 	void Character::walk_to_enemy() {
 		if (direction == LEFT && position.x >= attack_position.x) {
 			screen_position.x -= 1;
-		} else if (direction == RIGHT && position.x <= attack_position.x) {
+		} else if (direction == RIGHT && position.x < attack_position.x) {
 			screen_position.x += 1;
 		} else {
 			animation_sprites = attack_sprites;
@@ -88,7 +88,7 @@ namespace combat {
 	void Character::walk_back() {
 		if (direction == LEFT && position.x < start_position.x) {
 			screen_position.x += 1;
-		} else if (direction == RIGHT && position.x > start_position.x) {
+		} else if (direction == RIGHT && position.x >= start_position.x) {
 			screen_position.x -= 1;
 		} else {
 			set_state(IDLE);

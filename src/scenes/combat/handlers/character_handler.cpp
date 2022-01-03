@@ -13,7 +13,7 @@ namespace combat::character_handler {
 
 	void init(uint8_t save_id, CombatData combat_data) {
 		player = new Player(save_id, combat_data.player);
-		enemy = new Enemy(save_id, combat_data.enemy);
+		enemy = new Enemy(save_id, player, combat_data.enemy);
 		character_collection.push_back(player);
 		character_collection.push_back(enemy);
 
@@ -76,16 +76,13 @@ namespace combat::character_handler {
 	//TODO make generic
 	bool attack_light(Character *attacker, Character *target) {
 		if (attacker->use_stamina(5)) {
-			if (blit::random() % 5 == 0) {
-				return false;
-			} else {
-				attacker->animate_attack([target] {
-					uint8_t bonus_damage = blit::random() % 10;
-					target->take_damage(10 + bonus_damage);
-				});
-				return true;
-			}
+			attacker->animate_attack([target] {
+				uint8_t bonus_damage = blit::random() % 10;
+				target->take_damage(10 + bonus_damage);
+			});
+			return true;
 		} else {
+			attacker->finish_round();
 			return false;
 		}
 	}
