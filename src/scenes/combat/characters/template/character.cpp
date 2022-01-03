@@ -93,7 +93,7 @@ namespace combat {
 			screen_position.x -= 1;
 		} else {
 			set_state(IDLE);
-			finish_attack();
+			finish_round();
 		}
 
 		position = screen_to_world(screen_position);

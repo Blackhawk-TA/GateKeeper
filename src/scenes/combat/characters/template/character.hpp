@@ -20,8 +20,8 @@ namespace combat {
 		virtual ~Character() = default;
 		virtual bool use_stamina(uint8_t amount);
 		virtual CharacterType get_type() = 0;
-		virtual void attack() = 0;
-		virtual void finish_attack() = 0;
+		virtual void start_round() = 0;
+		virtual void finish_round() = 0;
 		void draw();
 		void update(uint32_t time);
 		void animate(Timer &timer);

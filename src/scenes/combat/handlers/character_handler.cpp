@@ -44,9 +44,9 @@ namespace combat::character_handler {
 
 	void next_turn(Character *last_turn) {
 		if (last_turn->get_type() == Character::Player) {
-			enemy->attack();
+			enemy->start_round();
 		} else if (last_turn->get_type() == Character::Enemy) {
-			player->attack();
+			player->start_round();
 		}
 	}
 

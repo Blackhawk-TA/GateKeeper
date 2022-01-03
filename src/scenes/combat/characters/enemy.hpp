@@ -10,8 +10,8 @@ namespace combat {
 	class Enemy : public Character {
 	public:
 		explicit Enemy(CharacterData character_data);
-		void attack() override;
-		void finish_attack() override;
+		void start_round() override;
+		void finish_round() override;
 		CharacterType get_type() override;
 	};
 }

@@ -24,7 +24,7 @@ namespace combat {
 		last_buttons = 0;
 
 		attack_menu::init(options.save_id, player, enemy);
-		attack_menu::open();
+		player->start_round();
 	}
 
 	Scene::~Scene() {
@@ -37,8 +37,11 @@ namespace combat {
 	void Scene::render(uint32_t time) {
 		map::draw();
 		character_handler::draw();
-		attack_menu::draw();
 		stats::draw(player->get_health(), player->get_stamina(), enemy->get_health());
+
+		if (attack_menu::is_open()) {
+			attack_menu::draw();
+		}
 	}
 
 	void Scene::update(uint32_t time) {

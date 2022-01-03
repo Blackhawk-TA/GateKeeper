@@ -16,11 +16,11 @@ namespace combat {
 		return Character::Enemy;
 	}
 
-	void Enemy::attack() {
+	void Enemy::start_round() {
 		//TODO implement enemy attack
 	}
 
-	void Enemy::finish_attack() {
+	void Enemy::finish_round() {
 		character_handler::next_turn(this);
 	}
 }
