@@ -36,7 +36,7 @@ namespace combat {
 		}
 	}
 
-	void Enemy::finish_round() {
+	void Enemy::handle_round_end() {
 		delete textbox;
 		textbox = nullptr;
 		character_handler::next_turn(this);

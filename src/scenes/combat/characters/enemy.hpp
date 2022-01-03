@@ -14,7 +14,7 @@ namespace combat {
 		explicit Enemy(uint8_t save_id, Character *target, CharacterData character_data);
 		void draw() override;
 		void start_round() override;
-		void finish_round() override;
+		void handle_round_end() override;
 		CharacterType get_type() override;
 
 	private:

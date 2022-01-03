@@ -21,8 +21,9 @@ namespace combat {
 		virtual bool use_stamina(uint8_t amount);
 		virtual CharacterType get_type() = 0;
 		virtual void start_round() = 0;
-		virtual void finish_round() = 0; //TODO add round end delay
+		virtual void handle_round_end() = 0;
 		virtual void draw();
+		void finish_round();
 		void update(uint32_t time);
 		void animate(Timer &timer);
 		uint8_t get_health() const;
@@ -45,10 +46,13 @@ namespace combat {
 		};
 
 		const uint8_t ATTACK_TILE_SIZE = 3;
+		const uint16_t ROUND_END_DELAY = 1000;
 		const Size SIZE = Size(1, 1);
+		bool round_finishing;
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites{};
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> attack_sprites{};
+		uint32_t finish_time;
 		uint16_t tile_id;
 		uint8_t tile_index;
 		Point position;

@@ -14,7 +14,7 @@ namespace combat {
 		uint8_t get_stamina() const;
 		bool use_stamina(uint8_t amount) override;
 		void start_round() override;
-		void finish_round() override;
+		void handle_round_end() override;
 		CharacterType get_type() override;
 
 	private:

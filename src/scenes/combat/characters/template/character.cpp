@@ -42,6 +42,11 @@ namespace combat {
 	}
 
 	void Character::update(uint32_t time) {
+		if (round_finishing && finish_time + ROUND_END_DELAY <= time) {
+			round_finishing = false;
+			handle_round_end();
+		}
+
 		switch (attack_state) {
 			case IDLE:
 				break;
@@ -129,5 +134,10 @@ namespace combat {
 
 	bool Character::is_attacking() const {
 		return attack_state != IDLE;
+	}
+
+	void Character::finish_round() {
+		round_finishing = true;
+		finish_time = blit::now();
 	}
 }
