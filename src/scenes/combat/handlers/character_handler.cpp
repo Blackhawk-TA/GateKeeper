@@ -106,7 +106,6 @@ namespace combat::character_handler {
 				won
 			},
 			true,
-			true
 		};
 		load_scene(SceneType::GAME, options);
 	}

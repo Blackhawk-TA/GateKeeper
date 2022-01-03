@@ -6,6 +6,7 @@
 #include <array>
 #include "utils.hpp"
 #include "../engine/map.hpp"
+#include "movement_direction.hpp"
 
 //Data from the game scene that is needed for fights in combat scene
 struct CharacterData {
@@ -33,15 +34,22 @@ struct GameData {
 //The parameters that can be set for loading a save game
 struct SaveOptions {
 	bool tmp_save = false;
-	bool use_previous_player_position = false;
 	GameData game_data;
 };
+
+//Data that is required for load a player from a save
+struct PlayerData {
+	map::MapSection map_section;
+	MovementDirection direction;
+	Point camera_position;
+	uint8_t health;
+};
+
 
 struct SceneOptions {
 	uint8_t save_id = 0;
 	CombatData combat_data = {};
 	GameData game_data = {};
-	bool use_previous_player_position = false;
 	bool tmp_save = false;
 };
 

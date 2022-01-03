@@ -46,7 +46,7 @@ namespace combat {
 		};
 
 		const uint8_t ATTACK_TILE_SIZE = 3;
-		const uint16_t ROUND_END_DELAY = 1000;
+		const uint16_t ROUND_END_DELAY = 750;
 		const Size SIZE = Size(1, 1);
 		bool round_finishing;
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites{};

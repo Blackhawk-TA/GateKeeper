@@ -82,7 +82,7 @@ std::array<game::GameObject::Save, MAX_GAME_OBJECTS> get_game_object_saves(uint8
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> current_game_objects = game::game_objects::get_saves();
 
 	//Load old save to fetch game object data that is not currently in memory
-	savegame::GameData old_save = {};
+	savegame::SaveData old_save = {};
 	bool save_found = read_save(old_save, save_id);
 
 	if (save_found) {
@@ -104,6 +104,36 @@ std::array<game::GameObject::Save, MAX_GAME_OBJECTS> get_game_object_saves(uint8
 
 	//Return overwritten game objects
 	return old_save.game_objects;
+}
+
+PlayerData get_player_data(SaveOptions options, savegame::SaveData save_data) {
+	//The default save data if it was not a tmp save for the combat scene
+	PlayerData player_data = {
+		save_data.map_section,
+		save_data.player_direction,
+		save_data.camera_position,
+		save_data.player_health,
+	};
+
+	//On tmp save manually overwrite player_data depending on the outcome of the fight in the combat scene
+	if (options.tmp_save && options.game_data.health == 0 && !options.game_data.won) { //Loss
+		//TODO add game over screen
+		player_data = {
+			map::INTERIOR,
+			MovementDirection::DOWN,
+			Point(45, 20),
+			combat::Character::MAX_HEALTH,
+		};
+	} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won) { //Escape
+		player_data.direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
+		player_data.camera_position = save_data.previous_camera_position;
+		player_data.health = options.game_data.health;
+	} else if (options.tmp_save && options.game_data.won) { //Win
+		//TODO delete enemy from game object collection
+		player_data.health = options.game_data.health;
+	}
+
+	return player_data;
 }
 
 game::Player *savegame::create(uint8_t save_id) {
@@ -131,7 +161,7 @@ void savegame::save(uint8_t save_id, bool tmp_save) {
 	std::vector<Listbox::Item> items = game::inventory::get_items();
 
 	//Save and compress data which will be saved
-	GameData game_data = {
+	SaveData save_data = {
 		savegame::VERSION,
 		map::get_section(),
 		camera::get_player_position(),
@@ -144,17 +174,15 @@ void savegame::save(uint8_t save_id, bool tmp_save) {
 	};
 
 	if (tmp_save) {
-		write_save(game_data, TMP_SAVE_ID);
+		write_save(save_data, TMP_SAVE_ID);
 	} else {
-		write_save(game_data, save_id);
+		write_save(save_data, save_id);
 	}
 }
 
-//TODO will handle set position to hospital/home and reset health on death.
-// might need major rewriting
 game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 	game::Player *player;
-	GameData save_data;
+	SaveData save_data;
 	uint8_t load_save_id = options.tmp_save ? TMP_SAVE_ID : save_id;
 
 	bool save_found = read_save(save_data, load_save_id);
@@ -165,20 +193,15 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 			//TODO port save using structs for each save version
 		}
 
+		//Load the player data required for setting health, position and map section
+		PlayerData player_data = get_player_data(options, save_data);
+
 		//Load the map section
-		map::load_section(save_data.map_section);
+		map::load_section(player_data.map_section);
 
 		//Load position and direction
-		MovementDirection direction = save_data.player_direction;
-		Point camera_position = save_data.camera_position;
-		//Set the player position one step back if the flag is set
-		if (options.use_previous_player_position) {
-			camera_position = save_data.previous_camera_position;
-			direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
-		}
-		camera::init(camera_position);
-		uint8_t health = options.tmp_save ? options.game_data.health : save_data.player_health;
-		player = new game::Player(direction, health, save_id);
+		camera::init(player_data.camera_position);
+		player = new game::Player(player_data.direction, player_data.health, save_id);
 
 		//Init sidemenu
 		game::sidemenu::init(save_id);
@@ -204,7 +227,7 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 
 std::array<game::GameObject::Save, MAX_GAME_OBJECTS> savegame::load_game_objects(uint8_t save_id) {
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects;
-	savegame::GameData save_game;
+	savegame::SaveData save_game;
 
 	bool save_found = read_save(save_game, save_id);
 	if (save_found) {

@@ -24,6 +24,8 @@ namespace combat {
 		spritesheet_size = get_spritesheet_size(characters_spritesheet->bounds);
 		attack_spritesheet_size = get_spritesheet_size(attack_spritesheet->bounds);
 		attack_state = IDLE;
+		round_finishing = false;
+		finish_time = 0;
 	}
 
 	void Character::draw() {

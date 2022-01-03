@@ -35,7 +35,6 @@ namespace game {
 
 		SaveOptions save_options = {
 			options.tmp_save,
-			options.use_previous_player_position,
 			options.game_data
 		};
 		player = savegame::load(save_id, save_options);
