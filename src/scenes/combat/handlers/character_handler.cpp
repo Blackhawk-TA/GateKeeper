@@ -73,7 +73,6 @@ namespace combat::character_handler {
 	}
 
 	bool escape() {
-		//TODO save lost health;
 		if (blit::random() % 3 == 0) {
 			return true;
 		} else {
@@ -82,7 +81,7 @@ namespace combat::character_handler {
 		}
 	}
 
-		//TODO make generic
+	//TODO make generic
 	bool attack_light(Character *attacker, Character *target) {
 		if (attacker->use_stamina(5)) {
 			attacker->animate_attack([target] {
@@ -107,6 +106,7 @@ namespace combat::character_handler {
 			},
 			true,
 		};
+		//TODO load game over scene here
 		load_scene(SceneType::GAME, options);
 	}
 }

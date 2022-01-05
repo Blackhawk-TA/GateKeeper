@@ -43,7 +43,12 @@ namespace game {
 		level = 1; //TODO load level from save
 
 		//Set player animation tiles
-		current_direction = direction;
+		if (direction == NO_DIRECTION) {
+			std::cerr << "Invalid player direction, falling back to direction 'DOWN'" << std::endl;
+			current_direction = DOWN;
+		} else {
+			current_direction = direction;
+		}
 		animation_sprites = movement_sprites.at(current_direction);
 		sprite_id = animation_sprites[0];
 		sprite_index = 0;

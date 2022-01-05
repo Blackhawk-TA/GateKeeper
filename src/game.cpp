@@ -46,6 +46,7 @@ void load_scene(SceneType scene_type, SceneOptions options) {
 	previous_scene = current_scene;
 	current_scene = scene_type;
 
+	//TODO add options for game over scene
 	transition::start([scene_type, options] {
 		delete scene;
 
