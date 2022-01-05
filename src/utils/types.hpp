@@ -8,8 +8,18 @@
 #include "../engine/map.hpp"
 #include "movement_direction.hpp"
 
+/**
+ * A struct consisting of the map_section and position of a game object to create a unique signature.
+ */
+struct Signature {
+	uint8_t map_section = 0; //The map section on which the game object exists
+	uint8_t x = 0; //The x position of the game object
+	uint8_t y = 0; //The y position of the game object
+};
+
 //Data from the game scene that is needed for fights in combat scene
 struct CharacterData {
+	Signature signature{};
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> attack_sprites{};
 	uint8_t health = 100;
@@ -27,6 +37,7 @@ struct CombatData {
 
 //Data that is handed over from the combat to the game scene
 struct GameData {
+	Signature enemy_signature{};
 	uint8_t health = 0;
 	bool won = false;
 };
@@ -43,6 +54,7 @@ struct PlayerData {
 	MovementDirection direction;
 	Point camera_position;
 	uint8_t health;
+	Signature enemy_signature{};
 };
 
 

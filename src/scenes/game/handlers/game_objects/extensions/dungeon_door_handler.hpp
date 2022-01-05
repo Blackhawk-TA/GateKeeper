@@ -14,5 +14,5 @@ namespace game::dungeon_door_handler {
 	 * @param signature The signature of the door
 	 * @return True if the door was found and could be opened, else false
 	 */
-	bool open_door(GameObject::Signature signature);
+	bool open_door(Signature signature);
 }

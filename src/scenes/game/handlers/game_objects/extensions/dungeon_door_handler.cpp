@@ -22,7 +22,7 @@ namespace game {
 		doors.clear();
 	}
 
-	bool dungeon_door_handler::open_door(GameObject::Signature signature) {
+	bool dungeon_door_handler::open_door(Signature signature) {
 		bool is_open = false;
 		uint16_t i = 0;
 

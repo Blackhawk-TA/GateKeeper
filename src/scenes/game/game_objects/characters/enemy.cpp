@@ -93,6 +93,11 @@ namespace game {
 			map_section,
 			Player::get_character_data(),
 			CharacterData{
+				Signature{
+					static_cast<uint8_t>(map_section),
+					static_cast<uint8_t>(position.x),
+					static_cast<uint8_t>(position.y),
+				},
 				movement_sprites.at(RIGHT),
 				utils::get_attack_sprites(init_tile_id),
 				0,

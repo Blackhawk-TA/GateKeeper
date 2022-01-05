@@ -113,6 +113,7 @@ PlayerData get_player_data(SaveOptions options, savegame::SaveData save_data) {
 		save_data.player_direction,
 		save_data.camera_position,
 		save_data.player_health,
+		{}
 	};
 
 	//On tmp save manually overwrite player_data depending on the outcome of the fight in the combat scene
@@ -123,14 +124,15 @@ PlayerData get_player_data(SaveOptions options, savegame::SaveData save_data) {
 			MovementDirection::DOWN,
 			Point(45, 20),
 			combat::Character::MAX_HEALTH,
+			{}
 		};
 	} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won) { //Escape
 		player_data.direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
 		player_data.camera_position = save_data.previous_camera_position;
 		player_data.health = options.game_data.health;
 	} else if (options.tmp_save && options.game_data.won) { //Win
-		//TODO delete enemy from game object collection
 		player_data.health = options.game_data.health;
+		player_data.enemy_signature = options.game_data.enemy_signature;
 	}
 
 	return player_data;
@@ -213,6 +215,9 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 		//Load game object states
 		game::game_objects::init(save_data.map_section, save_id);
 		game::game_objects::load_saves(save_data.game_objects);
+		if (!game::game_objects::is_empty_signature(player_data.enemy_signature)) {
+			game::game_objects::delete_game_object(player_data.enemy_signature);
+		}
 
 		//Load game time
 		game_time::init();

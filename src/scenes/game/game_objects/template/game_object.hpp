@@ -12,15 +12,6 @@ namespace game {
 	class GameObject {
 	public:
 		/**
-		 * A struct consisting of the map_section and position of a game object to create a unique signature.
-		 */
-		struct Signature {
-			uint8_t map_section; //The map section on which the game object exists
-			uint8_t x; //The x position of the game object
-			uint8_t y; //The y position of the game object
-		};
-
-		/**
 		 * A struct consisting of the data which is stored for each game object
 		 */
 		struct Data {
@@ -33,7 +24,7 @@ namespace game {
 		 * A struct consisting of the save signature and data
 		 */
 		struct Save {
-			Signature signature;
+			Signature signature{};
 			Data data;
 		};
 

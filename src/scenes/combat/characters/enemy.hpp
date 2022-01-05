@@ -17,8 +17,10 @@ namespace combat {
 		void start_round() override;
 		void handle_round_end() override;
 		CharacterType get_type() override;
+		Signature get_signature();
 
 	private:
+		Signature signature;
 		Character *target;
 		Textbox *textbox;
 		void handle_death() override;

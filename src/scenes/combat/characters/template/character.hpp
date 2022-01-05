@@ -35,6 +35,7 @@ namespace combat {
 		MovementDirection direction;
 		uint8_t health;
 		uint8_t save_id;
+		Point position;
 		virtual void handle_death() = 0;
 
 	private:
@@ -55,7 +56,6 @@ namespace combat {
 		uint32_t finish_time;
 		uint16_t tile_id;
 		uint8_t tile_index;
-		Point position;
 		Point screen_position;
 		Point start_position;
 		Point attack_position; //The position at which the attack animation is done

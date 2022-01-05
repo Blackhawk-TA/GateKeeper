@@ -2,7 +2,6 @@
 // Created by daniel on 30.12.21.
 //
 
-#include <iostream>
 #include "character_handler.hpp"
 
 namespace combat::character_handler {
@@ -101,7 +100,8 @@ namespace combat::character_handler {
 		SceneOptions options = {
 			save_id,
 			{},
-			{
+			GameData{
+				enemy->get_signature(),
 				player->get_health(),
 				won
 			},

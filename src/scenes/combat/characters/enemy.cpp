@@ -9,6 +9,7 @@ namespace combat {
 	Enemy::Enemy(uint8_t save_id, Character *target, CharacterData character_data)
 	: Character(save_id, character_data, Point(11, 11), Point(17, 11)) {
 		Enemy::target = target;
+		Enemy::signature = character_data.signature;
 		direction = RIGHT;
 		health = MAX_HEALTH;
 		textbox = nullptr;
@@ -63,5 +64,9 @@ namespace combat {
 		if (textbox != nullptr) {
 			textbox->draw();
 		}
+	}
+
+	Signature Enemy::get_signature() {
+		return signature;
 	}
 }

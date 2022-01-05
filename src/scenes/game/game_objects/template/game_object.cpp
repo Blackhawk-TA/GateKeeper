@@ -62,7 +62,7 @@ namespace game {
 		       position.x > next_position.x - size.w && position.y > next_position.y - size.h;
 	}
 
-	GameObject::Signature GameObject::get_signature() {
+	Signature GameObject::get_signature() {
 		return signature;
 	}
 

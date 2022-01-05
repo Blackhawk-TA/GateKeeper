@@ -20,6 +20,13 @@ namespace game::game_objects {
 	std::vector<GameObject*> &get_collection();
 
 	/**
+	 * Deletes a single game object by its signature
+	 * @param signature The signature of the object that shall be deleted
+	 * @return True if it was found and deleted, else false
+	 */
+	bool delete_game_object(Signature &signature);
+
+	/**
 	 * Deletes all objects from memory
 	 */
 	void cleanup();
@@ -93,7 +100,12 @@ namespace game::game_objects {
 	 * @param sig2 The signature of the second game object
 	 * @return True if the signatures are equal, else false
 	 */
-	bool has_equal_signature(GameObject::Signature sig1, GameObject::Signature sig2);
+	bool has_equal_signature(Signature sig1, Signature sig2);
 
-	bool is_empty_signature(GameObject::Signature signature);
+	/**
+	 * Checks if a signature is set to its default values
+	 * @param signature The signature to check
+	 * @return True if the signature is empty, else false
+	 */
+	bool is_empty_signature(Signature &signature);
 }
