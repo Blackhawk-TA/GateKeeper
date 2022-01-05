@@ -3,6 +3,7 @@
 //
 #include "game_object.hpp"
 #include "../../../../engine/camera.hpp"
+#include "../../player.hpp"
 
 namespace game {
 	GameObject::GameObject(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool draw_under_player) {
@@ -111,5 +112,17 @@ namespace game {
 
 	bool GameObject::is_drawn_under_player() const {
 		return draw_under_player;
+	}
+
+	bool GameObject::in_range(uint8_t distance) {
+		return (Player::get_direction() == UP && camera::get_player_position() == position + Point(0, size.h + distance))
+			|| (Player::get_direction() == DOWN && camera::get_player_position() == position - Point(0, size.h + distance))
+			|| (Player::get_direction() == RIGHT && camera::get_player_position() == position + Point(size.w + distance, 0))
+			|| (Player::get_direction() == LEFT && camera::get_player_position() == position - Point(size.w + distance, 0));
+	}
+
+
+	bool GameObject::player_in_front(uint8_t distance) {
+		return Player::get_direction() == UP && camera::get_player_position() == position + Point(0, size.h + distance);
 	}
 }

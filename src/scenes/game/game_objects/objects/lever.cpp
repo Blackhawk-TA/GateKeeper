@@ -16,7 +16,7 @@ namespace game {
 	}
 
 	bool Lever::player_interact() {
-		if (player_usable && camera::get_player_position() == position + Point(0, size.h)) {
+		if (player_usable && player_in_front()) {
 			if (state == ON) {
 				textbox = new Textbox("The lever is already set to on.");
 				return true;

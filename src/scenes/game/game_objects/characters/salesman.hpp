@@ -8,7 +8,7 @@
 namespace game {
 	class Salesman : public Character {
 	private:
-		const uint16_t TILE_ID = 74;
+		const uint16_t TILE_ID = 68;
 		const uint8_t BAR_HEIGHT = 1;
 
 		void set_state(uint8_t new_state) override;

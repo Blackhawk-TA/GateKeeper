@@ -44,16 +44,16 @@ namespace game {
 		bool interacted = false;
 
 		if (player_usable) {
-			if (camera::get_player_position() == position + Point(0, size.h)) {
+			if (Player::get_direction() == UP && camera::get_player_position() == position + Point(0, size.h)) {
 				interacted = true;
 				change_direction(DOWN, false);
-			} else if (camera::get_player_position() == position - Point(0, size.h)) {
+			} else if (Player::get_direction() == DOWN && camera::get_player_position() == position - Point(0, size.h)) {
 				interacted = true;
 				change_direction(UP, false);
-			} else if (camera::get_player_position() == position + Point(size.w, 0)) {
+			} else if (Player::get_direction() == LEFT && camera::get_player_position() == position + Point(size.w, 0)) {
 				interacted = true;
 				change_direction(RIGHT, false);
-			} else if (camera::get_player_position() == position - Point(size.w, 0)) {
+			} else if (Player::get_direction() == RIGHT && camera::get_player_position() == position - Point(size.w, 0)) {
 				interacted = true;
 				change_direction(LEFT, false);
 			}

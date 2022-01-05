@@ -14,7 +14,7 @@ namespace game {
 	}
 
 	bool GateStatue::player_interact() {
-		if (player_usable && camera::get_player_position() == position + Point(0, size.h)) {
+		if (player_usable && player_in_front()) {
 			bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 			if (has_inventory_space) {
 				set_player_usable(false);

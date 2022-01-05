@@ -27,7 +27,6 @@ namespace game {
 		void set_state(uint8_t new_state) override;
 		void set_player_usable(bool usable) override;
 		void set_inventory_usable(bool usable) override;
-		bool in_use_range();
 
 	public:
 		explicit CarrotBed(map::MapSection map_section, Point position);

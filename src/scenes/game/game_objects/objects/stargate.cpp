@@ -4,6 +4,7 @@
 
 #include "stargate.hpp"
 #include "../../../../engine/camera.hpp"
+#include "../../player.hpp"
 
 namespace game {
 	Stargate::Stargate(map::MapSection map_section, Point position, StargateAddress address, StargateAddress destination, bool inventory_usable)
@@ -16,10 +17,10 @@ namespace game {
 	}
 
 	bool Stargate::check_collision(Point next_position) {
-		return next_position != position + RELATIVE_PRE_ENTRY_POINT &&
-		       next_position != position + RELATIVE_ENTRY_POINT &&
-		       position.x <= next_position.x && position.y <= next_position.y &&
-		       position.x > next_position.x - GATE_SIZE.w && position.y > next_position.y - GATE_SIZE.h;
+		return next_position != position + RELATIVE_PRE_ENTRY_POINT
+			&& next_position != position + RELATIVE_ENTRY_POINT
+			&& position.x <= next_position.x && position.y <= next_position.y
+			&& position.x > next_position.x - GATE_SIZE.w && position.y > next_position.y - GATE_SIZE.h;
 	}
 
 	void Stargate::update_state(Point next_position) {
@@ -111,7 +112,7 @@ namespace game {
 	 * @return True, if stargate could be repaired, else false
 	 */
 	bool Stargate::inventory_interact(listbox_item::INVENTORY_ITEM item_type) {
-		if (inventory_usable && item_type == listbox_item::GATE_PART && get_entry_point() == camera::get_player_position()) {
+		if (inventory_usable && Player::get_direction() == UP && item_type == listbox_item::GATE_PART && get_entry_point() == camera::get_player_position()) {
 			inventory_usable = false;
 			set_state(ACTIVATING);
 			return true;

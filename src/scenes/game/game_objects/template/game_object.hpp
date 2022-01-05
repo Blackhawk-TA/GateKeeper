@@ -133,6 +133,20 @@ namespace game {
 		 */
 		bool is_drawn_under_player() const;
 
+		/**
+		 * Checks if the player is looking at the game object and standing within the interaction distance
+		 * @param distance The amount of tiles that exists between the player and game object for an interaction to be possible
+		 * @return True if the player is in front of the game object, else false
+		 */
+		bool in_range(uint8_t distance = 0);
+
+		/**
+		 * Checks if the player is in front of the game object. This means he is looking up and the game object is above him
+		 * @param distance The amount of tiles that exists between the player and game object for an interaction to be possible
+		 * @return True if the player is in front of the game object, else false
+		 */
+		bool player_in_front(uint8_t distance = 0);
+
 	protected:
 		Point position;
 		map::MapSection map_section;

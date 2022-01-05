@@ -3,7 +3,6 @@
 //
 
 #include "salesman.hpp"
-#include "../../../../engine/camera.hpp"
 
 namespace game {
 	Salesman::Salesman(map::MapSection map_section, Point position) : Character(map_section, position, true, false) {
@@ -17,7 +16,7 @@ namespace game {
 	}
 
 	bool Salesman::player_interact() {
-		if (player_usable && camera::get_player_position() == position + Point(0, size.h + BAR_HEIGHT)) {
+		if (player_usable && player_in_front(BAR_HEIGHT)) {
 			textbox = new Textbox("Hello! Normally I would sell you carrot seeds but they are all gone.");
 			return true;
 		}

@@ -13,7 +13,7 @@ namespace game {
 	}
 
 	bool Sign::player_interact() {
-		if (player_usable && camera::get_player_position() == position + Point(0, size.h)) {
+		if (player_usable && player_in_front()) {
 			textbox = new Textbox(text);
 			return true;
 		}

@@ -30,7 +30,7 @@ namespace game {
 	}
 
 	bool CarrotBed::player_interact() {
-		if (player_usable && in_use_range()) {
+		if (player_usable && in_range()) {
 			bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT));
 			if (has_inventory_space) {
 				set_player_usable(false);
@@ -46,7 +46,7 @@ namespace game {
 	}
 
 	bool CarrotBed::inventory_interact(listbox_item::INVENTORY_ITEM item_type) {
-		if (inventory_usable && item_type == listbox_item::CARROT_SEED && in_use_range()) {
+		if (inventory_usable && item_type == listbox_item::CARROT_SEED && in_range()) {
 			value = game_time::get_time() + GROW_STAGE_1_TIME + GROW_STAGE_2_TIME;
 			set_inventory_usable(false);
 			return true;
@@ -98,13 +98,6 @@ namespace game {
 		} else {
 			set_state(PLANTED);
 		}
-	}
-
-	bool CarrotBed::in_use_range() {
-		return camera::get_player_position() == position + Point(0, size.h)
-			|| camera::get_player_position() == position - Point(0, size.h)
-			|| camera::get_player_position() == position + Point(size.w, 0)
-			|| camera::get_player_position() == position - Point(size.w, 0);
 	}
 
 	void CarrotBed::update_state(Point next_position) {}
