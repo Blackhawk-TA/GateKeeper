@@ -76,6 +76,11 @@ namespace game {
 		virtual void draw();
 
 		/**
+		 * Draws the textbox separately to ensure it is rendered on top of all game objects
+		 */
+		void draw_textbox();
+
+		/**
 		 * Called on the GameScenes update function
 		 */
 		virtual void update(uint32_t time) = 0;

@@ -41,8 +41,9 @@ namespace game {
 			world_to_screen(position) - camera::get_screen_position(),
 			SpriteTransform::NONE
 		);
+	}
 
-		//Draw textbox notification
+	void GameObject::draw_textbox() {
 		if (textbox != nullptr) {
 			textbox->draw();
 		}

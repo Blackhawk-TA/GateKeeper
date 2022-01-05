@@ -64,9 +64,10 @@ namespace game {
 	void Scene::render(uint32_t time) {
 		map::draw();
 
-		game_objects::drawUnderPlayer();
+		game_objects::draw_under_player();
 		player->draw();
-		game_objects::drawOverPlayer();
+		game_objects::draw_over_player();
+		game_objects::draw_textbox();
 
 		overlay::draw_statusbar(Player::get_health());
 

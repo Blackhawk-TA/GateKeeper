@@ -44,12 +44,17 @@ namespace game::game_objects {
 	/**
 	 * Draws the game objects which should be rendered under the player
 	 */
-	void drawUnderPlayer();
+	void draw_under_player();
 
 	/**
 	 * Draws the game objects which should be rendered over the player
 	 */
-	void drawOverPlayer();
+	void draw_over_player();
+
+	/**
+	 * Draws the textbox separately to ensure it is rendered on top of all game objects
+	 */
+	void draw_textbox();
 
 	/**
 	 * Updates all game objects

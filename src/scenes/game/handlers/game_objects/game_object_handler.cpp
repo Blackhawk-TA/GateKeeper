@@ -185,7 +185,7 @@ namespace game {
 		}
 	}
 
-	void game_objects::drawUnderPlayer() {
+	void game_objects::draw_under_player() {
 		for (auto &game_object: game_object_collection) {
 			if (game_object->is_drawn_under_player() && game_object->is_rendered()) {
 				game_object->draw();
@@ -193,10 +193,18 @@ namespace game {
 		}
 	}
 
-	void game_objects::drawOverPlayer() {
+	void game_objects::draw_over_player() {
 		for (auto &game_object: game_object_collection) {
 			if (!game_object->is_drawn_under_player() && game_object->is_rendered()) {
 				game_object->draw();
+			}
+		}
+	}
+
+	void game_objects::draw_textbox() {
+		for (auto &game_object: game_object_collection) {
+			if (game_object->is_rendered()) {
+				game_object->draw_textbox();
 			}
 		}
 	}
