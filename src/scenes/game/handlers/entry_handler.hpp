@@ -21,7 +21,7 @@ namespace game::entry_handler {
 	};
 
 	constexpr Entry connections[] = {
-		Entry{Point(15, 12), Point(6, 9), Point(0, 1), map::GRASSLAND, map::INTERIOR},
+		Entry{Point(15, 12), Point(50, 26), Point(0, 1), map::GRASSLAND, map::INTERIOR},
 		Entry{Point(29, 12), Point(28, 9), Point(0, 1), map::GRASSLAND, map::INTERIOR},
 		Entry{Point(18, 19), Point(50, 9), Point(0, 1), map::GRASSLAND, map::INTERIOR},
 		Entry{Point(27, 19), Point(6, 26), Point(0, 1), map::GRASSLAND, map::INTERIOR},

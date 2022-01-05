@@ -56,6 +56,8 @@ namespace game {
 
 				game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(24, 44), Sign::WOOD, "Trees grow fruits which can be eaten. They regrow after harvesting. Carrots can be planted and harvested."));
 				game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(25, 12), Sign::WOOD, "The Stargate is a portal to other worlds! It was closed to keep the village safe."));
+				game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(24, 19), Sign::WOOD, "Your house"));
+				game_object_collection.emplace_back(new Sign(map::GRASSLAND, Point(18, 12), Sign::WOOD, "The Hospital"));
 				game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(11, 16), true));
 				game_object_collection.emplace_back(new FruitTree(map::GRASSLAND, Point(21, 42), true));
 				game_object_collection.emplace_back(new CarrotBed(map::GRASSLAND, Point(16, 42)));
