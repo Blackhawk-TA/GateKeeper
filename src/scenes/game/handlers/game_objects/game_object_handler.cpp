@@ -97,29 +97,34 @@ namespace game {
 		return game_object_collection;
 	}
 
-	bool game_objects::delete_game_object(Signature &signature) {
-		bool deleted = false;
+	void game_objects::delete_game_object(Signature &signature) {
 		auto itr = game_object_collection.begin();
 
-		while (!deleted && itr != game_object_collection.end()) {
+		while (itr != game_object_collection.end()) {
 			if (has_equal_signature((*itr)->get_signature(), signature)) {
+				switch((*itr)->get_type()) {
+					case GameObject::StargateType:
+						stargate_handler::delete_stargate(signature);
+						break;
+					case GameObject::CharacterType:
+						character_handler::delete_character(signature);
+						break;
+					case GameObject::DungeonDoorType:
+						dungeon_door_handler::delete_door(signature);
+						break;
+					default:
+						break;
+				}
+
 				delete (*itr);
 				(*itr) = nullptr;
 				game_object_collection.erase(itr);
-				//TODO update extension handler's items properly without having to recreate everything
-				stargate_handler::cleanup();
-				dungeon_door_handler::cleanup();
-				character_handler::cleanup();
-				stargate_handler::init();
-				dungeon_door_handler::init();
-				character_handler::init();
-				deleted = true;
+
+				break;
 			} else {
 				itr++;
 			}
 		}
-
-		return deleted;
 	}
 
 	void game_objects::cleanup() {

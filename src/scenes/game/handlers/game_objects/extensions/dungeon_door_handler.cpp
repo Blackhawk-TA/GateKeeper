@@ -18,6 +18,19 @@ namespace game {
 		}
 	}
 
+	void dungeon_door_handler::delete_door(Signature &signature) {
+		auto itr = doors.begin();
+
+		while (itr != doors.end()) {
+			if (game_objects::has_equal_signature((*itr)->get_signature(), signature)) {
+				doors.erase(itr);
+				break;
+			} else {
+				itr++;
+			}
+		}
+	}
+
 	void dungeon_door_handler::cleanup() {
 		doors.clear();
 	}

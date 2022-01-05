@@ -8,5 +8,6 @@
 namespace game::character_handler {
 	void init();
 	void cleanup();
+	void delete_character(Signature &signature);
 	void animate(Timer &timer);
 }

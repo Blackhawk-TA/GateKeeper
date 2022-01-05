@@ -7,6 +7,7 @@
 
 namespace game::dungeon_door_handler {
 	void init();
+	void delete_door(Signature &signature);
 	void cleanup();
 
 	/**

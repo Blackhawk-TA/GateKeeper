@@ -23,6 +23,19 @@ namespace game {
 		animation_timer->start();
 	}
 
+	void character_handler::delete_character(Signature &signature) {
+		auto itr = characters.begin();
+
+		while (itr != characters.end()) {
+			if (game_objects::has_equal_signature((*itr)->get_signature(), signature)) {
+				characters.erase(itr);
+				break;
+			} else {
+				itr++;
+			}
+		}
+	}
+
 	void character_handler::cleanup() {
 		if (animation_timer != nullptr) {
 			animation_timer->stop();

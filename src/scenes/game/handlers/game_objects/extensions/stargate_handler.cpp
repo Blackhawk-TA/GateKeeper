@@ -18,16 +18,29 @@ namespace game {
 		}
 	}
 
+	void stargate_handler::delete_stargate(Signature &signature) {
+		auto itr = stargates.begin();
+
+		while (itr != stargates.end()) {
+			if (game_objects::has_equal_signature((*itr)->get_signature(), signature)) {
+				stargates.erase(itr);
+				break;
+			} else {
+				itr++;
+			}
+		}
+	}
+
 	void stargate_handler::cleanup() {
 		//Pointers don't have to be deleted here since this is done in game_objects cleanup
 		stargates.clear();
 	}
 
-/**
- * Checks if the players next position triggers a teleportation and returns the destination gate, if existing
- * @param next_position The next position of the player
- * @return The position of the destination gate if there is one, else Point(0, 0) is returned
- */
+	/**
+	 * Checks if the players next position triggers a teleportation and returns the destination gate, if existing
+	 * @param next_position The next position of the player
+	 * @return The position of the destination gate if there is one, else Point(0, 0) is returned
+	 */
 	Stargate *stargate_handler::get_destination_gate(Point next_position) {
 		bool teleport = false;
 		StargateAddress destination_address;

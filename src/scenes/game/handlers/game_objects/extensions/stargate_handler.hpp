@@ -7,6 +7,7 @@
 
 namespace game::stargate_handler {
 	void init();
+	void delete_stargate(Signature &signature);
 	void cleanup();
 	Stargate *get_destination_gate(Point next_position);
 }
