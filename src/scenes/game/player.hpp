@@ -45,6 +45,7 @@ namespace game {
 		static bool cut_scene;
 		static MovementDirection current_direction;
 		static uint8_t health;
+		static uint8_t save_id;
 		static uint8_t level;
 		static bool dead;
 		static bool sword;
@@ -53,7 +54,6 @@ namespace game {
 		Point position;
 		Size spritesheet_size;
 		uint8_t elevation_offset;
-		uint8_t save_id;
 
 		static void animate(Timer &timer);
 		static void gate_teleport(Stargate *destination_gate, uint8_t current_save_id);

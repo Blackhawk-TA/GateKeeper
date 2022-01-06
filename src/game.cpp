@@ -7,6 +7,7 @@
 #include "engine/effects/transition.hpp"
 #include "scenes/game/ui/overlay.hpp"
 #include "scenes/combat/combat_scene.hpp"
+#include "scenes/gameover/gameover_scene.hpp"
 
 using namespace blit;
 
@@ -62,6 +63,8 @@ void load_scene(SceneType scene_type, SceneOptions options) {
 			case SceneType::COMBAT:
 				scene = new combat::Scene(options);
 				break;
+			case SceneType::GAMEOVER:
+				scene = new gameover::Scene(options);
 		}
 	});
 }

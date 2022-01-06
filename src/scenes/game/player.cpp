@@ -20,6 +20,7 @@ namespace game {
 	uint8_t Player::sprite_index = 0;
 	uint8_t Player::health = 100;
 	uint8_t Player::level = 1;
+	uint8_t Player::save_id = 0;
 	MovementDirection Player::current_direction = DOWN;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> Player::animation_sprites;
 	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
@@ -75,6 +76,10 @@ namespace game {
 			health -= damage_amount;
 		} else {
 			dead = true;
+			SceneOptions options = {
+				save_id,
+			};
+			load_scene(GAMEOVER, options);
 		}
 	}
 

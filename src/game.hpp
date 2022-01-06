@@ -7,6 +7,7 @@ enum SceneType {
 	GAME = 2,
 	OPTIONS = 3,
 	COMBAT = 4,
+	GAMEOVER = 5,
 };
 
 void load_previous_scene(uint8_t save_id = 0);
