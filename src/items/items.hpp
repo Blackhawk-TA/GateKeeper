@@ -40,7 +40,10 @@ namespace listbox_item {
 
 	enum COMBAT_ITEM {
 		ESCAPE = 1,
-		ATTACK = 2,
+		ATTACK_LIGHT = 2,
+		ATTACK_HEAVY = 3,
+		ATTACK_RANGE = 4,
+		ATTACK_MAGIC = 5,
 	};
 
 	//Item generators
@@ -75,5 +78,6 @@ namespace listbox_item {
 
 	//Combat items
 	Listbox::Item create_combat_escape(uint8_t type_id, uint8_t save_id);
-	Listbox::Item create_combat_attack(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
+	Listbox::Item create_combat_attack_light(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
+	Listbox::Item create_combat_attack_heavy(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
 }

@@ -9,13 +9,14 @@ namespace combat {
 	void attack_menu::init(uint8_t save_id, Player *player, Enemy *enemy) {
 		control = nullptr;
 		items = {
-			listbox_item::create_combat_item(listbox_item::COMBAT_ITEM::ATTACK, save_id, player, enemy),
+			listbox_item::create_combat_item(listbox_item::COMBAT_ITEM::ATTACK_LIGHT, save_id, player, enemy),
+			listbox_item::create_combat_item(listbox_item::COMBAT_ITEM::ATTACK_HEAVY, save_id, player, enemy),
 			listbox_item::create_combat_item(listbox_item::COMBAT_ITEM::ESCAPE, save_id),
 		};
 	}
 
 	void attack_menu::open() {
-		control = new Listbox(Rect(16, 0, 4, 7), items);
+		control = new Listbox(Rect(16, 0, 4, 7), items, false);
 	}
 
 	void attack_menu::close() {

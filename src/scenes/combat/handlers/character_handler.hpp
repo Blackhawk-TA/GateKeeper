@@ -19,8 +19,6 @@ namespace combat::character_handler {
 	void load_game_scene(uint8_t save_id, bool won);
 	bool escape();
 	bool attack_light(Character *attacker, Character *target);
-//	bool attack_heavy(Character *attacker, Character *target);
-//	bool attack_range(Character *attacker, Character *target);
-//	bool attack_evade(Character *character);
-//	bool attack_heal(Character *character);
+	bool attack_heavy(Character *attacker, Character *target);
+	bool attack_range(Character *attacker, Character *target);
 }

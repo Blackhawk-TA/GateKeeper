@@ -95,8 +95,15 @@ namespace listbox_item {
 			case COMBAT_ITEM::ESCAPE:
 				item = create_combat_escape(COMBAT_ITEM::ESCAPE, save_id);
 				break;
-			case COMBAT_ITEM::ATTACK:
-				item = create_combat_attack(COMBAT_ITEM::ATTACK, player, enemy);
+			case COMBAT_ITEM::ATTACK_LIGHT:
+				item = create_combat_attack_light(COMBAT_ITEM::ATTACK_LIGHT, player, enemy);
+				break;
+			case COMBAT_ITEM::ATTACK_HEAVY:
+				item = create_combat_attack_heavy(COMBAT_ITEM::ATTACK_HEAVY, player, enemy);
+				break;
+			case ATTACK_RANGE:
+				break;
+			case ATTACK_MAGIC:
 				break;
 		}
 

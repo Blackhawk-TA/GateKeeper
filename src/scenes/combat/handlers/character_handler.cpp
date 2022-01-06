@@ -83,10 +83,23 @@ namespace combat::character_handler {
 
 	//TODO make generic
 	bool attack_light(Character *attacker, Character *target) {
-		if (attacker->use_stamina(5)) {
+		if (attacker->use_stamina(7)) {
 			attacker->animate_attack([target] {
 				uint8_t bonus_damage = blit::random() % 10;
 				target->take_damage(10 + bonus_damage);
+			});
+			return true;
+		} else {
+			attacker->finish_round();
+			return false;
+		}
+	}
+
+	bool attack_heavy(Character *attacker, Character *target) {
+		if (attacker->use_stamina(10)) {
+			attacker->animate_attack([target] {
+				uint8_t bonus_damage = blit::random() % 15;
+				target->take_damage(15 + bonus_damage);
 			});
 			return true;
 		} else {
@@ -106,7 +119,6 @@ namespace combat::character_handler {
 			},
 			true,
 		};
-		//TODO load game over scene here
 		load_scene(SceneType::GAME, options);
 	}
 }
