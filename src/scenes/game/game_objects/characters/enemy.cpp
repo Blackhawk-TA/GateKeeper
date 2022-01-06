@@ -49,7 +49,7 @@ namespace game {
 		Character::update(time);
 
 		//Trigger enemy to attack player
-		if (!in_action && !Player::in_cut_scene() && !transition::in_progress() && player_in_sightline()) {
+		if (!in_action && !Player::in_cut_scene() && !transition::in_process() && player_in_sightline()) {
 			in_action = true;
 			is_moving = true;
 			Player::set_cut_scene(true);

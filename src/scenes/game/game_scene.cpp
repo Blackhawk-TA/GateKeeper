@@ -84,7 +84,7 @@ namespace game {
 		game_time::update(time);
 
 		//Handle player death
-		if (Player::is_dead() && !transition::in_progress()) {
+		if (Player::is_dead() && !transition::in_process()) {
 			load_scene(SceneType::MENU);
 		}
 

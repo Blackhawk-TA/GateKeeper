@@ -27,7 +27,6 @@ void init() {
 	load_persistent_spritesheets();
 
 	options::load();
-	transition::init();
 
 	scene = new menu::Scene();
 	current_scene = SceneType::MENU;
@@ -80,7 +79,7 @@ void render(uint32_t time) {
 	screen.clear();
 	scene->render(time);
 
-	if (transition::in_progress()) {
+	if (transition::in_process()) {
 		transition::draw();
 	}
 
@@ -97,9 +96,10 @@ void render(uint32_t time) {
 //
 void update(uint32_t time) {
 	scene->update(time);
+	transition::update(time);
 
 	//Only update inputs when not in transition
-	if (!transition::in_progress()) {
+	if (!transition::in_process()) {
 		scene->inputs();
 	}
 }

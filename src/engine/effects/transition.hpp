@@ -6,8 +6,15 @@
 #include "../../utils/utils.hpp"
 
 namespace transition {
-	bool in_progress();
+	enum TransitionState {
+		INACTIVE = 0,
+		FADING_IN = 1,
+		BLACKED_OUT = 2,
+		FADING_OUT = 3,
+	};
+
+	bool in_process();
 	void draw();
-	void init();
+	void update(uint32_t time);
 	void start(std::function<void()> callback);
 }

@@ -57,11 +57,11 @@ namespace game {
 	}
 
 	bool Player::in_action() {
-		return camera::is_moving() || dead || cut_scene || transition::in_progress();
+		return camera::is_moving() || dead || cut_scene || transition::in_process();
 	}
 
 	void Player::animate(Timer &timer) {
-		if (camera::is_moving() && !transition::in_progress()) {
+		if (camera::is_moving() && !transition::in_process()) {
 			//Sprite index increment skips standing sprite because it is already displayed
 			sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
 		} else {

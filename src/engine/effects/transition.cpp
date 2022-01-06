@@ -6,53 +6,58 @@
 
 using namespace blit;
 
-bool fading_in = true;
-Timer *transition_timer;
-uint8_t default_timer_duration = 7;
-uint8_t transition_alpha = 0;
-std::function<void()> transition_callback;
+namespace transition {
+	TransitionState state = INACTIVE;
+	uint8_t black_out_time = 250;
+	uint8_t transition_steps = 5;
+	uint8_t transition_alpha = 0;
+	uint32_t delta_time_fade_in = 0;
+	uint32_t delta_time_fade_out = 0;
+	std::function<void()> transition_callback;
 
-void fade(Timer &timer) {
-	uint8_t transition_steps = 10;
-
-	if (fading_in) {
-		if (transition_alpha + transition_steps < 255) {
-			transition_alpha += transition_steps;
-		} else {
-			transition_alpha = 255;
-			timer.duration = 250;
-			fading_in = false;
-
-			transition_callback();
-		}
-	} else {
-		timer.duration = default_timer_duration;
-		if (transition_alpha - transition_steps >= 0) {
-			transition_alpha -= transition_steps;
-		} else {
-			//Reset transition
-			transition_alpha = 0;
-			timer.stop();
-			fading_in = true;
+	void update(uint32_t time) {
+		switch (state) {
+			case INACTIVE:
+				return;
+			case FADING_IN:
+				if (transition_alpha + transition_steps < 255) {
+					transition_alpha += transition_steps;
+				} else {
+					delta_time_fade_in = time;
+					transition_alpha = 255;
+					state = BLACKED_OUT;
+				}
+				break;
+			case BLACKED_OUT:
+				if (delta_time_fade_in + black_out_time >= time) {
+					transition_callback();
+					delta_time_fade_out = time;
+				} else if (delta_time_fade_out + black_out_time >= time) {
+					state = FADING_OUT;
+				}
+				break;
+			case FADING_OUT:
+				if (transition_alpha - transition_steps >= 0) {
+					transition_alpha -= transition_steps;
+				} else {
+					transition_alpha = 0;
+					state = INACTIVE;
+				}
+				break;
 		}
 	}
-}
 
-bool transition::in_progress() {
-	return transition_timer->is_running();
-}
+	bool in_process() {
+		return state != INACTIVE;
+	}
 
-void transition::draw() {
-	screen.pen = Pen(0, 0, 0, transition_alpha);
-	screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
-}
+	void draw() {
+		screen.pen = Pen(0, 0, 0, transition_alpha);
+		screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
+	}
 
-void transition::init() {
-	transition_timer = new Timer();
-	transition_timer->init(fade, default_timer_duration, -1);
-}
-
-void transition::start(std::function<void()> callback) {
-	transition_callback = std::move(callback);
-	transition_timer->start();
+	void start(std::function<void()> callback) {
+		transition_callback = std::move(callback);
+		state = FADING_IN;
+	}
 }
