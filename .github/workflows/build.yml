@@ -148,6 +148,7 @@ jobs:
           python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/characters.png -o main/assets/characters.png --key=ASSET_KEY
           python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/spritesheet.png -o main/assets/spritesheet.png --key=ASSET_KEY
           python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/attack_animations.png -o main/assets/attack_animations.png --key=ASSET_KEY
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/weapons.png -o main/assets/weapons.png --key=ASSET_KEY
 
       # Set up the cmake build environment
       - name: Create Build Environment
