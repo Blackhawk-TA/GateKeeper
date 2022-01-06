@@ -6,6 +6,7 @@
 
 #include <utility>
 #include "../../../../engine/camera.hpp"
+#include "assets.hpp"
 
 namespace combat {
 	Character::Character(uint8_t save_id, CharacterData character_data, Point position, Point attack_position) {
@@ -23,6 +24,7 @@ namespace combat {
 		tile_index = 0;
 		spritesheet_size = get_spritesheet_size(characters_spritesheet->bounds);
 		attack_spritesheet_size = get_spritesheet_size(attack_spritesheet->bounds);
+		weapons_spritesheet_size = get_spritesheet_size(weapons_spritesheet->bounds);
 		attack_state = IDLE;
 		round_finishing = false;
 		finish_time = 0;

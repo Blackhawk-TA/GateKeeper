@@ -15,6 +15,7 @@ constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;
 
 inline Surface *characters_spritesheet;
 inline Surface *attack_spritesheet;
+inline Surface *weapons_spritesheet;
 
 bool sprite_rect_in_screen(Point &position, const Size &size, Point camera_position_world);
 

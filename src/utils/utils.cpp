@@ -64,6 +64,7 @@ void load_persistent_spritesheets() {
 	screen.sprites = Surface::load_read_only(asset_spritesheet);
 	characters_spritesheet = Surface::load_read_only(asset_characters);
 	attack_spritesheet = Surface::load_read_only(asset_attack_animations);
+	weapons_spritesheet = Surface::load_read_only(asset_weapons);
 }
 
 void draw_fps(uint32_t &ms_start, uint32_t &ms_end) {

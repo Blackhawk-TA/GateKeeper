@@ -14,6 +14,9 @@ assets.cpp:
   assets/attack_animations.png:
     name: attack_animations
     packed: false
+  assets/weapons.png:
+    name: weapons
+    packed: false
 
   assets/grassland.tmx:
     name: grassland_map

@@ -61,6 +61,7 @@ namespace combat {
 		Point attack_position; //The position at which the attack animation is done
 		Size spritesheet_size;
 		Size attack_spritesheet_size;
+		Size weapons_spritesheet_size;
 		AttackState attack_state;
 		std::function<void()> damage_dealer;
 
