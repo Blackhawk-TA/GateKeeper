@@ -84,7 +84,7 @@ namespace combat::character_handler {
 	//TODO make generic
 	bool attack_light(Character *attacker, Character *target) {
 		if (attacker->use_stamina(7)) {
-			attacker->animate_attack([target] {
+			attacker->animate_attack(Character::SWORD, [target] {
 				uint8_t bonus_damage = blit::random() % 10;
 				target->take_damage(10 + bonus_damage);
 			});
@@ -95,9 +95,10 @@ namespace combat::character_handler {
 		}
 	}
 
+	//TODO remove
 	bool attack_heavy(Character *attacker, Character *target) {
 		if (attacker->use_stamina(10)) {
-			attacker->animate_attack([target] {
+			attacker->animate_attack(Character::MAGIC, [target] {
 				uint8_t bonus_damage = blit::random() % 15;
 				target->take_damage(15 + bonus_damage);
 			});

@@ -8,8 +8,7 @@
 
 namespace combat {
 	Player::Player(uint8_t save_id, CharacterData character_data)
-	: Character(save_id, character_data, Point(18, 11), Point(12, 11)) {
-		direction = LEFT;
+	: Character(save_id, character_data, Point(18, 11), Point(12, 11), LEFT) {
 		stamina = MAX_STAMINA;
 	}
 
