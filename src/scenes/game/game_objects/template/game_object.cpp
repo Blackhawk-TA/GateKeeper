@@ -117,8 +117,8 @@ namespace game {
 	bool GameObject::in_range(uint8_t distance) {
 		return (Player::get_direction() == UP && camera::get_player_position() == position + Point(0, size.h + distance))
 			|| (Player::get_direction() == DOWN && camera::get_player_position() == position - Point(0, size.h + distance))
-			|| (Player::get_direction() == RIGHT && camera::get_player_position() == position + Point(size.w + distance, 0))
-			|| (Player::get_direction() == LEFT && camera::get_player_position() == position - Point(size.w + distance, 0));
+			|| (Player::get_direction() == RIGHT && camera::get_player_position() == position - Point(size.w + distance, 0))
+			|| (Player::get_direction() == LEFT && camera::get_player_position() == position + Point(size.w + distance, 0));
 	}
 
 

@@ -28,7 +28,6 @@ namespace game::inventory {
 	void close();
 	bool is_open();
 	bool add_item(Listbox::Item item);
-	std::vector<Listbox::Item> get_items();
 	void draw();
 	void cursor_up();
 	void cursor_down();

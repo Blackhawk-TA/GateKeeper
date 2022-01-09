@@ -18,6 +18,8 @@
  */
 //TODO causes crash when on pico sometimes when going to snowland, solution: maybe one game_object save slot per map section
 // it works for items, why not for game objects?
+
+//TODO move to gameobject handler?
 std::array<game::GameObject::Save, MAX_GAME_OBJECTS> get_game_object_saves(uint8_t save_id) {
 	//The game object data which is currently in memory from the current map section
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> current_game_objects = game::game_objects::get_saves();
@@ -98,10 +100,6 @@ void savegame::save(uint8_t save_id, bool tmp_save) {
 		options::save_count = save_id;
 		options::save();
 	}
-
-	//Fetch item and stargate data
-	//TODO handle item compression and decompression in inventory namespace in get_items and load
-	std::vector<Listbox::Item> items = game::inventory::get_items();
 
 	//Save and compress data which will be saved
 	save::SaveData save_data = {

@@ -95,10 +95,6 @@ namespace game::inventory {
 		return control->add_item(item);
 	}
 
-	std::vector<Listbox::Item> get_items() {
-		return control->get_items();
-	}
-
 	void draw() {
 		control->draw();
 	}
