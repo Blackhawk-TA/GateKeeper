@@ -71,3 +71,23 @@ enum StargateAddress {
 	WINTER = 2,
 	DESERT = 3
 };
+
+//Attack types for the combat scene
+enum AttackType {
+	NO_ATTACK = 0,
+	SWORD = 1,
+	SPEAR = 2,
+	ARROW = 3,
+	DAGGER = 4,
+	FIRE = 5,
+	ICE = 6,
+	ELECTRIC = 7,
+	MAGIC = 8,
+};
+
+//The stats of an attack in the combat scene
+struct AttackStats {
+	uint8_t stamina;
+	uint8_t base_damage;
+	uint8_t bonus_damage;
+};

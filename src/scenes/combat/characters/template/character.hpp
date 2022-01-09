@@ -15,18 +15,6 @@ namespace combat {
 			Enemy = 2,
 		};
 
-		enum AttackType {
-			NO_ATTACK = 0,
-			SWORD = 1,
-			SPEAR = 2,
-			ARROW = 3,
-			DAGGER = 4,
-			FIRE = 5,
-			ICE = 6,
-			ELECTRIC = 7,
-			MAGIC = 8,
-		};
-
 		static const uint8_t MAX_HEALTH = 100;
 
 		explicit Character(uint8_t save_id, CharacterData character_data, Point position, Point attack_position, MovementDirection direction);

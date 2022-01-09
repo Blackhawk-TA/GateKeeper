@@ -81,26 +81,23 @@ namespace combat::character_handler {
 		}
 	}
 
-	//TODO make generic
-	bool attack_light(Character *attacker, Character *target) {
-		if (attacker->use_stamina(7)) {
-			attacker->animate_attack(Character::SWORD, [target] {
-				uint8_t bonus_damage = blit::random() % 10;
-				target->take_damage(10 + bonus_damage);
-			});
-			return true;
-		} else {
-			attacker->finish_round();
-			return false;
-		}
-	}
+	bool attack(AttackType type, Character *attacker, Character *target) {
+		std::map<AttackType, AttackStats> attacks = {
+			{SWORD, AttackStats{10, 10, 10}},
+			{SPEAR, AttackStats{15, 15, 15}},
+			{ARROW, AttackStats{10, 10, 15}},
+			{DAGGER, AttackStats{7, 5, 15}},
+			{FIRE, AttackStats{30, 20, 10}},
+			{ICE, AttackStats{30, 20, 10}},
+			{ELECTRIC, AttackStats{30, 20, 10}},
+			{MAGIC, AttackStats{30, 20, 10}},
+		};
+		AttackStats attack = attacks.at(type);
 
-	//TODO remove
-	bool attack_heavy(Character *attacker, Character *target) {
-		if (attacker->use_stamina(10)) {
-			attacker->animate_attack(Character::MAGIC, [target] {
-				uint8_t bonus_damage = blit::random() % 15;
-				target->take_damage(15 + bonus_damage);
+		if (attacker->use_stamina(attack.stamina)) {
+			attacker->animate_attack(type, [target, attack] {
+				uint8_t bonus_damage = blit::random() % attack.bonus_damage;
+				target->take_damage(attack.base_damage + bonus_damage);
 			});
 			return true;
 		} else {

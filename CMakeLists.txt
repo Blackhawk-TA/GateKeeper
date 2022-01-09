@@ -31,8 +31,11 @@ set(PROJECT_SOURCE
         src/scenes/game/handlers/game_objects/extensions/stargate_handler.cpp src/scenes/game/handlers/game_objects/extensions/stargate_handler.hpp
         src/scenes/game/handlers/game_objects/extensions/dungeon_door_handler.cpp src/scenes/game/handlers/game_objects/extensions/dungeon_door_handler.hpp
         src/items/combat/escape.cpp
-        src/items/combat/sword_light.cpp
-        src/items/combat/sword_heavy.cpp
+        src/items/combat/sword.cpp
+        src/items/combat/spear.cpp
+        src/items/combat/arrow.cpp
+        src/items/combat/dagger.cpp
+        src/items/combat/magic.cpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
         src/items/inventory/apple.cpp

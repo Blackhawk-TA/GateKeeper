@@ -18,7 +18,5 @@ namespace combat::character_handler {
 	void next_turn(Character *last_turn);
 	void load_game_scene(uint8_t save_id, bool won);
 	bool escape();
-	bool attack_light(Character *attacker, Character *target);
-	bool attack_heavy(Character *attacker, Character *target);
-	bool attack_range(Character *attacker, Character *target);
+	bool attack(AttackType type, Character *attacker, Character *target);
 }
