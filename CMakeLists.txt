@@ -75,6 +75,7 @@ set(PROJECT_SOURCE
         src/utils/game_time.cpp src/utils/game_time.hpp
         src/utils/movement_direction.cpp src/utils/movement_direction.hpp
         src/utils/types.hpp
+        src/utils/saves/save_types.hpp
 )
 # ... and any other files you want in the release here
 set(PROJECT_DISTRIBS LICENSE.md README.md)

@@ -9,6 +9,7 @@
 
 namespace combat::attack_menu {
 	void init(uint8_t save_id, Player *player, Enemy *enemy);
+	void cleanup();
 	void open();
 	void close();
 	bool is_open();

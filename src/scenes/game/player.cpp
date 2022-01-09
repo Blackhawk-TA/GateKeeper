@@ -34,9 +34,8 @@ namespace game {
 		{RIGHT, {96,  97,  98,  99}}
 	};
 
-	Player::Player(MovementDirection direction, uint8_t player_health, uint8_t save_id) {
-		Player::health = player_health;
-		Player::save_id = save_id;
+	Player::Player(save::PlayerData player_data, uint8_t current_save_id) {
+		Player::save_id = current_save_id;
 		position = get_screen_tiles() / 2;
 		spritesheet_size = get_spritesheet_size(characters_spritesheet->bounds);
 		elevation_offset = 0;
@@ -45,20 +44,21 @@ namespace game {
 		cut_scene = false;
 		dead = false;
 
-		//TODO load weapons from save by using get_save() function for all player save data
-		sword = false;
-		spear = false;
-		arrow = false;
-		dagger = false;
-		magic = false;
-		level = 1; //TODO load level from save
+		health = player_data.health;
+		level = player_data.level;
+		current_direction = player_data.direction;
+		sword = player_data.sword;
+		spear = player_data.spear;
+		arrow = player_data.arrow;
+		dagger = player_data.dagger;
+		magic = player_data.magic;
 
 		//Set player animation tiles
-		if (direction == NO_DIRECTION) {
+		if (player_data.direction == NO_DIRECTION) {
 			std::cerr << "Invalid player direction, falling back to direction 'DOWN'" << std::endl;
 			current_direction = DOWN;
 		} else {
-			current_direction = direction;
+			current_direction = player_data.direction;
 		}
 		animation_sprites = movement_sprites.at(current_direction);
 		sprite_id = animation_sprites[0];
@@ -251,5 +251,18 @@ namespace game {
 			default:
 				return false;
 		}
+	}
+
+	save::PlayerData Player::get_save() {
+		return save::PlayerData{
+			health,
+			level,
+			current_direction,
+			sword,
+			spear,
+			arrow,
+			dagger,
+			magic
+		};
 	}
 }

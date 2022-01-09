@@ -7,15 +7,17 @@
 #include "../../scenes/game/ui/inventory.hpp"
 #include "../../scenes/game/ui/sidemenu.hpp"
 #include "../game_time.hpp"
+#include "save_types.hpp"
 #include <cassert>
 
+//TODO move item compression to inventory namespace and add returned ItemSave struct to save_types.hpp
 /**
  * Parses the item vector into an array, because vector cannot be saved directly
  * @param items The item vector to be compressed
  * @return The compressed item array
  */
-std::array<savegame::Item, MAX_ITEMS> compress_items(std::vector<Listbox::Item> &items) {
-	std::array<savegame::Item, MAX_ITEMS> compressed_items = {};
+std::array<save::Item, MAX_ITEMS> compress_items(std::vector<Listbox::Item> &items) {
+	std::array<save::Item, MAX_ITEMS> compressed_items = {};
 	uint8_t amount;
 
 	//TODO check earlier if possible
@@ -23,7 +25,7 @@ std::array<savegame::Item, MAX_ITEMS> compress_items(std::vector<Listbox::Item> 
 
 	for (auto i = 0u; i < items.size(); i++) {
 		amount = i < items.size() ? items[i].amount : 0;
-		compressed_items[i] = savegame::Item{
+		compressed_items[i] = save::Item{
 			items[i].type,
 			amount
 		};
@@ -32,12 +34,12 @@ std::array<savegame::Item, MAX_ITEMS> compress_items(std::vector<Listbox::Item> 
 	return compressed_items;
 }
 
-std::vector<Listbox::Item> decompress_items(std::array<savegame::Item, MAX_ITEMS> &items) {
+std::vector<Listbox::Item> decompress_items(std::array<save::Item, MAX_ITEMS> &items) {
 	std::vector<Listbox::Item> decompressed_items = {};
 	Listbox::Item item_template;
 
 	uint8_t i = 0;
-	savegame::Item *item;
+	save::Item *item;
 	bool array_end = false;
 
 	while (!array_end && i < MAX_ITEMS) {
@@ -82,7 +84,7 @@ std::array<game::GameObject::Save, MAX_GAME_OBJECTS> get_game_object_saves(uint8
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> current_game_objects = game::game_objects::get_saves();
 
 	//Load old save to fetch game object data that is not currently in memory
-	savegame::SaveData old_save = {};
+	save::SaveData old_save = {};
 	bool save_found = read_save(old_save, save_id);
 
 	if (save_found) {
@@ -106,19 +108,19 @@ std::array<game::GameObject::Save, MAX_GAME_OBJECTS> get_game_object_saves(uint8
 	return old_save.game_objects;
 }
 
-PlayerData get_player_data(SaveOptions options, savegame::SaveData save_data) {
+//TODO refactor
+PlayerTempData get_player_temp_data(SaveOptions options, save::SaveData save_data) {
 	//The default save data if it was not a tmp save for the combat scene
-	PlayerData player_data = {
+	PlayerTempData player_data = {
 		save_data.map_section,
-		save_data.player_direction,
+		save_data.player_data.direction,
 		save_data.camera_position,
-		save_data.player_health,
+		save_data.player_data.health,
 		{}
 	};
 
 	//On tmp save manually overwrite player_data depending on the outcome of the fight in the combat scene
 	if (options.tmp_save && options.game_data.health == 0 && !options.game_data.won) { //Loss
-		//TODO add game over screen
 		player_data = {
 			map::INTERIOR,
 			MovementDirection::DOWN,
@@ -148,7 +150,7 @@ game::Player *savegame::create(uint8_t save_id) {
 	game::game_objects::init(map::GRASSLAND, save_id);
 	game_time::init();
 
-	return new game::Player(MovementDirection::DOWN, 100, save_id);
+	return new game::Player(save::PlayerData{}, save_id);
 }
 
 void savegame::save(uint8_t save_id, bool tmp_save) {
@@ -163,13 +165,12 @@ void savegame::save(uint8_t save_id, bool tmp_save) {
 	std::vector<Listbox::Item> items = game::inventory::get_items();
 
 	//Save and compress data which will be saved
-	SaveData save_data = {
+	save::SaveData save_data = {
 		savegame::VERSION,
 		map::get_section(),
 		camera::get_player_position(),
 		camera::get_previous_player_position(),
-		game::Player::get_direction(),
-		game::Player::get_health(),
+		game::Player::get_save(),
 		get_game_object_saves(save_id),
 		compress_items(items),
 		game_time::get_time()
@@ -184,7 +185,7 @@ void savegame::save(uint8_t save_id, bool tmp_save) {
 
 game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 	game::Player *player;
-	SaveData save_data;
+	save::SaveData save_data;
 	uint8_t load_save_id = options.tmp_save ? TMP_SAVE_ID : save_id;
 
 	bool save_found = read_save(save_data, load_save_id);
@@ -195,15 +196,19 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 			//TODO port save using structs for each save version
 		}
 
-		//Load the player data required for setting health, position and map section
-		PlayerData player_data = get_player_data(options, save_data);
+		//Load the player temp data required for setting health, position and map section
+		PlayerTempData player_temp_data = get_player_temp_data(options, save_data);
 
 		//Load the map section
-		map::load_section(player_data.map_section);
+		map::load_section(player_temp_data.map_section);
 
 		//Load position and direction
-		camera::init(player_data.camera_position);
-		player = new game::Player(player_data.direction, player_data.health, save_id);
+		camera::init(player_temp_data.camera_position);
+
+		save::PlayerData player_save = save_data.player_data;
+		player_save.direction = player_temp_data.direction;
+		player_save.health = player_temp_data.health;
+		player = new game::Player(player_save, save_id);
 
 		//Init sidemenu
 		game::sidemenu::init(save_id);
@@ -215,8 +220,8 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 		//Load game object states
 		game::game_objects::init(save_data.map_section, save_id);
 		game::game_objects::load_saves(save_data.game_objects);
-		if (!game::game_objects::is_empty_signature(player_data.enemy_signature)) {
-			game::game_objects::delete_game_object(player_data.enemy_signature);
+		if (!game::game_objects::is_empty_signature(player_temp_data.enemy_signature)) {
+			game::game_objects::delete_game_object(player_temp_data.enemy_signature);
 		}
 
 		//Load game time
@@ -227,12 +232,12 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 		player = create(save_id);
 	}
 
-	return player;
+	return player; //TODO with player save and load function there is no need to return this
 }
 
 std::array<game::GameObject::Save, MAX_GAME_OBJECTS> savegame::load_game_objects(uint8_t save_id) {
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects;
-	savegame::SaveData save_game;
+	save::SaveData save_game;
 
 	bool save_found = read_save(save_game, save_id);
 	if (save_found) {

@@ -29,7 +29,7 @@ namespace combat {
 
 	Scene::~Scene() {
 		character_handler::cleanup();
-		attack_menu::close();
+		attack_menu::cleanup();
 
 		//Deleted by character_handler
 		player = nullptr;

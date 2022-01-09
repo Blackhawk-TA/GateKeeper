@@ -8,14 +8,15 @@
 #include "game_objects/objects/stargate.hpp"
 #include "../../game.hpp"
 #include "../../utils/movement_direction.hpp"
+#include "../../utils/saves/save_types.hpp"
 
 using namespace blit;
 
-namespace game {
 //TODO rewrite so it is similar to character
+namespace game {
 	class Player {
 	public:
-		explicit Player(MovementDirection direction, uint8_t player_health, uint8_t save_id);
+		explicit Player(save::PlayerData player_data, uint8_t current_save_id);
 		void draw();
 		void move(MovementDirection direction);
 		static bool is_dead();
@@ -28,6 +29,7 @@ namespace game {
 		static bool in_cut_scene();
 		static bool has_weapon(AttackType type);
 		static CharacterData get_character_data();
+		static save::PlayerData get_save();
 
 	private:
 		const std::map<MovementDirection, Point> movements{

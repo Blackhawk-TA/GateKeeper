@@ -49,7 +49,7 @@ struct SaveOptions {
 };
 
 //Data that is required for load a player from a save
-struct PlayerData {
+struct PlayerTempData {
 	map::MapSection map_section;
 	MovementDirection direction;
 	Point camera_position;

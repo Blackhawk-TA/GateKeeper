@@ -31,6 +31,11 @@ namespace combat {
 		add_item(listbox_item::create_combat_item(listbox_item::COMBAT_ITEM::ESCAPE, save_id));
 	}
 
+	void attack_menu::cleanup() {
+		delete control;
+		control = nullptr;
+	}
+
 	void attack_menu::open() {
 		control->set_view_mode(false);
 		control->cursor_reset();
