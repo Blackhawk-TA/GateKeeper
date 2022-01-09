@@ -8,68 +8,7 @@
 #include "../../scenes/game/ui/sidemenu.hpp"
 #include "../game_time.hpp"
 #include "save_types.hpp"
-#include <cassert>
 
-//TODO move item compression to inventory namespace and add returned ItemSave struct to save_types.hpp
-/**
- * Parses the item vector into an array, because vector cannot be saved directly
- * @param items The item vector to be compressed
- * @return The compressed item array
- */
-std::array<save::Item, MAX_ITEMS> compress_items(std::vector<Listbox::Item> &items) {
-	std::array<save::Item, MAX_ITEMS> compressed_items = {};
-	uint8_t amount;
-
-	//TODO check earlier if possible
-	assert(items.size() <= MAX_ITEMS);
-
-	for (auto i = 0u; i < items.size(); i++) {
-		amount = i < items.size() ? items[i].amount : 0;
-		compressed_items[i] = save::Item{
-			items[i].type,
-			amount
-		};
-	}
-
-	return compressed_items;
-}
-
-std::vector<Listbox::Item> decompress_items(std::array<save::Item, MAX_ITEMS> &items) {
-	std::vector<Listbox::Item> decompressed_items = {};
-	Listbox::Item item_template;
-
-	uint8_t i = 0;
-	save::Item *item;
-	bool array_end = false;
-
-	while (!array_end && i < MAX_ITEMS) {
-		item = &items[i];
-
-		if (item->type == 0 && item->amount == 0) {
-			array_end = true;
-			continue;
-		}
-
-		item_template = listbox_item::create_inventory_item(static_cast<listbox_item::INVENTORY_ITEM>(item->type));
-
-		//Include only items that have an amount > 0 or are a menu item
-		if (item->type > 0 && (item->amount > 0 || (item->amount == 0 && !item_template.single_use))) {
-			decompressed_items.emplace_back(Listbox::Item{
-				item->type,
-				item_template.name,
-				item_template.tooltip,
-				item_template.callback_tooltip,
-				item_template.callback_fail_tooltip,
-				item_template.single_use,
-				item->amount,
-				item_template.callback
-			});
-		}
-		i++;
-	}
-
-	return decompressed_items;
-}
 
 /**
  * Gets all game object saves by merging the old ones from different map sections with the ones im memory from the current map section.
@@ -172,7 +111,7 @@ void savegame::save(uint8_t save_id, bool tmp_save) {
 		camera::get_previous_player_position(),
 		game::Player::get_save(),
 		get_game_object_saves(save_id),
-		compress_items(items),
+		game::inventory::get_save(),
 		game_time::get_time()
 	};
 
@@ -215,7 +154,7 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 
 		//Load inventory
 		game::inventory::init();
-		game::inventory::load(decompress_items(save_data.items));
+		game::inventory::load_save(save_data.items);
 
 		//Load game object states
 		game::game_objects::init(save_data.map_section, save_id);
