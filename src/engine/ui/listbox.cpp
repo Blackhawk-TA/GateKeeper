@@ -97,6 +97,7 @@ void Listbox::draw() {
 
 void Listbox::cursor_reset() {
 	cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
+	update_tooltip();
 }
 
 void Listbox::cursor_up() {
@@ -225,4 +226,8 @@ std::vector<Listbox::Item> Listbox::get_items() {
 
 void Listbox::set_items(std::vector<Item> &new_items) {
 	items = new_items;
+}
+
+void Listbox::set_view_mode(bool value) {
+	view_mode = value;
 }

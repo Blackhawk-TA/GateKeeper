@@ -26,6 +26,7 @@ namespace game {
 		static void change_direction(MovementDirection direction, bool animate = true);
 		static void set_cut_scene(bool value);
 		static bool in_cut_scene();
+		static bool has_weapon(AttackType type);
 		static CharacterData get_character_data();
 
 	private:
@@ -49,6 +50,10 @@ namespace game {
 		static uint8_t level;
 		static bool dead;
 		static bool sword;
+		static bool spear;
+		static bool arrow;
+		static bool dagger;
+		static bool magic;
 
 		Timer animation_timer;
 		Point position;

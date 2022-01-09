@@ -16,6 +16,10 @@ namespace game {
 	bool Player::cut_scene = false;
 	bool Player::dead = false;
 	bool Player::sword = false;
+	bool Player::spear = false;
+	bool Player::arrow = false;
+	bool Player::dagger = false;
+	bool Player::magic = false;
 	uint16_t Player::sprite_id = 0;
 	uint8_t Player::sprite_index = 0;
 	uint8_t Player::health = 100;
@@ -40,7 +44,13 @@ namespace game {
 		//Set static vars in case of re-initialisation
 		cut_scene = false;
 		dead = false;
+
+		//TODO load weapons from save by using get_save() function for all player save data
 		sword = false;
+		spear = false;
+		arrow = false;
+		dagger = false;
+		magic = false;
 		level = 1; //TODO load level from save
 
 		//Set player animation tiles
@@ -224,5 +234,22 @@ namespace game {
 			sword,
 			false,
 		};
+	}
+
+	bool Player::has_weapon(AttackType type) {
+		switch (type) {
+			case SWORD:
+				return sword;
+			case SPEAR:
+				return spear;
+			case ARROW:
+				return arrow;
+			case DAGGER:
+				return dagger;
+			case MAGIC:
+				return magic;
+			default:
+				return false;
+		}
 	}
 }

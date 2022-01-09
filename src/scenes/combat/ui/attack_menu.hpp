@@ -8,13 +8,11 @@
 #include "../characters/player.hpp"
 
 namespace combat::attack_menu {
-	inline Listbox *control;
-	inline std::vector<Listbox::Item> items;
-
 	void init(uint8_t save_id, Player *player, Enemy *enemy);
 	void open();
 	void close();
 	bool is_open();
+	bool add_item(Listbox::Item item);
 	void draw();
 	void cursor_up();
 	void cursor_down();

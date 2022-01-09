@@ -18,10 +18,10 @@ namespace game {
 		control = new Listbox(Rect(14, 0, 6, 7), items);
 	}
 
-/**
- * Load a inventory that was stored in the save game
- * @param loaded_items The stored items from the save game
- */
+	/**
+	 * Load a inventory that was stored in the save game
+	 * @param loaded_items The stored items from the save game
+	 */
 	void inventory::load(std::vector<Listbox::Item> loaded_items) {
 		control->set_items(loaded_items);
 	}
