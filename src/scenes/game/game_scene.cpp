@@ -59,6 +59,7 @@ namespace game {
 		//Delete game objects and inventory after saving
 		game_objects::cleanup();
 		inventory::cleanup();
+		sidemenu::cleanup();
 	}
 
 	void Scene::render(uint32_t time) {
