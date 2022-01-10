@@ -7,10 +7,8 @@
 #include "../../../engine/ui/listbox.hpp"
 
 namespace game::sidemenu {
-	inline Listbox *control;
-	inline std::vector<Listbox::Item> items;
-
 	void init(uint8_t save_id);
+	void cleanup();
 	void open();
 	void close();
 	bool is_open();
