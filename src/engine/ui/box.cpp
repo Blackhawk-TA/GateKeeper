@@ -41,7 +41,7 @@ Rect Box::set_bounds(Rect &r) {
 	return {r.x, r.y, r.w, r.h};
 }
 
-void Box::draw() const {
+void Box::draw() {
 	if (visible) {
 		uint8_t x, y;
 		uint16_t sprite_id;
@@ -84,4 +84,8 @@ void Box::draw() const {
 
 void Box::set_visibility(bool value) {
 	visible = value;
+}
+
+bool Box::is_visible() const {
+	return visible;
 }

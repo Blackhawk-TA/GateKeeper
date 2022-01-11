@@ -5,7 +5,7 @@
 #pragma once
 #include "box.hpp"
 
-class Textbox : private Box {
+class Textbox : public Box {
 private:
 	static constexpr Rect rect = Rect(0, 12, 20, 3);
 	const uint8_t PADDING = 1; //Distance between Box border and text in tiles
@@ -21,6 +21,6 @@ private:
 
 public:
 	explicit Textbox(std::string text = "");
-	void draw();
+	void draw() override;
 	void set_text(std::string &new_text);
 };

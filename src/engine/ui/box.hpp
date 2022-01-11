@@ -8,8 +8,14 @@
 class Box {
 public:
 	explicit Box(Rect rect);
-	void draw() const;
+	virtual void draw();
 	void set_visibility(bool value);
+	bool is_visible() const;
+
+protected:
+	Rect rect;
+	Size spritesheet_size;
+	bool visible;
 
 	static Rect set_bounds(Rect &r);
 
@@ -23,8 +29,4 @@ private:
 	const uint16_t sprite_id_bottom_left = 1807;
 	const uint16_t sprite_id_bottom_center = 1808;
 	const uint16_t sprite_id_bottom_right = 1809;
-
-	Rect rect;
-	bool visible;
-	Size spritesheet_size;
 };

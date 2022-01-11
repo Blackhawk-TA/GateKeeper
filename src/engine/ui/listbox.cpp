@@ -9,8 +9,8 @@ Listbox::Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting) : Box
 	Listbox::items = items;
 	Listbox::enable_sorting = enable_sorting;
 	view_mode = false;
-	spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
+	confirm_dialog = new ConfirmDialog(Rect(rect.x - 3, 0, 3, 3));
 	tooltip = new Textbox();
 
 	update_tooltip();
@@ -20,6 +20,8 @@ Listbox::Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting) : Box
 Listbox::~Listbox() {
 	delete tooltip;
 	tooltip = nullptr;
+	delete confirm_dialog;
+	confirm_dialog = nullptr;
 }
 
 /**
@@ -42,6 +44,7 @@ void Listbox::sort_list() {
 
 void Listbox::draw() {
 	tooltip->draw();
+	confirm_dialog->draw();
 
 	if (view_mode) return;
 
@@ -93,17 +96,21 @@ void Listbox::draw() {
 			SpriteTransform::NONE
 		);
 	}
+
 }
 
 void Listbox::cursor_reset() {
 	cursor_position = Point(rect.x, rect.y + CURSOR_OFFSET);
+	confirm_dialog->cursor_reset();
 	update_tooltip();
 }
 
 void Listbox::cursor_up() {
 	if (view_mode) return;
 
-	if (cursor_position.y - rect.y > 1) {
+	if (confirm_dialog->is_visible()) {
+		confirm_dialog->cursor_up();
+	} else if (cursor_position.y - rect.y > 1) {
 		cursor_position.y--;
 	}
 
@@ -113,7 +120,9 @@ void Listbox::cursor_up() {
 void Listbox::cursor_down() {
 	if (view_mode) return;
 
-	if (cursor_position.y - rect.y < static_cast<uint8_t>(items.size())) {
+	if (confirm_dialog->is_visible()) {
+		confirm_dialog->cursor_down();
+	} else if (cursor_position.y - rect.y < items.size()) {
 		cursor_position.y++;
 	}
 
@@ -130,27 +139,41 @@ void Listbox::cursor_press(bool set_view_mode) {
 	uint8_t item_index = cursor_position.y - rect.y - CURSOR_OFFSET;
 
 	if (!items.empty() && item_index < items.size()) {
-		std::string callback_tooltip = items[item_index].callback_tooltip;
-		std::string callback_fail_tooltip = items[item_index].callback_fail_tooltip;
-		Tooltip tooltip_state = items[item_index].callback();
-
-		if (tooltip != nullptr) {
-			switch (tooltip_state) {
-				case SUCCESS:
-					tooltip->set_text(callback_tooltip);
-					break;
-				case FAILURE:
-					tooltip->set_text(callback_fail_tooltip);
-					break;
-				case SUPPRESS:
-					break;
+		if (items[item_index].confirm_dialog) {
+			if (confirm_dialog->is_visible()) {
+				confirm_dialog->cursor_press([this, item_index, set_view_mode] {
+					handle_item_press(item_index, set_view_mode);
+				});
+			} else {
+				confirm_dialog->set_visibility(true);
 			}
+		} else {
+			handle_item_press(item_index, set_view_mode);
 		}
+	}
+}
 
-		//Delete items that can only be used once
-		if (tooltip_state == Tooltip::SUCCESS && items[item_index].single_use) {
-			remove_item(item_index);
+void Listbox::handle_item_press(uint8_t item_index, bool set_view_mode) {
+	std::string callback_tooltip = items[item_index].callback_tooltip;
+	std::string callback_fail_tooltip = items[item_index].callback_fail_tooltip;
+	Tooltip tooltip_state = items[item_index].callback();
+
+	if (tooltip != nullptr) {
+		switch (tooltip_state) {
+			case SUCCESS:
+				tooltip->set_text(callback_tooltip);
+				break;
+			case FAILURE:
+				tooltip->set_text(callback_fail_tooltip);
+				break;
+			case SUPPRESS:
+				break;
 		}
+	}
+
+	//Delete items that can only be used once
+	if (tooltip_state == Tooltip::SUCCESS && items[item_index].single_use) {
+		remove_item(item_index);
 	}
 
 	view_mode = set_view_mode;

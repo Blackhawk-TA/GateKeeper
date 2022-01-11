@@ -10,6 +10,10 @@ set(PROJECT_SOURCE
         src/engine/flags.cpp src/engine/flags.hpp
         src/engine/map.cpp src/engine/map.hpp
         src/engine/effects/transition.cpp src/engine/effects/transition.hpp
+        src/engine/ui/box.cpp src/engine/ui/box.hpp
+        src/engine/ui/listbox.cpp src/engine/ui/listbox.hpp
+        src/engine/ui/textbox.cpp src/engine/ui/textbox.hpp
+        src/engine/ui/confirm_dialog.cpp src/engine/ui/textbox.hpp
         src/game.cpp src/game.hpp
         src/scenes/scene_interface.hpp
         src/scenes/combat/combat_scene.cpp src/scenes/combat/combat_scene.hpp
@@ -63,11 +67,8 @@ set(PROJECT_SOURCE
         src/scenes/game/game_objects/objects/gate_statue.cpp src/scenes/game/game_objects/objects/gate_statue.hpp
         src/scenes/game/game_objects/template/game_object.cpp src/scenes/game/game_objects/template/game_object.hpp
         src/scenes/game/player.cpp src/scenes/game/player.hpp
-        src/engine/ui/box.cpp src/engine/ui/box.hpp
-        src/engine/ui/listbox.cpp src/engine/ui/listbox.hpp
         src/scenes/game/ui/inventory.cpp src/scenes/game/ui/inventory.hpp
         src/scenes/game/ui/sidemenu.cpp src/scenes/game/ui/sidemenu.hpp
-        src/engine/ui/textbox.cpp src/engine/ui/textbox.hpp
         src/scenes/game/ui/overlay.cpp src/scenes/game/ui/overlay.hpp
         src/utils/saves/savegame.cpp src/utils/saves/savegame.hpp
         src/utils/saves/options.cpp src/utils/saves/options.hpp
