@@ -122,7 +122,7 @@ void Listbox::cursor_down() {
 
 	if (confirm_dialog->is_visible()) {
 		confirm_dialog->cursor_down();
-	} else if (cursor_position.y - rect.y < items.size()) {
+	} else if (cursor_position.y - rect.y < static_cast<int>(items.size())) {
 		cursor_position.y++;
 	}
 

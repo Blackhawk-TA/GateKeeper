@@ -8,6 +8,7 @@
 class Box {
 public:
 	explicit Box(Rect rect);
+	virtual ~Box() = default;
 	virtual void draw();
 	void set_visibility(bool value);
 	bool is_visible() const;

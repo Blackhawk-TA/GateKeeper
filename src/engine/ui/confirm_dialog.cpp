@@ -52,19 +52,18 @@ void ConfirmDialog::cursor_up() {
 }
 
 void ConfirmDialog::cursor_down() {
-	if (cursor_position.y - rect.y < confirm_options.size() - 1) {
+	if (cursor_position.y - rect.y < static_cast<int>(confirm_options.size()) - 1) {
 		cursor_position.y++;
 	}
 }
 
-void ConfirmDialog::cursor_press(std::function<void()> callback) {
+void ConfirmDialog::cursor_press(const std::function<void()>& callback) {
 	uint8_t item_index = cursor_position.y - rect.y;
 
 	if (item_index == 0) {
 		callback();
-	} else {
-		visible = false;
 	}
 
+	visible = false;
 	cursor_reset();
 }

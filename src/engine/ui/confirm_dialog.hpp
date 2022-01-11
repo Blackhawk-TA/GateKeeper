@@ -13,7 +13,7 @@ public:
 	void cursor_reset();
 	void cursor_up();
 	void cursor_down();
-	void cursor_press(std::function<void()> callback);
+	void cursor_press(const std::function<void()>& callback);
 
 private:
 	const uint8_t PADDING = 1; //Distance between Box border and text in tiles
