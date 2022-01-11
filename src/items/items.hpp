@@ -35,7 +35,9 @@ namespace listbox_item {
 
 	enum OPTIONS_ITEM {
 		SHOW_FPS = 1,
-		OPTIONS_BACK = 2
+		RESET_SAVE = 2,
+		RESET_ALL = 3,
+		OPTIONS_BACK = 4
 	};
 
 	enum COMBAT_ITEM {
@@ -76,6 +78,8 @@ namespace listbox_item {
 	//Options items
 	Listbox::Item create_show_fps_entry(uint8_t type_id);
 	Listbox::Item create_options_exit_entry(uint8_t type_id, uint8_t save_id = 0);
+	Listbox::Item create_reset_save_entry(uint8_t type_id, uint8_t save_id);
+	Listbox::Item create_reset_all_entry(uint8_t type_id);
 
 	//Combat items
 	Listbox::Item create_combat_escape(uint8_t type_id, uint8_t save_id);
