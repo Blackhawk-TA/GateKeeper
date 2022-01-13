@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_combat_attack_sword(uint8_t type_id, combat::
 		false,
 		0,
 		[player, enemy] {
-			if (combat::character_handler::attack(AttackType::SWORD, player, enemy)) {
+			if (combat::character_handler::attack(AttackType::MELEE, player, enemy)) {
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

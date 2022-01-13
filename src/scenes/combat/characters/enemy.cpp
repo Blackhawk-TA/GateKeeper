@@ -29,24 +29,29 @@ namespace combat {
 	}
 
 	void Enemy::start_round() {
-		uint8_t rand = blit::random() % 10;
+		if (is_animal()) {
+			textbox = new Textbox("Enemy is attacking!");
+			character_handler::attack(MELEE, this, target);
+		} else {
+			uint8_t rand = blit::random() % 10;
 
-		//TODO dont always allow all attacks.
-		if (rand < 4) { //40% chance for sword attack
-			textbox = new Textbox("Enemy is executing a sword attack!");
-			character_handler::attack(SWORD, this, target);
-		} else if (rand < 6) { // 20% chance for spear attack
-			textbox = new Textbox("Enemy is throwing a spear!");
-			character_handler::attack(SPEAR, this, target);
-		} else if (rand < 8) { // 20% chance for arrow attack
-			textbox = new Textbox("Enemy is shooting an arrow!");
-			character_handler::attack(ARROW, this, target);
-		} else if (rand < 9) { // 10% chance for dagger attack
-			textbox = new Textbox("Enemy is throwing a dagger!");
-			character_handler::attack(DAGGER, this, target);
-		} else { //10% change for magic attack
-			textbox = new Textbox("Enemy is using magic!");
-			character_handler::attack(MAGIC, this, target);
+			//TODO dont always allow all attacks.
+			if (rand < 4) { //40% chance for sword attack
+				textbox = new Textbox("Enemy is executing a sword attack!");
+				character_handler::attack(MELEE, this, target);
+			} else if (rand < 6) { // 20% chance for spear attack
+				textbox = new Textbox("Enemy is throwing a spear!");
+				character_handler::attack(SPEAR, this, target);
+			} else if (rand < 8) { // 20% chance for arrow attack
+				textbox = new Textbox("Enemy is shooting an arrow!");
+				character_handler::attack(ARROW, this, target);
+			} else if (rand < 9) { // 10% chance for dagger attack
+				textbox = new Textbox("Enemy is throwing a dagger!");
+				character_handler::attack(DAGGER, this, target);
+			} else { //10% change for magic attack
+				textbox = new Textbox("Enemy is using magic!");
+				character_handler::attack(MAGIC, this, target);
+			}
 		}
 	}
 
@@ -71,5 +76,10 @@ namespace combat {
 
 	Signature Enemy::get_signature() {
 		return signature;
+	}
+
+	bool Enemy::is_animal() {
+		uint16_t default_tile_id = movement_sprites.at(0);
+		return default_tile_id == 104 || default_tile_id == 224 || default_tile_id == 228 || default_tile_id == 232 || default_tile_id == 236;
 	}
 }

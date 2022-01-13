@@ -100,7 +100,7 @@ namespace combat {
 
 		attack_type = type;
 		attack_sprites = get_attack_sprites(type);
-		if (attack_type != SWORD) {
+		if (attack_type != MELEE) {
 			projectile_animation_time = blit::now();
 			range_weapon_position = screen_position;
 			if (attack_type == ARROW || attack_type == DAGGER || attack_type == SPEAR) {
@@ -212,7 +212,7 @@ namespace combat {
 	}
 
 	void Character::animate(Timer &timer) {
-		if (attack_state != IDLE && attack_type == SWORD) {
+		if (attack_state != IDLE && attack_type == MELEE) {
 			tile_id = animation_sprites[++tile_index % ANIMATION_SPRITE_COUNT];
 		}
 	}
@@ -248,7 +248,7 @@ namespace combat {
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> sprites = {};
 
 		switch (type) {
-			case SWORD:
+			case MELEE:
 				sprites = attack_sword_sprites;
 				break;
 			case DAGGER:

@@ -75,7 +75,7 @@ enum StargateAddress {
 //Attack types for the combat scene
 enum AttackType {
 	NO_ATTACK = 0,
-	SWORD = 1,
+	MELEE = 1,
 	SPEAR = 2,
 	ARROW = 3,
 	DAGGER = 4,

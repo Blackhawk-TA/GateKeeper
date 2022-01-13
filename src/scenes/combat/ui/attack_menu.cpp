@@ -15,11 +15,11 @@ namespace combat {
 		control = new Listbox(Rect(16, 0, 4, 8), items, false);
 
 		std::map<AttackType, listbox_item::COMBAT_ITEM> supported_weapons = {
-			{SWORD, listbox_item::COMBAT_ITEM::ATTACK_SWORD},
-			{SPEAR, listbox_item::COMBAT_ITEM::ATTACK_SPEAR},
-			{ARROW, listbox_item::COMBAT_ITEM::ATTACK_ARROW},
+			{MELEE,  listbox_item::COMBAT_ITEM::ATTACK_SWORD},
+			{SPEAR,  listbox_item::COMBAT_ITEM::ATTACK_SPEAR},
+			{ARROW,  listbox_item::COMBAT_ITEM::ATTACK_ARROW},
 			{DAGGER, listbox_item::COMBAT_ITEM::ATTACK_DAGGER},
-			{MAGIC, listbox_item::COMBAT_ITEM::ATTACK_MAGIC}
+			{MAGIC,  listbox_item::COMBAT_ITEM::ATTACK_MAGIC}
 		};
 
 		for (auto &supported_weapon : supported_weapons) {

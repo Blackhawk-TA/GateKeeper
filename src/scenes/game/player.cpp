@@ -238,7 +238,7 @@ namespace game {
 
 	bool Player::has_weapon(AttackType type) {
 		switch (type) {
-			case SWORD:
+			case MELEE:
 				return sword;
 			case SPEAR:
 				return spear;

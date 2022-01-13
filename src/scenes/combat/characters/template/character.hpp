@@ -37,6 +37,8 @@ namespace combat {
 		uint8_t health;
 		uint8_t save_id;
 		Point position;
+		std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
+
 		virtual void handle_death() = 0;
 
 	private:
@@ -57,7 +59,6 @@ namespace combat {
 		const Size SIZE = Size(1, 1);
 		bool round_finishing;
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites{};
-		std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> attack_sprites{};
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> attack_sword_sprites{};
 		uint32_t finish_time;

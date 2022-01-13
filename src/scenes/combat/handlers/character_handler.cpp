@@ -83,14 +83,14 @@ namespace combat::character_handler {
 
 	bool attack(AttackType type, Character *attacker, Character *target) {
 		std::map<AttackType, AttackStats> attacks = {
-			{SWORD, AttackStats{10, 10, 10}},
-			{SPEAR, AttackStats{15, 15, 15}},
-			{ARROW, AttackStats{10, 10, 15}},
-			{DAGGER, AttackStats{7, 5, 15}},
-			{FIRE, AttackStats{30, 20, 10}},
-			{ICE, AttackStats{30, 20, 10}},
+			{MELEE,    AttackStats{10, 10, 10}},
+			{SPEAR,    AttackStats{15, 15, 15}},
+			{ARROW,    AttackStats{10, 10, 15}},
+			{DAGGER,   AttackStats{7, 5, 15}},
+			{FIRE,     AttackStats{30, 20, 10}},
+			{ICE,      AttackStats{30, 20, 10}},
 			{ELECTRIC, AttackStats{30, 20, 10}},
-			{MAGIC, AttackStats{30, 20, 10}},
+			{MAGIC,    AttackStats{30, 20, 10}},
 		};
 		AttackStats attack = attacks.at(type);
 
