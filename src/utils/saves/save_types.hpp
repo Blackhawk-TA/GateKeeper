@@ -39,4 +39,9 @@ namespace save {
 		std::array<Item, MAX_ITEMS> items;
 		uint32_t passed_time;
 	};
+
+	struct OptionsData {
+		uint8_t save_count;
+		bool show_fps;
+	};
 }

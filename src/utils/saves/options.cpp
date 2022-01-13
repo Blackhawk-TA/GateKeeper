@@ -3,26 +3,29 @@
 //
 
 #include "options.hpp"
+#include "save_types.hpp"
 
-bool options::show_fps = false;
-uint8_t options::save_count = 0;
+namespace options {
+	bool show_fps = false;
+	uint8_t save_count = 0;
 
-void options::save() {
-	OptionsData data = {
-		save_count,
-		show_fps
-	};
+	void save() {
+		save::OptionsData data = {
+			save_count,
+			show_fps
+		};
 
-	write_save(data, OPTIONS_DATA_SLOT);
-}
+		write_save(data, OPTIONS_DATA_SLOT);
+	}
 
-void options::load() {
-	OptionsData data{};
+	void load() {
+		save::OptionsData data{};
 
-	bool save_found = read_save(data, OPTIONS_DATA_SLOT);
+		bool save_found = read_save(data, OPTIONS_DATA_SLOT);
 
-	if (save_found) {
-		save_count = data.save_count;
-		show_fps = data.show_fps;
+		if (save_found) {
+			save_count = data.save_count;
+			show_fps = data.show_fps;
+		}
 	}
 }

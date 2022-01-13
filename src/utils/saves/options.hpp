@@ -13,11 +13,6 @@ namespace options {
 	extern bool show_fps;
 	extern uint8_t save_count;
 
-	struct OptionsData {
-		uint8_t save_count;
-		bool show_fps;
-	};
-
 	void save();
 	void load();
 }
