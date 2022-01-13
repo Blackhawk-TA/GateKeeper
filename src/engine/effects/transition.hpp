@@ -10,7 +10,8 @@ namespace transition {
 		INACTIVE = 0,
 		FADING_IN = 1,
 		BLACKED_OUT = 2,
-		FADING_OUT = 3,
+		CALLBACK_EXECUTED = 3,
+		FADING_OUT = 4,
 	};
 
 	bool in_process();

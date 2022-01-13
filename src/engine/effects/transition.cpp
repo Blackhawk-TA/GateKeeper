@@ -32,7 +32,11 @@ namespace transition {
 				if (delta_time_fade_in + black_out_time >= time) {
 					transition_callback();
 					delta_time_fade_out = time;
-				} else if (delta_time_fade_out + black_out_time >= time) {
+					state = CALLBACK_EXECUTED;
+				}
+				break;
+			case CALLBACK_EXECUTED:
+				if (delta_time_fade_out + black_out_time >= time) {
 					state = FADING_OUT;
 				}
 				break;
