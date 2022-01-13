@@ -33,6 +33,10 @@ void init() {
 	current_scene = SceneType::MENU;
 }
 
+SceneType get_previous_scene() {
+	return previous_scene;
+}
+
 void load_previous_scene(uint8_t save_id) {
 	SceneOptions options = {
 		save_id,
