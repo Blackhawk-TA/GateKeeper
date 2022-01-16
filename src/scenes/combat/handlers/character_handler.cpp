@@ -93,11 +93,13 @@ namespace combat::character_handler {
 			{MAGIC,    AttackStats{30, 20, 10}},
 		};
 		AttackStats attack = attacks.at(type);
+		float damage_multiplier = attacker->get_stats().damage_multiplier;
 
 		if (attacker->use_stamina(attack.stamina)) {
-			attacker->animate_attack(type, [target, attack] {
+			attacker->animate_attack(type, [target, attack, damage_multiplier] {
 				uint8_t bonus_damage = blit::random() % attack.bonus_damage;
-				target->take_damage(attack.base_damage + bonus_damage);
+				uint8_t damage = static_cast<uint8_t>(static_cast<float>(attack.base_damage + bonus_damage) * damage_multiplier);
+				target->take_damage(damage);
 			});
 			return true;
 		} else {

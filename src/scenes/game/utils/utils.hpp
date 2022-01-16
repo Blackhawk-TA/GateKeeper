@@ -17,5 +17,5 @@ namespace game::utils {
 	 * Gets the attack sprites by the first tile id of a character
 	 * @param tile_id The first tile id of a character
 	 */
-	std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(uint16_t tile_id);
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(CombatCharacterType type);
 }

@@ -15,6 +15,11 @@ namespace combat {
 			Enemy = 2,
 		};
 
+		struct CharacterStats {
+			float damage_multiplier;
+			std::vector<AttackType> attacks;
+		};
+
 		static const uint8_t MAX_HEALTH = 100;
 
 		explicit Character(uint8_t save_id, CharacterData character_data, Point position, Point attack_position, MovementDirection direction);
@@ -31,12 +36,14 @@ namespace combat {
 		void take_damage(uint8_t amount);
 		void animate_attack(AttackType type, std::function<void()> callback);
 		bool is_attacking() const;
+		CharacterStats get_stats();
 
 	protected:
 		MovementDirection direction;
 		uint8_t health;
 		uint8_t save_id;
 		Point position;
+		CharacterStats stats;
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
 
 		virtual void handle_death() = 0;
@@ -79,6 +86,7 @@ namespace combat {
 		Size weapons_spritesheet_size;
 		AttackState attack_state;
 		AttackType attack_type;
+		CombatCharacterType character_type;
 		std::function<void()> damage_dealer;
 
 		void set_state(AttackState state);

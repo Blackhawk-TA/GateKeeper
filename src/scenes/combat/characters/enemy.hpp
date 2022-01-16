@@ -24,6 +24,5 @@ namespace combat {
 		Character *target;
 		Textbox *textbox;
 		void handle_death() override;
-		bool is_animal();
 	};
 }

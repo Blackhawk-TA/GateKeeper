@@ -227,8 +227,9 @@ namespace game {
 	CharacterData Player::get_character_data() {
 		return CharacterData{
 			{},
+			CombatCharacterType::PLAYER,
 			movement_sprites.at(LEFT),
-			utils::get_attack_sprites(INIT_SPRITE_ID),
+			utils::get_attack_sprites(PLAYER),
 			health,
 			level,
 			sword,

@@ -4,17 +4,18 @@
 
 #include "enemy.hpp"
 #include <utility>
+#include <iostream>
 #include "../../player.hpp"
 #include "../../../../engine/effects/transition.hpp"
 #include "../../utils/utils.hpp"
 
 namespace game {
-	Enemy::Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, uint8_t save_id, bool turn, std::string message)
+	Enemy::Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn, std::string message)
 		: Character(map_section, position, true, false, turn) {
-		Enemy::tile_id = tile_id;
+		Enemy::character_type = character_type;
+		Enemy::tile_id = get_init_tile_id();
 		Enemy::save_id = save_id;
 		Enemy::message = std::move(message);
-		init_tile_id = tile_id;
 		movement_sprites = {
 			{UP, {
 				static_cast<uint16_t>(tile_id + 48),
@@ -98,8 +99,9 @@ namespace game {
 					static_cast<uint8_t>(position.x),
 					static_cast<uint8_t>(position.y),
 				},
+				character_type,
 				movement_sprites.at(RIGHT),
-				utils::get_attack_sprites(init_tile_id),
+				utils::get_attack_sprites(character_type),
 				0,
 				0,
 				true,
@@ -115,4 +117,26 @@ namespace game {
 
 	void Enemy::set_state(uint8_t new_state) {}
 	void Enemy::update_state(Point next_position) {}
+
+	uint16_t Enemy::get_init_tile_id() {
+		switch (character_type) {
+			case PLAYER:
+				return 64;
+			case BLUE_GUARD:
+				return 76;
+			case SPIDER:
+				return 72;
+			case BROWN_BEAR:
+				return 192;
+			case ICE_BEAR:
+				return 204;
+			case DEVIL:
+				return 196;
+			case RED_CREATURE:
+				return 200;
+			default:
+				std::cerr << "Invalid CombatCharacterType" << std::endl;
+				exit(1);
+		}
+	}
 }

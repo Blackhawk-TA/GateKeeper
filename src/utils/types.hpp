@@ -17,9 +17,21 @@ struct Signature {
 	uint8_t y = 0; //The y position of the game object
 };
 
+enum CombatCharacterType {
+	NO_TYPE = 0,
+	PLAYER = 1,
+	BLUE_GUARD = 2,
+	SPIDER = 3,
+	BROWN_BEAR = 4,
+	ICE_BEAR = 5,
+	DEVIL = 6,
+	RED_CREATURE = 7
+};
+
 //Data from the game scene that is needed for fights in combat scene
 struct CharacterData {
 	Signature signature{};
+	CombatCharacterType character_type = CombatCharacterType::NO_TYPE;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> attack_sprites{};
 	uint8_t health = 100;
@@ -71,7 +83,6 @@ enum StargateAddress {
 	WINTER = 2,
 	DESERT = 3
 };
-
 //Attack types for the combat scene
 enum AttackType {
 	NO_ATTACK = 0,

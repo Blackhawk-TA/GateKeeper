@@ -27,17 +27,17 @@ namespace game::utils {
 		game_objects::load_saves(game_objects);
 	}
 
-	std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(uint16_t tile_id) {
-		std::map<uint16_t, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> sprite_map = {
-			{64, {0, 3, 6, 9}}, //Player
-			{76, {72, 75, 78, 81}}, //Blue Knight
-			{72, {12, 15, 18, 21}}, //Spider
-			{192, {144, 147, 150, 153}}, //Brown Bear
-			{196, {84, 87, 90, 93}}, //Devil
-			{200, {216, 219, 222, 225}}, //Red Creature
-			{204, {156, 159, 162, 165}} //Ice Bear
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(CombatCharacterType type) {
+		std::map<CombatCharacterType, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> sprite_map = {
+			{PLAYER,       {0,   3,   6,   9}}, //Player
+			{BLUE_GUARD,   {72,  75,  78,  81}}, //Blue Guard
+			{SPIDER,       {12,  15,  18,  21}}, //Spider
+			{BROWN_BEAR,   {144, 147, 150, 153}}, //Brown Bear
+			{DEVIL,        {84,  87,  90,  93}}, //Devil
+			{RED_CREATURE, {216, 219, 222, 225}}, //Red Creature
+			{ICE_BEAR,     {156, 159, 162, 165}} //Ice Bear
 		};
 
-		return sprite_map[tile_id];
+		return sprite_map[type];
 	}
 }

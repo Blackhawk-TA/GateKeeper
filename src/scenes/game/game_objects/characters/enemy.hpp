@@ -14,13 +14,14 @@ namespace game {
 		void close_textbox() override;
 		void start_interaction();
 		void start_fight();
+		uint16_t get_init_tile_id();
 
 		uint8_t save_id;
-		uint16_t init_tile_id;
 		std::string message;
+		CombatCharacterType character_type;
 
 	public:
-		explicit Enemy(map::MapSection map_section, Point position, uint16_t tile_id, MovementDirection direction, uint8_t save_id, bool turn = false, std::string message = "");
+		explicit Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn = false, std::string message = "");
 		~Enemy() override = default;
 		void update(uint32_t time) override;
 		void update_state(Point next_position) override;
