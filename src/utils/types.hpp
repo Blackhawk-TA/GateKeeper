@@ -17,6 +17,25 @@ struct Signature {
 	uint8_t y = 0; //The y position of the game object
 };
 
+enum StargateAddress {
+	GRASSLAND = 0,
+	GRASSLAND_ENDGAME = 1,
+	WINTER = 2,
+	DESERT = 3
+};
+//Attack types for the combat scene
+enum AttackType {
+	NO_ATTACK = 0,
+	MELEE = 1,
+	SPEAR = 2,
+	ARROW = 3,
+	DAGGER = 4,
+	FIRE = 5,
+	ICE = 6,
+	ELECTRIC = 7,
+	MAGIC = 8,
+};
+
 enum CombatCharacterType {
 	NO_TYPE = 0,
 	PLAYER = 1,
@@ -28,16 +47,19 @@ enum CombatCharacterType {
 	RED_CREATURE = 7
 };
 
+struct CharacterStats {
+	float damage_multiplier;
+	std::vector<AttackType> attacks;
+};
+
 //Data from the game scene that is needed for fights in combat scene
 struct CharacterData {
 	Signature signature{};
-	CombatCharacterType character_type = CombatCharacterType::NO_TYPE;
+	CharacterStats stats;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> attack_sprites{};
 	uint8_t health = 100;
 	uint8_t level = 1;
-	bool sword = false;
-	bool magic_powers = false; //TODO implement
 };
 
 //Data that is handed over from the game to the combat scene
@@ -76,26 +98,6 @@ struct SceneOptions {
 	GameData game_data = {};
 	bool tmp_save = false;
 };
-
-enum StargateAddress {
-	GRASSLAND = 0,
-	GRASSLAND_ENDGAME = 1,
-	WINTER = 2,
-	DESERT = 3
-};
-//Attack types for the combat scene
-enum AttackType {
-	NO_ATTACK = 0,
-	MELEE = 1,
-	SPEAR = 2,
-	ARROW = 3,
-	DAGGER = 4,
-	FIRE = 5,
-	ICE = 6,
-	ELECTRIC = 7,
-	MAGIC = 8,
-};
-
 //The stats of an attack in the combat scene
 struct AttackStats {
 	uint8_t stamina;

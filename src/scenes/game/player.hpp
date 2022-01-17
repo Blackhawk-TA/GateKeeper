@@ -27,7 +27,6 @@ namespace game {
 		static void change_direction(MovementDirection direction, bool animate = true);
 		static void set_cut_scene(bool value);
 		static bool in_cut_scene();
-		static bool has_weapon(AttackType type);
 		static CharacterData get_character_data();
 		static save::PlayerData get_save();
 
@@ -39,7 +38,6 @@ namespace game {
 			{RIGHT, Point(1, 0)},
 		};
 
-		static const uint16_t INIT_SPRITE_ID = 64;
 		static const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
 
 		static uint16_t sprite_id;
@@ -51,11 +49,7 @@ namespace game {
 		static uint8_t save_id;
 		static uint8_t level;
 		static bool dead;
-		static bool sword;
-		static bool spear;
-		static bool arrow;
-		static bool dagger;
-		static bool magic;
+		static std::vector<AttackType> attacks;
 
 		Timer animation_timer;
 		Point position;

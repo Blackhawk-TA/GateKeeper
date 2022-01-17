@@ -17,11 +17,7 @@ namespace save {
 		uint8_t health = 100;
 		uint8_t level = 1;
 		MovementDirection direction = DOWN;
-		bool sword = true;
-		bool spear = true;
-		bool arrow = true;
-		bool dagger = false;
-		bool magic = false;
+		std::array<AttackType, MAX_ATTACKS> attacks = {MELEE, DAGGER, SPEAR, ARROW}; //The default attacks for a new save
 	};
 
 	struct Item {

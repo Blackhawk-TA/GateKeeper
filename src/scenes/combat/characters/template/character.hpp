@@ -15,14 +15,9 @@ namespace combat {
 			Enemy = 2,
 		};
 
-		struct CharacterStats {
-			float damage_multiplier;
-			std::vector<AttackType> attacks;
-		};
-
 		static const uint8_t MAX_HEALTH = 100;
 
-		explicit Character(uint8_t save_id, CharacterData character_data, Point position, Point attack_position, MovementDirection direction);
+		explicit Character(uint8_t save_id, const CharacterData& character_data, Point position, Point attack_position, MovementDirection direction);
 		virtual ~Character() = default;
 		virtual bool use_stamina(uint8_t amount);
 		virtual CharacterType get_type() = 0;
@@ -39,10 +34,10 @@ namespace combat {
 		CharacterStats get_stats();
 
 	protected:
-		MovementDirection direction;
 		uint8_t health;
 		uint8_t save_id;
 		Point position;
+		MovementDirection direction;
 		CharacterStats stats;
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
 
@@ -86,7 +81,6 @@ namespace combat {
 		Size weapons_spritesheet_size;
 		AttackState attack_state;
 		AttackType attack_type;
-		CombatCharacterType character_type;
 		std::function<void()> damage_dealer;
 
 		void set_state(AttackState state);

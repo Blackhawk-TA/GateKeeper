@@ -6,10 +6,11 @@
 #include "../handlers/character_handler.hpp"
 
 namespace combat {
-	Enemy::Enemy(uint8_t save_id, Character *target, CharacterData character_data)
+	Enemy::Enemy(uint8_t save_id, Character *target, const CharacterData& character_data)
 	: Character(save_id, character_data, Point(11, 11), Point(17, 11), RIGHT) {
 		Enemy::target = target;
 		Enemy::signature = character_data.signature;
+		stats = character_data.stats;
 		health = MAX_HEALTH;
 		textbox = nullptr;
 	}
@@ -42,7 +43,6 @@ namespace combat {
 	}
 
 	void Enemy::handle_death() {
-		//TODO remove enemy from game objects and set player health
 		character_handler::load_game_scene(save_id, true);
 	}
 
@@ -57,5 +57,4 @@ namespace combat {
 	Signature Enemy::get_signature() {
 		return signature;
 	}
-
 }

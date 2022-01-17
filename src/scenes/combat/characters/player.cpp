@@ -7,9 +7,10 @@
 #include "../handlers/character_handler.hpp"
 
 namespace combat {
-	Player::Player(uint8_t save_id, CharacterData character_data)
+	Player::Player(uint8_t save_id, const CharacterData& character_data)
 	: Character(save_id, character_data, Point(18, 11), Point(12, 11), LEFT) {
 		stamina = MAX_STAMINA;
+		stats = character_data.stats;
 	}
 
 	uint8_t Player::get_stamina() const {

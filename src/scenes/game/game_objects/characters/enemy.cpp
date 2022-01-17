@@ -99,13 +99,11 @@ namespace game {
 					static_cast<uint8_t>(position.x),
 					static_cast<uint8_t>(position.y),
 				},
-				character_type,
+				get_stats(),
 				movement_sprites.at(RIGHT),
 				utils::get_attack_sprites(character_type),
 				0,
 				0,
-				true,
-				true,
 			}
 		};
 		SceneOptions options = {
@@ -134,6 +132,32 @@ namespace game {
 				return 196;
 			case RED_CREATURE:
 				return 200;
+			default:
+				std::cerr << "Invalid CombatCharacterType" << std::endl;
+				exit(1);
+		}
+	}
+
+	CharacterStats Enemy::get_stats() {
+		switch (character_type) {
+			case BLUE_GUARD:
+				return CharacterStats{
+					1.0,
+					{MELEE, DAGGER, ARROW, SPEAR},
+				};
+			case SPIDER:
+			case BROWN_BEAR:
+			case ICE_BEAR:
+				return CharacterStats{
+					1.25,
+					{MELEE},
+				};
+			case DEVIL:
+			case RED_CREATURE:
+				return CharacterStats{
+					1.5,
+					{MELEE, FIRE}
+				};
 			default:
 				std::cerr << "Invalid CombatCharacterType" << std::endl;
 				exit(1);

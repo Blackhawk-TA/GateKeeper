@@ -10,7 +10,7 @@ namespace combat {
 	public:
 		static const uint8_t MAX_STAMINA = 100;
 
-		explicit Player(uint8_t save_id, CharacterData character_data);
+		explicit Player(uint8_t save_id, const CharacterData& character_data);
 		uint8_t get_stamina() const;
 		bool use_stamina(uint8_t amount) override;
 		void start_round() override;

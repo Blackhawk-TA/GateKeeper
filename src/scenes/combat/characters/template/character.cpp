@@ -5,18 +5,15 @@
 #include "character.hpp"
 
 #include <utility>
-#include <iostream>
 #include "../../../../engine/camera.hpp"
 #include "assets.hpp"
 
 namespace combat {
-	Character::Character(uint8_t save_id, CharacterData character_data, Point position, Point attack_position, MovementDirection direction) {
+	Character::Character(uint8_t save_id, const CharacterData& character_data, Point position, Point attack_position, MovementDirection direction) {
 		Character::save_id = save_id;
 		Character::position = position;
 		Character::attack_position = attack_position;
 		Character::direction = direction;
-		Character::character_type = character_data.character_type;
-		Character::stats = get_stats();
 
 		if (direction == LEFT) {
 			target_position = attack_position - Point(1, 0);
@@ -282,34 +279,7 @@ namespace combat {
 		return sprites;
 	}
 
-	Character::CharacterStats Character::get_stats() {
-		switch (character_type) {
-			case PLAYER:
-				return CharacterStats{
-					1.0,
-					{MELEE, DAGGER, ARROW, SPEAR, MAGIC},
-				};
-			case BLUE_GUARD:
-				return CharacterStats{
-					1.0,
-					{MELEE, DAGGER, ARROW, SPEAR},
-				};
-			case SPIDER:
-			case BROWN_BEAR:
-			case ICE_BEAR:
-				return CharacterStats{
-					1.25,
-					{MELEE},
-				};
-			case DEVIL:
-			case RED_CREATURE:
-				return CharacterStats{
-					1.5,
-					{MELEE, FIRE}
-				};
-			default:
-				std::cerr << "Invalid CombatCharacterType" << std::endl;
-				exit(1);
-		}
+	CharacterStats Character::get_stats() {
+		return stats;
 	}
 }

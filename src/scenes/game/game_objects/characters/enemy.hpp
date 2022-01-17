@@ -16,6 +16,12 @@ namespace game {
 		void start_fight();
 		uint16_t get_init_tile_id();
 
+		/**
+		 * Get the stats for each enemy type including their available attacks and damage multiplier
+		 * @return  The attack stats of the enemy depending on the character_type
+		 */
+		CharacterStats get_stats();
+
 		uint8_t save_id;
 		std::string message;
 		CombatCharacterType character_type;

@@ -2,9 +2,9 @@
 // Created by daniel on 26.12.21.
 //
 
+#include <iostream>
 #include "attack_menu.hpp"
 #include "../../../items/items.hpp"
-#include "../../game/player.hpp"
 
 namespace combat {
 	Listbox *control;
@@ -14,7 +14,7 @@ namespace combat {
 		std::vector<Listbox::Item> items = {};
 		control = new Listbox(Rect(16, 0, 4, 8), items, false);
 
-		std::map<AttackType, listbox_item::COMBAT_ITEM> supported_weapons = {
+		std::map<AttackType, listbox_item::COMBAT_ITEM> supported_attacks = {
 			{MELEE,  listbox_item::COMBAT_ITEM::ATTACK_SWORD},
 			{SPEAR,  listbox_item::COMBAT_ITEM::ATTACK_SPEAR},
 			{ARROW,  listbox_item::COMBAT_ITEM::ATTACK_ARROW},
@@ -22,9 +22,11 @@ namespace combat {
 			{MAGIC,  listbox_item::COMBAT_ITEM::ATTACK_MAGIC}
 		};
 
-		for (auto &supported_weapon : supported_weapons) {
-			if (game::Player::has_weapon(supported_weapon.first)) {
-				add_item(listbox_item::create_combat_item(supported_weapon.second, save_id, player, enemy));
+		for (auto &attack : player->get_stats().attacks) {
+			if (supported_attacks.find(attack) != supported_attacks.end()) {
+				add_item(listbox_item::create_combat_item(supported_attacks.at(attack), save_id, player, enemy));
+			} else {
+				std::cerr << "Unsupported attack for player" << std::endl;
 			}
 		}
 

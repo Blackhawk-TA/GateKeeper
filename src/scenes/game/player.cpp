@@ -15,11 +15,6 @@
 namespace game {
 	bool Player::cut_scene = false;
 	bool Player::dead = false;
-	bool Player::sword = false;
-	bool Player::spear = false;
-	bool Player::arrow = false;
-	bool Player::dagger = false;
-	bool Player::magic = false;
 	uint16_t Player::sprite_id = 0;
 	uint8_t Player::sprite_index = 0;
 	uint8_t Player::health = 100;
@@ -27,6 +22,7 @@ namespace game {
 	uint8_t Player::save_id = 0;
 	MovementDirection Player::current_direction = DOWN;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> Player::animation_sprites;
+	std::vector<AttackType> Player::attacks = {};
 	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
 		{UP,    {112, 113, 114, 115}},
 		{DOWN,  {64,  65,  66,  67}},
@@ -47,11 +43,13 @@ namespace game {
 		health = player_data.health;
 		level = player_data.level;
 		current_direction = player_data.direction;
-		sword = player_data.sword;
-		spear = player_data.spear;
-		arrow = player_data.arrow;
-		dagger = player_data.dagger;
-		magic = player_data.magic;
+
+		//Parse available attacks from player_data to local variable
+		attacks = {};
+		for (auto & attack : player_data.attacks) {
+			if (attack == AttackType::NO_ATTACK) break;
+			attacks.push_back(attack);
+		}
 
 		//Set player animation tiles
 		if (player_data.direction == NO_DIRECTION) {
@@ -227,43 +225,29 @@ namespace game {
 	CharacterData Player::get_character_data() {
 		return CharacterData{
 			{},
-			CombatCharacterType::PLAYER,
+			CharacterStats{
+				1.0,
+				attacks,
+			},
 			movement_sprites.at(LEFT),
 			utils::get_attack_sprites(PLAYER),
 			health,
 			level,
-			sword,
-			false,
 		};
 	}
 
-	bool Player::has_weapon(AttackType type) {
-		switch (type) {
-			case MELEE:
-				return sword;
-			case SPEAR:
-				return spear;
-			case ARROW:
-				return arrow;
-			case DAGGER:
-				return dagger;
-			case MAGIC:
-				return magic;
-			default:
-				return false;
-		}
-	}
-
 	save::PlayerData Player::get_save() {
+		std::array<AttackType, MAX_ATTACKS> attacks_array = {};
+
+		for (uint8_t i = 0u; i < attacks.size(); i++) {
+			attacks_array[i] = attacks.at(i);
+		}
+
 		return save::PlayerData{
 			health,
 			level,
 			current_direction,
-			sword,
-			spear,
-			arrow,
-			dagger,
-			magic
+			attacks_array,
 		};
 	}
 }
