@@ -16,6 +16,7 @@
 #include "extensions/dungeon_door_handler.hpp"
 #include "../../game_objects/characters/enemy.hpp"
 #include "extensions/character_handler.hpp"
+#include "../../game_objects/characters/nurse.hpp"
 #include <stdexcept>
 #include <cassert>
 #include <iostream>
@@ -73,6 +74,7 @@ namespace game {
 				break;
 			case map::INTERIOR:
 				game_object_collection.emplace_back(new Salesman(map::INTERIOR, Point(31, 20)));
+				game_object_collection.emplace_back(new Nurse(map::INTERIOR, Point(54, 20)));
 				break;
 			case map::SNOWLAND:
 				game_object_collection.emplace_back(new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false));

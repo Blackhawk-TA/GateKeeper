@@ -8,7 +8,7 @@
 class ConfirmDialog : public Box {
 public:
 	explicit ConfirmDialog(Rect rect);
-	~ConfirmDialog() = default;
+	~ConfirmDialog() override = default;
 	void draw() override;
 	void cursor_reset();
 	void cursor_up();

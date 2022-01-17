@@ -98,6 +98,7 @@ struct SceneOptions {
 	GameData game_data = {};
 	bool tmp_save = false;
 };
+
 //The stats of an attack in the combat scene
 struct AttackStats {
 	uint8_t stamina;

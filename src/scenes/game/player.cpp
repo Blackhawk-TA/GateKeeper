@@ -17,7 +17,7 @@ namespace game {
 	bool Player::dead = false;
 	uint16_t Player::sprite_id = 0;
 	uint8_t Player::sprite_index = 0;
-	uint8_t Player::health = 100;
+	uint8_t Player::health = MAX_HEALTH;
 	uint8_t Player::level = 1;
 	uint8_t Player::save_id = 0;
 	MovementDirection Player::current_direction = DOWN;
@@ -92,8 +92,8 @@ namespace game {
 	}
 
 	void Player::heal(uint8_t heal_amount) {
-		if (health + heal_amount > 100) {
-			health = 100;
+		if (health + heal_amount > MAX_HEALTH) {
+			health = MAX_HEALTH;
 		} else {
 			health += heal_amount;
 		}

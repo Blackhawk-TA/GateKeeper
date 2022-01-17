@@ -16,6 +16,7 @@ using namespace blit;
 namespace game {
 	class Player {
 	public:
+		static constexpr uint8_t MAX_HEALTH = 100;
 		explicit Player(save::PlayerData player_data, uint8_t current_save_id);
 		void draw();
 		void move(MovementDirection direction);
