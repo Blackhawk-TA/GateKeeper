@@ -15,6 +15,7 @@ namespace game {
 		GameObject::spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 		GameObject::textbox = nullptr;
 		GameObject::value = 0;
+		GameObject::tile_id = 0;
 
 		//Generate object signature
 		signature = Signature{
@@ -52,6 +53,10 @@ namespace game {
 
 	bool GameObject::is_textbox_open() {
 		return textbox != nullptr;
+	}
+
+	bool GameObject::next_textbox() {
+		return textbox->next();
 	}
 
 	void GameObject::close_textbox() {

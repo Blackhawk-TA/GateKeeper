@@ -28,7 +28,7 @@ public:
 	};
 
 	explicit Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting = true);
-	~Listbox();
+	~Listbox() override;
 	void draw() override;
 	void set_view_mode(bool value);
 	void cursor_reset();

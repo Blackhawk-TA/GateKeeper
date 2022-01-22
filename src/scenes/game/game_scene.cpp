@@ -125,7 +125,7 @@ namespace game {
 				inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
 			}
 		} else if (game_objects::is_textbox_open()) {
-			if (buttons & changed & Button::A) {
+			if ((buttons & changed & Button::A) && !game_objects::next_textbox()) {
 				game_objects::close_textboxes();
 			}
 		} else {

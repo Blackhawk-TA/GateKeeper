@@ -68,6 +68,12 @@ namespace game::game_objects {
 	bool is_textbox_open();
 
 	/**
+	 * Opens the next textbox if it exists.
+	 * @return True if a next texbox is opened, else false.
+	 */
+	bool next_textbox();
+
+	/**
 	 * Closes all textboxes opened by game objects
 	 */
 	void close_textboxes();

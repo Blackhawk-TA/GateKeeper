@@ -92,6 +92,12 @@ namespace game {
 		bool is_textbox_open();
 
 		/**
+		 * Shows the next textbox if the text is too long for one.
+		 * @return True if the next textbox is shown, else false
+		 */
+		bool next_textbox();
+
+		/**
 		 * Closes the textbox of the game object
 		 */
 		virtual void close_textbox();

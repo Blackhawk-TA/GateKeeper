@@ -231,6 +231,20 @@ namespace game {
 		return is_open;
 	}
 
+	bool game_objects::next_textbox() {
+		bool has_next = false;
+		uint16_t i = 0;
+
+		while (!has_next && i < game_object_collection.size()) {
+			if (game_object_collection.at(i)->is_textbox_open()) {
+				has_next = game_object_collection.at(i)->next_textbox();
+			}
+			i++;
+		}
+
+		return has_next;
+	}
+
 	void game_objects::close_textboxes() {
 		for (auto &game_object: game_object_collection) {
 			if (game_object->is_textbox_open()) {
