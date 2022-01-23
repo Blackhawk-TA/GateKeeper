@@ -32,7 +32,7 @@ namespace game::game_objects {
 			new CarrotBed(map::GRASSLAND, Point(18, 43)),
 			new Villager(map::GRASSLAND, Point(24, 15), 0, LEFT, "Hello there!"),
 			new Villager(map::GRASSLAND, Point(13, 14), 12, RIGHT, "Hello I'm the elder of this village."),
-			new Villager(map::GRASSLAND, Point(39, 17), 4, RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."),
+//			new Villager(map::GRASSLAND, Point(39, 17), 4, RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."),
 			new Enemy(map::GRASSLAND, Point(22, 14), BLUE_GUARD, DOWN, save_id, false, "LET'S FIGHT!"),
 		};
 	}
