@@ -18,6 +18,8 @@ namespace game::game_objects {
 				return create_snowland_objects(save_id);
 			case map::DESERT:
 				return create_desert_objects(save_id);
+			case map::VOLCANO:
+				return create_volcano_objects(save_id);
 			default:
 				std::cerr << "Invalid map section" << std::endl;
 				exit(1);

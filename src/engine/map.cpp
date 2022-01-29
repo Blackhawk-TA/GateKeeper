@@ -94,6 +94,11 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 			memcpy(tmx, asset_desert_map, asset_desert_map_length);
 			background = Pen(244, 204, 161);
 			break;
+		case MapSection::VOLCANO:
+			tmx = (TMX_16 *) malloc(asset_volcano_map_length);
+			memcpy(tmx, asset_volcano_map, asset_volcano_map_length);
+			background = Pen(244, 180, 27);
+			break;
 		case MapSection::DUNGEON_COMBAT:
 			tmx = (TMX_16 *) malloc(asset_dungeon_combat_map_length);
 			memcpy(tmx, asset_dungeon_combat_map, asset_dungeon_combat_map_length);

@@ -18,6 +18,7 @@ namespace map {
 		SNOWLAND = 4,
 		DESERT = 5,
 		DUNGEON_COMBAT = 6,
+		VOLCANO = 7,
 	};
 
 	//Stores information of a tile and how often it appears in repetition

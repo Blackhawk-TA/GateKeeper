@@ -42,3 +42,7 @@ assets.cpp:
     name: desert_map
     empty_tile: 0
     output_struct: true
+  assets/volcano.tmx:
+    name: volcano_map
+    empty_tile: 0
+    output_struct: true
