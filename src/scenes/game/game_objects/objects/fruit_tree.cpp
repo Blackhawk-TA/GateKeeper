@@ -5,8 +5,8 @@
 #include "fruit_tree.hpp"
 #include "../../../../engine/camera.hpp"
 #include "../../../../utils/game_time.hpp"
-#include "../../ui/inventory.hpp"
 #include "../../player.hpp"
+#include "../../handlers/sidemenu_handler.hpp"
 
 namespace game {
 	FruitTree::FruitTree(map::MapSection map_section, Point position, bool player_usable)
@@ -60,7 +60,7 @@ namespace game {
 
 	bool FruitTree::player_interact() {
 		if (player_usable && Player::get_direction() == UP && camera::get_player_position() == position + Point(size.w / 2, size.h)) {
-			bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::APPLE));
+			bool has_inventory_space = sidemenu::add_item(sidemenu::INVENTORY, listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::APPLE));
 			if (has_inventory_space) {
 				set_player_usable(false);
 				value = game_time::get_time() + GROW_TIME_MS;

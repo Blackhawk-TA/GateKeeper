@@ -46,7 +46,7 @@ void load_previous_scene(uint8_t save_id) {
 
 //TODO either implement own gameover screen or fix invalid read.
 // without transition, there are invalid reads and writes. Transitions somehow fix it
-void load_scene(SceneType scene_type, SceneOptions options) {
+void load_scene(SceneType scene_type, const SceneOptions& options) {
 	previous_scene = current_scene;
 	current_scene = scene_type;
 

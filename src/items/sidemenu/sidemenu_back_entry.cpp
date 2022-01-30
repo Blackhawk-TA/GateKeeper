@@ -3,8 +3,7 @@
 //
 
 #include "../items.hpp"
-#include "../../scenes/game/ui/inventory.hpp"
-#include "../../scenes/game/ui/sidemenu.hpp"
+#include "../../scenes/game/handlers/sidemenu_handler.hpp"
 
 Listbox::Item listbox_item::create_back_entry(uint8_t type_id) {
 	return Listbox::Item{
@@ -16,12 +15,7 @@ Listbox::Item listbox_item::create_back_entry(uint8_t type_id) {
 		false,
 		0,
 		[] {
-			if (game::inventory::is_open()) {
-				game::inventory::close();
-				game::sidemenu::open();
-			} else if (game::sidemenu::is_open()) {
-				game::sidemenu::close();
-			}
+			game::sidemenu::navigate_back();
 			return Listbox::Tooltip::SUPPRESS;
 		}
 	};

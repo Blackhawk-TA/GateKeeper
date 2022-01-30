@@ -39,13 +39,15 @@ public:
 	void set_items(std::vector<Item> &new_items);
 	std::vector<Item> get_items();
 
+protected:
+	std::vector<Item> items;
+
 private:
 	const uint16_t CURSOR_SPRITE_ID = 1742;
 	const uint8_t CURSOR_OFFSET = 1;
 	const uint8_t PADDING = 1;
 	const Font FONT = minimal_font;
-	const uint8_t MAX_ITEMS = 99;
-	std::vector<Item> items;
+	const uint8_t MAX_ITEM_COUNT = 99;
 	bool enable_sorting;
 	bool view_mode;
 	Point cursor_position;

@@ -13,6 +13,8 @@
  */
 //TODO move all save structs to this file
 namespace save {
+	constexpr uint8_t MAX_INVENTORIES = 2;
+
 	struct PlayerData {
 		uint8_t health = 100;
 		uint8_t level = 1;
@@ -32,7 +34,7 @@ namespace save {
 		Point previous_camera_position;
 		PlayerData player_data;
 		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects; //TODO this causes save warning
-		std::array<Item, MAX_ITEMS> items;
+		std::array<std::array<Item, MAX_ITEMS>, MAX_INVENTORIES> items;
 		uint32_t passed_time;
 	};
 

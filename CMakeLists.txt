@@ -28,8 +28,9 @@ set(PROJECT_SOURCE
         src/scenes/combat/handlers/character_handler.cpp src/scenes/combat/handlers/character_handler.hpp
         src/scenes/combat/ui/attack_menu.cpp src/scenes/combat/ui/attack_menu.hpp
         src/scenes/combat/ui/stats.cpp src/scenes/combat/ui/stats.hpp
-        src/scenes/game/handlers/game_objects/extensions/character_handler.cpp src/scenes/game/handlers/game_objects/extensions/character_handler.hpp
         src/scenes/game/handlers/entry_handler.cpp src/scenes/game/handlers/entry_handler.hpp
+        src/scenes/game/handlers/sidemenu_handler.cpp src/scenes/game/handlers/sidemenu_handler.hpp
+        src/scenes/game/handlers/game_objects/extensions/character_handler.cpp src/scenes/game/handlers/game_objects/extensions/character_handler.hpp
         src/scenes/game/handlers/game_objects/game_object_handler.cpp src/scenes/game/handlers/game_objects/game_object_handler.hpp
         src/scenes/game/handlers/game_objects/extensions/character_handler.cpp src/scenes/game/handlers/game_objects/extensions/character_handler.hpp
         src/scenes/game/handlers/game_objects/extensions/stargate_handler.cpp src/scenes/game/handlers/game_objects/extensions/stargate_handler.hpp
@@ -78,7 +79,6 @@ set(PROJECT_SOURCE
         src/scenes/game/game_objects/template/game_object.cpp src/scenes/game/game_objects/template/game_object.hpp
         src/scenes/game/player.cpp src/scenes/game/player.hpp
         src/scenes/game/ui/inventory.cpp src/scenes/game/ui/inventory.hpp
-        src/scenes/game/ui/sidemenu.cpp src/scenes/game/ui/sidemenu.hpp
         src/scenes/game/ui/overlay.cpp src/scenes/game/ui/overlay.hpp
         src/utils/saves/savegame.cpp src/utils/saves/savegame.hpp
         src/utils/saves/options.cpp src/utils/saves/options.hpp

@@ -6,14 +6,13 @@
 #include "../../engine/effects/transition.hpp"
 #include "../../engine/flags.hpp"
 #include "../../utils/saves/savegame.hpp"
-#include "ui/sidemenu.hpp"
-#include "ui/inventory.hpp"
 #include "ui/overlay.hpp"
 #include "../../utils/game_time.hpp"
 #include "utils/utils.hpp"
+#include "handlers/sidemenu_handler.hpp"
 
 namespace game {
-	Scene::Scene(SceneOptions options) {
+	Scene::Scene(const SceneOptions& options) {
 		Scene::save_id = options.save_id;
 		last_buttons = 0;
 		changed = 0;
@@ -64,7 +63,6 @@ namespace game {
 
 		//Delete game objects and inventory after saving
 		game_objects::cleanup();
-		inventory::cleanup();
 		sidemenu::cleanup();
 	}
 
@@ -80,10 +78,6 @@ namespace game {
 
 		if (sidemenu::is_open()) {
 			sidemenu::draw();
-		}
-
-		if (inventory::is_open()) {
-			inventory::draw();
 		}
 	}
 
@@ -112,23 +106,12 @@ namespace game {
 				sidemenu::cursor_down();
 			} else if (buttons & changed & Button::A) {
 				sidemenu::cursor_press();
-			} else if (buttons & changed & Button::MENU || buttons & changed & Button::B || buttons & changed & Button::Y) {
-				sidemenu::close();
-			}
-		} else if (inventory::is_open()) {
-			if (buttons & changed & Button::DPAD_UP) {
-				inventory::cursor_up();
-			} else if (buttons & changed & Button::DPAD_DOWN) {
-				inventory::cursor_down();
-			} else if (buttons & changed & Button::A) {
-				inventory::cursor_press();
 			} else if (buttons & changed & Button::B) {
-				sidemenu::open();
-				inventory::close();
+				sidemenu::navigate_back();
 			} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
-				inventory::close();
+				sidemenu::close();
 			} else if (buttons & changed & Button::X) {
-				inventory::add_item(listbox_item::create_inventory_item(listbox_item::GATE_PART));
+				sidemenu::add_item(sidemenu::INVENTORY, listbox_item::create_inventory_item(listbox_item::GATE_PART));
 			}
 		} else if (game_objects::is_textbox_open()) {
 			if ((buttons & changed & Button::A) && !game_objects::next_textbox()) {
@@ -144,7 +127,7 @@ namespace game {
 			} else if (buttons & Button::DPAD_RIGHT) {
 				player->move(RIGHT);
 			} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
-				sidemenu::open();
+				sidemenu::open(sidemenu::MAIN);
 			} else if (buttons & changed & Button::A) {
 				game_objects::player_interact();
 			}

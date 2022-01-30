@@ -223,7 +223,7 @@ bool Listbox::add_item(Listbox::Item &item) {
 	//Increment amount if item already exists and the amount is lower than the max. allowed
 	while (!found && it != items.end()) {
 		if (it->name == item.name) {
-			if (it->amount < MAX_ITEMS) {
+			if (it->amount < MAX_ITEM_COUNT) {
 				it->amount++;
 				success = true;
 			}

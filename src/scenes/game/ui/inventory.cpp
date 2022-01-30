@@ -1,24 +1,34 @@
 //
-// Created by daniel on 23.09.21.
+// Created by daniel on 24.01.22.
 //
 
 #include <cassert>
 #include "inventory.hpp"
 
-namespace game::inventory {
-	Listbox *control;
-	bool open_state = false;
-
-	void init() {
-		std::vector<Listbox::Item> items = {
-			//TODO remove free items
-			listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT_SEED),
-			listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
-		};
-		control = new Listbox(Rect(14, 0, 6, 7), items);
+namespace game::ui {
+	Inventory::Inventory(Rect rect, std::vector<Item> &items) : Listbox(rect, items, true) {
+		Inventory::rect = rect;
+		Inventory::items = items;
 	}
 
-	void load_save(std::array<save::Item, MAX_ITEMS> &save_items) {
+	std::array<save::Item, MAX_ITEMS> Inventory::get_save() {
+		std::array<save::Item, MAX_ITEMS> compressed_items = {};
+		uint8_t amount;
+
+		assert(items.size() <= MAX_ITEMS);
+
+		for (auto i = 0u; i < items.size(); i++) {
+			amount = i < items.size() ? items[i].amount : 0;
+			compressed_items[i] = save::Item{
+				items[i].type,
+				amount
+			};
+		}
+
+		return compressed_items;
+	}
+
+	void Inventory::load_save(std::array<save::Item, MAX_ITEMS> &save_items) {
 		std::vector<Listbox::Item> decompressed_items = {};
 		Listbox::Item item_template;
 
@@ -52,62 +62,6 @@ namespace game::inventory {
 			i++;
 		}
 
-		control->set_items(decompressed_items);
-	}
-
-	std::array<save::Item, MAX_ITEMS> get_save() {
-		std::array<save::Item, MAX_ITEMS> compressed_items = {};
-		std::vector<Listbox::Item> items = control->get_items();
-		uint8_t amount;
-
-		assert(control->get_items().size() <= MAX_ITEMS);
-
-		for (auto i = 0u; i < items.size(); i++) {
-			amount = i < items.size() ? items[i].amount : 0;
-			compressed_items[i] = save::Item{
-				items[i].type,
-				amount
-			};
-		}
-
-		return compressed_items;
-	}
-
-	void cleanup() {
-		open_state = false;
-		delete control;
-	}
-
-	void open() {
-		open_state = true;
-	}
-
-	void close() {
-		open_state = false;
-		control->cursor_reset();
-	}
-
-	bool is_open() {
-		return open_state;
-	}
-
-	bool add_item(Listbox::Item item) {
-		return control->add_item(item);
-	}
-
-	void draw() {
-		control->draw();
-	}
-
-	void cursor_up() {
-		control->cursor_up();
-	}
-
-	void cursor_down() {
-		control->cursor_down();
-	}
-
-	void cursor_press() {
-		control->cursor_press();
+		items = decompressed_items;
 	}
 }

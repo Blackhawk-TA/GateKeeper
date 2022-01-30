@@ -4,10 +4,9 @@
 
 #include "savegame.hpp"
 #include "options.hpp"
-#include "../../scenes/game/ui/inventory.hpp"
-#include "../../scenes/game/ui/sidemenu.hpp"
 #include "../game_time.hpp"
 #include "save_types.hpp"
+#include "../../scenes/game/handlers/sidemenu_handler.hpp"
 
 
 /**
@@ -87,7 +86,6 @@ game::Player *savegame::create(uint8_t save_id) {
 	map::load_section(map::GRASSLAND);
 	camera::init(start_position);
 	game::sidemenu::init(save_id);
-	game::inventory::init();
 	game::game_objects::init(map::GRASSLAND, save_id);
 	game_time::init();
 
@@ -109,7 +107,7 @@ void savegame::save(uint8_t save_id, bool tmp_save) {
 		camera::get_previous_player_position(),
 		game::Player::get_save(),
 		get_game_object_saves(save_id),
-		game::inventory::get_save(),
+		game::sidemenu::get_saves(),
 		game_time::get_time()
 	};
 
@@ -150,9 +148,8 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 		//Init sidemenu
 		game::sidemenu::init(save_id);
 
-		//Load inventory
-		game::inventory::init();
-		game::inventory::load_save(save_data.items);
+		//Load inventories
+		game::sidemenu::load_saves(save_data.items);
 
 		//Load game object states
 		game::game_objects::init(save_data.map_section, save_id);

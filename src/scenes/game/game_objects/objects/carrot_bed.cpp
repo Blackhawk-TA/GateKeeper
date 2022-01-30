@@ -4,9 +4,7 @@
 
 #include "carrot_bed.hpp"
 #include "../../../../utils/game_time.hpp"
-#include "../../../../engine/camera.hpp"
-#include "../../../../items/items.hpp"
-#include "../../ui/inventory.hpp"
+#include "../../handlers/sidemenu_handler.hpp"
 
 namespace game {
 	CarrotBed::CarrotBed(map::MapSection map_section, Point position) : GameObject(map_section, position, false, false) {
@@ -31,7 +29,7 @@ namespace game {
 
 	bool CarrotBed::player_interact() {
 		if (player_usable && in_range()) {
-			bool has_inventory_space = inventory::add_item(listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT));
+			bool has_inventory_space = sidemenu::add_item(sidemenu::INVENTORY, listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT));
 			if (has_inventory_space) {
 				set_player_usable(false);
 				set_inventory_usable(true);

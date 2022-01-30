@@ -3,8 +3,7 @@
 //
 
 #include "../items.hpp"
-#include "../../scenes/game/ui/inventory.hpp"
-#include "../../scenes/game/ui/sidemenu.hpp"
+#include "../../scenes/game/handlers/sidemenu_handler.hpp"
 
 Listbox::Item listbox_item::create_inventory_entry(uint8_t type_id) {
 	return Listbox::Item{
@@ -16,8 +15,7 @@ Listbox::Item listbox_item::create_inventory_entry(uint8_t type_id) {
 		false,
 		0,
 		[] {
-			game::inventory::open();
-			game::sidemenu::close();
+			game::sidemenu::open(game::sidemenu::INVENTORY);
 			return Listbox::Tooltip::SUPPRESS;
 		}
 	};
