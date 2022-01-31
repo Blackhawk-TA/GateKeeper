@@ -46,10 +46,6 @@ namespace game {
 	}
 
 	Scene::~Scene() {
-		if (sidemenu::is_open()) {
-			sidemenu::close();
-		}
-
 		//Auto save
 		if (!Player::is_dead()) {
 			if (Player::in_cut_scene()) {

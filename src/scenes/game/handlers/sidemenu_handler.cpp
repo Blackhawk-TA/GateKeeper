@@ -44,9 +44,11 @@ namespace game::sidemenu {
 		};
 
 		controls = {};
+		inventories = {};
+		ui::Inventory *inventory;
 		for (auto &itr : menu_data) {
 			if (itr.second.is_inventory) {
-				auto *inventory = new ui::Inventory(itr.second.rect, itr.second.items);
+				inventory = new ui::Inventory(itr.second.rect, itr.second.items);
 				inventories.emplace_back(inventory);
 				controls.insert(std::make_pair(itr.first, inventory));
 			} else {
@@ -57,6 +59,7 @@ namespace game::sidemenu {
 
 	void cleanup() {
 		controls.clear();
+		inventories.clear();
 	}
 
 	std::array<std::array<save::Item, MAX_ITEMS>, save::MAX_INVENTORIES> get_saves() {
