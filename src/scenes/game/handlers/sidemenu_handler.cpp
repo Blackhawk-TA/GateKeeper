@@ -58,6 +58,10 @@ namespace game::sidemenu {
 	}
 
 	void cleanup() {
+		for (auto &control : controls) {
+			delete control.second;
+		}
+
 		controls.clear();
 		inventories.clear();
 	}
