@@ -56,10 +56,7 @@ namespace game::sidemenu {
 	}
 
 	void cleanup() {
-		for (auto itr = controls.begin(); itr != controls.end(); itr++) {
-			controls.erase(itr);
-			delete itr->second;
-		}
+		controls.clear();
 	}
 
 	std::array<std::array<save::Item, MAX_ITEMS>, save::MAX_INVENTORIES> get_saves() {
@@ -82,16 +79,18 @@ namespace game::sidemenu {
 		if (controls.find(current_sidemenu) != controls.end()) {
 			controls.at(current_sidemenu)->cursor_reset();
 		}
-		previous_sidemenu = current_sidemenu;
-		current_sidemenu = menu_type;
+		if (controls.find(menu_type) != controls.end()) {
+			previous_sidemenu = current_sidemenu;
+			current_sidemenu = menu_type;
+		}
 	}
 
 	void close() {
 		if (controls.find(current_sidemenu) != controls.end()) {
 			controls.at(current_sidemenu)->cursor_reset();
-			previous_sidemenu = current_sidemenu;
-			current_sidemenu = NO_MENU;
 		}
+		previous_sidemenu = current_sidemenu;
+		current_sidemenu = NO_MENU;
 	}
 
 	void navigate_back() {
@@ -114,18 +113,26 @@ namespace game::sidemenu {
 	}
 
 	void draw() {
-		controls.at(current_sidemenu)->draw();
+		if (controls.find(current_sidemenu) != controls.end()) {
+			controls.at(current_sidemenu)->draw();
+		}
 	}
 
 	void cursor_up() {
-		controls.at(current_sidemenu)->cursor_up();
+		if (controls.find(current_sidemenu) != controls.end()) {
+			controls.at(current_sidemenu)->cursor_up();
+		}
 	}
 
 	void cursor_down() {
-		controls.at(current_sidemenu)->cursor_down();
+		if (controls.find(current_sidemenu) != controls.end()) {
+			controls.at(current_sidemenu)->cursor_down();
+		}
 	}
 
 	void cursor_press() {
-		controls.at(current_sidemenu)->cursor_press();
+		if (controls.find(current_sidemenu) != controls.end()) {
+			controls.at(current_sidemenu)->cursor_press();
+		}
 	}
 }
