@@ -59,8 +59,7 @@ set(PROJECT_SOURCE
         src/items/sidemenu/quit_entry.cpp
         src/items/options/show_fps_entry.cpp
         src/items/options/options_back_entry.cpp
-        src/items/options/reset_save_entry.cpp
-        src/items/options/reset_all_entry.cpp
+        src/items/options/reset_all_entries.cpp
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
         src/items/generic/options_entry.cpp

@@ -83,11 +83,8 @@ namespace listbox_item {
 			case OPTIONS_ITEM::OPTIONS_BACK:
 				item = create_options_exit_entry(OPTIONS_ITEM::OPTIONS_BACK, save_id);
 				break;
-			case RESET_SAVE:
-				item = create_reset_save_entry(OPTIONS_ITEM::RESET_SAVE, save_id);
-				break;
 			case RESET_ALL:
-				item = create_reset_all_entry(OPTIONS_ITEM::RESET_ALL);
+				item = create_reset_all_entries(OPTIONS_ITEM::RESET_ALL);
 				break;
 		}
 

@@ -27,8 +27,6 @@ void init() {
 	set_screen_mode(ScreenMode::hires);
 	load_persistent_spritesheets();
 
-	options::load();
-
 	scene = new menu::Scene();
 	current_scene = SceneType::MENU;
 }

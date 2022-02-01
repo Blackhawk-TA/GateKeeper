@@ -26,6 +26,9 @@ namespace options {
 		if (save_found) {
 			save_count = data.save_count;
 			show_fps = data.show_fps;
+		} else {
+			save_count = 0;
+			show_fps = false;
 		}
 	}
 }

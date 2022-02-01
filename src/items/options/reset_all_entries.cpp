@@ -4,9 +4,8 @@
 
 #include "../items.hpp"
 #include "../../utils/saves/options.hpp"
-#include "../../utils/saves/save_types.hpp"
 
-Listbox::Item listbox_item::create_reset_all_entry(uint8_t type_id) {
+Listbox::Item listbox_item::create_reset_all_entries(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"RESET ALL",
@@ -16,13 +15,13 @@ Listbox::Item listbox_item::create_reset_all_entry(uint8_t type_id) {
 		false,
 		0,
 		[] {
-			//TODO properly delete data
-			write_save(0, 0);
+			remove_save(0);
 			for (uint8_t i = 0u; i < options::MAX_SAVES; i++) {
-				write_save(save::SaveData{}, i + 1);
+				remove_save(i + 1);
 			}
-			write_save(save::SaveData{}, TMP_SAVE_ID);
+			remove_save(TMP_SAVE_ID);
 
+			load_previous_scene();
 			return Listbox::Tooltip::SUCCESS;
 		},
 		true

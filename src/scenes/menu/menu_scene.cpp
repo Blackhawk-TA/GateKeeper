@@ -12,6 +12,7 @@ namespace menu {
 		last_buttons = 0;
 		changed = 0;
 
+		options::load();
 		create_list_entries();
 
 		listbox = new Listbox(Rect(15, 0, 5, 6), saves, false);
