@@ -8,7 +8,7 @@
 #include "../characters/player.hpp"
 
 namespace combat::character_handler {
-	void init(uint8_t save_id, CombatData combat_data);
+	void init(uint8_t save_id, const CombatData& combat_data);
 	void cleanup();
 	void draw();
 	void update(uint32_t time);
