@@ -20,9 +20,7 @@ namespace game {
 		explicit Player(save::PlayerData player_data, uint8_t current_save_id);
 		void draw();
 		void move(MovementDirection direction);
-		static bool is_dead();
 		static uint8_t get_health();
-		static void take_damage(uint8_t damage_amount);
 		static void heal(uint8_t heal_amount);
 		static MovementDirection get_direction();
 		static void change_direction(MovementDirection direction, bool animate = true);
@@ -57,6 +55,7 @@ namespace game {
 		Size spritesheet_size;
 		uint8_t elevation_offset;
 
+		static void take_damage(uint8_t damage_amount);
 		static void animate(Timer &timer);
 		static void gate_teleport(Stargate *destination_gate, uint8_t current_save_id);
 		static bool in_action();

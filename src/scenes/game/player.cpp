@@ -206,10 +206,6 @@ namespace game {
 		sprite_id = animation_sprites[0];
 	}
 
-	bool Player::is_dead() {
-		return dead;
-	}
-
 	uint8_t Player::get_health() {
 		return health;
 	}

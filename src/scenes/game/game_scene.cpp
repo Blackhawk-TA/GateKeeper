@@ -47,13 +47,11 @@ namespace game {
 
 	Scene::~Scene() {
 		//Auto save
-		if (!Player::is_dead()) {
-			if (Player::in_cut_scene()) {
-				//When changing scene on cut scene create temporary save
-				savegame::save(save_id, true);
-			} else {
-				savegame::save(save_id);
-			}
+		if (Player::in_cut_scene()) {
+			//When changing scene on cut scene create temporary save
+			savegame::save(save_id, true);
+		} else {
+			savegame::save(save_id);
 		}
 		delete player;
 
@@ -79,11 +77,6 @@ namespace game {
 
 	void Scene::update(uint32_t time) {
 		game_time::update(time);
-
-		//Handle player death
-		if (Player::is_dead() && !transition::in_process()) {
-			load_scene(SceneType::MENU);
-		}
 
 		//Handle camera_position update
 		camera::update_position();
