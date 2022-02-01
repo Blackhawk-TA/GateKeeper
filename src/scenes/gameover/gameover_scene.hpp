@@ -11,7 +11,7 @@
 namespace gameover {
 	class Scene : public IScene {
 	public:
-		explicit Scene(SceneOptions options);
+		explicit Scene(const SceneOptions& options);
 		~Scene() override;
 		void render(uint32_t time) override;
 		void update(uint32_t time) override;

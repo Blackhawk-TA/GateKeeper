@@ -6,7 +6,7 @@
 #include "../../game.hpp"
 
 namespace gameover {
-	Scene::Scene(SceneOptions options) {
+	Scene::Scene(const SceneOptions& options) {
 		Scene::save_id = options.save_id;
 		last_buttons = 0;
 		changed = 0;

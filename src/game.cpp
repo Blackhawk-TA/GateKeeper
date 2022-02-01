@@ -3,7 +3,6 @@
 #include "scenes/game/game_scene.hpp"
 #include "scenes/menu/menu_scene.hpp"
 #include "scenes/options/options_scene.hpp"
-#include "utils/saves/options.hpp"
 #include "engine/effects/transition.hpp"
 #include "scenes/game/ui/overlay.hpp"
 #include "scenes/combat/combat_scene.hpp"
