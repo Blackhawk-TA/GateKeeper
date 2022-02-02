@@ -3,7 +3,6 @@
 //
 
 #include "../items.hpp"
-#include "../../game.hpp"
 #include "../../utils/saves/options.hpp"
 
 Listbox::Item listbox_item::create_options_exit_entry(uint8_t type_id, uint8_t save_id) {

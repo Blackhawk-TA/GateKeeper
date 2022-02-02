@@ -46,3 +46,7 @@ assets.cpp:
     name: volcano_map
     empty_tile: 0
     output_struct: true
+  assets/volcano_combat.tmx:
+    name: volcano_combat_map
+    empty_tile: 0
+    output_struct: true

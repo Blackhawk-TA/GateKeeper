@@ -3,7 +3,6 @@
 //
 
 #include "game_scene.hpp"
-#include "../../engine/effects/transition.hpp"
 #include "../../engine/flags.hpp"
 #include "../../utils/saves/savegame.hpp"
 #include "ui/overlay.hpp"
@@ -47,11 +46,13 @@ namespace game {
 
 	Scene::~Scene() {
 		//Auto save
-		if (Player::in_cut_scene()) {
-			//When changing scene on cut scene create temporary save
-			savegame::save(save_id, true);
-		} else {
-			savegame::save(save_id);
+		if (!Player::is_dead()) {
+			if (Player::in_cut_scene()) {
+				//When changing scene on cut scene create temporary save
+				savegame::save(save_id, true);
+			} else {
+				savegame::save(save_id);
+			}
 		}
 		delete player;
 

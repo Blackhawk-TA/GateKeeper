@@ -246,4 +246,8 @@ namespace game {
 			attacks_array,
 		};
 	}
+
+	bool Player::is_dead() {
+		return dead;
+	}
 }

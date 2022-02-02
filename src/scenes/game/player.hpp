@@ -26,6 +26,7 @@ namespace game {
 		static void change_direction(MovementDirection direction, bool animate = true);
 		static void set_cut_scene(bool value);
 		static bool in_cut_scene();
+		static bool is_dead();
 		static CharacterData get_character_data();
 		static save::PlayerData get_save();
 
