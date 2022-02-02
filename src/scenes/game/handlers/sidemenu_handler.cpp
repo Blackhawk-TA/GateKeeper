@@ -20,9 +20,10 @@ namespace game::sidemenu {
 				MAIN,
 				MenuData{
 					false,
-					Rect(16, 0, 4, 7),
+					Rect(16, 0, 4, 8),
 					{
 						listbox_item::create_sidemenu_item(listbox_item::INVENTORY),
+						listbox_item::create_sidemenu_item(listbox_item::GEAR),
 						listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_OPTIONS, save_id),
 						listbox_item::create_sidemenu_item(listbox_item::SAVE, save_id),
 						listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_BACK),
@@ -38,6 +39,15 @@ namespace game::sidemenu {
 						//TODO remove free items
 						listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT_SEED),
 						listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
+					}
+				}
+			}, {
+				GEAR,
+				MenuData{
+					true,
+					Rect(14, 0, 6, 7),
+					{
+						listbox_item::create_gear_item(listbox_item::GEAR_ITEM::GEAR_BACK)
 					}
 				}
 			}

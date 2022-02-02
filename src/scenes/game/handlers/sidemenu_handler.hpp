@@ -12,6 +12,7 @@ namespace game::sidemenu {
 		NO_MENU = 0,
 		MAIN = 1,
 		INVENTORY = 2,
+		GEAR = 3,
 	};
 
 	struct MenuData {

@@ -55,6 +55,7 @@ set(PROJECT_SOURCE
         src/items/inventory/carrot_seed.cpp
         src/items/sidemenu/sidemenu_back_entry.cpp
         src/items/sidemenu/inventory_entry.cpp
+        src/items/sidemenu/gear_entry.cpp
         src/items/sidemenu/save_entry.cpp
         src/items/sidemenu/quit_entry.cpp
         src/items/options/show_fps_entry.cpp
