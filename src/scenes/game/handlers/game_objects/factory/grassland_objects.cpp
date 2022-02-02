@@ -13,7 +13,8 @@
 namespace game::game_objects {
 	std::vector<GameObject*> create_grassland_objects(uint8_t save_id) {
 		return {
-			new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true),
+			//TODO disable endgame gate
+			new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, false),
 			new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false),
 			new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false),
 			new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false),
