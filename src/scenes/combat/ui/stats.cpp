@@ -11,8 +11,6 @@ namespace combat {
 		//Background box
 		screen.pen = Pen(0, 0, 0, 150);
 		screen.rectangle(Rect(0, 0, 160, 30));
-		screen.pen = Pen(60, 89, 86);
-		screen.triangle(Point(160, 24), Point(154, 30), Point(160, 30));
 
 		//Text and Statusbar background
 		for (uint8_t i = 0u; i < sizeof(STATUS_BARS) / sizeof(STATUS_BARS[0]); i++) {

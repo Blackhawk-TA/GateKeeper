@@ -11,7 +11,7 @@ namespace game::game_objects {
 		std::array<CombatCharacterType, 3> enemies = {SPIDER, RED_CREATURE, DEVIL};
 
 		return {
-			new Enemy(map::VOLCANO, Point(20, 50), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
+			new Enemy(map::VOLCANO, Point(21, 50), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
 			new Enemy(map::VOLCANO, Point(48, 45), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
 			new Enemy(map::VOLCANO, Point(60, 32), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
 			new Enemy(map::VOLCANO, Point(26, 35), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
