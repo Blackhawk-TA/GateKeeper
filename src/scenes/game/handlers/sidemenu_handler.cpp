@@ -47,7 +47,7 @@ namespace game::sidemenu {
 					true,
 					Rect(14, 0, 6, 7),
 					{
-						listbox_item::create_gear_item(listbox_item::GEAR_ITEM::GEAR_BACK)
+						listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
 					}
 				}
 			}

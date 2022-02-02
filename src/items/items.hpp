@@ -19,10 +19,6 @@ namespace listbox_item {
 		INVENTORY_BACK = 5
 	};
 
-	enum GEAR_ITEM {
-		GEAR_BACK = 1,
-	};
-
 	enum SIDEMENU_ITEM {
 		INVENTORY = 1,
 		SAVE = 2,
@@ -55,7 +51,6 @@ namespace listbox_item {
 
 	//Item generators
 	Listbox::Item create_inventory_item(INVENTORY_ITEM item_type);
-	Listbox::Item create_gear_item(GEAR_ITEM item_type);
 	Listbox::Item create_sidemenu_item(SIDEMENU_ITEM item_type, uint8_t save_id = 0);
 	Listbox::Item create_menu_item(MENU_ITEM item_type, uint8_t save_id = 0);
 	Listbox::Item create_options_item(OPTIONS_ITEM item_type, uint8_t save_id = 0);

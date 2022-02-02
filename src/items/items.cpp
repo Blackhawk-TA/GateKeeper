@@ -29,18 +29,6 @@ namespace listbox_item {
 		return item;
 	}
 
-	Listbox::Item create_gear_item(GEAR_ITEM item_type) {
-		Listbox::Item item;
-
-		switch(item_type) {
-			case GEAR_ITEM::GEAR_BACK:
-				item = create_back_entry(GEAR_ITEM::GEAR_BACK);
-				break;
-		}
-
-		return item;
-	}
-
 	Listbox::Item create_sidemenu_item(SIDEMENU_ITEM item_type, uint8_t save_id) {
 		Listbox::Item item;
 
