@@ -120,6 +120,7 @@ namespace game {
 		if (!walk_straight_line(player_position)) {
 			//Enemy is standing in front of player and starts combat
 			is_moving = false;
+			turn = false; //TODO might cause issues when character doesn't take you to different scene. 
 			tile_id = animation_sprites[0];
 			trigger_cut_scene();
 		}
