@@ -3,8 +3,8 @@
 //
 
 #include "object_factory.hpp"
-#include "../../../game_objects/characters/salesman.hpp"
-#include "../../../game_objects/characters/nurse.hpp"
+#include "../../characters/salesman.hpp"
+#include "../../characters/nurse.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_interior_objects(uint8_t save_id) {

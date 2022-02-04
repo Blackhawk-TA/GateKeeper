@@ -3,12 +3,12 @@
 //
 
 #include "object_factory.hpp"
-#include "../../../game_objects/objects/stargate.hpp"
-#include "../../../game_objects/objects/sign.hpp"
-#include "../../../game_objects/objects/fruit_tree.hpp"
-#include "../../../game_objects/objects/carrot_bed.hpp"
-#include "../../../game_objects/characters/villager.hpp"
-#include "../../../game_objects/characters/enemy.hpp"
+#include "../../objects/stargate.hpp"
+#include "../../objects/sign.hpp"
+#include "../../objects/fruit_tree.hpp"
+#include "../../objects/carrot_bed.hpp"
+#include "../../characters/villager.hpp"
+#include "../../characters/enemy.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_grassland_objects(uint8_t save_id) {

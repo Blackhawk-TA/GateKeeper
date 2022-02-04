@@ -4,9 +4,9 @@
 
 #pragma once
 #include "../utils.hpp"
-#include "../../scenes/game/player.hpp"
+#include "../../scenes/game/game_objects/player.hpp"
 #include "../../items/items.hpp"
-#include "../../scenes/game/handlers/game_objects/game_object_handler.hpp"
+#include "../../scenes/game/game_objects/handler/game_object_handler.hpp"
 #include "../movement_direction.hpp"
 
 namespace savegame {

@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "../../../game_objects/characters/template/character.hpp"
+#include "../../characters/template/character.hpp"
 
 namespace game::character_handler {
 	void init();

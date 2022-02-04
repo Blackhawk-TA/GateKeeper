@@ -3,9 +3,9 @@
 //
 
 #include "object_factory.hpp"
-#include "../../../game_objects/objects/stargate.hpp"
-#include "../../../game_objects/characters/enemy.hpp"
-#include "../../../game_objects/objects/sign.hpp"
+#include "../../objects/stargate.hpp"
+#include "../../characters/enemy.hpp"
+#include "../../objects/sign.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_snowland_objects(uint8_t save_id) {

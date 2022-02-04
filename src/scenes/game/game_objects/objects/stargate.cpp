@@ -4,7 +4,7 @@
 
 #include "stargate.hpp"
 #include "../../../../engine/camera.hpp"
-#include "../../player.hpp"
+#include "../player.hpp"
 
 namespace game {
 	Stargate::Stargate(map::MapSection map_section, Point position, StargateAddress address, StargateAddress destination, bool inventory_usable)

@@ -3,8 +3,8 @@
 //
 #include "entry_handler.hpp"
 #include "../../../engine/effects/transition.hpp"
-#include "../player.hpp"
-#include "../utils/utils.hpp"
+#include "../game_objects/player.hpp"
+#include "utils.hpp"
 
 namespace game {
 	/**

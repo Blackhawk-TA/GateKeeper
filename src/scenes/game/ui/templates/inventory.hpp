@@ -3,10 +3,10 @@
 //
 
 #pragma once
-#include "../../../engine/ui/listbox.hpp"
-#include "../../../utils/saves/save_types.hpp"
+#include "../../../../engine/ui/listbox.hpp"
+#include "../../../../utils/saves/save_types.hpp"
 
-namespace game::ui {
+namespace game::ui_template {
 	class Inventory : public Listbox {
 		~Inventory() override = default;
 

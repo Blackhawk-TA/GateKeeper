@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "../../../game_objects/objects/dungeon_door.hpp"
+#include "../../objects/dungeon_door.hpp"
 
 namespace game::dungeon_door_handler {
 	void init();

@@ -5,7 +5,7 @@
 #include <cassert>
 #include "inventory.hpp"
 
-namespace game::ui {
+namespace game::ui_template {
 	Inventory::Inventory(Rect rect, std::vector<Item> &items) : Listbox(rect, items, true) {
 		Inventory::rect = rect;
 		Inventory::items = items;

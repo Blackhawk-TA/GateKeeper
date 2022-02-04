@@ -3,7 +3,7 @@
 //
 
 #include "utils.hpp"
-#include "../handlers/game_objects/game_object_handler.hpp"
+#include "../game_objects/handler/game_object_handler.hpp"
 #include "../../../utils/saves/savegame.hpp"
 
 namespace game::utils {

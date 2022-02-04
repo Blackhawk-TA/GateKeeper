@@ -4,7 +4,7 @@
 
 #include "gate_statue.hpp"
 #include "../../../../engine/camera.hpp"
-#include "../../handlers/sidemenu_handler.hpp"
+#include "../../ui/sidemenu.hpp"
 
 namespace game {
 	GateStatue::GateStatue(map::MapSection map_section, Point position, bool player_usable)

@@ -3,7 +3,7 @@
 //
 
 #include "../items.hpp"
-#include "../../scenes/game/handlers/sidemenu_handler.hpp"
+#include "../../scenes/game/ui/sidemenu.hpp"
 
 Listbox::Item listbox_item::create_back_entry(uint8_t type_id) {
 	return Listbox::Item{

@@ -3,8 +3,7 @@
 //
 
 #include "lever.hpp"
-#include "../../../../engine/camera.hpp"
-#include "../../handlers/game_objects/extensions/dungeon_door_handler.hpp"
+#include "../handler/extensions/dungeon_door_handler.hpp"
 
 namespace game {
 	Lever::Lever(map::MapSection map_section, Point position, Signature interaction_object, bool working) : GameObject(map_section, position, true, false) {

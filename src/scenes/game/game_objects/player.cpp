@@ -5,12 +5,12 @@
 #include <assets.hpp>
 #include <iostream>
 #include "player.hpp"
-#include "../../engine/effects/transition.hpp"
-#include "../../engine/flags.hpp"
-#include "handlers/game_objects/game_object_handler.hpp"
-#include "handlers/entry_handler.hpp"
-#include "handlers/game_objects/extensions/stargate_handler.hpp"
-#include "utils/utils.hpp"
+#include "../../../engine/effects/transition.hpp"
+#include "../../../engine/flags.hpp"
+#include "handler/game_object_handler.hpp"
+#include "../utils/entry_handler.hpp"
+#include "../utils/utils.hpp"
+#include "handler/extensions/stargate_handler.hpp"
 
 namespace game {
 	bool Player::cut_scene = false;

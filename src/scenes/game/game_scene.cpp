@@ -8,7 +8,7 @@
 #include "ui/overlay.hpp"
 #include "../../utils/game_time.hpp"
 #include "utils/utils.hpp"
-#include "handlers/sidemenu_handler.hpp"
+#include "ui/sidemenu.hpp"
 
 namespace game {
 	Scene::Scene(const SceneOptions& options) {

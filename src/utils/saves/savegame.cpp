@@ -6,7 +6,7 @@
 #include "options.hpp"
 #include "../game_time.hpp"
 #include "save_types.hpp"
-#include "../../scenes/game/handlers/sidemenu_handler.hpp"
+#include "../../scenes/game/ui/sidemenu.hpp"
 
 
 /**

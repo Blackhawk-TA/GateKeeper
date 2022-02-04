@@ -3,7 +3,7 @@
 //
 #include "character.hpp"
 #include "../../../../../engine/camera.hpp"
-#include "../../../player.hpp"
+#include "../../player.hpp"
 
 namespace game {
 	Character::Character(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool turn)

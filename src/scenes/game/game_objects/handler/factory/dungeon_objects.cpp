@@ -3,11 +3,11 @@
 //
 
 #include "object_factory.hpp"
-#include "../../../game_objects/objects/gate_statue.hpp"
-#include "../../../game_objects/objects/sign.hpp"
-#include "../../../game_objects/characters/enemy.hpp"
-#include "../../../game_objects/objects/dungeon_door.hpp"
-#include "../../../game_objects/objects/lever.hpp"
+#include "../../objects/gate_statue.hpp"
+#include "../../objects/sign.hpp"
+#include "../../characters/enemy.hpp"
+#include "../../objects/dungeon_door.hpp"
+#include "../../objects/lever.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_dungeon_objects(uint8_t save_id) {

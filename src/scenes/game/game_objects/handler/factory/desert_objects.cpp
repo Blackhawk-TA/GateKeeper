@@ -3,7 +3,7 @@
 //
 
 #include "object_factory.hpp"
-#include "../../../game_objects/objects/stargate.hpp"
+#include "../../objects/stargate.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_desert_objects(uint8_t save_id) {

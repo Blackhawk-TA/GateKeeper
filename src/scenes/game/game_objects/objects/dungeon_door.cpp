@@ -4,7 +4,7 @@
 
 #include "dungeon_door.hpp"
 #include "../../../../engine/camera.hpp"
-#include "../../player.hpp"
+#include "../player.hpp"
 
 namespace game {
 	DungeonDoor::DungeonDoor(map::MapSection map_section, Point position) : GameObject(map_section, position, true, false, false) {

@@ -2,13 +2,13 @@
 // Created by daniel on 24.01.22.
 //
 
-#include "sidemenu_handler.hpp"
-#include "../ui/inventory.hpp"
+#include "sidemenu.hpp"
+#include "templates/inventory.hpp"
 
 namespace game::sidemenu {
 	std::map<MenuType, MenuData> menu_data;
 	std::map<MenuType, Listbox*> controls;
-	std::vector<ui::Inventory*> inventories;
+	std::vector<ui_template::Inventory*> inventories;
 	MenuType previous_sidemenu;
 	MenuType current_sidemenu;
 
@@ -55,10 +55,10 @@ namespace game::sidemenu {
 
 		controls = {};
 		inventories = {};
-		ui::Inventory *inventory;
+		ui_template::Inventory *inventory;
 		for (auto &itr : menu_data) {
 			if (itr.second.is_inventory) {
-				inventory = new ui::Inventory(itr.second.rect, itr.second.items);
+				inventory = new ui_template::Inventory(itr.second.rect, itr.second.items);
 				inventories.emplace_back(inventory);
 				controls.insert(std::make_pair(itr.first, inventory));
 			} else {

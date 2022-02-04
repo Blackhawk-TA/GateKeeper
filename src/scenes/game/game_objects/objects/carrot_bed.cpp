@@ -4,7 +4,7 @@
 
 #include "carrot_bed.hpp"
 #include "../../../../utils/game_time.hpp"
-#include "../../handlers/sidemenu_handler.hpp"
+#include "../../ui/sidemenu.hpp"
 
 namespace game {
 	CarrotBed::CarrotBed(map::MapSection map_section, Point position) : GameObject(map_section, position, false, false) {

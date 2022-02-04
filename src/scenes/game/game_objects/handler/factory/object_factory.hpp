@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "../../../game_objects/template/game_object.hpp"
+#include "../../template/game_object.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_game_objects(map::MapSection map_section, uint8_t save_id);

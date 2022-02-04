@@ -3,7 +3,7 @@
 //
 
 #include "object_factory.hpp"
-#include "../../../game_objects/characters/enemy.hpp"
+#include "../../characters/enemy.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_volcano_objects(uint8_t save_id) {

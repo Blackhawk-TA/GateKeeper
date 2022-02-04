@@ -3,7 +3,7 @@
 //
 
 #include "nurse.hpp"
-#include "../../player.hpp"
+#include "../player.hpp"
 
 namespace game {
 	Nurse::Nurse(map::MapSection map_section, Point position) : Character(map_section, position, true, false) {

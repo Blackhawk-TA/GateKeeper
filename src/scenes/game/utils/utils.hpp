@@ -4,7 +4,7 @@
 
 #include "../../../utils/utils.hpp"
 #include "../../../engine/map.hpp"
-#include "../player.hpp"
+#include "../game_objects/player.hpp"
 
 namespace game::utils {
 	/**

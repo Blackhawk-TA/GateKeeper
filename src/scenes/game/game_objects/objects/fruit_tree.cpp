@@ -5,8 +5,8 @@
 #include "fruit_tree.hpp"
 #include "../../../../engine/camera.hpp"
 #include "../../../../utils/game_time.hpp"
-#include "../../player.hpp"
-#include "../../handlers/sidemenu_handler.hpp"
+#include "../player.hpp"
+#include "../../ui/sidemenu.hpp"
 
 namespace game {
 	FruitTree::FruitTree(map::MapSection map_section, Point position, bool player_usable)

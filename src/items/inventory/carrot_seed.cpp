@@ -3,7 +3,7 @@
 //
 
 #include "../items.hpp"
-#include "../../scenes/game/handlers/game_objects/game_object_handler.hpp"
+#include "../../scenes/game/game_objects/handler/game_object_handler.hpp"
 
 Listbox::Item listbox_item::create_carrot_seed(uint8_t type_id) {
 	return Listbox::Item{

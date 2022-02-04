@@ -6,7 +6,7 @@
 #include "../../utils/utils.hpp"
 #include "assets.hpp"
 #include "../scene_interface.hpp"
-#include "player.hpp"
+#include "game_objects/player.hpp"
 
 namespace game {
 	class Scene : public IScene {

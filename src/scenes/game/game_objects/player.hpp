@@ -3,12 +3,12 @@
 //
 
 #pragma once
-#include "../../utils/utils.hpp"
-#include "../../engine/camera.hpp"
-#include "game_objects/objects/stargate.hpp"
-#include "../../game.hpp"
-#include "../../utils/movement_direction.hpp"
-#include "../../utils/saves/save_types.hpp"
+#include "../../../utils/utils.hpp"
+#include "../../../engine/camera.hpp"
+#include "objects/stargate.hpp"
+#include "../../../game.hpp"
+#include "../../../utils/movement_direction.hpp"
+#include "../../../utils/saves/save_types.hpp"
 
 using namespace blit;
 

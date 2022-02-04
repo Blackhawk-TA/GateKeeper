@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "../../../game_objects/objects/stargate.hpp"
+#include "../../objects/stargate.hpp"
 
 namespace game::stargate_handler {
 	void init();
