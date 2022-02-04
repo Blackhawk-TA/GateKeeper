@@ -1,8 +1,8 @@
 # Gate Keeper
 
-[![license](http://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Blackhawk-TA/32blit-rpg/blob/master/LICENSE.md)
-![Build](https://github.com/Blackhawk-TA/32blit-rpg/workflows/Build/badge.svg)
-[![github](https://img.shields.io/github/release/Blackhawk-TA/32blit-rpg.svg?color=brightgreen)](https://github.com/Blackhawk-TA/TowerDefense/releases)
+[![license](https://img.shields.io/github/license/Blackhawk-TA/GateKeeper)](https://github.com/Blackhawk-TA/GateKeeper/blob/master/LICENSE.md)
+![Build](https://github.com/Blackhawk-TA/GateKeeper/workflows/Build/badge.svg)
+[![github](https://img.shields.io/github/release/Blackhawk-TA/GateKeeper.svg?color=brightgreen)](https://github.com/Blackhawk-TA/GateKeeper/releases)
 
 An RPG game called GateKeeper made for the 32blit and PicoSystem retro consoles. \
 It also runs on Linux, MacOS and Windows.
