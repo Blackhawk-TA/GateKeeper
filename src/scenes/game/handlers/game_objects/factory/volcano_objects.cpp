@@ -11,15 +11,15 @@ namespace game::game_objects {
 		std::array<CombatCharacterType, 3> enemies = {SPIDER, RED_CREATURE, DEVIL};
 
 		return {
-			new Enemy(map::VOLCANO, Point(21, 50), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
-			new Enemy(map::VOLCANO, Point(48, 45), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
-			new Enemy(map::VOLCANO, Point(60, 32), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
-			new Enemy(map::VOLCANO, Point(26, 37), enemies[blit::random() % enemies.size()], UP, save_id, false, "LET'S FIGHT!"),
-			new Enemy(map::VOLCANO, Point(3, 47), enemies[blit::random() % enemies.size()], UP, save_id, false, "LET'S FIGHT!"),
-			new Enemy(map::VOLCANO, Point(11, 28), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
-			new Enemy(map::VOLCANO, Point(39, 24), enemies[blit::random() % enemies.size()], LEFT, save_id, false, "LET'S FIGHT!"),
-			new Enemy(map::VOLCANO, Point(58, 17), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
-			new Enemy(map::VOLCANO, Point(32, 11), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
+			new Enemy(map::VOLCANO, Point(21, 50), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
+			new Enemy(map::VOLCANO, Point(48, 45), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
+			new Enemy(map::VOLCANO, Point(60, 32), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
+			new Enemy(map::VOLCANO, Point(26, 37), enemies[blit::random() % enemies.size()], UP, save_id, false),
+			new Enemy(map::VOLCANO, Point(3, 47), enemies[blit::random() % enemies.size()], UP, save_id, false),
+			new Enemy(map::VOLCANO, Point(11, 28), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
+			new Enemy(map::VOLCANO, Point(39, 24), enemies[blit::random() % enemies.size()], LEFT, save_id, false),
+			new Enemy(map::VOLCANO, Point(58, 17), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
+			new Enemy(map::VOLCANO, Point(32, 11), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
 		};
 	}
 }
