@@ -14,7 +14,7 @@ namespace game::game_objects {
 			new Enemy(map::VOLCANO, Point(21, 50), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
 			new Enemy(map::VOLCANO, Point(48, 45), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
 			new Enemy(map::VOLCANO, Point(60, 32), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
-			new Enemy(map::VOLCANO, Point(26, 35), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
+			new Enemy(map::VOLCANO, Point(26, 37), enemies[blit::random() % enemies.size()], UP, save_id, false, "LET'S FIGHT!"),
 			new Enemy(map::VOLCANO, Point(3, 47), enemies[blit::random() % enemies.size()], UP, save_id, false, "LET'S FIGHT!"),
 			new Enemy(map::VOLCANO, Point(11, 28), enemies[blit::random() % enemies.size()], DOWN, save_id, false, "LET'S FIGHT!"),
 			new Enemy(map::VOLCANO, Point(39, 24), enemies[blit::random() % enemies.size()], LEFT, save_id, false, "LET'S FIGHT!"),

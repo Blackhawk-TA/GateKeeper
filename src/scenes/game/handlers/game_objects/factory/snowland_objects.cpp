@@ -12,11 +12,11 @@ namespace game::game_objects {
 			new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false),
 			new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false),
 
-			new Enemy(map::SNOWLAND, Point(18, 48), ICE_BEAR, DOWN, save_id, true, "LET'S FIGHT!"),
-			new Enemy(map::SNOWLAND, Point(42, 29), ICE_BEAR, DOWN, save_id, true, "LET'S FIGHT!"),
-			new Enemy(map::SNOWLAND, Point(58, 30), ICE_BEAR, DOWN, save_id, true, "LET'S FIGHT!"),
-			new Enemy(map::SNOWLAND, Point(42, 5), ICE_BEAR, DOWN, save_id, true, "LET'S FIGHT!"),
-			new Enemy(map::SNOWLAND, Point(54, 19), ICE_BEAR, DOWN, save_id, true, "LET'S FIGHT!"),
+			new Enemy(map::SNOWLAND, Point(18, 46), ICE_BEAR, UP, save_id, true, "GRR!"),
+			new Enemy(map::SNOWLAND, Point(42, 29), ICE_BEAR, LEFT, save_id, true, "GRR!"),
+			new Enemy(map::SNOWLAND, Point(57, 33), ICE_BEAR, UP, save_id, true, "GRR!"),
+			new Enemy(map::SNOWLAND, Point(42, 5), ICE_BEAR, UP, save_id, true, "GRR!"),
+			new Enemy(map::SNOWLAND, Point(54, 19), ICE_BEAR, UP, save_id, true, "GRR!"),
 		};
 	}
 }
