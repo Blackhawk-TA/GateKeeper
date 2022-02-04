@@ -20,6 +20,7 @@ namespace map {
 		DUNGEON_COMBAT = 6,
 		VOLCANO = 7,
 		VOLCANO_COMBAT = 8,
+		SNOWLAND_COMBAT = 9,
 	};
 
 	//Stores information of a tile and how often it appears in repetition

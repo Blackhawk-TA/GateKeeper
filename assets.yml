@@ -50,3 +50,7 @@ assets.cpp:
     name: volcano_combat_map
     empty_tile: 0
     output_struct: true
+  assets/snowland_combat.tmx:
+    name: snowland_combat_map
+    empty_tile: 0
+    output_struct: true

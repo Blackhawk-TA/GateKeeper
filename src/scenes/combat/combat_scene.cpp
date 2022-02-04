@@ -75,6 +75,9 @@ namespace combat {
 			case map::VOLCANO:
 				map::load_section(map::VOLCANO_COMBAT);
 				break;
+			case map::SNOWLAND:
+				map::load_section(map::SNOWLAND_COMBAT);
+				break;
 			default:
 				std::cerr << "No matching combat area for map section found" << std::endl;
 				exit(1);
