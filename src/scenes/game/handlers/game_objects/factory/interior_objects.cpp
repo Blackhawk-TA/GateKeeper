@@ -11,6 +11,7 @@ namespace game::game_objects {
 		return {
 			new Salesman(map::INTERIOR, Point(31, 20)),
 			new Nurse(map::INTERIOR, Point(54, 20)),
+			new Nurse(map::INTERIOR, Point(54, 37)),
 		};
 	}
 }

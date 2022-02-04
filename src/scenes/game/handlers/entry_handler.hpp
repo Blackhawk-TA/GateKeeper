@@ -21,13 +21,23 @@ namespace game::entry_handler {
 	};
 
 	constexpr Entry connections[] = {
-		Entry{Point(15, 12), Point(50, 26), Point(0, 1), map::GRASSLAND, map::INTERIOR},
+		//Grassland houses
 		Entry{Point(29, 12), Point(28, 9), Point(0, 1), map::GRASSLAND, map::INTERIOR},
 		Entry{Point(18, 19), Point(50, 9), Point(0, 1), map::GRASSLAND, map::INTERIOR},
 		Entry{Point(27, 19), Point(6, 26), Point(0, 1), map::GRASSLAND, map::INTERIOR},
 		Entry{Point(12, 44), Point(28, 26), Point(0, 1), map::GRASSLAND, map::INTERIOR},
+		Entry{Point(15, 12), Point(50, 26), Point(0, 1), map::GRASSLAND, map::INTERIOR},
+
+		//Dungeon entries
 		Entry{Point(52, 50), Point(19, 56), Point(1, 0), map::GRASSLAND, map::DUNGEON},
-		Entry{Point(56, 15), Point(33, 61), Point(1, 0), map::SNOWLAND, map::VOLCANO}
+		Entry{Point(56, 15), Point(33, 61), Point(1, 0), map::SNOWLAND, map::VOLCANO},
+
+		//Snowland houses
+		Entry{Point(19, 13), Point(6, 43), Point(0, 1), map::SNOWLAND, map::INTERIOR},
+		Entry{Point(28, 13), Point(28, 43), Point(0, 1), map::SNOWLAND, map::INTERIOR},
+		Entry{Point(14, 13), Point(50, 43), Point(0, 1), map::SNOWLAND, map::INTERIOR},
+		Entry{Point(13, 20), Point(6, 60), Point(0, 1), map::SNOWLAND, map::INTERIOR},
+		Entry{Point(24, 20), Point(28, 60), Point(0, 1), map::SNOWLAND, map::INTERIOR},
 	};
 
 	uint8_t get_id(Point &p, map::MapSection current_map);
