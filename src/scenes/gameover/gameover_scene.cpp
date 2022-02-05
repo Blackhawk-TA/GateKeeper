@@ -19,6 +19,9 @@ namespace gameover {
 	}
 
 	void Scene::render(uint32_t time) {
+		screen.pen = Pen(0, 0, 0, 255);
+		screen.rectangle(Rect(0, 0, 320, 240));
+
 		if (textbox != nullptr) {
 			textbox->draw();
 		}
