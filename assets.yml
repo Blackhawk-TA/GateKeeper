@@ -54,3 +54,7 @@ assets.cpp:
     name: snowland_combat_map
     empty_tile: 0
     output_struct: true
+  assets/desert_combat.tmx:
+    name: desert_combat_map
+    empty_tile: 0
+    output_struct: true

@@ -21,6 +21,7 @@ namespace map {
 		VOLCANO = 7,
 		VOLCANO_COMBAT = 8,
 		SNOWLAND_COMBAT = 9,
+		DESERT_COMBAT = 10,
 	};
 
 	//Stores information of a tile and how often it appears in repetition

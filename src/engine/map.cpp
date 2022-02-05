@@ -114,6 +114,11 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 			memcpy(tmx, asset_snowland_combat_map, asset_snowland_combat_map_length);
 			background = Pen(223, 246, 245);
 			break;
+		case MapSection::DESERT_COMBAT:
+			tmx = (TMX_16 *) malloc(asset_desert_combat_map_length);
+			memcpy(tmx, asset_desert_combat_map, asset_desert_combat_map_length);
+			background = Pen(244, 204, 161);
+			break;
 		default:
 			std::cerr << "Invalid map section" << std::endl;
 			exit(1);
