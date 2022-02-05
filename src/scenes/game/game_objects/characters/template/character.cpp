@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "../../../../../engine/camera.hpp"
 #include "../../player.hpp"
+#include "../../../../../engine/flags.hpp"
 
 namespace game {
 	Character::Character(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool turn)
@@ -116,13 +117,12 @@ namespace game {
 
 	void Character::walk_to_player() {
 		Point player_position = camera::get_player_position();
-		turn = false;
+		turn = false; //TODO reset this when character doesn't trigger a new scene being loaded
 
 		if (!walk_straight_line(player_position)) {
 			//Enemy is standing in front of player and starts combat
 			is_moving = false;
 			tile_id = animation_sprites[0];
-			turn = true;
 			trigger_cut_scene();
 		}
 
@@ -131,10 +131,35 @@ namespace game {
 
 	bool Character::player_in_sightline() {
 		Point player_position = camera::get_player_position();
-		return (current_direction == UP && position.x == player_position.x && position.y > player_position.y)
-			|| (current_direction == DOWN && position.x == player_position.x && position.y < player_position.y)
-			|| (current_direction == LEFT && position.y == player_position.y && position.x > player_position.x)
-			|| (current_direction == RIGHT && position.y == player_position.y && position.x < player_position.x);
+		return (current_direction == UP && position.x == player_position.x && position.y > player_position.y && path_is_walkable(player_position, position))
+			|| (current_direction == DOWN && position.x == player_position.x && position.y < player_position.y && path_is_walkable(position, player_position))
+			|| (current_direction == LEFT && position.y == player_position.y && position.x > player_position.x && path_is_walkable(player_position, position))
+			|| (current_direction == RIGHT && position.y == player_position.y && position.x < player_position.x && path_is_walkable(position, player_position));
+	}
+
+	bool Character::path_is_walkable(Point start, Point end) {
+		if (start.x == end.x) {
+			for (int i = start.y; i < end.y; i++) {
+				if (tile_is_walkable(Point(start.x, i))) {
+					return false;
+				}
+			}
+			return  true;
+		} else if (start.y == end.y) {
+			for (int i = start.x; i < end.x; i++) {
+				if (tile_is_walkable(Point(start.x, i))) {
+					return false;
+				}
+			}
+			return  true;
+		}
+
+		return false;
+	}
+
+	bool Character::tile_is_walkable(Point tile_position) {
+		uint8_t flag = map::get_flag(tile_position);
+		return flag != flags::WALKABLE && flag != flags::ELEVATE_1PX && flag != flags::ELEVATE_2PX && flag != flags::ELEVATE_3PX;
 	}
 
 	void Character::player_face_character() {
