@@ -16,12 +16,12 @@ namespace game::game_objects {
 			new Enemy(map::DESERT, Point(28, 48), BLUE_GUARD, DOWN, save_id),
 			new Enemy(map::DESERT, Point(34, 48), BLUE_GUARD, DOWN, save_id),
 			new Enemy(map::DESERT, Point(44, 48), BLUE_GUARD, DOWN, save_id),
-			new Enemy(map::DESERT, Point(27, 34), BLUE_GUARD, RIGHT, save_id, true),
-			new Enemy(map::DESERT, Point(35, 34), BLUE_GUARD, LEFT, save_id, true),
-			new Enemy(map::DESERT, Point(28, 30), BLUE_GUARD, RIGHT, save_id),
-			new Enemy(map::DESERT, Point(34, 30), BLUE_GUARD, LEFT, save_id),
-			new Enemy(map::DESERT, Point(16, 11), BLUE_GUARD, UP, save_id, true),
-			new Enemy(map::DESERT, Point(46, 11), BLUE_GUARD, UP, save_id, true),
+			new Enemy(map::DESERT, Point(27, 34), BLUE_GUARD, RIGHT, save_id, true, "You are not allowed to be here!"),
+			new Enemy(map::DESERT, Point(35, 34), BLUE_GUARD, LEFT, save_id, true, "What are you doing here?"),
+			new Enemy(map::DESERT, Point(28, 30), BLUE_GUARD, RIGHT, save_id, false, "I cannot let you pass!"),
+			new Enemy(map::DESERT, Point(34, 30), BLUE_GUARD, LEFT, save_id, false, "Run as long as you can!"),
+			new Enemy(map::DESERT, Point(16, 11), BLUE_GUARD, UP, save_id, true, "How did you get here?"),
+			new Enemy(map::DESERT, Point(46, 11), BLUE_GUARD, UP, save_id, true, "You have no permission to be here!"),
 		};
 	}
 }
