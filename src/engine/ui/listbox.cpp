@@ -85,15 +85,15 @@ void Listbox::draw() {
 		}
 
 		//Draw cursor
-		screen.blit_sprite(
+		screen.blit(
+			screen.sprites,
 			Rect(
 				(CURSOR_SPRITE_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
 				(CURSOR_SPRITE_ID / spritesheet_size.h) * TILE_SIZE,
 				TILE_SIZE,
 				TILE_SIZE
 			),
-			world_to_screen(cursor_position),
-			SpriteTransform::NONE
+			world_to_screen(cursor_position)
 		);
 	}
 

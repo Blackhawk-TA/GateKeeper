@@ -33,15 +33,15 @@ namespace game {
 	}
 
 	void GameObject::draw() {
-		screen.blit_sprite(
+		screen.blit(
+			screen.sprites,
 			Rect(
 				(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
 				(tile_id / spritesheet_size.h) * TILE_SIZE,
 				size.w * TILE_SIZE,
 				size.h * TILE_SIZE
 			),
-			world_to_screen(position) - camera::get_screen_position(),
-			SpriteTransform::NONE
+			world_to_screen(position) - camera::get_screen_position()
 		);
 	}
 

@@ -16,7 +16,7 @@ Textbox::Textbox(std::string text) : Box(rect) {
 	Textbox::text = update_text(block_index);
  }
 
-std::vector<std::string> Textbox::split_text(std::string &unformatted_text) {
+std::vector<std::string> Textbox::split_text(std::string &unformatted_text) const {
 	std::vector<std::string> blocks = {""};
 	std::istringstream iss(unformatted_text);
 	uint8_t index = 0;
@@ -98,15 +98,15 @@ void Textbox::draw() {
 	);
 
 	if (block_index < text_blocks.size() - 1) {
-		screen.blit_sprite(
+		screen.blit(
+			screen.sprites,
 			Rect(
 				(NEXT_TEXTBOX_TILE_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
 				(NEXT_TEXTBOX_TILE_ID / spritesheet_size.h) * TILE_SIZE,
 				TILE_SIZE,
 				TILE_SIZE
 			),
-			Point((rect.x + rect.w - 1) * TILE_SIZE, (rect.y + rect.h - 1) * TILE_SIZE),
-			SpriteTransform::NONE
+			Point((rect.x + rect.w - 1) * TILE_SIZE, (rect.y + rect.h - 1) * TILE_SIZE)
 		);
 	}
 }

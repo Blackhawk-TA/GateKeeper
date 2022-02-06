@@ -21,28 +21,28 @@ namespace game {
 		Point camera_position = camera::get_screen_position();
 
 		//Draw tree
-		screen.blit_sprite(
+		screen.blit(
+			screen.sprites,
 			Rect(
 				(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
 				(tile_id / spritesheet_size.h) * TILE_SIZE,
 				size.w * TILE_SIZE,
 				size.h * TILE_SIZE
 			),
-			world_to_screen(position) - camera_position,
-			SpriteTransform::NONE
+			world_to_screen(position) - camera_position
 		);
 
 		//Draw fruits
 		if (player_usable) {
-			screen.blit_sprite(
+			screen.blit(
+				screen.sprites,
 				Rect(
 					(TILE_ID_FRUITS & (spritesheet_size.w - 1)) * TILE_SIZE,
 					(TILE_ID_FRUITS / spritesheet_size.h) * TILE_SIZE,
 					FRUIT_SIZE.w * TILE_SIZE,
 					FRUIT_SIZE.h * TILE_SIZE
 				),
-				world_to_screen(position + FRUIT_OFFSET) - camera_position,
-				SpriteTransform::NONE
+				world_to_screen(position + FRUIT_OFFSET) - camera_position
 			);
 		}
 

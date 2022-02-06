@@ -67,15 +67,15 @@ void Box::draw() {
 					sprite_id = sprite_id_center_center;
 				}
 
-				screen.blit_sprite(
+				screen.blit(
+					screen.sprites,
 					Rect(
 						(sprite_id & (spritesheet_size.w - 1)) * TILE_SIZE,
 						(sprite_id / spritesheet_size.h) * TILE_SIZE,
 						TILE_SIZE,
 						TILE_SIZE
 					),
-					Point((rect.x + x) * TILE_SIZE, (rect.y + y) * TILE_SIZE),
-					SpriteTransform::NONE
+					Point((rect.x + x) * TILE_SIZE, (rect.y + y) * TILE_SIZE)
 				);
 			}
 		}

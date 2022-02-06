@@ -157,10 +157,10 @@ void map::draw() {
 			if (camera_position_world.x <= tile_x && camera_position_world.y <= tile_y &&
 			    screen_tiles.x + camera_position_world.x - tile_x >= 0 &&
 			    screen_tiles.y + camera_position_world.y - tile_y >= 0) {
-				screen.blit_sprite(
+				screen.blit(
+					screen.sprites,
 					Rect(tile_map.data[i].sprite_rect_x, tile_map.data[i].sprite_rect_y, TILE_SIZE, TILE_SIZE),
-					Point(tile_x * TILE_SIZE, tile_y * TILE_SIZE) - camera_position,
-					SpriteTransform::NONE
+					Point(tile_x * TILE_SIZE, tile_y * TILE_SIZE) - camera_position
 				);
 			}
 

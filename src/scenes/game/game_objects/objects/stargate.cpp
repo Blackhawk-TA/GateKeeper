@@ -60,28 +60,28 @@ namespace game {
 		Point camera_position = camera::get_screen_position();
 
 		//Draw stargate
-		screen.blit_sprite(
+		screen.blit(
+			screen.sprites,
 			Rect(
 				(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
 				(tile_id / spritesheet_size.h) * TILE_SIZE,
 				GATE_SIZE.w * TILE_SIZE,
 				GATE_SIZE.h * TILE_SIZE
 			),
-			world_to_screen(position) - camera_position,
-			SpriteTransform::NONE
+			world_to_screen(position) - camera_position
 		);
 
 		//Draw animation
 		if (state == ACTIVATING || state == DEACTIVATING) {
-			screen.blit_sprite(
+			screen.blit(
+				screen.sprites,
 				Rect(
 					(ANIMATION_ID & (spritesheet_size.w - 1)) * TILE_SIZE,
 					(ANIMATION_ID / spritesheet_size.h) * TILE_SIZE,
 					ANIMATION_SIZE.w * TILE_SIZE,
 					ANIMATION_SIZE.h * TILE_SIZE
 				),
-				world_to_screen(position + ANIMATION_OFFSET) - camera_position, //Calculate animation offset because it's smaller than the gate
-				SpriteTransform::NONE
+				world_to_screen(position + ANIMATION_OFFSET) - camera_position //Calculate animation offset because it's smaller than the gate
 			);
 		}
 	}

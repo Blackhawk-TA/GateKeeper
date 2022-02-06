@@ -32,7 +32,7 @@ private:
 	 * Splits the given unformatted text into blocks. Each block is shown in its own textbox
 	 * @param unformatted_text The unformatted text that is split into blocks
 	 */
-	std::vector<std::string> split_text(std::string &unformatted_text);
+	std::vector<std::string> split_text(std::string &unformatted_text) const;
 
 	/**
 	 * Calculate the offset to which the text y-position is adjusted to center the text vertically
