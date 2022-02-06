@@ -51,17 +51,18 @@ namespace game {
 
 		//Trigger enemy to attack player
 		if (!in_action && !Player::in_cut_scene() && !transition::in_process() && player_in_sightline()) {
+			turn = false;
 			in_action = true;
-			is_moving = true;
+			moving_to_player = true;
 			Player::set_cut_scene(true);
 		}
 
-		if (is_moving) {
+		if (moving_to_player) {
 			walk_to_player();
 		}
 	}
 
-	void Enemy::trigger_cut_scene() {
+	void Enemy::trigger_cutscene() {
 		Character::player_face_character();
 		start_interaction();
 	}

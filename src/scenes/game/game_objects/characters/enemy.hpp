@@ -10,7 +10,7 @@ namespace game {
 	private:
 		void set_state(uint8_t new_state) override;
 		bool player_interact() override;
-		void trigger_cut_scene() override;
+		void trigger_cutscene() override;
 		void close_textbox() override;
 		void start_interaction();
 		void start_fight();

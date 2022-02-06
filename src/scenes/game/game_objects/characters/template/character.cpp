@@ -15,7 +15,8 @@ namespace game {
 		Character::spritesheet_size = get_spritesheet_size(characters_spritesheet->bounds);
 		Character::tile_index = 0;
 		Character::in_action = false;
-		Character::is_moving = false;
+		Character::moving_to_player = false;
+		Character::moving_back = false;
 		Character::last_turn = blit::now();
 		Character::animation_delay = ANIMATION_BASE_DELAY;
 		Character::turn = turn;
@@ -76,7 +77,7 @@ namespace game {
 	}
 
 	void Character::animate() {
-		if (is_moving) {
+		if (moving_to_player || moving_back) {
 			tile_id = animation_sprites[++tile_index % ANIMATION_SPRITE_COUNT];
 		}
 	}
@@ -93,21 +94,23 @@ namespace game {
 	}
 
 	bool Character::walk_straight_line(Point &p) {
+		Point p_world = world_to_screen(p);
+
 		//Can only walk straight lines
-		if (position.x != p.x && position.y != p.y) {
+		if (screen_position.x != p_world.x && screen_position.y != p_world.y) {
 			return false;
 		}
 
-		if (current_direction == UP && screen_position.y - TILE_SIZE > p.y * TILE_SIZE) {
+		if (current_direction == UP && screen_position.y > p_world.y) {
 			screen_position.y -= 1;
 			return true;
-		} else if (current_direction == DOWN && screen_position.y + TILE_SIZE < p.y * TILE_SIZE) {
+		} else if (current_direction == DOWN && screen_position.y < p_world.y) {
 			screen_position.y += 1;
 			return true;
-		} else if (current_direction == LEFT && screen_position.x - TILE_SIZE > p.x * TILE_SIZE) {
+		} else if (current_direction == LEFT && screen_position.x > p_world.x) {
 			screen_position.x -= 1;
 			return true;
-		} else if (current_direction == RIGHT && screen_position.x + TILE_SIZE < p.x * TILE_SIZE) {
+		} else if (current_direction == RIGHT && screen_position.x < p_world.x) {
 			screen_position.x += 1;
 			return true;
 		} else {
@@ -117,15 +120,41 @@ namespace game {
 
 	void Character::walk_to_player() {
 		Point player_position = camera::get_player_position();
+		Point target_position;
 
-		if (!walk_straight_line(player_position)) {
-			//Enemy is standing in front of player and starts combat
-			is_moving = false;
-			tile_id = animation_sprites[0];
-			trigger_cut_scene();
+		//Walk in front of the player instead of into it
+		switch (current_direction) {
+			case UP:
+				target_position = Point(player_position.x, player_position.y + 1);
+				break;
+			case DOWN:
+				target_position = Point(player_position.x, player_position.y - 1);
+				break;
+			case LEFT:
+				target_position = Point(player_position.x + 1, player_position.y);
+				break;
+			case RIGHT:
+				target_position = Point(player_position.x - 1, player_position.y);
+				break;
+			default:
+				return;
 		}
 
-		position = screen_to_world(screen_position);
+		if (!walk_straight_line(target_position)) {
+			//Enemy is standing in front of player and starts combat
+			moving_to_player = false;
+			tile_id = animation_sprites[0];
+			trigger_cutscene();
+		}
+	}
+
+	void Character::walk_back() {
+		if (!walk_straight_line(position)) {
+			//Character is standing at spawn position
+			moving_back = false;
+			tile_id = animation_sprites[0];
+			trigger_back_at_spawn();
+		}
 	}
 
 	bool Character::player_in_sightline() {
@@ -180,5 +209,6 @@ namespace game {
 		}
 	}
 
-	void Character::trigger_cut_scene() {}
+	void Character::trigger_cutscene() {}
+	void Character::trigger_back_at_spawn() {}
 }

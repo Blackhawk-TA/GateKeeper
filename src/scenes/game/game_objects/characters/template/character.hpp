@@ -27,7 +27,8 @@ namespace game {
 
 		bool turn;
 		bool in_action;
-		bool is_moving;
+		bool moving_to_player;
+		bool moving_back;
 		uint8_t tile_index;
 		uint32_t last_turn;
 		uint32_t animation_delay;
@@ -39,7 +40,12 @@ namespace game {
 		/**
 		 * Triggers the cut scene which is started when a player stands directly in front of the character
 		 */
-		virtual void trigger_cut_scene();
+		virtual void trigger_cutscene();
+
+		/**
+		 * Called when the character walked back to its spawn position after triggering a cut scene
+		 */
+		virtual void trigger_back_at_spawn();
 
 		/**
 		 * Checks if the player is in sightline of the character
@@ -58,6 +64,11 @@ namespace game {
 		 * Makes the character walk to the player and triggers the cut scene once it stands in front of the player
 		 */
 		void walk_to_player();
+
+		/**
+		 * Makes the character walk back to its initial position
+		 */
+		void walk_back();
 
 		/**
 		 * Changes the direction of the character

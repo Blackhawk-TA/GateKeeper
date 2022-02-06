@@ -68,6 +68,7 @@ set(PROJECT_SOURCE
         src/scenes/game/game_objects/characters/enemy.cpp src/scenes/game/game_objects/characters/enemy.hpp
         src/scenes/game/game_objects/characters/salesman.cpp src/scenes/game/game_objects/characters/salesman.hpp
         src/scenes/game/game_objects/characters/nurse.cpp src/scenes/game/game_objects/characters/nurse.hpp
+        src/scenes/game/game_objects/characters/story_character.cpp src/scenes/game/game_objects/characters/story_character.hpp
         src/scenes/game/game_objects/characters/villager.cpp src/scenes/game/game_objects/characters/villager.hpp
         src/scenes/game/game_objects/objects/carrot_bed.cpp src/scenes/game/game_objects/objects/carrot_bed.hpp
         src/scenes/game/game_objects/objects/dungeon_door.cpp src/scenes/game/game_objects/objects/dungeon_door.hpp

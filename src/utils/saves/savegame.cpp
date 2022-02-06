@@ -81,7 +81,7 @@ PlayerTempData get_player_temp_data(SaveOptions options, save::SaveData save_dat
 }
 
 game::Player *savegame::create(uint8_t save_id) {
-	Point start_position = Point(22, 12);
+	Point start_position = Point(22, 13);
 
 	map::load_section(map::GRASSLAND);
 	camera::init(start_position);
