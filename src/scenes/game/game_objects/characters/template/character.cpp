@@ -98,16 +98,16 @@ namespace game {
 			return false;
 		}
 
-		if (current_direction == UP && position.y > p.y) {
+		if (current_direction == UP && screen_position.y - TILE_SIZE > p.y * TILE_SIZE) {
 			screen_position.y -= 1;
 			return true;
-		} else if (current_direction == DOWN && position.y + 1 < p.y) {
+		} else if (current_direction == DOWN && screen_position.y + TILE_SIZE < p.y * TILE_SIZE) {
 			screen_position.y += 1;
 			return true;
-		} else if (current_direction == LEFT && position.x > p.x) {
+		} else if (current_direction == LEFT && screen_position.x - TILE_SIZE > p.x * TILE_SIZE) {
 			screen_position.x -= 1;
 			return true;
-		} else if (current_direction == RIGHT && position.x + 1 < p.x) {
+		} else if (current_direction == RIGHT && screen_position.x + TILE_SIZE < p.x * TILE_SIZE) {
 			screen_position.x += 1;
 			return true;
 		} else {
@@ -117,7 +117,6 @@ namespace game {
 
 	void Character::walk_to_player() {
 		Point player_position = camera::get_player_position();
-		turn = false; //TODO reset this when character doesn't trigger a new scene being loaded
 
 		if (!walk_straight_line(player_position)) {
 			//Enemy is standing in front of player and starts combat
@@ -147,7 +146,7 @@ namespace game {
 			return  true;
 		} else if (start.y == end.y) {
 			for (int i = start.x; i < end.x; i++) {
-				if (tile_is_walkable(Point(start.x, i))) {
+				if (tile_is_walkable(Point(i, start.y))) {
 					return false;
 				}
 			}
