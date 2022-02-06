@@ -37,7 +37,7 @@ namespace game::game_objects {
 			new Enemy(map::GRASSLAND, Point(21, 10), BLUE_GUARD, RIGHT, save_id, false, "LET'S FIGHT!"),
 			new Enemy(map::GRASSLAND, Point(23, 10), BLUE_GUARD, LEFT, save_id, false, "LET'S FIGHT!"),
 
-			new StoryCharacter(map::GRASSLAND, Point(30, 13), 12, LEFT, true, "Hello I'm the elder of this village. The gate you behind you is a portal to different worlds. Unfortunately the new king destroyed or most gates, those which were not are heavily guarded.", "Do you really want to go through that gate?"),
+			new StoryCharacter(map::GRASSLAND, Point(30, 13), 12, LEFT, true, "Hello I'm the elder of this village. The gate you behind you is a portal to different worlds. Unfortunately the new king destroyed most gates, those which were not are heavily guarded.", "Do you really want to go through that gate?"),
 		};
 	}
 }

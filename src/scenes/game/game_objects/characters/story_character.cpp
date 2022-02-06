@@ -7,8 +7,6 @@
 #include "../../../../engine/effects/transition.hpp"
 #include <utility>
 
-//TODO use save value to check if cut scene was already triggered
-// show different message on direct interaction when cut scene was already completed
 namespace game {
 	StoryCharacter::StoryCharacter(map::MapSection mapSection, Point position, uint16_t tile_id, MovementDirection direction, bool turn, std::string message, std::string alt_message)
 	: Character(mapSection, position, true, false) {

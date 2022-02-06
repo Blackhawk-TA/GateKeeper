@@ -11,26 +11,27 @@ Textbox::Textbox(std::string text) : Box(rect) {
 	Textbox::line_offset = 0;
 	Textbox::block_index = 0;
 	Textbox::line_max_chars = static_cast<uint8_t>(static_cast<float>(screen_tiles.x) * CHARS_PER_TILE);
-	Textbox::block_max_chars = line_max_chars * MAX_LINES;
+	Textbox::block_max_chars = line_max_chars * MAX_LINES - 4; //Minus 3 to compensate for ' ...' at message end and beginning
 	Textbox::text_blocks = split_text(text);
 	Textbox::text = update_text(block_index);
-}
+ }
 
 std::vector<std::string> Textbox::split_text(std::string &unformatted_text) {
 	std::vector<std::string> blocks = {""};
 	std::istringstream iss(unformatted_text);
-	block_index = 0;
+	uint8_t index = 0;
 
 	//Loop over every word in the unformatted text
 	for (std::string s; iss >> s;) {
 		//If block text length would exceed max chars limiter, go to next block
-		if (blocks.at(block_index).length() + s.length() >= block_max_chars) {
-			block_index++;
-			blocks.emplace_back(""); //Init new block
+		if (blocks.at(index).length() + s.length() >= block_max_chars) {
+			blocks.at(index).append("...");
+			index++;
+			blocks.emplace_back(" ..."); //Init new block
 		}
 
 		//Add word of unformatted text to block text
-		blocks.at(block_index).append(s + " ");
+		blocks.at(index).append(s + " ");
 	}
 
 	return blocks;
