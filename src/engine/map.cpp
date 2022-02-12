@@ -79,6 +79,11 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 			memcpy(tmx, asset_grassland_map, asset_grassland_map_length);
 			background = Pen(113, 170, 52);
 			break;
+		case MapSection::GRASSLAND_COMBAT:
+			tmx = (TMX_16 *) malloc(asset_grassland_combat_map_length);
+			memcpy(tmx, asset_grassland_combat_map, asset_grassland_combat_map_length);
+			background = Pen(113, 170, 52);
+			break;
 		case MapSection::INTERIOR:
 			tmx = (TMX_16 *) malloc(asset_interior_map_length);
 			memcpy(tmx, asset_interior_map, asset_interior_map_length);

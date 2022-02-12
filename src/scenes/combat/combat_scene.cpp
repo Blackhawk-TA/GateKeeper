@@ -68,7 +68,9 @@ namespace combat {
 
 	void Scene::load_combat_scene() {
 		switch (map_section) {
-			case map::GRASSLAND: //TODO remove this line
+			case map::GRASSLAND:
+				map::load_section(map::GRASSLAND_COMBAT);
+				break;
 			case map::DUNGEON:
 				map::load_section(map::DUNGEON_COMBAT);
 				break;
