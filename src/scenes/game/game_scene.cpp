@@ -103,8 +103,6 @@ namespace game {
 				sidemenu::navigate_back();
 			} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
 				sidemenu::close();
-			} else if (buttons & changed & Button::X) {
-				sidemenu::add_item(sidemenu::INVENTORY, listbox_item::create_inventory_item(listbox_item::GATE_PART));
 			}
 		} else if (game_objects::is_textbox_open()) {
 			if ((buttons & changed & Button::A) && !game_objects::next_textbox()) {
