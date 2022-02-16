@@ -19,7 +19,7 @@ namespace game {
 		}
 
 		animation_timer = new Timer();
-		animation_timer->init(animate, 175, -1);
+		animation_timer->init(animate, 150, -1);
 		animation_timer->start();
 	}
 
