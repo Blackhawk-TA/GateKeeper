@@ -62,7 +62,7 @@ namespace game {
 		sprite_id = animation_sprites[0];
 		sprite_index = 0;
 
-		animation_timer.init(animate, 175, -1);
+		animation_timer.init(animate, 150, -1);
 	}
 
 	bool Player::in_action() {
