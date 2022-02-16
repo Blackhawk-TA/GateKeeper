@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../game.hpp"
 
-Listbox::Item listbox_item::create_quit_entry(uint8_t type_id) {
+Listbox::Item items::create_quit_entry(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"QUIT",

@@ -29,7 +29,7 @@ namespace game {
 
 	bool CarrotBed::player_interact() {
 		if (player_usable && in_range()) {
-			bool has_inventory_space = sidemenu::add_item(sidemenu::INVENTORY, listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT));
+			bool has_inventory_space = sidemenu::add_item(sidemenu::INVENTORY, items::create_inventory_item(items::INVENTORY_ITEM::CARROT));
 			if (has_inventory_space) {
 				set_player_usable(false);
 				set_inventory_usable(true);
@@ -43,8 +43,8 @@ namespace game {
 		}
 	}
 
-	bool CarrotBed::inventory_interact(listbox_item::INVENTORY_ITEM item_type) {
-		if (inventory_usable && item_type == listbox_item::CARROT_SEED && in_range()) {
+	bool CarrotBed::inventory_interact(items::INVENTORY_ITEM item_type) {
+		if (inventory_usable && item_type == items::CARROT_SEED && in_range()) {
 			value = game_time::get_time() + GROW_STAGE_1_TIME + GROW_STAGE_2_TIME;
 			set_inventory_usable(false);
 			return true;

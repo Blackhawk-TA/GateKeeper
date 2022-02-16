@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../utils/saves/options.hpp"
 
-Listbox::Item listbox_item::create_reset_all_entries(uint8_t type_id) {
+Listbox::Item items::create_reset_all_entries(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"RESET ALL",

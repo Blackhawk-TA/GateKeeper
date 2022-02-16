@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../scenes/combat/handlers/character_handler.hpp"
 
-Listbox::Item listbox_item::create_combat_attack_spear(uint8_t type_id, combat::Player *player, combat::Enemy *enemy) {
+Listbox::Item items::create_combat_attack_spear(uint8_t type_id, combat::Player *player, combat::Enemy *enemy) {
 	return Listbox::Item{
 		type_id,
 		"SPEAR",

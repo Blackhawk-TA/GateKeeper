@@ -10,7 +10,7 @@
 /**
  * Contains the create function for all inventory items
  */
-namespace listbox_item {
+namespace items {
 	enum INVENTORY_ITEM {
 		GATE_PART = 1,
 		APPLE = 2,

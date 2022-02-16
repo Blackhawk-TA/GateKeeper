@@ -96,7 +96,7 @@ namespace game::game_objects {
 	 * @param item_type The listbox_item enum value of the item
 	 * @return True, if interaction successful, else false
 	 */
-	bool inventory_interact(listbox_item::INVENTORY_ITEM item_type);
+	bool inventory_interact(items::INVENTORY_ITEM item_type);
 
 	/**
 	 * Updates the states of the objects when a player moves closer to it

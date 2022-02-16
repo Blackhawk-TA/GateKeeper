@@ -4,7 +4,7 @@
 
 #include "../items.hpp"
 
-Listbox::Item listbox_item::create_gear_shock(uint8_t type_id) {
+Listbox::Item items::create_gear_shock(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"YELLOW STONE",

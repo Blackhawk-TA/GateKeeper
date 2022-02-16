@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../game.hpp"
 
-Listbox::Item listbox_item::create_options_entry(uint8_t type_id, uint8_t save_id) {
+Listbox::Item items::create_options_entry(uint8_t type_id, uint8_t save_id) {
 	return Listbox::Item{
 		type_id,
 		"OPTIONS",

@@ -15,7 +15,7 @@ namespace game {
 
 	bool GateStatue::player_interact() {
 		if (player_usable && player_in_front()) {
-			bool has_inventory_space = sidemenu::add_item(sidemenu::INVENTORY, listbox_item::create_inventory_item(listbox_item::GATE_PART));
+			bool has_inventory_space = sidemenu::add_item(sidemenu::INVENTORY, items::create_inventory_item(items::GATE_PART));
 			if (has_inventory_space) {
 				set_player_usable(false);
 				textbox = new Textbox("You picked up a Gate Part!");

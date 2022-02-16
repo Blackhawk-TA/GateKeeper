@@ -4,7 +4,7 @@
 
 #include "../items.hpp"
 
-Listbox::Item listbox_item::create_new_save_entry(uint8_t type_id, uint8_t save_id) {
+Listbox::Item items::create_new_save_entry(uint8_t type_id, uint8_t save_id) {
 	std::string save_id_str = std::to_string(save_id);
 
 	return Listbox::Item{

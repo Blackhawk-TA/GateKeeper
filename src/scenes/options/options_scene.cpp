@@ -11,15 +11,15 @@ namespace options {
 		last_buttons = 0;
 		changed = 0;
 		option_items = {
-			listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::SHOW_FPS),
+			items::create_options_item(items::OPTIONS_ITEM::SHOW_FPS),
 		};
 
 		//Only show reset all option from MENU scene
 		if (get_previous_scene() == SceneType::MENU) {
-			option_items.emplace_back(listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::RESET_ALL));
+			option_items.emplace_back(items::create_options_item(items::OPTIONS_ITEM::RESET_ALL));
 		}
 
-		option_items.emplace_back(listbox_item::create_options_item(listbox_item::OPTIONS_ITEM::OPTIONS_BACK, save_id));
+		option_items.emplace_back(items::create_options_item(items::OPTIONS_ITEM::OPTIONS_BACK, save_id));
 		listbox = new Listbox(Rect(15, 0, 5, 6), option_items, false);
 	}
 

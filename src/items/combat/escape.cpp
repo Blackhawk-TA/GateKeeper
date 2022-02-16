@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../scenes/combat/handlers/character_handler.hpp"
 
-Listbox::Item listbox_item::create_combat_escape(uint8_t type_id, uint8_t save_id) {
+Listbox::Item items::create_combat_escape(uint8_t type_id, uint8_t save_id) {
 	return Listbox::Item{
 		type_id,
 		"ESCAPE",

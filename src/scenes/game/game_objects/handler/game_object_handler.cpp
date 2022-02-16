@@ -207,7 +207,7 @@ namespace game::game_objects {
 		return interacted;
 	}
 
-	bool inventory_interact(listbox_item::INVENTORY_ITEM item_type) {
+	bool inventory_interact(items::INVENTORY_ITEM item_type) {
 		bool interacted = false;
 		uint16_t i = 0;
 

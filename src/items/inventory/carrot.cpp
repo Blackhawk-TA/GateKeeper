@@ -5,7 +5,7 @@
 #include "../items.hpp"
 #include "../../scenes/game/game_objects/player.hpp"
 
-Listbox::Item listbox_item::create_carrot(uint8_t type_id) {
+Listbox::Item items::create_carrot(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"Carrot",

@@ -14,26 +14,26 @@ namespace combat {
 		std::vector<Listbox::Item> items = {};
 		control = new Listbox(Rect(16, 0, 4, 8), items, false);
 
-		std::map<GEAR_TYPE, listbox_item::COMBAT_ITEM> supported_attacks = {
-			{GEAR_SWORD,  listbox_item::COMBAT_ITEM::ATTACK_SWORD},
-			{GEAR_SPEAR,  listbox_item::COMBAT_ITEM::ATTACK_SPEAR},
-			{GEAR_ARROW,  listbox_item::COMBAT_ITEM::ATTACK_ARROW},
-			{GEAR_DAGGER, listbox_item::COMBAT_ITEM::ATTACK_DAGGER},
-			{GEAR_MAGIC,  listbox_item::COMBAT_ITEM::ATTACK_MAGIC},
-			{GEAR_FIRE,  listbox_item::COMBAT_ITEM::ATTACK_FIRE},
-			{GEAR_ICE,  listbox_item::COMBAT_ITEM::ATTACK_ICE},
-			{GEAR_SHOCK,  listbox_item::COMBAT_ITEM::ATTACK_SHOCK},
+		std::map<GEAR_TYPE, items::COMBAT_ITEM> supported_attacks = {
+			{GEAR_SWORD,  items::COMBAT_ITEM::ATTACK_SWORD},
+			{GEAR_SPEAR,  items::COMBAT_ITEM::ATTACK_SPEAR},
+			{GEAR_ARROW,  items::COMBAT_ITEM::ATTACK_ARROW},
+			{GEAR_DAGGER, items::COMBAT_ITEM::ATTACK_DAGGER},
+			{GEAR_MAGIC,  items::COMBAT_ITEM::ATTACK_MAGIC},
+			{GEAR_FIRE,   items::COMBAT_ITEM::ATTACK_FIRE},
+			{GEAR_ICE,    items::COMBAT_ITEM::ATTACK_ICE},
+			{GEAR_SHOCK,  items::COMBAT_ITEM::ATTACK_SHOCK},
 		};
 
 		for (auto &attack : player->get_stats().attacks) {
 			if (supported_attacks.find(attack) != supported_attacks.end()) {
-				add_item(listbox_item::create_combat_item(supported_attacks.at(attack), save_id, player, enemy));
+				add_item(items::create_combat_item(supported_attacks.at(attack), save_id, player, enemy));
 			} else {
 				std::cerr << "Unsupported attack for player" << std::endl;
 			}
 		}
 
-		add_item(listbox_item::create_combat_item(listbox_item::COMBAT_ITEM::ESCAPE, save_id));
+		add_item(items::create_combat_item(items::COMBAT_ITEM::ESCAPE, save_id));
 	}
 
 	void attack_menu::cleanup() {

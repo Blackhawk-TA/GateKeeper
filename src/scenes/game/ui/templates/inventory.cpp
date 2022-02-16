@@ -48,10 +48,10 @@ namespace game::sidemenu {
 
 			switch (menu_type) {
 				case INVENTORY:
-					item_template = listbox_item::create_inventory_item(static_cast<listbox_item::INVENTORY_ITEM>(item->type));
+					item_template = items::create_inventory_item(static_cast<items::INVENTORY_ITEM>(item->type));
 					break;
 				case GEAR:
-					item_template = listbox_item::create_gear_item(static_cast<GEAR_TYPE>(item->type));
+					item_template = items::create_gear_item(static_cast<GEAR_TYPE>(item->type));
 					break;
 				default:
 					std::cerr << "Cannot load save: Invalid inventory type" << std::endl;

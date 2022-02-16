@@ -22,12 +22,12 @@ namespace game::sidemenu {
 					false,
 					Rect(16, 0, 4, 8),
 					{
-						listbox_item::create_sidemenu_item(listbox_item::INVENTORY),
-						listbox_item::create_sidemenu_item(listbox_item::GEAR),
-						listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_OPTIONS, save_id),
-						listbox_item::create_sidemenu_item(listbox_item::SAVE, save_id),
-						listbox_item::create_sidemenu_item(listbox_item::SIDEMENU_BACK),
-						listbox_item::create_sidemenu_item(listbox_item::QUIT)
+						items::create_sidemenu_item(items::INVENTORY),
+						items::create_sidemenu_item(items::GEAR),
+						items::create_sidemenu_item(items::SIDEMENU_OPTIONS, save_id),
+						items::create_sidemenu_item(items::SAVE, save_id),
+						items::create_sidemenu_item(items::SIDEMENU_BACK),
+						items::create_sidemenu_item(items::QUIT)
 					}
 				}
 			}, {
@@ -37,8 +37,8 @@ namespace game::sidemenu {
 					Rect(14, 0, 6, 7),
 					{
 						//TODO remove free items
-						listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::CARROT_SEED),
-						listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
+						items::create_inventory_item(items::INVENTORY_ITEM::CARROT_SEED),
+						items::create_inventory_item(items::INVENTORY_ITEM::INVENTORY_BACK)
 					}
 				}
 			}, {
@@ -47,10 +47,10 @@ namespace game::sidemenu {
 					true,
 					Rect(14, 0, 6, 7),
 					{
-						listbox_item::create_gear_item(GEAR_SWORD),
-						listbox_item::create_gear_item(GEAR_SPEAR),
-						listbox_item::create_gear_item(GEAR_ARROW),
-						listbox_item::create_gear_item(GEAR_NAVIGATE_BACK),
+						items::create_gear_item(GEAR_SWORD),
+						items::create_gear_item(GEAR_SPEAR),
+						items::create_gear_item(GEAR_ARROW),
+						items::create_gear_item(GEAR_NAVIGATE_BACK),
 					}
 				}
 			}

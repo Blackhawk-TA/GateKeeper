@@ -60,7 +60,7 @@ namespace game {
 
 	bool FruitTree::player_interact() {
 		if (player_usable && Player::get_direction() == UP && camera::get_player_position() == position + Point(size.w / 2, size.h)) {
-			bool has_inventory_space = sidemenu::add_item(sidemenu::INVENTORY, listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::APPLE));
+			bool has_inventory_space = sidemenu::add_item(sidemenu::INVENTORY, items::create_inventory_item(items::INVENTORY_ITEM::APPLE));
 			if (has_inventory_space) {
 				set_player_usable(false);
 				value = game_time::get_time() + GROW_TIME_MS;

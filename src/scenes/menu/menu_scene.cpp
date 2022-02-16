@@ -25,14 +25,14 @@ namespace menu {
 
 	void Scene::create_list_entries() {
 		for (uint8_t i = 0u; i < options::save_count; i++) {
-			saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::LOAD_SAVE, i + 1));
+			saves.emplace_back(items::create_menu_item(items::MENU_ITEM::LOAD_SAVE, i + 1));
 		}
 
 		if (options::save_count < options::MAX_SAVES) {
-			saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::NEW_SAVE, options::save_count + 1));
+			saves.emplace_back(items::create_menu_item(items::MENU_ITEM::NEW_SAVE, options::save_count + 1));
 		}
 
-		saves.emplace_back(listbox_item::create_menu_item(listbox_item::MENU_ITEM::MENU_OPTIONS));
+		saves.emplace_back(items::create_menu_item(items::MENU_ITEM::MENU_OPTIONS));
 	}
 
 	void Scene::render(uint32_t time) {

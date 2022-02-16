@@ -4,7 +4,7 @@
 
 #include "items.hpp"
 
-namespace listbox_item {
+namespace items {
 	Listbox::Item create_inventory_item(INVENTORY_ITEM item_type) {
 		Listbox::Item item;
 

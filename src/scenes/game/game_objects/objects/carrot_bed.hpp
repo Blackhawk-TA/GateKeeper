@@ -33,7 +33,7 @@ namespace game {
 		~CarrotBed() override = default;
 		void update(uint32_t time) override;
 		bool player_interact() override;
-		bool inventory_interact(listbox_item::INVENTORY_ITEM item_type) override;
+		bool inventory_interact(items::INVENTORY_ITEM item_type) override;
 		void update_state(Point next_position) override;
 		ObjectType get_type() override;
 	};

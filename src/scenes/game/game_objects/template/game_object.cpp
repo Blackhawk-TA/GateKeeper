@@ -106,7 +106,7 @@ namespace game {
 		return false;
 	}
 
-	bool GameObject::inventory_interact(listbox_item::INVENTORY_ITEM item_type) {
+	bool GameObject::inventory_interact(items::INVENTORY_ITEM item_type) {
 		return false;
 	}
 
