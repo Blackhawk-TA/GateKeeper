@@ -49,21 +49,13 @@ namespace listbox_item {
 		ATTACK_MAGIC = 6,
 	};
 
-	enum GEAR_ITEM {
-		GEAR_SWORD = 1,
-		GEAR_SPEAR = 2,
-		GEAR_ARROW = 3,
-		GEAR_DAGGER = 4,
-		GEAR_MAGIC = 5,
-	};
-
 	//Item generators
 	Listbox::Item create_inventory_item(INVENTORY_ITEM item_type);
 	Listbox::Item create_sidemenu_item(SIDEMENU_ITEM item_type, uint8_t save_id = 0);
 	Listbox::Item create_menu_item(MENU_ITEM item_type, uint8_t save_id = 0);
 	Listbox::Item create_options_item(OPTIONS_ITEM item_type, uint8_t save_id = 0);
 	Listbox::Item create_combat_item(COMBAT_ITEM item_type, uint8_t save_id = 0, combat::Player *player = nullptr, combat::Enemy *enemy = nullptr);
-	Listbox::Item create_gear_item(GEAR_ITEM item_type);
+	Listbox::Item create_gear_item(GEAR_TYPE item_type);
 
 	//Generic items
 	Listbox::Item create_options_entry(uint8_t type_id, uint8_t save_id = 0);

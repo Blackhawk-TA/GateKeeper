@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_combat_attack_dagger(uint8_t type_id, combat:
 		false,
 		0,
 		[player, enemy] {
-			if (combat::character_handler::attack(AttackType::DAGGER, player, enemy)) {
+			if (combat::character_handler::attack(GEAR_DAGGER, player, enemy)) {
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

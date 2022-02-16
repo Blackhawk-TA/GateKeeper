@@ -121,7 +121,7 @@ namespace listbox_item {
 		return item;
 	}
 
-	Listbox::Item create_gear_item(GEAR_ITEM item_type) {
+	Listbox::Item create_gear_item(GEAR_TYPE item_type) {
 		Listbox::Item item;
 
 		switch (item_type) {
@@ -139,6 +139,14 @@ namespace listbox_item {
 				break;
 			case GEAR_MAGIC:
 				item = create_gear_magic(item_type);
+				break;
+//			case GEAR_FIRE:
+//				break;
+//			case GEAR_ICE:
+//				break;
+//			case GEAR_SHOCK:
+//				break;
+			default:
 				break;
 		}
 

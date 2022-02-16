@@ -36,7 +36,7 @@ namespace combat {
 		attack_spritesheet_size = get_spritesheet_size(attack_spritesheet->bounds);
 		weapons_spritesheet_size = get_spritesheet_size(weapons_spritesheet->bounds);
 		attack_state = IDLE;
-		attack_type = NO_ATTACK;
+		attack_type = GEAR_NONE;
 		round_finishing = false;
 		finish_time = 0;
 	}
@@ -95,15 +95,15 @@ namespace combat {
 		}
 	}
 
-	void Character::animate_attack(AttackType type, std::function<void()> callback) {
+	void Character::animate_attack(GEAR_TYPE type, std::function<void()> callback) {
 		Character::damage_dealer = std::move(callback);
 
 		attack_type = type;
 		attack_sprites = get_attack_sprites(type);
-		if (attack_type != MELEE) {
+		if (attack_type != GEAR_SWORD) {
 			projectile_animation_time = blit::now();
 			range_weapon_position = screen_position;
-			if (attack_type == ARROW || attack_type == DAGGER || attack_type == SPEAR) {
+			if (attack_type == GEAR_ARROW || attack_type == GEAR_DAGGER || attack_type == GEAR_SPEAR) {
 				projectile_velocity = 2;
 			} else {
 				projectile_velocity = 1;
@@ -190,7 +190,7 @@ namespace combat {
 	}
 
 	void Character::set_weapon_state(Character::AttackState state) {
-		bool has_init_sprite = attack_type == FIRE || attack_type == ICE || attack_type == ELECTRIC || attack_type == MAGIC;
+		bool has_init_sprite = attack_type == GEAR_FIRE || attack_type == GEAR_ICE || attack_type == GEAR_SHOCK || attack_type == GEAR_MAGIC;
 		attack_state = state;
 
 		switch (state) {
@@ -212,7 +212,7 @@ namespace combat {
 	}
 
 	void Character::animate(Timer &timer) {
-		if (attack_state != IDLE && attack_type == MELEE) {
+		if (attack_state != IDLE && attack_type == GEAR_SWORD) {
 			tile_id = animation_sprites[++tile_index % ANIMATION_SPRITE_COUNT];
 		}
 	}
@@ -240,39 +240,39 @@ namespace combat {
 
 	void Character::finish_round() {
 		round_finishing = true;
-		attack_type = NO_ATTACK;
+		attack_type = GEAR_NONE;
 		finish_time = blit::now();
 	}
 
-	std::array<uint16_t, ANIMATION_SPRITE_COUNT> Character::get_attack_sprites(AttackType type) {
+	std::array<uint16_t, ANIMATION_SPRITE_COUNT> Character::get_attack_sprites(GEAR_TYPE type) {
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> sprites = {};
 
 		switch (type) {
-			case MELEE:
+			case GEAR_SWORD:
 				sprites = attack_sword_sprites;
 				break;
-			case DAGGER:
+			case GEAR_DAGGER:
 				direction == RIGHT ? sprites = {2, 8} : sprites = {3, 9};
 				break;
-			case ARROW:
+			case GEAR_ARROW:
 				direction == RIGHT ? sprites = {1, 8} : sprites = {4, 9};
 				break;
-			case SPEAR:
+			case GEAR_SPEAR:
 				direction == RIGHT ? sprites = {0, 8} : sprites = {5, 9};
 				break;
-			case FIRE:
+			case GEAR_FIRE:
 				direction == RIGHT ? sprites = {12, 13, 14} : sprites = {17, 16, 15};
 				break;
-			case ICE:
+			case GEAR_ICE:
 				direction == RIGHT ? sprites = {18, 19, 20} : sprites = {23, 22, 21};
 				break;
-			case ELECTRIC:
+			case GEAR_SHOCK:
 				direction == RIGHT ? sprites = {24, 25, 26} : sprites = {29, 28, 27};
 				break;
-			case MAGIC:
+			case GEAR_MAGIC:
 				direction == RIGHT ? sprites = {30, 31, 32} : sprites = {35, 34, 33};
 				break;
-			case NO_ATTACK:
+			case GEAR_NONE:
 				break;
 		}
 

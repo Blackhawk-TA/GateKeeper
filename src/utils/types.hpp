@@ -23,18 +23,6 @@ enum StargateAddress {
 	WINTER = 2,
 	DESERT = 3
 };
-//Attack types for the combat scene
-enum AttackType {
-	NO_ATTACK = 0,
-	MELEE = 1,
-	SPEAR = 2,
-	ARROW = 3,
-	DAGGER = 4,
-	FIRE = 5,
-	ICE = 6,
-	ELECTRIC = 7,
-	MAGIC = 8,
-};
 
 enum CombatCharacterType {
 	NO_TYPE = 0,
@@ -47,9 +35,21 @@ enum CombatCharacterType {
 	RED_CREATURE = 7
 };
 
+enum GEAR_TYPE {
+	GEAR_NONE = 0,
+	GEAR_SWORD = 1,
+	GEAR_SPEAR = 2,
+	GEAR_ARROW = 3,
+	GEAR_DAGGER = 4,
+	GEAR_MAGIC = 5,
+	GEAR_FIRE = 6,
+	GEAR_ICE = 7,
+	GEAR_SHOCK = 8,
+};
+
 struct CharacterStats {
 	float damage_multiplier;
-	std::vector<AttackType> attacks;
+	std::vector<GEAR_TYPE> attacks;
 };
 
 //Data from the game scene that is needed for fights in combat scene

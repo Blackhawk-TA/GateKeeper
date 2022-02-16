@@ -49,7 +49,6 @@ namespace game {
 		static uint8_t save_id;
 		static uint8_t level;
 		static bool dead;
-		static std::vector<AttackType> attacks;
 
 		Timer animation_timer;
 		Point position;

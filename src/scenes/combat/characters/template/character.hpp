@@ -29,7 +29,7 @@ namespace combat {
 		void animate(Timer &timer);
 		uint8_t get_health() const;
 		void take_damage(uint8_t amount);
-		void animate_attack(AttackType type, std::function<void()> callback);
+		void animate_attack(GEAR_TYPE type, std::function<void()> callback);
 		bool is_attacking() const;
 		CharacterStats get_stats();
 
@@ -80,7 +80,7 @@ namespace combat {
 		Size attack_spritesheet_size;
 		Size weapons_spritesheet_size;
 		AttackState attack_state;
-		AttackType attack_type;
+		GEAR_TYPE attack_type;
 		std::function<void()> damage_dealer;
 
 		void set_state(AttackState state);
@@ -93,6 +93,6 @@ namespace combat {
 		void execute_range_attack(uint32_t time);
 		void hit_range_attack(uint32_t time);
 
-		std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(AttackType type);
+		std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(GEAR_TYPE type);
 	};
 }

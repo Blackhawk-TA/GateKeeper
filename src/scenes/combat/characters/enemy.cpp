@@ -30,7 +30,7 @@ namespace combat {
 	}
 
 	void Enemy::start_round() {
-		AttackType attack = stats.attacks[blit::random() % stats.attacks.size()];
+		GEAR_TYPE attack = stats.attacks[blit::random() % stats.attacks.size()];
 
 		textbox = new Textbox("Enemy is attacking!");
 		character_handler::attack(attack, this, target);

@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_combat_attack_arrow(uint8_t type_id, combat::
 		false,
 		0,
 		[player, enemy] {
-			if (combat::character_handler::attack(AttackType::ARROW, player, enemy)) {
+			if (combat::character_handler::attack(GEAR_ARROW, player, enemy)) {
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

@@ -11,6 +11,7 @@
 #include "../utils/entry_handler.hpp"
 #include "../utils/utils.hpp"
 #include "handler/extensions/stargate_handler.hpp"
+#include "../ui/sidemenu.hpp"
 
 namespace game {
 	bool Player::cut_scene = false;
@@ -22,7 +23,6 @@ namespace game {
 	uint8_t Player::save_id = 0;
 	MovementDirection Player::current_direction = DOWN;
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> Player::animation_sprites;
-	std::vector<AttackType> Player::attacks = {};
 	const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> Player::movement_sprites = {
 		{UP,    {112, 113, 114, 115}},
 		{DOWN,  {64,  65,  66,  67}},
@@ -43,13 +43,6 @@ namespace game {
 		health = player_data.health;
 		level = player_data.level;
 		current_direction = player_data.direction;
-
-		//Parse available attacks from player_data to local variable
-		attacks = {};
-		for (auto & attack : player_data.attacks) {
-			if (attack == AttackType::NO_ATTACK) break;
-			attacks.push_back(attack);
-		}
 
 		//Set player animation tiles
 		if (player_data.direction == NO_DIRECTION) {
@@ -219,6 +212,17 @@ namespace game {
 	}
 
 	CharacterData Player::get_character_data() {
+		std::vector<GEAR_TYPE> attacks = {};
+		auto gears = sidemenu::get_items(sidemenu::MenuType::GEAR);
+		attacks.reserve(gears.size());
+
+		for (auto &gear : gears) {
+			if (gear.name == "BACK") {
+				continue; //Skip sidemenu back entry
+			}
+			attacks.push_back(static_cast<GEAR_TYPE>(gear.type));
+		}
+
 		return CharacterData{
 			{},
 			CharacterStats{
@@ -233,17 +237,10 @@ namespace game {
 	}
 
 	save::PlayerData Player::get_save() {
-		std::array<AttackType, MAX_ATTACKS> attacks_array = {};
-
-		for (uint8_t i = 0u; i < attacks.size(); i++) {
-			attacks_array[i] = attacks.at(i);
-		}
-
 		return save::PlayerData{
 			health,
 			level,
 			current_direction,
-			attacks_array,
 		};
 	}
 

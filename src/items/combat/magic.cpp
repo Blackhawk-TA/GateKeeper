@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_combat_attack_magic(uint8_t type_id, combat::
 		false,
 		0,
 		[player, enemy] {
-			if (combat::character_handler::attack(AttackType::MAGIC, player, enemy)) {
+			if (combat::character_handler::attack(GEAR_MAGIC, player, enemy)) {
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

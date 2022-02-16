@@ -15,7 +15,7 @@ Listbox::Item listbox_item::create_combat_attack_spear(uint8_t type_id, combat::
 		false,
 		0,
 		[player, enemy] {
-			if (combat::character_handler::attack(AttackType::SPEAR, player, enemy)) {
+			if (combat::character_handler::attack(GEAR_SPEAR, player, enemy)) {
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

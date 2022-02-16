@@ -81,16 +81,16 @@ namespace combat::character_handler {
 		}
 	}
 
-	bool attack(AttackType type, Character *attacker, Character *target) {
-		std::map<AttackType, AttackStats> attacks = {
-			{MELEE,    AttackStats{10, 10, 10}},
-			{SPEAR,    AttackStats{15, 15, 15}},
-			{ARROW,    AttackStats{10, 10, 15}},
-			{DAGGER,   AttackStats{7, 5, 15}},
-			{FIRE,     AttackStats{30, 20, 10}},
-			{ICE,      AttackStats{30, 20, 10}},
-			{ELECTRIC, AttackStats{30, 20, 10}},
-			{MAGIC,    AttackStats{30, 20, 10}},
+	bool attack(GEAR_TYPE type, Character *attacker, Character *target) {
+		std::map<GEAR_TYPE, AttackStats> attacks = {
+			{GEAR_SWORD,    AttackStats{10, 10, 10}},
+			{GEAR_SPEAR,    AttackStats{15, 15, 15}},
+			{GEAR_ARROW,    AttackStats{10, 10, 15}},
+			{GEAR_DAGGER,   AttackStats{7, 5, 15}},
+			{GEAR_FIRE,     AttackStats{30, 20, 10}},
+			{GEAR_ICE,      AttackStats{30, 20, 10}},
+			{GEAR_SHOCK, AttackStats{30, 20, 10}},
+			{GEAR_MAGIC,    AttackStats{30, 20, 10}},
 		};
 		AttackStats attack = attacks.at(type);
 		float damage_multiplier = attacker->get_stats().damage_multiplier;

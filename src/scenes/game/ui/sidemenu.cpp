@@ -47,9 +47,9 @@ namespace game::sidemenu {
 					true,
 					Rect(14, 0, 6, 7),
 					{
-						listbox_item::create_gear_item(listbox_item::GEAR_ITEM::GEAR_SWORD),
-						listbox_item::create_gear_item(listbox_item::GEAR_ITEM::GEAR_SPEAR),
-						listbox_item::create_gear_item(listbox_item::GEAR_ITEM::GEAR_ARROW),
+						listbox_item::create_gear_item(GEAR_SWORD),
+						listbox_item::create_gear_item(GEAR_SPEAR),
+						listbox_item::create_gear_item(GEAR_ARROW),
 						listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
 					}
 				}
@@ -119,6 +119,13 @@ namespace game::sidemenu {
 			current_sidemenu = previous_sidemenu;
 			previous_sidemenu = NO_MENU; //Allows only one sub menu regarding menu depth
 		}
+	}
+
+	std::vector<Listbox::Item> get_items(MenuType menu_type) {
+		if (menu_data.find(menu_type) != menu_data.end()) {
+			return menu_data.at(menu_type).items;
+		}
+		return {};
 	}
 
 	bool add_item(MenuType menu_type, Listbox::Item item) {

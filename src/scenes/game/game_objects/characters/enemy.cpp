@@ -140,20 +140,20 @@ namespace game {
 			case BLUE_GUARD:
 				return CharacterStats{
 					1.0,
-					{MELEE, DAGGER, ARROW, SPEAR},
+					{GEAR_SWORD, GEAR_DAGGER, GEAR_ARROW, GEAR_SPEAR},
 				};
 			case SPIDER:
 			case BROWN_BEAR:
 			case ICE_BEAR:
 				return CharacterStats{
 					1.25,
-					{MELEE},
+					{GEAR_SWORD},
 				};
 			case DEVIL:
 			case RED_CREATURE:
 				return CharacterStats{
 					1.5,
-					{MELEE, FIRE}
+					{GEAR_SWORD, GEAR_FIRE}
 				};
 			default:
 				std::cerr << "Invalid CombatCharacterType" << std::endl;
