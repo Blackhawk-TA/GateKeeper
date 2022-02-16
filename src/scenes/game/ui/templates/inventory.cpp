@@ -3,10 +3,12 @@
 //
 
 #include <cassert>
+#include <iostream>
 #include "inventory.hpp"
 
-namespace game::ui_template {
-	Inventory::Inventory(Rect rect, std::vector<Item> &items) : Listbox(rect, items, true) {
+namespace game::sidemenu {
+	Inventory::Inventory(MenuType menu_type, Rect rect, std::vector<Item> &items) : Listbox(rect, items, true) {
+		Inventory::menu_type = menu_type;
 		Inventory::rect = rect;
 		Inventory::items = items;
 	}
@@ -44,7 +46,17 @@ namespace game::ui_template {
 				continue;
 			}
 
-			item_template = listbox_item::create_inventory_item(static_cast<listbox_item::INVENTORY_ITEM>(item->type));
+			switch (menu_type) {
+				case INVENTORY:
+					item_template = listbox_item::create_inventory_item(static_cast<listbox_item::INVENTORY_ITEM>(item->type));
+					break;
+				case GEAR:
+					item_template = listbox_item::create_gear_item(static_cast<GEAR_TYPE>(item->type));
+					break;
+				default:
+					std::cerr << "Cannot load save: Invalid inventory type" << std::endl;
+					break;
+			}
 
 			//Include only items that have an amount > 0 or are a menu item
 			if (item->type > 0 && (item->amount > 0 || (item->amount == 0 && !item_template.single_use))) {

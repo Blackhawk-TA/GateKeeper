@@ -8,7 +8,7 @@
 namespace game::sidemenu {
 	std::map<MenuType, MenuData> menu_data;
 	std::map<MenuType, Listbox*> controls;
-	std::vector<ui_template::Inventory*> inventories;
+	std::vector<Inventory*> inventories;
 	MenuType previous_sidemenu;
 	MenuType current_sidemenu;
 
@@ -50,7 +50,7 @@ namespace game::sidemenu {
 						listbox_item::create_gear_item(GEAR_SWORD),
 						listbox_item::create_gear_item(GEAR_SPEAR),
 						listbox_item::create_gear_item(GEAR_ARROW),
-						listbox_item::create_inventory_item(listbox_item::INVENTORY_ITEM::INVENTORY_BACK)
+						listbox_item::create_gear_item(GEAR_NAVIGATE_BACK),
 					}
 				}
 			}
@@ -58,10 +58,10 @@ namespace game::sidemenu {
 
 		controls = {};
 		inventories = {};
-		ui_template::Inventory *inventory;
+		Inventory *inventory;
 		for (auto &itr : menu_data) {
 			if (itr.second.is_inventory) {
-				inventory = new ui_template::Inventory(itr.second.rect, itr.second.items);
+				inventory = new Inventory(itr.first, itr.second.rect, itr.second.items);
 				inventories.emplace_back(inventory);
 				controls.insert(std::make_pair(itr.first, inventory));
 			} else {

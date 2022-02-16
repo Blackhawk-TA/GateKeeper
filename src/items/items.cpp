@@ -146,6 +146,9 @@ namespace listbox_item {
 //				break;
 //			case GEAR_SHOCK:
 //				break;
+			case GEAR_NAVIGATE_BACK:
+				item = create_back_entry(item_type);
+				break;
 			default:
 				break;
 		}

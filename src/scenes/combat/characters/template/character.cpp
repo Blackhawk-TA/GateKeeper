@@ -272,7 +272,7 @@ namespace combat {
 			case GEAR_MAGIC:
 				direction == RIGHT ? sprites = {30, 31, 32} : sprites = {35, 34, 33};
 				break;
-			case GEAR_NONE:
+			default:
 				break;
 		}
 

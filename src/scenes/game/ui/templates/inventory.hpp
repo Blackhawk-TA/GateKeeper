@@ -5,13 +5,16 @@
 #pragma once
 #include "../../../../engine/ui/listbox.hpp"
 #include "../../../../utils/saves/save_types.hpp"
+#include "../sidemenu.hpp"
 
-namespace game::ui_template {
+namespace game::sidemenu {
 	class Inventory : public Listbox {
-		~Inventory() override = default;
+	private:
+		MenuType menu_type;
 
 	public:
-		explicit Inventory(Rect rect, std::vector<Item> &items);
+		explicit Inventory(MenuType menu_type, Rect rect, std::vector<Item> &items);
+		~Inventory() override = default;
 
 		/**
 		 * Loads the compressed items from an array save game to the item vector of the inventory

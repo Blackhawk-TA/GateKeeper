@@ -45,6 +45,7 @@ enum GEAR_TYPE {
 	GEAR_FIRE = 6,
 	GEAR_ICE = 7,
 	GEAR_SHOCK = 8,
+	GEAR_NAVIGATE_BACK = 9,
 };
 
 struct CharacterStats {
