@@ -120,4 +120,28 @@ namespace listbox_item {
 
 		return item;
 	}
+
+	Listbox::Item create_gear_item(GEAR_ITEM item_type) {
+		Listbox::Item item;
+
+		switch (item_type) {
+			case GEAR_SWORD:
+				item = create_gear_sword(item_type);
+				break;
+			case GEAR_SPEAR:
+				item = create_gear_spear(item_type);
+				break;
+			case GEAR_ARROW:
+				item = create_gear_arrow(item_type);
+				break;
+			case GEAR_DAGGER:
+				item = create_gear_dagger(item_type);
+				break;
+			case GEAR_MAGIC:
+				item = create_gear_magic(item_type);
+				break;
+		}
+
+		return item;
+	}
 }
