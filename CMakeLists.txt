@@ -48,11 +48,17 @@ set(PROJECT_SOURCE
         src/items/combat/arrow.cpp
         src/items/combat/dagger.cpp
         src/items/combat/magic.cpp
+        src/items/combat/fire.cpp
+        src/items/combat/ice.cpp
+        src/items/combat/shock.cpp
         src/items/gear/sword.cpp
         src/items/gear/spear.cpp
         src/items/gear/arrow.cpp
         src/items/gear/dagger.cpp
         src/items/gear/magic.cpp
+        src/items/gear/fire.cpp
+        src/items/gear/ice.cpp
+        src/items/gear/shock.cpp
         src/items/items.cpp src/items/items.hpp
         src/items/inventory/gate_part.cpp
         src/items/inventory/apple.cpp

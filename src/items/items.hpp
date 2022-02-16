@@ -47,6 +47,9 @@ namespace listbox_item {
 		ATTACK_ARROW = 4,
 		ATTACK_DAGGER = 5,
 		ATTACK_MAGIC = 6,
+		ATTACK_FIRE = 7,
+		ATTACK_ICE = 8,
+		ATTACK_SHOCK = 9,
 	};
 
 	//Item generators
@@ -89,6 +92,9 @@ namespace listbox_item {
 	Listbox::Item create_combat_attack_arrow(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
 	Listbox::Item create_combat_attack_dagger(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
 	Listbox::Item create_combat_attack_magic(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
+	Listbox::Item create_combat_attack_fire(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
+	Listbox::Item create_combat_attack_ice(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
+	Listbox::Item create_combat_attack_shock(uint8_t type_id, combat::Player *player, combat::Enemy *enemy);
 
 	//Gear items
 	Listbox::Item create_gear_sword(uint8_t type_id);
@@ -96,4 +102,7 @@ namespace listbox_item {
 	Listbox::Item create_gear_arrow(uint8_t type_id);
 	Listbox::Item create_gear_dagger(uint8_t type_id);
 	Listbox::Item create_gear_magic(uint8_t type_id);
+	Listbox::Item create_gear_fire(uint8_t type_id);
+	Listbox::Item create_gear_ice(uint8_t type_id);
+	Listbox::Item create_gear_shock(uint8_t type_id);
 }

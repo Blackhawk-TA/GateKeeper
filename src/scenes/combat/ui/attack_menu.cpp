@@ -14,13 +14,15 @@ namespace combat {
 		std::vector<Listbox::Item> items = {};
 		control = new Listbox(Rect(16, 0, 4, 8), items, false);
 
-		//TODO either merge both item types or add missing enums
 		std::map<GEAR_TYPE, listbox_item::COMBAT_ITEM> supported_attacks = {
 			{GEAR_SWORD,  listbox_item::COMBAT_ITEM::ATTACK_SWORD},
 			{GEAR_SPEAR,  listbox_item::COMBAT_ITEM::ATTACK_SPEAR},
 			{GEAR_ARROW,  listbox_item::COMBAT_ITEM::ATTACK_ARROW},
 			{GEAR_DAGGER, listbox_item::COMBAT_ITEM::ATTACK_DAGGER},
-			{GEAR_MAGIC,  listbox_item::COMBAT_ITEM::ATTACK_MAGIC}
+			{GEAR_MAGIC,  listbox_item::COMBAT_ITEM::ATTACK_MAGIC},
+			{GEAR_FIRE,  listbox_item::COMBAT_ITEM::ATTACK_FIRE},
+			{GEAR_ICE,  listbox_item::COMBAT_ITEM::ATTACK_ICE},
+			{GEAR_SHOCK,  listbox_item::COMBAT_ITEM::ATTACK_SHOCK},
 		};
 
 		for (auto &attack : player->get_stats().attacks) {

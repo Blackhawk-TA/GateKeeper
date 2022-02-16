@@ -99,22 +99,31 @@ namespace listbox_item {
 
 		switch (item_type) {
 			case COMBAT_ITEM::ESCAPE:
-				item = create_combat_escape(COMBAT_ITEM::ESCAPE, save_id);
+				item = create_combat_escape(item_type, save_id);
 				break;
 			case ATTACK_SWORD:
-				item = create_combat_attack_sword(COMBAT_ITEM::ATTACK_SWORD, player, enemy);
+				item = create_combat_attack_sword(item_type, player, enemy);
 				break;
 			case ATTACK_SPEAR:
-				item = create_combat_attack_spear(COMBAT_ITEM::ATTACK_SPEAR, player, enemy);
+				item = create_combat_attack_spear(item_type, player, enemy);
 				break;
 			case ATTACK_ARROW:
-				item = create_combat_attack_arrow(COMBAT_ITEM::ATTACK_ARROW, player, enemy);
+				item = create_combat_attack_arrow(item_type, player, enemy);
 				break;
 			case ATTACK_DAGGER:
-				item = create_combat_attack_dagger(COMBAT_ITEM::ATTACK_DAGGER, player, enemy);
+				item = create_combat_attack_dagger(item_type, player, enemy);
 				break;
 			case ATTACK_MAGIC:
-				item = create_combat_attack_magic(COMBAT_ITEM::ATTACK_MAGIC, player, enemy);
+				item = create_combat_attack_magic(item_type, player, enemy);
+				break;
+			case ATTACK_FIRE:
+				item = create_combat_attack_fire(item_type, player, enemy);
+				break;
+			case ATTACK_ICE:
+				item = create_combat_attack_ice(item_type, player, enemy);
+				break;
+			case ATTACK_SHOCK:
+				item = create_combat_attack_shock(item_type, player, enemy);
 				break;
 		}
 
@@ -140,12 +149,15 @@ namespace listbox_item {
 			case GEAR_MAGIC:
 				item = create_gear_magic(item_type);
 				break;
-//			case GEAR_FIRE:
-//				break;
-//			case GEAR_ICE:
-//				break;
-//			case GEAR_SHOCK:
-//				break;
+			case GEAR_FIRE:
+				item = create_gear_fire(item_type);
+				break;
+			case GEAR_ICE:
+				item = create_gear_ice(item_type);
+				break;
+			case GEAR_SHOCK:
+				item = create_gear_shock(item_type);
+				break;
 			case GEAR_NAVIGATE_BACK:
 				item = create_back_entry(item_type);
 				break;
