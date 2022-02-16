@@ -108,7 +108,7 @@ namespace game {
 			if ((buttons & changed & Button::A) && !game_objects::next_textbox()) {
 				game_objects::close_textboxes();
 			}
-		} else {
+		} else if (!Player::in_cut_scene()) {
 			if (buttons & Button::DPAD_UP) {
 				player->move(UP);
 			} else if (buttons & Button::DPAD_DOWN) {
