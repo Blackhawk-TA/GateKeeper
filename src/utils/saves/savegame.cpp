@@ -152,7 +152,7 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 		game::sidemenu::load_saves(save_data.items);
 
 		//Load game object states
-		game::game_objects::init(save_data.map_section, save_id);
+		game::game_objects::init(player_temp_data.map_section, save_id);
 		game::game_objects::load_saves(save_data.game_objects);
 		if (!game::game_objects::is_empty_signature(player_temp_data.enemy_signature)) {
 			game::game_objects::delete_game_object(player_temp_data.enemy_signature);
