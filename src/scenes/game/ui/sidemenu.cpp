@@ -45,7 +45,7 @@ namespace game::sidemenu {
 				GEAR,
 				MenuData{
 					true,
-					Rect(14, 0, 6, 7),
+					Rect(14, 0, 6, 11),
 					{
 						items::create_gear_item(GEAR_SWORD),
 						items::create_gear_item(GEAR_SPEAR),
@@ -65,7 +65,7 @@ namespace game::sidemenu {
 				inventories.emplace_back(inventory);
 				controls.insert(std::make_pair(itr.first, inventory));
 			} else {
-				controls.insert(std::make_pair(itr.first, new Listbox(itr.second.rect, itr.second.items)));
+				controls.insert(std::make_pair(itr.first, new Listbox(itr.second.rect, itr.second.items, false)));
 			}
 		}
 	}

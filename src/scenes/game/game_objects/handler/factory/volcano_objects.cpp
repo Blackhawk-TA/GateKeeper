@@ -4,6 +4,8 @@
 
 #include "object_factory.hpp"
 #include "../../characters/enemy.hpp"
+#include "../../objects/gate_statue.hpp"
+#include "../../objects/crystal.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_volcano_objects(uint8_t save_id) {
@@ -11,6 +13,8 @@ namespace game::game_objects {
 		std::array<CombatCharacterType, 3> enemies = {SPIDER, RED_CREATURE, DEVIL};
 
 		return {
+			new GateStatue(map::VOLCANO, Point(14, 15)),
+			new Crystal(map::VOLCANO, Point(48, 6), Crystal::PURPLE),
 			new Enemy(map::VOLCANO, Point(21, 50), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
 			new Enemy(map::VOLCANO, Point(48, 45), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
 			new Enemy(map::VOLCANO, Point(60, 32), enemies[blit::random() % enemies.size()], DOWN, save_id, false),

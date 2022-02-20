@@ -40,6 +40,7 @@ namespace game {
 			CharacterType = 6,
 			LeverType = 7,
 			DungeonDoorType = 8,
+			CrystalType = 9,
 		};
 
 		explicit GameObject(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool draw_under_player = true);

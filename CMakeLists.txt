@@ -85,6 +85,7 @@ set(PROJECT_SOURCE
         src/scenes/game/game_objects/objects/dungeon_door.cpp src/scenes/game/game_objects/objects/dungeon_door.hpp
         src/scenes/game/game_objects/objects/fruit_tree.cpp src/scenes/game/game_objects/objects/fruit_tree.hpp
         src/scenes/game/game_objects/objects/lever.cpp src/scenes/game/game_objects/objects/lever.hpp
+        src/scenes/game/game_objects/objects/crystal.cpp src/scenes/game/game_objects/objects/crystal.hpp
         src/scenes/game/game_objects/objects/sign.cpp src/scenes/game/game_objects/objects/sign.hpp
         src/scenes/game/game_objects/objects/stargate.cpp src/scenes/game/game_objects/objects/stargate.hpp
         src/scenes/game/game_objects/objects/gate_statue.cpp src/scenes/game/game_objects/objects/gate_statue.hpp
