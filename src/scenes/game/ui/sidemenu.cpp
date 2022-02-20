@@ -123,7 +123,7 @@ namespace game::sidemenu {
 
 	std::vector<Listbox::Item> get_items(MenuType menu_type) {
 		if (menu_data.find(menu_type) != menu_data.end()) {
-			return menu_data.at(menu_type).items;
+			return controls.at(menu_type)->get_items();
 		}
 		return {};
 	}
