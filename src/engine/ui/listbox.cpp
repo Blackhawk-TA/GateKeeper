@@ -154,6 +154,7 @@ void Listbox::cursor_press(bool set_view_mode) {
 }
 
 void Listbox::handle_item_press(uint8_t item_index, bool set_view_mode) {
+	view_mode = set_view_mode;
 	std::string callback_tooltip = items[item_index].callback_tooltip;
 	std::string callback_fail_tooltip = items[item_index].callback_fail_tooltip;
 	Tooltip tooltip_state = items[item_index].callback();
@@ -175,8 +176,6 @@ void Listbox::handle_item_press(uint8_t item_index, bool set_view_mode) {
 	if (tooltip_state == Tooltip::SUCCESS && items[item_index].single_use) {
 		remove_item(item_index);
 	}
-
-	view_mode = set_view_mode;
 }
 
 void Listbox::update_tooltip() {

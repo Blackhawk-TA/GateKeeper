@@ -3,6 +3,7 @@
 //
 
 #include "character_handler.hpp"
+#include "../ui/attack_menu.hpp"
 
 namespace combat::character_handler {
 	std::vector<Character *> character_collection;
@@ -103,7 +104,7 @@ namespace combat::character_handler {
 			});
 			return true;
 		} else {
-			attacker->finish_round();
+			attack_menu::set_view_mode(false);
 			return false;
 		}
 	}

@@ -18,4 +18,5 @@ namespace combat::attack_menu {
 	void cursor_up();
 	void cursor_down();
 	void cursor_press();
+	void set_view_mode(bool value);
 }
