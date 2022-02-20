@@ -36,6 +36,7 @@ public:
 	void cursor_down();
 	void cursor_press(bool set_view_mode = false);
 	bool add_item(Item &item);
+	void update_tooltip();
 	void set_items(std::vector<Item> &new_items);
 	std::vector<Item> get_items();
 
@@ -55,7 +56,6 @@ private:
 	ConfirmDialog *confirm_dialog;
 
 	void sort_list();
-	void update_tooltip();
 	void remove_item(uint8_t index);
 	void handle_item_press(uint8_t item_index, bool set_view_mode);
 };

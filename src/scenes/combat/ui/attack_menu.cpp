@@ -43,7 +43,7 @@ namespace combat {
 
 	void attack_menu::open() {
 		control->set_view_mode(false);
-		control->cursor_reset();
+		control->update_tooltip();
 		open_state = true;
 	}
 
