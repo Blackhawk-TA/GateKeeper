@@ -13,8 +13,8 @@ namespace game::game_objects {
 		std::array<CombatCharacterType, 3> enemies = {SPIDER, RED_CREATURE, DEVIL};
 
 		return {
-			new GateStatue(map::VOLCANO, Point(14, 15)),
-			new Crystal(map::VOLCANO, Point(48, 6), Crystal::PURPLE),
+			new GateStatue(map::VOLCANO, Point(14, 13)),
+			new Crystal(map::VOLCANO, Point(48, 5), Crystal::RED),
 			new Enemy(map::VOLCANO, Point(21, 50), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
 			new Enemy(map::VOLCANO, Point(48, 45), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
 			new Enemy(map::VOLCANO, Point(60, 32), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
