@@ -26,6 +26,8 @@ std::array<game::GameObject::Save, MAX_GAME_OBJECTS> get_game_object_saves(uint8
 	//Load old save to fetch game object data that is not currently in memory
 	save::SaveData old_save = {};
 	bool save_found = read_save(old_save, save_id);
+	bool game_object_save_exists;
+	uint8_t i;
 
 	if (save_found) {
 		for (auto &current_game_object : current_game_objects) {
@@ -33,10 +35,25 @@ std::array<game::GameObject::Save, MAX_GAME_OBJECTS> get_game_object_saves(uint8
 				continue;
 			}
 
-			for (auto &old_game_object : old_save.game_objects) {
-				if (game::game_objects::has_equal_signature(old_game_object.signature, current_game_object.signature)) {
-					old_game_object = current_game_object;
-					break;
+			game_object_save_exists = false;
+			i = 0;
+
+			//Update existing game object save if it exists
+			while (!game_object_save_exists && i < old_save.game_objects.size()) {
+				if (game::game_objects::has_equal_signature(old_save.game_objects.at(i).signature, current_game_object.signature)) {
+					old_save.game_objects.at(i) = current_game_object;
+					game_object_save_exists = true;
+				}
+				i++;
+			}
+
+			//Add new game object save to existing save
+			if (!game_object_save_exists) {
+				for (auto &old_game_object: old_save.game_objects) {
+					if (game::game_objects::is_empty_signature(old_game_object.signature)) {
+						old_game_object = current_game_object;
+						break;
+					}
 				}
 			}
 		}
