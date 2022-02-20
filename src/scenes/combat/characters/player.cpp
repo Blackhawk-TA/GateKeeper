@@ -18,11 +18,10 @@ namespace combat {
 	}
 
 	bool Player::use_stamina(uint8_t amount) {
-		if (stamina - amount > 0) {
+		if (stamina - amount >= 0) {
 			stamina -= amount;
 			return true;
 		} else {
-			stamina = 0;
 			return false;
 		}
 	}
