@@ -3,7 +3,6 @@
 //
 
 #include "../items.hpp"
-#include "../../game.hpp"
 
 Listbox::Item items::create_load_entry(uint8_t type_id, uint8_t save_id) {
 	std::string save_id_str = std::to_string(save_id);

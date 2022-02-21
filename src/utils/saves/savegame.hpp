@@ -20,6 +20,13 @@ namespace savegame {
 	game::Player *create(uint8_t save_id);
 
 	/**
+	 * Converts a temporary save to a persistent one. Should be used when a temporary save already exists, but no persistent save is present.
+	 * @param save_id The save id of the persistent save
+	 * @return True, if a temporary save exists and could be converted, else false.
+	 */
+	bool convert_tmp_save(uint8_t save_id);
+
+	/**
 	 * Save the data of a game to a save file
 	 * @param save_id The id of the save
 	 * @param tmp_save Whether the save is a temporary save for e.g. combat scene transitions

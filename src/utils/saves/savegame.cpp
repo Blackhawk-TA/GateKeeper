@@ -109,6 +109,17 @@ game::Player *savegame::create(uint8_t save_id) {
 	return new game::Player(save::PlayerData{}, save_id);
 }
 
+bool savegame::convert_tmp_save(uint8_t save_id) {
+	save::SaveData save_data;
+	bool save_found = read_save(save_data, TMP_SAVE_ID);
+
+	if (save_found) {
+		write_save(save_data, save_id);
+	}
+
+	return save_found;
+}
+
 void savegame::save(uint8_t save_id, bool tmp_save) {
 	//Check if current save is a new save game and therefore update save_count
 	if (!tmp_save && options::save_count < save_id) {

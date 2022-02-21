@@ -2,6 +2,7 @@
 // Created by daniel on 06.01.22.
 //
 
+#include <iostream>
 #include "gameover_scene.hpp"
 #include "../../game.hpp"
 #include "../../utils/saves/savegame.hpp"
@@ -12,10 +13,13 @@ namespace gameover {
 		last_buttons = 0;
 		changed = 0;
 		textbox = new Textbox("You became unconscious. You wake up at the hospital.");
+		bool save_converted = savegame::convert_tmp_save(save_id);
+		if (!save_converted) {
+			std::cerr << "Could not convert temporary save to normal save" << std::endl; //This should never happen
+		}
 	}
 
 	Scene::~Scene() {
-		savegame::save(save_id); //Save game after game over
 		delete textbox;
 		textbox = nullptr;
 	}

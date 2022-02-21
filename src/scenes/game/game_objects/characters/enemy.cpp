@@ -80,6 +80,8 @@ namespace game {
 		SceneOptions options = {
 			save_id,
 			combat_data,
+			{},
+			true,
 		};
 		load_scene(SceneType::COMBAT, options);
 	}
