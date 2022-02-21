@@ -21,6 +21,8 @@ Listbox::Item items::create_combat_escape(uint8_t type_id, uint8_t save_id) {
 			} else {
 				return Listbox::Tooltip::FAILURE;
 			}
-		}
+		},
+		false,
+		true,
 	};
 }

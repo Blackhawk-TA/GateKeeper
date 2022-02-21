@@ -25,6 +25,7 @@ public:
 		uint8_t amount; //Amount 0 indicates menu item
 		std::function<Tooltip()> callback;
 		bool confirm_dialog = false;
+		bool sort_to_bottom = false;
 	};
 
 	explicit Listbox(Rect rect, std::vector<Item> &items, bool enable_sorting = true);

@@ -17,6 +17,8 @@ Listbox::Item items::create_back_entry(uint8_t type_id) {
 		[] {
 			game::sidemenu::navigate_back();
 			return Listbox::Tooltip::SUPPRESS;
-		}
+		},
+		false,
+		true,
 	};
 }
