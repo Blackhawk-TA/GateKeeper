@@ -54,6 +54,14 @@ namespace game {
 		bool player_in_sightline();
 
 		/**
+		 * Calculate the distance between a player and the character in assumption that both are on the same X or Y coordinate
+		 * @param a The position of the player that differs from the character
+		 * @param b The position of the character that differs from the player
+		 * @return The distance as an absolute uint8
+		 */
+		 static uint8_t calc_player_distance(uint8_t a, uint8_t b);
+
+		/**
 		 * Makes the character walk a straight line to the given point
 		 * @param p The point to which the character shall walk to
 		 * @return True, if the character is walking, else false

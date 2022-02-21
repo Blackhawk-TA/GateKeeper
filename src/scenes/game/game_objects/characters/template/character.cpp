@@ -159,10 +159,21 @@ namespace game {
 
 	bool Character::player_in_sightline() {
 		Point player_position = camera::get_player_position();
-		return (current_direction == UP && position.x == player_position.x && position.y > player_position.y && path_is_walkable(player_position, position))
-			|| (current_direction == DOWN && position.x == player_position.x && position.y < player_position.y && path_is_walkable(position, player_position))
-			|| (current_direction == LEFT && position.y == player_position.y && position.x > player_position.x && path_is_walkable(player_position, position))
-			|| (current_direction == RIGHT && position.y == player_position.y && position.x < player_position.x && path_is_walkable(position, player_position));
+		return (current_direction == UP && position.x == player_position.x && position.y > player_position.y
+		&& calc_player_distance(position.y, player_position.y) < 6 && path_is_walkable(player_position, position))
+
+		|| (current_direction == DOWN && position.x == player_position.x && position.y < player_position.y
+		&& calc_player_distance(player_position.y, position.y) < 6 && path_is_walkable(position, player_position))
+
+		|| (current_direction == LEFT && position.y == player_position.y && position.x > player_position.x
+		&& calc_player_distance(position.x, player_position.x) < 9 && path_is_walkable(player_position, position))
+
+		|| (current_direction == RIGHT && position.y == player_position.y && position.x < player_position.x
+		&& calc_player_distance(position.x, player_position.x) < 9 && path_is_walkable(position, player_position));
+	}
+
+	uint8_t Character::calc_player_distance(uint8_t a, uint8_t b) {
+		return abs(a - b);
 	}
 
 	bool Character::path_is_walkable(Point start, Point end) {
