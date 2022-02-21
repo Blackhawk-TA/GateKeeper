@@ -158,6 +158,8 @@ namespace game {
 	}
 
 	bool Character::player_in_sightline() {
+		if (camera::is_moving()) return false;
+
 		Point player_position = camera::get_player_position();
 		return (current_direction == UP && position.x == player_position.x && position.y > player_position.y
 		&& calc_player_distance(position.y, player_position.y) < 6 && path_is_walkable(player_position, position))
