@@ -41,7 +41,7 @@ namespace combat {
 
 	void Player::handle_death() {
 		SceneOptions options = {
-			TMP_SAVE_ID
+			TMP_SAVE_ID,
 		};
 		load_scene(GAMEOVER, options);
 	}

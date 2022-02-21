@@ -4,6 +4,7 @@
 
 #include "gameover_scene.hpp"
 #include "../../game.hpp"
+#include "../../utils/saves/savegame.hpp"
 
 namespace gameover {
 	Scene::Scene(const SceneOptions& options) {
@@ -14,6 +15,7 @@ namespace gameover {
 	}
 
 	Scene::~Scene() {
+		savegame::save(save_id); //Save game after game over
 		delete textbox;
 		textbox = nullptr;
 	}
