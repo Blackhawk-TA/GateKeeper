@@ -10,33 +10,7 @@ namespace game {
 		: Character(map_section, position, true, false, true) {
 		Villager::message = std::move(message);
 		Villager::tile_id = tile_id;
-		movement_sprites = {
-			{UP, {
-				static_cast<uint16_t>(tile_id + 48),
-				static_cast<uint16_t>(tile_id + 49),
-				static_cast<uint16_t>(tile_id + 50),
-				static_cast<uint16_t>(tile_id + 51)
-			}},
-			{DOWN, {
-				tile_id,
-				static_cast<uint16_t>(tile_id + 1),
-				static_cast<uint16_t>(tile_id + 2),
-				static_cast<uint16_t>(tile_id + 3)
-			}},
-			{LEFT, {
-				static_cast<uint16_t>(tile_id + 16),
-				static_cast<uint16_t>(tile_id + 17),
-				static_cast<uint16_t>(tile_id + 18),
-				static_cast<uint16_t>(tile_id + 19)
-			}},
-			{RIGHT, {
-				static_cast<uint16_t>(tile_id + 32),
-				static_cast<uint16_t>(tile_id + 33),
-				static_cast<uint16_t>(tile_id + 34),
-				static_cast<uint16_t>(tile_id + 35)
-			}},
-		};
-
+		set_movement_sprites();
 		change_direction(direction, false);
 	}
 

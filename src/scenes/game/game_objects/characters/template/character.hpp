@@ -38,6 +38,11 @@ namespace game {
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
 
 		/**
+		 * Sets the movement sprites of the character. Should be called in the subclass constructor.
+		 */
+		void set_movement_sprites();
+
+		/**
 		 * Triggers the cut scene which is started when a player stands directly in front of the character
 		 */
 		virtual void trigger_cutscene();

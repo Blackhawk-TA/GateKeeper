@@ -8,12 +8,7 @@
 namespace game {
 	Nurse::Nurse(map::MapSection map_section, Point position) : Character(map_section, position, true, false) {
 		tile_id = TILE_ID;
-		movement_sprites = {
-			{UP,    {180, 181, 182, 183}},
-			{DOWN,  {132, 133, 134, 135}},
-			{LEFT,  {148, 149, 150, 151}},
-			{RIGHT, {164, 165, 166, 167}}
-		};
+		set_movement_sprites();
 	}
 
 	bool Nurse::player_interact() {
