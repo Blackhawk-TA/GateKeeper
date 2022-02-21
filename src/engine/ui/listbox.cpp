@@ -32,9 +32,10 @@ void Listbox::sort_list() {
 
 	std::sort(Listbox::items.begin(), Listbox::items.end(), [] (Listbox::Item &item1, Listbox::Item &item2){
 		//Move items with the amount 0 to the bottom of the list
-		if (item1.name == "BACK" || item1.name == "QUIT") { //Move item down in list
+		//TODO add item property for "Keep at bottom"
+		if (item1.name == "BACK" || item1.name == "QUIT" || item1.name == "ESCAPE") { //Move item down in list
 			return false;
-		} else if (item2.name == "BACK" || item2.name == "QUIT") { //Keep position in list
+		} else if (item2.name == "BACK" || item2.name == "QUIT" || item2.name == "ESCAPE") { //Keep position in list
 			return true;
 		} else {
 			return item1.name < item2.name; //Sort alphabetically

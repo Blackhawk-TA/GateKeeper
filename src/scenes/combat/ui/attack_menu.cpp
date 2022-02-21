@@ -12,7 +12,7 @@ namespace combat {
 
 	void attack_menu::init(uint8_t save_id, Player *player, Enemy *enemy) {
 		std::vector<Listbox::Item> items = {};
-		control = new Listbox(Rect(16, 0, 4, 8), items, false);
+		control = new Listbox(Rect(16, 0, 4, 8), items);
 
 		std::map<GEAR_TYPE, items::COMBAT_ITEM> supported_attacks = {
 			{GEAR_SWORD,  items::COMBAT_ITEM::ATTACK_SWORD},
