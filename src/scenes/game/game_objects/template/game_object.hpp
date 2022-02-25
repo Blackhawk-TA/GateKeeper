@@ -17,6 +17,7 @@ namespace game {
 		struct Data {
 			bool player_usable{};
 			bool inventory_usable{};
+			bool is_active{};
 			uint32_t value{};
 		};
 
@@ -41,6 +42,7 @@ namespace game {
 			LeverType = 7,
 			DungeonDoorType = 8,
 			CrystalType = 9,
+			EnemyType = 10,
 		};
 
 		explicit GameObject(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool draw_under_player = true);
@@ -154,12 +156,20 @@ namespace game {
 		 */
 		bool player_in_front(uint8_t distance = 0);
 
+		/**
+		 * Sets the game object active state. Inactive game objects are not rendered nor accessible.
+		 * They still exist in memory and their states are therefore saved.
+		 * @param active The boolean showing if a game object is active
+		 */
+		virtual void set_active(bool active);
+
 	protected:
 		Point position;
 		map::MapSection map_section;
 		bool player_usable; //Shows if a player can directly interact with it
 		bool inventory_usable; //Shows if a player can interact with it using the inventory
 		bool draw_under_player; //Shows if the game object should be drawn under the player sprite
+		bool is_active;
 		uint32_t value;
 		Signature signature;
 		Size spritesheet_size;

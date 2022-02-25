@@ -14,6 +14,11 @@ namespace game::game_objects {
 	void init(map::MapSection map_section, uint8_t save_id);
 
 	/**
+	 * Deletes all objects from memory
+	 */
+	void cleanup();
+
+	/**
 	 * Gets the game object collection
 	 * @return The game object collection
 	 */
@@ -26,9 +31,18 @@ namespace game::game_objects {
 	void delete_game_object(Signature &signature);
 
 	/**
-	 * Deletes all objects from memory
+	 * Gets the pointer to a game object by its signature, if it exists
+	 * @param signature The signature of the game object
+	 * @return A pointer to the game object or null pointer if it does not exist
 	 */
-	void cleanup();
+	GameObject* get_game_object(Signature &signature);
+
+	/**
+	 * Set the active property which is saved and shows whether a game object is rendered and interactive
+	 * @param signature The signature of the game object
+	 * @param value True, if the game object should be rendered and interactive, else false
+	 */
+	void set_active(Signature &signature, bool value);
 
 	/**
 	 * Gets array with save structs of all game objects objects

@@ -25,7 +25,7 @@ namespace game {
 		return false;
 	}
 
-//Prevent player from looking away directly after closing textbox
+	//Prevent player from looking away directly after closing textbox
 	void Villager::close_textbox() {
 		GameObject::close_textbox();
 		last_turn = blit::now();

@@ -13,7 +13,7 @@ namespace game {
 		std::vector<GameObject *> game_object_collection = game_objects::get_collection();
 
 		for (GameObject *game_object: game_object_collection) {
-			if (game_object->get_type() == GameObject::CharacterType) {
+			if (game_object->get_type() == GameObject::CharacterType || game_object->get_type() == GameObject::EnemyType) {
 				characters.push_back((Character *) game_object);
 			}
 		}

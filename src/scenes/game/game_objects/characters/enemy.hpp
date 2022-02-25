@@ -25,11 +25,19 @@ namespace game {
 		uint8_t save_id;
 		std::string message;
 		CombatCharacterType character_type;
+		bool can_respawn;
 
 	public:
-		explicit Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn = false, std::string message = "");
+		explicit Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn = false, std::string message = "", bool can_respawn = true);
 		~Enemy() override = default;
 		void update(uint32_t time) override;
 		void update_state(Point next_position) override;
+		GameObject::ObjectType get_type() override;
+
+		/**
+		 * Set active property only when can_respawn is set to true, otherwise it can only be set to false
+		 * @param active The active value
+		 */
+		void set_active(bool active) override;
 	};
 }

@@ -33,6 +33,7 @@ set(PROJECT_SOURCE
         src/scenes/game/game_objects/handler/extensions/character_handler.cpp src/scenes/game/game_objects/handler/extensions/character_handler.hpp
         src/scenes/game/game_objects/handler/game_object_handler.cpp src/scenes/game/game_objects/handler/game_object_handler.hpp
         src/scenes/game/game_objects/handler/extensions/character_handler.cpp src/scenes/game/game_objects/handler/extensions/character_handler.hpp
+        src/scenes/game/game_objects/handler/extensions/enemy_handler.cpp src/scenes/game/game_objects/handler/extensions/enemy_handler.hpp
         src/scenes/game/game_objects/handler/extensions/stargate_handler.cpp src/scenes/game/game_objects/handler/extensions/stargate_handler.hpp
         src/scenes/game/game_objects/handler/extensions/dungeon_door_handler.cpp src/scenes/game/game_objects/handler/extensions/dungeon_door_handler.hpp
         src/scenes/game/game_objects/handler/factory/object_factory.cpp src/scenes/game/game_objects/handler/factory/object_factory.hpp

@@ -7,10 +7,13 @@
 #include "extensions/dungeon_door_handler.hpp"
 #include "extensions/character_handler.hpp"
 #include "factory/object_factory.hpp"
+#include "extensions/enemy_handler.hpp"
 #include <stdexcept>
 #include <cassert>
 
 namespace game::game_objects {
+	//TODO change to hash_map <Signature, GameObjectPointer>?
+	// Might be faster, check if it uses more memory and if hash map makes sense
 	std::vector<GameObject *> game_object_collection;
 
 	void init(map::MapSection map_section, uint8_t save_id) {
@@ -21,6 +24,21 @@ namespace game::game_objects {
 		stargate_handler::init();
 		dungeon_door_handler::init();
 		character_handler::init();
+		enemy_handler::init();
+	}
+
+	void cleanup() {
+		for (auto &game_object: game_object_collection) {
+			delete game_object;
+			game_object = nullptr;
+		}
+		game_object_collection.clear();
+
+		//Cleanup extension handlers
+		stargate_handler::cleanup();
+		dungeon_door_handler::cleanup();
+		character_handler::cleanup();
+		enemy_handler::cleanup();
 	}
 
 	std::vector<GameObject *> &get_collection() {
@@ -57,17 +75,25 @@ namespace game::game_objects {
 		}
 	}
 
-	void cleanup() {
-		for (auto &game_object: game_object_collection) {
-			delete game_object;
-			game_object = nullptr;
-		}
-		game_object_collection.clear();
+	GameObject* get_game_object(Signature &signature) {
+		auto itr = game_object_collection.begin();
 
-		//Cleanup extension handlers
-		stargate_handler::cleanup();
-		dungeon_door_handler::cleanup();
-		character_handler::cleanup();
+		while (itr != game_object_collection.end()) {
+			if (has_equal_signature(signature, (*itr)->get_signature())) {
+				return *itr;
+			}
+			itr++;
+		}
+
+		return nullptr;
+	}
+
+	void set_active(Signature &signature, bool value) {
+		GameObject* game_object = get_game_object(signature);
+
+		if (game_object != nullptr) {
+			game_object->set_active(value);
+		}
 	}
 
 	bool has_equal_signature(Signature sig1, Signature sig2) {
@@ -110,6 +136,12 @@ namespace game::game_objects {
 				}
 			}
 			i++;
+		}
+
+		//Respawn enemies
+		SceneType previous_scene = get_previous_scene();
+		if (previous_scene == SceneType::MENU || previous_scene == SceneType::GAMEOVER) {
+			enemy_handler::respawn();
 		}
 	}
 

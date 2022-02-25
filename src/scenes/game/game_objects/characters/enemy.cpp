@@ -10,11 +10,12 @@
 #include "../../utils/utils.hpp"
 
 namespace game {
-	Enemy::Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn, std::string message)
+	Enemy::Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn, std::string message, bool can_respawn)
 		: Character(map_section, position, true, false, turn) {
 		Enemy::character_type = character_type;
 		Enemy::tile_id = get_init_tile_id();
 		Enemy::save_id = save_id;
+		Enemy::can_respawn = can_respawn;
 		Enemy::message = std::move(message);
 		set_movement_sprites();
 		change_direction(direction, false);
@@ -135,5 +136,17 @@ namespace game {
 				std::cerr << "Invalid CombatCharacterType" << std::endl;
 				exit(1);
 		}
+	}
+
+	GameObject::ObjectType Enemy::get_type() {
+		return EnemyType;
+	}
+
+	void Enemy::set_active(bool active) {
+		if (active && !can_respawn) {
+			return;
+		}
+
+		GameObject::set_active(active);
 	}
 }
