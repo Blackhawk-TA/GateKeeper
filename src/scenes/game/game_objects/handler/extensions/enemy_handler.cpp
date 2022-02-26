@@ -22,9 +22,27 @@ namespace game::enemy_handler {
 		enemies.clear();
 	}
 
+	void delete_enemy(Signature &signature) {
+		auto itr = enemies.begin();
+
+		while (itr != enemies.end()) {
+			if (game_objects::has_equal_signature((*itr)->get_signature(), signature)) {
+				enemies.erase(itr);
+			} else {
+				itr++;
+			}
+		}
+	}
+
 	void respawn() {
-		for (Enemy *enemy : enemies) {
-			enemy->set_active(true);
+		auto itr = enemies.begin();
+		while (itr != enemies.end()) {
+			if ((*itr)->can_be_respawned()) {
+				(*itr)->set_active(true);
+			} else {
+				game_objects::delete_game_object((*itr)->get_signature());
+			}
+			itr++;
 		}
 	}
 }

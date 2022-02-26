@@ -33,6 +33,7 @@ namespace game {
 		void update(uint32_t time) override;
 		void update_state(Point next_position) override;
 		GameObject::ObjectType get_type() override;
+		bool can_be_respawned() const;
 
 		/**
 		 * Set active property only when can_respawn is set to true, otherwise it can only be set to false

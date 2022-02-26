@@ -149,4 +149,8 @@ namespace game {
 
 		GameObject::set_active(active);
 	}
+
+	bool Enemy::can_be_respawned() const {
+		return can_respawn;
+	}
 }

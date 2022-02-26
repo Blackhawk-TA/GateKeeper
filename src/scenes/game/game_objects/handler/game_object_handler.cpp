@@ -14,6 +14,7 @@
 namespace game::game_objects {
 	//TODO change to hash_map <Signature, GameObjectPointer>?
 	// Might be faster, check if it uses more memory and if hash map makes sense
+	// or use list instead of vector for faster deletion
 	std::vector<GameObject *> game_object_collection;
 
 	void init(map::MapSection map_section, uint8_t save_id) {
@@ -45,7 +46,7 @@ namespace game::game_objects {
 		return game_object_collection;
 	}
 
-	void delete_game_object(Signature &signature) {
+	void delete_game_object(Signature signature) {
 		auto itr = game_object_collection.begin();
 
 		while (itr != game_object_collection.end()) {
@@ -57,6 +58,10 @@ namespace game::game_objects {
 					case GameObject::CharacterType:
 						character_handler::delete_character(signature);
 						break;
+					case GameObject::EnemyType: //An enemy is a character as well, therefore delete both
+						character_handler::delete_character(signature);
+						enemy_handler::delete_enemy(signature);
+						break;
 					case GameObject::DungeonDoorType:
 						dungeon_door_handler::delete_door(signature);
 						break;
@@ -64,10 +69,8 @@ namespace game::game_objects {
 						break;
 				}
 
-				delete (*itr);
-				(*itr) = nullptr;
+				delete *itr;
 				game_object_collection.erase(itr);
-
 				break;
 			} else {
 				itr++;

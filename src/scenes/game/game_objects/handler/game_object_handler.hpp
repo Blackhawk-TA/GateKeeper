@@ -28,7 +28,7 @@ namespace game::game_objects {
 	 * Deletes a single game object by its signature
 	 * @param signature The signature of the object that shall be deleted
 	 */
-	void delete_game_object(Signature &signature);
+	void delete_game_object(Signature signature);
 
 	/**
 	 * Gets the pointer to a game object by its signature, if it exists

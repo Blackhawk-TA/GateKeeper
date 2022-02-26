@@ -9,10 +9,11 @@
 namespace game::enemy_handler {
 	void init();
 	void cleanup();
+	void delete_enemy(Signature &signature);
 
 	/**
 	 * Respawns all enemies by setting their 'is_active' value to true, if they can be respawned.
-	 * The check if an enemy can be respawned is done within the enemy class itself
+	 * If they cannot be respawned they are deleted from the game objects collection.
 	 */
 	void respawn();
 }
