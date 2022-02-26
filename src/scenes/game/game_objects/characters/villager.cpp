@@ -15,9 +15,7 @@ namespace game {
 	}
 
 	bool Villager::player_interact() {
-		bool interacted = Character::player_interact();
-
-		if (interacted) {
+		if (Character::player_interact()) {
 			textbox = new Textbox(message);
 			return true;
 		}

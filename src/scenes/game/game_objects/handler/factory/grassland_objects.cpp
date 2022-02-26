@@ -10,6 +10,7 @@
 #include "../../characters/villager.hpp"
 #include "../../characters/enemy.hpp"
 #include "../../characters/story_character.hpp"
+#include "../../characters/gear_villager.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_grassland_objects(uint8_t save_id) {
@@ -36,6 +37,9 @@ namespace game::game_objects {
 //			new Villager(map::GRASSLAND, Point(39, 17), 4, RIGHT, "There is a Gate in this forest, but I can't let you pass without permission of the elder. It could be too dangerous for you."),
 			new Enemy(map::GRASSLAND, Point(21, 10), BLUE_GUARD, RIGHT, save_id, false, "LET'S FIGHT!", false),
 			new Enemy(map::GRASSLAND, Point(23, 10), BLUE_GUARD, LEFT, save_id, false, "LET'S FIGHT!", false),
+
+			//TODO remove
+			new GearVillager(map::GRASSLAND, Point(23, 17), 4, LEFT, "Here take that sword.", "You already have a sword, go use it.", GEAR_DAGGER),
 
 			new StoryCharacter(map::GRASSLAND, Point(30, 13), 12, LEFT, true, "Hello I'm the elder of this village. The gate you behind you is a portal to different worlds. Unfortunately the new king destroyed most gates, those which were not are heavily guarded.", "Do you really want to go through that gate?"),
 		};

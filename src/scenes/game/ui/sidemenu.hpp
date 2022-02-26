@@ -29,6 +29,14 @@ namespace game::sidemenu {
 	void close();
 	void navigate_back();
 	std::vector<Listbox::Item> get_items(MenuType menu_type);
+
+	/**
+	 * Checks if an item exists in the menu list no matter of the amount. This function is memory intensive and should be used only when necessary.
+	 * @param menu_type The menu type enum operator stating in which enum to check for
+	 * @param item The item whose existence is checked
+	 * @return True if the item exists, else false
+	 */
+	bool has_item(MenuType menu_type, Listbox::Item &item);
 	bool add_item(MenuType menu_type, Listbox::Item item);
 	bool is_open();
 	void draw();

@@ -128,6 +128,14 @@ namespace game::sidemenu {
 		return {};
 	}
 
+	bool has_item(MenuType menu_type, Listbox::Item &item) {
+		std::vector<Listbox::Item> items = get_items(menu_type);
+
+		return std::any_of(items.begin(), items.end(), [item](Listbox::Item &tmp_item) {
+			return tmp_item.type == item.type;
+		});
+	}
+
 	bool add_item(MenuType menu_type, Listbox::Item item) {
 		if (menu_data.at(menu_type).is_inventory) {
 			return controls.at(menu_type)->add_item(item);
