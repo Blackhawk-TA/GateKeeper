@@ -25,9 +25,9 @@ std::vector<std::string> Textbox::split_text(std::string &unformatted_text) cons
 	for (std::string s; iss >> s;) {
 		//If block text length would exceed max chars limiter, go to next block
 		if (blocks.at(index).length() + s.length() >= block_max_chars) {
-			blocks.at(index).append("...");
+			blocks.at(index).append(" ...");
 			index++;
-			blocks.emplace_back(" ..."); //Init new block
+			blocks.emplace_back("... "); //Init new block
 		}
 
 		//Add word of unformatted text to block text
