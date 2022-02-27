@@ -36,8 +36,6 @@ namespace game::sidemenu {
 					true,
 					Rect(14, 0, 6, 7),
 					{
-						//TODO remove free items
-						items::create_inventory_item(items::INVENTORY_ITEM::CARROT_SEED),
 						items::create_inventory_item(items::INVENTORY_ITEM::INVENTORY_BACK)
 					}
 				}

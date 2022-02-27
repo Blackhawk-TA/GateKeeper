@@ -10,6 +10,7 @@ namespace game {
 	private:
 		const uint16_t TILE_ID = 68;
 		const uint8_t BAR_HEIGHT = 1;
+		const uint16_t COOLDOWN_MS = 60000;
 
 	public:
 		explicit Salesman(map::MapSection map_section, Point position);
