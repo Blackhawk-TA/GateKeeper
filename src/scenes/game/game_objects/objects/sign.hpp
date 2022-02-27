@@ -17,14 +17,11 @@ namespace game {
 		explicit Sign(map::MapSection map_section, Point position, Sign::SpriteType sprite_type, std::string text);
 		~Sign() override = default;
 		bool player_interact() override;
-		void update_state(Point next_position) override;
 		ObjectType get_type() override;
-		void update(uint32_t time) override;
 
 	private:
 		std::string text;
 
 		void set_sprite(SpriteType sprite_type);
-		void set_state(uint8_t new_state) override;
 	};
 }

@@ -18,10 +18,4 @@ namespace game {
 
 		return false;
 	}
-
-	void Salesman::update_state(Point next_position) {}
-
-	void Salesman::set_state(uint8_t new_state) {}
-
-	void Salesman::update(uint32_t time) {}
 }

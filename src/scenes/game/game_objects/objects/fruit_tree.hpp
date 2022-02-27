@@ -14,15 +14,12 @@ namespace game {
 		const Point FRUIT_OFFSET = Point(0, 1);
 		const uint16_t GROW_TIME_MS = 60000;
 
-		void set_state(uint8_t new_state) override;
-
 	public:
 		explicit FruitTree(map::MapSection map_section, Point position, bool player_usable);
 		~FruitTree() override = default;
 		void draw() override;
 		void update(uint32_t time) override;
 		bool player_interact() override;
-		void update_state(Point next_position) override;
 		ObjectType get_type() override;
 	};
 }

@@ -73,8 +73,4 @@ namespace game {
 	GameObject::ObjectType Crystal::get_type() {
 		return GameObject::CrystalType;
 	}
-
-	void Crystal::update_state(Point next_position) {}
-	void Crystal::update(uint32_t time) {}
-	void Crystal::set_state(uint8_t new_state) {}
 }

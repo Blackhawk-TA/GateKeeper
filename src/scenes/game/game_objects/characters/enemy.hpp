@@ -8,7 +8,6 @@
 namespace game {
 	class Enemy : public Character {
 	private:
-		void set_state(uint8_t new_state) override;
 		bool player_interact() override;
 		void trigger_cutscene() override;
 		void close_textbox() override;
@@ -31,7 +30,6 @@ namespace game {
 		explicit Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn = false, std::string message = "", bool can_respawn = true);
 		~Enemy() override = default;
 		void update(uint32_t time) override;
-		void update_state(Point next_position) override;
 		GameObject::ObjectType get_type() override;
 		bool can_be_respawned() const;
 

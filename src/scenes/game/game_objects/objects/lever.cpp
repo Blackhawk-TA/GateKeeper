@@ -58,8 +58,4 @@ namespace game {
 
 		state = new_state_enum;
 	}
-
-	void Lever::update(uint32_t time) {}
-
-	void Lever::update_state(Point next_position) {}
 }

@@ -19,14 +19,10 @@ namespace game {
 		~Crystal() override = default;
 		void draw() override;
 		bool player_interact() override;
-		void update_state(Point next_position) override;
 		ObjectType get_type() override;
-		void update(uint32_t time) override;
 
 	private:
 		CrystalType type;
 		uint16_t tile_id_crystal;
-
-		void set_state(uint8_t new_state) override;
 	};
 }

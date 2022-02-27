@@ -50,10 +50,6 @@ namespace game {
 		}
 	}
 
-	void DungeonDoor::update(uint32_t time) {}
-
-	void DungeonDoor::update_state(Point next_position) {}
-
 	bool DungeonDoor::open() {
 		if (state == CLOSED) {
 			set_state(OPEN);

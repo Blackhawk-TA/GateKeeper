@@ -11,9 +11,7 @@ namespace game {
 		explicit Lever(map::MapSection map_section, Point position, Signature interaction_object, bool working);
 		~Lever() override = default;
 		bool player_interact() override;
-		void update_state(Point next_position) override;
 		ObjectType get_type() override;
-		void update(uint32_t time) override;
 
 	private:
 		enum State {

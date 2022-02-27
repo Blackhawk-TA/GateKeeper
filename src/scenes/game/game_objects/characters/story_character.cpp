@@ -27,9 +27,6 @@ namespace game {
 		moving_back = true;
 	}
 
-	void StoryCharacter::update_state(Point next_position) {}
-	void StoryCharacter::set_state(uint8_t new_state) {}
-
 	void StoryCharacter::update(uint32_t time) {
 		Character::update(time);
 

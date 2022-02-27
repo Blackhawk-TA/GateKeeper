@@ -97,6 +97,4 @@ namespace game {
 			set_state(PLANTED);
 		}
 	}
-
-	void CarrotBed::update_state(Point next_position) {}
 }

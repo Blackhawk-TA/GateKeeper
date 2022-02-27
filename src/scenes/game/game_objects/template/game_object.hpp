@@ -86,7 +86,7 @@ namespace game {
 		/**
 		 * Called on the GameScenes update function
 		 */
-		virtual void update(uint32_t time) = 0;
+		virtual void update(uint32_t time);
 
 		/**
 		 * Checks if a textbox created by this game object is open
@@ -128,7 +128,7 @@ namespace game {
 		 * Updates the state of the object when a player moves closer to it
 		 * @param next_position The next position of the player
 		 */
-		virtual void update_state(Point next_position) = 0;
+		virtual void update_state(Point next_position);
 
 		/**
 		 * Gets the type of the game object
@@ -187,7 +187,7 @@ namespace game {
 		 * Sets the state and tile_id of the object
 		 * @param new_state The new render state
 		 */
-		virtual void set_state(uint8_t new_state) = 0;
+		virtual void set_state(uint8_t new_state);
 
 		/**
 		 * Sets the player_usable variable for direct player interaction of a game object

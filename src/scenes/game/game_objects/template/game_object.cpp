@@ -141,4 +141,10 @@ namespace game {
 	bool GameObject::is_active() const {
 		return active;
 	}
+
+	void GameObject::update_state(Point next_position) {}
+
+	void GameObject::update(uint32_t time) {}
+
+	void GameObject::set_state(uint8_t new_state) {}
 }

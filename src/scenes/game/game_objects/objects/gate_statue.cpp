@@ -70,6 +70,4 @@ namespace game {
 	GameObject::ObjectType GateStatue::get_type() {
 		return GateStatueType;
 	}
-
-	void GateStatue::update(uint32_t time) {}
 }

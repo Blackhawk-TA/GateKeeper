@@ -46,8 +46,4 @@ namespace game {
 		GameObject::close_textbox();
 		last_turn = blit::now();
 	}
-
-	void GearVillager::update_state(Point next_position) {}
-
-	void GearVillager::set_state(uint8_t new_state) {}
 }

@@ -25,10 +25,4 @@ namespace game {
 
 		return false;
 	}
-
-	void Nurse::set_state(uint8_t new_state) {}
-
-	void Nurse::update(uint32_t time) {}
-
-	void Nurse::update_state(Point next_position) {}
 }

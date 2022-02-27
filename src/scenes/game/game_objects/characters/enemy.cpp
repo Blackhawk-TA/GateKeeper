@@ -87,9 +87,6 @@ namespace game {
 		load_scene(SceneType::COMBAT, options);
 	}
 
-	void Enemy::set_state(uint8_t new_state) {}
-	void Enemy::update_state(Point next_position) {}
-
 	uint16_t Enemy::get_init_tile_id() {
 		switch (character_type) {
 			case PLAYER:

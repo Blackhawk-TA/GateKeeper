@@ -76,8 +76,4 @@ namespace game {
 	GameObject::ObjectType FruitTree::get_type() {
 		return FruitTreeType;
 	}
-
-	void FruitTree::set_state(uint8_t new_state) {}
-
-	void FruitTree::update_state(Point next_position) {}
 }

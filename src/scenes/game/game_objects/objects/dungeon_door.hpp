@@ -11,10 +11,7 @@ namespace game {
 		explicit DungeonDoor(map::MapSection map_section, Point position);
 		~DungeonDoor() override = default;
 		bool player_interact() override;
-		void update_state(Point next_position) override;
 		ObjectType get_type() override;
-		void update(uint32_t time) override;
-
 		bool open();
 
 	private:

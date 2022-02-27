@@ -28,8 +28,4 @@ namespace game {
 		GameObject::close_textbox();
 		last_turn = blit::now();
 	}
-
-	void Villager::set_state(uint8_t new_state) {}
-
-	void Villager::update_state(Point next_position) {}
 }

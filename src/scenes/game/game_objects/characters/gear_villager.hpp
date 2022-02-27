@@ -12,8 +12,6 @@ namespace game {
 		std::string alt_message;
 		GEAR_TYPE gear_type;
 
-		void set_state(uint8_t new_state) override;
-
 	public:
 		explicit GearVillager(
 			map::MapSection map_section,
@@ -26,7 +24,6 @@ namespace game {
 		);
 		~GearVillager() override = default;
 
-		void update_state(Point next_position) override;
 		bool player_interact() override;
 		void close_textbox() override;
 	};

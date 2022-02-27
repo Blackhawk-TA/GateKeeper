@@ -37,10 +37,4 @@ namespace game {
 	GameObject::ObjectType Sign::get_type() {
 		return SignType;
 	}
-
-	void Sign::set_state(uint8_t new_state) {}
-
-	void Sign::update_state(Point next_position) {}
-
-	void Sign::update(uint32_t time) {}
 }
