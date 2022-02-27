@@ -32,6 +32,7 @@ set(PROJECT_SOURCE
         src/scenes/game/ui/sidemenu.cpp src/scenes/game/ui/sidemenu.hpp
         src/scenes/game/game_objects/handler/extensions/character_handler.cpp src/scenes/game/game_objects/handler/extensions/character_handler.hpp
         src/scenes/game/game_objects/handler/game_object_handler.cpp src/scenes/game/game_objects/handler/game_object_handler.hpp
+        src/scenes/game/game_objects/handler/save_game_objects.cpp src/scenes/game/game_objects/handler/save_game_objects.hpp
         src/scenes/game/game_objects/handler/extensions/character_handler.cpp src/scenes/game/game_objects/handler/extensions/character_handler.hpp
         src/scenes/game/game_objects/handler/extensions/enemy_handler.cpp src/scenes/game/game_objects/handler/extensions/enemy_handler.hpp
         src/scenes/game/game_objects/handler/extensions/stargate_handler.cpp src/scenes/game/game_objects/handler/extensions/stargate_handler.hpp

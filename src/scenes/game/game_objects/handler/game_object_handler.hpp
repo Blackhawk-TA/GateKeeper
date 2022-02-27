@@ -45,17 +45,6 @@ namespace game::game_objects {
 	void set_active(Signature &signature, bool value);
 
 	/**
-	 * Gets array with save structs of all game objects objects
-	 */
-	std::array<GameObject::Save, MAX_GAME_OBJECTS> get_saves();
-
-	/**
-	 * Loads saved objects into each game object
-	 * @param saved_objects The saved game objects pointer array
-	 */
-	void load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects);
-
-	/**
 	 * Draws the game objects which should be rendered under the player
 	 */
 	void draw_under_player();

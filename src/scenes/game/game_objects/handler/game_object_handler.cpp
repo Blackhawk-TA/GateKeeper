@@ -107,47 +107,6 @@ namespace game::game_objects {
 		return signature.map_section == map::NO_MAP && signature.x == 0 && signature.y == 0;
 	}
 
-	std::array<GameObject::Save, MAX_GAME_OBJECTS> get_saves() {
-		std::array<GameObject::Save, MAX_GAME_OBJECTS> saves = {};
-
-		for (uint8_t i = 0; i < game_object_collection.size(); i++) {
-			saves[i] = game_object_collection.at(i)->get_save();
-		}
-
-		return saves;
-	}
-
-	void load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects) {
-		Signature signature{};
-		GameObject::Save *saved_object;
-		uint8_t i = 0;
-		bool array_end = false;
-
-		while (!array_end && i < MAX_GAME_OBJECTS) {
-			saved_object = &saved_objects[i];
-
-			if (is_empty_signature(saved_object->signature)) {
-				array_end = true;
-				continue;
-			}
-
-			for (auto &game_object: game_object_collection) {
-				signature = game_object->get_signature();
-
-				if (has_equal_signature(signature, saved_object->signature)) {
-					game_object->load_save(saved_object->data);
-				}
-			}
-			i++;
-		}
-
-		//Respawn enemies
-		SceneType previous_scene = get_previous_scene();
-		if (previous_scene == SceneType::MENU || previous_scene == SceneType::GAMEOVER) {
-			enemy_handler::respawn();
-		}
-	}
-
 	void draw_under_player() {
 		for (auto &game_object: game_object_collection) {
 			if (game_object->is_drawn_under_player() && game_object->is_rendered()) {
