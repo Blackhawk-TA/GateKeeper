@@ -15,9 +15,8 @@ namespace savegame {
 	/**
 	 * Create a new save game
 	 * @param save_id The id of the save
-	 * @return The player instance of the game scene
 	 */
-	game::Player *create(uint8_t save_id);
+	void create(uint8_t save_id);
 
 	/**
 	 * Converts a temporary save to a persistent one. Should be used when a temporary save already exists, but no persistent save is present.
@@ -36,9 +35,8 @@ namespace savegame {
 	/**
 	 * Load existing save from file
 	 * @param save_id The id of the save
-	 * @return The player instance of the game scene
 	 */
-	game::Player *load(uint8_t save_id, SaveOptions options);
+	void load(uint8_t save_id, SaveOptions options);
 
 	/**
 	 * Gets an array of all game objects of a map section depending on the save id

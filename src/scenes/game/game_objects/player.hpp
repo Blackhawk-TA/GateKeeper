@@ -17,7 +17,7 @@ namespace game {
 	class Player {
 	public:
 		static constexpr uint8_t MAX_HEALTH = 100;
-		explicit Player(save::PlayerData player_data, uint8_t current_save_id);
+		explicit Player(uint8_t current_save_id);
 		void draw();
 		void move(MovementDirection direction);
 		static uint8_t get_health();
@@ -29,6 +29,7 @@ namespace game {
 		static bool is_dead();
 		static CharacterData get_character_data();
 		static save::PlayerData get_save();
+		static void load_save(save::PlayerData save_data);
 
 	private:
 		const std::map<MovementDirection, Point> movements{

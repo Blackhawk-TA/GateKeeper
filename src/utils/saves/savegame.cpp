@@ -44,7 +44,7 @@ namespace savegame {
 		return player_data;
 	}
 
-	game::Player *create(uint8_t save_id) {
+	void create(uint8_t save_id) {
 		Point start_position = Point(22, 13);
 
 		map::load_section(map::GRASSLAND);
@@ -52,8 +52,11 @@ namespace savegame {
 		game::sidemenu::init(save_id);
 		game::game_objects::init(map::GRASSLAND, save_id);
 		game_time::init();
-
-		return new game::Player(save::PlayerData{}, save_id);
+		game::Player::load_save(save::PlayerData{
+			100,
+			1,
+			DOWN
+		});
 	}
 
 	bool convert_tmp_save(uint8_t save_id) {
@@ -93,8 +96,7 @@ namespace savegame {
 		}
 	}
 
-	game::Player *load(uint8_t save_id, SaveOptions options) {
-		game::Player *player;
+	void load(uint8_t save_id, SaveOptions options) {
 		save::SaveData save_data;
 		uint8_t load_save_id = options.tmp_save ? TMP_SAVE_ID : save_id;
 
@@ -116,10 +118,8 @@ namespace savegame {
 			camera::init(player_temp_data.camera_position);
 			camera::set_previous_position(save_data.previous_camera_position);
 
-			save::PlayerData player_save = save_data.player_data;
-			player_save.direction = player_temp_data.direction;
-			player_save.health = player_temp_data.health;
-			player = new game::Player(player_save, save_id);
+			//Load player save with health, level and direction
+			game::Player::load_save(save_data.player_data);
 
 			//Init sidemenu
 			game::sidemenu::init(save_id);
@@ -139,10 +139,8 @@ namespace savegame {
 			game_time::load(save_data.passed_time);
 		} else {
 			//If loading save was not successful, create new save
-			player = create(save_id);
+			create(save_id);
 		}
-
-		return player; //TODO with player save and load function there is no need to return this
 	}
 
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> load_game_objects(uint8_t save_id) {

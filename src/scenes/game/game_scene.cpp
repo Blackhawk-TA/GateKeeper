@@ -40,11 +40,11 @@ namespace game {
 			3691, 3753, 3754
 		});
 
-		SaveOptions save_options = {
+		player = new Player(save_id);
+		savegame::load(save_id, SaveOptions{
 			options.tmp_save,
 			options.game_data
-		};
-		player = savegame::load(save_id, save_options);
+		});
 	}
 
 	Scene::~Scene() {

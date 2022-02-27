@@ -13,6 +13,7 @@
 #include "handler/extensions/stargate_handler.hpp"
 #include "../ui/sidemenu.hpp"
 
+//TODO refactor using handler / object model
 namespace game {
 	bool Player::cut_scene = false;
 	bool Player::dead = false;
@@ -30,7 +31,7 @@ namespace game {
 		{RIGHT, {96,  97,  98,  99}}
 	};
 
-	Player::Player(save::PlayerData player_data, uint8_t current_save_id) {
+	Player::Player(uint8_t current_save_id) {
 		Player::save_id = current_save_id;
 		position = get_screen_tiles() / 2;
 		spritesheet_size = get_spritesheet_size(characters_spritesheet->bounds);
@@ -40,21 +41,7 @@ namespace game {
 		cut_scene = false;
 		dead = false;
 
-		health = player_data.health;
-		level = player_data.level;
-		current_direction = player_data.direction;
-
-		//Set player animation tiles
-		if (player_data.direction == NO_DIRECTION) {
-			std::cerr << "Invalid player direction, falling back to direction 'DOWN'" << std::endl;
-			current_direction = DOWN;
-		} else {
-			current_direction = player_data.direction;
-		}
-		animation_sprites = movement_sprites.at(current_direction);
-		sprite_id = animation_sprites[0];
 		sprite_index = 0;
-
 		animation_timer.init(animate, 150, -1);
 	}
 
@@ -242,6 +229,23 @@ namespace game {
 			level,
 			current_direction,
 		};
+	}
+
+	void Player::load_save(save::PlayerData save_data) {
+		health = save_data.health;
+		level = save_data.level;
+
+		//Set player animation tiles
+		if (save_data.direction == NO_DIRECTION) {
+			std::cerr << "Invalid player direction, falling back to direction 'DOWN'" << std::endl;
+			current_direction = DOWN;
+		} else {
+			current_direction = save_data.direction;
+		}
+
+		//Set player sprite depending on direction
+		animation_sprites = movement_sprites.at(current_direction);
+		sprite_id = animation_sprites[0];
 	}
 
 	bool Player::is_dead() {

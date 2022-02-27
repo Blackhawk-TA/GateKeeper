@@ -16,9 +16,9 @@ namespace save {
 	constexpr uint8_t MAX_INVENTORIES = 2;
 
 	struct PlayerData {
-		uint8_t health = 100;
-		uint8_t level = 1;
-		MovementDirection direction = DOWN;
+		uint8_t health;
+		uint8_t level;
+		MovementDirection direction;
 	};
 
 	struct Item {
