@@ -36,7 +36,7 @@ public:
 	void cursor_up();
 	void cursor_down();
 	void cursor_press(bool set_view_mode = false);
-	bool add_item(Item &item);
+	bool add_item(Item &item, uint8_t amount = 1);
 	void update_tooltip();
 	void set_items(std::vector<Item> &new_items);
 	std::vector<Item> get_items();

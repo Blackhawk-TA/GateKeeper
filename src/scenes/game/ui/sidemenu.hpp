@@ -37,7 +37,7 @@ namespace game::sidemenu {
 	 * @return True if the item exists, else false
 	 */
 	bool has_item(MenuType menu_type, Listbox::Item &item);
-	bool add_item(MenuType menu_type, Listbox::Item item);
+	bool add_item(MenuType menu_type, Listbox::Item item, uint8_t amount = 1);
 	bool is_open();
 	void draw();
 	void cursor_up();

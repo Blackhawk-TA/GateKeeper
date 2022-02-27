@@ -214,7 +214,7 @@ void Listbox::remove_item(uint8_t index) {
  * @param item The item that should be added
  * @return True if the item could be added, else false
  */
-bool Listbox::add_item(Listbox::Item &item) {
+bool Listbox::add_item(Listbox::Item &item, uint8_t amount) {
 	auto it = items.begin();
 	bool found = false;
 	bool success = false;
@@ -222,8 +222,8 @@ bool Listbox::add_item(Listbox::Item &item) {
 	//Increment amount if item already exists and the amount is lower than the max. allowed
 	while (!found && it != items.end()) {
 		if (it->name == item.name) {
-			if (it->amount < MAX_ITEM_COUNT) {
-				it->amount++;
+			if (it->amount + amount <= MAX_ITEM_COUNT) {
+				it->amount += amount;
 				success = true;
 			}
 			found = true;
@@ -234,6 +234,10 @@ bool Listbox::add_item(Listbox::Item &item) {
 
 	//Add item to the end of the list
 	if (!found) {
+		//Set item amount for new item
+		if (amount > 1) {
+			item.amount = amount;
+		}
 		items.push_back(item);
 		sort_list();
 		success = true;

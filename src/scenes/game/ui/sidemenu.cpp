@@ -136,9 +136,9 @@ namespace game::sidemenu {
 		});
 	}
 
-	bool add_item(MenuType menu_type, Listbox::Item item) {
+	bool add_item(MenuType menu_type, Listbox::Item item, uint8_t amount) {
 		if (menu_data.at(menu_type).is_inventory) {
-			return controls.at(menu_type)->add_item(item);
+			return controls.at(menu_type)->add_item(item, amount);
 		}
 		return false;
 	}
