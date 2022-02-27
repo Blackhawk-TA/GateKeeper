@@ -35,14 +35,23 @@ namespace game::enemy_handler {
 	}
 
 	void respawn() {
+		std::vector<Enemy*> delete_queue = {};
 		auto itr = enemies.begin();
+
 		while (itr != enemies.end()) {
 			if ((*itr)->can_be_respawned()) {
 				(*itr)->set_active(true);
-			} else {
-				game_objects::delete_game_object((*itr)->get_signature());
+			} else if (!(*itr)->is_active()){
+				delete_queue.push_back(*itr);
 			}
+
 			itr++;
 		}
+
+		//Use delete queue because deleting in loop while external function delete elements may cause issues
+		for(auto &enemy : delete_queue) {
+			game_objects::delete_game_object(enemy->get_signature());
+		}
+		delete_queue.clear();
 	}
 }

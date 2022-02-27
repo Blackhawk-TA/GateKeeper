@@ -159,9 +159,15 @@ namespace game {
 		/**
 		 * Sets the game object active state. Inactive game objects are not rendered nor accessible.
 		 * They still exist in memory and their states are therefore saved.
-		 * @param active The boolean showing if a game object is active
+		 * @param active_value The boolean showing if a game object is active
 		 */
-		virtual void set_active(bool active);
+		virtual void set_active(bool active_value);
+
+		/**
+		 * Get whether the game object is currently active or not
+		 * @return True if the game object is active, else false
+		 */
+		bool is_active() const;
 
 	protected:
 		Point position;
@@ -169,7 +175,7 @@ namespace game {
 		bool player_usable; //Shows if a player can directly interact with it
 		bool inventory_usable; //Shows if a player can interact with it using the inventory
 		bool draw_under_player; //Shows if the game object should be drawn under the player sprite
-		bool is_active;
+		bool active;
 		uint32_t value;
 		Signature signature;
 		Size spritesheet_size;

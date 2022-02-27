@@ -14,7 +14,7 @@ namespace game {
 		GameObject::draw_under_player = draw_under_player;
 		GameObject::spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 		GameObject::textbox = nullptr;
-		GameObject::is_active = true;
+		GameObject::active = true;
 		GameObject::value = 0;
 		GameObject::tile_id = 0;
 
@@ -80,7 +80,7 @@ namespace game {
 			Data{
 				player_usable,
 				inventory_usable,
-				is_active,
+				active,
 				value,
 			}
 		};
@@ -105,8 +105,8 @@ namespace game {
 		value = new_value;
 	}
 
-	void GameObject::set_active(bool active) {
-		is_active = active;
+	void GameObject::set_active(bool active_value) {
+		active = active_value;
 	}
 
 	bool GameObject::player_interact() {
@@ -118,8 +118,8 @@ namespace game {
 	}
 
 	bool GameObject::is_rendered() {
-		return is_active && map::get_section() == map_section
-			&& sprite_rect_in_screen(position, size, camera::get_world_position());
+		return active && map::get_section() == map_section
+		       && sprite_rect_in_screen(position, size, camera::get_world_position());
 	}
 
 	bool GameObject::is_drawn_under_player() const {
@@ -136,5 +136,9 @@ namespace game {
 
 	bool GameObject::player_in_front(uint8_t distance) {
 		return Player::get_direction() == UP && camera::get_player_position() == position + Point(0, size.h + distance);
+	}
+
+	bool GameObject::is_active() const {
+		return active;
 	}
 }
