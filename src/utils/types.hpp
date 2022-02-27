@@ -88,6 +88,7 @@ struct PlayerTempData {
 	map::MapSection map_section;
 	MovementDirection direction;
 	Point camera_position;
+	Point camera_previous_position;
 	uint8_t health;
 	Signature enemy_signature{};
 };

@@ -72,6 +72,7 @@ PlayerTempData get_player_temp_data(SaveOptions options, save::SaveData save_dat
 		save_data.map_section,
 		save_data.player_data.direction,
 		save_data.camera_position,
+		save_data.previous_camera_position,
 		save_data.player_data.health,
 		{}
 	};
@@ -81,6 +82,7 @@ PlayerTempData get_player_temp_data(SaveOptions options, save::SaveData save_dat
 		player_data = {
 			map::INTERIOR,
 			MovementDirection::DOWN,
+			Point(45, 20),
 			Point(45, 20),
 			combat::Character::MAX_HEALTH,
 			{}
@@ -167,6 +169,7 @@ game::Player *savegame::load(uint8_t save_id, SaveOptions options) {
 
 		//Load position and direction
 		camera::init(player_temp_data.camera_position);
+		camera::set_previous_position(save_data.previous_camera_position);
 
 		save::PlayerData player_save = save_data.player_data;
 		player_save.direction = player_temp_data.direction;

@@ -46,6 +46,10 @@ void camera::set_position(Point position) {
 	camera_position = (position - get_screen_tiles() / 2) * camera_scale;
 }
 
+void camera::set_previous_position(Point position) {
+	previous_camera_position = (position - get_screen_tiles() / 2) * camera_scale;
+}
+
 void camera::move(Point &offset) {
 	previous_camera_position = camera_position;
 	camera_offset = offset * camera_scale;
