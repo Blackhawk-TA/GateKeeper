@@ -3,8 +3,8 @@
 //
 #include "character.hpp"
 #include "../../../../../engine/camera.hpp"
-#include "../../player.hpp"
 #include "../../../../../engine/flags.hpp"
+#include "../../handler/player_handler.hpp"
 
 namespace game {
 	Character::Character(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool turn)
@@ -75,16 +75,16 @@ namespace game {
 		bool interacted = false;
 
 		if (player_usable) {
-			if (Player::get_direction() == UP && camera::get_player_position() == position + Point(0, size.h)) {
+			if (player_handler::get_direction() == UP && camera::get_player_position() == position + Point(0, size.h)) {
 				interacted = true;
 				change_direction(DOWN, false);
-			} else if (Player::get_direction() == DOWN && camera::get_player_position() == position - Point(0, size.h)) {
+			} else if (player_handler::get_direction() == DOWN && camera::get_player_position() == position - Point(0, size.h)) {
 				interacted = true;
 				change_direction(UP, false);
-			} else if (Player::get_direction() == LEFT && camera::get_player_position() == position + Point(size.w, 0)) {
+			} else if (player_handler::get_direction() == LEFT && camera::get_player_position() == position + Point(size.w, 0)) {
 				interacted = true;
 				change_direction(RIGHT, false);
-			} else if (Player::get_direction() == RIGHT && camera::get_player_position() == position - Point(size.w, 0)) {
+			} else if (player_handler::get_direction() == RIGHT && camera::get_player_position() == position - Point(size.w, 0)) {
 				interacted = true;
 				change_direction(LEFT, false);
 			}
@@ -237,16 +237,16 @@ namespace game {
 			case NO_DIRECTION:
 				break;
 			case UP:
-				Player::change_direction(MovementDirection::DOWN, false);
+				player_handler::change_direction(MovementDirection::DOWN, false);
 				break;
 			case DOWN:
-				Player::change_direction(MovementDirection::UP, false);
+				player_handler::change_direction(MovementDirection::UP, false);
 				break;
 			case LEFT:
-				Player::change_direction(MovementDirection::RIGHT, false);
+				player_handler::change_direction(MovementDirection::RIGHT, false);
 				break;
 			case RIGHT:
-				Player::change_direction(MovementDirection::LEFT, false);
+				player_handler::change_direction(MovementDirection::LEFT, false);
 				break;
 		}
 	}

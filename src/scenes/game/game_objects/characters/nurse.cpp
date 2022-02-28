@@ -3,6 +3,7 @@
 //
 
 #include "nurse.hpp"
+#include "../handler/player_handler.hpp"
 #include "../player.hpp"
 
 namespace game {
@@ -13,11 +14,11 @@ namespace game {
 
 	bool Nurse::player_interact() {
 		if (player_usable && player_in_front(BAR_HEIGHT)) {
-			if (Player::get_health() == Player::MAX_HEALTH) {
+			if (player_handler::get_health() == Player::MAX_HEALTH) {
 				textbox = new Textbox("Hello, I'm the nurse here. I can heal you if you want, but you seem be healthy.");
 			} else {
 				textbox = new Textbox("Hello, I'm the nurse here. You look injured, let me heal you!");
-				Player::heal(Player::MAX_HEALTH);
+				player_handler::heal(Player::MAX_HEALTH);
 			}
 
 			return true;

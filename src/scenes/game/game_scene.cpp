@@ -9,6 +9,7 @@
 #include "../../utils/game_time.hpp"
 #include "utils/utils.hpp"
 #include "ui/sidemenu.hpp"
+#include "game_objects/handler/player_handler.hpp"
 
 namespace game {
 	Scene::Scene(const SceneOptions& options) {
@@ -40,7 +41,7 @@ namespace game {
 			3691, 3753, 3754
 		});
 
-		player = new Player(save_id);
+		player_handler::init(save_id);
 		savegame::load(save_id, SaveOptions{
 			options.tmp_save,
 			options.game_data
@@ -49,15 +50,15 @@ namespace game {
 
 	Scene::~Scene() {
 		//Auto save
-		if (!Player::is_dead()) {
-			if (Player::in_cut_scene()) {
+		if (!player_handler::is_dead()) {
+			if (player_handler::in_cut_scene()) {
 				//When changing scene on cut scene create temporary save
 				savegame::save(save_id, true);
 			} else {
 				savegame::save(save_id);
 			}
 		}
-		delete player;
+		player_handler::cleanup();
 
 		//Delete game objects and inventory after saving
 		game_objects::cleanup();
@@ -68,11 +69,11 @@ namespace game {
 		map::draw();
 
 		game_objects::draw_under_player();
-		player->draw();
+		player_handler::draw();
 		game_objects::draw_over_player();
 		game_objects::draw_textbox();
 
-		overlay::draw_statusbar(Player::get_health());
+		overlay::draw_statusbar(player_handler::get_health());
 
 		if (sidemenu::is_open()) {
 			sidemenu::draw();
@@ -108,15 +109,15 @@ namespace game {
 			if ((buttons & changed & Button::A) && !game_objects::next_textbox()) {
 				game_objects::close_textboxes();
 			}
-		} else if (!Player::in_cut_scene()) {
+		} else if (!player_handler::in_cut_scene()) {
 			if (buttons & Button::DPAD_UP) {
-				player->move(UP);
+				player_handler::move(UP);
 			} else if (buttons & Button::DPAD_DOWN) {
-				player->move(DOWN);
+				player_handler::move(DOWN);
 			} else if (buttons & Button::DPAD_LEFT) {
-				player->move(LEFT);
+				player_handler::move(LEFT);
 			} else if (buttons & Button::DPAD_RIGHT) {
-				player->move(RIGHT);
+				player_handler::move(RIGHT);
 			} else if (buttons & changed & Button::MENU || buttons & changed & Button::Y) {
 				sidemenu::open(sidemenu::MAIN);
 			} else if (buttons & changed & Button::A) {

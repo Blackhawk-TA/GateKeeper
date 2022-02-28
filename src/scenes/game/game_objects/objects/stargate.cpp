@@ -4,7 +4,7 @@
 
 #include "stargate.hpp"
 #include "../../../../engine/camera.hpp"
-#include "../player.hpp"
+#include "../handler/player_handler.hpp"
 
 namespace game {
 	Stargate::Stargate(map::MapSection map_section, Point position, StargateAddress address, StargateAddress destination, bool inventory_usable)
@@ -112,7 +112,7 @@ namespace game {
 	 * @return True, if stargate could be repaired, else false
 	 */
 	bool Stargate::inventory_interact(items::INVENTORY_ITEM item_type) {
-		if (inventory_usable && Player::get_direction() == UP && item_type == items::GATE_PART && get_entry_point() == camera::get_player_position()) {
+		if (inventory_usable && player_handler::get_direction() == UP && item_type == items::GATE_PART && get_entry_point() == camera::get_player_position()) {
 			inventory_usable = false;
 			set_state(ACTIVATING);
 			return true;

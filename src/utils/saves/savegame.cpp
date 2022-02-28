@@ -8,6 +8,7 @@
 #include "save_types.hpp"
 #include "../../scenes/game/ui/sidemenu.hpp"
 #include "../../scenes/game/game_objects/handler/save_game_objects.hpp"
+#include "../../scenes/game/game_objects/handler/player_handler.hpp"
 
 namespace savegame {
 	PlayerTempData get_player_temp_data(SaveOptions options, save::SaveData save_data) {
@@ -52,7 +53,7 @@ namespace savegame {
 		game::sidemenu::init(save_id);
 		game::game_objects::init(map::GRASSLAND, save_id);
 		game_time::init();
-		game::Player::load_save(save::PlayerData{
+		game::player_handler::load_save(save::PlayerData{
 			100,
 			1,
 			DOWN
@@ -83,7 +84,7 @@ namespace savegame {
 			map::get_section(),
 			camera::get_player_position(),
 			camera::get_previous_player_position(),
-			game::Player::get_save(),
+			game::player_handler::get_save(),
 			game::game_objects::get_global_saves(save_id),
 			game::sidemenu::get_saves(),
 			game_time::get_time()
@@ -119,7 +120,7 @@ namespace savegame {
 			camera::set_previous_position(save_data.previous_camera_position);
 
 			//Load player save with health, level and direction
-			game::Player::load_save(save_data.player_data);
+			game::player_handler::load_save(save_data.player_data);
 
 			//Init sidemenu
 			game::sidemenu::init(save_id);

@@ -3,8 +3,8 @@
 //
 
 #include "story_character.hpp"
-#include "../player.hpp"
 #include "../../../../engine/effects/transition.hpp"
+#include "../handler/player_handler.hpp"
 #include <utility>
 
 namespace game {
@@ -31,11 +31,11 @@ namespace game {
 		Character::update(time);
 
 		//Trigger character to walk to player
-		if (value == 0 && !in_action && !Player::in_cut_scene() && !transition::in_process() && player_in_sightline()) {
+		if (value == 0 && !in_action && !player_handler::in_cut_scene() && !transition::in_process() && player_in_sightline()) {
 			turn = false;
 			in_action = true;
 			moving_to_player = true;
-			Player::set_cut_scene(true);
+			player_handler::set_cut_scene(true);
 		}
 
 		if (moving_to_player) {
@@ -64,7 +64,7 @@ namespace game {
 		set_value(1);
 
 		//Stop cut scene
-		Player::set_cut_scene(false);
+		player_handler::set_cut_scene(false);
 	}
 
 	bool StoryCharacter::player_interact() {

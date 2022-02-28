@@ -4,7 +4,7 @@
 
 #include "dungeon_door.hpp"
 #include "../../../../engine/camera.hpp"
-#include "../player.hpp"
+#include "../handler/player_handler.hpp"
 
 namespace game {
 	DungeonDoor::DungeonDoor(map::MapSection map_section, Point position) : GameObject(map_section, position, true, false, false) {
@@ -14,7 +14,7 @@ namespace game {
 	}
 
 	bool DungeonDoor::player_interact() {
-		if (GameObject::player_usable && state == CLOSED && Player::get_direction() == MovementDirection::UP
+		if (GameObject::player_usable && state == CLOSED && player_handler::get_direction() == MovementDirection::UP
 		&& (camera::get_player_position() == position + Point(0, size.h) || camera::get_player_position() == position + Point(size.w - 1, size.h))) {
 			textbox = new Textbox("The door is closed.");
 			return true;

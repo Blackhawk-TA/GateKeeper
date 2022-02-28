@@ -5,13 +5,14 @@
 #include "utils.hpp"
 #include "../../../utils/saves/savegame.hpp"
 #include "../game_objects/handler/save_game_objects.hpp"
+#include "../game_objects/handler/player_handler.hpp"
 
 namespace game::utils {
 	void teleport_player(map::MapSection map_section, Point position, MovementDirection direction, uint8_t save_id) {
 		//Load map and set position
 		load_section(map_section);
 		camera::set_position(position);
-		Player::change_direction(direction, false);
+		player_handler::change_direction(direction, false);
 
 		//Auto save game
 		savegame::save(save_id);

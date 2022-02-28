@@ -5,9 +5,9 @@
 #include "enemy.hpp"
 #include <utility>
 #include <iostream>
-#include "../player.hpp"
 #include "../../../../engine/effects/transition.hpp"
 #include "../../utils/utils.hpp"
+#include "../handler/player_handler.hpp"
 
 namespace game {
 	Enemy::Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn, std::string message, bool can_respawn)
@@ -25,11 +25,11 @@ namespace game {
 		Character::update(time);
 
 		//Trigger enemy to attack player
-		if (!in_action && !Player::in_cut_scene() && !transition::in_process() && player_in_sightline()) {
+		if (!in_action && !player_handler::in_cut_scene() && !transition::in_process() && player_in_sightline()) {
 			turn = false;
 			in_action = true;
 			moving_to_player = true;
-			Player::set_cut_scene(true);
+			player_handler::set_cut_scene(true);
 		}
 
 		if (moving_to_player) {
@@ -45,7 +45,7 @@ namespace game {
 	bool Enemy::player_interact() {
 		if (Character::player_interact()) {
 			in_action = true;
-			Player::set_cut_scene(true);
+			player_handler::set_cut_scene(true);
 			start_interaction();
 			return true;
 		}
@@ -68,7 +68,7 @@ namespace game {
 	void Enemy::start_fight() {
 		CombatData combat_data = {
 			map_section,
-			Player::get_character_data(),
+			player_handler::get_character_data(),
 			CharacterData{
 				signature,
 				get_stats(),

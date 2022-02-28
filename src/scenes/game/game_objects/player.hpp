@@ -12,24 +12,25 @@
 
 using namespace blit;
 
-//TODO rewrite so it is similar to character
 namespace game {
 	class Player {
 	public:
-		static constexpr uint8_t MAX_HEALTH = 100;
+		static const uint8_t MAX_HEALTH = 100;
+
 		explicit Player(uint8_t current_save_id);
 		void draw();
+		void animate();
 		void move(MovementDirection direction);
-		static uint8_t get_health();
-		static void heal(uint8_t heal_amount);
-		static MovementDirection get_direction();
-		static void change_direction(MovementDirection direction, bool animate = true);
-		static void set_cut_scene(bool value);
-		static bool in_cut_scene();
-		static bool is_dead();
-		static CharacterData get_character_data();
-		static save::PlayerData get_save();
-		static void load_save(save::PlayerData save_data);
+		void heal(uint8_t heal_amount);
+		uint8_t get_health() const;
+		MovementDirection get_direction();
+		void change_direction(MovementDirection direction, bool animate = true);
+		void set_cut_scene(bool value);
+		bool in_cut_scene() const;
+		bool is_dead() const;
+		CharacterData get_character_data();
+		save::PlayerData get_save();
+		void load_save(save::PlayerData save_data);
 
 	private:
 		const std::map<MovementDirection, Point> movements{
@@ -38,28 +39,35 @@ namespace game {
 			{LEFT,  Point(-1, 0)},
 			{RIGHT, Point(1, 0)},
 		};
+		const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites = {
+			{UP,    {112, 113, 114, 115}},
+			{DOWN,  {64,  65,  66,  67}},
+			{LEFT,  {80,  81,  82,  83}},
+			{RIGHT, {96,  97,  98,  99}}
+		};
+		std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites{};
 
-		static const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites;
-
-		static uint16_t sprite_id;
-		static uint8_t sprite_index;
-		static std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites;
-		static bool cut_scene;
-		static MovementDirection current_direction;
-		static uint8_t health;
-		static uint8_t save_id;
-		static uint8_t level;
-		static bool dead;
-
-		Timer animation_timer;
+		bool is_animating;
+		bool cut_scene;
+		bool dead;
+		uint16_t sprite_id;
+		uint8_t sprite_index;
+		uint8_t health;
+		uint8_t save_id;
+		uint8_t level;
+		uint8_t elevation_offset;
+		MovementDirection current_direction;
 		Point position;
 		Size spritesheet_size;
-		uint8_t elevation_offset;
 
-		static void take_damage(uint8_t damage_amount);
-		static void animate(Timer &timer);
+		void take_damage(uint8_t damage_amount);
+		bool in_action() const;
+
+		/**
+		 * Teleports a player to the given gate and sets the movement direction to facing downwards
+		 * @param destination_gate The gate to which the player is teleported
+		 * @param current_save_id The id of the current save
+		 */
 		static void gate_teleport(Stargate *destination_gate, uint8_t current_save_id);
-		static bool in_action();
-		void stop_animation();
 	};
 }

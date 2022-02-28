@@ -21,6 +21,5 @@ namespace game {
 		uint8_t save_id;
 		uint32_t last_buttons;
 		uint32_t changed;
-		Player *player;
 	};
 }
