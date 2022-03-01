@@ -68,7 +68,9 @@ namespace game::sidemenu {
 					item_template.callback_fail_tooltip,
 					item_template.single_use,
 					item->amount,
-					item_template.callback
+					item_template.callback,
+					item_template.confirm_dialog,
+					item_template.sort_to_bottom
 				});
 			}
 			i++;

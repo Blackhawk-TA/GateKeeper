@@ -96,7 +96,6 @@ void Listbox::draw() {
 			world_to_screen(cursor_position)
 		);
 	}
-
 }
 
 void Listbox::cursor_reset() {
