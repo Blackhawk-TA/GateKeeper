@@ -197,10 +197,10 @@ namespace game {
 		&& calc_player_distance(player_position.y, position.y) < 7 && path_is_walkable(position, player_position))
 
 		|| (current_direction == LEFT && position.y == player_position.y && position.x > player_position.x
-		&& calc_player_distance(position.x, player_position.x) < 9 && path_is_walkable(player_position, position))
+		&& calc_player_distance(position.x, player_position.x) < 7 && path_is_walkable(player_position, position))
 
 		|| (current_direction == RIGHT && position.y == player_position.y && position.x < player_position.x
-		&& calc_player_distance(position.x, player_position.x) < 9 && path_is_walkable(position, player_position));
+		&& calc_player_distance(position.x, player_position.x) < 7 && path_is_walkable(position, player_position));
 	}
 
 	uint8_t Character::calc_player_distance(uint8_t a, uint8_t b) {

@@ -39,9 +39,9 @@ namespace game::game_objects {
 			new Enemy(map::GRASSLAND, Point(23, 10), BLUE_GUARD, LEFT, save_id, false, "LET'S FIGHT!", false),
 
 			//TODO remove
-			new GearVillager(map::GRASSLAND, Point(23, 17), 4, LEFT, "Here take that sword.", "You already have a sword, go use it.", GEAR_DAGGER),
+			new GearVillager(map::GRASSLAND, Point(23, 17), 4, LEFT, "Here take that dagger.", "You already have a dagger, go use it.", GEAR_DAGGER),
 
-			new StoryCharacter(map::GRASSLAND, Point(30, 13), 12, LEFT, true, "Hello I'm the elder of this village. The gate you behind you is a portal to different worlds. Unfortunately the new king destroyed most gates, those which were not are heavily guarded.", "Do you really want to go through that gate?"),
+			new StoryCharacter(map::GRASSLAND, Point(28, 13), 12, LEFT, true, "Hello I'm the elder of this village. The gate you behind you is a portal to different worlds. Unfortunately the new king destroyed most gates, those which were not are heavily guarded.", "Do you really want to go through that gate?"),
 		};
 	}
 }
