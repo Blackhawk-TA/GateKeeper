@@ -28,5 +28,6 @@ namespace game {
 		Signature interaction_object; //The GameObjects signature with which the lever interacts with
 
 		void set_state(uint8_t new_state) override;
+		void set_value(uint32_t new_value) override;
 	};
 }

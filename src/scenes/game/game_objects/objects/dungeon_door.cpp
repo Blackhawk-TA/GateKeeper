@@ -33,9 +33,11 @@ namespace game {
 		switch (new_state_enum) {
 			case OPEN:
 				tile_id = TILE_ID_OPEN;
+				value = 1;
 				break;
 			case CLOSED:
 				tile_id = TILE_ID_CLOSED;
+				value = 0;
 				break;
 		}
 
@@ -57,5 +59,15 @@ namespace game {
 		}
 
 		return false;
+	}
+
+	void DungeonDoor::set_value(uint32_t new_value) {
+		GameObject::set_value(new_value);
+
+		if (new_value == 1) {
+			set_state(OPEN);
+		} else {
+			set_state(CLOSED);
+		}
 	}
 }

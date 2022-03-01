@@ -26,6 +26,7 @@ namespace game {
 		State state;
 
 		void set_state(uint8_t new_state) override;
+		void set_value(uint32_t new_value) override;
 		bool check_collision(Point next_position) override;
 	};
 }

@@ -50,12 +50,24 @@ namespace game {
 		switch (new_state_enum) {
 			case ON:
 				tile_id = TILE_ID_ON;
+				value = 1;
 				break;
 			case OFF:
 				tile_id = TILE_ID_OFF;
+				value = 0;
 				break;
 		}
 
 		state = new_state_enum;
+	}
+
+	void Lever::set_value(uint32_t new_value) {
+		GameObject::set_value(new_value);
+
+		if (new_value == 1) {
+			set_state(ON);
+		} else {
+			set_state(OFF);
+		}
 	}
 }
