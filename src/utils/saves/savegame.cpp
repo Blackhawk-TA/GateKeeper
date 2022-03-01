@@ -120,7 +120,11 @@ namespace savegame {
 			camera::set_previous_position(save_data.previous_camera_position);
 
 			//Load player save with health, level and direction
-			game::player_handler::load_save(save_data.player_data);
+			game::player_handler::load_save(save::PlayerData{
+				player_temp_data.health,
+				save_data.player_data.level,
+				save_data.player_data.direction,
+			});
 
 			//Init sidemenu
 			game::sidemenu::init(save_id);
