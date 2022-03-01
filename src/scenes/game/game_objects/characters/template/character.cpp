@@ -191,10 +191,10 @@ namespace game {
 
 		Point player_position = camera::get_player_position();
 		return (current_direction == UP && position.x == player_position.x && position.y > player_position.y
-		&& calc_player_distance(position.y, player_position.y) < 6 && path_is_walkable(player_position, position))
+		&& calc_player_distance(position.y, player_position.y) < 7 && path_is_walkable(player_position, position))
 
 		|| (current_direction == DOWN && position.x == player_position.x && position.y < player_position.y
-		&& calc_player_distance(player_position.y, position.y) < 6 && path_is_walkable(position, player_position))
+		&& calc_player_distance(player_position.y, position.y) < 7 && path_is_walkable(position, player_position))
 
 		|| (current_direction == LEFT && position.y == player_position.y && position.x > player_position.x
 		&& calc_player_distance(position.x, player_position.x) < 9 && path_is_walkable(player_position, position))
