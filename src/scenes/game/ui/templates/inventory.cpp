@@ -9,7 +9,7 @@
 namespace game::sidemenu {
 	Inventory::Inventory(MenuType menu_type, Rect rect, std::vector<Item> &items) : Listbox(rect, items, true) {
 		Inventory::menu_type = menu_type;
-		Inventory::rect = rect;
+		Inventory::rect = Box::set_bounds(rect);
 		Inventory::items = items;
 	}
 
