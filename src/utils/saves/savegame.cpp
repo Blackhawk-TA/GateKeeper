@@ -33,8 +33,7 @@ namespace savegame {
 				{}
 			};
 		} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won) { //Escape
-			player_data.direction = invert_direction(
-				calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
+			player_data.direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
 			player_data.camera_position = save_data.previous_camera_position;
 			player_data.health = options.game_data.health;
 		} else if (options.tmp_save && options.game_data.won) { //Win
@@ -123,7 +122,7 @@ namespace savegame {
 			game::player_handler::load_save(save::PlayerData{
 				player_temp_data.health,
 				save_data.player_data.level,
-				save_data.player_data.direction,
+				player_temp_data.direction,
 			});
 
 			//Init sidemenu
