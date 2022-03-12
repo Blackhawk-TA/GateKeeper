@@ -74,7 +74,7 @@ namespace combat::character_handler {
 	}
 
 	bool escape() {
-		if (blit::random() % 3 == 0) {
+		if (blit::random() % 1 == 0) {
 			return true;
 		} else {
 			player->finish_round();
