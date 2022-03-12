@@ -30,13 +30,14 @@ namespace game::utils {
 
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(CombatCharacterType type) {
 		std::map<CombatCharacterType, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> sprite_map = {
-			{PLAYER,       {0,   3,   6,   9}}, //Player
-			{BLUE_GUARD,   {72,  75,  78,  81}}, //Blue Guard
-			{SPIDER,       {12,  15,  18,  21}}, //Spider
-			{BROWN_BEAR,   {144, 147, 150, 153}}, //Brown Bear
-			{DEVIL,        {84,  87,  90,  93}}, //Devil
-			{RED_CREATURE, {216, 219, 222, 225}}, //Red Creature
-			{ICE_BEAR,     {156, 159, 162, 165}} //Ice Bear
+			{PLAYER,       {0,   3,   6,   9}},
+			{BLUE_GUARD,   {72,  75,  78,  81}},
+			{SPIDER,       {12,  15,  18,  21}},
+			{BROWN_BEAR,   {144, 147, 150, 153}},
+			{DEVIL,        {84,  87,  90,  93}},
+			{RED_CREATURE, {216, 219, 222, 225}},
+			{RED_GUARD,    {228, 231, 234, 237}},
+			{ICE_BEAR,     {156, 159, 162, 165}}
 		};
 
 		return sprite_map[type];

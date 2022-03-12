@@ -8,7 +8,7 @@
 namespace game {
 	class Salesman : public Character {
 	private:
-		const uint16_t TILE_ID = 68;
+		const uint16_t TILE_ID = 20;
 		const uint8_t BAR_HEIGHT = 1;
 		const uint16_t COOLDOWN_MS = 60000;
 

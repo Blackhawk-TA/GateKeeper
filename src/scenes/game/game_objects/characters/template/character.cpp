@@ -27,10 +27,10 @@ namespace game {
 	void Character::set_movement_sprites() {
 		movement_sprites = {
 			{UP, {
-				static_cast<uint16_t>(tile_id + 48),
-				static_cast<uint16_t>(tile_id + 49),
-				static_cast<uint16_t>(tile_id + 50),
-				static_cast<uint16_t>(tile_id + 51)
+				static_cast<uint16_t>(tile_id + 96),
+				static_cast<uint16_t>(tile_id + 97),
+				static_cast<uint16_t>(tile_id + 98),
+				static_cast<uint16_t>(tile_id + 99)
 			}},
 			{DOWN, {
 				tile_id,
@@ -39,16 +39,16 @@ namespace game {
 				static_cast<uint16_t>(tile_id + 3)
 			}},
 			{LEFT, {
-				static_cast<uint16_t>(tile_id + 16),
-				static_cast<uint16_t>(tile_id + 17),
-				static_cast<uint16_t>(tile_id + 18),
-				static_cast<uint16_t>(tile_id + 19)
-			}},
-			{RIGHT, {
 				static_cast<uint16_t>(tile_id + 32),
 				static_cast<uint16_t>(tile_id + 33),
 				static_cast<uint16_t>(tile_id + 34),
 				static_cast<uint16_t>(tile_id + 35)
+			}},
+			{RIGHT, {
+				static_cast<uint16_t>(tile_id + 64),
+				static_cast<uint16_t>(tile_id + 65),
+				static_cast<uint16_t>(tile_id + 66),
+				static_cast<uint16_t>(tile_id + 67)
 			}},
 		};
 	}

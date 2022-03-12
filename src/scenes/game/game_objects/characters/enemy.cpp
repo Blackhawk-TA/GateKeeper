@@ -90,19 +90,21 @@ namespace game {
 	uint16_t Enemy::get_init_tile_id() {
 		switch (character_type) {
 			case PLAYER:
-				return 64;
+				return 16;
 			case BLUE_GUARD:
-				return 76;
+				return 28;
 			case SPIDER:
-				return 72;
+				return 24;
 			case BROWN_BEAR:
-				return 192;
+				return 144;
 			case ICE_BEAR:
-				return 204;
+				return 156;
 			case DEVIL:
-				return 196;
+				return 148;
 			case RED_CREATURE:
-				return 200;
+				return 152;
+			case RED_GUARD:
+				return 256;
 			default:
 				std::cerr << "Invalid CombatCharacterType" << std::endl;
 				exit(1);

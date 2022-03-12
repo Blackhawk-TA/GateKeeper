@@ -32,7 +32,8 @@ enum CombatCharacterType {
 	BROWN_BEAR = 4,
 	ICE_BEAR = 5,
 	DEVIL = 6,
-	RED_CREATURE = 7
+	RED_CREATURE = 7,
+	RED_GUARD = 8,
 };
 
 enum GEAR_TYPE {

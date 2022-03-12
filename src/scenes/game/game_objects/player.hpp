@@ -41,9 +41,9 @@ namespace game {
 		};
 		const std::map<MovementDirection, std::array<uint16_t, ANIMATION_SPRITE_COUNT>> movement_sprites = {
 			{UP,    {112, 113, 114, 115}},
-			{DOWN,  {64,  65,  66,  67}},
-			{LEFT,  {80,  81,  82,  83}},
-			{RIGHT, {96,  97,  98,  99}}
+			{DOWN,  {16,   17,  18,  19}},
+			{LEFT,  {48,   49,  50,  51}},
+			{RIGHT, {80,   81,  82,  83}}
 		};
 		std::array<uint16_t, ANIMATION_SPRITE_COUNT> animation_sprites{};
 
