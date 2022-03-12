@@ -62,3 +62,11 @@ assets.cpp:
     name: desert_combat_map
     empty_tile: 0
     output_struct: true
+  assets/castle.tmx:
+    name: castle_map
+    empty_tile: 0
+    output_struct: true
+  assets/castle_combat.tmx:
+    name: castle_combat_map
+    empty_tile: 0
+    output_struct: true

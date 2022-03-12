@@ -13,7 +13,7 @@ namespace combat {
 	Player *player;
 	Enemy *enemy;
 
-	Scene::Scene(SceneOptions options) {
+	Scene::Scene(const SceneOptions& options) {
 		map_section = options.combat_data.map_section;
 		load_combat_scene();
 
@@ -82,6 +82,9 @@ namespace combat {
 				break;
 			case map::DESERT:
 				map::load_section(map::DESERT_COMBAT);
+				break;
+			case map::CASTLE:
+				map::load_section(map::CASTLE_COMBAT);
 				break;
 			default:
 				std::cerr << "No matching combat area for map section found" << std::endl;

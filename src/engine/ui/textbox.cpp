@@ -117,7 +117,6 @@ void Textbox::set_text(std::string &new_text) {
 	text = update_text(block_index);
 }
 
-
 bool Textbox::next() {
 	block_index++;
 	if (block_index < text_blocks.size()) {

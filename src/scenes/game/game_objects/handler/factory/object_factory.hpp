@@ -14,4 +14,5 @@ namespace game::game_objects {
 	std::vector<GameObject*> create_interior_objects(uint8_t save_id);
 	std::vector<GameObject*> create_snowland_objects(uint8_t save_id);
 	std::vector<GameObject*> create_volcano_objects(uint8_t save_id);
+	std::vector<GameObject*> create_castle_objects(uint8_t save_id);
 }

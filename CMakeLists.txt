@@ -39,6 +39,7 @@ set(PROJECT_SOURCE
         src/scenes/game/game_objects/handler/extensions/stargate_handler.cpp src/scenes/game/game_objects/handler/extensions/stargate_handler.hpp
         src/scenes/game/game_objects/handler/extensions/dungeon_door_handler.cpp src/scenes/game/game_objects/handler/extensions/dungeon_door_handler.hpp
         src/scenes/game/game_objects/handler/factory/object_factory.cpp src/scenes/game/game_objects/handler/factory/object_factory.hpp
+        src/scenes/game/game_objects/handler/factory/castle_objects.cpp
         src/scenes/game/game_objects/handler/factory/desert_objects.cpp
         src/scenes/game/game_objects/handler/factory/dungeon_objects.cpp
         src/scenes/game/game_objects/handler/factory/grassland_objects.cpp

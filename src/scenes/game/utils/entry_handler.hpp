@@ -38,6 +38,9 @@ namespace game::entry_handler {
 		Entry{Point(14, 13), Point(50, 43), Point(0, 1), map::SNOWLAND, map::INTERIOR},
 		Entry{Point(13, 20), Point(6, 60), Point(0, 1), map::SNOWLAND, map::INTERIOR},
 		Entry{Point(24, 20), Point(28, 60), Point(0, 1), map::SNOWLAND, map::INTERIOR},
+
+		//Castle
+		Entry{Point(31, 28), Point(15, 30), Point(0, 1), map::DESERT, map::CASTLE},
 	};
 
 	uint8_t get_id(Point &p, map::MapSection current_map);
