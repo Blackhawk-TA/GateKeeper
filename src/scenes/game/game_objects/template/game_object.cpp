@@ -142,6 +142,10 @@ namespace game {
 		return active;
 	}
 
+	Point GameObject::get_position() {
+		return position;
+	}
+
 	void GameObject::update_state(Point next_position) {}
 
 	void GameObject::update(uint32_t time) {}

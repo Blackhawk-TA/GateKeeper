@@ -5,6 +5,7 @@
 #include "../../../../../engine/camera.hpp"
 #include "../../../../../engine/flags.hpp"
 #include "../../handler/player_handler.hpp"
+#include "../../handler/game_object_handler.hpp"
 
 namespace game {
 	Character::Character(map::MapSection map_section, Point position, bool player_usable, bool inventory_usable, bool turn)
@@ -209,15 +210,15 @@ namespace game {
 
 	bool Character::path_is_walkable(Point start, Point end) {
 		if (start.x == end.x) {
-			for (int i = start.y; i < end.y; i++) {
-				if (tile_is_walkable(Point(start.x, i))) {
+			for (int i = start.y + 1; i < end.y; i++) {
+				if (!tile_is_walkable(Point(start.x, i))) {
 					return false;
 				}
 			}
 			return  true;
 		} else if (start.y == end.y) {
-			for (int i = start.x; i < end.x; i++) {
-				if (tile_is_walkable(Point(i, start.y))) {
+			for (int i = start.x + 1; i < end.x; i++) {
+				if (!tile_is_walkable(Point(i, start.y))) {
 					return false;
 				}
 			}
@@ -229,7 +230,8 @@ namespace game {
 
 	bool Character::tile_is_walkable(Point tile_position) {
 		uint8_t flag = map::get_flag(tile_position);
-		return flag != flags::WALKABLE && flag != flags::ELEVATE_1PX && flag != flags::ELEVATE_2PX && flag != flags::ELEVATE_3PX;
+		return (flag == flags::WALKABLE || flag == flags::ELEVATE_1PX || flag == flags::ELEVATE_2PX || flag == flags::ELEVATE_3PX || flag == flags::NO_FLAG)
+			&& !game_objects::tile_occupied(tile_position);
 	}
 
 	void Character::player_face_character() {

@@ -38,6 +38,13 @@ namespace game::game_objects {
 	GameObject* get_game_object(Signature &signature);
 
 	/**
+	 * Checks if there is currently a game object placed on the given position.
+	 * @param position The position that shall be checked using tile units.
+	 * @return True if the tile is occupied by a game object, else false
+	 */
+	bool tile_occupied(Point &position);
+
+	/**
 	 * Set the active property which is saved and shows whether a game object is rendered and interactive
 	 * @param signature The signature of the game object
 	 * @param value True, if the game object should be rendered and interactive, else false

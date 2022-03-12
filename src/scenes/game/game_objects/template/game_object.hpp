@@ -61,6 +61,12 @@ namespace game {
 		Save get_save();
 
 		/**
+		 * Gets the current position of the game object. May differ from the signature position depending on a game objects movement
+		 * @return The current position of the game object in tile units
+		 */
+		Point get_position();
+
+		/**
 		 * Loads the saved state of the game object
 		 * @param value The value that is loaded in the game object
 		 */

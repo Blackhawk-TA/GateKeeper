@@ -9,6 +9,7 @@ using namespace blit;
 
 namespace flags {
 	enum TileFlags {
+		NO_FLAG = 0,
 		WALKABLE = 1,
 		ELEVATE_1PX = 2,
 		ELEVATE_2PX = 3,

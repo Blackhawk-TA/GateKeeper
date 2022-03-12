@@ -80,15 +80,24 @@ namespace game::game_objects {
 
 	GameObject* get_game_object(Signature &signature) {
 		auto itr = game_object_collection.begin();
-
 		while (itr != game_object_collection.end()) {
 			if (has_equal_signature(signature, (*itr)->get_signature())) {
 				return *itr;
 			}
 			itr++;
 		}
-
 		return nullptr;
+	}
+
+	bool tile_occupied(Point &position) {
+		auto itr = game_object_collection.begin();
+		while (itr != game_object_collection.end()) {
+			if ((*itr)->get_position() == position) {
+				return true;
+			}
+			itr++;
+		}
+		return false;
 	}
 
 	void set_active(Signature &signature, bool value) {
