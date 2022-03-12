@@ -100,12 +100,6 @@ namespace game {
 			return;
 		}
 
-		//Start animation timer and directly update sprite animation to prevent delay
-		if (!is_animating) {
-			is_animating = true;
-			sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
-		}
-
 		//Move player according to tile flag of next position
 		switch (map::get_flag(next_position)) {
 			case flags::TileFlags::WALKABLE:
@@ -137,6 +131,12 @@ namespace game {
 			default:
 				is_animating = false;
 				return; //Prevent game object state update
+		}
+
+		//Start animation timer and directly update sprite animation to prevent delay
+		if (!is_animating && camera::is_moving()) {
+			is_animating = true;
+			sprite_id = animation_sprites[++sprite_index % ANIMATION_SPRITE_COUNT];
 		}
 
 		//Update the stargate states when a player comes near them
