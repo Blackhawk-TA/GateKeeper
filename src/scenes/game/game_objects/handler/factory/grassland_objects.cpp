@@ -38,7 +38,7 @@ namespace game::game_objects {
 			new GearVillager(map::GRASSLAND, Point(23, 17), 4, LEFT, "Here take that dagger.", "You already have a dagger, go use it.", GEAR_DAGGER),
 		};
 
-		if (story_state == StoryState::INITIAL_GEAR) {
+		if (story_state == StoryState::START) {
 			std::string msg = "Hello traveler I'm the elder of this village. The gate behind you is a portal to different worlds. "
 							  "Unfortunately the new king limits gate travel by guarding the gate to the castle from which "
 							  "he suppresses us. I hope someday a traveler arrives that brings the kings reign of terror to an end. "

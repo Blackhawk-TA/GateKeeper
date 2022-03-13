@@ -15,7 +15,7 @@ namespace game::game_objects {
 			new Nurse(map::INTERIOR, Point(54, 37)),
 		};
 
-		if (story_state == StoryState::REMOVE_GEAR || story_state == StoryState::FOUND_GEAR) {
+		if (story_state == StoryState::FIRST_DEATH || story_state == StoryState::FIRST_HOSPITAL_WAKEUP) {
 			std::string msg = "Oh hey, you're awake! I'm not sure if you can remember what happened. You challenged the "
 							  "guards at the gate. They struck you down and stole all your weapons. They went back back "
 							  "through the gate while you were unconscious and destroyed it to prevent us from ever "

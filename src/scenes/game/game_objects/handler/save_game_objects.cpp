@@ -40,7 +40,7 @@ namespace game::game_objects {
 		}
 
 		//Damage stargate
-		if (story_state == StoryState::FOUND_GEAR) {
+		if (story_state == StoryState::FIRST_HOSPITAL_WAKEUP) {
 			Signature gate_signature = {
 				map::GRASSLAND,
 				21,

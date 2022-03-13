@@ -25,7 +25,7 @@ namespace game {
 		level = 1;
 		cut_scene = false;
 		dead = false;
-		story_state = StoryState::INITIAL_GEAR;
+		story_state = StoryState::START;
 
 		//Init graphics
 		is_animating = true;
@@ -201,9 +201,9 @@ namespace game {
 		level = save_data.level;
 
 		//Remove gear on first death
-		if (save_data.story_state == StoryState::REMOVE_GEAR) {
+		if (save_data.story_state == StoryState::FIRST_DEATH) {
 			sidemenu::clear_items(sidemenu::GEAR);
-			story_state = StoryState::FOUND_GEAR;
+			story_state = StoryState::FIRST_HOSPITAL_WAKEUP;
 		} else {
 			story_state = save_data.story_state;
 		}

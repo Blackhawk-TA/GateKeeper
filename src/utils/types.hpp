@@ -86,9 +86,9 @@ struct SaveOptions {
 
 //Shows if the gear of a player was stripped after the first player death
 enum StoryState {
-	INITIAL_GEAR = 1, //The gear the player gets when starting a new game
-	REMOVE_GEAR = 2, //Symbolises that the players gear must be removed
-	FOUND_GEAR = 3, //The gear the player collected during the game after the initial gear was removed
+	START = 1, //The first part of the game were the player starts with default weapons
+	FIRST_DEATH = 2, //Symbolises that the players gear must be removed on first death
+	FIRST_HOSPITAL_WAKEUP = 3, //The player died the first time and woke up at the hospital
 };
 
 //Data that is required for load a player from a save

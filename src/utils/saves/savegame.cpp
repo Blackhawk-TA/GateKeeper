@@ -31,7 +31,7 @@ namespace savegame {
 				Point(45, 20),
 				Point(45, 20),
 				combat::Character::MAX_HEALTH,
-				save_data.player_data.story_state == INITIAL_GEAR ? REMOVE_GEAR : FOUND_GEAR,
+				save_data.player_data.story_state == START ? FIRST_DEATH : FIRST_HOSPITAL_WAKEUP,
 				{}
 			};
 		} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won) { //Escape
@@ -52,13 +52,13 @@ namespace savegame {
 		map::load_section(map::GRASSLAND);
 		camera::init(start_position);
 		game::sidemenu::init(save_id);
-		game::game_objects::init(map::GRASSLAND, save_id, StoryState::INITIAL_GEAR);
+		game::game_objects::init(map::GRASSLAND, save_id, StoryState::START);
 		game_time::init();
 		game::player_handler::load_save(save::PlayerData{
 			100,
 			1,
 			DOWN,
-			StoryState::INITIAL_GEAR,
+			StoryState::START,
 		});
 	}
 

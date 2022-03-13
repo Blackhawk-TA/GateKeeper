@@ -230,7 +230,7 @@ namespace game {
 
 	bool Character::tile_is_walkable(Point tile_position) {
 		uint8_t flag = map::get_flag(tile_position);
-		return (flag == flags::WALKABLE || flag == flags::ELEVATE_1PX || flag == flags::ELEVATE_2PX || flag == flags::ELEVATE_3PX || flag == flags::NO_FLAG)
+		return (flag == flags::WALKABLE || flag == flags::ELEVATE_1PX || flag == flags::ELEVATE_2PX || flag == flags::ELEVATE_3PX)
 			&& !game_objects::tile_occupied(tile_position);
 	}
 
