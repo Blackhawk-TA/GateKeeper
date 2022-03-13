@@ -36,11 +36,19 @@ namespace game {
 		stargates.clear();
 	}
 
-	/**
-	 * Checks if the players next position triggers a teleportation and returns the destination gate, if existing
-	 * @param next_position The next position of the player
-	 * @return The position of the destination gate if there is one, else Point(0, 0) is returned
-	 */
+	void stargate_handler::damage_stargate(Signature &signature) {
+		auto itr = stargates.begin();
+
+		while (itr != stargates.end()) {
+			if (game_objects::has_equal_signature((*itr)->get_signature(), signature)) {
+				(*itr)->set_inventory_usable(true);
+				break;
+			} else {
+				itr++;
+			}
+		}
+	}
+
 	Stargate *stargate_handler::get_destination_gate(Point next_position) {
 		bool teleport = false;
 		StargateAddress destination_address;

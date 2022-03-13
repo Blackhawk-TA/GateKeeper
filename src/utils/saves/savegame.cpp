@@ -137,7 +137,7 @@ namespace savegame {
 
 			//Load game object states
 			game::game_objects::init(player_temp_data.map_section, save_id, player_temp_data.story_state);
-			game::game_objects::load_saves(save_data.game_objects);
+			game::game_objects::load_saves(save_data.game_objects, player_temp_data.story_state);
 			if (!game::game_objects::is_empty_signature(player_temp_data.enemy_signature)) {
 				game::game_objects::set_active(player_temp_data.enemy_signature, false);
 			}

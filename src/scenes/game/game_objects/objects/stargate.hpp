@@ -37,7 +37,6 @@ namespace game {
 		uint32_t activation_start_time;
 
 		void set_state(uint8_t new_state) override;
-		void set_inventory_usable(bool usable) override;
 
 	public:
 		explicit Stargate(map::MapSection map_section, Point position, StargateAddress address, StargateAddress destination, bool inventory_usable);
@@ -46,6 +45,7 @@ namespace game {
 		void update(uint32_t time) override;
 		bool inventory_interact(items::INVENTORY_ITEM item_type) override;
 		void update_state(Point next_position) override;
+		void set_inventory_usable(bool usable) override;
 		ObjectType get_type() override;
 
 		bool check_enter(Point next_position);

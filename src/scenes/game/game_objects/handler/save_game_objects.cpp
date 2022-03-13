@@ -6,9 +6,10 @@
 #include "game_object_handler.hpp"
 #include "../../../../utils/saves/save_types.hpp"
 #include "extensions/enemy_handler.hpp"
+#include "extensions/stargate_handler.hpp"
 
 namespace game::game_objects {
-	void load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects) {
+	void load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects, StoryState story_state) {
 		Signature signature{};
 		GameObject::Save *saved_object;
 		uint8_t i = 0;
@@ -36,6 +37,16 @@ namespace game::game_objects {
 		SceneType previous_scene = get_previous_scene();
 		if (previous_scene == SceneType::MENU || previous_scene == SceneType::GAMEOVER) {
 			enemy_handler::respawn();
+		}
+
+		//Damage stargate
+		if (story_state == StoryState::FOUND_GEAR) {
+			Signature gate_signature = {
+				map::GRASSLAND,
+				21,
+				7,
+			};
+			stargate_handler::damage_stargate(gate_signature);
 		}
 	}
 

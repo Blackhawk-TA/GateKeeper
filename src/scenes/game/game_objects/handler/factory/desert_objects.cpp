@@ -12,6 +12,9 @@ namespace game::game_objects {
 			new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true),
 			new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false),
 
+			new Enemy(map::DESERT, Point(4, 60), BLUE_GUARD, RIGHT, save_id, false, "Why are you here?", false),
+			new Enemy(map::DESERT, Point(6, 60), BLUE_GUARD, LEFT, save_id, false, "You are not supposed to be here!", false),
+
 			new Enemy(map::DESERT, Point(18, 48), BLUE_GUARD, DOWN, save_id),
 			new Enemy(map::DESERT, Point(28, 48), BLUE_GUARD, DOWN, save_id),
 			new Enemy(map::DESERT, Point(34, 48), BLUE_GUARD, DOWN, save_id),

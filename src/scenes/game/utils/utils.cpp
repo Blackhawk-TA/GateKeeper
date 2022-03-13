@@ -25,7 +25,7 @@ namespace game::utils {
 
 		//Load save to apply saved game object values for new map section
 		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects = savegame::load_game_objects(save_id);
-		game_objects::load_saves(game_objects);
+		game_objects::load_saves(game_objects, story_state);
 	}
 
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(CombatCharacterType type) {

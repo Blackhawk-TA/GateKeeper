@@ -9,8 +9,9 @@ namespace game::game_objects {
 	/**
 	 * Loads saved objects into each game object
 	 * @param saved_objects The saved game objects pointer array
+	 * @param story_state The current state of the story, depending on which game objects can be spawned
 	 */
-	void load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects);
+	void load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects, StoryState story_state);
 
 	/**
 	 * Gets array with save structs of all game objects objects on the current map section.
