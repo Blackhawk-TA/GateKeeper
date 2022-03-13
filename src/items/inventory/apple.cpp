@@ -9,14 +9,14 @@ Listbox::Item items::create_apple(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"Apple",
-		"Regenerates 20 health when eaten.",
+		"Regenerates 70 health when eaten.",
 		"You ate an apple.",
 		"You're not hungry.",
 		true,
 		1,
 		[] {
 			if (game::player_handler::get_health() < 100) {
-				game::player_handler::heal(20);
+				game::player_handler::heal(70);
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

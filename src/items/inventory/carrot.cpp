@@ -9,14 +9,14 @@ Listbox::Item items::create_carrot(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"Carrot",
-		"Regenerates 15 health when eaten.",
+		"Regenerates 50 health when eaten.",
 		"You ate a carrot.",
 		"You're not hungry.",
 		true,
 		1,
 		[] {
 			if (game::player_handler::get_health() < 100) {
-				game::player_handler::heal(15);
+				game::player_handler::heal(50);
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;
