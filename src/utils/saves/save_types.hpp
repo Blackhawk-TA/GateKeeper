@@ -6,6 +6,7 @@
 #include "../utils.hpp"
 #include "../movement_direction.hpp"
 #include "../../scenes/game/game_objects/template/game_object.hpp"
+#include "../types.hpp"
 
 /*
  * Important: If any of those structs is changed the save version in savegame.hpp must be updated.
@@ -19,6 +20,7 @@ namespace save {
 		uint8_t health;
 		uint8_t level;
 		MovementDirection direction;
+		StoryState story_state;
 	};
 
 	struct Item {

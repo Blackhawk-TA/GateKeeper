@@ -11,7 +11,7 @@ Textbox::Textbox(std::string text) : Box(rect) {
 	Textbox::line_offset = 0;
 	Textbox::block_index = 0;
 	Textbox::line_max_chars = static_cast<uint8_t>(static_cast<float>(screen_tiles.x) * CHARS_PER_TILE);
-	Textbox::block_max_chars = line_max_chars * MAX_LINES - 4; //Minus 3 to compensate for ' ...' at message end and beginning
+	Textbox::block_max_chars = line_max_chars * MAX_LINES - 8; //Minus 8 to compensate for ' ...' at message end and beginning
 	Textbox::text_blocks = split_text(text);
 	Textbox::text = update_text(block_index);
  }

@@ -25,6 +25,7 @@ namespace game {
 		level = 1;
 		cut_scene = false;
 		dead = false;
+		story_state = StoryState::INITIAL_GEAR;
 
 		//Init graphics
 		is_animating = true;
@@ -119,7 +120,7 @@ namespace game {
 				elevation_offset = 3;
 				break;
 			case flags::TileFlags::ENTRY:
-				if (entry_handler::enter(next_position, save_id)) {
+				if (entry_handler::enter(next_position, save_id, story_state)) {
 					camera::move(movement);
 				}
 				elevation_offset = 0;
@@ -155,7 +156,7 @@ namespace game {
 		Point teleport_destination = destination_gate->get_entry_point();
 		map::MapSection destination_map_section = destination_gate->get_map_section();
 		if (map::get_section() != destination_map_section) {
-			utils::teleport_player(destination_map_section, teleport_destination, MovementDirection::DOWN, current_save_id);
+			utils::teleport_player(destination_map_section, teleport_destination, MovementDirection::DOWN, current_save_id, story_state);
 		}
 
 		game_objects::update_states(teleport_destination);
@@ -191,12 +192,21 @@ namespace game {
 			health,
 			level,
 			current_direction,
+			story_state,
 		};
 	}
 
 	void Player::load_save(save::PlayerData save_data) {
 		health = save_data.health;
 		level = save_data.level;
+
+		//Remove gear on first death
+		if (save_data.story_state == StoryState::REMOVE_GEAR) {
+			sidemenu::clear_items(sidemenu::GEAR);
+			story_state = StoryState::FOUND_GEAR;
+		} else {
+			story_state = save_data.story_state;
+		}
 
 		//Set player animation tiles
 		if (save_data.direction == NO_DIRECTION) {

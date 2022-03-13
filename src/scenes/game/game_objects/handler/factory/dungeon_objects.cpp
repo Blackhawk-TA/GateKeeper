@@ -11,7 +11,7 @@
 #include "../../objects/crystal.hpp"
 
 namespace game::game_objects {
-	std::vector<GameObject*> create_dungeon_objects(uint8_t save_id) {
+	std::vector<GameObject*> create_dungeon_objects(uint8_t save_id, StoryState story_state) {
 		//Settings for dungeon
 		uint8_t enabled_lever = blit::random() % 3;
 

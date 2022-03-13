@@ -7,7 +7,7 @@
 #include "../../characters/enemy.hpp"
 
 namespace game::game_objects {
-	std::vector<GameObject*> create_desert_objects(uint8_t save_id) {
+	std::vector<GameObject*> create_desert_objects(uint8_t save_id, StoryState story_state) {
 		return {
 			new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true),
 			new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false),

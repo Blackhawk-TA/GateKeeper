@@ -6,7 +6,7 @@
 #include "../../characters/enemy.hpp"
 
 namespace game::game_objects {
-	std::vector<GameObject*> create_castle_objects(uint8_t save_id) {
+	std::vector<GameObject*> create_castle_objects(uint8_t save_id, StoryState story_state) {
 		return {
 			new Enemy(map::CASTLE, Point(12, 14), BLUE_GUARD, RIGHT, save_id),
 			new Enemy(map::CASTLE, Point(13, 17), BLUE_GUARD, RIGHT, save_id),

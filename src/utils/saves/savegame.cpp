@@ -19,6 +19,7 @@ namespace savegame {
 			save_data.camera_position,
 			save_data.previous_camera_position,
 			save_data.player_data.health,
+			save_data.player_data.story_state,
 			{}
 		};
 
@@ -30,6 +31,7 @@ namespace savegame {
 				Point(45, 20),
 				Point(45, 20),
 				combat::Character::MAX_HEALTH,
+				save_data.player_data.story_state == INITIAL_GEAR ? REMOVE_GEAR : FOUND_GEAR,
 				{}
 			};
 		} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won) { //Escape
@@ -50,12 +52,13 @@ namespace savegame {
 		map::load_section(map::GRASSLAND);
 		camera::init(start_position);
 		game::sidemenu::init(save_id);
-		game::game_objects::init(map::GRASSLAND, save_id);
+		game::game_objects::init(map::GRASSLAND, save_id, StoryState::INITIAL_GEAR);
 		game_time::init();
 		game::player_handler::load_save(save::PlayerData{
 			100,
 			1,
-			DOWN
+			DOWN,
+			StoryState::INITIAL_GEAR,
 		});
 	}
 
@@ -118,21 +121,22 @@ namespace savegame {
 			camera::init(player_temp_data.camera_position);
 			camera::set_previous_position(save_data.previous_camera_position);
 
-			//Load player save with health, level and direction
-			game::player_handler::load_save(save::PlayerData{
-				player_temp_data.health,
-				save_data.player_data.level,
-				player_temp_data.direction,
-			});
-
 			//Init sidemenu
 			game::sidemenu::init(save_id);
 
 			//Load inventories
 			game::sidemenu::load_saves(save_data.items);
 
+			//Load player save with health, level and direction
+			game::player_handler::load_save(save::PlayerData{
+				player_temp_data.health,
+				save_data.player_data.level,
+				player_temp_data.direction,
+				player_temp_data.story_state,
+			});
+
 			//Load game object states
-			game::game_objects::init(player_temp_data.map_section, save_id);
+			game::game_objects::init(player_temp_data.map_section, save_id, player_temp_data.story_state);
 			game::game_objects::load_saves(save_data.game_objects);
 			if (!game::game_objects::is_empty_signature(player_temp_data.enemy_signature)) {
 				game::game_objects::set_active(player_temp_data.enemy_signature, false);

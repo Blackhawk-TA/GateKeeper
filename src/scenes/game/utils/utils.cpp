@@ -8,7 +8,7 @@
 #include "../game_objects/handler/player_handler.hpp"
 
 namespace game::utils {
-	void teleport_player(map::MapSection map_section, Point position, MovementDirection direction, uint8_t save_id) {
+	void teleport_player(map::MapSection map_section, Point position, MovementDirection direction, uint8_t save_id, StoryState story_state) {
 		//Load map and set position
 		load_section(map_section);
 		camera::set_position(position);
@@ -21,7 +21,7 @@ namespace game::utils {
 		game_objects::cleanup();
 
 		//Create game objects for next map section
-		game_objects::init(map_section, save_id);
+		game_objects::init(map_section, save_id, story_state);
 
 		//Load save to apply saved game object values for new map section
 		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects = savegame::load_game_objects(save_id);

@@ -141,6 +141,22 @@ namespace game::sidemenu {
 		return false;
 	}
 
+	void clear_items(MenuType menu_type) {
+		if (!menu_data.at(menu_type).is_inventory) {
+			return;
+		}
+		std::vector<Listbox::Item> old_items = get_items(menu_type);
+		std::vector<Listbox::Item> new_items = {};
+
+		for (auto &item : old_items) {
+			if (item.sort_to_bottom) { //Move menu items to new items list
+				new_items.emplace_back(item);
+			}
+		}
+
+		controls.at(menu_type)->set_items(new_items);
+	}
+
 	bool is_open() {
 		return current_sidemenu != NO_MENU;
 	}

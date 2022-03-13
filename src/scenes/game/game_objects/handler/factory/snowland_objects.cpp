@@ -8,7 +8,7 @@
 #include "../../objects/sign.hpp"
 
 namespace game::game_objects {
-	std::vector<GameObject*> create_snowland_objects(uint8_t save_id) {
+	std::vector<GameObject*> create_snowland_objects(uint8_t save_id, StoryState story_state) {
 		return {
 			new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false),
 			new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false),

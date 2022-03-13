@@ -5,6 +5,7 @@
 #pragma once
 #include "../../../utils/utils.hpp"
 #include "../../../engine/map.hpp"
+#include "../../../utils/types.hpp"
 
 using namespace blit;
 
@@ -43,7 +44,29 @@ namespace game::entry_handler {
 		Entry{Point(31, 28), Point(15, 30), Point(0, 1), map::DESERT, map::CASTLE},
 	};
 
+	/**
+	 * Gets the id of an entry by the position of its interior or exterior entry depending on
+	 * @param p The position on the map
+	 * @param current_map The section type of the current tile map
+	 * @return The id of the entry. If value is 255, no entry was found
+	 */
 	uint8_t get_id(Point &p, map::MapSection current_map);
-	void teleport(uint8_t entry_id, Point next_position, uint8_t save_id);
-	bool enter(Point &next_position, uint8_t save_id);
+
+	/**
+	 * Teleports the player to the interior/exterior of the entry and swaps the tile maps
+	 * @param entry_id The id of the entry
+	 * @param next_position The position where the player will walk within the next move
+	 * @param save_id The id of the current save
+	 * @param story_state The current state of the story
+	 */
+	void teleport(uint8_t entry_id, Point next_position, uint8_t save_id, StoryState story_state);
+
+	/**
+	 * Triggers the entering process of for example a door or dungeon
+	 * @param next_position The position where the player will walk within the next move
+	 * @param save_id The id of the current save
+	 * @param story_state The current state of the story
+	 * @return False if entry id was not found, else true
+	 */
+	bool enter(Point &next_position, uint8_t save_id, StoryState story_state);
 }

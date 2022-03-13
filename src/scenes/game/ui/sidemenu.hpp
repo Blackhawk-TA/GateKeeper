@@ -38,6 +38,7 @@ namespace game::sidemenu {
 	 */
 	bool has_item(MenuType menu_type, Listbox::Item &item);
 	bool add_item(MenuType menu_type, Listbox::Item item, uint8_t amount = 1);
+	void clear_items(MenuType menu_type);
 	bool is_open();
 	void draw();
 	void cursor_up();

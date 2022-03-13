@@ -57,6 +57,7 @@ namespace game {
 		uint8_t level;
 		uint8_t elevation_offset;
 		MovementDirection current_direction;
+		StoryState story_state;
 		Point position;
 		Size spritesheet_size;
 
@@ -68,6 +69,6 @@ namespace game {
 		 * @param destination_gate The gate to which the player is teleported
 		 * @param current_save_id The id of the current save
 		 */
-		static void gate_teleport(Stargate *destination_gate, uint8_t current_save_id);
+		void gate_teleport(Stargate *destination_gate, uint8_t current_save_id);
 	};
 }

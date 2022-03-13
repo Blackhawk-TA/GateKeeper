@@ -10,8 +10,11 @@
 namespace game::game_objects {
 	/**
 	 * Creates the objects using their factory function
+	 * @param map_section The map section which game objects shall be loaded
+	 * @param save_id The current save id
+	 * @param story_state The state of the story progress depending on which game objects are spawned
 	 */
-	void init(map::MapSection map_section, uint8_t save_id);
+	void init(map::MapSection map_section, uint8_t save_id, StoryState story_state);
 
 	/**
 	 * Deletes all objects from memory

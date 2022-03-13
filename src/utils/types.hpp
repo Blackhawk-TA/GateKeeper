@@ -84,6 +84,13 @@ struct SaveOptions {
 	GameData game_data;
 };
 
+//Shows if the gear of a player was stripped after the first player death
+enum StoryState {
+	INITIAL_GEAR = 1, //The gear the player gets when starting a new game
+	REMOVE_GEAR = 2, //Symbolises that the players gear must be removed
+	FOUND_GEAR = 3, //The gear the player collected during the game after the initial gear was removed
+};
+
 //Data that is required for load a player from a save
 struct PlayerTempData {
 	map::MapSection map_section;
@@ -91,9 +98,9 @@ struct PlayerTempData {
 	Point camera_position;
 	Point camera_previous_position;
 	uint8_t health;
+	StoryState story_state;
 	Signature enemy_signature{};
 };
-
 
 struct SceneOptions {
 	uint8_t save_id = 0;

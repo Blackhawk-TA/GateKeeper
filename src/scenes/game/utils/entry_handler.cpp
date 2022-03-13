@@ -3,16 +3,9 @@
 //
 #include "entry_handler.hpp"
 #include "../../../engine/effects/transition.hpp"
-#include "../game_objects/player.hpp"
 #include "utils.hpp"
 
 namespace game {
-	/**
-	 * Gets the id of an entry by the position of its interior or exterior entry depending on
-	 * @param p The position on the map
-	 * @param current_map The section type of the current tile map
-	 * @return The id of the entry. If value is 255, no entry was found
-	 */
 	uint8_t entry_handler::get_id(Point &p, map::MapSection current_map) {
 		uint8_t id = 255; //Value 255 represents 'no entry found'
 		uint8_t i = 0;
@@ -28,13 +21,7 @@ namespace game {
 		return id;
 	}
 
-	/**
-	 * Teleports the player to the interior/exterior of the entry and swaps the tile maps
-	 * @param entry_id The id of the entry
-	 * @param next_position The position where the player will walk within the next move
-	 * @param save_id The id of the current save
-	 */
-	void entry_handler::teleport(uint8_t entry_id, Point next_position, uint8_t save_id) {
+	void entry_handler::teleport(uint8_t entry_id, Point next_position, uint8_t save_id, StoryState story_state) {
 		map::MapSection destination_map;
 		Point destination_position;
 		MovementDirection player_direction;
@@ -50,16 +37,10 @@ namespace game {
 			player_direction = MovementDirection::DOWN;
 		}
 
-		utils::teleport_player(destination_map, destination_position, player_direction, save_id);
+		utils::teleport_player(destination_map, destination_position, player_direction, save_id, story_state);
 	}
 
-	/**
-	 * Triggers the entering process of for example a door or dungeon
-	 * @param next_position The position where the player will walk within the next move
-	 * @param save_id The id of the current save
-	 * @return False if entry id was not found, else true
-	 */
-	bool entry_handler::enter(Point &next_position, uint8_t save_id) {
+	bool entry_handler::enter(Point &next_position, uint8_t save_id, StoryState story_state) {
 		uint8_t entry_id = entry_handler::get_id(next_position, map::get_section());
 
 		//No entry found, stop movement
@@ -68,8 +49,8 @@ namespace game {
 		}
 
 		//Teleport to position on different tile map
-		transition::start([entry_id, next_position, save_id] {
-			entry_handler::teleport(entry_id, next_position, save_id);
+		transition::start([entry_id, next_position, save_id, story_state] {
+			entry_handler::teleport(entry_id, next_position, save_id, story_state);
 		});
 
 		return true;

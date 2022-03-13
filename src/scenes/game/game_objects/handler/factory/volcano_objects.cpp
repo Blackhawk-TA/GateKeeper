@@ -8,7 +8,7 @@
 #include "../../objects/crystal.hpp"
 
 namespace game::game_objects {
-	std::vector<GameObject*> create_volcano_objects(uint8_t save_id) {
+	std::vector<GameObject*> create_volcano_objects(uint8_t save_id, StoryState story_state) {
 		std::vector<GameObject*> objects = {};
 		std::array<CombatCharacterType, 3> enemies = {SPIDER, RED_CREATURE, DEVIL};
 
