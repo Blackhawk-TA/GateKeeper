@@ -9,8 +9,6 @@
 #include "../../objects/carrot_bed.hpp"
 #include "../../characters/villager.hpp"
 #include "../../characters/story_character.hpp"
-#include "../../characters/gear_villager.hpp"
-#include "../extensions/stargate_handler.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_grassland_objects(uint8_t save_id, StoryState story_state) {
@@ -33,9 +31,6 @@ namespace game::game_objects {
 			new CarrotBed(map::GRASSLAND, Point(17, 43)),
 			new CarrotBed(map::GRASSLAND, Point(18, 43)),
 			new Villager(map::GRASSLAND, Point(24, 15), 0, LEFT, "Hello there!"),
-
-			//TODO remove
-			new GearVillager(map::GRASSLAND, Point(23, 17), 4, LEFT, "Here take that dagger.", "You already have a dagger, go use it.", GEAR_DAGGER),
 		};
 
 		if (story_state == StoryState::START) {
