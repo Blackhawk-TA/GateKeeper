@@ -4,6 +4,7 @@
 
 #include "object_factory.hpp"
 #include "../../characters/enemy.hpp"
+#include "../../objects/chest.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_castle_objects(uint8_t save_id, StoryState story_state) {
@@ -16,6 +17,13 @@ namespace game::game_objects {
 			new Enemy(map::CASTLE, Point(17, 17), BLUE_GUARD, LEFT, save_id),
 			new Enemy(map::CASTLE, Point(17, 20), BLUE_GUARD, LEFT, save_id),
 			new Enemy(map::CASTLE, Point(17, 23), BLUE_GUARD, LEFT, save_id),
+
+			new Chest(map::CASTLE, Point(12, 6)),
+			new Chest(map::CASTLE, Point(13, 6)),
+			new Chest(map::CASTLE, Point(14, 6)),
+			new Chest(map::CASTLE, Point(16, 6)),
+			new Chest(map::CASTLE, Point(17, 6)),
+			new Chest(map::CASTLE, Point(18, 6)),
 		};
 	}
 }

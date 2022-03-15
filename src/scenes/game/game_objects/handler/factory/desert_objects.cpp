@@ -5,6 +5,7 @@
 #include "object_factory.hpp"
 #include "../../objects/stargate.hpp"
 #include "../../characters/enemy.hpp"
+#include "../../objects/chest.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_desert_objects(uint8_t save_id, StoryState story_state) {
@@ -29,6 +30,12 @@ namespace game::game_objects {
 			new Enemy(map::DESERT, Point(32, 53), BLUE_GUARD, LEFT, save_id, false, "I cannot let you through."),
 			new Enemy(map::DESERT, Point(29, 42), BLUE_GUARD, RIGHT, save_id, true, "I cannot let you go."),
 			new Enemy(map::DESERT, Point(33, 42), BLUE_GUARD, LEFT, save_id, true, "You will pay for intruding here!"),
+
+			new Chest(map::DESERT, Point(2, 50)),
+			new Chest(map::DESERT, Point(27, 33)),
+			new Chest(map::DESERT, Point(35, 33)),
+			new Chest(map::DESERT, Point(48, 32)),
+			new Chest(map::DESERT, Point(24, 10)),
 		};
 	}
 }

@@ -9,6 +9,7 @@
 #include "../../objects/carrot_bed.hpp"
 #include "../../characters/villager.hpp"
 #include "../../characters/story_character.hpp"
+#include "../../objects/chest.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_grassland_objects(uint8_t save_id, StoryState story_state) {
@@ -31,6 +32,10 @@ namespace game::game_objects {
 			new CarrotBed(map::GRASSLAND, Point(17, 43)),
 			new CarrotBed(map::GRASSLAND, Point(18, 43)),
 			new Villager(map::GRASSLAND, Point(24, 15), 0, LEFT, "Hello there!"),
+
+			new Chest(map::GRASSLAND, Point(11, 14)),
+			new Chest(map::GRASSLAND, Point(35, 38)),
+			new Chest(map::GRASSLAND, Point(50, 13)),
 		};
 
 		if (story_state == StoryState::START) {

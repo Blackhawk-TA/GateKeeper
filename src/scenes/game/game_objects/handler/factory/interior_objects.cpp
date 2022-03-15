@@ -6,6 +6,7 @@
 #include "../../characters/salesman.hpp"
 #include "../../characters/nurse.hpp"
 #include "../../characters/story_character.hpp"
+#include "../../objects/chest.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_interior_objects(uint8_t save_id, StoryState story_state) {
@@ -13,6 +14,12 @@ namespace game::game_objects {
 			new Salesman(map::INTERIOR, Point(31, 20)),
 			new Nurse(map::INTERIOR, Point(54, 20)),
 			new Nurse(map::INTERIOR, Point(54, 37)),
+
+			new Chest(map::INTERIOR, Point(11, 3)),
+			new Chest(map::INTERIOR, Point(45, 3)),
+			new Chest(map::INTERIOR, Point(4, 54)),
+			new Chest(map::INTERIOR, Point(11, 21)),
+			new Chest(map::INTERIOR, Point(11, 41)),
 		};
 
 		if (story_state == StoryState::FIRST_DEATH || story_state == StoryState::FIRST_HOSPITAL_WAKEUP) {

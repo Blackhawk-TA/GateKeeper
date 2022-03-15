@@ -6,6 +6,7 @@
 #include "../../characters/enemy.hpp"
 #include "../../objects/gate_statue.hpp"
 #include "../../objects/crystal.hpp"
+#include "../../objects/chest.hpp"
 
 namespace game::game_objects {
 	std::vector<GameObject*> create_volcano_objects(uint8_t save_id, StoryState story_state) {
@@ -24,6 +25,11 @@ namespace game::game_objects {
 			new Enemy(map::VOLCANO, Point(39, 24), enemies[blit::random() % enemies.size()], LEFT, save_id, false),
 			new Enemy(map::VOLCANO, Point(58, 17), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
 			new Enemy(map::VOLCANO, Point(32, 11), enemies[blit::random() % enemies.size()], DOWN, save_id, false),
+
+			new Chest(map::VOLCANO, Point(2, 142)),
+			new Chest(map::VOLCANO, Point(16, 14)),
+			new Chest(map::VOLCANO, Point(25, 35)),
+			new Chest(map::VOLCANO, Point(46, 5)),
 		};
 	}
 }
