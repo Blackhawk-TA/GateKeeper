@@ -15,8 +15,8 @@ namespace game::game_objects {
 			new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false),
 			new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false),
 
-			new Sign(map::SNOWLAND, Point(11, 13), Sign::WOOD, "The Hospital"),
-			new Sign(map::SNOWLAND, Point(21, 20), Sign::WOOD, "The Weapon Shop"),
+			new Sign(map::SNOWLAND, Point(11, 13), Sign::WOOD, "The Hospital."),
+			new Sign(map::SNOWLAND, Point(21, 20), Sign::WOOD, "The Blacksmith. You can buy weapons here!"),
 			new Enemy(map::SNOWLAND, Point(18, 46), ICE_BEAR, UP, save_id, true, "GRR!"),
 			new Enemy(map::SNOWLAND, Point(42, 29), ICE_BEAR, LEFT, save_id, true, "GRR!"),
 			new Enemy(map::SNOWLAND, Point(57, 33), ICE_BEAR, UP, save_id, true, "GRR!"),
