@@ -74,7 +74,7 @@ namespace game {
 		game_objects::draw_over_player();
 		game_objects::draw_textbox();
 
-		overlay::draw_statusbar(player_handler::get_health());
+		overlay::draw_statusbar();
 
 		if (sidemenu::is_open()) {
 			sidemenu::draw();

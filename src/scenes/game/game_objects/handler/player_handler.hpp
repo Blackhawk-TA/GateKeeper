@@ -20,6 +20,9 @@ namespace game::player_handler {
 	void set_cut_scene(bool value);
 	bool in_cut_scene();
 	bool is_dead();
+	uint16_t get_gold();
+	void add_gold(uint16_t amount);
+	bool remove_gold(uint16_t amount);
 	CharacterData get_character_data();
 	save::PlayerData get_save();
 	void load_save(save::PlayerData save_data);

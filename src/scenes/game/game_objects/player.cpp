@@ -23,6 +23,7 @@ namespace game {
 		//Init properties
 		health = MAX_HEALTH;
 		level = 1;
+		gold = 0;
 		cut_scene = false;
 		dead = false;
 		story_state = StoryState::START;
@@ -191,6 +192,7 @@ namespace game {
 		return save::PlayerData{
 			health,
 			level,
+			gold,
 			current_direction,
 			story_state,
 		};
@@ -199,6 +201,7 @@ namespace game {
 	void Player::load_save(save::PlayerData save_data) {
 		health = save_data.health;
 		level = save_data.level;
+		gold = save_data.gold;
 
 		//Remove gear on first death
 		if (save_data.story_state == StoryState::FIRST_DEATH) {
@@ -239,5 +242,26 @@ namespace game {
 
 	bool Player::is_dead() const {
 		return dead;
+	}
+
+	uint16_t Player::get_gold() const {
+		return gold;
+	}
+
+	void Player::add_gold(uint16_t amount) {
+		if (gold + amount <= MAX_GOLD) {
+			gold += amount;
+		} else {
+			gold = MAX_GOLD;
+		}
+	}
+
+	bool Player::remove_gold(uint16_t amount) {
+		if (gold - amount >= 0) {
+			gold -= amount;
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

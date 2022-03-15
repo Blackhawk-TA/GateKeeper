@@ -62,7 +62,19 @@ namespace game::player_handler {
 	}
 
 	bool is_dead() {
-		return  player->is_dead();
+		return player->is_dead();
+	}
+
+	uint16_t get_gold() {
+		return player->get_gold();
+	}
+
+	void add_gold(uint16_t amount) {
+		player->add_gold(amount);
+	}
+
+	bool remove_gold(uint16_t amount) {
+		return player->remove_gold(amount);
 	}
 
 	CharacterData get_character_data() {

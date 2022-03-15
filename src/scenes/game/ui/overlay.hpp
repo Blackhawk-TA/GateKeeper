@@ -6,5 +6,5 @@
 #include "32blit.hpp"
 
 namespace game::overlay {
-	void draw_statusbar(uint8_t health);
+	void draw_statusbar();
 }

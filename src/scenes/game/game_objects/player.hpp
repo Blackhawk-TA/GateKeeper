@@ -16,6 +16,7 @@ namespace game {
 	class Player {
 	public:
 		static const uint8_t MAX_HEALTH = 100;
+		static const uint16_t MAX_GOLD = 999;
 
 		explicit Player(uint8_t current_save_id);
 		void draw();
@@ -23,6 +24,9 @@ namespace game {
 		void move(MovementDirection direction);
 		void heal(uint8_t heal_amount);
 		uint8_t get_health() const;
+		uint16_t get_gold() const;
+		void add_gold(uint16_t amount);
+		bool remove_gold(uint16_t amount);
 		MovementDirection get_direction();
 		void change_direction(MovementDirection direction, bool animate = true);
 		void set_cut_scene(bool value);
@@ -51,6 +55,7 @@ namespace game {
 		bool cut_scene;
 		bool dead;
 		uint16_t sprite_id;
+		uint16_t gold;
 		uint8_t sprite_index;
 		uint8_t health;
 		uint8_t save_id;
