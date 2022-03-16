@@ -105,6 +105,9 @@ namespace savegame {
 	}
 
 	void load(uint8_t save_id, SaveOptions options) {
+		//Reset save icon
+		game::overlay::save_time = 0;
+
 		save::SaveData save_data;
 		uint8_t load_save_id = options.tmp_save ? TMP_SAVE_ID : save_id;
 

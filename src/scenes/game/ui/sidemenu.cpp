@@ -51,6 +51,31 @@ namespace game::sidemenu {
 						items::create_gear_item(GEAR_NAVIGATE_BACK),
 					}
 				}
+			}, {
+				ITEM_SHOP,
+				MenuData{
+					false,
+					Rect(15, 0, 5, 8),
+					{
+						items::create_shop_item(items::SHOP_APPLE),
+						items::create_shop_item(items::SHOP_CARROT),
+						items::create_shop_item(items::SHOP_CARROT_SEED),
+						items::create_shop_item(items::SHOP_BACK),
+					},
+				}
+			}, {
+				GEAR_SHOP,
+				MenuData{
+					false,
+					Rect(16, 0, 4, 8),
+					{
+						items::create_shop_item(items::SHOP_ARROW),
+						items::create_shop_item(items::SHOP_DAGGER),
+						items::create_shop_item(items::SHOP_SPEAR),
+						items::create_shop_item(items::SHOP_SWORD),
+						items::create_shop_item(items::SHOP_BACK),
+					},
+				}
 			}
 		};
 

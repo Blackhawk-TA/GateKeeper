@@ -79,6 +79,13 @@ set(PROJECT_SOURCE
         src/items/menu/load_entry.cpp
         src/items/menu/new_save_entry.cpp
         src/items/generic/options_entry.cpp
+        src/items/shop/apple.cpp
+        src/items/shop/arrow.cpp
+        src/items/shop/carrot.cpp
+        src/items/shop/carrot_seed.cpp
+        src/items/shop/dagger.cpp
+        src/items/shop/spear.cpp
+        src/items/shop/sword.cpp
         src/scenes/game/game_objects/characters/template/character.cpp src/scenes/game/game_objects/characters/template/character.hpp
         src/scenes/game/game_objects/characters/enemy.cpp src/scenes/game/game_objects/characters/enemy.hpp
         src/scenes/game/game_objects/characters/salesman.cpp src/scenes/game/game_objects/characters/salesman.hpp

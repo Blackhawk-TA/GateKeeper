@@ -52,6 +52,17 @@ namespace items {
 		ATTACK_SHOCK = 9,
 	};
 
+	enum SHOP_ITEM {
+		SHOP_APPLE = 1,
+		SHOP_CARROT = 2,
+		SHOP_CARROT_SEED = 3,
+		SHOP_SWORD = 4,
+		SHOP_DAGGER = 5,
+		SHOP_ARROW = 6,
+		SHOP_SPEAR = 7,
+		SHOP_BACK = 8,
+	};
+
 	//Item generators
 	Listbox::Item create_inventory_item(INVENTORY_ITEM item_type);
 	Listbox::Item create_sidemenu_item(SIDEMENU_ITEM item_type, uint8_t save_id = 0);
@@ -59,6 +70,7 @@ namespace items {
 	Listbox::Item create_options_item(OPTIONS_ITEM item_type, uint8_t save_id = 0);
 	Listbox::Item create_combat_item(COMBAT_ITEM item_type, uint8_t save_id = 0, combat::Player *player = nullptr, combat::Enemy *enemy = nullptr);
 	Listbox::Item create_gear_item(GEAR_TYPE item_type);
+	Listbox::Item create_shop_item(SHOP_ITEM item_type);
 
 	//Generic items
 	Listbox::Item create_options_entry(uint8_t type_id, uint8_t save_id = 0);
@@ -105,4 +117,13 @@ namespace items {
 	Listbox::Item create_gear_fire(uint8_t type_id);
 	Listbox::Item create_gear_ice(uint8_t type_id);
 	Listbox::Item create_gear_shock(uint8_t type_id);
+
+	//Shop items
+	Listbox::Item create_shop_apple(uint8_t type_id);
+	Listbox::Item create_shop_carrot(uint8_t type_id);
+	Listbox::Item create_shop_carrot_seed(uint8_t type_id);
+	Listbox::Item create_shop_sword(uint8_t type_id);
+	Listbox::Item create_shop_dagger(uint8_t type_id);
+	Listbox::Item create_shop_arrow(uint8_t type_id);
+	Listbox::Item create_shop_spear(uint8_t type_id);
 }

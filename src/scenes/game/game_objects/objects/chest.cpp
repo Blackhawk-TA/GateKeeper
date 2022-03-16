@@ -22,6 +22,8 @@ namespace game {
 			textbox = new Textbox("The chest is empty.");
 			return false;
 		}
+
+		return false;
 	}
 
 	GameObject::ObjectType Chest::get_type() {

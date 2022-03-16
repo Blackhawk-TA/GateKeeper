@@ -11,7 +11,8 @@
 namespace game::game_objects {
 	std::vector<GameObject*> create_interior_objects(uint8_t save_id, StoryState story_state) {
 		std::vector<GameObject*> objects = {
-			new Salesman(map::INTERIOR, Point(31, 20)),
+			new Salesman(map::INTERIOR, Point(31, 20), Salesman::Supply::ITEMS),
+			new Salesman(map::INTERIOR, Point(25, 55), Salesman::Supply::GEAR),
 			new Nurse(map::INTERIOR, Point(54, 20)),
 			new Nurse(map::INTERIOR, Point(54, 37)),
 

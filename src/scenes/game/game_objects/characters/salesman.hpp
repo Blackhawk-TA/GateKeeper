@@ -7,14 +7,21 @@
 
 namespace game {
 	class Salesman : public Character {
-	private:
-		const uint16_t TILE_ID = 20;
-		const uint8_t BAR_HEIGHT = 1;
-		const uint16_t COOLDOWN_MS = 60000;
-
 	public:
-		explicit Salesman(map::MapSection map_section, Point position);
+		enum Supply {
+			ITEMS = 1,
+			GEAR = 2,
+		};
+
+		explicit Salesman(map::MapSection map_section, Point position, Supply supply);
 		~Salesman() override = default;
+
+	private:
+		const uint8_t BAR_HEIGHT = 1;
+		Supply supply;
+		std::string message;
+
 		bool player_interact() override;
+		void close_textbox() override;
 	};
 }

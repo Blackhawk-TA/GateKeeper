@@ -167,4 +167,37 @@ namespace items {
 
 		return item;
 	}
+
+	Listbox::Item create_shop_item(SHOP_ITEM item_type) {
+		Listbox::Item item;
+
+		switch (item_type) {
+			case SHOP_APPLE:
+				item = create_shop_apple(item_type);
+				break;
+			case SHOP_CARROT:
+				item = create_shop_carrot(item_type);
+				break;
+			case SHOP_CARROT_SEED:
+				item = create_shop_carrot_seed(item_type);
+				break;
+			case SHOP_SWORD:
+				item = create_shop_sword(item_type);
+				break;
+			case SHOP_DAGGER:
+				item = create_shop_dagger(item_type);
+				break;
+			case SHOP_ARROW:
+				item = create_shop_arrow(item_type);
+				break;
+			case SHOP_SPEAR:
+				item = create_shop_spear(item_type);
+				break;
+			case SHOP_BACK:
+				item = create_back_entry(item_type);
+				break;
+		}
+
+		return item;
+	}
 }
