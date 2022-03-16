@@ -9,6 +9,7 @@
 #include "../../scenes/game/ui/sidemenu.hpp"
 #include "../../scenes/game/game_objects/handler/save_game_objects.hpp"
 #include "../../scenes/game/game_objects/handler/player_handler.hpp"
+#include "../../scenes/game/ui/overlay.hpp"
 
 namespace savegame {
 	PlayerTempData get_player_temp_data(SaveOptions options, save::SaveData save_data) {
@@ -98,6 +99,9 @@ namespace savegame {
 		} else {
 			write_save(save_data, save_id);
 		}
+
+		//Show save icon by setting save time
+		game::overlay::save_time = game_time::get_time();
 	}
 
 	void load(uint8_t save_id, SaveOptions options) {

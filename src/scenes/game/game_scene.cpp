@@ -76,6 +76,7 @@ namespace game {
 		game_objects::draw_textbox();
 
 		overlay::draw_statusbar();
+		overlay::draw_save_icon();
 
 		if (sidemenu::is_open()) {
 			sidemenu::draw();
