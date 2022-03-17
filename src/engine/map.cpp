@@ -24,7 +24,8 @@ Pen background;
 map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 	std::vector<map::Tile> tile_data;
 	Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
-	uint16_t tile_range, tile_id, i;
+	uint16_t tile_id, i;
+	uint8_t tile_range;
 	uint8_t tile_x = 0;
 	uint8_t tile_y = 0;
 	uint16_t data_length = tmx->data[0]; //First array entry is the array length

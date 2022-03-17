@@ -32,7 +32,7 @@ namespace map {
 		uint8_t x;
 		uint8_t y;
 		uint8_t flag;
-		uint16_t range;
+		uint8_t range;
 		uint16_t sprite_rect_x;
 		uint16_t sprite_rect_y;
 	};
