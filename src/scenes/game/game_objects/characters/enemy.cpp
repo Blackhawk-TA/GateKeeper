@@ -118,6 +118,11 @@ namespace game {
 					1.0,
 					{GEAR_SWORD, GEAR_DAGGER, GEAR_ARROW, GEAR_SPEAR},
 				};
+			case RED_GUARD:
+				return CharacterStats{
+					2.0,
+					{GEAR_FIRE, GEAR_ICE, GEAR_SHOCK, GEAR_MAGIC, GEAR_SWORD}
+				};
 			case SPIDER:
 			case BROWN_BEAR:
 			case ICE_BEAR:
