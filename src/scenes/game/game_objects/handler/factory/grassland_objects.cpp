@@ -31,7 +31,7 @@ namespace game::game_objects {
 			new CarrotBed(map::GRASSLAND, Point(16, 43)),
 			new CarrotBed(map::GRASSLAND, Point(17, 43)),
 			new CarrotBed(map::GRASSLAND, Point(18, 43)),
-			new Villager(map::GRASSLAND, Point(24, 15), 0, LEFT, "Hello there!"),
+			new Villager(map::GRASSLAND, Point(24, 15), 0, LEFT, "A myth says that there are crystals hidden in multiple dungeons. It is said that they grant special powers to their owner."),
 
 			new Chest(map::GRASSLAND, Point(11, 14)),
 			new Chest(map::GRASSLAND, Point(35, 38)),

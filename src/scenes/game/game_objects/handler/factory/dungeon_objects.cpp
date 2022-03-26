@@ -26,7 +26,7 @@ namespace game::game_objects {
 		return {
 			new GateStatue(map::DUNGEON, Point(14, 22)),
 			new Crystal(map::DUNGEON, Point(55, 35), Crystal::PURPLE),
-			new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to keep the gate closed and protect the village."),
+			new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to hide a gate part to repair the gate in case it gets destroyed."),
 			new DungeonDoor( static_cast<map::MapSection>(interaction_signature.map_section), Point(interaction_signature.x, interaction_signature.y)),
 
 			new Enemy(map::DUNGEON, Point(36, 36), SPIDER, DOWN, save_id),
