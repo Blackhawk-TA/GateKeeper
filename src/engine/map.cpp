@@ -8,6 +8,7 @@
 #include "map.hpp"
 #include "flags.hpp"
 #include "camera.hpp"
+#include "engine/fast_code.hpp"
 
 using namespace blit;
 
@@ -155,7 +156,7 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
  * Draws the tile map to the screen if a TileMap is loaded in the memory
  * @param camera_position The position of the camera on the TileMap
  */
-void map::draw() {
+void blit_fast_code(map::draw)() {
 	screen.pen = background;
 	screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
 
