@@ -48,8 +48,8 @@ namespace game::game_objects {
 							  "You look well armed, maybe you could be this warrior? I really hope so. However, have a nice day!";
 			std::string alt_msg = "We can only be free once the brutal king is dead. He lives in a castle in middle of a desert.";
  			objects.emplace_back(new StoryCharacter(map::GRASSLAND, Point(27, 22), 12, UP, true, msg, alt_msg));
-			objects.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, DOWN, "I cannot let you pass yet. You should talk to the elder in the village first."));
-			objects.emplace_back(new Villager(map::GRASSLAND, Point(52, 51), 268, DOWN, "I cannot let you pass yet. You should talk to the elder in the village first."));
+			objects.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, DOWN, "I cannot let you pass yet."));
+			objects.emplace_back(new Villager(map::GRASSLAND, Point(20, 30), 272, RIGHT, "I cannot let you go through yet."));
 		}
 
 		return objects;

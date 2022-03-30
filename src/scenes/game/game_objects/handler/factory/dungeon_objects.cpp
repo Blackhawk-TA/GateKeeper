@@ -24,8 +24,8 @@ namespace game::game_objects {
 		};
 
 		return {
+			//Main dungeon
 			new GateStatue(map::DUNGEON, Point(14, 22)),
-			new Crystal(map::DUNGEON, Point(55, 35), Crystal::PURPLE),
 			new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to hide a gate part to repair the gate in case it gets destroyed."),
 			new DungeonDoor( static_cast<map::MapSection>(interaction_signature.map_section), Point(interaction_signature.x, interaction_signature.y)),
 
@@ -41,8 +41,17 @@ namespace game::game_objects {
 
 			new Chest(map::DUNGEON, Point(11, 24)),
 			new Chest(map::DUNGEON, Point(18, 24)),
-			new Chest(map::DUNGEON, Point(54, 36)),
-			new Chest(map::DUNGEON, Point(56, 36)),
+
+			//Mini dungeon
+			new Crystal(map::DUNGEON, Point(58, 2), Crystal::PURPLE),
+
+			new Chest(map::DUNGEON, Point(55, 3)),
+			new Chest(map::DUNGEON, Point(61, 3)),
+
+			new Enemy(map::DUNGEON, Point(56, 15), SPIDER, RIGHT, save_id),
+			new Enemy(map::DUNGEON, Point(60, 15), SPIDER, LEFT, save_id),
+			new Enemy(map::DUNGEON, Point(56, 10), SPIDER, RIGHT, save_id),
+			new Enemy(map::DUNGEON, Point(60, 10), SPIDER, LEFT, save_id),
 		};
 	}
 }
