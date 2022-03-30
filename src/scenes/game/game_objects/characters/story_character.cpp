@@ -13,7 +13,7 @@ namespace game {
 		StoryCharacter::tile_id = tile_id;
 		StoryCharacter::message = std::move(message);
 		StoryCharacter::alt_message = std::move(alt_message);
-		StoryCharacter::turn = turn;
+		StoryCharacter::turn = false;
 		StoryCharacter::default_turn_value = turn;
 		set_movement_sprites();
 		change_direction(direction, false);
