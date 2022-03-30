@@ -58,18 +58,18 @@ namespace savegame {
 	}
 
 	void create(uint8_t save_id) {
-		Point start_position = Point(22, 13);
+		Point start_position = Point(1, 23);
 
-		map::load_section(map::GRASSLAND);
+		map::load_section(map::INTERIOR);
 		camera::init(start_position);
 		game::sidemenu::init(save_id);
-		game::game_objects::init(map::GRASSLAND, save_id, StoryState::START);
+		game::game_objects::init(map::INTERIOR, save_id, StoryState::START);
 		game_time::init();
 		game::player_handler::load_save(save::PlayerData{
 			100,
 			1,
 			0,
-			DOWN,
+			RIGHT,
 			StoryState::START,
 		});
 	}

@@ -16,7 +16,7 @@ namespace gameover {
 		changed = 0;
 
 		if (finished_game) {
-			textbox = new Textbox("You defeated the evil king. The villagers are now safe again. Thank you for playing.");
+			textbox = new Textbox("You defeated the king and ended his reign of terror. The villagers are now safe again. Thank you for playing.");
 		} else {
 			textbox = new Textbox("You became unconscious. You wake up at the hospital.");
 		}

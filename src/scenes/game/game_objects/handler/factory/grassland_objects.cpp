@@ -31,7 +31,7 @@ namespace game::game_objects {
 			new CarrotBed(map::GRASSLAND, Point(16, 43)),
 			new CarrotBed(map::GRASSLAND, Point(17, 43)),
 			new CarrotBed(map::GRASSLAND, Point(18, 43)),
-			new Villager(map::GRASSLAND, Point(24, 15), 0, LEFT, "A myth says that there are crystals hidden in multiple dungeons. It is said that they grant special powers to their owner."),
+			new Villager(map::GRASSLAND, Point(20, 15), 260, RIGHT, "A myth says that there are crystals hidden in multiple dungeons. It is said that they grant special powers to their owner."),
 
 			new Chest(map::GRASSLAND, Point(11, 14)),
 			new Chest(map::GRASSLAND, Point(35, 38)),
@@ -39,13 +39,16 @@ namespace game::game_objects {
 		};
 
 		if (story_state == StoryState::START) {
-			std::string msg = "Hello traveler I'm the elder of this village. The gate behind you is a portal to different worlds. "
-							  "Unfortunately the new king limits gate travel by guarding the gate to the castle from which "
-							  "he suppresses us. I hope someday a traveler arrives that brings the kings reign of terror to an end. "
-							  "You look well armed, do you think you could try your best to liberate us from that brutal king?";
+			std::string msg = "Hello! It's great that you decided to move to our village. Let me give you a short introduction. "
+							  "I'm the elder of this village. To the north there is a gate that is a portal to different worlds. "
+							  "This gate leads to the castle of the king but it is heavily guarded because the king is suppressing us. "
+							  "He is afraid of losing his power, but nobody was brave enough to challenge him yet. "
+							  "I hope some day a great warrior arrives that brings the kings reign of terror to an end. "
+							  "You look well armed, maybe you could be this warrior? I really hope so. However, have a nice day!";
 			std::string alt_msg = "We can only be free once the brutal king is dead. He lives in a castle in middle of a desert.";
- 			objects.emplace_back(new StoryCharacter(map::GRASSLAND, Point(28, 13), 12, LEFT, true, msg, alt_msg));
-			objects.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, DOWN, "I cannot let you pass yet. You should talk to the elder first."));
+ 			objects.emplace_back(new StoryCharacter(map::GRASSLAND, Point(27, 22), 12, UP, true, msg, alt_msg));
+			objects.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, DOWN, "I cannot let you pass yet. You should talk to the elder in the village first."));
+			objects.emplace_back(new Villager(map::GRASSLAND, Point(52, 51), 268, DOWN, "I cannot let you pass yet. You should talk to the elder in the village first."));
 		}
 
 		return objects;
