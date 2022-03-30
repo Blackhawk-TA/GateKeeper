@@ -14,7 +14,7 @@
 namespace game::game_objects {
 	std::vector<GameObject*> create_grassland_objects(uint8_t save_id, StoryState story_state) {
 		std::vector<GameObject*> objects = {
-			new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, false),
+			new Stargate(map::GRASSLAND, Point(21, 7), GRASSLAND_ENDGAME, DESERT, true),
 			new Stargate(map::GRASSLAND, Point(51, 10), GRASSLAND, WINTER, false),
 			new Stargate(map::SNOWLAND, Point(8, 37), WINTER, GRASSLAND, false),
 			new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false),
@@ -32,6 +32,7 @@ namespace game::game_objects {
 			new CarrotBed(map::GRASSLAND, Point(17, 43)),
 			new CarrotBed(map::GRASSLAND, Point(18, 43)),
 			new Villager(map::GRASSLAND, Point(20, 15), 260, RIGHT, "A myth says that there are crystals hidden in multiple dungeons. It is said that they grant special powers to their owner."),
+			new StoryCharacter(map::GRASSLAND, Point(23, 12), 0, LEFT, true, "The gate is broken, you need a gate part to repair it. I have heard that they are hidden in dungeons sometimes.", "It is said that gate parts are hidden in dungeons."),
 
 			new Chest(map::GRASSLAND, Point(11, 14)),
 			new Chest(map::GRASSLAND, Point(35, 38)),
@@ -41,8 +42,8 @@ namespace game::game_objects {
 		if (story_state == StoryState::START) {
 			std::string msg = "Hello! It's great that you decided to move to our village. Let me give you a short introduction. "
 							  "I'm the elder of this village. To the north there is a gate that is a portal to different worlds. "
-							  "This gate leads to the castle of the king but it is heavily guarded because the king is suppressing us. "
-							  "He is afraid of losing his power, but nobody was brave enough to challenge him yet. "
+							  "This gate leads to the castle of the king but it is broken because the king who is suppressing us "
+							  "is afraid of losing his power. Nobody was brave enough to repair the gate and challenge him yet. "
 							  "I hope some day a great warrior arrives that brings the kings reign of terror to an end. "
 							  "You look well armed, maybe you could be this warrior? I really hope so. However, have a nice day!";
 			std::string alt_msg = "We can only be free once the brutal king is dead. He lives in a castle in middle of a desert.";
