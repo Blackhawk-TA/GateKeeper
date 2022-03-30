@@ -16,7 +16,7 @@ Listbox::Item items::create_combat_escape(uint8_t type_id, uint8_t save_id) {
 		0,
 		[save_id] {
 			if (combat::character_handler::escape()) {
-				combat::character_handler::load_game_scene(save_id, false);
+				combat::character_handler::load_game_scene(save_id, false, false);
 				return Listbox::Tooltip::SUCCESS;
 			} else {
 				return Listbox::Tooltip::FAILURE;

@@ -23,6 +23,7 @@ namespace combat {
 		Signature signature;
 		Character *target;
 		Textbox *textbox;
+		CombatCharacterType enemy_type;
 		void handle_death() override;
 	};
 }

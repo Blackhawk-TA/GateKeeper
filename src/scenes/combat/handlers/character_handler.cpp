@@ -109,17 +109,23 @@ namespace combat::character_handler {
 		}
 	}
 
-	void load_game_scene(uint8_t save_id, bool won) {
+	void load_game_scene(uint8_t save_id, bool won, bool finished_game) {
 		SceneOptions options = {
 			save_id,
 			{},
 			GameData{
 				enemy->get_signature(),
 				player->get_health(),
-				won
+				won,
+				finished_game,
 			},
 			true,
 		};
-		load_scene(SceneType::GAME, options);
+
+		if (finished_game) {
+			load_scene(SceneType::GAMEOVER, options);
+		} else {
+			load_scene(SceneType::GAME, options);
+		}
 	}
 }

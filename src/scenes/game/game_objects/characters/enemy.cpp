@@ -76,6 +76,7 @@ namespace game {
 				utils::get_attack_sprites(character_type),
 				0,
 				0,
+				character_type,
 			}
 		};
 		SceneOptions options = {

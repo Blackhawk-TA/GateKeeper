@@ -16,7 +16,7 @@ namespace combat::character_handler {
 	Enemy *get_enemy();
 	Player *get_player();
 	void next_turn(Character *last_turn);
-	void load_game_scene(uint8_t save_id, bool won);
+	void load_game_scene(uint8_t save_id, bool won, bool finished_game);
 	bool escape();
 	bool attack(GEAR_TYPE type, Character *attacker, Character *target);
 }

@@ -12,6 +12,7 @@ namespace combat {
 		Enemy::signature = character_data.signature;
 		stats = character_data.stats;
 		health = MAX_HEALTH;
+		enemy_type = character_data.character_type;
 		textbox = nullptr;
 	}
 
@@ -43,7 +44,10 @@ namespace combat {
 	}
 
 	void Enemy::handle_death() {
-		character_handler::load_game_scene(save_id, true);
+		//The red guard is the end boss. If he is defeated, the game is over.
+		bool finished_game = enemy_type == CombatCharacterType::RED_GUARD;
+
+		character_handler::load_game_scene(save_id, true, finished_game);
 	}
 
 	void Enemy::draw() {

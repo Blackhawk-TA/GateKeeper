@@ -39,9 +39,19 @@ namespace savegame {
 			player_data.direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
 			player_data.camera_position = save_data.previous_camera_position;
 			player_data.health = options.game_data.health;
-		} else if (options.tmp_save && options.game_data.won) { //Win
+		} else if (options.tmp_save && options.game_data.won && !options.game_data.finished_game) { //Win
 			player_data.health = options.game_data.health;
 			player_data.enemy_signature = options.game_data.enemy_signature;
+		} else if (options.tmp_save && options.game_data.won && options.game_data.finished_game) { //Win + finished game
+			player_data = {
+				map::INTERIOR,
+				MovementDirection::RIGHT,
+				Point(1, 23),
+				Point(1, 23),
+				combat::Character::MAX_HEALTH,
+				COMPLETED,
+				{}
+			};
 		}
 
 		return player_data;

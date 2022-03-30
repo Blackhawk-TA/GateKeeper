@@ -62,6 +62,7 @@ struct CharacterData {
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> attack_sprites{};
 	uint8_t health = 100;
 	uint8_t level = 1;
+	CombatCharacterType character_type{};
 };
 
 //Data that is handed over from the game to the combat scene
@@ -76,6 +77,7 @@ struct GameData {
 	Signature enemy_signature{};
 	uint8_t health = 0;
 	bool won = false;
+	bool finished_game = false;
 };
 
 //The parameters that can be set for loading a save game
@@ -89,6 +91,7 @@ enum StoryState {
 	START = 1, //The first part of the game were the player starts with default weapons
 	FIRST_DEATH = 2, //Symbolises that the players gear must be removed on first death
 	FIRST_HOSPITAL_WAKEUP = 3, //The player died the first time and woke up at the hospital
+	COMPLETED = 4, //The end boss was beaten, the game is finished
 };
 
 //Data that is required for load a player from a save
