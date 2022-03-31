@@ -46,6 +46,6 @@ namespace combat {
 			{},
 			true,
 		};
-		load_scene(GAMEOVER, options);
+		load_scene(SceneType::GAMEOVER, options);
 	}
 }

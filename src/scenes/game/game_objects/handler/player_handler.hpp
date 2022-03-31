@@ -19,7 +19,6 @@ namespace game::player_handler {
 	void change_direction(MovementDirection direction, bool animate = true);
 	void set_cut_scene(bool value);
 	bool in_cut_scene();
-	bool is_dead();
 	uint16_t get_gold();
 	void add_gold(uint16_t amount);
 	bool remove_gold(uint16_t amount);

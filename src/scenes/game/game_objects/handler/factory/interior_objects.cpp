@@ -27,7 +27,7 @@ namespace game::game_objects {
 			new Chest(map::INTERIOR, Point(11, 41)),
 		};
 
-		if (story_state == StoryState::FIRST_DEATH || story_state == StoryState::FIRST_HOSPITAL_WAKEUP) {
+		if (story_state >= StoryState::FIRST_DEATH) {
 			std::string msg = "Oh hey, you're awake! I'm not sure if you can remember what happened. You challenged the "
 							  "guards at the gate. They struck you down and stole all your weapons. They went back back "
 							  "through the gate while you were unconscious and destroyed it to prevent us from ever "

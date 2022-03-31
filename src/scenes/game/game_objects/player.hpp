@@ -31,7 +31,6 @@ namespace game {
 		void change_direction(MovementDirection direction, bool animate = true);
 		void set_cut_scene(bool value);
 		bool in_cut_scene() const;
-		bool is_dead() const;
 		CharacterData get_character_data();
 		save::PlayerData get_save();
 		void load_save(save::PlayerData save_data);
@@ -53,7 +52,6 @@ namespace game {
 
 		bool is_animating;
 		bool cut_scene;
-		bool dead;
 		uint16_t sprite_id;
 		uint16_t gold;
 		uint8_t sprite_index;

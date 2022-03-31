@@ -37,7 +37,7 @@ namespace game {
 		flags::set_flags(flags::TileFlags::ELEVATE_2PX, {1493});
 		flags::set_flags(flags::TileFlags::ELEVATE_3PX, {186, 2861});
 		flags::set_flags(flags::TileFlags::ENTRY, {
-			141, 200, 294, 295, 515, 517, 676, 740, 965, 1425, 1573, 1997, 2098, 2371, 2373, 2629, 2821
+			141, 200, 294, 295, 515, 517, 676, 740, 773, 965, 1425, 1573, 1997, 2098, 2371, 2373, 2629, 2821
 		});
 		flags::set_flags(flags::TileFlags::DEADLY, {
 			56, 57, 58, 248, 249, 250, 3497, 3498, 3560, 3561, 3562, 3563, 3624, 3625, 3626, 3627, 3688, 3689, 3690,
@@ -52,8 +52,8 @@ namespace game {
 	}
 
 	Scene::~Scene() {
-		//Auto save
-		if (!player_handler::is_dead()) {
+		//Auto save when player is alive
+		if (player_handler::get_health() > 0) {
 			if (player_handler::in_cut_scene()) {
 				//When changing scene on cut scene create temporary save
 				savegame::save(save_id, true);

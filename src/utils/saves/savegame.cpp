@@ -24,16 +24,21 @@ namespace savegame {
 			{}
 		};
 
-		//On tmp save manually overwrite player_data depending on the outcome of the fight in the combat scene
-		if (options.tmp_save && options.game_data.health == 0 && !options.game_data.won) { //Loss
+		//On tmp save manually overwrite player_data depending on the outcome of the fight in the combat scene or death by world
+		if (options.game_data.health == 0 && !options.game_data.won) { //Loss + death by world
+			StoryState story_state = save_data.player_data.story_state;
+
+			if (save_data.map_section == map::DESERT && save_data.player_data.story_state == START) {
+				story_state = FIRST_DEATH;
+			}
+
 			player_data = {
 				map::INTERIOR,
 				MovementDirection::DOWN,
 				Point(45, 20),
 				Point(45, 20),
 				combat::Character::MAX_HEALTH,
-				save_data.player_data.story_state == START ? FIRST_DEATH : FIRST_HOSPITAL_WAKEUP,
-				{}
+				story_state
 			};
 		} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won) { //Escape
 			player_data.direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));

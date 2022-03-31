@@ -12,6 +12,7 @@ namespace gameover {
 		save_id = options.save_id;
 		won = options.game_data.won;
 		finished_game = options.game_data.finished_game;
+		tmp_save = options.tmp_save;
 		last_buttons = 0;
 		changed = 0;
 
@@ -21,9 +22,11 @@ namespace gameover {
 			textbox = new Textbox("You became unconscious. You wake up at the hospital.");
 		}
 
-		bool save_converted = savegame::convert_tmp_save(save_id);
-		if (!save_converted) {
-			std::cerr << "Could not convert temporary save to normal save" << std::endl; //This should never happen
+		if (tmp_save) {
+			bool save_converted = savegame::convert_tmp_save(save_id);
+			if (!save_converted) {
+				std::cerr << "Could not convert temporary save to normal save" << std::endl; //This should never happen
+			}
 		}
 	}
 
@@ -56,7 +59,7 @@ namespace gameover {
 					won,
 					finished_game,
 				},
-				true,
+				tmp_save,
 			};
 			load_scene(GAME, options);
 		}

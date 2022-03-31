@@ -61,10 +61,6 @@ namespace game::player_handler {
 		return player->in_cut_scene();
 	}
 
-	bool is_dead() {
-		return player->is_dead();
-	}
-
 	uint16_t get_gold() {
 		return player->get_gold();
 	}

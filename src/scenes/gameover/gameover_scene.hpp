@@ -24,5 +24,6 @@ namespace gameover {
 		uint32_t changed;
 		bool won;
 		bool finished_game;
+		bool tmp_save;
 	};
 }

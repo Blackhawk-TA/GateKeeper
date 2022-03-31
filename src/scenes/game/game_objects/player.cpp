@@ -25,7 +25,6 @@ namespace game {
 		level = 1;
 		gold = 0;
 		cut_scene = false;
-		dead = false;
 		story_state = StoryState::START;
 
 		//Init graphics
@@ -37,7 +36,7 @@ namespace game {
 	}
 
 	bool Player::in_action() const {
-		return camera::is_moving() || dead || cut_scene || transition::in_process();
+		return camera::is_moving() || health == 0 || cut_scene || transition::in_process();
 	}
 
 	void Player::draw() {
@@ -63,11 +62,11 @@ namespace game {
 		if (health - damage_amount > 0) {
 			health -= damage_amount;
 		} else {
-			dead = true;
+			health = 0;
 			SceneOptions options = {
 				save_id,
 			};
-			load_scene(GAMEOVER, options);
+			load_scene(SceneType::GAMEOVER, options);
 		}
 	}
 
@@ -238,10 +237,6 @@ namespace game {
 
 	bool Player::in_cut_scene() const {
 		return cut_scene;
-	}
-
-	bool Player::is_dead() const {
-		return dead;
 	}
 
 	uint16_t Player::get_gold() const {
