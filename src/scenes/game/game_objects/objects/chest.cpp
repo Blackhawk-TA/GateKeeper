@@ -13,7 +13,7 @@ namespace game {
 
 	bool Chest::player_interact() {
 		if (state == CLOSED && player_usable && player_in_front()) {
-			uint16_t gold = blit::random() % 15 + 15;
+			uint16_t gold = blit::random() % 20 + 15;
 			textbox = new Textbox("You found " + std::to_string(gold) + " gold in the chest.");
 			player_handler::add_gold(gold);
 			set_state(OPEN);

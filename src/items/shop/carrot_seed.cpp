@@ -7,7 +7,7 @@
 #include "../../scenes/game/game_objects/handler/player_handler.hpp"
 
 Listbox::Item items::create_shop_carrot_seed(uint8_t type_id) {
-	uint8_t price = 5;
+	uint8_t price = 3;
 	return Listbox::Item{
 		type_id,
 		"Carrot Seed",

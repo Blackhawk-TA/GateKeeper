@@ -7,7 +7,7 @@
 #include "../../scenes/game/game_objects/handler/player_handler.hpp"
 
 Listbox::Item items::create_shop_apple(uint8_t type_id) {
-	uint8_t price = 7;
+	uint8_t price = 5;
 	return Listbox::Item{
 		type_id,
 		"Apple",
