@@ -22,8 +22,8 @@ namespace gameover {
 		uint8_t save_id;
 		uint32_t last_buttons;
 		uint32_t changed;
-		bool won;
-		bool finished_game;
+		bool respawn;
+		bool won_fight;
 		bool tmp_save;
 	};
 }

@@ -109,19 +109,20 @@ namespace combat::character_handler {
 		}
 	}
 
-	void load_game_scene(uint8_t save_id, bool won, bool finished_game) {
+	void load_game_scene(uint8_t save_id, bool respawn, bool won_fight) {
 		SceneOptions options = {
 			save_id,
 			{},
 			GameData{
 				enemy->get_signature(),
 				player->get_health(),
-				won,
-				finished_game,
+				won_fight,
+				respawn,
 			},
 			true,
 		};
 
+		bool finished_game = won_fight && respawn; //After beating the boss the player respawns at his house.
 		if (finished_game) {
 			load_scene(SceneType::GAMEOVER, options);
 		} else {

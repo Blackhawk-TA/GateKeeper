@@ -76,8 +76,8 @@ struct CombatData {
 struct GameData {
 	Signature enemy_signature{};
 	uint8_t health = 0;
-	bool won = false;
-	bool finished_game = false;
+	bool won_fight = false;
+	bool respawn = false;
 };
 
 //The parameters that can be set for loading a save game

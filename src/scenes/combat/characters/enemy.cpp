@@ -44,10 +44,10 @@ namespace combat {
 	}
 
 	void Enemy::handle_death() {
-		//The red guard is the end boss. If he is defeated, the game is over.
-		bool finished_game = enemy_type == CombatCharacterType::RED_GUARD;
+		//The red guard is the end boss. If he is defeated, the game is over and the player is respawned in his house.
+		bool respawn = enemy_type == CombatCharacterType::RED_GUARD;
 
-		character_handler::load_game_scene(save_id, true, finished_game);
+		character_handler::load_game_scene(save_id, respawn, true);
 	}
 
 	void Enemy::draw() {

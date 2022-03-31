@@ -10,13 +10,13 @@
 namespace gameover {
 	Scene::Scene(const SceneOptions& options) {
 		save_id = options.save_id;
-		won = options.game_data.won;
-		finished_game = options.game_data.finished_game;
+		respawn = options.game_data.respawn;
+		won_fight = options.game_data.won_fight;
 		tmp_save = options.tmp_save;
 		last_buttons = 0;
 		changed = 0;
 
-		if (finished_game) {
+		if (won_fight && respawn) { //Game finished by beating the boss and respawning at home
 			textbox = new Textbox("You defeated the king and ended his reign of terror. The villagers are now safe again. Thank you for playing.");
 		} else {
 			textbox = new Textbox("You became unconscious. You wake up at the hospital.");
@@ -56,12 +56,12 @@ namespace gameover {
 				GameData{
 					Signature{},
 					0,
-					won,
-					finished_game,
+					won_fight,
+					respawn,
 				},
 				tmp_save,
 			};
-			load_scene(GAME, options);
+			load_scene(SceneType::GAME, options);
 		}
 
 		last_buttons = buttons;

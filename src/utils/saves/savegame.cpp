@@ -25,7 +25,7 @@ namespace savegame {
 		};
 
 		//On tmp save manually overwrite player_data depending on the outcome of the fight in the combat scene or death by world
-		if (options.game_data.health == 0 && !options.game_data.won) { //Loss + death by world
+		if (options.game_data.health == 0 && !options.game_data.won_fight && options.game_data.respawn) { //Loss + death by world
 			StoryState story_state = save_data.player_data.story_state;
 
 			if (save_data.map_section == map::DESERT && save_data.player_data.story_state == START) {
@@ -40,14 +40,14 @@ namespace savegame {
 				combat::Character::MAX_HEALTH,
 				story_state
 			};
-		} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won) { //Escape
+		} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won_fight && !options.game_data.respawn) { //Escape
 			player_data.direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
 			player_data.camera_position = save_data.previous_camera_position;
 			player_data.health = options.game_data.health;
-		} else if (options.tmp_save && options.game_data.won && !options.game_data.finished_game) { //Win
+		} else if (options.tmp_save && options.game_data.won_fight && !options.game_data.respawn) { //Win
 			player_data.health = options.game_data.health;
 			player_data.enemy_signature = options.game_data.enemy_signature;
-		} else if (options.tmp_save && options.game_data.won && options.game_data.finished_game) { //Win + finished game
+		} else if (options.tmp_save && options.game_data.won_fight && options.game_data.respawn) { //Win + finished game (detected by won + respawn)
 			player_data = {
 				map::INTERIOR,
 				MovementDirection::RIGHT,

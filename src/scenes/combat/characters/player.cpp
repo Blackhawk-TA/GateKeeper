@@ -42,8 +42,13 @@ namespace combat {
 	void Player::handle_death() {
 		SceneOptions options = {
 			save_id,
-			{},
-			{},
+			CombatData{},
+			GameData{
+				{},
+				health,
+				false,
+				true
+				},
 			true,
 		};
 		load_scene(SceneType::GAMEOVER, options);

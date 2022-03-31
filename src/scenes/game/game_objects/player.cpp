@@ -65,6 +65,13 @@ namespace game {
 			health = 0;
 			SceneOptions options = {
 				save_id,
+				CombatData{},
+				GameData{
+					{},
+					health,
+					false,
+					true,
+				},
 			};
 			load_scene(SceneType::GAMEOVER, options);
 		}
