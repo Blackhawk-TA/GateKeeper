@@ -30,6 +30,7 @@ set(PROJECT_SOURCE
         src/scenes/combat/ui/stats.cpp src/scenes/combat/ui/stats.hpp
         src/scenes/game/utils/entry_handler.cpp src/scenes/game/utils/entry_handler.hpp
         src/scenes/game/ui/sidemenu.cpp src/scenes/game/ui/sidemenu.hpp
+        src/scenes/game/ui/notification.cpp src/scenes/game/ui/notification.hpp
         src/scenes/game/game_objects/handler/extensions/character_handler.cpp src/scenes/game/game_objects/handler/extensions/character_handler.hpp
         src/scenes/game/game_objects/handler/game_object_handler.cpp src/scenes/game/game_objects/handler/game_object_handler.hpp
         src/scenes/game/game_objects/handler/player_handler.cpp src/scenes/game/game_objects/handler/player_handler.hpp

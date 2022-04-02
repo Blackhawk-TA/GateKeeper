@@ -6,8 +6,5 @@
 #include "32blit.hpp"
 
 namespace game::overlay {
-	extern uint32_t save_time;
-
 	void draw_statusbar();
-	void draw_save_icon();
 }

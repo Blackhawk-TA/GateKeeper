@@ -20,7 +20,7 @@ namespace game::game_objects {
 			new Stargate(map::DESERT, Point(4, 57), DESERT, GRASSLAND_ENDGAME, false),
 
 			new Sign(map::GRASSLAND, Point(24, 44), Sign::WOOD, "Trees grow fruits which can be eaten. They regrow after harvesting. Carrots can be planted and harvested."),
-			new Sign(map::GRASSLAND, Point(25, 12), Sign::WOOD, "The Stargate is a portal to other worlds! It was closed to keep the village safe."),
+			new Sign(map::GRASSLAND, Point(25, 12), Sign::WOOD, "The Stargate is a portal to other worlds!"),
 			new Sign(map::GRASSLAND, Point(24, 19), Sign::WOOD, "Your house"),
 			new Sign(map::GRASSLAND, Point(18, 12), Sign::WOOD, "The Hospital"),
 			new FruitTree(map::GRASSLAND, Point(11, 16), true),

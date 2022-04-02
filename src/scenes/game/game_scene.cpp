@@ -10,6 +10,7 @@
 #include "utils/utils.hpp"
 #include "ui/sidemenu.hpp"
 #include "game_objects/handler/player_handler.hpp"
+#include "ui/notification.hpp"
 
 namespace game {
 	Scene::Scene(const SceneOptions &options) {
@@ -66,6 +67,7 @@ namespace game {
 		//Delete game objects and inventory after saving
 		game_objects::cleanup();
 		sidemenu::cleanup();
+		notification::cleanup();
 	}
 
 	void Scene::render(uint32_t time) {
@@ -77,7 +79,7 @@ namespace game {
 		game_objects::draw_textbox();
 
 		overlay::draw_statusbar();
-		overlay::draw_save_icon();
+		notification::draw();
 
 		if (sidemenu::is_open()) {
 			sidemenu::draw();
