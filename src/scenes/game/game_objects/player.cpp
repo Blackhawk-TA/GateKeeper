@@ -12,6 +12,7 @@
 #include "../utils/utils.hpp"
 #include "handler/extensions/stargate_handler.hpp"
 #include "../ui/sidemenu.hpp"
+#include "../ui/notification.hpp"
 
 namespace game {
 	Player::Player(uint8_t current_save_id) {
@@ -253,14 +254,18 @@ namespace game {
 	void Player::add_gold(uint16_t amount) {
 		if (gold + amount <= MAX_GOLD) {
 			gold += amount;
+			notification::add_to_queue("+ " + std::to_string(amount) + " Gold");
 		} else {
+			notification::add_to_queue("+ " + std::to_string(MAX_GOLD - gold) + " Gold");
 			gold = MAX_GOLD;
 		}
+
 	}
 
 	bool Player::remove_gold(uint16_t amount) {
 		if (gold - amount >= 0) {
 			gold -= amount;
+			notification::add_to_queue("- " + std::to_string(amount) + " Gold");
 			return true;
 		} else {
 			return false;
