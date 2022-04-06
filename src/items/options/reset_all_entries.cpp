@@ -9,8 +9,8 @@ Listbox::Item items::create_reset_all_entries(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"RESET ALL",
-		"Reset all save data of the game",
-		"Successfully deleted all save data",
+		"Reset all save data of the game.",
+		"Successfully deleted all save data.",
 		"",
 		false,
 		0,

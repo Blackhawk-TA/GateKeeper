@@ -83,6 +83,9 @@ namespace items {
 			case OPTIONS_ITEM::SHOW_FPS:
 				item = create_show_fps_entry(OPTIONS_ITEM::SHOW_FPS);
 				break;
+			case OPTIONS_ITEM::SHOW_TIME:
+				item = create_show_time_entry(OPTIONS_ITEM::SHOW_TIME);
+				break;
 			case OPTIONS_ITEM::OPTIONS_BACK:
 				item = create_options_exit_entry(OPTIONS_ITEM::OPTIONS_BACK, save_id);
 				break;

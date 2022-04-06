@@ -7,6 +7,7 @@
 
 namespace options {
 	bool show_fps = false;
+	bool show_time = false;
 	uint8_t save_count = 0;
 
 	void save() {

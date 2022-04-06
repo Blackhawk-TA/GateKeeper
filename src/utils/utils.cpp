@@ -74,7 +74,7 @@ void draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
 	//Draw fps box
 	screen.alpha = 255;
 	screen.pen = Pen(255, 255, 255, 100);
-	screen.rectangle(Rect(0, screen.bounds.h - 10, 20, 10));
+	screen.rectangle(Rect(0, screen.bounds.h - 10, 20, 9));
 	screen.pen = Pen(0, 0, 0, 200);
 
 	//Calculate frames per second (fps)

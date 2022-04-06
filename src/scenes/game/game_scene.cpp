@@ -79,6 +79,7 @@ namespace game {
 		game_objects::draw_textbox();
 
 		overlay::draw_statusbar();
+		overlay::draw_time();
 		notification::draw();
 
 		if (sidemenu::is_open()) {

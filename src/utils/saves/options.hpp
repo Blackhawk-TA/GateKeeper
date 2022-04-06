@@ -11,6 +11,7 @@ namespace options {
 
 	//Global settings variables
 	extern bool show_fps;
+	extern bool show_time;
 	extern uint8_t save_count;
 
 	void save();

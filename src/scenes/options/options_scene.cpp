@@ -12,6 +12,7 @@ namespace options {
 		changed = 0;
 		option_items = {
 			items::create_options_item(items::OPTIONS_ITEM::SHOW_FPS),
+			items::create_options_item(items::OPTIONS_ITEM::SHOW_TIME),
 		};
 
 		//Only show reset all option from MENU scene
