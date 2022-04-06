@@ -47,7 +47,7 @@ namespace game::notification {
 
 		if (!current_notification->message.empty()) { //Message notification
 			screen.pen = Pen(255, 255, 255, 255);
-			screen.text(current_notification->message, minimal_font, Rect(1, 11, 10, 10), false, TextAlign::left);
+			screen.text(current_notification->message, minimal_font, Rect(1, 13, 10, 10), false, TextAlign::left);
 		} else if (current_notification->tile_id != NO_ICON) { //Icon notification
 			Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 			screen.blit(
@@ -58,7 +58,7 @@ namespace game::notification {
 					TILE_SIZE,
 					TILE_SIZE
 				),
-				Point(0, 11)
+				Point(1, 13)
 			);
 		}
 	}
