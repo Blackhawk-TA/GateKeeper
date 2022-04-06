@@ -44,5 +44,6 @@ namespace save {
 	struct OptionsData {
 		uint8_t save_count;
 		bool show_fps;
+		bool show_time;
 	};
 }

@@ -13,7 +13,8 @@ namespace options {
 	void save() {
 		save::OptionsData data = {
 			save_count,
-			show_fps
+			show_fps,
+			show_time,
 		};
 
 		write_save(data, OPTIONS_DATA_SLOT);
@@ -27,9 +28,11 @@ namespace options {
 		if (save_found) {
 			save_count = data.save_count;
 			show_fps = data.show_fps;
+			show_time = data.show_time;
 		} else {
 			save_count = 0;
 			show_fps = false;
+			show_time = false;
 		}
 	}
 }
