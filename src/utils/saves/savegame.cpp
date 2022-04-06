@@ -75,6 +75,7 @@ namespace savegame {
 			100,
 			1,
 			0,
+			0,
 			RIGHT,
 			StoryState::START,
 		});
@@ -152,6 +153,7 @@ namespace savegame {
 			game::player_handler::load_save(save::PlayerData{
 				player_temp_data.health,
 				save_data.player_data.level,
+				save_data.player_data.xp,
 				save_data.player_data.gold,
 				player_temp_data.direction,
 				player_temp_data.story_state,

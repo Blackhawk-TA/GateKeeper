@@ -19,6 +19,10 @@ namespace game::player_handler {
 	void change_direction(MovementDirection direction, bool animate = true);
 	void set_cut_scene(bool value);
 	bool in_cut_scene();
+	uint8_t get_level();
+	uint32_t get_xp();
+	uint32_t get_next_level_max_xp();
+	void add_xp(uint32_t amount);
 	uint16_t get_gold();
 	void add_gold(uint16_t amount);
 	bool remove_gold(uint16_t amount);

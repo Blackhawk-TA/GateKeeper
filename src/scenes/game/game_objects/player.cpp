@@ -24,6 +24,7 @@ namespace game {
 		//Init properties
 		health = MAX_HEALTH;
 		level = 1;
+		xp = 0;
 		gold = 0;
 		cut_scene = false;
 		story_state = StoryState::START;
@@ -175,7 +176,7 @@ namespace game {
 		auto gears = sidemenu::get_items(sidemenu::MenuType::GEAR);
 		attacks.reserve(gears.size());
 
-		for (auto &gear : gears) {
+		for (auto &gear: gears) {
 			if (gear.name == "BACK") {
 				continue; //Skip sidemenu back entry
 			}
@@ -199,6 +200,7 @@ namespace game {
 		return save::PlayerData{
 			health,
 			level,
+			xp,
 			gold,
 			current_direction,
 			story_state,
@@ -208,6 +210,7 @@ namespace game {
 	void Player::load_save(save::PlayerData save_data) {
 		health = save_data.health;
 		level = save_data.level;
+		xp = save_data.xp;
 		gold = save_data.gold;
 
 		//Remove gear on first death
@@ -270,5 +273,32 @@ namespace game {
 		} else {
 			return false;
 		}
+	}
+
+	uint8_t Player::get_level() const {
+		return level;
+	}
+
+	uint32_t Player::get_xp() const {
+		return xp;
+	}
+
+	void Player::add_xp(uint32_t amount) {
+		if (level >= MAX_LEVEL) return;
+
+		if (xp + amount >= get_next_level_max_xp()) {
+			xp = xp + amount - get_next_level_max_xp();
+			level++;
+		} else {
+			xp += amount;
+		}
+	}
+
+	uint32_t Player::get_next_level_max_xp() const {
+		return calc_total_level_xp(level) - calc_total_level_xp(level - 1);
+	}
+
+	uint32_t Player::calc_total_level_xp(uint8_t target_level) {
+		return uint32_t(pow(target_level * 100, 1.2));
 	}
 }

@@ -16,6 +16,7 @@ namespace game {
 	class Player {
 	public:
 		static const uint8_t MAX_HEALTH = 100;
+		static const uint8_t MAX_LEVEL = 25;
 		static const uint16_t MAX_GOLD = 999;
 
 		explicit Player(uint8_t current_save_id);
@@ -24,6 +25,15 @@ namespace game {
 		void move(MovementDirection direction);
 		void heal(uint8_t heal_amount);
 		uint8_t get_health() const;
+		uint8_t get_level() const;
+		uint32_t get_xp() const;
+
+		/**
+		 * Gets the amount of XP required for the next level without considering the current XP amount
+		 * @return The XP amount required for the next level
+		 */
+		uint32_t get_next_level_max_xp() const;
+		void add_xp(uint32_t amount);
 		uint16_t get_gold() const;
 		void add_gold(uint16_t amount);
 		bool remove_gold(uint16_t amount);
@@ -58,6 +68,7 @@ namespace game {
 		uint8_t health;
 		uint8_t save_id;
 		uint8_t level;
+		uint32_t xp;
 		uint8_t elevation_offset;
 		MovementDirection current_direction;
 		StoryState story_state;
@@ -66,6 +77,13 @@ namespace game {
 
 		void take_damage(uint8_t damage_amount);
 		bool in_action() const;
+
+		/**
+		 * Calculates the total amount of xp needed to achieve the given level when the player has no XP yet
+		 * @param target_level The level of which the total xp amount is needed
+		 * @return The amount of xp needed to achieve the given level
+		 */
+		static uint32_t calc_total_level_xp(uint8_t target_level);
 
 		/**
 		 * Teleports a player to the given gate and sets the movement direction to facing downwards

@@ -84,4 +84,20 @@ namespace game::player_handler {
 	void load_save(save::PlayerData save_data) {
 		player->load_save(save_data);
 	}
+
+	uint8_t get_level() {
+		return player->get_level();
+	}
+
+	uint32_t get_next_level_max_xp() {
+		return player->get_next_level_max_xp();
+	}
+
+	uint32_t get_xp() {
+		return player->get_xp();
+	}
+
+	void add_xp(uint32_t amount) {
+		player->add_xp(amount);
+	}
 }
