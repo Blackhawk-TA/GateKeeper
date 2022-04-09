@@ -11,5 +11,6 @@ namespace combat::stats {
 	const uint8_t BOX_Y_POS = 160;
 	const uint8_t BOX_WIDTH = 120;
 
-	void draw(uint8_t health, uint8_t stamina, uint8_t level, uint8_t enemy_health, uint8_t enemy_level);
+	void draw_player_stats(uint8_t health, uint8_t max_health, uint8_t stamina, uint8_t level);
+	void draw_enemy_stats(uint8_t health, uint8_t max_health, uint8_t level);
 }

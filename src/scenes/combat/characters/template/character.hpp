@@ -15,8 +15,6 @@ namespace combat {
 			Enemy = 2,
 		};
 
-		static const uint8_t MAX_HEALTH = 100;
-
 		explicit Character(uint8_t save_id, const CharacterData& character_data, Point position, Point attack_position, MovementDirection direction);
 		virtual ~Character() = default;
 		virtual bool use_stamina(uint8_t amount);
@@ -28,6 +26,7 @@ namespace combat {
 		void update(uint32_t time);
 		void animate(Timer &timer);
 		uint8_t get_health() const;
+		uint8_t get_max_health() const;
 		void take_damage(uint8_t amount);
 		void animate_attack(GEAR_TYPE type, std::function<void()> callback);
 		bool is_attacking() const;
@@ -36,6 +35,7 @@ namespace combat {
 
 	protected:
 		uint8_t health;
+		uint8_t max_health;
 		uint8_t level;
 		uint8_t save_id;
 		Point position;

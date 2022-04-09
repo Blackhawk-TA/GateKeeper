@@ -38,7 +38,7 @@ namespace savegame {
 				MovementDirection::DOWN,
 				Point(45, 20),
 				Point(45, 20),
-				combat::Character::MAX_HEALTH,
+				game::Player::MAX_HEALTH,
 				story_state
 			};
 		} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won_fight && !options.game_data.respawn) { //Escape
@@ -54,7 +54,7 @@ namespace savegame {
 				MovementDirection::RIGHT,
 				Point(1, 23),
 				Point(1, 23),
-				combat::Character::MAX_HEALTH,
+				game::Player::MAX_HEALTH,
 				COMPLETED,
 				{}
 			};

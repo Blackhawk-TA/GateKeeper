@@ -11,7 +11,7 @@ namespace combat {
 		Enemy::target = target;
 		Enemy::signature = character_data.signature;
 		stats = character_data.stats;
-		health = MAX_HEALTH;
+		health = character_data.health;
 		enemy_type = character_data.character_type;
 		textbox = nullptr;
 	}

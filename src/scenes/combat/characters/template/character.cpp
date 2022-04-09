@@ -27,6 +27,7 @@ namespace combat {
 		animation_sprites = character_data.movement_sprites;
 		movement_sprites = character_data.movement_sprites;
 		attack_sword_sprites = character_data.attack_sprites;
+		max_health = character_data.health;
 		health = character_data.health;
 		level = character_data.level;
 		tile_id = animation_sprites.at(0);
@@ -286,5 +287,9 @@ namespace combat {
 
 	uint8_t Character::get_level() const {
 		return level;
+	}
+
+	uint8_t Character::get_max_health() const {
+		return max_health;
 	}
 }

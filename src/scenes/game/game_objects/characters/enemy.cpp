@@ -75,7 +75,7 @@ namespace game {
 				get_stats(),
 				movement_sprites.at(RIGHT),
 				utils::get_attack_sprites(character_type),
-				0,
+				MAX_HEALTH,
 				level,
 				character_type,
 			}

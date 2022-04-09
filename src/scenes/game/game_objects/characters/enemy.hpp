@@ -8,6 +8,7 @@
 namespace game {
 	class Enemy : public Character {
 	private:
+		const uint8_t MAX_HEALTH = 100;
 		bool player_interact() override;
 		void trigger_cutscene() override;
 		void close_textbox() override;
