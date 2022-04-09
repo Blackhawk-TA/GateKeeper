@@ -20,6 +20,7 @@ namespace save {
 		uint8_t health;
 		uint8_t level;
 		uint32_t xp;
+		uint32_t gained_xp;
 		uint16_t gold;
 		MovementDirection direction;
 		StoryState story_state;

@@ -96,8 +96,4 @@ namespace game::player_handler {
 	uint32_t get_xp() {
 		return player->get_xp();
 	}
-
-	void add_xp(uint32_t amount) {
-		player->add_xp(amount);
-	}
 }

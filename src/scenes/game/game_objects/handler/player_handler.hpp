@@ -22,7 +22,6 @@ namespace game::player_handler {
 	uint8_t get_level();
 	uint32_t get_xp();
 	uint32_t get_next_level_max_xp();
-	void add_xp(uint32_t amount);
 	uint16_t get_gold();
 	void add_gold(uint16_t amount);
 	bool remove_gold(uint16_t amount);

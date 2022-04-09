@@ -29,11 +29,11 @@ namespace game::game_objects {
 			new Sign(map::DUNGEON, Point(15, 23), Sign::STONE, "This dungeon was created to hide a gate part to repair the gate in case it gets destroyed."),
 			new DungeonDoor( static_cast<map::MapSection>(interaction_signature.map_section), Point(interaction_signature.x, interaction_signature.y)),
 
-			new Enemy(map::DUNGEON, Point(36, 36), 3, SPIDER, DOWN, save_id),
-			new Enemy(map::DUNGEON, Point(42, 36), 3, SPIDER, DOWN, save_id),
-			new Enemy(map::DUNGEON, Point(48, 36), 3, SPIDER, DOWN, save_id),
-			new Enemy(map::DUNGEON, Point(11, 35), 3, SPIDER, RIGHT, save_id),
-			new Enemy(map::DUNGEON, Point(18, 35), 3, SPIDER, LEFT, save_id),
+			new Enemy(map::DUNGEON, Point(36, 36), 1, SPIDER, DOWN, save_id),
+			new Enemy(map::DUNGEON, Point(42, 36), 1, SPIDER, DOWN, save_id),
+			new Enemy(map::DUNGEON, Point(48, 36), 1, SPIDER, DOWN, save_id),
+			new Enemy(map::DUNGEON, Point(11, 35), 1, SPIDER, RIGHT, save_id),
+			new Enemy(map::DUNGEON, Point(18, 35), 1, SPIDER, LEFT, save_id),
 
 			new Lever(map::DUNGEON, Point(37, 36), interaction_signature, enabled_lever == 0),
 			new Lever(map::DUNGEON, Point(43, 36), interaction_signature, enabled_lever == 1),

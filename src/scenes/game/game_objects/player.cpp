@@ -201,6 +201,7 @@ namespace game {
 			health,
 			level,
 			xp,
+			0,
 			gold,
 			current_direction,
 			story_state,
@@ -212,6 +213,11 @@ namespace game {
 		level = save_data.level;
 		xp = save_data.xp;
 		gold = save_data.gold;
+
+		//Add xp if any were gained
+		if (save_data.gained_xp > 0) {
+			add_xp(save_data.gained_xp);
+		}
 
 		//Remove gear on first death
 		if (save_data.story_state == StoryState::FIRST_DEATH) {
@@ -285,10 +291,12 @@ namespace game {
 
 	void Player::add_xp(uint32_t amount) {
 		if (level >= MAX_LEVEL) return;
+		notification::add_to_queue("+ " + std::to_string(amount) + "XP");
 
 		if (xp + amount >= get_next_level_max_xp()) {
 			xp = xp + amount - get_next_level_max_xp();
 			level++;
+			notification::add_to_queue("+ Level Up");
 		} else {
 			xp += amount;
 		}

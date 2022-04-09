@@ -11,6 +11,7 @@
 #include "../../scenes/game/game_objects/handler/player_handler.hpp"
 #include "../../scenes/game/ui/overlay.hpp"
 #include "../../scenes/game/ui/notification.hpp"
+#include "../../scenes/game/game_objects/handler/extensions/enemy_handler.hpp"
 
 namespace savegame {
 	PlayerTempData get_player_temp_data(SaveOptions options, save::SaveData save_data) {
@@ -56,7 +57,7 @@ namespace savegame {
 				Point(1, 23),
 				game::Player::MAX_HEALTH,
 				COMPLETED,
-				{}
+				player_data.enemy_signature,
 			};
 		}
 
@@ -74,6 +75,7 @@ namespace savegame {
 		game::player_handler::load_save(save::PlayerData{
 			100,
 			1,
+			0,
 			0,
 			0,
 			RIGHT,
@@ -149,22 +151,28 @@ namespace savegame {
 			//Load inventories
 			game::sidemenu::load_saves(save_data.items);
 
-			//Load player save with health, level and direction
-			game::player_handler::load_save(save::PlayerData{
-				player_temp_data.health,
-				save_data.player_data.level,
-				save_data.player_data.xp,
-				save_data.player_data.gold,
-				player_temp_data.direction,
-				player_temp_data.story_state,
-			});
-
 			//Load game object states
 			game::game_objects::init(player_temp_data.map_section, save_id, player_temp_data.story_state);
 			game::game_objects::load_saves(save_data.game_objects, player_temp_data.story_state);
 			if (!game::game_objects::is_empty_signature(player_temp_data.enemy_signature)) {
 				game::game_objects::set_active(player_temp_data.enemy_signature, false);
+
+				//Add XP gained during a fight
+				game::Enemy *enemy = game::enemy_handler::get_enemy(player_temp_data.enemy_signature);
+				float xp_modifier = sqrtf(save_data.player_data.level) / sqrtf(enemy->get_level());
+				save_data.player_data.gained_xp = static_cast<uint32_t>(static_cast<float>(blit::random() % 50 + 75) * xp_modifier);
 			}
+
+			//Load player save with health, level and direction
+			game::player_handler::load_save(save::PlayerData{
+				player_temp_data.health,
+				save_data.player_data.level,
+				save_data.player_data.xp,
+				save_data.player_data.gained_xp,
+				save_data.player_data.gold,
+				player_temp_data.direction,
+				player_temp_data.story_state,
+			});
 
 			//Load game time
 			game_time::init();

@@ -34,6 +34,7 @@ namespace game {
 		void update(uint32_t time) override;
 		GameObject::ObjectType get_type() override;
 		bool can_be_respawned() const;
+		uint8_t get_level() const;
 
 		/**
 		 * Set active property only when can_respawn is set to true, otherwise it can only be set to false

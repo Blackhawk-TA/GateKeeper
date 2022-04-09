@@ -159,4 +159,8 @@ namespace game {
 	bool Enemy::can_be_respawned() const {
 		return can_respawn;
 	}
+
+	uint8_t Enemy::get_level() const {
+		return level;
+	}
 }

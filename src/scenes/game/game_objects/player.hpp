@@ -33,7 +33,6 @@ namespace game {
 		 * @return The XP amount required for the next level
 		 */
 		uint32_t get_next_level_max_xp() const;
-		void add_xp(uint32_t amount);
 		uint16_t get_gold() const;
 		void add_gold(uint16_t amount);
 		bool remove_gold(uint16_t amount);
@@ -76,6 +75,7 @@ namespace game {
 		Size spritesheet_size;
 
 		void take_damage(uint8_t damage_amount);
+		void add_xp(uint32_t amount);
 		bool in_action() const;
 
 		/**

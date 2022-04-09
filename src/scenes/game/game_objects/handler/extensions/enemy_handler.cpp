@@ -54,4 +54,18 @@ namespace game::enemy_handler {
 		}
 		delete_queue.clear();
 	}
+
+	Enemy* get_enemy(Signature &signature) {
+		auto itr = enemies.begin();
+
+		while (itr != enemies.end()) {
+			if (game_objects::has_equal_signature((*itr)->get_signature(), signature)) {
+				return *itr;
+			} else {
+				itr++;
+			}
+		}
+
+		return nullptr;
+	}
 }
