@@ -28,6 +28,7 @@ namespace combat {
 		movement_sprites = character_data.movement_sprites;
 		attack_sword_sprites = character_data.attack_sprites;
 		health = character_data.health;
+		level = character_data.level;
 		tile_id = animation_sprites.at(0);
 		tile_index = 0;
 		projectile_tile_id = 0;
@@ -281,5 +282,9 @@ namespace combat {
 
 	CharacterStats Character::get_stats() {
 		return stats;
+	}
+
+	uint8_t Character::get_level() const {
+		return level;
 	}
 }

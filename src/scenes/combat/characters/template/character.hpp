@@ -31,10 +31,12 @@ namespace combat {
 		void take_damage(uint8_t amount);
 		void animate_attack(GEAR_TYPE type, std::function<void()> callback);
 		bool is_attacking() const;
+		uint8_t get_level() const;
 		CharacterStats get_stats();
 
 	protected:
 		uint8_t health;
+		uint8_t level;
 		uint8_t save_id;
 		Point position;
 		MovementDirection direction;

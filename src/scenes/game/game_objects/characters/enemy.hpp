@@ -22,12 +22,13 @@ namespace game {
 		CharacterStats get_stats();
 
 		uint8_t save_id;
+		uint8_t level;
 		std::string message;
 		CombatCharacterType character_type;
 		bool can_respawn;
 
 	public:
-		explicit Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn = false, std::string message = "", bool can_respawn = true);
+		explicit Enemy(map::MapSection map_section, Point position, uint8_t level, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn = false, std::string message = "", bool can_respawn = true);
 		~Enemy() override = default;
 		void update(uint32_t time) override;
 		GameObject::ObjectType get_type() override;

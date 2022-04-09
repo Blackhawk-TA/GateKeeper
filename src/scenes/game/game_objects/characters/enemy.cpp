@@ -10,8 +10,9 @@
 #include "../handler/player_handler.hpp"
 
 namespace game {
-	Enemy::Enemy(map::MapSection map_section, Point position, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn, std::string message, bool can_respawn)
+	Enemy::Enemy(map::MapSection map_section, Point position, uint8_t level, CombatCharacterType character_type, MovementDirection direction, uint8_t save_id, bool turn, std::string message, bool can_respawn)
 		: Character(map_section, position, true, false, turn) {
+		Enemy::level = level;
 		Enemy::character_type = character_type;
 		Enemy::tile_id = get_init_tile_id();
 		Enemy::save_id = save_id;
@@ -75,7 +76,7 @@ namespace game {
 				movement_sprites.at(RIGHT),
 				utils::get_attack_sprites(character_type),
 				0,
-				0,
+				level,
 				character_type,
 			}
 		};

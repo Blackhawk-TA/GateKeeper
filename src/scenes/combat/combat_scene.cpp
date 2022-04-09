@@ -39,7 +39,7 @@ namespace combat {
 	void Scene::render(uint32_t time) {
 		map::draw();
 		character_handler::draw();
-		stats::draw(player->get_health(), player->get_stamina(), enemy->get_health());
+		stats::draw(player->get_health(), player->get_stamina(), player->get_level(), enemy->get_health(), enemy->get_level());
 
 		if (attack_menu::is_open()) {
 			attack_menu::draw();
