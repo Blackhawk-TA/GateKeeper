@@ -95,11 +95,12 @@ namespace combat::character_handler {
 		};
 		AttackStats attack = attacks.at(type);
 		float damage_multiplier = attacker->get_stats().damage_multiplier;
+		float level_modifier = sqrtf(attacker->get_level()) / sqrtf(target->get_level()); //Max damage multiplier between 0.2 and 5 depending on level difference
 
 		if (attacker->use_stamina(attack.stamina)) {
-			attacker->animate_attack(type, [target, attack, damage_multiplier] {
+			attacker->animate_attack(type, [target, attack, damage_multiplier, level_modifier] {
 				uint8_t bonus_damage = blit::random() % attack.bonus_damage;
-				uint8_t damage = static_cast<uint8_t>(static_cast<float>(attack.base_damage + bonus_damage) * damage_multiplier);
+				uint8_t damage = static_cast<uint8_t>(static_cast<float>(attack.base_damage + bonus_damage) * damage_multiplier * level_modifier);
 				target->take_damage(damage);
 			});
 			return true;
