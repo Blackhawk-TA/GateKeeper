@@ -88,10 +88,10 @@ namespace combat::character_handler {
 			{GEAR_SPEAR,  AttackStats{15, 15, 15}},
 			{GEAR_ARROW,  AttackStats{10, 10, 15}},
 			{GEAR_DAGGER, AttackStats{7, 5, 15}},
-			{GEAR_FIRE,   AttackStats{30, 30, 10}},
-			{GEAR_ICE,    AttackStats{30, 30, 10}},
-			{GEAR_SHOCK,  AttackStats{30, 30, 10}},
-			{GEAR_MAGIC,  AttackStats{30, 30, 10}},
+			{GEAR_FIRE,   AttackStats{20, 20, 10}},
+			{GEAR_ICE,    AttackStats{20, 20, 10}},
+			{GEAR_SHOCK,  AttackStats{20, 20, 10}},
+			{GEAR_MAGIC,  AttackStats{20, 20, 10}},
 		};
 		AttackStats attack = attacks.at(type);
 		float damage_multiplier = attacker->get_stats().damage_multiplier;

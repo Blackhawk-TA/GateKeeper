@@ -52,6 +52,7 @@ namespace game::game_objects {
 			new Enemy(map::DUNGEON, Point(60, 15), 5, SPIDER, LEFT, save_id),
 			new Enemy(map::DUNGEON, Point(56, 10), 5, SPIDER, RIGHT, save_id),
 			new Enemy(map::DUNGEON, Point(60, 10), 5, SPIDER, LEFT, save_id),
+			//TODO add boss enemy instead of 4 small enemies
 		};
 	}
 }
