@@ -192,6 +192,7 @@ namespace game {
 			movement_sprites.at(LEFT),
 			utils::get_attack_sprites(PLAYER),
 			health,
+			MAX_HEALTH,
 			level,
 		};
 	}

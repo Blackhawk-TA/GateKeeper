@@ -61,6 +61,7 @@ struct CharacterData {
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> movement_sprites{};
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> attack_sprites{};
 	uint8_t health = 100;
+	uint8_t max_health = 100;
 	uint8_t level = 1;
 	CombatCharacterType character_type{};
 };
