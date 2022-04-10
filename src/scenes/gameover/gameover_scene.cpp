@@ -50,18 +50,20 @@ namespace gameover {
 		changed = buttons ^ last_buttons;
 
 		if (buttons & changed & Button::A) {
-			SceneOptions options = {
-				save_id,
-				CombatData{},
-				GameData{
-					Signature{},
-					0,
-					won_fight,
-					respawn,
-				},
-				tmp_save,
-			};
-			load_scene(SceneType::GAME, options);
+			if (!textbox->next()) {
+				SceneOptions options = {
+					save_id,
+					CombatData{},
+					GameData{
+						Signature{},
+						0,
+						won_fight,
+						respawn,
+					},
+					tmp_save,
+				};
+				load_scene(SceneType::GAME, options);
+			}
 		}
 
 		last_buttons = buttons;
