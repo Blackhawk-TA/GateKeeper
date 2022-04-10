@@ -76,10 +76,11 @@ namespace game {
 		game_objects::draw_under_player();
 		player_handler::draw();
 		game_objects::draw_over_player();
+
+		overlay::draw_time();
 		game_objects::draw_textbox();
 
 		overlay::draw_statusbar();
-		overlay::draw_time();
 		notification::draw();
 
 		if (sidemenu::is_open()) {
