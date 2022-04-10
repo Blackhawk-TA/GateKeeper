@@ -14,7 +14,8 @@
 namespace game::game_objects {
 	std::vector<GameObject*> create_dungeon_objects(uint8_t save_id, StoryState story_state) {
 		//Settings for dungeon
-		uint8_t enabled_lever = blit::random() % 3;
+		//TODO re-enable random lever but implement saving the enabled one when starting a new game
+//		uint8_t enabled_lever = blit::random() % 3; //TODO is not saved when leaving scene => can cause already switched lever to be the enabled one, causing the door to not open
 
 		//The signature of the door that the levers open
 		Signature interaction_signature = {
