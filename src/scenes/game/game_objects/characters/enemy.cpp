@@ -130,7 +130,7 @@ namespace game {
 			case BROWN_BEAR:
 			case ICE_BEAR:
 				return CharacterStats{
-					1.25,
+					1.0,
 					{GEAR_SWORD},
 				};
 			case DEVIL:

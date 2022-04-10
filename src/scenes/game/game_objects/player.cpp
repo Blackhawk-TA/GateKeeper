@@ -308,6 +308,6 @@ namespace game {
 	}
 
 	uint32_t Player::calc_total_level_xp(uint8_t target_level) {
-		return uint32_t(pow(target_level * 100, 1.2));
+		return uint32_t(pow(target_level * 100, 1.1));
 	}
 }
