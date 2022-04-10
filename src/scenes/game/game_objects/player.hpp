@@ -16,7 +16,7 @@ namespace game {
 	class Player {
 	public:
 		static const uint8_t MAX_HEALTH = 100;
-		static const uint8_t MAX_LEVEL = 25;
+		static const uint8_t MAX_LEVEL = 100;
 		static const uint16_t MAX_GOLD = 999;
 
 		explicit Player(uint8_t current_save_id);

@@ -6,6 +6,7 @@
 #include "../game_objects/handler/player_handler.hpp"
 #include "../../../utils/saves/options.hpp"
 #include "../../../utils/game_time.hpp"
+#include "../game_objects/player.hpp"
 
 using namespace blit;
 
@@ -24,9 +25,10 @@ namespace game::overlay {
 		screen.pen = Pen(155, 155, 155, 200);
 		screen.rectangle(Rect(0, BAR_HEIGHT, screen.bounds.w, 2));
 
-		screen.pen = Pen(0, 255, 0, 200);
-		screen.rectangle(Rect(0, BAR_HEIGHT, int(float(player_handler::get_xp()) / float(
-			player_handler::get_next_level_max_xp()) * float(screen.bounds.w)), 2));
+		if (player_handler::get_level() != Player::MAX_LEVEL) {
+			screen.pen = Pen(0, 255, 0, 200);
+			screen.rectangle(Rect(0, BAR_HEIGHT, int(float(player_handler::get_xp()) / float(player_handler::get_next_level_max_xp()) * float(screen.bounds.w)), 2));
+		}
 	}
 
 	void draw_time() {
