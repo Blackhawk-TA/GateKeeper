@@ -4,6 +4,7 @@
 
 #include "options_scene.hpp"
 #include "../../items/items.hpp"
+#include "../../utils/saves/options.hpp"
 
 namespace options {
 	Scene::Scene(const SceneOptions& options) {
@@ -48,6 +49,7 @@ namespace options {
 		} else if (buttons & changed & Button::A) {
 			listbox->cursor_press();
 		} else if (buttons & changed & Button::B) {
+			options::save();
 			load_previous_scene(save_id);
 		}
 
