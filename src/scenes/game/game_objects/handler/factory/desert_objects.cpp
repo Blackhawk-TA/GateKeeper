@@ -31,8 +31,8 @@ namespace game::game_objects {
 			new Enemy(map::DESERT, Point(46, 11), 12, BLUE_GUARD, UP, save_id, true, "You have no permission to be here!"),
 			new Enemy(map::DESERT, Point(30, 53), 14, BLUE_GUARD, RIGHT, save_id, false, "You cannot enter."),
 			new Enemy(map::DESERT, Point(32, 53), 14, BLUE_GUARD, LEFT, save_id, false, "I cannot let you through."),
-			new Enemy(map::DESERT, Point(29, 42), 14, BLUE_GUARD, RIGHT, save_id, true, "I cannot let you go."),
-			new Enemy(map::DESERT, Point(33, 42), 14, BLUE_GUARD, LEFT, save_id, true, "You will pay for intruding here!"),
+			new Enemy(map::DESERT, Point(29, 42), 14, BLUE_GUARD, RIGHT, save_id, false, "I cannot let you go."),
+			new Enemy(map::DESERT, Point(33, 42), 14, BLUE_GUARD, LEFT, save_id, false, "You will pay for intruding here!"),
 
 			new Chest(map::DESERT, Point(2, 50)),
 			new Chest(map::DESERT, Point(27, 33)),
