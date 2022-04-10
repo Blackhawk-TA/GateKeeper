@@ -4,6 +4,7 @@
 
 #include "gear_villager.hpp"
 #include "../../ui/sidemenu.hpp"
+#include "../../ui/notification.hpp"
 
 namespace game {
 	GearVillager::GearVillager(map::MapSection map_section, Point position, uint16_t tile_id,
@@ -25,6 +26,7 @@ namespace game {
 				Listbox::Item gear = items::create_gear_item(gear_type);
 				if (!sidemenu::has_item(sidemenu::GEAR, gear)) {
 					sidemenu::add_item(sidemenu::GEAR, gear);
+					notification::add_to_queue("+ " + gear.name);
 					textbox = new Textbox(message);
 				} else {
 					textbox = new Textbox(alt_message);
