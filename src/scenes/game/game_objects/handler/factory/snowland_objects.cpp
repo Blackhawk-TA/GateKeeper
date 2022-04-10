@@ -26,6 +26,7 @@ namespace game::game_objects {
 
 			new GearVillager(map::SNOWLAND, Point(50, 52), 4, DOWN, "What you don't have a sword? It's far too dangerous out here without any weapons. Here take mine!", "The sword will help you to protect yourself against wild animals like bears.", GEAR_SWORD),
 			new Villager(map::SNOWLAND, Point(17, 14), 0, DOWN, "There is a dungeon inside the vulcano on the east. It is said that there are treasures hidden in it. There could be a Gate Part or other cool stuff in it. Unfortunately, it is dangerous to go there and I am not good at fighting."),
+			new Villager(map::SNOWLAND, Point(14, 21), 276, DOWN, "I love fighting, but some enemies are just too strong. I like to go back to places where I already defeated weaker enemies to practise."),
 
 			new Chest(map::SNOWLAND, Point(16, 38)),
 			new Chest(map::SNOWLAND, Point(22, 35)),
