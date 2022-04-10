@@ -43,6 +43,7 @@ namespace game {
 		CharacterData get_character_data();
 		save::PlayerData get_save();
 		void load_save(save::PlayerData save_data);
+		void next_story_state();
 
 	private:
 		const std::map<MovementDirection, Point> movements{

@@ -310,4 +310,10 @@ namespace game {
 	uint32_t Player::calc_total_level_xp(uint8_t target_level) {
 		return uint32_t(pow(target_level * 100, 1.1));
 	}
+
+	void Player::next_story_state() {
+		if (story_state != COMPLETED) {
+			story_state = static_cast<StoryState>(story_state + 1);
+		}
+	}
 }

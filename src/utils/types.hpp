@@ -92,7 +92,8 @@ enum StoryState {
 	START = 1, //The first part of the game were the player starts with default weapons
 	FIRST_DEATH = 2, //Symbolises that the players gear must be removed on first death
 	FIRST_HOSPITAL_WAKEUP = 3, //The player died the first time and woke up at the hospital
-	COMPLETED = 4, //The end boss was beaten, the game is finished
+	GATE_PART_SEARCH = 4, //The player is visiting dungeons to get the gate part
+	COMPLETED = 5, //The end boss was beaten, the game is finished
 };
 
 //Data that is required for load a player from a save

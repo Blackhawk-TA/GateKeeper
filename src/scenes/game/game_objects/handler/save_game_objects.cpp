@@ -7,6 +7,7 @@
 #include "../../../../utils/saves/save_types.hpp"
 #include "extensions/enemy_handler.hpp"
 #include "extensions/stargate_handler.hpp"
+#include "player_handler.hpp"
 
 namespace game::game_objects {
 	void load_saves(std::array<GameObject::Save, MAX_GAME_OBJECTS> &saved_objects, StoryState story_state) {
@@ -47,6 +48,7 @@ namespace game::game_objects {
 				7,
 			};
 			stargate_handler::damage_stargate(gate_signature);
+			player_handler::next_story_state();
 		}
 	}
 

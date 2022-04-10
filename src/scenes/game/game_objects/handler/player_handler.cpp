@@ -96,4 +96,8 @@ namespace game::player_handler {
 	uint32_t get_xp() {
 		return player->get_xp();
 	}
+
+	void next_story_state() {
+		player->next_story_state();
+	}
 }
