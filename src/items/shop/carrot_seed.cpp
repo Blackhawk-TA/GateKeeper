@@ -11,7 +11,7 @@ Listbox::Item items::create_shop_carrot_seed(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"Carrot Seed",
-		"Buy 6 carrot seeds for " + std::to_string(price) + " gold. You can plant them and harvest the grown carrots later.",
+		"Buy 6 carrot seeds for " + std::to_string(price) + " gold. You can plant and harvest them.",
 		"You bought 6 carrot seeds for " + std::to_string(price) + " gold.",
 		"You can't buy this now.",
 		false,

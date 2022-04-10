@@ -11,7 +11,7 @@ Listbox::Item items::create_shop_spear(uint8_t type_id) {
 	return Listbox::Item{
 		type_id,
 		"SPEAR",
-		"Buy a spear for " + std::to_string(price) + " gold. It can be used during fights to defend yourself against enemies.",
+		"Buy a spear for " + std::to_string(price) + " gold. It can be used during fights to defend yourself.",
 		"You bought a spear for " + std::to_string(price) + " gold",
 		"You can't buy this now.",
 		false,

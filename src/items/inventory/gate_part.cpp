@@ -11,7 +11,7 @@ Listbox::Item items::create_gate_part(uint8_t type_id) {
 		"GATE PART",
 		"Can be used to repair a broken stargate.",
 		"The gate part was used to repair the stargate.",
-		"Cannot repair stargate here. It has to be broken and you have to stand directly in front of it.",
+		"Cannot repair a stargate here.",
 		true,
 		1,
 		[] {
