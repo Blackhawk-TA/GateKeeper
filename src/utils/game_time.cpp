@@ -6,7 +6,7 @@
 #include <iomanip>
 #include "game_time.hpp"
 
-const uint32_t ONE_HOUR_IN_MS = 360000;
+const uint32_t ONE_HOUR_IN_MS = 3600000;
 const uint16_t ONE_MINUTE_IN_MS = 60000;
 const uint16_t ONE_SECOND_IN_MS = 1000;
 
