@@ -15,7 +15,9 @@ namespace game::game_objects {
 
 			new Enemy(map::DESERT, Point(4, 60), 10, BLUE_GUARD, RIGHT, save_id, false, "Why are you here?", false),
 			new Enemy(map::DESERT, Point(5, 62), 10, BLUE_GUARD, UP, save_id, false, "Stop! Who are you?", false),
-			new Enemy(map::DESERT, Point(6, 60), 10, BLUE_GUARD, LEFT, save_id, false, "You are not supposed to be here!", false),
+
+			//TODO ren-enable this enemy once escape in front of gate is possible
+//			new Enemy(map::DESERT, Point(6, 60), 10, BLUE_GUARD, LEFT, save_id, false, "You are not supposed to be here!", false),
 
 			new Enemy(map::DESERT, Point(18, 48), 12, BLUE_GUARD, DOWN, save_id),
 			new Enemy(map::DESERT, Point(28, 48), 12, BLUE_GUARD, DOWN, save_id),
