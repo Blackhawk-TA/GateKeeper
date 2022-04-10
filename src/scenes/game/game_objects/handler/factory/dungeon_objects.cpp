@@ -32,12 +32,12 @@ namespace game::game_objects {
 			new Enemy(map::DUNGEON, Point(36, 36), 1, SPIDER, DOWN, save_id),
 			new Enemy(map::DUNGEON, Point(42, 36), 1, SPIDER, DOWN, save_id),
 			new Enemy(map::DUNGEON, Point(48, 36), 1, SPIDER, DOWN, save_id),
-			new Enemy(map::DUNGEON, Point(11, 35), 1, SPIDER, RIGHT, save_id),
-			new Enemy(map::DUNGEON, Point(18, 35), 1, SPIDER, LEFT, save_id),
+			new Enemy(map::DUNGEON, Point(11, 35), 2, SPIDER, RIGHT, save_id),
+			new Enemy(map::DUNGEON, Point(18, 35), 2, SPIDER, LEFT, save_id),
 
-			new Lever(map::DUNGEON, Point(37, 36), interaction_signature, enabled_lever == 0),
-			new Lever(map::DUNGEON, Point(43, 36), interaction_signature, enabled_lever == 1),
-			new Lever(map::DUNGEON, Point(49, 36), interaction_signature, enabled_lever == 2),
+			new Lever(map::DUNGEON, Point(37, 36), interaction_signature, false),
+			new Lever(map::DUNGEON, Point(43, 36), interaction_signature, true),
+			new Lever(map::DUNGEON, Point(49, 36), interaction_signature, false),
 
 			new Chest(map::DUNGEON, Point(11, 24)),
 			new Chest(map::DUNGEON, Point(18, 24)),

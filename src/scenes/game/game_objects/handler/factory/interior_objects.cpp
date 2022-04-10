@@ -31,7 +31,7 @@ namespace game::game_objects {
 			std::string msg = "Oh hey, you're awake! I'm not sure if you can remember what happened. You challenged the "
 							  "guards at the gate. They struck you down and stole all your weapons. They went back back "
 							  "through the gate while you were unconscious and destroyed it to prevent us from ever "
-							  "coming back. Now we have no possibility to reach the castle were the king suppresses our villagers from.";
+							  "coming back. Now we have no possibility to reach the castle where the king suppresses our villagers from.";
 			std::string alt_msg = "You need new weapons. In the north-east there should be a gate, try your luck there.";
 			objects.emplace_back(new StoryCharacter(map::INTERIOR, Point(51, 21), 12, LEFT, false, msg, alt_msg));
 		}
