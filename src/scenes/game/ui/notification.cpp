@@ -7,6 +7,7 @@
 
 namespace game::notification {
 	const uint16_t DISPLAY_TIME_MS = 2000;
+	const uint16_t DELAY_TIME_MS = 1000;
 	uint32_t last_notification_time = 0;
 	Notification *current_notification = nullptr;
 	std::queue<Notification> queue;
@@ -34,12 +35,12 @@ namespace game::notification {
 	void draw() {
 		//Trigger next notification and end existing
 		if (last_notification_time == 0 || game_time::get_time() > last_notification_time + DISPLAY_TIME_MS) {
-			if (queue.empty()) {
-				current_notification = nullptr;
-			} else {
+			if (!queue.empty() && game_time::get_time() > last_notification_time + DISPLAY_TIME_MS + DELAY_TIME_MS) {
 				last_notification_time = game_time::get_time();
 				current_notification = &queue.front();
 				queue.pop();
+			} else {
+				current_notification = nullptr;
 			}
 		}
 
