@@ -9,10 +9,10 @@
 namespace game::game_objects {
 	std::vector<GameObject*> create_castle_objects(uint8_t save_id, StoryState story_state) {
 		return {
-			new Enemy(map::CASTLE, Point(12, 14), 16, BLUE_GUARD, RIGHT, save_id, false, "", false),
-			new Enemy(map::CASTLE, Point(12, 17), 16, BLUE_GUARD, RIGHT, save_id, false, "", false),
-			new Enemy(map::CASTLE, Point(12, 20), 16, BLUE_GUARD, RIGHT, save_id, false, "", false),
-			new Enemy(map::CASTLE, Point(12, 23), 16, BLUE_GUARD, RIGHT, save_id, false, "", false),
+			new Enemy(map::CASTLE, Point(12, 14), 17, BLUE_GUARD, RIGHT, save_id, false, "", false),
+			new Enemy(map::CASTLE, Point(12, 17), 17, BLUE_GUARD, RIGHT, save_id, false, "", false),
+			new Enemy(map::CASTLE, Point(12, 20), 18, BLUE_GUARD, RIGHT, save_id, false, "", false),
+			new Enemy(map::CASTLE, Point(12, 23), 18, BLUE_GUARD, RIGHT, save_id, false, "", false),
 			new Enemy(map::CASTLE, Point(18, 14), 17, BLUE_GUARD, LEFT, save_id, false, "", false),
 			new Enemy(map::CASTLE, Point(18, 17), 17, BLUE_GUARD, LEFT, save_id, false, "", false),
 			new Enemy(map::CASTLE, Point(18, 20), 18, BLUE_GUARD, LEFT, save_id, false, "", false),
