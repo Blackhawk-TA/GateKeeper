@@ -38,9 +38,9 @@ namespace game::notification {
 			if (!queue.empty() && game_time::get_time() > last_notification_time + DISPLAY_TIME_MS + DELAY_TIME_MS) {
 				last_notification_time = game_time::get_time();
 				current_notification = &queue.front();
-				queue.pop();
-			} else {
+			} else if (current_notification != nullptr && game_time::get_time() > last_notification_time + DISPLAY_TIME_MS) {
 				current_notification = nullptr;
+				queue.pop();
 			}
 		}
 
