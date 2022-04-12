@@ -159,7 +159,7 @@ namespace savegame {
 
 				//Add XP gained during a fight
 				game::Enemy *enemy = game::enemy_handler::get_enemy(player_temp_data.enemy_signature);
-				float xp_modifier = sqrtf(save_data.player_data.level) / sqrtf(enemy->get_level());
+				float xp_modifier = sqrtf(enemy->get_level()) / sqrtf(save_data.player_data.level);
 				save_data.player_data.gained_xp = static_cast<uint32_t>(static_cast<float>(blit::random() % 50 + 75) * xp_modifier);
 			}
 
