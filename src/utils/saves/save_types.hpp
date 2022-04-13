@@ -46,5 +46,6 @@ namespace save {
 		uint8_t save_count;
 		bool show_fps;
 		bool show_time;
+		uint8_t active_tmp_save;
 	};
 }

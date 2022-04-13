@@ -95,11 +95,19 @@ namespace savegame {
 	}
 
 	void save(uint8_t save_id, bool tmp_save) {
-		//Check if current save is a new save game and therefore update save_count
-		if (!tmp_save && options::save_count < save_id) {
-			options::save_count = save_id;
-			options::save();
+		if (!tmp_save) {
+			//Check if current save is a new save game and therefore update save_count
+			if (options::save_count < save_id) {
+				options::save_count = save_id;
+			}
+
+			//When a non tmp save is saved, reset the active_tmp_save flag
+			options::active_tmp_save = 0;
+		} else {
+			//Save the id when going to a tmp save to restore it on unexpected combat scene exit
+			options::active_tmp_save = save_id;
 		}
+		options::save();
 
 		//Save and compress data which will be saved
 		save::SaveData save_data = {

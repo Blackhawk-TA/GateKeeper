@@ -13,6 +13,7 @@ namespace options {
 	extern bool show_fps;
 	extern bool show_time;
 	extern uint8_t save_count;
+	extern uint8_t active_tmp_save;
 
 	void save();
 	void load();

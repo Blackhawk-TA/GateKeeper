@@ -11,6 +11,7 @@
 #include "ui/sidemenu.hpp"
 #include "game_objects/handler/player_handler.hpp"
 #include "ui/notification.hpp"
+#include "../../utils/saves/options.hpp"
 
 namespace game {
 	Scene::Scene(const SceneOptions &options) {
@@ -44,6 +45,13 @@ namespace game {
 			56, 57, 58, 248, 249, 250, 3497, 3498, 3560, 3561, 3562, 3563, 3624, 3625, 3626, 3627, 3688, 3689, 3690,
 			3691, 3753, 3754
 		});
+
+		//Convert tmp save to normal save if the game was exited without properly exiting the combat scene
+		if (options::active_tmp_save != 0) {
+			savegame::convert_tmp_save(options::active_tmp_save);
+			options::active_tmp_save = 0;
+			options::save();
+		}
 
 		player_handler::init(save_id);
 		savegame::load(save_id, SaveOptions{
