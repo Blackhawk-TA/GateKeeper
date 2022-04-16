@@ -110,7 +110,6 @@ namespace savegame {
 
 		//Save and compress data which will be saved
 		save::SaveData save_data = {
-			VERSION,
 			map::get_section(),
 			camera::get_player_position(),
 			camera::get_previous_player_position(),
@@ -138,10 +137,6 @@ namespace savegame {
 
 		//Load data from save game
 		if (save_found) {
-			if (save_data.version != VERSION) {
-				//TODO port save using structs for each save version
-			}
-
 			//Load the player temp data required for setting health, position and map section
 			PlayerTempData player_temp_data = get_player_temp_data(game_data, save_data);
 

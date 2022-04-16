@@ -10,8 +10,6 @@
 #include "../movement_direction.hpp"
 
 namespace savegame {
-	const uint8_t VERSION = 0;
-
 	/**
 	 * Create a new save game
 	 * @param save_id The id of the save

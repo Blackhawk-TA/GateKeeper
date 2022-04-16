@@ -32,7 +32,6 @@ namespace save {
 	};
 
 	struct SaveData {
-		uint8_t version;
 		map::MapSection map_section;
 		Point camera_position;
 		Point previous_camera_position;
@@ -43,7 +42,6 @@ namespace save {
 	};
 
 	struct OptionsData {
-		uint8_t version;
 		uint8_t save_count;
 		bool show_fps;
 		bool show_time;

@@ -110,6 +110,9 @@ set(PROJECT_SOURCE
         src/scenes/game/ui/overlay.cpp src/scenes/game/ui/overlay.hpp
         src/utils/saves/savegame.cpp src/utils/saves/savegame.hpp
         src/utils/saves/options.cpp src/utils/saves/options.hpp
+        src/utils/saves/converter/save_converter.cpp src/utils/saves/converter/save_converter.hpp
+        src/utils/saves/converter/legacy_game_structs.hpp
+        src/utils/saves/converter/legacy_option_structs.hpp
         src/utils/utils.cpp src/utils/utils.hpp
         src/utils/game_time.cpp src/utils/game_time.hpp
         src/utils/movement_direction.cpp src/utils/movement_direction.hpp

@@ -8,11 +8,14 @@
 #include "../../items/items.hpp"
 #include "../../utils/saves/options.hpp"
 #include "../../utils/saves/savegame.hpp"
+#include "../../utils/saves/converter/save_converter.hpp"
 
 namespace menu {
 	Scene::Scene() {
 		last_buttons = 0;
 		changed = 0;
+
+		save_converter::update_save_structs();
 
 		options::load();
 

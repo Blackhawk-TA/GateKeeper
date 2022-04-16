@@ -9,6 +9,7 @@ using namespace blit;
 
 constexpr uint8_t TILE_SIZE = 16;
 constexpr uint8_t TMP_SAVE_ID = 4;
+constexpr uint8_t VERSION_SAVE_ID = 5;
 constexpr uint8_t MAX_ITEMS = 32;
 constexpr uint8_t MAX_GAME_OBJECTS = 255;
 constexpr uint8_t ANIMATION_SPRITE_COUNT = 4;

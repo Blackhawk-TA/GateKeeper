@@ -13,7 +13,6 @@ namespace options {
 
 	void save() {
 		save::OptionsData data = {
-			0, //TODO has new version, needs conversion
 			save_count,
 			show_fps,
 			show_time,
