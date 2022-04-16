@@ -64,7 +64,7 @@ void Box::draw() {
 				} else if (y == rect.h - 1) {
 					sprite_id = sprite_id_bottom_center;
 				} else {
-					sprite_id = sprite_id_center_center;
+					continue; //Don't draw the centerpieces for better performance
 				}
 
 				screen.blit(
@@ -79,6 +79,15 @@ void Box::draw() {
 				);
 			}
 		}
+
+		//Draw the centerpieces as white rectangle
+		screen.pen = Pen(255, 255, 255, 255);
+		screen.rectangle(Rect(
+			rect.x * TILE_SIZE + TILE_SIZE,
+			rect.y * TILE_SIZE + TILE_SIZE,
+			rect.w * TILE_SIZE - 2 * TILE_SIZE,
+			rect.h * TILE_SIZE - 2 * TILE_SIZE)
+		);
 	}
 }
 
