@@ -27,6 +27,7 @@ void ConfirmDialog::draw() {
 		world_to_screen(cursor_position) + Point(0, HALF_PADDING_PX)
 	);
 
+	screen.pen = Pen(0, 0, 0, 255);
 	for (uint8_t i = 0u; i < confirm_options.size(); i++) {
 		screen.text(
 			confirm_options[i],
