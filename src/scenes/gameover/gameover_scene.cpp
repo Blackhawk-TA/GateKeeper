@@ -5,14 +5,12 @@
 #include <iostream>
 #include "gameover_scene.hpp"
 #include "../../game.hpp"
-#include "../../utils/saves/savegame.hpp"
 
 namespace gameover {
-	Scene::Scene(const SceneOptions& options) {
-		save_id = options.save_id;
-		respawn = options.game_data.respawn;
-		won_fight = options.game_data.won_fight;
-		tmp_save = options.tmp_save;
+	Scene::Scene(const SceneOptions& opts) {
+		save_id = opts.save_id;
+		respawn = opts.game_data.respawn;
+		won_fight = opts.game_data.won_fight;
 		last_buttons = 0;
 		changed = 0;
 
@@ -20,13 +18,6 @@ namespace gameover {
 			textbox = new Textbox("You defeated the king and ended his reign of terror. The villagers are now safe again. Thank you for playing.");
 		} else {
 			textbox = new Textbox("You became unconscious. You wake up at the hospital.");
-		}
-
-		if (tmp_save) {
-			bool save_converted = savegame::convert_tmp_save(save_id);
-			if (!save_converted) {
-				std::cerr << "Could not convert temporary save to normal save" << std::endl; //This should never happen
-			}
 		}
 	}
 
@@ -60,7 +51,6 @@ namespace gameover {
 						won_fight,
 						respawn,
 					},
-					tmp_save,
 				};
 				load_scene(SceneType::GAME, options);
 			}

@@ -36,7 +36,7 @@ namespace savegame {
 	 * Load existing save from file
 	 * @param save_id The id of the save
 	 */
-	void load(uint8_t save_id, SaveOptions options);
+	void load(uint8_t save_id, GameData options);
 
 	/**
 	 * Gets an array of all game objects of a map section depending on the save id

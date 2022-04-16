@@ -120,7 +120,6 @@ namespace combat::character_handler {
 				won_fight,
 				respawn,
 			},
-			true,
 		};
 
 		bool finished_game = won_fight && respawn; //After beating the boss the player respawns at his house.

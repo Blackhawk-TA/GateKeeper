@@ -14,7 +14,7 @@
 #include "../../scenes/game/game_objects/handler/extensions/enemy_handler.hpp"
 
 namespace savegame {
-	PlayerTempData get_player_temp_data(SaveOptions options, save::SaveData save_data) {
+	PlayerTempData get_player_temp_data(GameData game_data, save::SaveData save_data) {
 		//The default save data if it was not a tmp save for the combat scene
 		PlayerTempData player_data = {
 			save_data.map_section,
@@ -27,7 +27,7 @@ namespace savegame {
 		};
 
 		//On tmp save manually overwrite player_data depending on the outcome of the fight in the combat scene or death by world
-		if (options.game_data.health == 0 && !options.game_data.won_fight && options.game_data.respawn) { //Loss + death by world
+		if (game_data.health == 0 && !game_data.won_fight && game_data.respawn) { //Loss + death by world
 			StoryState story_state = save_data.player_data.story_state;
 
 			if (save_data.map_section == map::DESERT && save_data.player_data.story_state == START) {
@@ -42,14 +42,14 @@ namespace savegame {
 				game::Player::MAX_HEALTH,
 				story_state
 			};
-		} else if (options.tmp_save && options.game_data.health > 0 && !options.game_data.won_fight && !options.game_data.respawn) { //Escape
+		} else if (options::active_tmp_save != 0 && game_data.health > 0 && !game_data.won_fight && !game_data.respawn) { //Escape
 			player_data.direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
 			player_data.camera_position = save_data.previous_camera_position;
-			player_data.health = options.game_data.health;
-		} else if (options.tmp_save && options.game_data.won_fight && !options.game_data.respawn) { //Win
-			player_data.health = options.game_data.health;
-			player_data.enemy_signature = options.game_data.enemy_signature;
-		} else if (options.tmp_save && options.game_data.won_fight && options.game_data.respawn) { //Win + finished game (detected by won + respawn)
+			player_data.health = game_data.health;
+		} else if (options::active_tmp_save != 0 && game_data.won_fight && !game_data.respawn) { //Win
+			player_data.health = game_data.health;
+			player_data.enemy_signature = game_data.enemy_signature;
+		} else if (options::active_tmp_save != 0 && game_data.won_fight && game_data.respawn) { //Win + finished game (detected by won + respawn)
 			player_data = {
 				map::INTERIOR,
 				MovementDirection::RIGHT,
@@ -90,6 +90,8 @@ namespace savegame {
 		if (save_found) {
 			write_save(save_data, save_id);
 		}
+		options::active_tmp_save = 0;
+		options::save();
 
 		return save_found;
 	}
@@ -100,9 +102,6 @@ namespace savegame {
 			if (options::save_count < save_id) {
 				options::save_count = save_id;
 			}
-
-			//When a non tmp save is saved, reset the active_tmp_save flag
-			options::active_tmp_save = 0;
 		} else {
 			//Save the id when going to a tmp save to restore it on unexpected combat scene exit
 			options::active_tmp_save = save_id;
@@ -131,9 +130,9 @@ namespace savegame {
 		game::notification::add_to_queue(game::notification::Icon::SAVE);
 	}
 
-	void load(uint8_t save_id, SaveOptions options) {
+	void load(uint8_t save_id, GameData game_data) {
 		save::SaveData save_data;
-		uint8_t load_save_id = options.tmp_save ? TMP_SAVE_ID : save_id;
+		uint8_t load_save_id = options::active_tmp_save != 0 ? TMP_SAVE_ID : save_id;
 
 		bool save_found = read_save(save_data, load_save_id);
 
@@ -144,7 +143,7 @@ namespace savegame {
 			}
 
 			//Load the player temp data required for setting health, position and map section
-			PlayerTempData player_temp_data = get_player_temp_data(options, save_data);
+			PlayerTempData player_temp_data = get_player_temp_data(game_data, save_data);
 
 			//Load the map section
 			map::load_section(player_temp_data.map_section);
@@ -193,11 +192,11 @@ namespace savegame {
 
 	std::array<game::GameObject::Save, MAX_GAME_OBJECTS> load_game_objects(uint8_t save_id) {
 		std::array<game::GameObject::Save, MAX_GAME_OBJECTS> game_objects;
-		save::SaveData save_game;
+		save::SaveData save_data;
 
-		bool save_found = read_save(save_game, save_id);
+		bool save_found = read_save(save_data, save_id);
 		if (save_found) {
-			game_objects = save_game.game_objects;
+			game_objects = save_data.game_objects;
 		}
 
 		return game_objects;

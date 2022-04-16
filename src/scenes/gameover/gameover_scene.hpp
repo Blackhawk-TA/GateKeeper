@@ -11,7 +11,7 @@
 namespace gameover {
 	class Scene : public IScene {
 	public:
-		explicit Scene(const SceneOptions& options);
+		explicit Scene(const SceneOptions& opts);
 		~Scene() override;
 		void render(uint32_t time) override;
 		void update(uint32_t time) override;
@@ -24,6 +24,5 @@ namespace gameover {
 		uint32_t changed;
 		bool respawn;
 		bool won_fight;
-		bool tmp_save;
 	};
 }

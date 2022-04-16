@@ -2,6 +2,7 @@
 // Created by daniel on 17.10.21.
 //
 
+#include <iostream>
 #include "game_scene.hpp"
 #include "../../engine/flags.hpp"
 #include "../../utils/saves/savegame.hpp"
@@ -14,8 +15,8 @@
 #include "../../utils/saves/options.hpp"
 
 namespace game {
-	Scene::Scene(const SceneOptions &options) {
-		Scene::save_id = options.save_id;
+	Scene::Scene(const SceneOptions &opts) {
+		Scene::save_id = opts.save_id;
 		last_buttons = 0;
 		changed = 0;
 
@@ -48,16 +49,14 @@ namespace game {
 
 		//Convert tmp save to normal save if the game was exited without properly exiting the combat scene
 		if (options::active_tmp_save != 0) {
-			savegame::convert_tmp_save(options::active_tmp_save);
-			options::active_tmp_save = 0;
-			options::save();
+			bool save_converted = savegame::convert_tmp_save(options::active_tmp_save);
+			if (!save_converted) {
+				std::cerr << "Could not convert temporary save to normal save" << std::endl; //This should never happen
+			}
 		}
 
 		player_handler::init(save_id);
-		savegame::load(save_id, SaveOptions{
-			options.tmp_save,
-			options.game_data
-		});
+		savegame::load(save_id, opts.game_data);
 	}
 
 	Scene::~Scene() {

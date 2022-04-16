@@ -2,10 +2,12 @@
 // Created by daniel on 17.10.21.
 //
 
+#include <iostream>
 #include "menu_scene.hpp"
 #include "../../game.hpp"
 #include "../../items/items.hpp"
 #include "../../utils/saves/options.hpp"
+#include "../../utils/saves/savegame.hpp"
 
 namespace menu {
 	Scene::Scene() {
@@ -13,8 +15,16 @@ namespace menu {
 		changed = 0;
 
 		options::load();
-		create_list_entries();
 
+		//Convert tmp save to normal save if the game was exited without properly exiting the combat scene
+		if (options::active_tmp_save != 0) {
+			bool save_converted = savegame::convert_tmp_save(options::active_tmp_save);
+			if (!save_converted) {
+				std::cerr << "Could not convert temporary save to normal save on unexpected exit" << std::endl; //This should never happen
+			}
+		}
+
+		create_list_entries();
 		listbox = new Listbox(Rect(15, 0, 5, 6), saves, false);
 	}
 

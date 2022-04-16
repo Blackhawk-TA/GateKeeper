@@ -81,12 +81,6 @@ struct GameData {
 	bool respawn = false;
 };
 
-//The parameters that can be set for loading a save game
-struct SaveOptions {
-	bool tmp_save = false;
-	GameData game_data;
-};
-
 //Shows if the gear of a player was stripped after the first player death
 enum StoryState {
 	START = 1, //The first part of the game were the player starts with default weapons
@@ -111,7 +105,6 @@ struct SceneOptions {
 	uint8_t save_id = 0;
 	CombatData combat_data = {};
 	GameData game_data = {};
-	bool tmp_save = false;
 };
 
 //The stats of an attack in the combat scene
