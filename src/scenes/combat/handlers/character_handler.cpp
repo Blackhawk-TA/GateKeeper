@@ -100,7 +100,12 @@ namespace combat::character_handler {
 		if (attacker->use_stamina(attack.stamina)) {
 			attacker->animate_attack(type, [target, attack, damage_multiplier, level_modifier] {
 				uint8_t bonus_damage = blit::random() % attack.bonus_damage;
-				uint8_t damage = static_cast<uint8_t>(std::clamp(static_cast<int>(static_cast<float>(attack.base_damage + bonus_damage) * damage_multiplier * level_modifier), 0, UINT8_MAX));
+
+				int full_damage = static_cast<int>(static_cast<float>(attack.base_damage + bonus_damage) * damage_multiplier * level_modifier);
+				uint8_t damage = static_cast<uint8_t>(std::clamp(full_damage, static_cast<int>(0), static_cast<int>(UINT8_MAX), [](const int &a, const int &b) {
+					return a < b;
+				}));
+
 				target->take_damage(damage);
 			});
 			return true;
