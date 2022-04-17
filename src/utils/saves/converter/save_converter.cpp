@@ -40,7 +40,7 @@ namespace save_converter {
 	void update_game_v0_v1(uint8_t save_count) {
 		//Store saves in heap instead of stack due to limit space on PicoSystem
 		auto *old_version = new SaveDataV0{};
-		auto *new_version = new save::SaveData{};
+		save::SaveData *new_version;
 		uint8_t save_slot;
 
 		for (uint8_t i = 0; i < save_count; i++) {
@@ -48,7 +48,7 @@ namespace save_converter {
 
 			bool found = read_save(*old_version, save_slot);
 			if (found) { //If no save is found, nothing will be updated
-				*new_version = {
+				new_version = new save::SaveData{
 					old_version->map_section,
 					old_version->camera_position,
 					old_version->previous_camera_position,
@@ -58,11 +58,11 @@ namespace save_converter {
 					old_version->passed_time,
 				};
 				write_save(*new_version, save_slot);
+				delete new_version;
 			}
 		}
 
 		delete old_version;
-		delete new_version;
 	}
 
 	void update_save_structs() {
