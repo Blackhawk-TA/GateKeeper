@@ -33,8 +33,9 @@ namespace savegame {
 	/**
 	 * Load existing save from file
 	 * @param save_id The id of the save
+	 * @param tmp_save Whether the save is a temporary save for e.g. combat scene transitions
 	 */
-	void load(uint8_t save_id, GameData options);
+	void load(uint8_t save_id, GameData game_data, bool tmp_save);
 
 	/**
 	 * Gets an array of all game objects of a map section depending on the save id

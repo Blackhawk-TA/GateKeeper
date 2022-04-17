@@ -48,7 +48,10 @@ namespace game {
 		});
 
 		//Convert tmp save to normal save if the game was exited without properly exiting the combat scene
+		bool tmp_save = false;
 		if (options::active_tmp_save != 0) {
+			tmp_save = true;
+
 			bool save_converted = savegame::convert_tmp_save(options::active_tmp_save);
 			if (!save_converted) {
 				std::cerr << "Could not convert temporary save to normal save" << std::endl; //This should never happen
@@ -56,7 +59,7 @@ namespace game {
 		}
 
 		player_handler::init(save_id);
-		savegame::load(save_id, opts.game_data);
+		savegame::load(save_id, opts.game_data, tmp_save);
 	}
 
 	Scene::~Scene() {

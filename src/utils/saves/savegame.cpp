@@ -14,7 +14,7 @@
 #include "../../scenes/game/game_objects/handler/extensions/enemy_handler.hpp"
 
 namespace savegame {
-	PlayerTempData get_player_temp_data(GameData game_data, save::SaveData save_data) {
+	PlayerTempData get_player_temp_data(GameData game_data, save::SaveData save_data, bool tmp_save) {
 		//The default save data if it was not a tmp save for the combat scene
 		PlayerTempData player_data = {
 			save_data.map_section,
@@ -42,14 +42,14 @@ namespace savegame {
 				game::Player::MAX_HEALTH,
 				story_state
 			};
-		} else if (options::active_tmp_save != 0 && game_data.health > 0 && !game_data.won_fight && !game_data.respawn) { //Escape
+		} else if (tmp_save && game_data.health > 0 && !game_data.won_fight && !game_data.respawn) { //Escape
 			player_data.direction = invert_direction(calculate_direction_from_points(save_data.previous_camera_position, save_data.camera_position));
 			player_data.camera_position = save_data.previous_camera_position;
 			player_data.health = game_data.health;
-		} else if (options::active_tmp_save != 0 && game_data.won_fight && !game_data.respawn) { //Win
+		} else if (tmp_save && game_data.won_fight && !game_data.respawn) { //Win
 			player_data.health = game_data.health;
 			player_data.enemy_signature = game_data.enemy_signature;
-		} else if (options::active_tmp_save != 0 && game_data.won_fight && game_data.respawn) { //Win + finished game (detected by won + respawn)
+		} else if (tmp_save && game_data.won_fight && game_data.respawn) { //Win + finished game (detected by won + respawn)
 			player_data = {
 				map::INTERIOR,
 				MovementDirection::RIGHT,
@@ -129,7 +129,7 @@ namespace savegame {
 		game::notification::add_to_queue(game::notification::Icon::SAVE);
 	}
 
-	void load(uint8_t save_id, GameData game_data) {
+	void load(uint8_t save_id, GameData game_data, bool tmp_save) {
 		save::SaveData save_data;
 		uint8_t load_save_id = options::active_tmp_save != 0 ? TMP_SAVE_ID : save_id;
 
@@ -138,7 +138,7 @@ namespace savegame {
 		//Load data from save game
 		if (save_found) {
 			//Load the player temp data required for setting health, position and map section
-			PlayerTempData player_temp_data = get_player_temp_data(game_data, save_data);
+			PlayerTempData player_temp_data = get_player_temp_data(game_data, save_data, tmp_save);
 
 			//Load the map section
 			map::load_section(player_temp_data.map_section);
