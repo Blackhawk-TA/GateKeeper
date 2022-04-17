@@ -91,9 +91,9 @@ void Textbox::draw() {
 		font,
 		Rect(
 			PADDING * TILE_SIZE,
-			(rect.y + PADDING) * TILE_SIZE + line_offset,
-			rect.w * TILE_SIZE,
-			rect.h * TILE_SIZE
+			(Box::rect.y + PADDING) * TILE_SIZE + line_offset,
+			Box::rect.w * TILE_SIZE,
+			Box::rect.h * TILE_SIZE
 		)
 	);
 
@@ -106,7 +106,7 @@ void Textbox::draw() {
 				TILE_SIZE,
 				TILE_SIZE
 			),
-			Point((rect.x + rect.w - 1) * TILE_SIZE, (rect.y + rect.h - 1) * TILE_SIZE)
+			Point((Box::rect.x + Box::rect.w - 1) * TILE_SIZE, (Box::rect.y + Box::rect.h - 1) * TILE_SIZE)
 		);
 	}
 }
