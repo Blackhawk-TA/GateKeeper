@@ -32,6 +32,7 @@ namespace game::game_objects {
 			new CarrotBed(map::GRASSLAND, Point(17, 43)),
 			new CarrotBed(map::GRASSLAND, Point(18, 43)),
 			new Villager(map::GRASSLAND, Point(20, 15), 260, RIGHT, "A myth says that there are crystals hidden in multiple dungeons. It is said that they grant special powers to their owner."),
+			new Villager(map::GRASSLAND, Point(45, 48), 8, LEFT, "Are you searching the dungeon? It is right around the corner in that mountain."),
 			new StoryCharacter(map::GRASSLAND, Point(23, 12), 0, LEFT, true, "The gate is broken, you need a gate part to repair it. I have heard that they are hidden in dungeons sometimes.", "It is said that gate parts are hidden in dungeons."),
 
 			new Chest(map::GRASSLAND, Point(11, 14)),
