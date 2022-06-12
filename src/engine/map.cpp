@@ -30,6 +30,7 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 	uint8_t tile_x = 0;
 	uint8_t tile_y = 0;
 	uint16_t data_length = tmx->data[0]; //First array entry is the array length
+	bool is_tree_layer = false;
 
 	//Skip first layer because it only contains the array length
 	for (i = 1u; i < data_length; i += 2) {
@@ -37,20 +38,33 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 		tile_range = tmx->data[i];
 		tile_id = tmx->data[i + 1];
 
-		if (tile_id != tmx->empty_tile) {
-			//Save first tile in row of equals and its position.
-			tile_data.push_back(Tile{
-				tile_x,
-				tile_y,
-				flags::get_flag(tile_id),
-				tile_range,
-				static_cast<uint16_t>((tile_id % spritesheet_size.w) * TILE_SIZE),
-				static_cast<uint16_t>((tile_id / spritesheet_size.h) * TILE_SIZE),
-			});
+		//Detect tree layer start and end.
+		//If we are not in a tree layer enable it. If we are in a tree layer disable it.
+		if (tile_range == 255 && tile_id == 65355) {
+			is_tree_layer ^= true;
+			continue; //Don't add tree layer markers to tile_data
 		}
 
-		tile_x = (((tile_y + tile_range + 1) / tmx->height) + tile_x) & (tmx->width - 1);
-		tile_y = (tile_y + tile_range + 1) & (tmx->height - 1);
+		if (is_tree_layer) {
+//          TODO implement and check if single trees work
+//			tile_data.push_back(Tile{
+//			});
+		} else {
+			if (tile_id != tmx->empty_tile) {
+				//Save first tile in row of equals and its position.
+				tile_data.push_back(Tile{
+					tile_x,
+					tile_y,
+					flags::get_flag(tile_id), //TODO use flag for tree_layer marker?
+					tile_range,
+					static_cast<uint16_t>((tile_id % spritesheet_size.w) * TILE_SIZE),
+					static_cast<uint16_t>((tile_id / spritesheet_size.h) * TILE_SIZE),
+					});
+			}
+
+			tile_x = (((tile_y + tile_range + 1) / tmx->height) + tile_x) & (tmx->width - 1);
+			tile_y = (tile_y + tile_range + 1) & (tmx->height - 1);
+		}
 	}
 
 	return map::TileMap{
