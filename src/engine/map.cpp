@@ -17,16 +17,12 @@ Point screen_tiles;
 map::MapSection current_section;
 Pen background;
 
-/**
- * Parses the tmx struct into a tile map struct with render optimized tile_data
- * @param tmx The TMX struct which contains the data directly extracted from the tilemap file
- * @return The rendering and memory optimized TileMap struct
- */
 map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 	std::vector<map::Tile> tile_data;
+	std::vector<map::TreeTile> tree_data;
 	Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	uint16_t tile_id, i;
-	uint8_t tile_range;
+	uint8_t tile_range, tree_repetitions;
 	uint8_t tile_x = 0;
 	uint8_t tile_y = 0;
 	uint16_t data_length = tmx->data[0]; //First array entry is the array length
@@ -38,28 +34,39 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 		tile_range = tmx->data[i];
 		tile_id = tmx->data[i + 1];
 
-		//Detect tree layer start and end.
-		//If we are not in a tree layer enable it. If we are in a tree layer disable it.
+		//Detect tree layer start and end and toggle the is_tree_layer variable.
 		if (tile_range == 255 && tile_id == 65355) {
 			is_tree_layer ^= true;
+			tile_x = 0; //Reset tile positions for next layer
+			tile_y = 0;
 			continue; //Don't add tree layer markers to tile_data
 		}
 
 		if (is_tree_layer) {
-//          TODO implement and check if single trees work
-//			tile_data.push_back(Tile{
-//			});
+			tile_id = tmx->data[i];
+			tile_x = tmx->data[i + 1];
+			tile_y = tmx->data[i + 2];
+			tree_repetitions = tmx->data[i + 3];
+
+			//TODO add individual collision detection for tree tiles
+			tree_data.push_back(TreeTile{
+				tile_x,
+				tile_y,
+				tree_repetitions,
+				tile_id,
+			});
+			i += 2; //Skip the next 2 loop iterations since tree layers use quadruples instead of tuples
 		} else {
 			if (tile_id != tmx->empty_tile) {
 				//Save first tile in row of equals and its position.
 				tile_data.push_back(Tile{
 					tile_x,
 					tile_y,
-					flags::get_flag(tile_id), //TODO use flag for tree_layer marker?
+					flags::get_flag(tile_id),
 					tile_range,
 					static_cast<uint16_t>((tile_id % spritesheet_size.w) * TILE_SIZE),
 					static_cast<uint16_t>((tile_id / spritesheet_size.h) * TILE_SIZE),
-					});
+				});
 			}
 
 			tile_x = (((tile_y + tile_range + 1) / tmx->height) + tile_x) & (tmx->width - 1);
@@ -72,14 +79,11 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 		static_cast<uint8_t>(tmx->width),
 		static_cast<uint8_t>(tmx->height),
 		static_cast<uint8_t>(tmx->layers),
-		tile_data
+		tile_data,
+		tree_data
 	};
 }
 
-/**
- * Loads new map section into memory and deletes the old one
- * @param map_section The enum describing the map section
- */
 void map::load_section(MapSection map_section) { //TODO make sure only map data is in memory when loading new section
 	map::TMX_16 *tmx = nullptr;
 
@@ -166,28 +170,30 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 	}
 }
 
-/**
- * Draws the tile map to the screen if a TileMap is loaded in the memory
- * @param camera_position The position of the camera on the TileMap
- */
 void blit_fast_code(map::draw)() {
 	screen.pen = background;
 	screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
 
+	//TODO dont calc every frame
+	Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
+
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
+	Size tree_size;
+	TreePartSizes tree_part_sizes = {};
+	uint16_t i, r, h_offset, sprite_rect_x, sprite_rect_y, tile_x, tile_y;
 
-	uint16_t i, r, tile_x, tile_y;
 	for (i = 0u; i < tile_map.data.size(); i++) {
 		tile_x = tile_map.data[i].x;
 
+		//Draw normal layer
 		for (r = 0u; r <= tile_map.data[i].range; r++) {
 			tile_y = (tile_map.data[i].y + r) & (tile_map.height - 1); //Equal to modulo operator but faster, only works with powers of 2
 
 			//Checks if tile is visible on screen
-			if (camera_position_world.x <= tile_x && camera_position_world.y <= tile_y &&
-			    screen_tiles.x + camera_position_world.x - tile_x >= 0 &&
-			    screen_tiles.y + camera_position_world.y - tile_y >= 0) {
+			if (camera_position_world.x <= tile_x && camera_position_world.y <= tile_y
+				&& screen_tiles.x + camera_position_world.x - tile_x >= 0
+				&& screen_tiles.y + camera_position_world.y - tile_y >= 0) {
 				screen.blit(
 					screen.sprites,
 					Rect(tile_map.data[i].sprite_rect_x, tile_map.data[i].sprite_rect_y, TILE_SIZE, TILE_SIZE),
@@ -201,14 +207,61 @@ void blit_fast_code(map::draw)() {
 			}
 		}
 	}
+
+	//TODO implement rendering check (if the tree has to rendered); Also render tree repetitions only as far as necessary
+	//Render trees, they are always drawn on top of the other layers
+	for (i = 0u; i < tile_map.tree_data.size(); i++) {
+		//Render entire tree because there are no repetitions
+		if (tile_map.tree_data[i].range == 0) {
+			tree_size = tree_map.at(tile_map.tree_data[i].tile_id);
+			sprite_rect_x = static_cast<uint16_t>((tile_map.tree_data[i].tile_id % spritesheet_size.w) * TILE_SIZE);
+			sprite_rect_y = static_cast<uint16_t>((tile_map.tree_data[i].tile_id / spritesheet_size.h) * TILE_SIZE);
+
+			screen.blit(
+				screen.sprites,
+				Rect(sprite_rect_x, sprite_rect_y, tree_size.w, tree_size.h),
+				Point(tile_map.tree_data[i].x * TILE_SIZE, tile_map.tree_data[i].y * TILE_SIZE) - camera_position
+			);
+			continue;
+		}
+
+		//Get the sizes of the individual tree parts
+		tree_part_sizes = tree_part_map.at(tile_map.tree_data[i].tile_id);
+		sprite_rect_x = static_cast<uint16_t>((tree_part_sizes.top.tile_id % spritesheet_size.w) * TILE_SIZE);
+		sprite_rect_y = static_cast<uint16_t>((tree_part_sizes.top.tile_id / spritesheet_size.h) * TILE_SIZE);
+
+		//Render tree top
+		screen.blit(
+			screen.sprites,
+			Rect(sprite_rect_x, sprite_rect_y, tree_part_sizes.top.w, tree_part_sizes.top.h),
+			Point(tile_map.tree_data[i].x * TILE_SIZE, tile_map.tree_data[i].y * TILE_SIZE) - camera_position
+		);
+		h_offset = tree_part_sizes.top.h;
+
+		//Render tree center repetitions
+		sprite_rect_x = static_cast<uint16_t>((tree_part_sizes.center.tile_id % spritesheet_size.w) * TILE_SIZE);
+		sprite_rect_y = static_cast<uint16_t>((tree_part_sizes.center.tile_id / spritesheet_size.h) * TILE_SIZE);
+
+		for (r = 0u; r < tile_map.tree_data[i].range; r++) {
+			screen.blit(
+				screen.sprites,
+				Rect(sprite_rect_x, sprite_rect_y, tree_part_sizes.center.w, tree_part_sizes.center.h),
+				Point( tile_map.tree_data[i].x * TILE_SIZE, tile_map.tree_data[i].y * TILE_SIZE + h_offset) - camera_position
+			);
+			h_offset += tree_part_sizes.center.h;
+		}
+
+		//Render tree bottom
+		sprite_rect_x = static_cast<uint16_t>((tree_part_sizes.bottom.tile_id % spritesheet_size.w) * TILE_SIZE);
+		sprite_rect_y = static_cast<uint16_t>((tree_part_sizes.bottom.tile_id / spritesheet_size.h) * TILE_SIZE);
+		screen.blit(
+			screen.sprites,
+			Rect(sprite_rect_x, sprite_rect_y, tree_part_sizes.bottom.w, tree_part_sizes.bottom.h),
+			Point(tile_map.tree_data[i].x * TILE_SIZE, tile_map.tree_data[i].y * TILE_SIZE + h_offset) - camera_position
+		);
+	}
 }
 
-/**
- * Gets the id of a tile at a specific Point on the map.
- * Always selects the tile on the highest layer if several tiles overlap.
- * @param p The point at which the tile is located
- * @return The id of the tile mapped to the sprite sheet
- */
 uint8_t map::get_flag(Point &p) {
 	uint16_t i = tile_map.data.size();
 	uint8_t flag_enum_id = 0;
@@ -216,6 +269,8 @@ uint8_t map::get_flag(Point &p) {
 	uint8_t tile_max_y;
 	bool found = false;
 
+	//TODO for loop for tree data
+	//TODO flags need to be found differently for trees
 	while (i > 0 && !found) {
 		i--;
 		tile_max_x = tile_map.data[i].x + (tile_map.data[i].y + tile_map.data[i].range) / tile_map.width;
@@ -239,18 +294,7 @@ map::MapSection map::get_section() {
 	return current_section;
 }
 
-/**
- * Checks if a point is within an area of the map defined by a min and max point.
- * It is expected that the map is drawn from top to bottom and then left to right.
- * @param p The point which shall be checked
- * @param min_x The position at which the rectangle begins on the x-axis
- * @param min_y The position at which the rectangle begins on the y-axis
- * @param max_x The position at which the rectangle ends on the x-axis
- * @param max_y The position at which the rectangle ends on the y-axis
- * @return True if the point p is within the rectangle, else false
- */
 bool map::point_in_area(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, uint8_t max_y) {
-	return (((p.x == min_x && p.y >= min_y) || p.x > min_x) &&
-	        ((p.x == max_x && p.y <= max_y) || p.x < max_x));
+	return ((p.x == min_x && p.y >= min_y) || p.x > min_x) &&
+	       ((p.x == max_x && p.y <= max_y) || p.x < max_x);
 }
-
