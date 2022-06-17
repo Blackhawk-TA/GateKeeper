@@ -139,4 +139,23 @@ namespace map {
 	 * @return True if the point p is within the rectangle, else false
 	 */
 	bool point_in_area(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, uint8_t max_y);
+
+	/**
+	 * Gets the position of a tile on its spritesheet
+	 * @param tile_id The tile id of which the position is needed
+	 * @param spritesheet_size The spritesheet on which the tile exists
+	 * @return The position in pixel of the tile's upper left corner
+	 */
+	Point get_sprite_rect_pos(uint16_t tile_id, Size spritesheet_size);
+
+	/**
+	 * Checks if a rectangle is in the currently visible area of the player.
+	 * @param x The x position of the rectangle in tile units
+	 * @param y The y position of the rectangle in tile units
+	 * @param w The width of the rectangle in pixels
+	 * @param h The height of the rectangle in pixels
+	 * @param camera_position The camera_position in pixels
+	 * @return True, if the rect is in the view and has to be rendered, else false
+	 */
+	bool rect_in_view(Rect rect, Point camera_position);
 }

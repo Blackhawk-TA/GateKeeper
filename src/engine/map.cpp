@@ -170,23 +170,27 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 	}
 }
 
+//TODO split rendering in two functions, one for map and one for trees.
+// They are both called from map::draw() which does basic stuff like background and mutual variables setting
 void blit_fast_code(map::draw)() {
 	screen.pen = background;
 	screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
 
-	//TODO dont calc every frame
+	//TODO dont calc every frame, do it like for screen_tiles...
 	Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
+	Point sprite_rect_pos;
+	Rect tree_rect; //Contains the position on the map and the size of the tree
 	Size tree_size;
 	TreePartSizes tree_part_sizes = {};
-	uint16_t i, r, h_offset, sprite_rect_x, sprite_rect_y, tile_x, tile_y;
+	uint16_t i, r, h_offset, tile_x, tile_y, tree_x_px, tree_y_px;
 
+	//Render individual tiles
 	for (i = 0u; i < tile_map.data.size(); i++) {
 		tile_x = tile_map.data[i].x;
 
-		//Draw normal layer
 		for (r = 0u; r <= tile_map.data[i].range; r++) {
 			tile_y = (tile_map.data[i].y + r) & (tile_map.height - 1); //Equal to modulo operator but faster, only works with powers of 2
 
@@ -211,54 +215,66 @@ void blit_fast_code(map::draw)() {
 	//TODO implement rendering check (if the tree has to rendered); Also render tree repetitions only as far as necessary
 	//Render trees, they are always drawn on top of the other layers
 	for (i = 0u; i < tile_map.tree_data.size(); i++) {
+		tree_x_px = tile_map.tree_data[i].x * TILE_SIZE; //The x position of the tree top in px
+		tree_y_px = tile_map.tree_data[i].y * TILE_SIZE; //The y position of the tree top in px
+
 		//Render entire tree because there are no repetitions
 		if (tile_map.tree_data[i].range == 0) {
 			tree_size = tree_map.at(tile_map.tree_data[i].tile_id);
-			sprite_rect_x = static_cast<uint16_t>((tile_map.tree_data[i].tile_id % spritesheet_size.w) * TILE_SIZE);
-			sprite_rect_y = static_cast<uint16_t>((tile_map.tree_data[i].tile_id / spritesheet_size.h) * TILE_SIZE);
+			tree_rect = Rect(tree_x_px, tree_y_px, tree_size.w, tree_size.h);
 
+			//Don't render tree when it is out of view
+			if (!rect_in_view(tree_rect, camera_position)) continue;
+
+			sprite_rect_pos = get_sprite_rect_pos(tile_map.tree_data[i].tile_id, spritesheet_size);
 			screen.blit(
 				screen.sprites,
-				Rect(sprite_rect_x, sprite_rect_y, tree_size.w, tree_size.h),
-				Point(tile_map.tree_data[i].x * TILE_SIZE, tile_map.tree_data[i].y * TILE_SIZE) - camera_position
+				Rect(sprite_rect_pos.x, sprite_rect_pos.y, tree_rect.w, tree_rect.h),
+				Point(tree_x_px, tree_y_px) - camera_position
 			);
 			continue;
 		}
 
 		//Get the sizes of the individual tree parts
 		tree_part_sizes = tree_part_map.at(tile_map.tree_data[i].tile_id);
-		sprite_rect_x = static_cast<uint16_t>((tree_part_sizes.top.tile_id % spritesheet_size.w) * TILE_SIZE);
-		sprite_rect_y = static_cast<uint16_t>((tree_part_sizes.top.tile_id / spritesheet_size.h) * TILE_SIZE);
+		tree_rect = Rect(tree_x_px, tree_y_px, tree_part_sizes.top.w, tree_part_sizes.top.h);
 
 		//Render tree top
-		screen.blit(
-			screen.sprites,
-			Rect(sprite_rect_x, sprite_rect_y, tree_part_sizes.top.w, tree_part_sizes.top.h),
-			Point(tile_map.tree_data[i].x * TILE_SIZE, tile_map.tree_data[i].y * TILE_SIZE) - camera_position
-		);
+		if (rect_in_view(tree_rect, camera_position)) {
+			sprite_rect_pos = get_sprite_rect_pos(tree_part_sizes.top.tile_id, spritesheet_size);
+			screen.blit(
+				screen.sprites,
+				Rect(sprite_rect_pos.x, sprite_rect_pos.y, tree_rect.w, tree_rect.h),
+				Point(tree_x_px, tree_y_px) - camera_position
+			);
+		}
 		h_offset = tree_part_sizes.top.h;
 
 		//Render tree center repetitions
-		sprite_rect_x = static_cast<uint16_t>((tree_part_sizes.center.tile_id % spritesheet_size.w) * TILE_SIZE);
-		sprite_rect_y = static_cast<uint16_t>((tree_part_sizes.center.tile_id / spritesheet_size.h) * TILE_SIZE);
+		sprite_rect_pos = get_sprite_rect_pos(tree_part_sizes.center.tile_id, spritesheet_size);
 
 		for (r = 0u; r < tile_map.tree_data[i].range; r++) {
-			screen.blit(
-				screen.sprites,
-				Rect(sprite_rect_x, sprite_rect_y, tree_part_sizes.center.w, tree_part_sizes.center.h),
-				Point( tile_map.tree_data[i].x * TILE_SIZE, tile_map.tree_data[i].y * TILE_SIZE + h_offset) - camera_position
-			);
+			tree_rect = Rect(tree_x_px, tree_y_px + h_offset, tree_part_sizes.center.w, tree_part_sizes.center.h);
+			if (rect_in_view(tree_rect, camera_position)) {
+				screen.blit(
+					screen.sprites,
+					Rect(sprite_rect_pos.x, sprite_rect_pos.y, tree_rect.w, tree_rect.h),
+					Point(tree_x_px, tree_y_px + h_offset) - camera_position
+				);
+			}
 			h_offset += tree_part_sizes.center.h;
 		}
 
 		//Render tree bottom
-		sprite_rect_x = static_cast<uint16_t>((tree_part_sizes.bottom.tile_id % spritesheet_size.w) * TILE_SIZE);
-		sprite_rect_y = static_cast<uint16_t>((tree_part_sizes.bottom.tile_id / spritesheet_size.h) * TILE_SIZE);
-		screen.blit(
-			screen.sprites,
-			Rect(sprite_rect_x, sprite_rect_y, tree_part_sizes.bottom.w, tree_part_sizes.bottom.h),
-			Point(tile_map.tree_data[i].x * TILE_SIZE, tile_map.tree_data[i].y * TILE_SIZE + h_offset) - camera_position
-		);
+		tree_rect = Rect(tree_x_px, tree_y_px + h_offset, tree_part_sizes.bottom.w, tree_part_sizes.bottom.h);
+		if (rect_in_view(tree_rect, camera_position)) {
+			sprite_rect_pos = get_sprite_rect_pos(tree_part_sizes.bottom.tile_id, spritesheet_size);
+			screen.blit(
+				screen.sprites,
+				Rect(sprite_rect_pos.x, sprite_rect_pos.y, tree_rect.w, tree_rect.h),
+				Point(tree_x_px, tree_y_px + h_offset) - camera_position
+			);
+		}
 	}
 }
 
@@ -297,4 +313,18 @@ map::MapSection map::get_section() {
 bool map::point_in_area(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, uint8_t max_y) {
 	return ((p.x == min_x && p.y >= min_y) || p.x > min_x) &&
 	       ((p.x == max_x && p.y <= max_y) || p.x < max_x);
+}
+
+Point map::get_sprite_rect_pos(uint16_t tile_id, Size spritesheet_size) {
+	return Point(
+		static_cast<uint16_t>((tile_id % spritesheet_size.w) * TILE_SIZE),
+		static_cast<uint16_t>((tile_id / spritesheet_size.h) * TILE_SIZE)
+	);
+}
+
+bool map::rect_in_view(Rect rect, Point camera_position) {
+	//TODO implement properly
+	return camera_position.x <= rect.x && camera_position.y <= rect.y
+		&& screen.bounds.w + camera_position.x - rect.x >= 0
+		&& screen.bounds.h + camera_position.y - rect.y >= 0;
 }
