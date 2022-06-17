@@ -114,8 +114,18 @@ namespace map {
 	 */
 	void draw();
 
-	void draw_tiles();
-	void draw_trees();
+	/**
+	 * Draws individual tiles of the map.
+	 * @param camera_position The current camera position in pixel
+	 */
+	void draw_tiles(Point camera_position);
+
+	/**
+	 * Draws trees in clusters to save memory and render calls.
+	 * Trees that repeat on the y axis are drawn as multiple rects instead of drawing their individual tiles.
+	 * @param camera_position The current camera position in pixel
+	 */
+	void draw_trees(Point camera_position);
 
 	/**
 	 * Gets the id of a tile at a specific Point on the map.

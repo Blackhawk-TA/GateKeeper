@@ -172,21 +172,21 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 	}
 }
 
-//TODO split rendering in two functions, one for map and one for trees.
-// They are both called from map::draw() which does basic stuff like background and mutual variables setting
+//TODO check if blit fast code should be used for tiles or trees or both
 void blit_fast_code(map::draw)() {
 	screen.pen = background;
 	screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
 
 	Point camera_position = camera::get_screen_position();
-	Point camera_position_world = screen_to_world(camera_position);
-	Point sprite_rect_pos;
-	Rect tree_rect; //Contains the position on the map and the size of the tree
-	Size tree_size;
-	TreePartSizes tree_part_sizes = {};
-	uint16_t i, r, h_offset, tile_x, tile_y, tree_x_px, tree_y_px;
 
-	//Render individual tiles
+	draw_tiles(camera_position);
+	draw_trees(camera_position);
+}
+
+void map::draw_tiles(Point camera_position) {
+	uint16_t i, r, tile_x, tile_y;
+	Point camera_position_world = screen_to_world(camera_position);
+
 	for (i = 0u; i < tile_map.data.size(); i++) {
 		tile_x = tile_map.data[i].x;
 
@@ -195,8 +195,8 @@ void blit_fast_code(map::draw)() {
 
 			//Checks if tile is visible on screen
 			if (camera_position_world.x <= tile_x && camera_position_world.y <= tile_y
-				&& screen_tiles.x + camera_position_world.x - tile_x >= 0
-				&& screen_tiles.y + camera_position_world.y - tile_y >= 0) {
+			    && screen_tiles.x + camera_position_world.x - tile_x >= 0
+			    && screen_tiles.y + camera_position_world.y - tile_y >= 0) {
 				screen.blit(
 					screen.sprites,
 					Rect(tile_map.data[i].sprite_rect_x, tile_map.data[i].sprite_rect_y, TILE_SIZE, TILE_SIZE),
@@ -211,8 +211,16 @@ void blit_fast_code(map::draw)() {
 		}
 	}
 
-	//TODO implement rendering check (if the tree has to rendered); Also render tree repetitions only as far as necessary
-	//Render trees, they are always drawn on top of the other layers
+}
+
+//TODO implement rendering check (if the tree has to rendered); Also render tree repetitions only as far as necessary
+void map::draw_trees(Point camera_position) {
+	Point sprite_rect_pos;
+	Rect tree_rect; //Contains the position on the map and the size of the tree
+	Size tree_size;
+	TreePartSizes tree_part_sizes = {};
+	uint16_t i, r, h_offset, tree_x_px, tree_y_px;
+
 	for (i = 0u; i < tile_map.tree_data.size(); i++) {
 		tree_x_px = tile_map.tree_data[i].x * TILE_SIZE; //The x position of the tree top in px
 		tree_y_px = tile_map.tree_data[i].y * TILE_SIZE; //The y position of the tree top in px
