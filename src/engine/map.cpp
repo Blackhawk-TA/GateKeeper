@@ -13,14 +13,14 @@
 using namespace blit;
 
 map::TileMap tile_map;
-Point screen_tiles;
 map::MapSection current_section;
+Point screen_tiles;
+Size spritesheet_size;
 Pen background;
 
 map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 	std::vector<map::Tile> tile_data;
 	std::vector<map::TreeTile> tree_data;
-	Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 	uint16_t tile_id, i;
 	uint8_t tile_range, tree_repetitions;
 	uint8_t tile_x = 0;
@@ -161,6 +161,8 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 
 	if (tmx != nullptr) {
 		screen_tiles = get_screen_tiles();
+		spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
+
 		current_section = map_section;
 
 		tile_map = precalculate_tile_data(tmx);
@@ -175,9 +177,6 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 void blit_fast_code(map::draw)() {
 	screen.pen = background;
 	screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
-
-	//TODO dont calc every frame, do it like for screen_tiles...
-	Size spritesheet_size = get_spritesheet_size(screen.sprites->bounds);
 
 	Point camera_position = camera::get_screen_position();
 	Point camera_position_world = screen_to_world(camera_position);
@@ -226,7 +225,7 @@ void blit_fast_code(map::draw)() {
 			//Don't render tree when it is out of view
 			if (!rect_in_view(tree_rect, camera_position)) continue;
 
-			sprite_rect_pos = get_sprite_rect_pos(tile_map.tree_data[i].tile_id, spritesheet_size);
+			sprite_rect_pos = get_sprite_rect_pos(tile_map.tree_data[i].tile_id);
 			screen.blit(
 				screen.sprites,
 				Rect(sprite_rect_pos.x, sprite_rect_pos.y, tree_rect.w, tree_rect.h),
@@ -241,7 +240,7 @@ void blit_fast_code(map::draw)() {
 
 		//Render tree top
 		if (rect_in_view(tree_rect, camera_position)) {
-			sprite_rect_pos = get_sprite_rect_pos(tree_part_sizes.top.tile_id, spritesheet_size);
+			sprite_rect_pos = get_sprite_rect_pos(tree_part_sizes.top.tile_id);
 			screen.blit(
 				screen.sprites,
 				Rect(sprite_rect_pos.x, sprite_rect_pos.y, tree_rect.w, tree_rect.h),
@@ -251,7 +250,7 @@ void blit_fast_code(map::draw)() {
 		h_offset = tree_part_sizes.top.h;
 
 		//Render tree center repetitions
-		sprite_rect_pos = get_sprite_rect_pos(tree_part_sizes.center.tile_id, spritesheet_size);
+		sprite_rect_pos = get_sprite_rect_pos(tree_part_sizes.center.tile_id);
 
 		for (r = 0u; r < tile_map.tree_data[i].range; r++) {
 			tree_rect = Rect(tree_x_px, tree_y_px + h_offset, tree_part_sizes.center.w, tree_part_sizes.center.h);
@@ -268,7 +267,7 @@ void blit_fast_code(map::draw)() {
 		//Render tree bottom
 		tree_rect = Rect(tree_x_px, tree_y_px + h_offset, tree_part_sizes.bottom.w, tree_part_sizes.bottom.h);
 		if (rect_in_view(tree_rect, camera_position)) {
-			sprite_rect_pos = get_sprite_rect_pos(tree_part_sizes.bottom.tile_id, spritesheet_size);
+			sprite_rect_pos = get_sprite_rect_pos(tree_part_sizes.bottom.tile_id);
 			screen.blit(
 				screen.sprites,
 				Rect(sprite_rect_pos.x, sprite_rect_pos.y, tree_rect.w, tree_rect.h),
@@ -315,7 +314,7 @@ bool map::point_in_area(Point &p, uint8_t min_x, uint8_t min_y, uint8_t max_x, u
 	       ((p.x == max_x && p.y <= max_y) || p.x < max_x);
 }
 
-Point map::get_sprite_rect_pos(uint16_t tile_id, Size spritesheet_size) {
+Point map::get_sprite_rect_pos(uint16_t tile_id) {
 	return Point(
 		static_cast<uint16_t>((tile_id % spritesheet_size.w) * TILE_SIZE),
 		static_cast<uint16_t>((tile_id / spritesheet_size.h) * TILE_SIZE)

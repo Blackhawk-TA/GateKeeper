@@ -114,6 +114,9 @@ namespace map {
 	 */
 	void draw();
 
+	void draw_tiles();
+	void draw_trees();
+
 	/**
 	 * Gets the id of a tile at a specific Point on the map.
 	 * Always selects the tile on the highest layer if several tiles overlap.
@@ -143,10 +146,9 @@ namespace map {
 	/**
 	 * Gets the position of a tile on its spritesheet
 	 * @param tile_id The tile id of which the position is needed
-	 * @param spritesheet_size The spritesheet on which the tile exists
 	 * @return The position in pixel of the tile's upper left corner
 	 */
-	Point get_sprite_rect_pos(uint16_t tile_id, Size spritesheet_size);
+	Point get_sprite_rect_pos(uint16_t tile_id);
 
 	/**
 	 * Checks if a rectangle is in the currently visible area of the player.
