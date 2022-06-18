@@ -330,8 +330,6 @@ Point map::get_sprite_rect_pos(uint16_t tile_id) {
 }
 
 bool map::rect_in_view(Rect rect, Point camera_position) {
-	//TODO implement properly
-	return camera_position.x <= rect.x && camera_position.y <= rect.y
-		&& screen.bounds.w + camera_position.x - rect.x >= 0
-		&& screen.bounds.h + camera_position.y - rect.y >= 0;
+	Rect view = Rect(camera_position.x, camera_position.y, screen.bounds.w, screen.bounds.h);
+	return view.intersects(rect);
 }

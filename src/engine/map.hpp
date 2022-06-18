@@ -162,10 +162,7 @@ namespace map {
 
 	/**
 	 * Checks if a rectangle is in the currently visible area of the player.
-	 * @param x The x position of the rectangle in tile units
-	 * @param y The y position of the rectangle in tile units
-	 * @param w The width of the rectangle in pixels
-	 * @param h The height of the rectangle in pixels
+	 * @param rect The rectangle to check whether its in the view with all values in pixels
 	 * @param camera_position The camera_position in pixels
 	 * @return True, if the rect is in the view and has to be rendered, else false
 	 */
