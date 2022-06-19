@@ -286,14 +286,49 @@ void map::draw_trees(Point camera_position) {
 }
 
 uint8_t map::get_flag(Point &p) {
-	uint16_t i = tile_map.data.size();
+	uint16_t i, tree_x_px, tree_y_px, tree_cluster_h;
 	uint8_t flag_enum_id = 0;
-	uint8_t tile_max_x;
-	uint8_t tile_max_y;
+	uint8_t tile_max_x, tile_max_y, r;
+	Size tree_cluster_size;
+	Rect tree_cluster;
+	TreePartSizes tree_part_sizes = {};
 	bool found = false;
 
-	//TODO for loop for tree data
-	//TODO flags need to be found differently for trees
+	//Get flag of tree tile. Executed before tile flag check because the tree layer is always the highest layer
+	i = tile_map.tree_data.size();
+	while (i > 0 && !found) {
+		i--;
+		tree_x_px = tile_map.tree_data[i].x * TILE_SIZE; //The x position of the tree top in px
+		tree_y_px = tile_map.tree_data[i].y * TILE_SIZE; //The y position of the tree top in px
+
+		if (tile_map.tree_data[i].range == 0) { //Collision for single tree
+			tree_cluster_size = tree_map.at(tile_map.tree_data[i].tile_id);
+		} else { //Collision for tree clusters
+			tree_part_sizes = tree_part_map.at(tile_map.tree_data[i].tile_id);
+
+			//Add cluster top, only height is required since tree cluster width is always 1 tree
+			tree_cluster_h = tree_part_sizes.top.h;
+
+			//Add cluster repetitions
+			for (r = 0u; r < tile_map.tree_data[i].range; r++) {
+				tree_cluster_h += tree_part_sizes.center.h;
+			}
+
+			//Add cluster bottom
+			tree_cluster_h += tree_part_sizes.bottom.h;
+
+			tree_cluster_size = Size(tree_part_sizes.top.w, tree_cluster_h);
+		}
+
+		tree_cluster = Rect(tree_x_px, tree_y_px, tree_cluster_size.w, tree_cluster_size.h);
+		if (tree_cluster.contains(p * TILE_SIZE)) {
+			flag_enum_id = flags::TileFlags::TREE;
+			found = true;
+		}
+	}
+
+	//Get flag of a tile
+	i = tile_map.data.size();
 	while (i > 0 && !found) {
 		i--;
 		tile_max_x = tile_map.data[i].x + (tile_map.data[i].y + tile_map.data[i].range) / tile_map.width;
