@@ -171,7 +171,6 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 	}
 }
 
-//TODO check if blit fast code should be used for tiles or trees or both
 void map::draw() {
 	screen.pen = background;
 	screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
