@@ -48,7 +48,6 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 			tile_y = tmx->data[i + 2];
 			tree_repetitions = tmx->data[i + 3];
 
-			//TODO add individual collision detection for tree tiles
 			tree_data.push_back(TreeTile{
 				tile_x,
 				tile_y,
@@ -213,7 +212,6 @@ void map::draw_tiles(Point camera_position) {
 
 }
 
-//TODO implement rendering check (if the tree has to rendered); Also render tree repetitions only as far as necessary
 void map::draw_trees(Point camera_position) {
 	Point sprite_rect_pos;
 	Rect tree_rect; //Contains the position on the map and the size of the tree
