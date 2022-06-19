@@ -172,13 +172,13 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 }
 
 //TODO check if blit fast code should be used for tiles or trees or both
-void blit_fast_code(map::draw)() {
+void map::draw() {
 	screen.pen = background;
 	screen.rectangle(Rect(0, 0, screen.bounds.w, screen.bounds.h));
 
 	Point camera_position = camera::get_screen_position();
 
-	draw_tiles(camera_position);
+	blit_fast_code(draw_tiles(camera_position));
 	draw_trees(camera_position);
 }
 
@@ -217,7 +217,8 @@ void map::draw_trees(Point camera_position) {
 	Rect tree_rect; //Contains the position on the map and the size of the tree
 	Size tree_size;
 	TreePartSizes tree_part_sizes = {};
-	uint16_t i, r, h_offset, tree_x_px, tree_y_px;
+	uint16_t i, h_offset, tree_x_px, tree_y_px;
+	uint8_t r;
 
 	for (i = 0u; i < tile_map.tree_data.size(); i++) {
 		tree_x_px = tile_map.tree_data[i].x * TILE_SIZE; //The x position of the tree top in px
