@@ -85,14 +85,20 @@ namespace map {
 		{2907, Size(48, 48)}, // 3x3 fancy green tree full
 		{2910, Size(32, 48)}, // 2x3 round green tree full
 		{3216, Size(32, 48)}, // 2x3 fir green tree full
+		{2197, Size(48, 48)}, // 3x3 white tree
+		{1922, Size(32, 48)}, // 2x3 round white tree full
+		{1920, Size(32, 48)}, // 2x3 fir white tree full
 	};
 
 	// A map containing the sizes of the individual tree parts indexed by their top left tile id.
 	const std::map<uint16_t, TreePartSizes> tree_part_map = {
 		{2904, {{2904, 48, 16}, {3096, 48, 32}, {2968, 48, 32}}}, //3x3 green tree
 		{2907, {{2907, 48, 16}, {3099, 48, 32}, {2971, 48, 32}}}, //3x3 fancy green tree
-		{2910, {{2910, 32, 16}, {3102, 32,32}, {2974, 32, 32}}}, //2x3 fir green tree
-		{3216, {{3216, 32, 16}, {3218, 32,32}, {3280, 32, 32}}}, //2x3 round green tree
+		{2910, {{2910, 32, 16}, {3102, 32, 32}, {2974, 32, 32}}}, //2x3 fir green tree
+		{3216, {{3216, 32, 16}, {3218, 32, 32}, {3280, 32, 32}}}, //2x3 round green tree
+		{2197, {{2197, 48, 16}, {2252, 48, 32}, {2262, 48, 32}}}, //3x3 green tree
+		{1922, {{1922, 32, 16}, {2126, 32, 32}, {1986, 32, 32}}}, //2x3 round white tree
+		{1920, {{1920, 32, 16}, {2124, 32, 32}, {1984, 32, 32}}}, //2x3 fir white tree
 	};
 
 	/**
