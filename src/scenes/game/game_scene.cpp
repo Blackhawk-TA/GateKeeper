@@ -128,6 +128,10 @@ namespace game {
 				game_objects::close_textboxes();
 			}
 		} else if (!player_handler::in_cut_scene()) {
+			if (changed & buttons) {
+				utils::input_sequence_handler(buttons);
+			}
+
 			if (buttons & Button::DPAD_UP) {
 				player_handler::move(UP);
 			} else if (buttons & Button::DPAD_DOWN) {

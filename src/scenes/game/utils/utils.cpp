@@ -42,4 +42,22 @@ namespace game::utils {
 
 		return sprite_map[type];
 	}
+
+	uint8_t sequence_index = 0;
+	void input_sequence_handler(uint8_t pressed_button) {
+		std::array<Button, 10> sequence = {
+			Button::DPAD_UP, Button::DPAD_UP, Button::DPAD_DOWN, Button::DPAD_DOWN,
+			Button::DPAD_LEFT, Button::DPAD_RIGHT, Button::DPAD_LEFT, Button::DPAD_RIGHT, Button::B, Button::A
+		};
+
+		if (pressed_button == sequence[sequence_index] && sequence_index < sequence.size() - 1) {
+			sequence_index++;
+		} else if (pressed_button == sequence[sequence_index] && sequence_index == sequence.size() - 1) {
+			player_handler::add_gold(999);
+			player_handler::heal(100);
+			sequence_index = 0;
+		} else {
+			sequence_index = 0;
+		}
+	}
 }

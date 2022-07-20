@@ -18,4 +18,10 @@ namespace game::utils {
 	 * @param tile_id The first tile id of a character
 	 */
 	std::array<uint16_t, ANIMATION_SPRITE_COUNT> get_attack_sprites(CombatCharacterType type);
+
+	/**
+	 * Checks if a special sequence of buttons was pressed and triggers an action if the sequence is complete.
+	 * @param pressed_button The button that was pressed as part of the sequence.
+	 */
+	void input_sequence_handler(uint8_t pressed_button);
 }
