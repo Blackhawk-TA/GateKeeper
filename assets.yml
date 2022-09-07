@@ -70,3 +70,11 @@ assets.cpp:
     name: castle_combat_map
     empty_tile: 0
     output_struct: true
+  assets/tower.tmx:
+    name: tower_map
+    empty_tile: 0
+    output_struct: true
+  assets/tower_combat.tmx:
+    name: tower_combat_map
+    empty_tile: 0
+    output_struct: true

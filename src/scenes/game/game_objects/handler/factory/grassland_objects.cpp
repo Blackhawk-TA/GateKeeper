@@ -51,6 +51,7 @@ namespace game::game_objects {
  			objects.emplace_back(new StoryCharacter(map::GRASSLAND, Point(27, 22), 12, UP, true, msg, alt_msg));
 			objects.emplace_back(new Villager(map::GRASSLAND, Point(39, 17), 4, DOWN, "I cannot let you pass yet."));
 			objects.emplace_back(new Villager(map::GRASSLAND, Point(20, 30), 272, RIGHT, "I cannot let you go through yet."));
+			objects.emplace_back(new Villager(map::GRASSLAND, Point(43, 32), 268, LEFT, "I cannot let you go through yet."));
 		}
 
 		return objects;

@@ -43,6 +43,12 @@ namespace game::entry_handler {
 
 		//Castle
 		Entry{Point(31, 28), Point(15, 30), Point(0, 1), map::DESERT, map::CASTLE},
+
+		//Grassland tower
+		Entry{Point(50,28), Point(4, 8), Point(0, 0), map::GRASSLAND, map::TOWER},
+		Entry{Point(6, 2), Point(28, 2), Point(0, 0), map::TOWER, map::TOWER},
+		Entry{Point(25, 2), Point(3, 19), Point(0, 0), map::TOWER, map::TOWER},
+		Entry{Point(6, 19), Point(28, 19), Point(0, 0), map::TOWER, map::TOWER},
 	};
 
 	/**

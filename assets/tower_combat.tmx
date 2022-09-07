@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Compressed version of the Tiled TMX format-->
+<!--The first layer shows the amount of total data entries.-->
+<!--The data itself is split into pairs. The first value shows how often the tile is rendered in a row. The second is the tile id.-->
+<!--The highest repetition count is 255 to allow storing it in an unsigned 8bit integer. If a tile is repeated more often, it is split into several pairs.-->
+<!--Tree layers always starts and ends with the tuple (256,65356). A single tree information is a quadruple.-->
+<!--It consists of the tile id of the top left tree tile, its x/y position on the map and the amount of repetitions-->
+<map width="32" height="32">
+	<layer id="0">
+		<data encoding="csv">
+			170
+		</data>
+	</layer>
+	<layer id="1">
+		<data encoding="csv">
+			256,0,74,0,3,3829,27,0,1,3957,1,4021,1,4085,3,4089,25,0,1,3894,1,3958,1,4022,5,4089,24,0,1,3895,1,3959,6,4089,1,3829,22,0,1,3832,1,3896,1,3960,6,4089,1,3829,22,0,1,3833,1,3897,1,3961,6,4089,1,3829,23,0,1,3898,1,3962,6,4089,1,3829,23,0,1,3899,1,3963,1,4027,5,4089,25,0,1,3964,1,4028,1,4092,3,4089,28,0,3,3829,256,0,147,0
+		</data>
+	</layer>
+	<layer id="2">
+		<data encoding="csv">
+			256,0,107,0,1,2865,1,2929,1,2993,31,0,1,2994,1,3058,31,0,1,3059,31,0,1,3060,31,0,1,4093,31,0,1,4094,30,0,1,4031,1,4095,28,0,1,3904,1,3968,1,4032,256,0,178,0
+		</data>
+	</layer>
+	<layer id="3">
+		<data encoding="csv">
+			256,0,169,0,1,3828,36,0,1,3891,31,0,1,3892,26,0,1,3827,256,0,246,0
+		</data>
+	</layer>
+</map>

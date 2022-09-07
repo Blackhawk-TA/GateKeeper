@@ -87,6 +87,9 @@ namespace combat {
 			case map::CASTLE:
 				map::load_section(map::CASTLE_COMBAT);
 				break;
+			case map::TOWER:
+				map::load_section(map::TOWER_COMBAT);
+				break;
 			default:
 				std::cerr << "No matching combat area for map section found" << std::endl;
 				exit(1);

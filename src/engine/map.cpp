@@ -153,6 +153,16 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 			memcpy(tmx, asset_castle_combat_map, asset_castle_combat_map_length);
 			background = Pen(48, 44, 46);
 			break;
+		case MapSection::TOWER:
+			tmx = (TMX_16 *) malloc(asset_tower_map_length);
+			memcpy(tmx, asset_tower_map, asset_tower_map_length);
+			background = Pen(48, 44, 46);
+			break;
+		case MapSection::TOWER_COMBAT:
+			tmx = (TMX_16 *) malloc(asset_tower_combat_map_length);
+			memcpy(tmx, asset_tower_combat_map, asset_tower_combat_map_length);
+			background = Pen(48, 44, 46);
+			break;
 		default:
 			std::cerr << "Invalid map section" << std::endl;
 			exit(1);

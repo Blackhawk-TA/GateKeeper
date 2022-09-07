@@ -22,6 +22,8 @@ namespace game::game_objects {
 				return create_volcano_objects(save_id, story_state);
 			case map::CASTLE:
 				return create_castle_objects(save_id, story_state);
+			case map::TOWER:
+				return create_tower_objects(save_id, story_state);
 			default:
 				std::cerr << "Invalid map section" << std::endl;
 				exit(1);

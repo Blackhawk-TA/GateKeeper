@@ -46,6 +46,7 @@ set(PROJECT_SOURCE
         src/scenes/game/game_objects/handler/factory/grassland_objects.cpp
         src/scenes/game/game_objects/handler/factory/interior_objects.cpp
         src/scenes/game/game_objects/handler/factory/snowland_objects.cpp
+        src/scenes/game/game_objects/handler/factory/tower_objects.cpp
         src/scenes/game/game_objects/handler/factory/volcano_objects.cpp
         src/items/combat/escape.cpp
         src/items/combat/sword.cpp
