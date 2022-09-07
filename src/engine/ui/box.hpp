@@ -25,7 +25,6 @@ private:
 	const uint16_t sprite_id_top_center = 1680;
 	const uint16_t sprite_id_top_right = 1681;
 	const uint16_t sprite_id_center_left = 1743;
-	const uint16_t sprite_id_center_center = 1744;
 	const uint16_t sprite_id_center_right = 1745;
 	const uint16_t sprite_id_bottom_left = 1807;
 	const uint16_t sprite_id_bottom_center = 1808;
