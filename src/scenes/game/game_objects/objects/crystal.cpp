@@ -47,7 +47,7 @@ namespace game {
 	bool Crystal::player_interact() {
 		if (player_usable && player_in_front()) {
 			set_player_usable(false);
-			textbox = new Textbox("You picked up crystal and put it to your gear.");
+			textbox = new Textbox("You picked up a crystal and put it to your gear.");
 
 			switch (type) {
 				case PURPLE:
