@@ -2,9 +2,9 @@ title: Gate Keeper
 description: A RPG for the 32blit and PicoSystem retro consoles
 author: Blackhawk
 splash:
-  file: assets/no-image.png
+  file: assets/preview.png
 icon:
-  file: assets/no-icon.png
+  file: assets/icon.png
 version: v0.1.1
 category: game
 url: https://github.com/Blackhawk-TA/GateKeeper
