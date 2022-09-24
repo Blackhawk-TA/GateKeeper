@@ -31,8 +31,9 @@ namespace game::game_objects {
 			new Chest(map::SNOWLAND, Point(16, 38)),
 			new Chest(map::SNOWLAND, Point(22, 35)),
 			new Chest(map::SNOWLAND, Point(32, 18)),
-			new Chest(map::SNOWLAND, Point(53, 52)),
-			new Chest(map::SNOWLAND, Point(54, 52)),
+			new Chest(map::SNOWLAND, Point(52, 51)),
+			new Chest(map::SNOWLAND, Point(53, 43)),
+			new Chest(map::SNOWLAND, Point(54, 43)),
 			new Chest(map::SNOWLAND, Point(60, 19)),
 		};
 	}

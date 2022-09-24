@@ -78,3 +78,11 @@ assets.cpp:
     name: tower_combat_map
     empty_tile: 0
     output_struct: true
+  assets/water_dungeon.tmx:
+    name: water_dungeon_map
+    empty_tile: 0
+    output_struct: true
+  assets/water_dungeon_combat.tmx:
+    name: water_dungeon_combat_map
+    empty_tile: 0
+    output_struct: true

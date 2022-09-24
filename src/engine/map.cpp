@@ -163,6 +163,16 @@ void map::load_section(MapSection map_section) { //TODO make sure only map data 
 			memcpy(tmx, asset_tower_combat_map, asset_tower_combat_map_length);
 			background = Pen(48, 44, 46);
 			break;
+		case MapSection::WATER_DUNGEON:
+			tmx = (TMX_16 *) malloc(asset_water_dungeon_map_length);
+			memcpy(tmx, asset_water_dungeon_map, asset_water_dungeon_map_length);
+			background = Pen(0, 0, 0);
+			break;
+		case MapSection::WATER_DUNGEON_COMBAT:
+			tmx = (TMX_16 *) malloc(asset_water_dungeon_combat_map_length);
+			memcpy(tmx, asset_water_dungeon_combat_map, asset_water_dungeon_combat_map_length);
+			background = Pen(0, 0, 0);
+			break;
 		default:
 			std::cerr << "Invalid map section" << std::endl;
 			exit(1);

@@ -90,6 +90,9 @@ namespace combat {
 			case map::TOWER:
 				map::load_section(map::TOWER_COMBAT);
 				break;
+			case map::WATER_DUNGEON:
+				map::load_section(map::WATER_DUNGEON_COMBAT);
+				break;
 			default:
 				std::cerr << "No matching combat area for map section found" << std::endl;
 				exit(1);

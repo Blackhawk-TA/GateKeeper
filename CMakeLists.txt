@@ -48,6 +48,7 @@ set(PROJECT_SOURCE
         src/scenes/game/game_objects/handler/factory/snowland_objects.cpp
         src/scenes/game/game_objects/handler/factory/tower_objects.cpp
         src/scenes/game/game_objects/handler/factory/volcano_objects.cpp
+        src/scenes/game/game_objects/handler/factory/water_dungeon_objects.cpp
         src/items/combat/escape.cpp
         src/items/combat/sword.cpp
         src/items/combat/spear.cpp

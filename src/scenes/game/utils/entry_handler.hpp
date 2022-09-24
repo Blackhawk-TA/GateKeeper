@@ -33,6 +33,7 @@ namespace game::entry_handler {
 		Entry{Point(52, 50), Point(19, 56), Point(1, 0), map::GRASSLAND, map::DUNGEON},
 		Entry{Point(13, 28), Point(58, 22), Point(0, 1), map::GRASSLAND, map::DUNGEON},
 		Entry{Point(56, 15), Point(33, 61), Point(1, 0), map::SNOWLAND, map::VOLCANO},
+		Entry{Point(54, 49), Point(33, 53), Point(1, 0), map::SNOWLAND, map::WATER_DUNGEON},
 
 		//Snowland houses
 		Entry{Point(19, 13), Point(6, 43), Point(0, 1), map::SNOWLAND, map::INTERIOR},

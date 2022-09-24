@@ -27,6 +27,8 @@ namespace map {
 		CASTLE_COMBAT = 13,
 		TOWER = 14,
 		TOWER_COMBAT = 15,
+		WATER_DUNGEON = 16,
+		WATER_DUNGEON_COMBAT = 17,
 	};
 
 	//Stores information of a tile and how often it appears in repetition

@@ -16,4 +16,5 @@ namespace game::game_objects {
 	std::vector<GameObject*> create_volcano_objects(uint8_t save_id, StoryState story_state);
 	std::vector<GameObject*> create_castle_objects(uint8_t save_id, StoryState story_state);
 	std::vector<GameObject*> create_tower_objects(uint8_t save_id, StoryState story_state);
+	std::vector<GameObject*> create_water_dungeon_objects(uint8_t save_id, StoryState story_state);
 }

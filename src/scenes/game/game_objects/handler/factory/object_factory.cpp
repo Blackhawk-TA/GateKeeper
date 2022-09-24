@@ -24,6 +24,8 @@ namespace game::game_objects {
 				return create_castle_objects(save_id, story_state);
 			case map::TOWER:
 				return create_tower_objects(save_id, story_state);
+			case map::WATER_DUNGEON:
+				return create_water_dungeon_objects(save_id, story_state);
 			default:
 				std::cerr << "Invalid map section" << std::endl;
 				exit(1);
