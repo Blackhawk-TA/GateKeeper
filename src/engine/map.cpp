@@ -197,7 +197,7 @@ void map::draw() {
 
 	Point camera_position = camera::get_screen_position();
 
-	blit_fast_code(draw_tiles(camera_position));
+	draw_tiles(camera_position);
 	draw_trees(camera_position);
 }
 
