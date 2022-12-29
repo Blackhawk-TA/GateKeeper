@@ -2,8 +2,8 @@
 <!--Compressed version of the Tiled TMX format-->
 <!--The first layer shows the amount of total data entries.-->
 <!--The data itself is split into pairs. The first value shows how often the tile is rendered in a row. The second is the tile id.-->
-<!--The highest repetition count is 255 to allow storing it in an unsigned 8bit integer. If a tile is repeated more often, it is split into several pairs.-->
-<!--Tree layers always starts and ends with the tuple (256,65356). A single tree information is a quadruple.-->
+<!--The highest repetition count is 256 to allow storing it in an unsigned 8bit integer. If a tile is repeated more often, it is split into several pairs.-->
+<!--Tree layers always starts and ends with the tuple (256,65536). A single tree information is a quadruple.-->
 <!--It consists of the tile id of the top left tree tile, its x/y position on the map and the amount of repetitions-->
 <map width="64" height="64">
 	<layer id="0">
