@@ -21,8 +21,8 @@ Pen background;
 map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 	std::vector<map::Tile> tile_data;
 	std::vector<map::TreeTile> tree_data;
-	uint16_t tile_id, i;
-	uint8_t tile_range, tree_repetitions;
+	uint16_t tile_range, tile_id, i;
+	uint8_t tree_repetitions;
 	uint8_t tile_x = 0;
 	uint8_t tile_y = 0;
 	uint16_t data_length = tmx->data[0]; //First array entry is the array length
@@ -56,13 +56,19 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 			});
 			i += 2; //Skip the next 2 loop iterations since tree layers use quadruples instead of tuples
 		} else {
+
+			// Check if tile_range is out of bound to prevent future bugs, it should never happen.
+			if (tile_range >= 256) {
+				std::cerr << "Tile range is out of bounds and cannot be parsed without data loss." << std::endl; //This should never happen
+			}
+
 			if (tile_id != tmx->empty_tile) {
 				//Save first tile in row of equals and its position.
 				tile_data.push_back(Tile{
 					tile_x,
 					tile_y,
 					flags::get_flag(tile_id),
-					tile_range,
+					static_cast<uint8_t>(tile_range),
 					static_cast<uint16_t>((tile_id % spritesheet_size.w) * TILE_SIZE),
 					static_cast<uint16_t>((tile_id / spritesheet_size.h) * TILE_SIZE),
 				});
