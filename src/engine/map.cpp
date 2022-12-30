@@ -35,7 +35,7 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 		tile_id = tmx->data[i + 1];
 
 		//Detect tree layer start and end and toggle the is_tree_layer variable.
-		if (tile_range == 255 && tile_id == 65355) {
+		if (tile_range == 255 && tile_id == 65535) {
 			is_tree_layer ^= true;
 			tile_x = 0; //Reset tile positions for next layer
 			tile_y = 0;
@@ -56,7 +56,6 @@ map::TileMap map::precalculate_tile_data(map::TMX_16 *tmx) {
 			});
 			i += 2; //Skip the next 2 loop iterations since tree layers use quadruples instead of tuples
 		} else {
-
 			// Check if tile_range is out of bound to prevent future bugs, it should never happen.
 			if (tile_range >= 256) {
 				std::cerr << "Tile range is out of bounds and cannot be parsed without data loss." << std::endl; //This should never happen
