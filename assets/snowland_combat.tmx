@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--Compressed version of the Tiled TMX format-->
 <!--The first layer shows the amount of total data entries.-->
-<!--The data itself is split into pairs. The first value shows the how often the tile is rendered in a row. The second is the tile id.-->
-<!--The highest repetition count is 255 to allow storing it in an unsigned 8bit integer. If a tile is repeated more often, it is split into several pairs.-->
+<!--The data itself is split into pairs. The first value shows how often the tile is rendered in a row. The second is the tile id.-->
+<!--The highest repetition count is 256 to allow storing it in an unsigned 8bit integer. If a tile is repeated more often, it is split into several pairs.-->
+<!--Tree layers always starts and ends with the tuple (256,65536). A single tree information is a quadruple.-->
+<!--It consists of the tile id of the top left tree tile, its x/y position on the map and the amount of repetitions-->
 <map width="32" height="32">
 	<layer id="0">
 		<data encoding="csv">
-			330
+			331
 		</data>
 	</layer>
 	<layer id="1">
@@ -16,7 +18,7 @@
 	</layer>
 	<layer id="2">
 		<data encoding="csv">
-			255,0,79,0,1,1921,1,1985,1,2049,29,0,1,1922,1,1986,1,2050,20,0,1,1921,1,1985,1,2049,6,0,1,1921,1,1985,1,2049,20,0,1,1922,1,1986,1,2050,6,0,1,1922,1,1986,1,2050,190,0,1,1923,1,1987,1,2051,29,0,1,1924,1,1988,1,2052,255,0,111,0
+			256,0,78,0,1,1921,1,1985,1,2049,29,0,1,1922,1,1986,1,2050,20,0,1,1921,1,1985,1,2049,6,0,1,1921,1,1985,1,2049,20,0,1,1922,1,1986,1,2050,6,0,1,1922,1,1986,1,2050,190,0,1,1923,1,1987,1,2051,29,0,1,1924,1,1988,1,2052,256,0,110,0
 		</data>
 	</layer>
 </map>
