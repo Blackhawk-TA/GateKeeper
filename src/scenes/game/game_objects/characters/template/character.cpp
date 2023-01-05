@@ -53,7 +53,7 @@ namespace game {
 		};
 	}
 
-	void Character::draw() {
+	void Character::draw() { //TODO: Don't draw when out of view
 		screen.blit(
 			characters_spritesheet,
 			Rect(

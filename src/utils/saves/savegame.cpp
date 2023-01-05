@@ -13,6 +13,7 @@
 #include "../../scenes/game/ui/notification.hpp"
 #include "../../scenes/game/game_objects/handler/extensions/enemy_handler.hpp"
 
+//TODO writes/loads uninitialized byte somewhere
 namespace savegame {
 	PlayerTempData get_player_temp_data(GameData game_data, save::SaveData save_data, bool tmp_save) {
 		//The default save data if it was not a tmp save for the combat scene

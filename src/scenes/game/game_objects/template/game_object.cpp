@@ -33,7 +33,7 @@ namespace game {
 		}
 	}
 
-	void GameObject::draw() {
+	void GameObject::draw() { //TODO: Don't draw when out of view
 		screen.blit(
 			screen.sprites,
 			Rect(
