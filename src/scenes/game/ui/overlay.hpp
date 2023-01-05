@@ -8,4 +8,5 @@
 namespace game::overlay {
 	void draw_statusbar();
 	void draw_time();
+	void draw_debug(const std::string& info);
 }

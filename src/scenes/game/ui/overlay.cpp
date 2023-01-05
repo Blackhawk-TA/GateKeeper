@@ -39,4 +39,12 @@ namespace game::overlay {
 		screen.pen = Pen(0, 0, 0, 200);
 		screen.text(game_time::get_formatted(), minimal_font, Rect(screen.bounds.w - 51, screen.bounds.h - 9, 50, 10), false, TextAlign::right);
 	}
+
+	void draw_debug(const std::string& info) {
+		screen.pen = Pen(255, 255, 255, 100);
+		screen.rectangle(Rect(screen.bounds.w - 52, screen.bounds.h - 10, 52, 10));
+		screen.pen = Pen(0, 0, 0, 200);
+		screen.text("", minimal_font, Rect(screen.bounds.w - 51, screen.bounds.h - 9, 50, 10), false, TextAlign::right);
+		screen.text(info, minimal_font, Rect(screen.bounds.w - 51, screen.bounds.h - 9, 50, 10), false, TextAlign::right);
+	}
 }
