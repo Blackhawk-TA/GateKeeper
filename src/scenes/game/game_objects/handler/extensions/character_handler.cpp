@@ -6,7 +6,7 @@
 #include "../game_object_handler.hpp"
 
 namespace game {
-	std::vector<Character *> characters;
+	std::vector<Character *> characters = {};
 	Timer *animation_timer;
 
 	void character_handler::init() {

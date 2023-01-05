@@ -6,7 +6,7 @@
 #include "../game_object_handler.hpp"
 
 namespace game {
-	std::vector<DungeonDoor*> doors;
+	std::vector<DungeonDoor*> doors = {};
 
 	void dungeon_door_handler::init() {
 		std::vector<GameObject *> game_object_collection = game_objects::get_collection();
