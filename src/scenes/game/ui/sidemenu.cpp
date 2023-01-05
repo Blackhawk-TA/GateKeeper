@@ -8,7 +8,7 @@
 namespace game::sidemenu {
 	std::map<MenuType, MenuData> menu_data;
 	std::map<MenuType, Listbox*> controls;
-	std::vector<Inventory*> inventories;
+	std::vector<Inventory*> inventories = {};
 	MenuType previous_sidemenu;
 	MenuType current_sidemenu;
 

@@ -6,7 +6,7 @@
 #include "../game_object_handler.hpp"
 
 namespace game {
-	std::vector<Stargate *> stargates;
+	std::vector<Stargate *> stargates = {};
 
 	void stargate_handler::init() {
 		std::vector<GameObject *> game_object_collection = game_objects::get_collection();

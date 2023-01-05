@@ -15,7 +15,7 @@ namespace game::game_objects {
 	//TODO change to hash_map <Signature, GameObjectPointer>?
 	// Might be faster, check if it uses more memory and if hash map makes sense
 	// or use list instead of vector for faster deletion
-	std::vector<GameObject *> game_object_collection;
+	std::vector<GameObject *> game_object_collection = {};
 
 	void init(map::MapSection map_section, uint8_t save_id, StoryState story_state) {
 		game_object_collection = create_game_objects(map_section, save_id, story_state);

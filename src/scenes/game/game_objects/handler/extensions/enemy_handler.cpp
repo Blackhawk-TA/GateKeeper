@@ -6,7 +6,7 @@
 #include "../game_object_handler.hpp"
 
 namespace game::enemy_handler {
-	std::vector<Enemy *> enemies;
+	std::vector<Enemy *> enemies = {};
 
 	void init() {
 		std::vector<GameObject *> game_object_collection = game_objects::get_collection();
