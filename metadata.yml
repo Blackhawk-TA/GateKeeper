@@ -5,6 +5,6 @@ splash:
   file: assets/preview.png
 icon:
   file: assets/icon.png
-version: v0.1.1
+version: v1.0.0
 category: game
 url: https://github.com/Blackhawk-TA/GateKeeper
