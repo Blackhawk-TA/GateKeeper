@@ -38,9 +38,9 @@ void map::precalculate_tile_data(map::TMX_16 *tmx) {
 	std::vector<map::Tile> tile_data = {};
 	std::vector<map::TreeTile> tree_data = {};
 
-	//Make sure the vector only uses as much memory as required
-	tile_data.reserve(tile_entries);
-	tree_data.reserve(tree_entries);
+	//Make sure the vector only uses as much memory as required + 10 entries headroom.
+	tile_data.reserve(tile_entries + 10);
+	tree_data.reserve(tree_entries + 10);
 
 	//Skip first layer because it only contains the array length
 	for (i = 3u; i < data_length; i += 2) {
