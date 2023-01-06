@@ -33,16 +33,26 @@ namespace game {
 		}
 	}
 
-	void GameObject::draw() { //TODO: Don't draw when out of view
+	void GameObject::draw() {
+		Point camera_position = camera::get_screen_position();
+		Point screen_position = world_to_screen(position);
+		Size size_px = size * TILE_SIZE;
+		Rect object_rect = Rect(screen_position.x, screen_position.y, size_px.w, size_px.h);
+
+		//Do not draw when it is out of the current view
+		if (!map::rect_in_view(object_rect, camera_position)) {
+			return;
+		}
+
 		screen.blit(
 			screen.sprites,
 			Rect(
 				(tile_id & (spritesheet_size.w - 1)) * TILE_SIZE,
 				(tile_id / spritesheet_size.h) * TILE_SIZE,
-				size.w * TILE_SIZE,
-				size.h * TILE_SIZE
-			),
-			world_to_screen(position) - camera::get_screen_position()
+				size_px.w,
+				size_px.h
+				),
+			screen_position - camera_position
 		);
 	}
 
