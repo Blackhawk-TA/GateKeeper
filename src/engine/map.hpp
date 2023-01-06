@@ -75,10 +75,8 @@ namespace map {
 	#pragma pack(pop)
 
 	struct TileMap {
-		uint16_t emtpy_tile;
 		uint8_t width;
 		uint8_t height;
-		uint8_t layers;
 		std::vector<map::Tile> data;
 		std::vector<map::TreeTile> tree_data;
 	};
@@ -108,9 +106,8 @@ namespace map {
 	/**
 	 * Parses the tmx struct into a tile map struct with render optimized tile_data
 	 * @param tmx The TMX struct which contains the data directly extracted from the tilemap file
-	 * @return The rendering and memory optimized TileMap struct
 	 */
-	TileMap precalculate_tile_data(TMX_16 *tmx);
+	void precalculate_tile_data(TMX_16 *tmx);
 
 	/**
 	 * Loads new map section into memory and deletes the old one
