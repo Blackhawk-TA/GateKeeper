@@ -29,7 +29,7 @@ namespace game::game_objects {
 
 		if (story_state >= StoryState::FIRST_DEATH && story_state != StoryState::COMPLETED) {
 			std::string msg = "Oh hey, you're awake! I'm not sure if you can remember what happened. You challenged the "
-							  "guards at the gate. They struck you down and stole all your weapons. They went back back "
+							  "guards at the gate. They struck you down and stole all your weapons. Then they went back "
 							  "through the gate while you were unconscious and destroyed it to prevent us from ever "
 							  "coming back. Now we have no possibility to reach the castle where the king suppresses our villagers from.";
 			std::string alt_msg = "You need new weapons. In the north-east there should be a gate, try your luck there.";
