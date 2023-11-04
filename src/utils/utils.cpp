@@ -67,7 +67,7 @@ void load_persistent_spritesheets() {
 	weapons_spritesheet = Surface::load_read_only(asset_weapons);
 }
 
-void draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
+void draw_fps(uint32_t &current_time, uint32_t &ms_end) {
 	//Abort if fps counter is hidden
 	if (!options::show_fps) return;
 
@@ -78,11 +78,11 @@ void draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
 	screen.pen = Pen(0, 0, 0, 200);
 
 	//Calculate frames per second (fps)
-	float time_difference_in_sec = static_cast<float>(ms_end - ms_start) / 1000;
-	if (time_difference_in_sec == 0) {
-		time_difference_in_sec = 1;
+	int time_delta = static_cast<int>(current_time - ms_end);
+	if (time_delta == 0) {
+		time_delta = 1;
 	}
-	int fps = static_cast<int>(1 / time_difference_in_sec);
+	int fps = 1000 / time_delta;
 
 	//Cap max shown fps
 	if (fps > 999) {
@@ -95,7 +95,7 @@ void draw_fps(uint32_t &ms_start, uint32_t &ms_end) {
 
 	//Draw frame time boxes
 	int block_size = 4;
-	for (int i = 0; i < static_cast<int>(ms_end - ms_start); i++) {
+	for (int i = 0; i < time_delta; i++) {
 		screen.pen = Pen(i * 5, 255 - (i * 5), 0);
 		screen.rectangle(Rect(i * (block_size + 1) + 1 + 21, screen.bounds.h - block_size - 1, block_size, block_size));
 	}

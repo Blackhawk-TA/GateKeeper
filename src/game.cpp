@@ -1,3 +1,4 @@
+#include <iostream>
 #include "game.hpp"
 #include "assets.hpp"
 #include "scenes/game/game_scene.hpp"
@@ -10,7 +11,6 @@
 
 using namespace blit;
 
-uint32_t ms_start = 0;
 uint32_t ms_end = 0;
 IScene *scene = nullptr;
 SceneType previous_scene;
@@ -77,8 +77,6 @@ void load_scene(SceneType scene_type, const SceneOptions& options) {
 // amount of milliseconds elapsed since the start of your game
 //
 void render(uint32_t time) {
-	ms_start = now();
-
 	screen.clear();
 	scene->render(time);
 
@@ -86,8 +84,8 @@ void render(uint32_t time) {
 		transition::draw();
 	}
 
+	draw_fps(time, ms_end);
 	ms_end = now();
-	draw_fps(ms_start, ms_end);
 }
 
 ///////////////////////////////////////////////////////////////////////////
