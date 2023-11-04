@@ -6,6 +6,10 @@ build.*/
 .idea/
 cmake-build-debug/
 
+# Python dependencies
+.venv/
+venv/
+
 # Assets
 assets/characters.png
 assets/spritesheet.png
