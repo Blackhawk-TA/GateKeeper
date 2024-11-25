@@ -4,6 +4,8 @@ build.*/
 
 # IDE
 .idea/
+.vscode/
+.nvim-spell/
 cmake-build-debug/
 
 # Python dependencies
