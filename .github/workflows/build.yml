@@ -57,7 +57,7 @@ jobs:
             name: macOS
             release-suffix: MACOS
             cmake-args: -D32BLIT_DIR=$GITHUB_WORKSPACE/32blit-sdk
-            brew-packages: sdl2 sdl2_image sdl2_net
+            brew-packages: sdl2 sdl2_image sdl2_net pipx
 
           - os: windows-latest
             name: Visual Studio
@@ -72,13 +72,13 @@ jobs:
     steps:
       # Check out the main repo
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: main
 
       # Check out the 32Blit API we build against
       - name: Checkout 32Blit API
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: 32blit/32blit-sdk
           path: 32blit-sdk
@@ -86,7 +86,7 @@ jobs:
       # pico sdk/extras for some builds
       - name: Checkout Pico SDK
         if: matrix.pico-sdk
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: raspberrypi/pico-sdk
           path: pico-sdk
@@ -94,7 +94,7 @@ jobs:
 
       - name: Checkout Pico Extras
         if: matrix.pico-sdk
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           repository: raspberrypi/pico-extras
           path: pico-extras
@@ -104,27 +104,27 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt update && sudo apt install ${{matrix.apt-packages}}
-          pip3 install 32blit python-dotenv cryptography
+          pip3 install 32blit
 
       # MacOS dependencies
       - name: Install macOS deps
         if: runner.os == 'macOS'
         run: |
           brew install ${{matrix.brew-packages}}
-          python3 -m pip install 32blit python-dotenv cryptography
+          pipx install 32blit
 
       # Windows dependencies
       - name: Install Windows deps
         if: runner.os == 'Windows'
         shell: bash
         run: |
-          python -m pip install 32blit python-dotenv cryptography
+          python -m pip install 32blit
 
       # Emscripten SDK setup
       - name: Setup Emscripten cache
         if: matrix.name == 'Emscripten'
         id: cache-system-libraries
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ${{env.EM_CACHE_FOLDER}}
           key: ${{env.EM_VERSION}}-${{runner.os}}
@@ -141,14 +141,33 @@ jobs:
         run: embuilder.py build sdl2 sdl2-image-jpg sdl2-net
 
       # Decrypts uploaded assets
-      - name: Decrypt Assets
+      - name: Decrypt Assets (Unix)
+        if: runner.os != 'Windows'
         env:
           ASSET_KEY: ${{ secrets.ASSET_KEY }}
         run: |
+          python3 -m venv .venv
+          source .venv/bin/activate
+          python -m pip install python-dotenv cryptography
           python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/characters.png -o main/assets/characters.png --key=ASSET_KEY
           python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/spritesheet.png -o main/assets/spritesheet.png --key=ASSET_KEY
           python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/attack_animations.png -o main/assets/attack_animations.png --key=ASSET_KEY
           python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/weapons.png -o main/assets/weapons.png --key=ASSET_KEY
+          deactivate
+
+      - name: Decrypt Assets (Windows)
+        if: runner.os == 'Windows'
+        env:
+          ASSET_KEY: ${{ secrets.ASSET_KEY }}
+        run: |
+          python3 -m venv .venv
+          .venv/Scripts/activate
+          python -m pip install python-dotenv cryptography
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/characters.png -o main/assets/characters.png --key=ASSET_KEY
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/spritesheet.png -o main/assets/spritesheet.png --key=ASSET_KEY
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/attack_animations.png -o main/assets/attack_animations.png --key=ASSET_KEY
+          python3 main/scripts/asset_helper.py --mode=decrypt -i main/assets/encrypted/weapons.png -o main/assets/weapons.png --key=ASSET_KEY
+          deactivate
 
       # Set up the cmake build environment
       - name: Create Build Environment
